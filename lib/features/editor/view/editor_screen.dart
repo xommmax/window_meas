@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:window_meas/common/constants.dart';
+import 'package:window_meas/common/helper.dart';
 import 'package:window_meas/common/service_locator.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 
@@ -85,6 +87,7 @@ class DrawingViewState extends State<_DrawingView> {
 
   double currentScale = initScale;
   double prevScale = initScale;
+
   Offset focalPointDelta = const Offset(0, 0);
   Line currentLine = (null, null);
 
@@ -130,7 +133,10 @@ class DrawingViewState extends State<_DrawingView> {
                       state.mode == EditorMode.draw ? null : (details) => setState(() => prevScale = currentScale),
                   child: SizedBox.expand(
                     child: CustomPaint(
-                      painter: MyCustomPainter(lines: state.drawingState.lines, currentLine: currentLine),
+                      painter: MyCustomPainter(
+                        lines: state.drawingState.lines,
+                        currentLine: currentLine,
+                      ),
                     ),
                   ),
                 ),
@@ -142,9 +148,10 @@ class DrawingViewState extends State<_DrawingView> {
 }
 
 class MyCustomPainter extends CustomPainter {
+  static const lineWidth = 0.5;
+
   final List<Line> lines;
   final Line currentLine;
-  static const lineWidth = 0.5;
 
   MyCustomPainter({
     required this.lines,
@@ -169,9 +176,9 @@ class MyCustomPainter extends CustomPainter {
 
     final List<Offset> points = [];
 
-    double gridSize = size.width / gridSpacing;
+    double gridSize = size.width / Constants.gridSpacing;
 
-    for (int x = 0; x <= gridSpacing; x++) {
+    for (int x = 0; x <= Constants.gridSpacing; x++) {
       for (int y = 0; y <= (size.height / gridSize).ceil(); y++) {
         points.add(Offset(x * gridSize, y * gridSize));
       }
@@ -184,6 +191,7 @@ class MyCustomPainter extends CustomPainter {
     final linePaint = Paint()
       ..color = Colors.black
       ..strokeWidth = lineWidth;
+
     for (final line in lines) {
       if (line.$1 != null && line.$2 != null) {
         canvas.drawLine(toGlobalCoord(line.$1!, size), toGlobalCoord(line.$2!, size), linePaint);
@@ -196,29 +204,10 @@ class MyCustomPainter extends CustomPainter {
       final linePaint = Paint()
         ..color = Colors.green
         ..strokeWidth = lineWidth;
+
       canvas.drawLine(toGlobalCoord(currentLine.$1!, size), toGlobalCoord(currentLine.$2!, size), linePaint);
     }
   }
 }
 
 typedef Line = (Offset?, Offset?);
-
-Offset toInnerCoord(Offset offset, Size size) {
-  final gridSize = size.width / gridSpacing;
-
-  final x = ((offset.dx - size.width / 2.0) / gridSize).roundToDouble();
-  final y = ((offset.dy - size.height / 2.0) / gridSize).roundToDouble();
-
-  return Offset(x, y);
-}
-
-Offset toGlobalCoord(Offset offset, Size size) {
-  final gridSize = size.width / gridSpacing;
-
-  final x = offset.dx * gridSize + (size.width / 2.0 / gridSize).roundToDouble() * gridSize;
-  final y = offset.dy * gridSize + (size.height / 2.0 / gridSize).roundToDouble() * gridSize;
-
-  return Offset(x, y);
-}
-
-const gridSpacing = 60;

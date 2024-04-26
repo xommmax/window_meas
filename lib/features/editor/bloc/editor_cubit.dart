@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,11 +12,14 @@ class EditorCubit extends Cubit<EditorState> {
 
   void changeMode(EditorMode mode) => emit(state.copyWith(mode: mode));
 
-  void addLine(Line line) => emit(state.copyWith(
+  void addLine(Line line) {
+    log('Line coord: ${line.$1} - ${line.$2}');
+    emit(state.copyWith(
         drawingState: state.drawingState.copyWith(
           lines: [...state.drawingState.lines, line],
         ),
       ));
+  }
 }
 
 @freezed
