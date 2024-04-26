@@ -79,7 +79,7 @@ class _DrawingView extends StatefulWidget {
 }
 
 class DrawingViewState extends State<_DrawingView> {
-  static const minScale = 3.0;
+  static const minScale = 2.0;
   static const initScale = 5.0;
   static const maxScale = 8.0;
 
@@ -90,58 +90,61 @@ class DrawingViewState extends State<_DrawingView> {
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
-        builder: (context, constraints) => Transform.scale(
-          scale: currentScale,
-          child: Transform.translate(
-            offset: focalPointDelta,
-            child: BlocBuilder<EditorCubit, EditorState>(
-              builder: (context, state) => GestureDetector(
-                onPanDown: state.mode == EditorMode.move
-                    ? null
-                    : (details) => setState(() => currentLine = (details.localPosition, null)),
-                onPanUpdate: state.mode == EditorMode.move
-                    ? null
-                    : (details) => setState(() => currentLine = (currentLine.$1, details.localPosition)),
-                onPanEnd: state.mode == EditorMode.move
-                    ? null
-                    : (details) => setState(() {
-                          context.read<EditorCubit>().addLine(currentLine);
-                          currentLine = (null, null);
-                        }),
-                onScaleUpdate: state.mode == EditorMode.draw
-                    ? null
-                    : (details) => setState(() {
-                          currentScale = (prevScale * details.scale).clamp(minScale, maxScale);
+        builder: (context, constraints) {
+          final size = Size(constraints.maxWidth, constraints.maxHeight);
 
-                          final maxBoundaryX = constraints.maxWidth * (currentScale - 1) / 2 / currentScale;
-                          final maxBoundaryY = constraints.maxHeight * (currentScale - 1) / 2 / currentScale;
-                          final deltaX =
-                              (focalPointDelta.dx + details.focalPointDelta.dx).clamp(-maxBoundaryX, maxBoundaryX);
-                          final deltaY =
-                              (focalPointDelta.dy + details.focalPointDelta.dy).clamp(-maxBoundaryY, maxBoundaryY);
+          return Transform.scale(
+            scale: currentScale,
+            child: Transform.translate(
+              offset: focalPointDelta,
+              child: BlocBuilder<EditorCubit, EditorState>(
+                builder: (context, state) => GestureDetector(
+                  onPanDown: state.mode == EditorMode.move
+                      ? null
+                      : (details) => setState(() => currentLine = (toInnerCoord(details.localPosition, size), null)),
+                  onPanUpdate: state.mode == EditorMode.move
+                      ? null
+                      : (details) =>
+                          setState(() => currentLine = (currentLine.$1, toInnerCoord(details.localPosition, size))),
+                  onPanEnd: state.mode == EditorMode.move
+                      ? null
+                      : (details) => setState(() {
+                            context.read<EditorCubit>().addLine(currentLine);
+                            currentLine = (null, null);
+                          }),
+                  onScaleUpdate: state.mode == EditorMode.draw
+                      ? null
+                      : (details) => setState(() {
+                            currentScale = (prevScale * details.scale).clamp(minScale, maxScale);
 
-                          focalPointDelta = Offset(deltaX, deltaY);
-                        }),
-                onScaleEnd:
-                    state.mode == EditorMode.draw ? null : (details) => setState(() => prevScale = currentScale),
-                child: SizedBox.expand(
-                  child: CustomPaint(
-                    painter: MyCustomPainter(
-                      lines: state.drawingState.lines,
-                      currentLine: currentLine,
+                            final maxBoundaryX = constraints.maxWidth * (currentScale - 1) / 2 / currentScale;
+                            final maxBoundaryY = constraints.maxHeight * (currentScale - 1) / 2 / currentScale;
+                            final deltaX =
+                                (focalPointDelta.dx + details.focalPointDelta.dx).clamp(-maxBoundaryX, maxBoundaryX);
+                            final deltaY =
+                                (focalPointDelta.dy + details.focalPointDelta.dy).clamp(-maxBoundaryY, maxBoundaryY);
+
+                            focalPointDelta = Offset(deltaX, deltaY);
+                          }),
+                  onScaleEnd:
+                      state.mode == EditorMode.draw ? null : (details) => setState(() => prevScale = currentScale),
+                  child: SizedBox.expand(
+                    child: CustomPaint(
+                      painter: MyCustomPainter(lines: state.drawingState.lines, currentLine: currentLine),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       );
 }
 
 class MyCustomPainter extends CustomPainter {
   final List<Line> lines;
   final Line currentLine;
+  static const lineWidth = 0.5;
 
   MyCustomPainter({
     required this.lines,
@@ -160,15 +163,15 @@ class MyCustomPainter extends CustomPainter {
 
   void _drawBg(Canvas canvas, Size size) {
     final pointsPaint = Paint()
-      ..color = Colors.grey
-      ..strokeWidth = 1
+      ..color = Colors.grey.shade400
+      ..strokeWidth = lineWidth
       ..strokeCap = StrokeCap.round;
 
     final List<Offset> points = [];
 
-    double gridSize = size.width / gridSpacingX;
+    double gridSize = size.width / gridSpacing;
 
-    for (int x = 0; x <= gridSpacingX; x++) {
+    for (int x = 0; x <= gridSpacing; x++) {
       for (int y = 0; y <= (size.height / gridSize).ceil(); y++) {
         points.add(Offset(x * gridSize, y * gridSize));
       }
@@ -180,23 +183,42 @@ class MyCustomPainter extends CustomPainter {
   void _drawLines(Canvas canvas, Size size) {
     final linePaint = Paint()
       ..color = Colors.black
-      ..strokeWidth = 1;
+      ..strokeWidth = lineWidth;
     for (final line in lines) {
       if (line.$1 != null && line.$2 != null) {
-        canvas.drawLine(line.$1!, line.$2!, linePaint);
+        canvas.drawLine(toGlobalCoord(line.$1!, size), toGlobalCoord(line.$2!, size), linePaint);
       }
     }
   }
 
   void _drawCurrentLine(Canvas canvas, Size size) {
-    final linePaint = Paint()
-      ..color = Colors.green
-      ..strokeWidth = 1;
     if (currentLine.$1 != null && currentLine.$2 != null) {
-      canvas.drawLine(currentLine.$1!, currentLine.$2!, linePaint);
+      final linePaint = Paint()
+        ..color = Colors.green
+        ..strokeWidth = lineWidth;
+      canvas.drawLine(toGlobalCoord(currentLine.$1!, size), toGlobalCoord(currentLine.$2!, size), linePaint);
     }
   }
 }
 
 typedef Line = (Offset?, Offset?);
-const gridSpacingX = 60;
+
+Offset toInnerCoord(Offset offset, Size size) {
+  final gridSize = size.width / gridSpacing;
+
+  final x = ((offset.dx - size.width / 2.0) / gridSize).roundToDouble();
+  final y = ((offset.dy - size.height / 2.0) / gridSize).roundToDouble();
+
+  return Offset(x, y);
+}
+
+Offset toGlobalCoord(Offset offset, Size size) {
+  final gridSize = size.width / gridSpacing;
+
+  final x = offset.dx * gridSize + (size.width / 2.0 / gridSize).roundToDouble() * gridSize;
+  final y = offset.dy * gridSize + (size.height / 2.0 / gridSize).roundToDouble() * gridSize;
+
+  return Offset(x, y);
+}
+
+const gridSpacing = 60;
