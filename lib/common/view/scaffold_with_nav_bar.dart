@@ -18,10 +18,12 @@ class ScaffoldWithNavBar extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: const FaIcon(FontAwesomeIcons.list),
+              activeIcon: const FaIcon(FontAwesomeIcons.listCheck),
               label: context.l10n.myMeas,
             ),
             BottomNavigationBarItem(
               icon: const FaIcon(FontAwesomeIcons.user),
+              activeIcon: const FaIcon(FontAwesomeIcons.solidUser),
               label: context.l10n.profile,
             ),
           ],

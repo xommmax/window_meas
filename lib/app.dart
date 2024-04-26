@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:window_meas/common/nav/router.dart';
+import 'package:window_meas/common/view/colors.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -19,5 +20,11 @@ class MainAppView extends StatelessWidget {
         localizationsDelegates: L10n.localizationsDelegates,
         supportedLocales: L10n.supportedLocales,
         locale: const Locale('uk', 'UA'),
+        theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          primary: AppColors.primary,
+          secondary: AppColors.secondary,
+        )),
       );
 }

@@ -5,7 +5,22 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        return Center(child: Text('Profile'),);
-
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CircleAvatar(
+                radius: 50,
+                child: Icon(Icons.person),
+              ),
+              const SizedBox(height: 10),
+              Text('Profile', style: Theme.of(context).textTheme.titleMedium),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
