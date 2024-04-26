@@ -12,30 +12,21 @@ class ScaffoldWithNavBar extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         body: navigationShell,
         bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
+          iconSize: 20,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: [
-            // BottomNavigationBarItem(
-            //   icon: const FaIcon(FontAwesomeIcons.thumbsUp),
-            //   label: context.l10n.yaynay,
-            // ),
-            // BottomNavigationBarItem(
-            //   icon: const FaIcon(FontAwesomeIcons.dog),
-            //   label: context.l10n.breeds,
-            // ),
-            // BottomNavigationBarItem(
-            //   icon: const FaIcon(FontAwesomeIcons.magnifyingGlass),
-            //   label: context.l10n.search,
-            // ),
-            // BottomNavigationBarItem(
-            //   icon: const FaIcon(FontAwesomeIcons.solidStar),
-            //   label: context.l10n.favorites,
-            // ),
+            BottomNavigationBarItem(
+              icon: const FaIcon(FontAwesomeIcons.list),
+              label: context.l10n.myMeas,
+            ),
+            BottomNavigationBarItem(
+              icon: const FaIcon(FontAwesomeIcons.user),
+              label: context.l10n.profile,
+            ),
           ],
           currentIndex: navigationShell.currentIndex,
-          onTap: (index) => navigationShell.goBranch(index,
-              initialLocation: index == navigationShell.currentIndex),
+          onTap: (index) => navigationShell.goBranch(index, initialLocation: index == navigationShell.currentIndex),
         ),
       );
 }

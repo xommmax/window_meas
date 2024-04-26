@@ -1,3 +1,5 @@
 {
-  "appName": "Windows Measurements"
+  "appName": "Windows Measurements",
+  "myMeas": "My measurements",
+  "profile": "Profile"
 }

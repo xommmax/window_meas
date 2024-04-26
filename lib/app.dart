@@ -18,5 +18,6 @@ class MainAppView extends StatelessWidget {
         routerConfig: appRouter,
         localizationsDelegates: L10n.localizationsDelegates,
         supportedLocales: L10n.supportedLocales,
+        locale: const Locale('uk', 'UA'),
       );
 }
