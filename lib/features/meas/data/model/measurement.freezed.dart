@@ -16,8 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Measurement {
-  double? get width => throw _privateConstructorUsedError;
-  double? get height => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
+  String? get clientName => throw _privateConstructorUsedError;
+  String? get address => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementCopyWith<Measurement> get copyWith =>
@@ -30,7 +32,7 @@ abstract class $MeasurementCopyWith<$Res> {
           Measurement value, $Res Function(Measurement) then) =
       _$MeasurementCopyWithImpl<$Res, Measurement>;
   @useResult
-  $Res call({double? width, double? height});
+  $Res call({String id, DateTime date, String? clientName, String? address});
 }
 
 /// @nodoc
@@ -46,18 +48,28 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? width = freezed,
-    Object? height = freezed,
+    Object? id = null,
+    Object? date = null,
+    Object? clientName = freezed,
+    Object? address = freezed,
   }) {
     return _then(_value.copyWith(
-      width: freezed == width
-          ? _value.width
-          : width // ignore: cast_nullable_to_non_nullable
-              as double?,
-      height: freezed == height
-          ? _value.height
-          : height // ignore: cast_nullable_to_non_nullable
-              as double?,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      clientName: freezed == clientName
+          ? _value.clientName
+          : clientName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -70,7 +82,7 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       __$$MeasurementImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double? width, double? height});
+  $Res call({String id, DateTime date, String? clientName, String? address});
 }
 
 /// @nodoc
@@ -84,35 +96,51 @@ class __$$MeasurementImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? width = freezed,
-    Object? height = freezed,
+    Object? id = null,
+    Object? date = null,
+    Object? clientName = freezed,
+    Object? address = freezed,
   }) {
     return _then(_$MeasurementImpl(
-      width: freezed == width
-          ? _value.width
-          : width // ignore: cast_nullable_to_non_nullable
-              as double?,
-      height: freezed == height
-          ? _value.height
-          : height // ignore: cast_nullable_to_non_nullable
-              as double?,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      clientName: freezed == clientName
+          ? _value.clientName
+          : clientName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$MeasurementImpl implements _Measurement {
-  const _$MeasurementImpl({this.width, this.height});
+class _$MeasurementImpl extends _Measurement {
+  const _$MeasurementImpl(
+      {required this.id, required this.date, this.clientName, this.address})
+      : super._();
 
   @override
-  final double? width;
+  final String id;
   @override
-  final double? height;
+  final DateTime date;
+  @override
+  final String? clientName;
+  @override
+  final String? address;
 
   @override
   String toString() {
-    return 'Measurement(width: $width, height: $height)';
+    return 'Measurement(id: $id, date: $date, clientName: $clientName, address: $address)';
   }
 
   @override
@@ -120,12 +148,15 @@ class _$MeasurementImpl implements _Measurement {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MeasurementImpl &&
-            (identical(other.width, width) || other.width == width) &&
-            (identical(other.height, height) || other.height == height));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.clientName, clientName) ||
+                other.clientName == clientName) &&
+            (identical(other.address, address) || other.address == address));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, width, height);
+  int get hashCode => Object.hash(runtimeType, id, date, clientName, address);
 
   @JsonKey(ignore: true)
   @override
@@ -134,14 +165,22 @@ class _$MeasurementImpl implements _Measurement {
       __$$MeasurementImplCopyWithImpl<_$MeasurementImpl>(this, _$identity);
 }
 
-abstract class _Measurement implements Measurement {
-  const factory _Measurement({final double? width, final double? height}) =
-      _$MeasurementImpl;
+abstract class _Measurement extends Measurement {
+  const factory _Measurement(
+      {required final String id,
+      required final DateTime date,
+      final String? clientName,
+      final String? address}) = _$MeasurementImpl;
+  const _Measurement._() : super._();
 
   @override
-  double? get width;
+  String get id;
   @override
-  double? get height;
+  DateTime get date;
+  @override
+  String? get clientName;
+  @override
+  String? get address;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementImplCopyWith<_$MeasurementImpl> get copyWith =>

@@ -1,13 +1,19 @@
+import 'package:injectable/injectable.dart';
+import 'package:window_meas/features/meas/data/ds/meas_local_ds.dart';
+import 'package:window_meas/features/meas/data/ds/meas_remote_ds.dart';
 import 'package:window_meas/features/meas/data/model/measurement.dart';
 
+@singleton
 class MeasurementRepository {
-  List<Measurement> measurements = [];
+  MeasurementRepository(this.local, this.remote);
 
-  void addMeasurement(Measurement measurement) {
-    measurements.add(measurement);
-  }
+  final MeasurementLocalDataSource local;
+  final MeasurementRemoteDataSource remote;
 
-  List<Measurement> getMeasurements() {
-    return measurements;
+  Future<void> addMeasurement(Measurement measurement) => local.addMeasurement(measurement.toDB());
+
+  Future<List<Measurement>> getMeasurements() async {
+    final list = await local.getMeasurements();
+    return list.map((e) => Measurement.fromDB(e)).toList();
   }
 }

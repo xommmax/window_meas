@@ -3,10 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:window_meas/features/editor/view/editor_screen.dart';
 
 part 'editor_cubit.freezed.dart';
 
+@injectable
 class EditorCubit extends Cubit<EditorState> {
   EditorCubit() : super(const EditorState());
 

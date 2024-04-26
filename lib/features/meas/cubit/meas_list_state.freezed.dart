@@ -94,12 +94,11 @@ class __$$MeasurementListStateImplCopyWithImpl<$Res>
 
 class _$MeasurementListStateImpl implements _MeasurementListState {
   const _$MeasurementListStateImpl(
-      {final List<Measurement> measurements = const []})
+      {required final List<Measurement> measurements})
       : _measurements = measurements;
 
   final List<Measurement> _measurements;
   @override
-  @JsonKey()
   List<Measurement> get measurements {
     if (_measurements is EqualUnmodifiableListView) return _measurements;
     // ignore: implicit_dynamic_type
@@ -134,7 +133,8 @@ class _$MeasurementListStateImpl implements _MeasurementListState {
 }
 
 abstract class _MeasurementListState implements MeasurementListState {
-  const factory _MeasurementListState({final List<Measurement> measurements}) =
+  const factory _MeasurementListState(
+          {required final List<Measurement> measurements}) =
       _$MeasurementListStateImpl;
 
   @override

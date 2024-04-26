@@ -7,7 +7,7 @@ import 'common/bloc_observer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
   Bloc.observer = const AppBlocObserver();
-  ServiceLocator.init();
   runApp(const MainApp());
 }

@@ -6,6 +6,6 @@ part 'meas_list_state.freezed.dart';
 @freezed
 class MeasurementListState with _$MeasurementListState {
   const factory MeasurementListState({
-    @Default([]) List<Measurement> measurements,
+    required List<Measurement> measurements,
   }) = _MeasurementListState;
 }
