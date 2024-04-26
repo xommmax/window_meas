@@ -1,4 +1,4 @@
-package com.example.window_meas
+package com.xodev.everest
 
 import io.flutter.embedding.android.FlutterActivity
 
