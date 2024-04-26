@@ -7,7 +7,9 @@ import 'package:uuid/uuid.dart';
 
 @injectable
 class MeasurementListCubit extends Cubit<MeasurementListState> {
-  MeasurementListCubit(this.repo) : super(const MeasurementListState(measurements: []));
+  MeasurementListCubit(this.repo) : super(MeasurementListState.empty()) {
+    getMeasurements();
+  }
 
   final MeasurementRepository repo;
 
@@ -18,6 +20,10 @@ class MeasurementListCubit extends Cubit<MeasurementListState> {
     );
     await repo.addMeasurement(measurement);
 
+    getMeasurements();
+  }
+
+  Future<void> getMeasurements() async {
     final measurements = await repo.getMeasurements();
     emit(MeasurementListState(measurements: measurements));
   }

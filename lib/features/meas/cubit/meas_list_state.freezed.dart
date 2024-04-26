@@ -92,10 +92,11 @@ class __$$MeasurementListStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$MeasurementListStateImpl implements _MeasurementListState {
+class _$MeasurementListStateImpl extends _MeasurementListState {
   const _$MeasurementListStateImpl(
       {required final List<Measurement> measurements})
-      : _measurements = measurements;
+      : _measurements = measurements,
+        super._();
 
   final List<Measurement> _measurements;
   @override
@@ -132,10 +133,11 @@ class _$MeasurementListStateImpl implements _MeasurementListState {
               this, _$identity);
 }
 
-abstract class _MeasurementListState implements MeasurementListState {
+abstract class _MeasurementListState extends MeasurementListState {
   const factory _MeasurementListState(
           {required final List<Measurement> measurements}) =
       _$MeasurementListStateImpl;
+  const _MeasurementListState._() : super._();
 
   @override
   List<Measurement> get measurements;

@@ -17,9 +17,7 @@ class MeasurementListScreen extends StatelessWidget {
 }
 
 class MeasurementListView extends StatelessWidget {
-  const MeasurementListView({
-    super.key,
-  });
+  const MeasurementListView({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -31,7 +29,6 @@ class MeasurementListView extends StatelessWidget {
               'assets/logo.svg',
               width: 200,
             ),
-            Text('Allo'),
             const Expanded(child: MeasurementList()),
           ],
         ),
@@ -43,6 +40,7 @@ class MeasurementListView extends StatelessWidget {
 
   void _addMeasurement(BuildContext context) {
     context.read<MeasurementListCubit>().addNewMeasurement();
+    // context.go(location)
   }
 }
 
@@ -50,23 +48,19 @@ class MeasurementList extends StatelessWidget {
   const MeasurementList({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<MeasurementListCubit, MeasurementListState>(
-      builder: (context, state) {
-        return ListView.builder(
+  Widget build(BuildContext context) => BlocBuilder<MeasurementListCubit, MeasurementListState>(
+        builder: (context, state) => ListView.builder(
           itemCount: state.measurements.length,
           itemBuilder: (context, index) {
             final measurement = state.measurements[index];
             return ListTile(
-              title: Text(measurement.clientName ?? ''),
-              subtitle: Text(measurement.address ?? ''),
+              title: Text('Date: ${measurement.date}'),
+              subtitle: Text('ID: ${measurement.id}'),
               onTap: () => _editMeasurement(context, measurement.id),
             );
           },
-        );
-      },
-    );
-  }
+        ),
+      );
 
   void _editMeasurement(BuildContext context, String id) {}
 }
