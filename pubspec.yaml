@@ -21,6 +21,7 @@ dependencies:
   cached_network_image: ^3.2.3
   get_it: ^7.6.0
   flutter_native_splash: ^2.4.0
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
