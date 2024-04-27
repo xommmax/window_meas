@@ -14,6 +14,16 @@ class MeasurementRepository {
 
   Future<List<Measurement>> getMeasurements() async {
     final list = await local.getMeasurements();
-    return list.map((e) => Measurement.fromDB(e)).toList()..sort((m1, m2) => m2.date.compareTo(m1.date));
+    return list.map((e) => Measurement.fromDB(e)).toList();
   }
+
+  Future<Measurement?> getMeasurement(String id) async {
+    final db = await local.getMeasurement(id);
+    return db != null ? Measurement.fromDB(db) : null;
+  }
+
+  Future<void> updateMeasurement(Measurement measurement) => local.updateMeasurement(measurement.toDB());
+
+  Stream<List<Measurement>> watchMeasurements() =>
+      local.watchMeasurements().map((list) => list.map((e) => Measurement.fromDB(e)).toList());
 }

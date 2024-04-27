@@ -82,7 +82,7 @@ class _DrawingView extends StatefulWidget {
 
 class DrawingViewState extends State<_DrawingView> {
   static const minScale = 2.0;
-  static const initScale = 5.0;
+  static const initScale = 6.0;
   static const maxScale = 8.0;
 
   double currentScale = initScale;

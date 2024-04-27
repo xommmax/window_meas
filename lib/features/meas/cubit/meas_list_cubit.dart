@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:window_meas/features/meas/cubit/meas_list_state.dart';
@@ -7,24 +9,31 @@ import 'package:uuid/uuid.dart';
 
 @injectable
 class MeasurementListCubit extends Cubit<MeasurementListState> {
-  MeasurementListCubit(this.repo) : super(MeasurementListState.empty()) {
-    getMeasurements();
-  }
+  MeasurementListCubit(this.repo) : super(MeasurementListState.empty());
 
   final MeasurementRepository repo;
+  StreamSubscription? measSubscription;
 
-  Future<void> addNewMeasurement() async {
-    final measurement = Measurement(
-      date: DateTime.now(),
-      id: const Uuid().v4(),
-    );
+  Future<String> addNewMeasurement() async {
+    final id = const Uuid().v4();
+
+    final measurement = Measurement(date: DateTime.now(), id: id);
     await repo.addMeasurement(measurement);
 
-    getMeasurements();
+    return id;
   }
 
-  Future<void> getMeasurements() async {
+  void watchMeasurements() async {
+    measSubscription = repo.watchMeasurements().listen((measurements) {
+      emit(MeasurementListState(measurements: measurements));
+    });
     final measurements = await repo.getMeasurements();
     emit(MeasurementListState(measurements: measurements));
+  }
+
+  @override
+  Future<void> close() {
+    measSubscription?.cancel();
+    return super.close();
   }
 }

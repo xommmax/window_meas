@@ -2,5 +2,10 @@
   "appName": "Замір Вікон",
   "myMeas": "Мої заміри",
   "profile": "Профіль",
-  "measurement": "Замір"
+  "measurement": "Замір",
+  "measurementDate": "Дата",
+  "clientName": "ПІБ",
+  "address": "Адреса",
+  "scheme": "Схема"
+
 }

@@ -16,7 +16,7 @@ class MeasurementListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider<MeasurementListCubit>(
-        create: (context) => getIt(),
+        create: (context) => getIt()..watchMeasurements(),
         child: const MeasurementListView(),
       );
 }
@@ -48,9 +48,12 @@ class MeasurementListView extends StatelessWidget {
         child: const Icon(Icons.add),
       ));
 
-  void _addMeasurement(BuildContext context) {
-    context.read<MeasurementListCubit>().addNewMeasurement();
-    // context.go(location)
+  Future<void> _addMeasurement(BuildContext context) async {
+    final id = await context.read<MeasurementListCubit>().addNewMeasurement();
+
+    if (context.mounted) {
+      context.push('/meas_details/$id');
+    }
   }
 }
 
@@ -60,16 +63,11 @@ class MeasurementList extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocBuilder<MeasurementListCubit, MeasurementListState>(
         builder: (context, state) => ListView.builder(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
           itemCount: state.measurements.length,
-          itemBuilder: (context, index) {
-            final measurement = state.measurements[index];
-            return MeasurementItem(measurement);
-          },
+          itemBuilder: (context, index) => MeasurementItem(state.measurements[index]),
         ),
       );
-
-  void _editMeasurement(BuildContext context, String id) {}
 }
 
 class MeasurementItem extends StatelessWidget {
@@ -78,66 +76,71 @@ class MeasurementItem extends StatelessWidget {
   final Measurement measurement;
 
   @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [AppColors.secondary, AppColors.primary, AppColors.secondary],
-                stops: [0.07, 0.70, 0.95],
-              ),
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(12),
-              ),
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: InkWell(
+          onTap: () => context.push('/meas_details/${measurement.id}'),
+          child: Card(
+            color: Colors.white,
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                '${context.l10n.measurement} ${measurement.innerId?.toString().padLeft(4, '0') ?? ''}',
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const FaIcon(FontAwesomeIcons.clock, size: 16, color: AppColors.secondary),
-                const SizedBox(width: 12),
-                Text(DateFormat('dd.MM.yyyy, HH:mm').format(measurement.date)),
+                Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [AppColors.secondary, AppColors.primary, AppColors.secondary],
+                      stops: [0.07, 0.70, 0.95],
+                    ),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(8),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '${context.l10n.measurement} №${measurement.innerId?.toString().padLeft(4, '0') ?? ''}',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      const FaIcon(FontAwesomeIcons.clock, size: 16, color: AppColors.secondary),
+                      const SizedBox(width: 12),
+                      Text(DateFormat('dd.MM.yyyy, HH:mm').format(measurement.date)),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      const FaIcon(FontAwesomeIcons.user, size: 16, color: AppColors.secondary),
+                      const SizedBox(width: 12),
+                      Text(measurement.clientName ?? ''),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      const FaIcon(FontAwesomeIcons.locationDot, size: 16, color: AppColors.secondary),
+                      const SizedBox(width: 12),
+                      Text(measurement.address ?? ''),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                const FaIcon(FontAwesomeIcons.user, size: 16, color: AppColors.secondary),
-                const SizedBox(width: 12),
-                Text(measurement.clientName ?? ''),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                const FaIcon(FontAwesomeIcons.locationDot, size: 16, color: AppColors.secondary),
-                const SizedBox(width: 12),
-                Text(measurement.address ?? ''),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      );
 }

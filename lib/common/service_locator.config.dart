@@ -11,8 +11,9 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:isar/isar.dart' as _i4;
-import 'package:window_meas/common/register_module.dart' as _i9;
+import 'package:window_meas/common/register_module.dart' as _i10;
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart' as _i3;
+import 'package:window_meas/features/meas/cubit/meas_details_cubit.dart' as _i9;
 import 'package:window_meas/features/meas/cubit/meas_list_cubit.dart' as _i8;
 import 'package:window_meas/features/meas/data/ds/meas_local_ds.dart' as _i6;
 import 'package:window_meas/features/meas/data/ds/meas_remote_ds.dart' as _i5;
@@ -45,8 +46,10 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i8.MeasurementListCubit>(
         () => _i8.MeasurementListCubit(gh<_i7.MeasurementRepository>()));
+    gh.factory<_i9.MeasurementDetailsCubit>(
+        () => _i9.MeasurementDetailsCubit(gh<_i7.MeasurementRepository>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i9.RegisterModule {}
+class _$RegisterModule extends _i10.RegisterModule {}

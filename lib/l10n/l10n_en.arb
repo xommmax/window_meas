@@ -2,5 +2,9 @@
   "appName": "Windows Measurements",
   "myMeas": "My measurements",
   "profile": "Profile",
-  "measurement": "Measurement"
+  "measurement": "Measurement",
+  "measurementDate": "Date",
+  "clientName": "Client",
+  "address": "Address",
+  "scheme": "Scheme"
 }

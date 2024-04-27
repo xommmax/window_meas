@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:window_meas/common/nav/router.dart';
@@ -21,10 +22,21 @@ class MainAppView extends StatelessWidget {
         supportedLocales: L10n.supportedLocales,
         locale: const Locale('uk', 'UA'),
         theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.primary,
-          primary: AppColors.primary,
-          secondary: AppColors.secondary,
-        )),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: AppColors.primary,
+            primary: AppColors.primary,
+            secondary: AppColors.secondary,
+          ),
+          appBarTheme: const AppBarTheme(
+            color: AppColors.secondary,
+            titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+            actionsIconTheme: IconThemeData(color: Colors.white),
+            iconTheme: IconThemeData(color: Colors.white),
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: AppColors.secondary,
+              statusBarIconBrightness: Brightness.light,
+            ),
+          ),
+        ),
       );
 }

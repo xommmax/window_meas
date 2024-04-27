@@ -5,6 +5,8 @@ import 'package:window_meas/features/meas/data/model/measurement_db.dart';
 abstract class MeasurementLocalDataSource {
   Future<List<MeasurementDB>> getMeasurements();
 
+  Stream<List<MeasurementDB>> watchMeasurements();
+
   Future<MeasurementDB?> getMeasurement(String id);
 
   Future<void> addMeasurement(MeasurementDB measurement);
@@ -30,11 +32,12 @@ class MeasurementIsarLocalDataSource implements MeasurementLocalDataSource {
   Future<MeasurementDB?> getMeasurement(String id) => isar.measurementDBs.getById(id);
 
   @override
-  Future<List<MeasurementDB>> getMeasurements() => isar.measurementDBs.where().findAll();
+  Future<List<MeasurementDB>> getMeasurements() => isar.measurementDBs.where().sortByDateDesc().findAll();
 
   @override
-  Future<void> updateMeasurement(MeasurementDB measurement) async {
-    await deleteMeasurement(measurement.id);
-    await addMeasurement(measurement);
-  }
+  Future<void> updateMeasurement(MeasurementDB measurement) =>
+      isar.writeTxn(() => isar.measurementDBs.put(measurement));
+
+  @override
+  Stream<List<MeasurementDB>> watchMeasurements() => isar.measurementDBs.where().sortByDateDesc().watch();
 }
