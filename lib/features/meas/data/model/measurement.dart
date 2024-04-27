@@ -12,18 +12,21 @@ abstract class Measurement with _$Measurement {
     required DateTime date,
     String? clientName,
     String? address,
+    int? innerId,
   }) = _Measurement;
 
   MeasurementDB toDB() => MeasurementDB()
     ..id = id
     ..date = date
     ..clientName = clientName
-    ..address = address;
+    ..address = address
+    ..innerId = innerId;
 
   static Measurement fromDB(MeasurementDB db) => Measurement(
         id: db.id,
         date: db.date,
         clientName: db.clientName,
         address: db.address,
+        innerId: db.innerId,
       );
 }

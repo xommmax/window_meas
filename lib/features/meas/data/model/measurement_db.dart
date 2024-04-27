@@ -9,6 +9,5 @@ class MeasurementDB {
   late DateTime date;
   String? clientName;
   String? address;
-  
   Id? innerId;
 }

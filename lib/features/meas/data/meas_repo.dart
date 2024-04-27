@@ -14,6 +14,6 @@ class MeasurementRepository {
 
   Future<List<Measurement>> getMeasurements() async {
     final list = await local.getMeasurements();
-    return list.map((e) => Measurement.fromDB(e)).toList();
+    return list.map((e) => Measurement.fromDB(e)).toList()..sort((m1, m2) => m2.date.compareTo(m1.date));
   }
 }

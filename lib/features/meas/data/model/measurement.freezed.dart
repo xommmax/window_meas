@@ -20,6 +20,7 @@ mixin _$Measurement {
   DateTime get date => throw _privateConstructorUsedError;
   String? get clientName => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
+  int? get innerId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementCopyWith<Measurement> get copyWith =>
@@ -32,7 +33,12 @@ abstract class $MeasurementCopyWith<$Res> {
           Measurement value, $Res Function(Measurement) then) =
       _$MeasurementCopyWithImpl<$Res, Measurement>;
   @useResult
-  $Res call({String id, DateTime date, String? clientName, String? address});
+  $Res call(
+      {String id,
+      DateTime date,
+      String? clientName,
+      String? address,
+      int? innerId});
 }
 
 /// @nodoc
@@ -52,6 +58,7 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? date = null,
     Object? clientName = freezed,
     Object? address = freezed,
+    Object? innerId = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -70,6 +77,10 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
+      innerId: freezed == innerId
+          ? _value.innerId
+          : innerId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -82,7 +93,12 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       __$$MeasurementImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, DateTime date, String? clientName, String? address});
+  $Res call(
+      {String id,
+      DateTime date,
+      String? clientName,
+      String? address,
+      int? innerId});
 }
 
 /// @nodoc
@@ -100,6 +116,7 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? date = null,
     Object? clientName = freezed,
     Object? address = freezed,
+    Object? innerId = freezed,
   }) {
     return _then(_$MeasurementImpl(
       id: null == id
@@ -118,6 +135,10 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
+      innerId: freezed == innerId
+          ? _value.innerId
+          : innerId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -126,7 +147,11 @@ class __$$MeasurementImplCopyWithImpl<$Res>
 
 class _$MeasurementImpl extends _Measurement {
   const _$MeasurementImpl(
-      {required this.id, required this.date, this.clientName, this.address})
+      {required this.id,
+      required this.date,
+      this.clientName,
+      this.address,
+      this.innerId})
       : super._();
 
   @override
@@ -137,10 +162,12 @@ class _$MeasurementImpl extends _Measurement {
   final String? clientName;
   @override
   final String? address;
+  @override
+  final int? innerId;
 
   @override
   String toString() {
-    return 'Measurement(id: $id, date: $date, clientName: $clientName, address: $address)';
+    return 'Measurement(id: $id, date: $date, clientName: $clientName, address: $address, innerId: $innerId)';
   }
 
   @override
@@ -152,11 +179,13 @@ class _$MeasurementImpl extends _Measurement {
             (identical(other.date, date) || other.date == date) &&
             (identical(other.clientName, clientName) ||
                 other.clientName == clientName) &&
-            (identical(other.address, address) || other.address == address));
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.innerId, innerId) || other.innerId == innerId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, date, clientName, address);
+  int get hashCode =>
+      Object.hash(runtimeType, id, date, clientName, address, innerId);
 
   @JsonKey(ignore: true)
   @override
@@ -170,7 +199,8 @@ abstract class _Measurement extends Measurement {
       {required final String id,
       required final DateTime date,
       final String? clientName,
-      final String? address}) = _$MeasurementImpl;
+      final String? address,
+      final int? innerId}) = _$MeasurementImpl;
   const _Measurement._() : super._();
 
   @override
@@ -181,6 +211,8 @@ abstract class _Measurement extends Measurement {
   String? get clientName;
   @override
   String? get address;
+  @override
+  int? get innerId;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementImplCopyWith<_$MeasurementImpl> get copyWith =>
