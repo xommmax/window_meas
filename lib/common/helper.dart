@@ -2,26 +2,28 @@ import 'dart:ui';
 
 import 'package:window_meas/common/constants.dart';
 
-Offset toInnerCoord(Offset offset, Size size) {
-  final gridSize = size.width / Constants.gridSpacing;
+extension OffsetExt on Offset {
+  Offset toInnerCoord(Size size) {
+    final gridSize = size.width / Constants.gridSpacing;
 
-  final shiftX = (size.width / 2.0 / gridSize).roundToDouble() * gridSize;
-  final shiftY = (size.height / 2.0 / gridSize).roundToDouble() * gridSize;
+    final shiftX = (size.width / 2.0 / gridSize).roundToDouble() * gridSize;
+    final shiftY = (size.height / 2.0 / gridSize).roundToDouble() * gridSize;
 
-  final x = ((offset.dx - shiftX) / gridSize).roundToDouble();
-  final y = ((offset.dy - shiftY) / gridSize).roundToDouble();
+    final x = ((dx - shiftX) / gridSize).roundToDouble();
+    final y = ((dy - shiftY) / gridSize).roundToDouble();
 
-  return Offset(x, y);
-}
+    return Offset(x, y);
+  }
 
-Offset toGlobalCoord(Offset offset, Size size) {
-  final gridSize = size.width / Constants.gridSpacing;
+  Offset toGlobalCoord(Size size) {
+    final gridSize = size.width / Constants.gridSpacing;
 
-  final shiftX = (size.width / 2.0 / gridSize).roundToDouble() * gridSize;
-  final shiftY = (size.height / 2.0 / gridSize).roundToDouble() * gridSize;
+    final shiftX = (size.width / 2.0 / gridSize).roundToDouble() * gridSize;
+    final shiftY = (size.height / 2.0 / gridSize).roundToDouble() * gridSize;
 
-  final x = offset.dx * gridSize + shiftX;
-  final y = offset.dy * gridSize + shiftY;
+    final x = dx * gridSize + shiftX;
+    final y = dy * gridSize + shiftY;
 
-  return Offset(x, y);
+    return Offset(x, y);
+  }
 }

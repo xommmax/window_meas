@@ -1,12 +1,10 @@
-import 'dart:ui';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:window_meas/common/constants.dart';
 import 'package:window_meas/common/helper.dart';
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
+import 'package:window_meas/features/editor/view/components.dart';
+import 'package:window_meas/features/editor/view/painter.dart';
 
 class DrawingView extends StatefulWidget {
   const DrawingView({super.key});
@@ -39,11 +37,11 @@ class DrawingViewState extends State<DrawingView> {
                 builder: (context, state) => GestureDetector(
                   onPanDown: state.mode == EditorMode.move
                       ? null
-                      : (details) => setState(() => currentLine = (toInnerCoord(details.localPosition, size), null)),
+                      : (details) => setState(() => currentLine = (details.localPosition.toInnerCoord(size), null)),
                   onPanUpdate: state.mode == EditorMode.move
                       ? null
                       : (details) =>
-                          setState(() => currentLine = (currentLine.$1, toInnerCoord(details.localPosition, size))),
+                          setState(() => currentLine = (currentLine.$1, details.localPosition.toInnerCoord(size))),
                   onPanEnd: state.mode == EditorMode.move
                       ? null
                       : (details) => setState(() {
@@ -83,68 +81,3 @@ class DrawingViewState extends State<DrawingView> {
         },
       );
 }
-
-class MyCustomPainter extends CustomPainter {
-  static const lineWidth = 0.5;
-
-  final List<Line> lines;
-  final Line currentLine;
-
-  MyCustomPainter({
-    required this.lines,
-    required this.currentLine,
-  });
-  @override
-  void paint(Canvas canvas, Size size) {
-    _drawBg(canvas, size);
-    _drawLines(canvas, size);
-    _drawCurrentLine(canvas, size);
-  }
-
-  @override
-  bool shouldRepaint(MyCustomPainter oldDelegate) =>
-      !listEquals(lines, oldDelegate.lines) || currentLine != oldDelegate.currentLine;
-
-  void _drawBg(Canvas canvas, Size size) {
-    final pointsPaint = Paint()
-      ..color = Colors.grey.shade400
-      ..strokeWidth = lineWidth
-      ..strokeCap = StrokeCap.round;
-
-    final List<Offset> points = [];
-
-    double gridSize = size.width / Constants.gridSpacing;
-
-    for (int x = 0; x <= Constants.gridSpacing; x++) {
-      for (int y = 0; y <= (size.height / gridSize).ceil(); y++) {
-        points.add(Offset(x * gridSize, y * gridSize));
-      }
-    }
-
-    canvas.drawPoints(PointMode.points, points, pointsPaint);
-  }
-
-  void _drawLines(Canvas canvas, Size size) {
-    final linePaint = Paint()
-      ..color = Colors.black
-      ..strokeWidth = lineWidth;
-
-    for (final line in lines) {
-      if (line.$1 != null && line.$2 != null) {
-        canvas.drawLine(toGlobalCoord(line.$1!, size), toGlobalCoord(line.$2!, size), linePaint);
-      }
-    }
-  }
-
-  void _drawCurrentLine(Canvas canvas, Size size) {
-    if (currentLine.$1 != null && currentLine.$2 != null) {
-      final linePaint = Paint()
-        ..color = Colors.green
-        ..strokeWidth = lineWidth;
-
-      canvas.drawLine(toGlobalCoord(currentLine.$1!, size), toGlobalCoord(currentLine.$2!, size), linePaint);
-    }
-  }
-}
-
-typedef Line = (Offset?, Offset?);

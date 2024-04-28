@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:replay_bloc/replay_bloc.dart';
-import 'package:window_meas/features/editor/view/drawing_view.dart';
+import 'package:window_meas/features/editor/view/components.dart';
 
 part 'drawing_cubit.freezed.dart';
 
