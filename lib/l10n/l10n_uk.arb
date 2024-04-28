@@ -6,6 +6,9 @@
   "measurementDate": "Дата",
   "clientName": "ПІБ",
   "address": "Адреса",
-  "scheme": "Схема"
+  "scheme": "Схема",
+  "myProfile": "Мій профіль",
+  "settings": "Налаштування",
+  "templates": "Шаблони"
 
 }

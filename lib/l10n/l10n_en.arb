@@ -6,5 +6,8 @@
   "measurementDate": "Date",
   "clientName": "Client",
   "address": "Address",
-  "scheme": "Scheme"
+  "scheme": "Scheme",
+  "myProfile": "My profile",
+  "settings": "Settings",
+  "templates": "Templates"
 }

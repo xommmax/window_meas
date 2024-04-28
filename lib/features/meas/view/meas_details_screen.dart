@@ -122,7 +122,11 @@ class _InputItemState extends State<_InputItem> {
             ),
           ),
           Expanded(
-            child: TextField(controller: controller, decoration: null),
+            child: TextField(
+              controller: controller,
+              decoration: null,
+              textCapitalization: TextCapitalization.words,
+            ),
           ),
         ],
       ),

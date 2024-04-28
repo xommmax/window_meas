@@ -45,6 +45,8 @@ class MeasurementListView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addMeasurement(context),
+        backgroundColor: AppColors.primary,
+        foregroundColor: Colors.white,
         child: const Icon(Icons.add),
       ));
 
