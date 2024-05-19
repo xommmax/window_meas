@@ -34,6 +34,14 @@ mixin _$Measurement {
   QuarterPosition get quarterPosition => throw _privateConstructorUsedError;
   bool get staticCalculation => throw _privateConstructorUsedError;
   ProfileSystem get profileSystem => throw _privateConstructorUsedError;
+  DoorstepOption get doorstep => throw _privateConstructorUsedError;
+  DoorstepType get doorstepType => throw _privateConstructorUsedError;
+  DoorOpeningType get doorOpeningType => throw _privateConstructorUsedError;
+  String get laminationInternal => throw _privateConstructorUsedError;
+  String get laminationExternal => throw _privateConstructorUsedError;
+  RubberColor get rubberColor => throw _privateConstructorUsedError;
+  StandProfile get standProfile => throw _privateConstructorUsedError;
+  ExpanderOption get expanderOption => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementCopyWith<Measurement> get copyWith =>
@@ -64,7 +72,17 @@ abstract class $MeasurementCopyWith<$Res> {
       String quarterSize,
       QuarterPosition quarterPosition,
       bool staticCalculation,
-      ProfileSystem profileSystem});
+      ProfileSystem profileSystem,
+      DoorstepOption doorstep,
+      DoorstepType doorstepType,
+      DoorOpeningType doorOpeningType,
+      String laminationInternal,
+      String laminationExternal,
+      RubberColor rubberColor,
+      StandProfile standProfile,
+      ExpanderOption expanderOption});
+
+  $ExpanderOptionCopyWith<$Res> get expanderOption;
 }
 
 /// @nodoc
@@ -98,6 +116,14 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? quarterPosition = null,
     Object? staticCalculation = null,
     Object? profileSystem = null,
+    Object? doorstep = null,
+    Object? doorstepType = null,
+    Object? doorOpeningType = null,
+    Object? laminationInternal = null,
+    Object? laminationExternal = null,
+    Object? rubberColor = null,
+    Object? standProfile = null,
+    Object? expanderOption = null,
   }) {
     return _then(_value.copyWith(
       innerId: freezed == innerId
@@ -172,7 +198,47 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.profileSystem
           : profileSystem // ignore: cast_nullable_to_non_nullable
               as ProfileSystem,
+      doorstep: null == doorstep
+          ? _value.doorstep
+          : doorstep // ignore: cast_nullable_to_non_nullable
+              as DoorstepOption,
+      doorstepType: null == doorstepType
+          ? _value.doorstepType
+          : doorstepType // ignore: cast_nullable_to_non_nullable
+              as DoorstepType,
+      doorOpeningType: null == doorOpeningType
+          ? _value.doorOpeningType
+          : doorOpeningType // ignore: cast_nullable_to_non_nullable
+              as DoorOpeningType,
+      laminationInternal: null == laminationInternal
+          ? _value.laminationInternal
+          : laminationInternal // ignore: cast_nullable_to_non_nullable
+              as String,
+      laminationExternal: null == laminationExternal
+          ? _value.laminationExternal
+          : laminationExternal // ignore: cast_nullable_to_non_nullable
+              as String,
+      rubberColor: null == rubberColor
+          ? _value.rubberColor
+          : rubberColor // ignore: cast_nullable_to_non_nullable
+              as RubberColor,
+      standProfile: null == standProfile
+          ? _value.standProfile
+          : standProfile // ignore: cast_nullable_to_non_nullable
+              as StandProfile,
+      expanderOption: null == expanderOption
+          ? _value.expanderOption
+          : expanderOption // ignore: cast_nullable_to_non_nullable
+              as ExpanderOption,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ExpanderOptionCopyWith<$Res> get expanderOption {
+    return $ExpanderOptionCopyWith<$Res>(_value.expanderOption, (value) {
+      return _then(_value.copyWith(expanderOption: value) as $Val);
+    });
   }
 }
 
@@ -202,7 +268,18 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       String quarterSize,
       QuarterPosition quarterPosition,
       bool staticCalculation,
-      ProfileSystem profileSystem});
+      ProfileSystem profileSystem,
+      DoorstepOption doorstep,
+      DoorstepType doorstepType,
+      DoorOpeningType doorOpeningType,
+      String laminationInternal,
+      String laminationExternal,
+      RubberColor rubberColor,
+      StandProfile standProfile,
+      ExpanderOption expanderOption});
+
+  @override
+  $ExpanderOptionCopyWith<$Res> get expanderOption;
 }
 
 /// @nodoc
@@ -234,6 +311,14 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? quarterPosition = null,
     Object? staticCalculation = null,
     Object? profileSystem = null,
+    Object? doorstep = null,
+    Object? doorstepType = null,
+    Object? doorOpeningType = null,
+    Object? laminationInternal = null,
+    Object? laminationExternal = null,
+    Object? rubberColor = null,
+    Object? standProfile = null,
+    Object? expanderOption = null,
   }) {
     return _then(_$MeasurementImpl(
       innerId: freezed == innerId
@@ -308,6 +393,38 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.profileSystem
           : profileSystem // ignore: cast_nullable_to_non_nullable
               as ProfileSystem,
+      doorstep: null == doorstep
+          ? _value.doorstep
+          : doorstep // ignore: cast_nullable_to_non_nullable
+              as DoorstepOption,
+      doorstepType: null == doorstepType
+          ? _value.doorstepType
+          : doorstepType // ignore: cast_nullable_to_non_nullable
+              as DoorstepType,
+      doorOpeningType: null == doorOpeningType
+          ? _value.doorOpeningType
+          : doorOpeningType // ignore: cast_nullable_to_non_nullable
+              as DoorOpeningType,
+      laminationInternal: null == laminationInternal
+          ? _value.laminationInternal
+          : laminationInternal // ignore: cast_nullable_to_non_nullable
+              as String,
+      laminationExternal: null == laminationExternal
+          ? _value.laminationExternal
+          : laminationExternal // ignore: cast_nullable_to_non_nullable
+              as String,
+      rubberColor: null == rubberColor
+          ? _value.rubberColor
+          : rubberColor // ignore: cast_nullable_to_non_nullable
+              as RubberColor,
+      standProfile: null == standProfile
+          ? _value.standProfile
+          : standProfile // ignore: cast_nullable_to_non_nullable
+              as StandProfile,
+      expanderOption: null == expanderOption
+          ? _value.expanderOption
+          : expanderOption // ignore: cast_nullable_to_non_nullable
+              as ExpanderOption,
     ));
   }
 }
@@ -333,7 +450,15 @@ class _$MeasurementImpl extends _Measurement {
       required this.quarterSize,
       required this.quarterPosition,
       required this.staticCalculation,
-      required this.profileSystem})
+      required this.profileSystem,
+      required this.doorstep,
+      required this.doorstepType,
+      required this.doorOpeningType,
+      required this.laminationInternal,
+      required this.laminationExternal,
+      required this.rubberColor,
+      required this.standProfile,
+      required this.expanderOption})
       : super._();
 
   @override
@@ -372,10 +497,26 @@ class _$MeasurementImpl extends _Measurement {
   final bool staticCalculation;
   @override
   final ProfileSystem profileSystem;
+  @override
+  final DoorstepOption doorstep;
+  @override
+  final DoorstepType doorstepType;
+  @override
+  final DoorOpeningType doorOpeningType;
+  @override
+  final String laminationInternal;
+  @override
+  final String laminationExternal;
+  @override
+  final RubberColor rubberColor;
+  @override
+  final StandProfile standProfile;
+  @override
+  final ExpanderOption expanderOption;
 
   @override
   String toString() {
-    return 'Measurement(innerId: $innerId, id: $id, date: $date, address: $address, clientName: $clientName, phoneNumber: $phoneNumber, assembly: $assembly, disassembly: $disassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem)';
+    return 'Measurement(innerId: $innerId, id: $id, date: $date, address: $address, clientName: $clientName, phoneNumber: $phoneNumber, assembly: $assembly, disassembly: $disassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption)';
   }
 
   @override
@@ -414,30 +555,55 @@ class _$MeasurementImpl extends _Measurement {
             (identical(other.staticCalculation, staticCalculation) ||
                 other.staticCalculation == staticCalculation) &&
             (identical(other.profileSystem, profileSystem) ||
-                other.profileSystem == profileSystem));
+                other.profileSystem == profileSystem) &&
+            (identical(other.doorstep, doorstep) ||
+                other.doorstep == doorstep) &&
+            (identical(other.doorstepType, doorstepType) ||
+                other.doorstepType == doorstepType) &&
+            (identical(other.doorOpeningType, doorOpeningType) ||
+                other.doorOpeningType == doorOpeningType) &&
+            (identical(other.laminationInternal, laminationInternal) ||
+                other.laminationInternal == laminationInternal) &&
+            (identical(other.laminationExternal, laminationExternal) ||
+                other.laminationExternal == laminationExternal) &&
+            (identical(other.rubberColor, rubberColor) ||
+                other.rubberColor == rubberColor) &&
+            (identical(other.standProfile, standProfile) ||
+                other.standProfile == standProfile) &&
+            (identical(other.expanderOption, expanderOption) ||
+                other.expanderOption == expanderOption));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      innerId,
-      id,
-      date,
-      address,
-      clientName,
-      phoneNumber,
-      assembly,
-      disassembly,
-      delivery,
-      unloading,
-      buildingType,
-      flatStatus,
-      garbageRemoval,
-      elevator,
-      quarterSize,
-      quarterPosition,
-      staticCalculation,
-      profileSystem);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        innerId,
+        id,
+        date,
+        address,
+        clientName,
+        phoneNumber,
+        assembly,
+        disassembly,
+        delivery,
+        unloading,
+        buildingType,
+        flatStatus,
+        garbageRemoval,
+        elevator,
+        quarterSize,
+        quarterPosition,
+        staticCalculation,
+        profileSystem,
+        doorstep,
+        doorstepType,
+        doorOpeningType,
+        laminationInternal,
+        laminationExternal,
+        rubberColor,
+        standProfile,
+        expanderOption
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -465,7 +631,15 @@ abstract class _Measurement extends Measurement {
       required final String quarterSize,
       required final QuarterPosition quarterPosition,
       required final bool staticCalculation,
-      required final ProfileSystem profileSystem}) = _$MeasurementImpl;
+      required final ProfileSystem profileSystem,
+      required final DoorstepOption doorstep,
+      required final DoorstepType doorstepType,
+      required final DoorOpeningType doorOpeningType,
+      required final String laminationInternal,
+      required final String laminationExternal,
+      required final RubberColor rubberColor,
+      required final StandProfile standProfile,
+      required final ExpanderOption expanderOption}) = _$MeasurementImpl;
   const _Measurement._() : super._();
 
   @override
@@ -504,6 +678,22 @@ abstract class _Measurement extends Measurement {
   bool get staticCalculation;
   @override
   ProfileSystem get profileSystem;
+  @override
+  DoorstepOption get doorstep;
+  @override
+  DoorstepType get doorstepType;
+  @override
+  DoorOpeningType get doorOpeningType;
+  @override
+  String get laminationInternal;
+  @override
+  String get laminationExternal;
+  @override
+  RubberColor get rubberColor;
+  @override
+  StandProfile get standProfile;
+  @override
+  ExpanderOption get expanderOption;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementImplCopyWith<_$MeasurementImpl> get copyWith =>
