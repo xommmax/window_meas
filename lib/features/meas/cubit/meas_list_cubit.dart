@@ -5,7 +5,6 @@ import 'package:injectable/injectable.dart';
 import 'package:window_meas/features/meas/cubit/meas_list_state.dart';
 import 'package:window_meas/features/meas/data/meas_repo.dart';
 import 'package:window_meas/features/meas/data/model/measurement.dart';
-import 'package:uuid/uuid.dart';
 
 @injectable
 class MeasurementListCubit extends Cubit<MeasurementListState> {
@@ -15,12 +14,10 @@ class MeasurementListCubit extends Cubit<MeasurementListState> {
   StreamSubscription? measSubscription;
 
   Future<String> addNewMeasurement() async {
-    final id = const Uuid().v4();
-
-    final measurement = Measurement(date: DateTime.now(), id: id);
+    final measurement = Measurement.initial();
     await repo.addMeasurement(measurement);
 
-    return id;
+    return measurement.id;
   }
 
   void watchMeasurements() async {

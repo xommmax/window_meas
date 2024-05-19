@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:window_meas/common/ext/context_ext.dart';
+import 'package:window_meas/l10n/localization.dart';
 import 'package:window_meas/common/service_locator.dart';
 import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/meas/cubit/meas_list_cubit.dart';
@@ -126,7 +126,7 @@ class MeasurementItem extends StatelessWidget {
                     children: [
                       const FaIcon(FontAwesomeIcons.user, size: 16, color: AppColors.secondary),
                       const SizedBox(width: 12),
-                      Text(measurement.clientName ?? ''),
+                      Text(measurement.clientName),
                     ],
                   ),
                 ),
@@ -136,7 +136,7 @@ class MeasurementItem extends StatelessWidget {
                     children: [
                       const FaIcon(FontAwesomeIcons.locationDot, size: 16, color: AppColors.secondary),
                       const SizedBox(width: 12),
-                      Text(measurement.address ?? ''),
+                      Text(measurement.address),
                     ],
                   ),
                 ),

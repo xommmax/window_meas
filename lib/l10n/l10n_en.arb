@@ -9,5 +9,21 @@
   "scheme": "Scheme",
   "myProfile": "My profile",
   "settings": "Settings",
-  "templates": "Templates"
+  "templates": "Templates",
+  "clientInfo": "Client info",
+  "phoneNumber": "Phone number",
+  "buildingInfo": "Building info",
+  "assembly": "Assembly",
+  "disassembly": "Disassembly",
+  "delivery": "Delivery",
+  "unloading": "Unloading",
+  "buildingType": "Building type",
+  "buildingTypeNone": "None",
+  "buildingTypePanel": "Panel",
+  "buildingTypeBrick": "Brick",
+  "buildingTypeWooden": "Wooden",
+  "buildingTypeMonolithic": "Monolithic",
+  "buildingTypeBrickMonolithic": "Brick-monolithic",
+  "buildingTypeBlock": "Block",
+  "buildingTypeBlockMonolithic": "Block-monolithic"
 }

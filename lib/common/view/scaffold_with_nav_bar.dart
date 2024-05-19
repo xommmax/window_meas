@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:window_meas/common/ext/context_ext.dart';
+import 'package:window_meas/l10n/localization.dart';
 
 class ScaffoldWithNavBar extends StatelessWidget {
   final StatefulNavigationShell navigationShell;

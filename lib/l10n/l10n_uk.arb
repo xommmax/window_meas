@@ -9,6 +9,21 @@
   "scheme": "Схема",
   "myProfile": "Мій профіль",
   "settings": "Налаштування",
-  "templates": "Шаблони"
-
+  "templates": "Шаблони",
+  "clientInfo": "Дані про клієнта",
+  "phoneNumber": "Номер телефону",
+  "buildingInfo": "Інформація про дім",
+  "assembly": "Монтаж",
+  "disassembly": "Демонтаж",
+  "delivery": "Доставка",
+  "unloading": "Розвантаження",
+  "buildingType": "Тип дому",
+  "buildingTypeNone": "Не вибрано",
+  "buildingTypePanel": "Панельний",
+  "buildingTypeBrick": "Цегляний",
+  "buildingTypeWooden": "Деревʼяний",
+  "buildingTypeMonolithic": "Монолітний",
+  "buildingTypeBrickMonolithic": "Цегляно-монолітний",
+  "buildingTypeBlock": "Блочний",
+  "buildingTypeBlockMonolithic": "Блочно-монолітний"
 }

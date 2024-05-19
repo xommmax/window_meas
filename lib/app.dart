@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:window_meas/common/nav/router.dart';
 import 'package:window_meas/common/view/colors.dart';
+import 'package:window_meas/l10n/localization.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -20,7 +21,7 @@ class MainAppView extends StatelessWidget {
         routerConfig: appRouter,
         localizationsDelegates: L10n.localizationsDelegates,
         supportedLocales: L10n.supportedLocales,
-        locale: const Locale('uk', 'UA'),
+        locale: Localization.currentLocale,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
             seedColor: AppColors.primary,

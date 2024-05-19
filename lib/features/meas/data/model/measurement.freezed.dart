@@ -16,11 +16,17 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Measurement {
+  int? get innerId => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  String? get clientName => throw _privateConstructorUsedError;
-  String? get address => throw _privateConstructorUsedError;
-  int? get innerId => throw _privateConstructorUsedError;
+  String get address => throw _privateConstructorUsedError;
+  String get clientName => throw _privateConstructorUsedError;
+  String get phoneNumber => throw _privateConstructorUsedError;
+  bool get assembly => throw _privateConstructorUsedError;
+  bool get disassembly => throw _privateConstructorUsedError;
+  bool get delivery => throw _privateConstructorUsedError;
+  bool get unloading => throw _privateConstructorUsedError;
+  BuildingType get buildingType => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementCopyWith<Measurement> get copyWith =>
@@ -34,11 +40,17 @@ abstract class $MeasurementCopyWith<$Res> {
       _$MeasurementCopyWithImpl<$Res, Measurement>;
   @useResult
   $Res call(
-      {String id,
+      {int? innerId,
+      String id,
       DateTime date,
-      String? clientName,
-      String? address,
-      int? innerId});
+      String address,
+      String clientName,
+      String phoneNumber,
+      bool assembly,
+      bool disassembly,
+      bool delivery,
+      bool unloading,
+      BuildingType buildingType});
 }
 
 /// @nodoc
@@ -54,13 +66,23 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? innerId = freezed,
     Object? id = null,
     Object? date = null,
-    Object? clientName = freezed,
-    Object? address = freezed,
-    Object? innerId = freezed,
+    Object? address = null,
+    Object? clientName = null,
+    Object? phoneNumber = null,
+    Object? assembly = null,
+    Object? disassembly = null,
+    Object? delivery = null,
+    Object? unloading = null,
+    Object? buildingType = null,
   }) {
     return _then(_value.copyWith(
+      innerId: freezed == innerId
+          ? _value.innerId
+          : innerId // ignore: cast_nullable_to_non_nullable
+              as int?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -69,18 +91,38 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      clientName: freezed == clientName
-          ? _value.clientName
-          : clientName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      address: freezed == address
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      innerId: freezed == innerId
-          ? _value.innerId
-          : innerId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String,
+      clientName: null == clientName
+          ? _value.clientName
+          : clientName // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      assembly: null == assembly
+          ? _value.assembly
+          : assembly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disassembly: null == disassembly
+          ? _value.disassembly
+          : disassembly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      delivery: null == delivery
+          ? _value.delivery
+          : delivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      unloading: null == unloading
+          ? _value.unloading
+          : unloading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      buildingType: null == buildingType
+          ? _value.buildingType
+          : buildingType // ignore: cast_nullable_to_non_nullable
+              as BuildingType,
     ) as $Val);
   }
 }
@@ -94,11 +136,17 @@ abstract class _$$MeasurementImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
+      {int? innerId,
+      String id,
       DateTime date,
-      String? clientName,
-      String? address,
-      int? innerId});
+      String address,
+      String clientName,
+      String phoneNumber,
+      bool assembly,
+      bool disassembly,
+      bool delivery,
+      bool unloading,
+      BuildingType buildingType});
 }
 
 /// @nodoc
@@ -112,13 +160,23 @@ class __$$MeasurementImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? innerId = freezed,
     Object? id = null,
     Object? date = null,
-    Object? clientName = freezed,
-    Object? address = freezed,
-    Object? innerId = freezed,
+    Object? address = null,
+    Object? clientName = null,
+    Object? phoneNumber = null,
+    Object? assembly = null,
+    Object? disassembly = null,
+    Object? delivery = null,
+    Object? unloading = null,
+    Object? buildingType = null,
   }) {
     return _then(_$MeasurementImpl(
+      innerId: freezed == innerId
+          ? _value.innerId
+          : innerId // ignore: cast_nullable_to_non_nullable
+              as int?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -127,18 +185,38 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      clientName: freezed == clientName
-          ? _value.clientName
-          : clientName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      address: freezed == address
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      innerId: freezed == innerId
-          ? _value.innerId
-          : innerId // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String,
+      clientName: null == clientName
+          ? _value.clientName
+          : clientName // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      assembly: null == assembly
+          ? _value.assembly
+          : assembly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      disassembly: null == disassembly
+          ? _value.disassembly
+          : disassembly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      delivery: null == delivery
+          ? _value.delivery
+          : delivery // ignore: cast_nullable_to_non_nullable
+              as bool,
+      unloading: null == unloading
+          ? _value.unloading
+          : unloading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      buildingType: null == buildingType
+          ? _value.buildingType
+          : buildingType // ignore: cast_nullable_to_non_nullable
+              as BuildingType,
     ));
   }
 }
@@ -147,27 +225,45 @@ class __$$MeasurementImplCopyWithImpl<$Res>
 
 class _$MeasurementImpl extends _Measurement {
   const _$MeasurementImpl(
-      {required this.id,
+      {this.innerId,
+      required this.id,
       required this.date,
-      this.clientName,
-      this.address,
-      this.innerId})
+      required this.address,
+      required this.clientName,
+      required this.phoneNumber,
+      required this.assembly,
+      required this.disassembly,
+      required this.delivery,
+      required this.unloading,
+      required this.buildingType})
       : super._();
 
+  @override
+  final int? innerId;
   @override
   final String id;
   @override
   final DateTime date;
   @override
-  final String? clientName;
+  final String address;
   @override
-  final String? address;
+  final String clientName;
   @override
-  final int? innerId;
+  final String phoneNumber;
+  @override
+  final bool assembly;
+  @override
+  final bool disassembly;
+  @override
+  final bool delivery;
+  @override
+  final bool unloading;
+  @override
+  final BuildingType buildingType;
 
   @override
   String toString() {
-    return 'Measurement(id: $id, date: $date, clientName: $clientName, address: $address, innerId: $innerId)';
+    return 'Measurement(innerId: $innerId, id: $id, date: $date, address: $address, clientName: $clientName, phoneNumber: $phoneNumber, assembly: $assembly, disassembly: $disassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType)';
   }
 
   @override
@@ -175,17 +271,40 @@ class _$MeasurementImpl extends _Measurement {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MeasurementImpl &&
+            (identical(other.innerId, innerId) || other.innerId == innerId) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.date, date) || other.date == date) &&
+            (identical(other.address, address) || other.address == address) &&
             (identical(other.clientName, clientName) ||
                 other.clientName == clientName) &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.innerId, innerId) || other.innerId == innerId));
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.assembly, assembly) ||
+                other.assembly == assembly) &&
+            (identical(other.disassembly, disassembly) ||
+                other.disassembly == disassembly) &&
+            (identical(other.delivery, delivery) ||
+                other.delivery == delivery) &&
+            (identical(other.unloading, unloading) ||
+                other.unloading == unloading) &&
+            (identical(other.buildingType, buildingType) ||
+                other.buildingType == buildingType));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, date, clientName, address, innerId);
+  int get hashCode => Object.hash(
+      runtimeType,
+      innerId,
+      id,
+      date,
+      address,
+      clientName,
+      phoneNumber,
+      assembly,
+      disassembly,
+      delivery,
+      unloading,
+      buildingType);
 
   @JsonKey(ignore: true)
   @override
@@ -196,23 +315,41 @@ class _$MeasurementImpl extends _Measurement {
 
 abstract class _Measurement extends Measurement {
   const factory _Measurement(
-      {required final String id,
+      {final int? innerId,
+      required final String id,
       required final DateTime date,
-      final String? clientName,
-      final String? address,
-      final int? innerId}) = _$MeasurementImpl;
+      required final String address,
+      required final String clientName,
+      required final String phoneNumber,
+      required final bool assembly,
+      required final bool disassembly,
+      required final bool delivery,
+      required final bool unloading,
+      required final BuildingType buildingType}) = _$MeasurementImpl;
   const _Measurement._() : super._();
 
+  @override
+  int? get innerId;
   @override
   String get id;
   @override
   DateTime get date;
   @override
-  String? get clientName;
+  String get address;
   @override
-  String? get address;
+  String get clientName;
   @override
-  int? get innerId;
+  String get phoneNumber;
+  @override
+  bool get assembly;
+  @override
+  bool get disassembly;
+  @override
+  bool get delivery;
+  @override
+  bool get unloading;
+  @override
+  BuildingType get buildingType;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementImplCopyWith<_$MeasurementImpl> get copyWith =>
