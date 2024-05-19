@@ -5,8 +5,8 @@ import 'package:window_meas/common/service_locator.dart';
 import 'package:window_meas/features/meas/cubit/meas_details_cubit.dart';
 import 'package:window_meas/features/meas/cubit/meas_details_state.dart';
 import 'package:window_meas/features/meas/data/model/measurement.dart';
-import 'package:window_meas/features/meas/view/details/widgets/building_info_section.dart';
-import 'package:window_meas/features/meas/view/details/widgets/client_info_section.dart';
+import 'package:window_meas/features/meas/view/details/widgets/sections/building_info_section.dart';
+import 'package:window_meas/features/meas/view/details/widgets/sections/client_info_section.dart';
 import 'package:window_meas/features/meas/view/details/widgets/meas_param_section.dart';
 import 'package:window_meas/features/meas/view/details/widgets/workaround.dart';
 
@@ -35,6 +35,7 @@ class MeasurementDetailsView extends StatelessWidget {
             child: state.measurement != null
                 ? MeasurementDetailsList(state.measurement!)
                 : const Center(child: CircularProgressIndicator()),
+            bottom: false,
           ),
         ),
       );
@@ -56,26 +57,24 @@ class _MeasurementDetailsListState extends State<MeasurementDetailsList> {
   final List<bool> isExpanded = List.filled(2, true);
 
   @override
-  Widget build(BuildContext context) => Column(
-        children: [
-          WorkaroundForExpandIcon(
-            child: ExpansionPanelList(
-              expandedHeaderPadding: EdgeInsets.zero,
-              expansionCallback: (i, exp) => setState(() => isExpanded[i] = exp),
-              children: [
-                MeasurementParamSection(
-                  title: '${context.l10n.clientInfo}:',
-                  body: ClientInfoSection(widget.measurement),
-                  isExpanded: isExpanded[0],
-                ),
-                MeasurementParamSection(
-                  title: '${context.l10n.buildingInfo}:',
-                  body: BuildingInfoSection(widget.measurement),
-                  isExpanded: isExpanded[1],
-                ),
-              ],
-            ),
+  Widget build(BuildContext context) => WorkaroundForExpandIcon(
+        child: SingleChildScrollView(
+          child: ExpansionPanelList(
+            expandedHeaderPadding: EdgeInsets.zero,
+            expansionCallback: (i, exp) => setState(() => isExpanded[i] = exp),
+            children: [
+              MeasurementParamSection(
+                title: '${context.l10n.clientInfo}:',
+                body: ClientInfoSection(widget.measurement),
+                isExpanded: isExpanded[0],
+              ),
+              MeasurementParamSection(
+                title: '${context.l10n.buildingInfo}:',
+                body: BuildingInfoSection(widget.measurement),
+                isExpanded: isExpanded[1],
+              ),
+            ],
           ),
-        ],
+        ),
       );
 }

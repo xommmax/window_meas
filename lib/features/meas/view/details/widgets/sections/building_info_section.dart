@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:window_meas/features/meas/data/params/elevator_options_enum.dart';
+import 'package:window_meas/features/meas/data/params/flat_status_enum.dart';
 import 'package:window_meas/l10n/localization.dart';
 import 'package:window_meas/features/meas/cubit/meas_details_cubit.dart';
 import 'package:window_meas/features/meas/data/model/measurement.dart';
@@ -20,6 +22,22 @@ class BuildingInfoSection extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 8),
+            DropdownItem<BuildingType>(
+              title: context.l10n.buildingType,
+              values: BuildingType.values,
+              initialValue: measurement.buildingType,
+              onSelected: (e) =>
+                  context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(buildingType: e)),
+            ),
+            const Divider(),
+            DropdownItem<FlatStatus>(
+              title: context.l10n.flatStatus,
+              values: FlatStatus.values,
+              initialValue: measurement.flatStatus,
+              onSelected: (e) =>
+                  context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(flatStatus: e)),
+            ),
+            const Divider(),
             SwitchItem(
               context.l10n.assembly,
               measurement.assembly,
@@ -48,12 +66,19 @@ class BuildingInfoSection extends StatelessWidget {
                   context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(unloading: b)),
             ),
             const Divider(),
-            DropdownItem<BuildingType>(
-              title: context.l10n.buildingType,
-              values: BuildingType.values,
-              initialValue: measurement.buildingType,
+            SwitchItem(
+              context.l10n.garbageRemoval,
+              measurement.garbageRemoval,
+              onChanged: (b) =>
+                  context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(garbageRemoval: b)),
+            ),
+            const Divider(),
+            DropdownItem<ElevatorOptions>(
+              title: context.l10n.elevator,
+              values: ElevatorOptions.values,
+              initialValue: measurement.elevator,
               onSelected: (e) =>
-                  context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(buildingType: e)),
+                  context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(elevator: e)),
             ),
             const SizedBox(height: 8),
           ],

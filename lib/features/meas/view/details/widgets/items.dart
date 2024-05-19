@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:window_meas/features/meas/data/params/building_type_enum.dart';
+import 'package:window_meas/features/meas/data/params/param_enum.dart';
 
 class InputItem extends StatefulWidget {
   const InputItem(
@@ -39,6 +40,7 @@ class _InputItemState extends State<InputItem> {
                 fontSize: 16,
               ),
             ),
+            const SizedBox(width: 4),
             Expanded(
               child: TextField(
                 controller: controller,
@@ -104,7 +106,7 @@ class DropdownItem<T extends ParamEnum> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Row(
           children: [
             Text(
@@ -114,12 +116,17 @@ class DropdownItem<T extends ParamEnum> extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
+            const SizedBox(width: 4),
             DropdownMenu(
-                initialSelection: initialValue,
-                dropdownMenuEntries: values.map((e) => DropdownMenuEntry<T>(value: e, label: e.localizedName)).toList(),
-                onSelected: (e) {
-                  if (e != null) onSelected?.call(e);
-                }),
+              initialSelection: initialValue,
+              dropdownMenuEntries: values.map((e) => DropdownMenuEntry<T>(value: e, label: e.localizedName)).toList(),
+              onSelected: (e) {
+                if (e != null) onSelected?.call(e);
+              },
+              inputDecorationTheme: const InputDecorationTheme(
+                border: InputBorder.none,
+              ),
+            ),
           ],
         ),
       );

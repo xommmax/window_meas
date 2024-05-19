@@ -1,3 +1,4 @@
+import 'package:window_meas/features/meas/data/params/param_enum.dart';
 import 'package:window_meas/l10n/localization.dart';
 
 enum BuildingType implements ParamEnum {
@@ -19,10 +20,6 @@ enum BuildingType implements ParamEnum {
         BuildingType.brickMonolithic => Localization.l10n.buildingTypeBrickMonolithic,
         BuildingType.block => Localization.l10n.buildingTypeBlock,
         BuildingType.blockMonolithic => Localization.l10n.buildingTypeBlockMonolithic,
-        BuildingType.none => Localization.l10n.buildingTypeNone,
+        BuildingType.none => Localization.l10n.none,
       };
-}
-
-abstract class ParamEnum implements Enum {
-  String get localizedName;
 }

@@ -2,6 +2,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 import 'package:window_meas/features/meas/data/model/measurement_db.dart';
 import 'package:window_meas/features/meas/data/params/building_type_enum.dart';
+import 'package:window_meas/features/meas/data/params/elevator_options_enum.dart';
+import 'package:window_meas/features/meas/data/params/flat_status_enum.dart';
 
 part 'measurement.freezed.dart';
 
@@ -21,6 +23,9 @@ abstract class Measurement with _$Measurement {
     required bool delivery,
     required bool unloading,
     required BuildingType buildingType,
+    required FlatStatus flatStatus,
+    required bool garbageRemoval,
+    required ElevatorOptions elevator,
   }) = _Measurement;
 
   factory Measurement.initial() => Measurement(
@@ -34,6 +39,9 @@ abstract class Measurement with _$Measurement {
         delivery: false,
         unloading: false,
         buildingType: BuildingType.none,
+        flatStatus: FlatStatus.none,
+        garbageRemoval: false,
+        elevator: ElevatorOptions.none,
       );
 
   MeasurementDB toDB() => MeasurementDB()
@@ -47,7 +55,10 @@ abstract class Measurement with _$Measurement {
     ..disassembly = disassembly
     ..delivery = delivery
     ..unloading = unloading
-    ..buildingType = buildingType.name;
+    ..buildingType = buildingType
+    ..flatStatus = flatStatus
+    ..garbageRemoval = garbageRemoval
+    ..elevator = elevator;
 
   static Measurement fromDB(MeasurementDB db) => Measurement(
         innerId: db.innerId,
@@ -60,6 +71,9 @@ abstract class Measurement with _$Measurement {
         disassembly: db.disassembly,
         delivery: db.delivery,
         unloading: db.unloading,
-        buildingType: BuildingType.values.byName(db.buildingType),
+        buildingType: db.buildingType,
+        flatStatus: db.flatStatus,
+        garbageRemoval: db.garbageRemoval,
+        elevator: db.elevator,
       );
 }

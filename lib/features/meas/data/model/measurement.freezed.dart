@@ -27,6 +27,9 @@ mixin _$Measurement {
   bool get delivery => throw _privateConstructorUsedError;
   bool get unloading => throw _privateConstructorUsedError;
   BuildingType get buildingType => throw _privateConstructorUsedError;
+  FlatStatus get flatStatus => throw _privateConstructorUsedError;
+  bool get garbageRemoval => throw _privateConstructorUsedError;
+  ElevatorOptions get elevator => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementCopyWith<Measurement> get copyWith =>
@@ -50,7 +53,10 @@ abstract class $MeasurementCopyWith<$Res> {
       bool disassembly,
       bool delivery,
       bool unloading,
-      BuildingType buildingType});
+      BuildingType buildingType,
+      FlatStatus flatStatus,
+      bool garbageRemoval,
+      ElevatorOptions elevator});
 }
 
 /// @nodoc
@@ -77,6 +83,9 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? delivery = null,
     Object? unloading = null,
     Object? buildingType = null,
+    Object? flatStatus = null,
+    Object? garbageRemoval = null,
+    Object? elevator = null,
   }) {
     return _then(_value.copyWith(
       innerId: freezed == innerId
@@ -123,6 +132,18 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.buildingType
           : buildingType // ignore: cast_nullable_to_non_nullable
               as BuildingType,
+      flatStatus: null == flatStatus
+          ? _value.flatStatus
+          : flatStatus // ignore: cast_nullable_to_non_nullable
+              as FlatStatus,
+      garbageRemoval: null == garbageRemoval
+          ? _value.garbageRemoval
+          : garbageRemoval // ignore: cast_nullable_to_non_nullable
+              as bool,
+      elevator: null == elevator
+          ? _value.elevator
+          : elevator // ignore: cast_nullable_to_non_nullable
+              as ElevatorOptions,
     ) as $Val);
   }
 }
@@ -146,7 +167,10 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       bool disassembly,
       bool delivery,
       bool unloading,
-      BuildingType buildingType});
+      BuildingType buildingType,
+      FlatStatus flatStatus,
+      bool garbageRemoval,
+      ElevatorOptions elevator});
 }
 
 /// @nodoc
@@ -171,6 +195,9 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? delivery = null,
     Object? unloading = null,
     Object? buildingType = null,
+    Object? flatStatus = null,
+    Object? garbageRemoval = null,
+    Object? elevator = null,
   }) {
     return _then(_$MeasurementImpl(
       innerId: freezed == innerId
@@ -217,6 +244,18 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.buildingType
           : buildingType // ignore: cast_nullable_to_non_nullable
               as BuildingType,
+      flatStatus: null == flatStatus
+          ? _value.flatStatus
+          : flatStatus // ignore: cast_nullable_to_non_nullable
+              as FlatStatus,
+      garbageRemoval: null == garbageRemoval
+          ? _value.garbageRemoval
+          : garbageRemoval // ignore: cast_nullable_to_non_nullable
+              as bool,
+      elevator: null == elevator
+          ? _value.elevator
+          : elevator // ignore: cast_nullable_to_non_nullable
+              as ElevatorOptions,
     ));
   }
 }
@@ -235,7 +274,10 @@ class _$MeasurementImpl extends _Measurement {
       required this.disassembly,
       required this.delivery,
       required this.unloading,
-      required this.buildingType})
+      required this.buildingType,
+      required this.flatStatus,
+      required this.garbageRemoval,
+      required this.elevator})
       : super._();
 
   @override
@@ -260,10 +302,16 @@ class _$MeasurementImpl extends _Measurement {
   final bool unloading;
   @override
   final BuildingType buildingType;
+  @override
+  final FlatStatus flatStatus;
+  @override
+  final bool garbageRemoval;
+  @override
+  final ElevatorOptions elevator;
 
   @override
   String toString() {
-    return 'Measurement(innerId: $innerId, id: $id, date: $date, address: $address, clientName: $clientName, phoneNumber: $phoneNumber, assembly: $assembly, disassembly: $disassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType)';
+    return 'Measurement(innerId: $innerId, id: $id, date: $date, address: $address, clientName: $clientName, phoneNumber: $phoneNumber, assembly: $assembly, disassembly: $disassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator)';
   }
 
   @override
@@ -288,7 +336,13 @@ class _$MeasurementImpl extends _Measurement {
             (identical(other.unloading, unloading) ||
                 other.unloading == unloading) &&
             (identical(other.buildingType, buildingType) ||
-                other.buildingType == buildingType));
+                other.buildingType == buildingType) &&
+            (identical(other.flatStatus, flatStatus) ||
+                other.flatStatus == flatStatus) &&
+            (identical(other.garbageRemoval, garbageRemoval) ||
+                other.garbageRemoval == garbageRemoval) &&
+            (identical(other.elevator, elevator) ||
+                other.elevator == elevator));
   }
 
   @override
@@ -304,7 +358,10 @@ class _$MeasurementImpl extends _Measurement {
       disassembly,
       delivery,
       unloading,
-      buildingType);
+      buildingType,
+      flatStatus,
+      garbageRemoval,
+      elevator);
 
   @JsonKey(ignore: true)
   @override
@@ -325,7 +382,10 @@ abstract class _Measurement extends Measurement {
       required final bool disassembly,
       required final bool delivery,
       required final bool unloading,
-      required final BuildingType buildingType}) = _$MeasurementImpl;
+      required final BuildingType buildingType,
+      required final FlatStatus flatStatus,
+      required final bool garbageRemoval,
+      required final ElevatorOptions elevator}) = _$MeasurementImpl;
   const _Measurement._() : super._();
 
   @override
@@ -350,6 +410,12 @@ abstract class _Measurement extends Measurement {
   bool get unloading;
   @override
   BuildingType get buildingType;
+  @override
+  FlatStatus get flatStatus;
+  @override
+  bool get garbageRemoval;
+  @override
+  ElevatorOptions get elevator;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementImplCopyWith<_$MeasurementImpl> get copyWith =>
