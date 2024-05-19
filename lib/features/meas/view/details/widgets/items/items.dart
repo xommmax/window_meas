@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:window_meas/features/meas/data/params/building_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/param_enum.dart';
 
+class TextItem extends StatelessWidget {
+  const TextItem({
+    required this.title,
+    super.key,
+  });
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          '$title: ',
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+          ),
+        ),
+      );
+}
+
 class InputItem extends StatefulWidget {
-  const InputItem(
-    this.title,
-    this.value, {
+  const InputItem({
+    required this.title,
+    required this.value,
     this.onChanged,
     super.key,
   });
@@ -60,9 +80,9 @@ class _InputItemState extends State<InputItem> {
 }
 
 class SwitchItem extends StatelessWidget {
-  const SwitchItem(
-    this.title,
-    this.value, {
+  const SwitchItem({
+    required this.title,
+    required this.value,
     this.onChanged,
     super.key,
   });

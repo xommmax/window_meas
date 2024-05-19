@@ -30,6 +30,10 @@ mixin _$Measurement {
   FlatStatus get flatStatus => throw _privateConstructorUsedError;
   bool get garbageRemoval => throw _privateConstructorUsedError;
   ElevatorOptions get elevator => throw _privateConstructorUsedError;
+  String get quarterSize => throw _privateConstructorUsedError;
+  QuarterPosition get quarterPosition => throw _privateConstructorUsedError;
+  bool get staticCalculation => throw _privateConstructorUsedError;
+  ProfileSystem get profileSystem => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementCopyWith<Measurement> get copyWith =>
@@ -56,7 +60,11 @@ abstract class $MeasurementCopyWith<$Res> {
       BuildingType buildingType,
       FlatStatus flatStatus,
       bool garbageRemoval,
-      ElevatorOptions elevator});
+      ElevatorOptions elevator,
+      String quarterSize,
+      QuarterPosition quarterPosition,
+      bool staticCalculation,
+      ProfileSystem profileSystem});
 }
 
 /// @nodoc
@@ -86,6 +94,10 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? flatStatus = null,
     Object? garbageRemoval = null,
     Object? elevator = null,
+    Object? quarterSize = null,
+    Object? quarterPosition = null,
+    Object? staticCalculation = null,
+    Object? profileSystem = null,
   }) {
     return _then(_value.copyWith(
       innerId: freezed == innerId
@@ -144,6 +156,22 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.elevator
           : elevator // ignore: cast_nullable_to_non_nullable
               as ElevatorOptions,
+      quarterSize: null == quarterSize
+          ? _value.quarterSize
+          : quarterSize // ignore: cast_nullable_to_non_nullable
+              as String,
+      quarterPosition: null == quarterPosition
+          ? _value.quarterPosition
+          : quarterPosition // ignore: cast_nullable_to_non_nullable
+              as QuarterPosition,
+      staticCalculation: null == staticCalculation
+          ? _value.staticCalculation
+          : staticCalculation // ignore: cast_nullable_to_non_nullable
+              as bool,
+      profileSystem: null == profileSystem
+          ? _value.profileSystem
+          : profileSystem // ignore: cast_nullable_to_non_nullable
+              as ProfileSystem,
     ) as $Val);
   }
 }
@@ -170,7 +198,11 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       BuildingType buildingType,
       FlatStatus flatStatus,
       bool garbageRemoval,
-      ElevatorOptions elevator});
+      ElevatorOptions elevator,
+      String quarterSize,
+      QuarterPosition quarterPosition,
+      bool staticCalculation,
+      ProfileSystem profileSystem});
 }
 
 /// @nodoc
@@ -198,6 +230,10 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? flatStatus = null,
     Object? garbageRemoval = null,
     Object? elevator = null,
+    Object? quarterSize = null,
+    Object? quarterPosition = null,
+    Object? staticCalculation = null,
+    Object? profileSystem = null,
   }) {
     return _then(_$MeasurementImpl(
       innerId: freezed == innerId
@@ -256,6 +292,22 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.elevator
           : elevator // ignore: cast_nullable_to_non_nullable
               as ElevatorOptions,
+      quarterSize: null == quarterSize
+          ? _value.quarterSize
+          : quarterSize // ignore: cast_nullable_to_non_nullable
+              as String,
+      quarterPosition: null == quarterPosition
+          ? _value.quarterPosition
+          : quarterPosition // ignore: cast_nullable_to_non_nullable
+              as QuarterPosition,
+      staticCalculation: null == staticCalculation
+          ? _value.staticCalculation
+          : staticCalculation // ignore: cast_nullable_to_non_nullable
+              as bool,
+      profileSystem: null == profileSystem
+          ? _value.profileSystem
+          : profileSystem // ignore: cast_nullable_to_non_nullable
+              as ProfileSystem,
     ));
   }
 }
@@ -277,7 +329,11 @@ class _$MeasurementImpl extends _Measurement {
       required this.buildingType,
       required this.flatStatus,
       required this.garbageRemoval,
-      required this.elevator})
+      required this.elevator,
+      required this.quarterSize,
+      required this.quarterPosition,
+      required this.staticCalculation,
+      required this.profileSystem})
       : super._();
 
   @override
@@ -308,10 +364,18 @@ class _$MeasurementImpl extends _Measurement {
   final bool garbageRemoval;
   @override
   final ElevatorOptions elevator;
+  @override
+  final String quarterSize;
+  @override
+  final QuarterPosition quarterPosition;
+  @override
+  final bool staticCalculation;
+  @override
+  final ProfileSystem profileSystem;
 
   @override
   String toString() {
-    return 'Measurement(innerId: $innerId, id: $id, date: $date, address: $address, clientName: $clientName, phoneNumber: $phoneNumber, assembly: $assembly, disassembly: $disassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator)';
+    return 'Measurement(innerId: $innerId, id: $id, date: $date, address: $address, clientName: $clientName, phoneNumber: $phoneNumber, assembly: $assembly, disassembly: $disassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem)';
   }
 
   @override
@@ -342,7 +406,15 @@ class _$MeasurementImpl extends _Measurement {
             (identical(other.garbageRemoval, garbageRemoval) ||
                 other.garbageRemoval == garbageRemoval) &&
             (identical(other.elevator, elevator) ||
-                other.elevator == elevator));
+                other.elevator == elevator) &&
+            (identical(other.quarterSize, quarterSize) ||
+                other.quarterSize == quarterSize) &&
+            (identical(other.quarterPosition, quarterPosition) ||
+                other.quarterPosition == quarterPosition) &&
+            (identical(other.staticCalculation, staticCalculation) ||
+                other.staticCalculation == staticCalculation) &&
+            (identical(other.profileSystem, profileSystem) ||
+                other.profileSystem == profileSystem));
   }
 
   @override
@@ -361,7 +433,11 @@ class _$MeasurementImpl extends _Measurement {
       buildingType,
       flatStatus,
       garbageRemoval,
-      elevator);
+      elevator,
+      quarterSize,
+      quarterPosition,
+      staticCalculation,
+      profileSystem);
 
   @JsonKey(ignore: true)
   @override
@@ -385,7 +461,11 @@ abstract class _Measurement extends Measurement {
       required final BuildingType buildingType,
       required final FlatStatus flatStatus,
       required final bool garbageRemoval,
-      required final ElevatorOptions elevator}) = _$MeasurementImpl;
+      required final ElevatorOptions elevator,
+      required final String quarterSize,
+      required final QuarterPosition quarterPosition,
+      required final bool staticCalculation,
+      required final ProfileSystem profileSystem}) = _$MeasurementImpl;
   const _Measurement._() : super._();
 
   @override
@@ -416,6 +496,14 @@ abstract class _Measurement extends Measurement {
   bool get garbageRemoval;
   @override
   ElevatorOptions get elevator;
+  @override
+  String get quarterSize;
+  @override
+  QuarterPosition get quarterPosition;
+  @override
+  bool get staticCalculation;
+  @override
+  ProfileSystem get profileSystem;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementImplCopyWith<_$MeasurementImpl> get copyWith =>

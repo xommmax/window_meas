@@ -34,5 +34,18 @@
   "elevatorOptionPassenger": "Passenger",
   "elevatorOptionCargo": "Cargo",
   "elevatorOptionPassengerAndCargo": "Passenger and cargo",
-  "elevatorOptionAbsent": "Absent"
+  "elevatorOptionAbsent": "Absent",
+  "position": "Position",
+  "photo": "Photo",
+  "quarter": "Quarter",
+  "quarterSize": "Size, mm",
+  "quarterPosition": "Position",
+  "quarterPositionTop": "Top",
+  "quarterPositionTopBottom": "Top and bottom",
+  "quarterPositionTopSides": "Top and sides",
+  "quarterPositionSides": "Sides",
+  "quarterPositionAll": "All",
+  "staticCalculation": "Static calculation",
+  "profileSystem": "Profile system",
+  "profileSystemEuroline": "Euroline"
 }

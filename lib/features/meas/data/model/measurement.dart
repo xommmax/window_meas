@@ -4,6 +4,8 @@ import 'package:window_meas/features/meas/data/model/measurement_db.dart';
 import 'package:window_meas/features/meas/data/params/building_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/elevator_options_enum.dart';
 import 'package:window_meas/features/meas/data/params/flat_status_enum.dart';
+import 'package:window_meas/features/meas/data/params/profile_system_enum.dart';
+import 'package:window_meas/features/meas/data/params/quarter_position_enum.dart';
 
 part 'measurement.freezed.dart';
 
@@ -26,6 +28,10 @@ abstract class Measurement with _$Measurement {
     required FlatStatus flatStatus,
     required bool garbageRemoval,
     required ElevatorOptions elevator,
+    required String quarterSize,
+    required QuarterPosition quarterPosition,
+    required bool staticCalculation,
+    required ProfileSystem profileSystem,
   }) = _Measurement;
 
   factory Measurement.initial() => Measurement(
@@ -42,6 +48,10 @@ abstract class Measurement with _$Measurement {
         flatStatus: FlatStatus.none,
         garbageRemoval: false,
         elevator: ElevatorOptions.none,
+        quarterSize: '',
+        quarterPosition: QuarterPosition.none,
+        staticCalculation: false,
+        profileSystem: ProfileSystem.none,
       );
 
   MeasurementDB toDB() => MeasurementDB()
@@ -58,7 +68,11 @@ abstract class Measurement with _$Measurement {
     ..buildingType = buildingType
     ..flatStatus = flatStatus
     ..garbageRemoval = garbageRemoval
-    ..elevator = elevator;
+    ..elevator = elevator
+    ..quarterSize = quarterSize
+    ..quarterPosition = quarterPosition
+    ..staticCalculation = staticCalculation
+    ..profileSystem = profileSystem;
 
   static Measurement fromDB(MeasurementDB db) => Measurement(
         innerId: db.innerId,
@@ -75,5 +89,9 @@ abstract class Measurement with _$Measurement {
         flatStatus: db.flatStatus,
         garbageRemoval: db.garbageRemoval,
         elevator: db.elevator,
+        quarterSize: db.quarterSize,
+        quarterPosition: db.quarterPosition,
+        staticCalculation: db.staticCalculation,
+        profileSystem: db.profileSystem,
       );
 }

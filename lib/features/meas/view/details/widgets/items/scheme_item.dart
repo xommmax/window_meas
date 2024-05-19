@@ -9,7 +9,8 @@ class SchemeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               '${context.l10n.scheme}: ',
@@ -18,12 +19,10 @@ class SchemeItem extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
-            Expanded(
-              child: Center(
-                child: InkWell(
-                  child: const FaIcon(FontAwesomeIcons.squarePlus),
-                  onTap: () => context.push('/editor'),
-                ),
+            Center(
+              child: InkWell(
+                child: const FaIcon(FontAwesomeIcons.squarePlus),
+                onTap: () => context.push('/editor'),
               ),
             ),
           ],

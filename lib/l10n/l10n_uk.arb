@@ -34,5 +34,18 @@
   "elevatorOptionPassenger": "Пасажирський",
   "elevatorOptionCargo": "Вантажний",
   "elevatorOptionPassengerAndCargo": "Вантажний та пасажирський",
-  "elevatorOptionAbsent": "Відсутній"
+  "elevatorOptionAbsent": "Відсутній",
+  "position": "Позиція",
+  "photo": "Фото",
+  "quarter": "Четверть",
+  "quarterSize": "Розмір, мм",
+  "quarterPosition": "Розташування",
+  "quarterPositionTop": "Верх",
+  "quarterPositionTopBottom": "Верх і низ",
+  "quarterPositionTopSides": "Верх і боки",
+  "quarterPositionSides": "Боки",
+  "quarterPositionAll": "Всюди",
+  "staticCalculation": "Розрахунок на статику",
+  "profileSystem": "Профільна система",
+  "profileSystemEuroline": "Euroline"
 }

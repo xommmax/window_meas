@@ -80,8 +80,30 @@ const MeasurementDBSchema = CollectionSchema(
       name: r'phoneNumber',
       type: IsarType.string,
     ),
-    r'unloading': PropertySchema(
+    r'profileSystem': PropertySchema(
       id: 12,
+      name: r'profileSystem',
+      type: IsarType.string,
+      enumMap: _MeasurementDBprofileSystemEnumValueMap,
+    ),
+    r'quarterPosition': PropertySchema(
+      id: 13,
+      name: r'quarterPosition',
+      type: IsarType.string,
+      enumMap: _MeasurementDBquarterPositionEnumValueMap,
+    ),
+    r'quarterSize': PropertySchema(
+      id: 14,
+      name: r'quarterSize',
+      type: IsarType.string,
+    ),
+    r'staticCalculation': PropertySchema(
+      id: 15,
+      name: r'staticCalculation',
+      type: IsarType.bool,
+    ),
+    r'unloading': PropertySchema(
+      id: 16,
       name: r'unloading',
       type: IsarType.bool,
     )
@@ -127,6 +149,9 @@ int _measurementDBEstimateSize(
   bytesCount += 3 + object.flatStatus.name.length * 3;
   bytesCount += 3 + object.id.length * 3;
   bytesCount += 3 + object.phoneNumber.length * 3;
+  bytesCount += 3 + object.profileSystem.name.length * 3;
+  bytesCount += 3 + object.quarterPosition.name.length * 3;
+  bytesCount += 3 + object.quarterSize.length * 3;
   return bytesCount;
 }
 
@@ -148,7 +173,11 @@ void _measurementDBSerialize(
   writer.writeBool(offsets[9], object.garbageRemoval);
   writer.writeString(offsets[10], object.id);
   writer.writeString(offsets[11], object.phoneNumber);
-  writer.writeBool(offsets[12], object.unloading);
+  writer.writeString(offsets[12], object.profileSystem.name);
+  writer.writeString(offsets[13], object.quarterPosition.name);
+  writer.writeString(offsets[14], object.quarterSize);
+  writer.writeBool(offsets[15], object.staticCalculation);
+  writer.writeBool(offsets[16], object.unloading);
 }
 
 MeasurementDB _measurementDBDeserialize(
@@ -177,7 +206,15 @@ MeasurementDB _measurementDBDeserialize(
   object.id = reader.readString(offsets[10]);
   object.innerId = id;
   object.phoneNumber = reader.readString(offsets[11]);
-  object.unloading = reader.readBool(offsets[12]);
+  object.profileSystem = _MeasurementDBprofileSystemValueEnumMap[
+          reader.readStringOrNull(offsets[12])] ??
+      ProfileSystem.none;
+  object.quarterPosition = _MeasurementDBquarterPositionValueEnumMap[
+          reader.readStringOrNull(offsets[13])] ??
+      QuarterPosition.none;
+  object.quarterSize = reader.readString(offsets[14]);
+  object.staticCalculation = reader.readBool(offsets[15]);
+  object.unloading = reader.readBool(offsets[16]);
   return object;
 }
 
@@ -219,6 +256,18 @@ P _measurementDBDeserializeProp<P>(
     case 11:
       return (reader.readString(offset)) as P;
     case 12:
+      return (_MeasurementDBprofileSystemValueEnumMap[
+              reader.readStringOrNull(offset)] ??
+          ProfileSystem.none) as P;
+    case 13:
+      return (_MeasurementDBquarterPositionValueEnumMap[
+              reader.readStringOrNull(offset)] ??
+          QuarterPosition.none) as P;
+    case 14:
+      return (reader.readString(offset)) as P;
+    case 15:
+      return (reader.readBool(offset)) as P;
+    case 16:
       return (reader.readBool(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -268,6 +317,30 @@ const _MeasurementDBflatStatusValueEnumMap = {
   r'none': FlatStatus.none,
   r'repair': FlatStatus.repair,
   r'living': FlatStatus.living,
+};
+const _MeasurementDBprofileSystemEnumValueMap = {
+  r'none': r'none',
+  r'euroline': r'euroline',
+};
+const _MeasurementDBprofileSystemValueEnumMap = {
+  r'none': ProfileSystem.none,
+  r'euroline': ProfileSystem.euroline,
+};
+const _MeasurementDBquarterPositionEnumValueMap = {
+  r'none': r'none',
+  r'top': r'top',
+  r'topBottom': r'topBottom',
+  r'topSides': r'topSides',
+  r'sides': r'sides',
+  r'all': r'all',
+};
+const _MeasurementDBquarterPositionValueEnumMap = {
+  r'none': QuarterPosition.none,
+  r'top': QuarterPosition.top,
+  r'topBottom': QuarterPosition.topBottom,
+  r'topSides': QuarterPosition.topSides,
+  r'sides': QuarterPosition.sides,
+  r'all': QuarterPosition.all,
 };
 
 Id _measurementDBGetId(MeasurementDB object) {
@@ -1585,6 +1658,424 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      profileSystemEqualTo(
+    ProfileSystem value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'profileSystem',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      profileSystemGreaterThan(
+    ProfileSystem value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'profileSystem',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      profileSystemLessThan(
+    ProfileSystem value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'profileSystem',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      profileSystemBetween(
+    ProfileSystem lower,
+    ProfileSystem upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'profileSystem',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      profileSystemStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'profileSystem',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      profileSystemEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'profileSystem',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      profileSystemContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'profileSystem',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      profileSystemMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'profileSystem',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      profileSystemIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'profileSystem',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      profileSystemIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'profileSystem',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterPositionEqualTo(
+    QuarterPosition value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'quarterPosition',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterPositionGreaterThan(
+    QuarterPosition value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'quarterPosition',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterPositionLessThan(
+    QuarterPosition value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'quarterPosition',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterPositionBetween(
+    QuarterPosition lower,
+    QuarterPosition upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'quarterPosition',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterPositionStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'quarterPosition',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterPositionEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'quarterPosition',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterPositionContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'quarterPosition',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterPositionMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'quarterPosition',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterPositionIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'quarterPosition',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterPositionIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'quarterPosition',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterSizeEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'quarterSize',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterSizeGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'quarterSize',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterSizeLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'quarterSize',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterSizeBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'quarterSize',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterSizeStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'quarterSize',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterSizeEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'quarterSize',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterSizeContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'quarterSize',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterSizeMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'quarterSize',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterSizeIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'quarterSize',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      quarterSizeIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'quarterSize',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      staticCalculationEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'staticCalculation',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       unloadingEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -1755,6 +2246,61 @@ extension MeasurementDBQuerySortBy
       sortByPhoneNumberDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'phoneNumber', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByProfileSystem() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'profileSystem', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByProfileSystemDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'profileSystem', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByQuarterPosition() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'quarterPosition', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByQuarterPositionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'quarterPosition', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> sortByQuarterSize() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'quarterSize', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByQuarterSizeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'quarterSize', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByStaticCalculation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'staticCalculation', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByStaticCalculationDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'staticCalculation', Sort.desc);
     });
   }
 
@@ -1941,6 +2487,61 @@ extension MeasurementDBQuerySortThenBy
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByProfileSystem() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'profileSystem', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByProfileSystemDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'profileSystem', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByQuarterPosition() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'quarterPosition', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByQuarterPositionDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'quarterPosition', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByQuarterSize() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'quarterSize', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByQuarterSizeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'quarterSize', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByStaticCalculation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'staticCalculation', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByStaticCalculationDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'staticCalculation', Sort.desc);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByUnloading() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'unloading', Sort.asc);
@@ -2038,6 +2639,36 @@ extension MeasurementDBQueryWhereDistinct
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctByProfileSystem(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'profileSystem',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctByQuarterPosition({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'quarterPosition',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctByQuarterSize(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'quarterSize', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctByStaticCalculation() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'staticCalculation');
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctByUnloading() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'unloading');
@@ -2125,6 +2756,33 @@ extension MeasurementDBQueryProperty
   QueryBuilder<MeasurementDB, String, QQueryOperations> phoneNumberProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'phoneNumber');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, ProfileSystem, QQueryOperations>
+      profileSystemProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'profileSystem');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, QuarterPosition, QQueryOperations>
+      quarterPositionProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'quarterPosition');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, String, QQueryOperations> quarterSizeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'quarterSize');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, bool, QQueryOperations>
+      staticCalculationProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'staticCalculation');
     });
   }
 
