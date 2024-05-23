@@ -16,6 +16,7 @@ import 'package:window_meas/features/meas/data/params/rubber_color_enum.dart';
 import 'package:window_meas/features/meas/data/params/stand_profile_enum.dart';
 import 'package:window_meas/features/meas/data/params/windowsill_connector_enum.dart';
 import 'package:window_meas/features/meas/data/params/windowsill_depth_enum.dart';
+import 'package:window_meas/features/meas/data/params/windowsill_extension_enum.dart';
 import 'package:window_meas/features/meas/data/params/windowsill_type_enum.dart';
 
 part 'measurement.freezed.dart';
@@ -33,6 +34,9 @@ abstract class Measurement with _$Measurement {
     required String phoneNumber,
     required bool assembly,
     required bool disassembly,
+    required bool screedDisassembly,
+    required bool gridDisassembly,
+    required bool roofDisassembly,
     required bool delivery,
     required bool unloading,
     required BuildingType buildingType,
@@ -71,6 +75,11 @@ abstract class Measurement with _$Measurement {
     required String slopeDepth,
     required String slopeLength,
     required String slopeQuantity,
+    required bool parapetReinforcement,
+    required WindowsillExtension windowsillExtension,
+    required bool slabExtension,
+    required bool extensionSheathing,
+    required bool insulation,
   }) = _Measurement;
 
   factory Measurement.initial() => Measurement(
@@ -81,6 +90,9 @@ abstract class Measurement with _$Measurement {
         phoneNumber: '',
         assembly: false,
         disassembly: false,
+        screedDisassembly: false,
+        gridDisassembly: false,
+        roofDisassembly: false,
         delivery: false,
         unloading: false,
         buildingType: BuildingType.none,
@@ -119,6 +131,11 @@ abstract class Measurement with _$Measurement {
         slopeDepth: '',
         slopeLength: '',
         slopeQuantity: '',
+        parapetReinforcement: false,
+        windowsillExtension: WindowsillExtension.none,
+        slabExtension: false,
+        extensionSheathing: false,
+        insulation: false,
       );
 
   MeasurementDB toDB() => MeasurementDB()
@@ -130,6 +147,9 @@ abstract class Measurement with _$Measurement {
     ..phoneNumber = phoneNumber
     ..assembly = assembly
     ..disassembly = disassembly
+    ..screedDisassembly = screedDisassembly
+    ..gridDisassembly = gridDisassembly
+    ..roofDisassembly = roofDisassembly
     ..delivery = delivery
     ..unloading = unloading
     ..buildingType = buildingType
@@ -167,7 +187,12 @@ abstract class Measurement with _$Measurement {
     ..canopyColor = canopyColor
     ..slopeDepth = slopeDepth
     ..slopeLength = slopeLength
-    ..slopeQuantity = slopeQuantity;
+    ..slopeQuantity = slopeQuantity
+    ..parapetReinforcement = parapetReinforcement
+    ..windowsillExtension = windowsillExtension
+    ..slabExtension = slabExtension
+    ..extensionSheathing = extensionSheathing
+    ..insulation = insulation;
 
   static Measurement fromDB(MeasurementDB db) => Measurement(
         innerId: db.innerId,
@@ -178,6 +203,9 @@ abstract class Measurement with _$Measurement {
         phoneNumber: db.phoneNumber,
         assembly: db.assembly,
         disassembly: db.disassembly,
+        screedDisassembly: db.screedDisassembly,
+        gridDisassembly: db.gridDisassembly,
+        roofDisassembly: db.roofDisassembly,
         delivery: db.delivery,
         unloading: db.unloading,
         buildingType: db.buildingType,
@@ -216,5 +244,10 @@ abstract class Measurement with _$Measurement {
         slopeDepth: db.slopeDepth,
         slopeLength: db.slopeLength,
         slopeQuantity: db.slopeQuantity,
+        parapetReinforcement: db.parapetReinforcement,
+        windowsillExtension: db.windowsillExtension,
+        slabExtension: db.slabExtension,
+        extensionSheathing: db.extensionSheathing,
+        insulation: db.insulation,
       );
 }

@@ -24,6 +24,9 @@ mixin _$Measurement {
   String get phoneNumber => throw _privateConstructorUsedError;
   bool get assembly => throw _privateConstructorUsedError;
   bool get disassembly => throw _privateConstructorUsedError;
+  bool get screedDisassembly => throw _privateConstructorUsedError;
+  bool get gridDisassembly => throw _privateConstructorUsedError;
+  bool get roofDisassembly => throw _privateConstructorUsedError;
   bool get delivery => throw _privateConstructorUsedError;
   bool get unloading => throw _privateConstructorUsedError;
   BuildingType get buildingType => throw _privateConstructorUsedError;
@@ -63,6 +66,12 @@ mixin _$Measurement {
   String get slopeDepth => throw _privateConstructorUsedError;
   String get slopeLength => throw _privateConstructorUsedError;
   String get slopeQuantity => throw _privateConstructorUsedError;
+  bool get parapetReinforcement => throw _privateConstructorUsedError;
+  WindowsillExtension get windowsillExtension =>
+      throw _privateConstructorUsedError;
+  bool get slabExtension => throw _privateConstructorUsedError;
+  bool get extensionSheathing => throw _privateConstructorUsedError;
+  bool get insulation => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementCopyWith<Measurement> get copyWith =>
@@ -84,6 +93,9 @@ abstract class $MeasurementCopyWith<$Res> {
       String phoneNumber,
       bool assembly,
       bool disassembly,
+      bool screedDisassembly,
+      bool gridDisassembly,
+      bool roofDisassembly,
       bool delivery,
       bool unloading,
       BuildingType buildingType,
@@ -121,7 +133,12 @@ abstract class $MeasurementCopyWith<$Res> {
       String canopyColor,
       String slopeDepth,
       String slopeLength,
-      String slopeQuantity});
+      String slopeQuantity,
+      bool parapetReinforcement,
+      WindowsillExtension windowsillExtension,
+      bool slabExtension,
+      bool extensionSheathing,
+      bool insulation});
 
   $ExpanderOptionCopyWith<$Res> get expanderOption;
 }
@@ -147,6 +164,9 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? phoneNumber = null,
     Object? assembly = null,
     Object? disassembly = null,
+    Object? screedDisassembly = null,
+    Object? gridDisassembly = null,
+    Object? roofDisassembly = null,
     Object? delivery = null,
     Object? unloading = null,
     Object? buildingType = null,
@@ -185,6 +205,11 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? slopeDepth = null,
     Object? slopeLength = null,
     Object? slopeQuantity = null,
+    Object? parapetReinforcement = null,
+    Object? windowsillExtension = null,
+    Object? slabExtension = null,
+    Object? extensionSheathing = null,
+    Object? insulation = null,
   }) {
     return _then(_value.copyWith(
       innerId: freezed == innerId
@@ -219,6 +244,18 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.disassembly
           : disassembly // ignore: cast_nullable_to_non_nullable
               as bool,
+      screedDisassembly: null == screedDisassembly
+          ? _value.screedDisassembly
+          : screedDisassembly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      gridDisassembly: null == gridDisassembly
+          ? _value.gridDisassembly
+          : gridDisassembly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      roofDisassembly: null == roofDisassembly
+          ? _value.roofDisassembly
+          : roofDisassembly // ignore: cast_nullable_to_non_nullable
+              as bool,
       delivery: null == delivery
           ? _value.delivery
           : delivery // ignore: cast_nullable_to_non_nullable
@@ -371,6 +408,26 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.slopeQuantity
           : slopeQuantity // ignore: cast_nullable_to_non_nullable
               as String,
+      parapetReinforcement: null == parapetReinforcement
+          ? _value.parapetReinforcement
+          : parapetReinforcement // ignore: cast_nullable_to_non_nullable
+              as bool,
+      windowsillExtension: null == windowsillExtension
+          ? _value.windowsillExtension
+          : windowsillExtension // ignore: cast_nullable_to_non_nullable
+              as WindowsillExtension,
+      slabExtension: null == slabExtension
+          ? _value.slabExtension
+          : slabExtension // ignore: cast_nullable_to_non_nullable
+              as bool,
+      extensionSheathing: null == extensionSheathing
+          ? _value.extensionSheathing
+          : extensionSheathing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      insulation: null == insulation
+          ? _value.insulation
+          : insulation // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -400,6 +457,9 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       String phoneNumber,
       bool assembly,
       bool disassembly,
+      bool screedDisassembly,
+      bool gridDisassembly,
+      bool roofDisassembly,
       bool delivery,
       bool unloading,
       BuildingType buildingType,
@@ -437,7 +497,12 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       String canopyColor,
       String slopeDepth,
       String slopeLength,
-      String slopeQuantity});
+      String slopeQuantity,
+      bool parapetReinforcement,
+      WindowsillExtension windowsillExtension,
+      bool slabExtension,
+      bool extensionSheathing,
+      bool insulation});
 
   @override
   $ExpanderOptionCopyWith<$Res> get expanderOption;
@@ -462,6 +527,9 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? phoneNumber = null,
     Object? assembly = null,
     Object? disassembly = null,
+    Object? screedDisassembly = null,
+    Object? gridDisassembly = null,
+    Object? roofDisassembly = null,
     Object? delivery = null,
     Object? unloading = null,
     Object? buildingType = null,
@@ -500,6 +568,11 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? slopeDepth = null,
     Object? slopeLength = null,
     Object? slopeQuantity = null,
+    Object? parapetReinforcement = null,
+    Object? windowsillExtension = null,
+    Object? slabExtension = null,
+    Object? extensionSheathing = null,
+    Object? insulation = null,
   }) {
     return _then(_$MeasurementImpl(
       innerId: freezed == innerId
@@ -533,6 +606,18 @@ class __$$MeasurementImplCopyWithImpl<$Res>
       disassembly: null == disassembly
           ? _value.disassembly
           : disassembly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      screedDisassembly: null == screedDisassembly
+          ? _value.screedDisassembly
+          : screedDisassembly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      gridDisassembly: null == gridDisassembly
+          ? _value.gridDisassembly
+          : gridDisassembly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      roofDisassembly: null == roofDisassembly
+          ? _value.roofDisassembly
+          : roofDisassembly // ignore: cast_nullable_to_non_nullable
               as bool,
       delivery: null == delivery
           ? _value.delivery
@@ -686,6 +771,26 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.slopeQuantity
           : slopeQuantity // ignore: cast_nullable_to_non_nullable
               as String,
+      parapetReinforcement: null == parapetReinforcement
+          ? _value.parapetReinforcement
+          : parapetReinforcement // ignore: cast_nullable_to_non_nullable
+              as bool,
+      windowsillExtension: null == windowsillExtension
+          ? _value.windowsillExtension
+          : windowsillExtension // ignore: cast_nullable_to_non_nullable
+              as WindowsillExtension,
+      slabExtension: null == slabExtension
+          ? _value.slabExtension
+          : slabExtension // ignore: cast_nullable_to_non_nullable
+              as bool,
+      extensionSheathing: null == extensionSheathing
+          ? _value.extensionSheathing
+          : extensionSheathing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      insulation: null == insulation
+          ? _value.insulation
+          : insulation // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -702,6 +807,9 @@ class _$MeasurementImpl extends _Measurement {
       required this.phoneNumber,
       required this.assembly,
       required this.disassembly,
+      required this.screedDisassembly,
+      required this.gridDisassembly,
+      required this.roofDisassembly,
       required this.delivery,
       required this.unloading,
       required this.buildingType,
@@ -739,7 +847,12 @@ class _$MeasurementImpl extends _Measurement {
       required this.canopyColor,
       required this.slopeDepth,
       required this.slopeLength,
-      required this.slopeQuantity})
+      required this.slopeQuantity,
+      required this.parapetReinforcement,
+      required this.windowsillExtension,
+      required this.slabExtension,
+      required this.extensionSheathing,
+      required this.insulation})
       : super._();
 
   @override
@@ -758,6 +871,12 @@ class _$MeasurementImpl extends _Measurement {
   final bool assembly;
   @override
   final bool disassembly;
+  @override
+  final bool screedDisassembly;
+  @override
+  final bool gridDisassembly;
+  @override
+  final bool roofDisassembly;
   @override
   final bool delivery;
   @override
@@ -834,10 +953,20 @@ class _$MeasurementImpl extends _Measurement {
   final String slopeLength;
   @override
   final String slopeQuantity;
+  @override
+  final bool parapetReinforcement;
+  @override
+  final WindowsillExtension windowsillExtension;
+  @override
+  final bool slabExtension;
+  @override
+  final bool extensionSheathing;
+  @override
+  final bool insulation;
 
   @override
   String toString() {
-    return 'Measurement(innerId: $innerId, id: $id, date: $date, address: $address, clientName: $clientName, phoneNumber: $phoneNumber, assembly: $assembly, disassembly: $disassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity)';
+    return 'Measurement(innerId: $innerId, id: $id, date: $date, address: $address, clientName: $clientName, phoneNumber: $phoneNumber, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation)';
   }
 
   @override
@@ -857,6 +986,12 @@ class _$MeasurementImpl extends _Measurement {
                 other.assembly == assembly) &&
             (identical(other.disassembly, disassembly) ||
                 other.disassembly == disassembly) &&
+            (identical(other.screedDisassembly, screedDisassembly) ||
+                other.screedDisassembly == screedDisassembly) &&
+            (identical(other.gridDisassembly, gridDisassembly) ||
+                other.gridDisassembly == gridDisassembly) &&
+            (identical(other.roofDisassembly, roofDisassembly) ||
+                other.roofDisassembly == roofDisassembly) &&
             (identical(other.delivery, delivery) ||
                 other.delivery == delivery) &&
             (identical(other.unloading, unloading) ||
@@ -929,10 +1064,13 @@ class _$MeasurementImpl extends _Measurement {
                 other.canopyColor == canopyColor) &&
             (identical(other.slopeDepth, slopeDepth) ||
                 other.slopeDepth == slopeDepth) &&
-            (identical(other.slopeLength, slopeLength) ||
-                other.slopeLength == slopeLength) &&
-            (identical(other.slopeQuantity, slopeQuantity) ||
-                other.slopeQuantity == slopeQuantity));
+            (identical(other.slopeLength, slopeLength) || other.slopeLength == slopeLength) &&
+            (identical(other.slopeQuantity, slopeQuantity) || other.slopeQuantity == slopeQuantity) &&
+            (identical(other.parapetReinforcement, parapetReinforcement) || other.parapetReinforcement == parapetReinforcement) &&
+            (identical(other.windowsillExtension, windowsillExtension) || other.windowsillExtension == windowsillExtension) &&
+            (identical(other.slabExtension, slabExtension) || other.slabExtension == slabExtension) &&
+            (identical(other.extensionSheathing, extensionSheathing) || other.extensionSheathing == extensionSheathing) &&
+            (identical(other.insulation, insulation) || other.insulation == insulation));
   }
 
   @override
@@ -946,6 +1084,9 @@ class _$MeasurementImpl extends _Measurement {
         phoneNumber,
         assembly,
         disassembly,
+        screedDisassembly,
+        gridDisassembly,
+        roofDisassembly,
         delivery,
         unloading,
         buildingType,
@@ -983,7 +1124,12 @@ class _$MeasurementImpl extends _Measurement {
         canopyColor,
         slopeDepth,
         slopeLength,
-        slopeQuantity
+        slopeQuantity,
+        parapetReinforcement,
+        windowsillExtension,
+        slabExtension,
+        extensionSheathing,
+        insulation
       ]);
 
   @JsonKey(ignore: true)
@@ -1003,6 +1149,9 @@ abstract class _Measurement extends Measurement {
       required final String phoneNumber,
       required final bool assembly,
       required final bool disassembly,
+      required final bool screedDisassembly,
+      required final bool gridDisassembly,
+      required final bool roofDisassembly,
       required final bool delivery,
       required final bool unloading,
       required final BuildingType buildingType,
@@ -1040,7 +1189,12 @@ abstract class _Measurement extends Measurement {
       required final String canopyColor,
       required final String slopeDepth,
       required final String slopeLength,
-      required final String slopeQuantity}) = _$MeasurementImpl;
+      required final String slopeQuantity,
+      required final bool parapetReinforcement,
+      required final WindowsillExtension windowsillExtension,
+      required final bool slabExtension,
+      required final bool extensionSheathing,
+      required final bool insulation}) = _$MeasurementImpl;
   const _Measurement._() : super._();
 
   @override
@@ -1059,6 +1213,12 @@ abstract class _Measurement extends Measurement {
   bool get assembly;
   @override
   bool get disassembly;
+  @override
+  bool get screedDisassembly;
+  @override
+  bool get gridDisassembly;
+  @override
+  bool get roofDisassembly;
   @override
   bool get delivery;
   @override
@@ -1135,6 +1295,16 @@ abstract class _Measurement extends Measurement {
   String get slopeLength;
   @override
   String get slopeQuantity;
+  @override
+  bool get parapetReinforcement;
+  @override
+  WindowsillExtension get windowsillExtension;
+  @override
+  bool get slabExtension;
+  @override
+  bool get extensionSheathing;
+  @override
+  bool get insulation;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementImplCopyWith<_$MeasurementImpl> get copyWith =>

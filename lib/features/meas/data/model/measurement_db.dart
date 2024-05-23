@@ -15,6 +15,7 @@ import 'package:window_meas/features/meas/data/params/rubber_color_enum.dart';
 import 'package:window_meas/features/meas/data/params/stand_profile_enum.dart';
 import 'package:window_meas/features/meas/data/params/windowsill_connector_enum.dart';
 import 'package:window_meas/features/meas/data/params/windowsill_depth_enum.dart';
+import 'package:window_meas/features/meas/data/params/windowsill_extension_enum.dart';
 import 'package:window_meas/features/meas/data/params/windowsill_type_enum.dart';
 
 part 'measurement_db.g.dart';
@@ -35,6 +36,12 @@ class MeasurementDB {
   late bool assembly;
   @Default(false)
   late bool disassembly;
+  @Default(false)
+  late bool screedDisassembly;
+  @Default(false)
+  late bool gridDisassembly;
+  @Default(false)
+  late bool roofDisassembly;
   @Default(false)
   late bool delivery;
   @Default(false)
@@ -125,4 +132,15 @@ class MeasurementDB {
   late String slopeLength;
   @Default('')
   late String slopeQuantity;
+  @Default(false)
+  late bool parapetReinforcement;
+  @Enumerated(EnumType.name)
+  @Default(WindowsillExtension.none)
+  late WindowsillExtension windowsillExtension;
+  @Default(false)
+  late bool slabExtension;
+  @Default(false)
+  late bool extensionSheathing;
+  @Default(false)
+  late bool insulation;
 }

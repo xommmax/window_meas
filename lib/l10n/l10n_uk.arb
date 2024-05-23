@@ -22,6 +22,9 @@
   "buildingInfo": "Інформація про дім",
   "assembly": "Монтаж",
   "disassembly": "Демонтаж",
+  "screedDisassembly": "Демонтаж стяжки",
+  "gridDisassembly": "Демонтаж решітки",
+  "roofDisassembly": "Демонтаж даху",
   "delivery": "Доставка",
   "unloading": "Розвантаження",
   "buildingType": "Тип дому",
@@ -97,5 +100,13 @@
   "drainage": "Водовідлив",
   "drainageEndCap": "Заглушка",
   "canopy": "Козирок",
-  "slope": "Укіс"
+  "slope": "Укіс",
+  "otherWork": "Інші роботи",
+  "parapetReinforcement": "Посилення парапету",
+  "windowsillExtension": "Винос по підвіконню",
+  "windowsillExtensionShort": "Короткий",
+  "windowsillExtensionOffSlab": "Від плити",
+  "slabExtension": "Винос по плиті",
+  "extensionSheathing": "Обшивка виносу",
+  "insulation": "Утеплення"
 }

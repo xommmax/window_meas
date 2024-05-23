@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:window_meas/features/meas/view/details/widgets/sections/other_info_section.dart';
 import 'package:window_meas/features/meas/view/details/widgets/sections/position_info_section.dart';
 import 'package:window_meas/l10n/localization.dart';
 import 'package:window_meas/common/service_locator.dart';
@@ -27,10 +28,12 @@ class MeasurementDetailsView extends StatelessWidget {
   const MeasurementDetailsView({super.key});
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<MeasurementDetailsCubit, MeasurementDetailsState>(
+  Widget build(BuildContext context) =>
+      BlocBuilder<MeasurementDetailsCubit, MeasurementDetailsState>(
         builder: (context, state) => Scaffold(
           appBar: AppBar(
-            title: Text('${context.l10n.measurement} №${state.measurement?.innerId?.toString().padLeft(4, '0') ?? ''}'),
+            title: Text(
+                '${context.l10n.measurement} №${state.measurement?.innerId?.toString().padLeft(4, '0') ?? ''}'),
           ),
           body: SafeArea(
             bottom: false,
@@ -55,7 +58,7 @@ class MeasurementDetailsList extends StatefulWidget {
 }
 
 class _MeasurementDetailsListState extends State<MeasurementDetailsList> {
-  final List<bool> isExpanded = List.filled(3, true);
+  final List<bool> isExpanded = List.filled(4, true);
 
   @override
   Widget build(BuildContext context) => WorkaroundForExpandIcon(
@@ -64,7 +67,8 @@ class _MeasurementDetailsListState extends State<MeasurementDetailsList> {
             padding: const EdgeInsets.only(bottom: 100, top: 20),
             child: ExpansionPanelList(
               expandedHeaderPadding: EdgeInsets.zero,
-              expansionCallback: (i, exp) => setState(() => isExpanded[i] = exp),
+              expansionCallback: (i, exp) =>
+                  setState(() => isExpanded[i] = exp),
               children: [
                 MeasurementParamSection(
                   title: '${context.l10n.clientInfo}:',
@@ -80,6 +84,11 @@ class _MeasurementDetailsListState extends State<MeasurementDetailsList> {
                   title: '${context.l10n.position}:',
                   body: PositionInfoSection(widget.measurement),
                   isExpanded: isExpanded[2],
+                ),
+                MeasurementParamSection(
+                  title: '${context.l10n.otherWork}:',
+                  body: OtherInfoSection(widget.measurement),
+                  isExpanded: isExpanded[3],
                 )
               ],
             ),

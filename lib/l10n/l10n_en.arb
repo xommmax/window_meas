@@ -22,6 +22,9 @@
   "buildingInfo": "Building info",
   "assembly": "Assembly",
   "disassembly": "Disassembly",
+  "screedDisassembly": "Screed disassembly",
+  "gridDisassembly": "Grid disassembly",
+  "roofDisassembly": "Roof disassembly",
   "delivery": "Delivery",
   "unloading": "Unloading",
   "buildingType": "Building type",
@@ -97,5 +100,13 @@
   "drainage": "Drainage",
   "drainageEndCap": "End cap",
   "canopy": "Canopy",
-  "slope": "Slope"
+  "slope": "Slope",
+  "otherWork": "Other work",
+  "parapetReinforcement": "Parapet reinforcement",
+  "windowsillExtension": "Windowsill extension",
+  "windowsillExtensionShort": "Short",
+  "windowsillExtensionOffSlab": "Off slab",
+  "slabExtension": "Slab extension",
+  "extensionSheathing": "Extension sheathing",
+  "insulation": "Insulation"
 }
