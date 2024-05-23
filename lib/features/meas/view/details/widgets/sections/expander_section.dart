@@ -24,36 +24,51 @@ class ExpanderSection extends StatelessWidget {
             SwitchItem(
               title: context.l10n.expanderRight,
               value: measurement.expanderOption.rightEnabled,
-              onChanged: (b) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                    measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(rightEnabled: b)),
-                  ),
+              onChanged: (b) =>
+                  context.read<MeasurementDetailsCubit>().updateMeasurement(
+                        measurement.copyWith(
+                            expanderOption: measurement.expanderOption
+                                .copyWith(rightEnabled: b)),
+                      ),
             ),
             const Divider(),
             if (measurement.expanderOption.rightEnabled)
               Subcategory(
                 children: [
                   DropdownItem<ExpanderWidth>(
-                    title: context.l10n.expanderWidth,
+                    title: context.l10n.width,
                     values: ExpanderWidth.values,
                     initialValue: measurement.expanderOption.rightWidth,
-                    onSelected: (e) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                          measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(rightWidth: e)),
+                    onSelected: (e) => context
+                        .read<MeasurementDetailsCubit>()
+                        .updateMeasurement(
+                          measurement.copyWith(
+                              expanderOption: measurement.expanderOption
+                                  .copyWith(rightWidth: e)),
                         ),
                   ),
                   const Divider(),
                   InputItem(
                     title: context.l10n.expanderLength,
                     value: measurement.expanderOption.rightLength,
-                    onChanged: (s) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                          measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(rightLength: s)),
+                    onChanged: (s) => context
+                        .read<MeasurementDetailsCubit>()
+                        .updateMeasurement(
+                          measurement.copyWith(
+                              expanderOption: measurement.expanderOption
+                                  .copyWith(rightLength: s)),
                         ),
                   ),
                   const Divider(),
                   InputItem(
-                    title: context.l10n.expanderAmount,
+                    title: context.l10n.quantity,
                     value: measurement.expanderOption.rightAmount,
-                    onChanged: (s) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                          measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(rightAmount: s)),
+                    onChanged: (s) => context
+                        .read<MeasurementDetailsCubit>()
+                        .updateMeasurement(
+                          measurement.copyWith(
+                              expanderOption: measurement.expanderOption
+                                  .copyWith(rightAmount: s)),
                         ),
                   ),
                   const Divider(),
@@ -62,36 +77,51 @@ class ExpanderSection extends StatelessWidget {
             SwitchItem(
               title: context.l10n.expanderLeft,
               value: measurement.expanderOption.leftEnabled,
-              onChanged: (b) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                    measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(leftEnabled: b)),
-                  ),
+              onChanged: (b) =>
+                  context.read<MeasurementDetailsCubit>().updateMeasurement(
+                        measurement.copyWith(
+                            expanderOption: measurement.expanderOption
+                                .copyWith(leftEnabled: b)),
+                      ),
             ),
             const Divider(),
             if (measurement.expanderOption.leftEnabled)
               Subcategory(
                 children: [
                   DropdownItem<ExpanderWidth>(
-                    title: context.l10n.expanderWidth,
+                    title: context.l10n.width,
                     values: ExpanderWidth.values,
                     initialValue: measurement.expanderOption.leftWidth,
-                    onSelected: (e) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                          measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(leftWidth: e)),
+                    onSelected: (e) => context
+                        .read<MeasurementDetailsCubit>()
+                        .updateMeasurement(
+                          measurement.copyWith(
+                              expanderOption: measurement.expanderOption
+                                  .copyWith(leftWidth: e)),
                         ),
                   ),
                   const Divider(),
                   InputItem(
                     title: context.l10n.expanderLength,
                     value: measurement.expanderOption.leftLength,
-                    onChanged: (s) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                          measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(leftLength: s)),
+                    onChanged: (s) => context
+                        .read<MeasurementDetailsCubit>()
+                        .updateMeasurement(
+                          measurement.copyWith(
+                              expanderOption: measurement.expanderOption
+                                  .copyWith(leftLength: s)),
                         ),
                   ),
                   const Divider(),
                   InputItem(
-                    title: context.l10n.expanderAmount,
+                    title: context.l10n.quantity,
                     value: measurement.expanderOption.leftAmount,
-                    onChanged: (s) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                          measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(leftAmount: s)),
+                    onChanged: (s) => context
+                        .read<MeasurementDetailsCubit>()
+                        .updateMeasurement(
+                          measurement.copyWith(
+                              expanderOption: measurement.expanderOption
+                                  .copyWith(leftAmount: s)),
                         ),
                   ),
                   const Divider(),
@@ -100,36 +130,51 @@ class ExpanderSection extends StatelessWidget {
             SwitchItem(
               title: context.l10n.expanderTop,
               value: measurement.expanderOption.topEnabled,
-              onChanged: (b) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                    measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(topEnabled: b)),
-                  ),
+              onChanged: (b) =>
+                  context.read<MeasurementDetailsCubit>().updateMeasurement(
+                        measurement.copyWith(
+                            expanderOption: measurement.expanderOption
+                                .copyWith(topEnabled: b)),
+                      ),
             ),
             const Divider(),
             if (measurement.expanderOption.topEnabled)
               Subcategory(
                 children: [
                   DropdownItem<ExpanderWidth>(
-                    title: context.l10n.expanderWidth,
+                    title: context.l10n.width,
                     values: ExpanderWidth.values,
                     initialValue: measurement.expanderOption.topWidth,
-                    onSelected: (e) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                          measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(topWidth: e)),
+                    onSelected: (e) => context
+                        .read<MeasurementDetailsCubit>()
+                        .updateMeasurement(
+                          measurement.copyWith(
+                              expanderOption: measurement.expanderOption
+                                  .copyWith(topWidth: e)),
                         ),
                   ),
                   const Divider(),
                   InputItem(
                     title: context.l10n.expanderLength,
                     value: measurement.expanderOption.topLength,
-                    onChanged: (s) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                          measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(topLength: s)),
+                    onChanged: (s) => context
+                        .read<MeasurementDetailsCubit>()
+                        .updateMeasurement(
+                          measurement.copyWith(
+                              expanderOption: measurement.expanderOption
+                                  .copyWith(topLength: s)),
                         ),
                   ),
                   const Divider(),
                   InputItem(
-                    title: context.l10n.expanderAmount,
+                    title: context.l10n.quantity,
                     value: measurement.expanderOption.topAmount,
-                    onChanged: (s) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                          measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(topAmount: s)),
+                    onChanged: (s) => context
+                        .read<MeasurementDetailsCubit>()
+                        .updateMeasurement(
+                          measurement.copyWith(
+                              expanderOption: measurement.expanderOption
+                                  .copyWith(topAmount: s)),
                         ),
                   ),
                   const Divider(),
@@ -138,36 +183,51 @@ class ExpanderSection extends StatelessWidget {
             SwitchItem(
               title: context.l10n.expanderBottom,
               value: measurement.expanderOption.bottomEnabled,
-              onChanged: (b) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                    measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(bottomEnabled: b)),
-                  ),
+              onChanged: (b) =>
+                  context.read<MeasurementDetailsCubit>().updateMeasurement(
+                        measurement.copyWith(
+                            expanderOption: measurement.expanderOption
+                                .copyWith(bottomEnabled: b)),
+                      ),
             ),
             const Divider(),
             if (measurement.expanderOption.bottomEnabled)
               Subcategory(
                 children: [
                   DropdownItem<ExpanderWidth>(
-                    title: context.l10n.expanderWidth,
+                    title: context.l10n.width,
                     values: ExpanderWidth.values,
                     initialValue: measurement.expanderOption.bottomWidth,
-                    onSelected: (e) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                          measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(bottomWidth: e)),
+                    onSelected: (e) => context
+                        .read<MeasurementDetailsCubit>()
+                        .updateMeasurement(
+                          measurement.copyWith(
+                              expanderOption: measurement.expanderOption
+                                  .copyWith(bottomWidth: e)),
                         ),
                   ),
                   const Divider(),
                   InputItem(
                     title: context.l10n.expanderLength,
                     value: measurement.expanderOption.bottomLength,
-                    onChanged: (s) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                          measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(bottomLength: s)),
+                    onChanged: (s) => context
+                        .read<MeasurementDetailsCubit>()
+                        .updateMeasurement(
+                          measurement.copyWith(
+                              expanderOption: measurement.expanderOption
+                                  .copyWith(bottomLength: s)),
                         ),
                   ),
                   const Divider(),
                   InputItem(
-                    title: context.l10n.expanderAmount,
+                    title: context.l10n.quantity,
                     value: measurement.expanderOption.bottomAmount,
-                    onChanged: (s) => context.read<MeasurementDetailsCubit>().updateMeasurement(
-                          measurement.copyWith(expanderOption: measurement.expanderOption.copyWith(bottomAmount: s)),
+                    onChanged: (s) => context
+                        .read<MeasurementDetailsCubit>()
+                        .updateMeasurement(
+                          measurement.copyWith(
+                              expanderOption: measurement.expanderOption
+                                  .copyWith(bottomAmount: s)),
                         ),
                   ),
                   const Divider(),

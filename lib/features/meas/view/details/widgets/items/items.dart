@@ -11,7 +11,7 @@ class TextItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
         child: Text(
           '$title: ',
           style: const TextStyle(
@@ -50,7 +50,7 @@ class _InputItemState extends State<InputItem> {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
         child: Row(
           children: [
             Text(
@@ -137,14 +137,19 @@ class DropdownItem<T extends ParamEnum> extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 4),
-            DropdownMenu(
-              initialSelection: initialValue,
-              dropdownMenuEntries: values.map((e) => DropdownMenuEntry<T>(value: e, label: e.localizedName)).toList(),
-              onSelected: (e) {
-                if (e != null) onSelected?.call(e);
-              },
-              inputDecorationTheme: const InputDecorationTheme(
-                border: InputBorder.none,
+            Expanded(
+              child: DropdownMenu(
+                initialSelection: initialValue,
+                dropdownMenuEntries: values
+                    .map((e) =>
+                        DropdownMenuEntry<T>(value: e, label: e.localizedName))
+                    .toList(),
+                onSelected: (e) {
+                  if (e != null) onSelected?.call(e);
+                },
+                inputDecorationTheme: const InputDecorationTheme(
+                  border: InputBorder.none,
+                ),
               ),
             ),
           ],

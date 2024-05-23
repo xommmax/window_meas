@@ -42,6 +42,27 @@ mixin _$Measurement {
   RubberColor get rubberColor => throw _privateConstructorUsedError;
   StandProfile get standProfile => throw _privateConstructorUsedError;
   ExpanderOption get expanderOption => throw _privateConstructorUsedError;
+  String get glassUnit => throw _privateConstructorUsedError;
+  PanelType get panelType => throw _privateConstructorUsedError;
+  PanelThickness get panelThickness => throw _privateConstructorUsedError;
+  String get furniture => throw _privateConstructorUsedError;
+  WindowsillType get windowsillType => throw _privateConstructorUsedError;
+  WindowsillDepth get windowsillDepth => throw _privateConstructorUsedError;
+  String get windowsillSize => throw _privateConstructorUsedError;
+  WindowsillConnector get windowsillConnector =>
+      throw _privateConstructorUsedError;
+  String get windowsillColor => throw _privateConstructorUsedError;
+  bool get windowsillAssembly => throw _privateConstructorUsedError;
+  String get drainageDepth => throw _privateConstructorUsedError;
+  String get drainageWidth => throw _privateConstructorUsedError;
+  String get drainageColor => throw _privateConstructorUsedError;
+  bool get drainageEndCap => throw _privateConstructorUsedError;
+  String get canopyType => throw _privateConstructorUsedError;
+  String get canopySize => throw _privateConstructorUsedError;
+  String get canopyColor => throw _privateConstructorUsedError;
+  String get slopeDepth => throw _privateConstructorUsedError;
+  String get slopeLength => throw _privateConstructorUsedError;
+  String get slopeQuantity => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementCopyWith<Measurement> get copyWith =>
@@ -80,7 +101,27 @@ abstract class $MeasurementCopyWith<$Res> {
       String laminationExternal,
       RubberColor rubberColor,
       StandProfile standProfile,
-      ExpanderOption expanderOption});
+      ExpanderOption expanderOption,
+      String glassUnit,
+      PanelType panelType,
+      PanelThickness panelThickness,
+      String furniture,
+      WindowsillType windowsillType,
+      WindowsillDepth windowsillDepth,
+      String windowsillSize,
+      WindowsillConnector windowsillConnector,
+      String windowsillColor,
+      bool windowsillAssembly,
+      String drainageDepth,
+      String drainageWidth,
+      String drainageColor,
+      bool drainageEndCap,
+      String canopyType,
+      String canopySize,
+      String canopyColor,
+      String slopeDepth,
+      String slopeLength,
+      String slopeQuantity});
 
   $ExpanderOptionCopyWith<$Res> get expanderOption;
 }
@@ -124,6 +165,26 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? rubberColor = null,
     Object? standProfile = null,
     Object? expanderOption = null,
+    Object? glassUnit = null,
+    Object? panelType = null,
+    Object? panelThickness = null,
+    Object? furniture = null,
+    Object? windowsillType = null,
+    Object? windowsillDepth = null,
+    Object? windowsillSize = null,
+    Object? windowsillConnector = null,
+    Object? windowsillColor = null,
+    Object? windowsillAssembly = null,
+    Object? drainageDepth = null,
+    Object? drainageWidth = null,
+    Object? drainageColor = null,
+    Object? drainageEndCap = null,
+    Object? canopyType = null,
+    Object? canopySize = null,
+    Object? canopyColor = null,
+    Object? slopeDepth = null,
+    Object? slopeLength = null,
+    Object? slopeQuantity = null,
   }) {
     return _then(_value.copyWith(
       innerId: freezed == innerId
@@ -230,6 +291,86 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.expanderOption
           : expanderOption // ignore: cast_nullable_to_non_nullable
               as ExpanderOption,
+      glassUnit: null == glassUnit
+          ? _value.glassUnit
+          : glassUnit // ignore: cast_nullable_to_non_nullable
+              as String,
+      panelType: null == panelType
+          ? _value.panelType
+          : panelType // ignore: cast_nullable_to_non_nullable
+              as PanelType,
+      panelThickness: null == panelThickness
+          ? _value.panelThickness
+          : panelThickness // ignore: cast_nullable_to_non_nullable
+              as PanelThickness,
+      furniture: null == furniture
+          ? _value.furniture
+          : furniture // ignore: cast_nullable_to_non_nullable
+              as String,
+      windowsillType: null == windowsillType
+          ? _value.windowsillType
+          : windowsillType // ignore: cast_nullable_to_non_nullable
+              as WindowsillType,
+      windowsillDepth: null == windowsillDepth
+          ? _value.windowsillDepth
+          : windowsillDepth // ignore: cast_nullable_to_non_nullable
+              as WindowsillDepth,
+      windowsillSize: null == windowsillSize
+          ? _value.windowsillSize
+          : windowsillSize // ignore: cast_nullable_to_non_nullable
+              as String,
+      windowsillConnector: null == windowsillConnector
+          ? _value.windowsillConnector
+          : windowsillConnector // ignore: cast_nullable_to_non_nullable
+              as WindowsillConnector,
+      windowsillColor: null == windowsillColor
+          ? _value.windowsillColor
+          : windowsillColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      windowsillAssembly: null == windowsillAssembly
+          ? _value.windowsillAssembly
+          : windowsillAssembly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      drainageDepth: null == drainageDepth
+          ? _value.drainageDepth
+          : drainageDepth // ignore: cast_nullable_to_non_nullable
+              as String,
+      drainageWidth: null == drainageWidth
+          ? _value.drainageWidth
+          : drainageWidth // ignore: cast_nullable_to_non_nullable
+              as String,
+      drainageColor: null == drainageColor
+          ? _value.drainageColor
+          : drainageColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      drainageEndCap: null == drainageEndCap
+          ? _value.drainageEndCap
+          : drainageEndCap // ignore: cast_nullable_to_non_nullable
+              as bool,
+      canopyType: null == canopyType
+          ? _value.canopyType
+          : canopyType // ignore: cast_nullable_to_non_nullable
+              as String,
+      canopySize: null == canopySize
+          ? _value.canopySize
+          : canopySize // ignore: cast_nullable_to_non_nullable
+              as String,
+      canopyColor: null == canopyColor
+          ? _value.canopyColor
+          : canopyColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      slopeDepth: null == slopeDepth
+          ? _value.slopeDepth
+          : slopeDepth // ignore: cast_nullable_to_non_nullable
+              as String,
+      slopeLength: null == slopeLength
+          ? _value.slopeLength
+          : slopeLength // ignore: cast_nullable_to_non_nullable
+              as String,
+      slopeQuantity: null == slopeQuantity
+          ? _value.slopeQuantity
+          : slopeQuantity // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -276,7 +417,27 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       String laminationExternal,
       RubberColor rubberColor,
       StandProfile standProfile,
-      ExpanderOption expanderOption});
+      ExpanderOption expanderOption,
+      String glassUnit,
+      PanelType panelType,
+      PanelThickness panelThickness,
+      String furniture,
+      WindowsillType windowsillType,
+      WindowsillDepth windowsillDepth,
+      String windowsillSize,
+      WindowsillConnector windowsillConnector,
+      String windowsillColor,
+      bool windowsillAssembly,
+      String drainageDepth,
+      String drainageWidth,
+      String drainageColor,
+      bool drainageEndCap,
+      String canopyType,
+      String canopySize,
+      String canopyColor,
+      String slopeDepth,
+      String slopeLength,
+      String slopeQuantity});
 
   @override
   $ExpanderOptionCopyWith<$Res> get expanderOption;
@@ -319,6 +480,26 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? rubberColor = null,
     Object? standProfile = null,
     Object? expanderOption = null,
+    Object? glassUnit = null,
+    Object? panelType = null,
+    Object? panelThickness = null,
+    Object? furniture = null,
+    Object? windowsillType = null,
+    Object? windowsillDepth = null,
+    Object? windowsillSize = null,
+    Object? windowsillConnector = null,
+    Object? windowsillColor = null,
+    Object? windowsillAssembly = null,
+    Object? drainageDepth = null,
+    Object? drainageWidth = null,
+    Object? drainageColor = null,
+    Object? drainageEndCap = null,
+    Object? canopyType = null,
+    Object? canopySize = null,
+    Object? canopyColor = null,
+    Object? slopeDepth = null,
+    Object? slopeLength = null,
+    Object? slopeQuantity = null,
   }) {
     return _then(_$MeasurementImpl(
       innerId: freezed == innerId
@@ -425,6 +606,86 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.expanderOption
           : expanderOption // ignore: cast_nullable_to_non_nullable
               as ExpanderOption,
+      glassUnit: null == glassUnit
+          ? _value.glassUnit
+          : glassUnit // ignore: cast_nullable_to_non_nullable
+              as String,
+      panelType: null == panelType
+          ? _value.panelType
+          : panelType // ignore: cast_nullable_to_non_nullable
+              as PanelType,
+      panelThickness: null == panelThickness
+          ? _value.panelThickness
+          : panelThickness // ignore: cast_nullable_to_non_nullable
+              as PanelThickness,
+      furniture: null == furniture
+          ? _value.furniture
+          : furniture // ignore: cast_nullable_to_non_nullable
+              as String,
+      windowsillType: null == windowsillType
+          ? _value.windowsillType
+          : windowsillType // ignore: cast_nullable_to_non_nullable
+              as WindowsillType,
+      windowsillDepth: null == windowsillDepth
+          ? _value.windowsillDepth
+          : windowsillDepth // ignore: cast_nullable_to_non_nullable
+              as WindowsillDepth,
+      windowsillSize: null == windowsillSize
+          ? _value.windowsillSize
+          : windowsillSize // ignore: cast_nullable_to_non_nullable
+              as String,
+      windowsillConnector: null == windowsillConnector
+          ? _value.windowsillConnector
+          : windowsillConnector // ignore: cast_nullable_to_non_nullable
+              as WindowsillConnector,
+      windowsillColor: null == windowsillColor
+          ? _value.windowsillColor
+          : windowsillColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      windowsillAssembly: null == windowsillAssembly
+          ? _value.windowsillAssembly
+          : windowsillAssembly // ignore: cast_nullable_to_non_nullable
+              as bool,
+      drainageDepth: null == drainageDepth
+          ? _value.drainageDepth
+          : drainageDepth // ignore: cast_nullable_to_non_nullable
+              as String,
+      drainageWidth: null == drainageWidth
+          ? _value.drainageWidth
+          : drainageWidth // ignore: cast_nullable_to_non_nullable
+              as String,
+      drainageColor: null == drainageColor
+          ? _value.drainageColor
+          : drainageColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      drainageEndCap: null == drainageEndCap
+          ? _value.drainageEndCap
+          : drainageEndCap // ignore: cast_nullable_to_non_nullable
+              as bool,
+      canopyType: null == canopyType
+          ? _value.canopyType
+          : canopyType // ignore: cast_nullable_to_non_nullable
+              as String,
+      canopySize: null == canopySize
+          ? _value.canopySize
+          : canopySize // ignore: cast_nullable_to_non_nullable
+              as String,
+      canopyColor: null == canopyColor
+          ? _value.canopyColor
+          : canopyColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      slopeDepth: null == slopeDepth
+          ? _value.slopeDepth
+          : slopeDepth // ignore: cast_nullable_to_non_nullable
+              as String,
+      slopeLength: null == slopeLength
+          ? _value.slopeLength
+          : slopeLength // ignore: cast_nullable_to_non_nullable
+              as String,
+      slopeQuantity: null == slopeQuantity
+          ? _value.slopeQuantity
+          : slopeQuantity // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -458,7 +719,27 @@ class _$MeasurementImpl extends _Measurement {
       required this.laminationExternal,
       required this.rubberColor,
       required this.standProfile,
-      required this.expanderOption})
+      required this.expanderOption,
+      required this.glassUnit,
+      required this.panelType,
+      required this.panelThickness,
+      required this.furniture,
+      required this.windowsillType,
+      required this.windowsillDepth,
+      required this.windowsillSize,
+      required this.windowsillConnector,
+      required this.windowsillColor,
+      required this.windowsillAssembly,
+      required this.drainageDepth,
+      required this.drainageWidth,
+      required this.drainageColor,
+      required this.drainageEndCap,
+      required this.canopyType,
+      required this.canopySize,
+      required this.canopyColor,
+      required this.slopeDepth,
+      required this.slopeLength,
+      required this.slopeQuantity})
       : super._();
 
   @override
@@ -513,10 +794,50 @@ class _$MeasurementImpl extends _Measurement {
   final StandProfile standProfile;
   @override
   final ExpanderOption expanderOption;
+  @override
+  final String glassUnit;
+  @override
+  final PanelType panelType;
+  @override
+  final PanelThickness panelThickness;
+  @override
+  final String furniture;
+  @override
+  final WindowsillType windowsillType;
+  @override
+  final WindowsillDepth windowsillDepth;
+  @override
+  final String windowsillSize;
+  @override
+  final WindowsillConnector windowsillConnector;
+  @override
+  final String windowsillColor;
+  @override
+  final bool windowsillAssembly;
+  @override
+  final String drainageDepth;
+  @override
+  final String drainageWidth;
+  @override
+  final String drainageColor;
+  @override
+  final bool drainageEndCap;
+  @override
+  final String canopyType;
+  @override
+  final String canopySize;
+  @override
+  final String canopyColor;
+  @override
+  final String slopeDepth;
+  @override
+  final String slopeLength;
+  @override
+  final String slopeQuantity;
 
   @override
   String toString() {
-    return 'Measurement(innerId: $innerId, id: $id, date: $date, address: $address, clientName: $clientName, phoneNumber: $phoneNumber, assembly: $assembly, disassembly: $disassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption)';
+    return 'Measurement(innerId: $innerId, id: $id, date: $date, address: $address, clientName: $clientName, phoneNumber: $phoneNumber, assembly: $assembly, disassembly: $disassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity)';
   }
 
   @override
@@ -571,7 +892,47 @@ class _$MeasurementImpl extends _Measurement {
             (identical(other.standProfile, standProfile) ||
                 other.standProfile == standProfile) &&
             (identical(other.expanderOption, expanderOption) ||
-                other.expanderOption == expanderOption));
+                other.expanderOption == expanderOption) &&
+            (identical(other.glassUnit, glassUnit) ||
+                other.glassUnit == glassUnit) &&
+            (identical(other.panelType, panelType) ||
+                other.panelType == panelType) &&
+            (identical(other.panelThickness, panelThickness) ||
+                other.panelThickness == panelThickness) &&
+            (identical(other.furniture, furniture) ||
+                other.furniture == furniture) &&
+            (identical(other.windowsillType, windowsillType) ||
+                other.windowsillType == windowsillType) &&
+            (identical(other.windowsillDepth, windowsillDepth) ||
+                other.windowsillDepth == windowsillDepth) &&
+            (identical(other.windowsillSize, windowsillSize) ||
+                other.windowsillSize == windowsillSize) &&
+            (identical(other.windowsillConnector, windowsillConnector) ||
+                other.windowsillConnector == windowsillConnector) &&
+            (identical(other.windowsillColor, windowsillColor) ||
+                other.windowsillColor == windowsillColor) &&
+            (identical(other.windowsillAssembly, windowsillAssembly) ||
+                other.windowsillAssembly == windowsillAssembly) &&
+            (identical(other.drainageDepth, drainageDepth) ||
+                other.drainageDepth == drainageDepth) &&
+            (identical(other.drainageWidth, drainageWidth) ||
+                other.drainageWidth == drainageWidth) &&
+            (identical(other.drainageColor, drainageColor) ||
+                other.drainageColor == drainageColor) &&
+            (identical(other.drainageEndCap, drainageEndCap) ||
+                other.drainageEndCap == drainageEndCap) &&
+            (identical(other.canopyType, canopyType) ||
+                other.canopyType == canopyType) &&
+            (identical(other.canopySize, canopySize) ||
+                other.canopySize == canopySize) &&
+            (identical(other.canopyColor, canopyColor) ||
+                other.canopyColor == canopyColor) &&
+            (identical(other.slopeDepth, slopeDepth) ||
+                other.slopeDepth == slopeDepth) &&
+            (identical(other.slopeLength, slopeLength) ||
+                other.slopeLength == slopeLength) &&
+            (identical(other.slopeQuantity, slopeQuantity) ||
+                other.slopeQuantity == slopeQuantity));
   }
 
   @override
@@ -602,7 +963,27 @@ class _$MeasurementImpl extends _Measurement {
         laminationExternal,
         rubberColor,
         standProfile,
-        expanderOption
+        expanderOption,
+        glassUnit,
+        panelType,
+        panelThickness,
+        furniture,
+        windowsillType,
+        windowsillDepth,
+        windowsillSize,
+        windowsillConnector,
+        windowsillColor,
+        windowsillAssembly,
+        drainageDepth,
+        drainageWidth,
+        drainageColor,
+        drainageEndCap,
+        canopyType,
+        canopySize,
+        canopyColor,
+        slopeDepth,
+        slopeLength,
+        slopeQuantity
       ]);
 
   @JsonKey(ignore: true)
@@ -639,7 +1020,27 @@ abstract class _Measurement extends Measurement {
       required final String laminationExternal,
       required final RubberColor rubberColor,
       required final StandProfile standProfile,
-      required final ExpanderOption expanderOption}) = _$MeasurementImpl;
+      required final ExpanderOption expanderOption,
+      required final String glassUnit,
+      required final PanelType panelType,
+      required final PanelThickness panelThickness,
+      required final String furniture,
+      required final WindowsillType windowsillType,
+      required final WindowsillDepth windowsillDepth,
+      required final String windowsillSize,
+      required final WindowsillConnector windowsillConnector,
+      required final String windowsillColor,
+      required final bool windowsillAssembly,
+      required final String drainageDepth,
+      required final String drainageWidth,
+      required final String drainageColor,
+      required final bool drainageEndCap,
+      required final String canopyType,
+      required final String canopySize,
+      required final String canopyColor,
+      required final String slopeDepth,
+      required final String slopeLength,
+      required final String slopeQuantity}) = _$MeasurementImpl;
   const _Measurement._() : super._();
 
   @override
@@ -694,6 +1095,46 @@ abstract class _Measurement extends Measurement {
   StandProfile get standProfile;
   @override
   ExpanderOption get expanderOption;
+  @override
+  String get glassUnit;
+  @override
+  PanelType get panelType;
+  @override
+  PanelThickness get panelThickness;
+  @override
+  String get furniture;
+  @override
+  WindowsillType get windowsillType;
+  @override
+  WindowsillDepth get windowsillDepth;
+  @override
+  String get windowsillSize;
+  @override
+  WindowsillConnector get windowsillConnector;
+  @override
+  String get windowsillColor;
+  @override
+  bool get windowsillAssembly;
+  @override
+  String get drainageDepth;
+  @override
+  String get drainageWidth;
+  @override
+  String get drainageColor;
+  @override
+  bool get drainageEndCap;
+  @override
+  String get canopyType;
+  @override
+  String get canopySize;
+  @override
+  String get canopyColor;
+  @override
+  String get slopeDepth;
+  @override
+  String get slopeLength;
+  @override
+  String get slopeQuantity;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementImplCopyWith<_$MeasurementImpl> get copyWith =>

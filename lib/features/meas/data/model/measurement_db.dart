@@ -7,10 +7,15 @@ import 'package:window_meas/features/meas/data/params/doorstep_option_enum.dart'
 import 'package:window_meas/features/meas/data/params/doorstep_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/elevator_options_enum.dart';
 import 'package:window_meas/features/meas/data/params/flat_status_enum.dart';
+import 'package:window_meas/features/meas/data/params/panel_thickness_enum.dart';
+import 'package:window_meas/features/meas/data/params/panel_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/profile_system_enum.dart';
 import 'package:window_meas/features/meas/data/params/quarter_position_enum.dart';
 import 'package:window_meas/features/meas/data/params/rubber_color_enum.dart';
 import 'package:window_meas/features/meas/data/params/stand_profile_enum.dart';
+import 'package:window_meas/features/meas/data/params/windowsill_connector_enum.dart';
+import 'package:window_meas/features/meas/data/params/windowsill_depth_enum.dart';
+import 'package:window_meas/features/meas/data/params/windowsill_type_enum.dart';
 
 part 'measurement_db.g.dart';
 
@@ -75,4 +80,49 @@ class MeasurementDB {
   @Default(StandProfile.none)
   late StandProfile standProfile;
   late ExpanderOptionDB expanderOption;
+  @Default('')
+  late String glassUnit;
+  @Enumerated(EnumType.name)
+  @Default(PanelType.none)
+  late PanelType panelType;
+  @Enumerated(EnumType.name)
+  @Default(PanelThickness.none)
+  late PanelThickness panelThickness;
+  @Default('')
+  late String furniture;
+  @Enumerated(EnumType.name)
+  @Default(WindowsillType.none)
+  late WindowsillType windowsillType;
+  @Enumerated(EnumType.name)
+  @Default(WindowsillDepth.none)
+  late WindowsillDepth windowsillDepth;
+  @Default('')
+  late String windowsillSize;
+  @Enumerated(EnumType.name)
+  @Default(WindowsillConnector.none)
+  late WindowsillConnector windowsillConnector;
+  @Default('')
+  late String windowsillColor;
+  @Default(false)
+  late bool windowsillAssembly;
+  @Default('')
+  late String drainageDepth;
+  @Default('')
+  late String drainageWidth;
+  @Default('')
+  late String drainageColor;
+  @Default(false)
+  late bool drainageEndCap;
+  @Default('')
+  late String canopyType;
+  @Default('')
+  late String canopySize;
+  @Default('')
+  late String canopyColor;
+  @Default('')
+  late String slopeDepth;
+  @Default('')
+  late String slopeLength;
+  @Default('')
+  late String slopeQuantity;
 }

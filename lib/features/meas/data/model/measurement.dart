@@ -8,10 +8,15 @@ import 'package:window_meas/features/meas/data/params/doorstep_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/elevator_options_enum.dart';
 import 'package:window_meas/features/meas/data/params/expander_option.dart';
 import 'package:window_meas/features/meas/data/params/flat_status_enum.dart';
+import 'package:window_meas/features/meas/data/params/panel_thickness_enum.dart';
+import 'package:window_meas/features/meas/data/params/panel_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/profile_system_enum.dart';
 import 'package:window_meas/features/meas/data/params/quarter_position_enum.dart';
 import 'package:window_meas/features/meas/data/params/rubber_color_enum.dart';
 import 'package:window_meas/features/meas/data/params/stand_profile_enum.dart';
+import 'package:window_meas/features/meas/data/params/windowsill_connector_enum.dart';
+import 'package:window_meas/features/meas/data/params/windowsill_depth_enum.dart';
+import 'package:window_meas/features/meas/data/params/windowsill_type_enum.dart';
 
 part 'measurement.freezed.dart';
 
@@ -46,6 +51,26 @@ abstract class Measurement with _$Measurement {
     required RubberColor rubberColor,
     required StandProfile standProfile,
     required ExpanderOption expanderOption,
+    required String glassUnit,
+    required PanelType panelType,
+    required PanelThickness panelThickness,
+    required String furniture,
+    required WindowsillType windowsillType,
+    required WindowsillDepth windowsillDepth,
+    required String windowsillSize,
+    required WindowsillConnector windowsillConnector,
+    required String windowsillColor,
+    required bool windowsillAssembly,
+    required String drainageDepth,
+    required String drainageWidth,
+    required String drainageColor,
+    required bool drainageEndCap,
+    required String canopyType,
+    required String canopySize,
+    required String canopyColor,
+    required String slopeDepth,
+    required String slopeLength,
+    required String slopeQuantity,
   }) = _Measurement;
 
   factory Measurement.initial() => Measurement(
@@ -74,6 +99,26 @@ abstract class Measurement with _$Measurement {
         rubberColor: RubberColor.none,
         standProfile: StandProfile.none,
         expanderOption: ExpanderOption.initial(),
+        glassUnit: '',
+        panelType: PanelType.none,
+        panelThickness: PanelThickness.none,
+        furniture: '',
+        windowsillType: WindowsillType.none,
+        windowsillDepth: WindowsillDepth.none,
+        windowsillSize: '',
+        windowsillConnector: WindowsillConnector.none,
+        windowsillColor: '',
+        windowsillAssembly: false,
+        drainageDepth: '',
+        drainageWidth: '',
+        drainageColor: '',
+        drainageEndCap: false,
+        canopyType: '',
+        canopySize: '',
+        canopyColor: '',
+        slopeDepth: '',
+        slopeLength: '',
+        slopeQuantity: '',
       );
 
   MeasurementDB toDB() => MeasurementDB()
@@ -102,7 +147,27 @@ abstract class Measurement with _$Measurement {
     ..laminationExternal = laminationExternal
     ..rubberColor = rubberColor
     ..standProfile = standProfile
-    ..expanderOption = expanderOption.toDB();
+    ..expanderOption = expanderOption.toDB()
+    ..glassUnit = glassUnit
+    ..panelType = panelType
+    ..panelThickness = panelThickness
+    ..furniture = furniture
+    ..windowsillType = windowsillType
+    ..windowsillDepth = windowsillDepth
+    ..windowsillSize = windowsillSize
+    ..windowsillConnector = windowsillConnector
+    ..windowsillColor = windowsillColor
+    ..windowsillAssembly = windowsillAssembly
+    ..drainageDepth = drainageDepth
+    ..drainageWidth = drainageWidth
+    ..drainageColor = drainageColor
+    ..drainageEndCap = drainageEndCap
+    ..canopyType = canopyType
+    ..canopySize = canopySize
+    ..canopyColor = canopyColor
+    ..slopeDepth = slopeDepth
+    ..slopeLength = slopeLength
+    ..slopeQuantity = slopeQuantity;
 
   static Measurement fromDB(MeasurementDB db) => Measurement(
         innerId: db.innerId,
@@ -131,5 +196,25 @@ abstract class Measurement with _$Measurement {
         rubberColor: db.rubberColor,
         standProfile: db.standProfile,
         expanderOption: ExpanderOption.fromDB(db.expanderOption),
+        glassUnit: db.glassUnit,
+        panelType: db.panelType,
+        panelThickness: db.panelThickness,
+        furniture: db.furniture,
+        windowsillType: db.windowsillType,
+        windowsillDepth: db.windowsillDepth,
+        windowsillSize: db.windowsillSize,
+        windowsillConnector: db.windowsillConnector,
+        windowsillColor: db.windowsillColor,
+        windowsillAssembly: db.windowsillAssembly,
+        drainageDepth: db.drainageDepth,
+        drainageWidth: db.drainageWidth,
+        drainageColor: db.drainageColor,
+        drainageEndCap: db.drainageEndCap,
+        canopyType: db.canopyType,
+        canopySize: db.canopySize,
+        canopyColor: db.canopyColor,
+        slopeDepth: db.slopeDepth,
+        slopeLength: db.slopeLength,
+        slopeQuantity: db.slopeQuantity,
       );
 }
