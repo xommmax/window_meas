@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
 import 'package:window_meas/features/meas/data/model/expander_option_db.dart';
+import 'package:window_meas/features/meas/data/params/assembly_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/building_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/door_opening_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/doorstep_option_enum.dart';
@@ -27,13 +28,32 @@ class MeasurementDB {
   late String id;
   late DateTime date;
   @Default('')
-  late String address;
-  @Default('')
   late String clientName;
   @Default('')
-  late String phoneNumber;
-  @Default(false)
-  late bool assembly;
+  late String city;
+  @Default('')
+  late String district;
+  @Default('')
+  late String street;
+  @Default('')
+  late String building;
+  @Default('')
+  late String block;
+  @Default('')
+  late String entrance;
+  @Default('')
+  late String doorphone;
+  @Default('')
+  late String floor;
+  @Default('')
+  late String apartment;
+  @Default('')
+  late String phoneNumberMain;
+  @Default('')
+  late String phoneNumberAdditional;
+  @Enumerated(EnumType.name)
+  @Default(AssemblyType.none)
+  late AssemblyType assembly;
   @Default(false)
   late bool disassembly;
   @Default(false)
@@ -143,4 +163,22 @@ class MeasurementDB {
   late bool extensionSheathing;
   @Default(false)
   late bool insulation;
+  @Default(false)
+  late bool sealing;
+  @Default('')
+  late String cost;
+  @Default('')
+  late String prepayment;
+  @Default('')
+  late String comment;
+  @Default('')
+  late String estimatedAssemblyTime;
+  @Default(false)
+  late bool vacuumCleaner;
+  @Default('')
+  late String howDiscovered;
+  @Default('')
+  late String residentialComplex;
+  @Default('')
+  late String housingCoopNumber;
 }

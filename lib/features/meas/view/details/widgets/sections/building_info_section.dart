@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:window_meas/features/meas/data/params/assembly_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/elevator_options_enum.dart';
 import 'package:window_meas/features/meas/data/params/flat_status_enum.dart';
 import 'package:window_meas/features/meas/view/details/widgets/subcategory.dart';
@@ -41,12 +42,22 @@ class BuildingInfoSection extends StatelessWidget {
                   .updateMeasurement(measurement.copyWith(flatStatus: e)),
             ),
             const Divider(),
-            SwitchItem(
-              title: context.l10n.assembly,
-              value: measurement.assembly,
-              onChanged: (b) => context
+            DropdownItem<ElevatorOptions>(
+              title: context.l10n.elevator,
+              values: ElevatorOptions.values,
+              initialValue: measurement.elevator,
+              onSelected: (e) => context
                   .read<MeasurementDetailsCubit>()
-                  .updateMeasurement(measurement.copyWith(assembly: b)),
+                  .updateMeasurement(measurement.copyWith(elevator: e)),
+            ),
+            const Divider(),
+            DropdownItem<AssemblyType>(
+              title: context.l10n.assembly,
+              values: AssemblyType.values,
+              initialValue: measurement.assembly,
+              onSelected: (e) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updateMeasurement(measurement.copyWith(assembly: e)),
             ),
             const Divider(),
             SwitchItem(
@@ -113,13 +124,29 @@ class BuildingInfoSection extends StatelessWidget {
                   .updateMeasurement(measurement.copyWith(garbageRemoval: b)),
             ),
             const Divider(),
-            DropdownItem<ElevatorOptions>(
-              title: context.l10n.elevator,
-              values: ElevatorOptions.values,
-              initialValue: measurement.elevator,
-              onSelected: (e) => context
+            SwitchItem(
+              title: context.l10n.sealing,
+              value: measurement.sealing,
+              onChanged: (b) => context
                   .read<MeasurementDetailsCubit>()
-                  .updateMeasurement(measurement.copyWith(elevator: e)),
+                  .updateMeasurement(measurement.copyWith(sealing: b)),
+            ),
+            const Divider(),
+            SwitchItem(
+              title: context.l10n.vacuumCleaner,
+              value: measurement.vacuumCleaner,
+              onChanged: (b) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updateMeasurement(measurement.copyWith(vacuumCleaner: b)),
+            ),
+            const Divider(),
+            InputItem(
+              title: context.l10n.estimatedAssemblyTime,
+              value: measurement.estimatedAssemblyTime,
+              onChanged: (s) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updateMeasurement(
+                      measurement.copyWith(estimatedAssemblyTime: s)),
             ),
             const SizedBox(height: 8),
           ],

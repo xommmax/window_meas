@@ -63,11 +63,13 @@ class MeasurementList extends StatelessWidget {
   const MeasurementList({super.key});
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<MeasurementListCubit, MeasurementListState>(
+  Widget build(BuildContext context) =>
+      BlocBuilder<MeasurementListCubit, MeasurementListState>(
         builder: (context, state) => ListView.builder(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
           itemCount: state.measurements.length,
-          itemBuilder: (context, index) => MeasurementItem(state.measurements[index]),
+          itemBuilder: (context, index) =>
+              MeasurementItem(state.measurements[index]),
         ),
       );
 }
@@ -95,7 +97,11 @@ class MeasurementItem extends StatelessWidget {
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [AppColors.secondary, AppColors.primary, AppColors.secondary],
+                      colors: [
+                        AppColors.secondary,
+                        AppColors.primary,
+                        AppColors.secondary
+                      ],
                       stops: [0.07, 0.70, 0.95],
                     ),
                     borderRadius: BorderRadius.vertical(
@@ -114,9 +120,11 @@ class MeasurementItem extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      const FaIcon(FontAwesomeIcons.clock, size: 16, color: AppColors.secondary),
+                      const FaIcon(FontAwesomeIcons.clock,
+                          size: 16, color: AppColors.secondary),
                       const SizedBox(width: 12),
-                      Text(DateFormat('dd.MM.yyyy, HH:mm').format(measurement.date)),
+                      Text(DateFormat('dd.MM.yyyy, HH:mm')
+                          .format(measurement.date)),
                     ],
                   ),
                 ),
@@ -124,7 +132,8 @@ class MeasurementItem extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      const FaIcon(FontAwesomeIcons.user, size: 16, color: AppColors.secondary),
+                      const FaIcon(FontAwesomeIcons.user,
+                          size: 16, color: AppColors.secondary),
                       const SizedBox(width: 12),
                       Text(measurement.clientName),
                     ],
@@ -134,9 +143,10 @@ class MeasurementItem extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      const FaIcon(FontAwesomeIcons.locationDot, size: 16, color: AppColors.secondary),
+                      const FaIcon(FontAwesomeIcons.locationDot,
+                          size: 16, color: AppColors.secondary),
                       const SizedBox(width: 12),
-                      Text(measurement.address),
+                      Text('${measurement.city}'),
                     ],
                   ),
                 ),

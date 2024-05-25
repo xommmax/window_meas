@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:window_meas/features/meas/view/details/widgets/sections/other_info_section.dart';
+import 'package:window_meas/features/meas/view/details/widgets/sections/address_section.dart';
+import 'package:window_meas/features/meas/view/details/widgets/sections/other_work_section.dart';
 import 'package:window_meas/features/meas/view/details/widgets/sections/position_info_section.dart';
 import 'package:window_meas/l10n/localization.dart';
 import 'package:window_meas/common/service_locator.dart';
@@ -58,7 +59,7 @@ class MeasurementDetailsList extends StatefulWidget {
 }
 
 class _MeasurementDetailsListState extends State<MeasurementDetailsList> {
-  final List<bool> isExpanded = List.filled(4, true);
+  final List<bool> isExpanded = List.filled(5, true);
 
   @override
   Widget build(BuildContext context) => WorkaroundForExpandIcon(
@@ -76,19 +77,24 @@ class _MeasurementDetailsListState extends State<MeasurementDetailsList> {
                   isExpanded: isExpanded[0],
                 ),
                 MeasurementParamSection(
+                  title: '${context.l10n.address}:',
+                  body: AddressSection(widget.measurement),
+                  isExpanded: isExpanded[1],
+                ),
+                MeasurementParamSection(
                   title: '${context.l10n.buildingInfo}:',
                   body: BuildingInfoSection(widget.measurement),
-                  isExpanded: isExpanded[1],
+                  isExpanded: isExpanded[2],
                 ),
                 MeasurementParamSection(
                   title: '${context.l10n.position}:',
                   body: PositionInfoSection(widget.measurement),
-                  isExpanded: isExpanded[2],
+                  isExpanded: isExpanded[3],
                 ),
                 MeasurementParamSection(
                   title: '${context.l10n.otherWork}:',
-                  body: OtherInfoSection(widget.measurement),
-                  isExpanded: isExpanded[3],
+                  body: OtherWorkSection(widget.measurement),
+                  isExpanded: isExpanded[4],
                 )
               ],
             ),

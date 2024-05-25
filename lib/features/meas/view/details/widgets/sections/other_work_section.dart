@@ -6,8 +6,8 @@ import 'package:window_meas/features/meas/data/params/windowsill_extension_enum.
 import 'package:window_meas/features/meas/view/details/widgets/items/items.dart';
 import 'package:window_meas/l10n/localization.dart';
 
-class OtherInfoSection extends StatelessWidget {
-  const OtherInfoSection(
+class OtherWorkSection extends StatelessWidget {
+  const OtherWorkSection(
     this.measurement, {
     super.key,
   });

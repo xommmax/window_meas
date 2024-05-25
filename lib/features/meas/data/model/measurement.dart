@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 import 'package:window_meas/features/meas/data/model/measurement_db.dart';
+import 'package:window_meas/features/meas/data/params/assembly_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/building_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/door_opening_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/doorstep_option_enum.dart';
@@ -29,10 +30,19 @@ abstract class Measurement with _$Measurement {
     int? innerId,
     required String id,
     required DateTime date,
-    required String address,
     required String clientName,
-    required String phoneNumber,
-    required bool assembly,
+    required String city,
+    required String district,
+    required String street,
+    required String building,
+    required String block,
+    required String entrance,
+    required String doorphone,
+    required String floor,
+    required String apartment,
+    required String phoneNumberMain,
+    required String phoneNumberAdditional,
+    required AssemblyType assembly,
     required bool disassembly,
     required bool screedDisassembly,
     required bool gridDisassembly,
@@ -80,15 +90,33 @@ abstract class Measurement with _$Measurement {
     required bool slabExtension,
     required bool extensionSheathing,
     required bool insulation,
+    required bool sealing,
+    required String cost,
+    required String prepayment,
+    required String comment,
+    required String estimatedAssemblyTime,
+    required bool vacuumCleaner,
+    required String howDiscovered,
+    required String residentialComplex,
+    required String housingCoopNumber,
   }) = _Measurement;
 
   factory Measurement.initial() => Measurement(
         id: const Uuid().v4(),
         date: DateTime.now(),
-        address: '',
         clientName: '',
-        phoneNumber: '',
-        assembly: false,
+        city: '',
+        district: '',
+        street: '',
+        building: '',
+        block: '',
+        entrance: '',
+        doorphone: '',
+        floor: '',
+        apartment: '',
+        phoneNumberMain: '',
+        phoneNumberAdditional: '',
+        assembly: AssemblyType.none,
         disassembly: false,
         screedDisassembly: false,
         gridDisassembly: false,
@@ -136,15 +164,33 @@ abstract class Measurement with _$Measurement {
         slabExtension: false,
         extensionSheathing: false,
         insulation: false,
+        sealing: false,
+        cost: '',
+        prepayment: '',
+        comment: '',
+        estimatedAssemblyTime: '',
+        vacuumCleaner: false,
+        howDiscovered: '',
+        residentialComplex: '',
+        housingCoopNumber: '',
       );
 
   MeasurementDB toDB() => MeasurementDB()
     ..innerId = innerId
     ..id = id
     ..date = date
-    ..address = address
     ..clientName = clientName
-    ..phoneNumber = phoneNumber
+    ..city = city
+    ..district = district
+    ..street = street
+    ..building = building
+    ..block = block
+    ..entrance = entrance
+    ..doorphone = doorphone
+    ..floor = floor
+    ..apartment = apartment
+    ..phoneNumberMain = phoneNumberMain
+    ..phoneNumberAdditional = phoneNumberAdditional
     ..assembly = assembly
     ..disassembly = disassembly
     ..screedDisassembly = screedDisassembly
@@ -192,15 +238,33 @@ abstract class Measurement with _$Measurement {
     ..windowsillExtension = windowsillExtension
     ..slabExtension = slabExtension
     ..extensionSheathing = extensionSheathing
-    ..insulation = insulation;
+    ..insulation = insulation
+    ..sealing = sealing
+    ..cost = cost
+    ..prepayment = prepayment
+    ..comment = comment
+    ..estimatedAssemblyTime = estimatedAssemblyTime
+    ..vacuumCleaner = vacuumCleaner
+    ..howDiscovered = howDiscovered
+    ..residentialComplex = residentialComplex
+    ..housingCoopNumber = housingCoopNumber;
 
   static Measurement fromDB(MeasurementDB db) => Measurement(
         innerId: db.innerId,
         id: db.id,
         date: db.date,
-        address: db.address,
         clientName: db.clientName,
-        phoneNumber: db.phoneNumber,
+        city: db.city,
+        district: db.district,
+        street: db.street,
+        building: db.building,
+        block: db.block,
+        entrance: db.entrance,
+        doorphone: db.doorphone,
+        floor: db.floor,
+        apartment: db.apartment,
+        phoneNumberMain: db.phoneNumberMain,
+        phoneNumberAdditional: db.phoneNumberAdditional,
         assembly: db.assembly,
         disassembly: db.disassembly,
         screedDisassembly: db.screedDisassembly,
@@ -249,5 +313,14 @@ abstract class Measurement with _$Measurement {
         slabExtension: db.slabExtension,
         extensionSheathing: db.extensionSheathing,
         insulation: db.insulation,
+        sealing: db.sealing,
+        cost: db.cost,
+        prepayment: db.prepayment,
+        comment: db.comment,
+        estimatedAssemblyTime: db.estimatedAssemblyTime,
+        vacuumCleaner: db.vacuumCleaner,
+        howDiscovered: db.howDiscovered,
+        residentialComplex: db.residentialComplex,
+        housingCoopNumber: db.housingCoopNumber,
       );
 }
