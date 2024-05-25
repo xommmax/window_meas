@@ -29,6 +29,17 @@ extension LineExt on Line {
       }
     }
 
+    if (min == max) {
+      for (final offset in [$1, $2, line.$1, line.$2]) {
+        if (min == null || offset!.dy < min.dy) {
+          min = offset;
+        }
+        if (max == null || offset!.dy > max.dy) {
+          max = offset;
+        }
+      }
+    }
+
     return (min, max);
   }
 }
