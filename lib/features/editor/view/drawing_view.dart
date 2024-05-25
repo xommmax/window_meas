@@ -5,6 +5,7 @@ import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/view/components.dart';
 import 'package:window_meas/features/editor/view/painter.dart';
+import 'package:window_meas/features/editor/view/tap_helper.dart';
 
 class DrawingView extends StatefulWidget {
   const DrawingView({super.key});
@@ -35,6 +36,13 @@ class DrawingViewState extends State<DrawingView> {
               offset: focalPointDelta,
               child: BlocBuilder<EditorCubit, EditorState>(
                 builder: (context, state) => GestureDetector(
+                  onTapUp: (details) {
+                    final measTap = onTapUp(details, context.read<DrawingCubit>().state.lines, size);
+                    if (measTap != null) {
+                      // hsow dialog
+                      context.read<DrawingCubit>().onMeasurementTap(measTap);
+                    }
+                  },
                   onPanDown: state.mode == EditorMode.move
                       ? null
                       : (details) => setState(() => currentLine = (details.localPosition.toInnerCoord(size), null)),

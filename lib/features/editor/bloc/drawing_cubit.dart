@@ -1,10 +1,12 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:replay_bloc/replay_bloc.dart';
 import 'package:window_meas/common/ext/line_ext.dart';
 import 'package:window_meas/features/editor/view/components.dart';
+import 'package:window_meas/features/editor/view/meas_clicked_event.dart';
 
 part 'drawing_cubit.freezed.dart';
 
@@ -31,6 +33,10 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
 
     lines.add(newLine);
     emit(state.copyWith(lines: lines));
+  }
+
+  void onMeasurementTap(MeasurementTapEvent measTap) {
+    debugPrint('onMeasurementTap: $measTap');
   }
 }
 
