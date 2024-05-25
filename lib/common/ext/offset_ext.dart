@@ -4,7 +4,7 @@ import 'package:window_meas/common/constants.dart';
 
 extension OffsetExt on Offset {
   Offset toInnerCoord(Size size) {
-    final gridSize = size.width / Constants.gridSpacing;
+    final gridSize = size.width / Constants.gridAmount;
 
     final shiftX = (size.width / 2.0 / gridSize).roundToDouble() * gridSize;
     final shiftY = (size.height / 2.0 / gridSize).roundToDouble() * gridSize;
@@ -16,7 +16,7 @@ extension OffsetExt on Offset {
   }
 
   Offset toGlobalCoord(Size size) {
-    final gridSize = size.width / Constants.gridSpacing;
+    final gridSize = size.width / Constants.gridAmount;
 
     final shiftX = (size.width / 2.0 / gridSize).roundToDouble() * gridSize;
     final shiftY = (size.height / 2.0 / gridSize).roundToDouble() * gridSize;

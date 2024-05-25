@@ -1,3 +1,3 @@
 class Constants {
-  static const int gridSpacing = 60;
+  static const int gridAmount = 60;
 }

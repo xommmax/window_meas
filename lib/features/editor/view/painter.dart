@@ -5,7 +5,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:window_meas/common/constants.dart';
-import 'package:window_meas/common/helper.dart';
+import 'package:window_meas/common/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/view/components.dart';
 
 class MyCustomPainter extends CustomPainter {
@@ -38,9 +38,9 @@ class MyCustomPainter extends CustomPainter {
 
     final List<Offset> points = [];
 
-    double gridSize = size.width / Constants.gridSpacing;
+    double gridSize = size.width / Constants.gridAmount;
 
-    for (int x = 0; x <= Constants.gridSpacing; x++) {
+    for (int x = 0; x <= Constants.gridAmount; x++) {
       for (int y = 0; y <= (size.height / gridSize).ceil(); y++) {
         points.add(Offset(x * gridSize, y * gridSize));
       }
@@ -72,7 +72,7 @@ class MyCustomPainter extends CustomPainter {
   }
 
   void _drawMeasurements(Canvas canvas, Size size) {
-    double gridSize = size.width / Constants.gridSpacing;
+    double gridSize = size.width / Constants.gridAmount;
 
     final SplayTreeSet<double> xNodes = SplayTreeSet();
     final SplayTreeSet<double> yNodes = SplayTreeSet();

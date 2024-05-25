@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:replay_bloc/replay_bloc.dart';
+import 'package:window_meas/common/ext/line_ext.dart';
 import 'package:window_meas/features/editor/view/components.dart';
 
 part 'drawing_cubit.freezed.dart';
@@ -11,12 +12,25 @@ part 'drawing_cubit.freezed.dart';
 class DrawingCubit extends ReplayCubit<DrawingState> {
   DrawingCubit() : super(const DrawingState());
 
-  void addLine(Line line) {
-    if (line.$1 == line.$2) return;
+  void addLine(Line newLine) {
+    if (newLine.$1 == newLine.$2 || newLine.$1 == null || newLine.$2 == null) return;
+    final lines = List.of(state.lines);
 
-    emit(state.copyWith(
-      lines: [...state.lines, line],
-    ));
+    bool isOverlapping;
+    do {
+      isOverlapping = false;
+      for (final line in lines) {
+        if (line.isOverlapping(newLine)) {
+          isOverlapping = true;
+          lines.remove(line);
+          newLine = line.mergeOverlapping(newLine);
+          break;
+        }
+      }
+    } while (isOverlapping);
+
+    lines.add(newLine);
+    emit(state.copyWith(lines: lines));
   }
 }
 
