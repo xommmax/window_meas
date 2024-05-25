@@ -28,7 +28,7 @@ class InputItem extends StatefulWidget {
     required this.value,
     this.onChanged,
     this.keyboardType = TextInputType.text,
-    this.maxLines,
+    this.maxLines = 1,
     super.key,
   });
 
@@ -36,7 +36,7 @@ class InputItem extends StatefulWidget {
   final String? value;
   final Function(String)? onChanged;
   final TextInputType keyboardType;
-  final int? maxLines;
+  final int maxLines;
 
   @override
   State<InputItem> createState() => _InputItemState();
@@ -73,6 +73,8 @@ class _InputItemState extends State<InputItem> {
                 keyboardType: widget.keyboardType,
                 minLines: 1,
                 maxLines: widget.maxLines,
+                textInputAction:
+                    (widget.maxLines == 1) ? TextInputAction.next : null,
               ),
             ),
           ],
