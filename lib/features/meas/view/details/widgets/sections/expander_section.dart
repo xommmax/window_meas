@@ -58,6 +58,7 @@ class ExpanderSection extends StatelessWidget {
                               expanderOption: measurement.expanderOption
                                   .copyWith(rightLength: s)),
                         ),
+                    keyboardType: TextInputType.number,
                   ),
                   const Divider(),
                   InputItem(
@@ -70,6 +71,7 @@ class ExpanderSection extends StatelessWidget {
                               expanderOption: measurement.expanderOption
                                   .copyWith(rightAmount: s)),
                         ),
+                    keyboardType: TextInputType.number,
                   ),
                   const Divider(),
                 ],
@@ -111,6 +113,7 @@ class ExpanderSection extends StatelessWidget {
                               expanderOption: measurement.expanderOption
                                   .copyWith(leftLength: s)),
                         ),
+                    keyboardType: TextInputType.number,
                   ),
                   const Divider(),
                   InputItem(
@@ -123,6 +126,7 @@ class ExpanderSection extends StatelessWidget {
                               expanderOption: measurement.expanderOption
                                   .copyWith(leftAmount: s)),
                         ),
+                    keyboardType: TextInputType.number,
                   ),
                   const Divider(),
                 ],
@@ -164,6 +168,7 @@ class ExpanderSection extends StatelessWidget {
                               expanderOption: measurement.expanderOption
                                   .copyWith(topLength: s)),
                         ),
+                    keyboardType: TextInputType.number,
                   ),
                   const Divider(),
                   InputItem(
@@ -176,6 +181,7 @@ class ExpanderSection extends StatelessWidget {
                               expanderOption: measurement.expanderOption
                                   .copyWith(topAmount: s)),
                         ),
+                    keyboardType: TextInputType.number,
                   ),
                   const Divider(),
                 ],
@@ -217,6 +223,7 @@ class ExpanderSection extends StatelessWidget {
                               expanderOption: measurement.expanderOption
                                   .copyWith(bottomLength: s)),
                         ),
+                    keyboardType: TextInputType.number,
                   ),
                   const Divider(),
                   InputItem(
@@ -229,6 +236,7 @@ class ExpanderSection extends StatelessWidget {
                               expanderOption: measurement.expanderOption
                                   .copyWith(bottomAmount: s)),
                         ),
+                    keyboardType: TextInputType.number,
                   ),
                   const Divider(),
                 ],

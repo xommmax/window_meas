@@ -27,12 +27,16 @@ class InputItem extends StatefulWidget {
     required this.title,
     required this.value,
     this.onChanged,
+    this.keyboardType = TextInputType.text,
+    this.maxLines,
     super.key,
   });
 
   final String title;
   final String? value;
   final Function(String)? onChanged;
+  final TextInputType keyboardType;
+  final int? maxLines;
 
   @override
   State<InputItem> createState() => _InputItemState();
@@ -65,7 +69,10 @@ class _InputItemState extends State<InputItem> {
               child: TextField(
                 controller: controller,
                 decoration: null,
-                textCapitalization: TextCapitalization.words,
+                textCapitalization: TextCapitalization.sentences,
+                keyboardType: widget.keyboardType,
+                minLines: 1,
+                maxLines: widget.maxLines,
               ),
             ),
           ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:window_meas/features/meas/view/details/widgets/subcategory.dart';
 import 'package:window_meas/l10n/localization.dart';
 import 'package:window_meas/features/meas/cubit/meas_details_cubit.dart';
 import 'package:window_meas/features/meas/data/model/measurement.dart';
@@ -46,20 +45,20 @@ class AddressSection extends StatelessWidget {
             ),
             const Divider(),
             InputItem(
+              title: context.l10n.building,
+              value: measurement.building,
+              onChanged: (s) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updateMeasurement(measurement.copyWith(building: s)),
+            ),
+            const Divider(),
+            InputItem(
               title: context.l10n.residentialComplex,
               value: measurement.residentialComplex,
               onChanged: (s) => context
                   .read<MeasurementDetailsCubit>()
                   .updateMeasurement(
                       measurement.copyWith(residentialComplex: s)),
-            ),
-            const Divider(),
-            InputItem(
-              title: context.l10n.building,
-              value: measurement.building,
-              onChanged: (s) => context
-                  .read<MeasurementDetailsCubit>()
-                  .updateMeasurement(measurement.copyWith(building: s)),
             ),
             const Divider(),
             InputItem(
@@ -76,6 +75,7 @@ class AddressSection extends StatelessWidget {
               onChanged: (s) => context
                   .read<MeasurementDetailsCubit>()
                   .updateMeasurement(measurement.copyWith(entrance: s)),
+              keyboardType: TextInputType.number,
             ),
             const Divider(),
             InputItem(
@@ -92,6 +92,7 @@ class AddressSection extends StatelessWidget {
               onChanged: (s) => context
                   .read<MeasurementDetailsCubit>()
                   .updateMeasurement(measurement.copyWith(floor: s)),
+              keyboardType: TextInputType.number,
             ),
             const Divider(),
             InputItem(
@@ -109,6 +110,7 @@ class AddressSection extends StatelessWidget {
                   .read<MeasurementDetailsCubit>()
                   .updateMeasurement(
                       measurement.copyWith(housingCoopNumber: s)),
+                      keyboardType: TextInputType.phone,
             ),
             const SizedBox(height: 8),
           ],

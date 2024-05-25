@@ -50,6 +50,7 @@ class PositionInfoSection extends StatelessWidget {
                   onChanged: (s) => context
                       .read<MeasurementDetailsCubit>()
                       .updateMeasurement(measurement.copyWith(quarterSize: s)),
+                  keyboardType: TextInputType.number,
                 ),
                 const Divider(),
                 DropdownItem<QuarterPosition>(
@@ -235,6 +236,7 @@ class PositionInfoSection extends StatelessWidget {
                         .read<MeasurementDetailsCubit>()
                         .updateMeasurement(
                             measurement.copyWith(windowsillSize: s)),
+                    keyboardType: TextInputType.number,
                   ),
                   const Divider(),
                   DropdownItem<WindowsillConnector>(
@@ -279,6 +281,7 @@ class PositionInfoSection extends StatelessWidget {
                       .read<MeasurementDetailsCubit>()
                       .updateMeasurement(
                           measurement.copyWith(drainageDepth: s)),
+                  keyboardType: TextInputType.number,
                 ),
                 const Divider(),
                 InputItem(
@@ -288,6 +291,7 @@ class PositionInfoSection extends StatelessWidget {
                       .read<MeasurementDetailsCubit>()
                       .updateMeasurement(
                           measurement.copyWith(drainageWidth: s)),
+                  keyboardType: TextInputType.number,
                 ),
                 const Divider(),
                 InputItem(
@@ -328,6 +332,7 @@ class PositionInfoSection extends StatelessWidget {
                   onChanged: (s) => context
                       .read<MeasurementDetailsCubit>()
                       .updateMeasurement(measurement.copyWith(canopySize: s)),
+                  keyboardType: TextInputType.number,
                 ),
                 const Divider(),
                 InputItem(
@@ -350,6 +355,7 @@ class PositionInfoSection extends StatelessWidget {
                   onChanged: (s) => context
                       .read<MeasurementDetailsCubit>()
                       .updateMeasurement(measurement.copyWith(slopeDepth: s)),
+                  keyboardType: TextInputType.number,
                 ),
                 const Divider(),
                 InputItem(
@@ -358,6 +364,7 @@ class PositionInfoSection extends StatelessWidget {
                   onChanged: (s) => context
                       .read<MeasurementDetailsCubit>()
                       .updateMeasurement(measurement.copyWith(slopeLength: s)),
+                  keyboardType: TextInputType.number,
                 ),
                 const Divider(),
                 InputItem(
@@ -367,8 +374,8 @@ class PositionInfoSection extends StatelessWidget {
                       .read<MeasurementDetailsCubit>()
                       .updateMeasurement(
                           measurement.copyWith(slopeQuantity: s)),
+                  keyboardType: TextInputType.number,
                 ),
-                const Divider(),
               ],
             ),
             const SizedBox(height: 8),

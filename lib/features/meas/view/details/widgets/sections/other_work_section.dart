@@ -63,7 +63,6 @@ class OtherWorkSection extends StatelessWidget {
                   .read<MeasurementDetailsCubit>()
                   .updateMeasurement(measurement.copyWith(insulation: b)),
             ),
-            const Divider(),
             const SizedBox(height: 8),
           ],
         ),
