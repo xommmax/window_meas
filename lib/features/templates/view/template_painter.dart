@@ -5,7 +5,7 @@ import 'package:window_meas/common/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/view/components.dart';
 
 class TemplatePainter extends CustomPainter {
-  static const lineWidth = 1.0;
+  static const lineWidth = 1.5;
 
   final List<Line> lines;
 

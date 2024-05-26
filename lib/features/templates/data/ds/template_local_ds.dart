@@ -26,7 +26,7 @@ class TemplateIsarLocalDataSource implements TemplateLocalDataSource {
   Future<void> addTemplate(TemplateDB template) => isar.writeTxn(() => isar.templateDBs.put(template));
 
   @override
-  Future<void> deleteTemplate(int id) => isar.templateDBs.delete(id);
+  Future<void> deleteTemplate(int id) => isar.writeTxn(() => isar.templateDBs.delete(id));
 
   @override
   Future<TemplateDB?> getTemplate(int id) => isar.templateDBs.get(id);

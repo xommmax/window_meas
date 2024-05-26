@@ -135,5 +135,7 @@
   "enterValue": "Enter value",
   "cancel": "Cancel",
   "save": "Save",
-  "editor": "Editor"
+  "editor": "Editor",
+  "edit": "Edit",
+  "delete": "Delete"
 }

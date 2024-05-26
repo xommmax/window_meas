@@ -26,4 +26,6 @@ class TemplateRepository {
 
   Stream<List<Template>> watchTemplates() =>
       local.watchTemplates().map((list) => list.map((e) => Template.fromDB(e)).toList());
+
+  Future<void> deleteTemplate(int id) => local.deleteTemplate(id);
 }

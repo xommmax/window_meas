@@ -26,7 +26,7 @@ class MeasurementIsarLocalDataSource implements MeasurementLocalDataSource {
   Future<void> addMeasurement(MeasurementDB measurement) => isar.writeTxn(() => isar.measurementDBs.put(measurement));
 
   @override
-  Future<void> deleteMeasurement(String id) => isar.measurementDBs.deleteById(id);
+  Future<void> deleteMeasurement(String id) => isar.writeTxn(() => isar.measurementDBs.deleteById(id));
 
   @override
   Future<MeasurementDB?> getMeasurement(String id) => isar.measurementDBs.getById(id);
