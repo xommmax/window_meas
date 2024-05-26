@@ -12,14 +12,6 @@ class TemplateListCubit extends Cubit<TemplateListState> {
   final TemplateRepository repo;
   StreamSubscription? templateSubscription;
 
-  Future<String> addNewTemplate() async {
-    //   final template = Template.initial();
-    //   await repo.addTemplate(template);
-
-    //   return template.id;
-    return 'id';
-  }
-
   void watchTemplates() async {
     templateSubscription = repo.watchTemplates().listen((templates) {
       emit(TemplateListState(templates: templates));

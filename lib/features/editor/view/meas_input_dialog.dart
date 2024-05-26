@@ -32,7 +32,7 @@ class _MeasurementInputDialogState extends State<MeasurementInputDialog> {
           decoration: InputDecoration(hintText: context.l10n.enterValue),
           keyboardType: TextInputType.number,
         ),
-        actions: <Widget>[
+        actions: [
           ElevatedButton(
             child: Text(context.l10n.cancel),
             onPressed: () => Navigator.pop(context),

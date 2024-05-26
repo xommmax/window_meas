@@ -29,12 +29,10 @@ class MeasurementDetailsView extends StatelessWidget {
   const MeasurementDetailsView({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<MeasurementDetailsCubit, MeasurementDetailsState>(
+  Widget build(BuildContext context) => BlocBuilder<MeasurementDetailsCubit, MeasurementDetailsState>(
         builder: (context, state) => Scaffold(
           appBar: AppBar(
-            title: Text(
-                '${context.l10n.measurement} №${state.measurement?.innerId?.toString().padLeft(4, '0') ?? ''}'),
+            title: Text('${context.l10n.measurement} №${state.measurement?.innerId?.toString().padLeft(4, '0') ?? ''}'),
           ),
           body: SafeArea(
             bottom: false,
@@ -68,8 +66,7 @@ class _MeasurementDetailsListState extends State<MeasurementDetailsList> {
             padding: const EdgeInsets.only(bottom: 100, top: 20),
             child: ExpansionPanelList(
               expandedHeaderPadding: EdgeInsets.zero,
-              expansionCallback: (i, exp) =>
-                  setState(() => isExpanded[i] = exp),
+              expansionCallback: (i, exp) => setState(() => isExpanded[i] = exp),
               children: [
                 MeasurementParamSection(
                   title: '${context.l10n.clientInfo}:',

@@ -39,7 +39,9 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/editor',
-      builder: (context, state) => const EditorScreen(),
+      builder: (context, state) => EditorScreen(
+        isTemplate: (state.extra as Map?)?['isTemplate'],
+      ),
     ),
     GoRoute(
       path: '/meas_details/:id',

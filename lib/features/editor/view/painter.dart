@@ -13,7 +13,7 @@ class MyCustomPainter extends CustomPainter {
   static const lineWidth = 0.5;
 
   final List<Line> lines;
-  final Line currentLine;
+  final Line? currentLine;
   final List<Segment> segments;
 
   MyCustomPainter({
@@ -67,12 +67,12 @@ class MyCustomPainter extends CustomPainter {
   }
 
   void _drawCurrentLine(Canvas canvas, Size size) {
-    if (currentLine.$1 != null && currentLine.$2 != null) {
+    if (currentLine?.$1 != null && currentLine?.$2 != null) {
       final linePaint = Paint()
         ..color = Colors.green
         ..strokeWidth = lineWidth;
 
-      canvas.drawLine(currentLine.$1!.toGlobalCoord(size), currentLine.$2!.toGlobalCoord(size), linePaint);
+      canvas.drawLine(currentLine!.$1!.toGlobalCoord(size), currentLine!.$2!.toGlobalCoord(size), linePaint);
     }
   }
 

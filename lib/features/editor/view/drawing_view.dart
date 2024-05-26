@@ -23,7 +23,7 @@ class DrawingViewState extends State<DrawingView> {
   double prevScale = initScale;
 
   Offset focalPointDelta = const Offset(0, 0);
-  Line currentLine = (null, null);
+  Line? currentLine;
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
@@ -43,12 +43,14 @@ class DrawingViewState extends State<DrawingView> {
                   onPanUpdate: state.mode == EditorMode.move
                       ? null
                       : (details) =>
-                          setState(() => currentLine = (currentLine.$1, details.localPosition.toInnerCoord(size))),
+                          setState(() => currentLine = (currentLine?.$1, details.localPosition.toInnerCoord(size))),
                   onPanEnd: state.mode == EditorMode.move
                       ? null
                       : (details) => setState(() {
-                            context.read<DrawingCubit>().addLine(currentLine);
-                            currentLine = (null, null);
+                            if (currentLine != null) {
+                              context.read<DrawingCubit>().addLine(currentLine!);
+                            }
+                            currentLine = null;
                           }),
                   onScaleUpdate: state.mode == EditorMode.draw
                       ? null

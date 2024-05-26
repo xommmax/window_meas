@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:window_meas/common/service_locator.dart';
 import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/templates/cubit/template_list_cubit.dart';
 import 'package:window_meas/features/templates/cubit/template_list_state.dart';
 import 'package:window_meas/features/templates/view/template_list_item.dart';
+import 'package:window_meas/l10n/localization.dart';
 
 class TemplateListScreen extends StatelessWidget {
   const TemplateListScreen({super.key});
@@ -23,22 +23,11 @@ class TemplateListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              width: double.infinity,
-              color: AppColors.secondary,
-              child: SvgPicture.asset(
-                'assets/white_logo.svg',
-                width: 200,
-              ),
-            ),
-            const Expanded(child: TemplateList()),
-          ],
-        ),
+      appBar: AppBar(
+        title: Text(context.l10n.templates),
+      ),
+      body: const SafeArea(
+        child: TemplateList(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _addTemplate(context),
@@ -48,11 +37,7 @@ class TemplateListView extends StatelessWidget {
       ));
 
   Future<void> _addTemplate(BuildContext context) async {
-    final id = await context.read<TemplateListCubit>().addNewTemplate();
-
-    if (context.mounted) {
-      context.push('/template_details/$id');
-    }
+    context.push('/editor', extra: {'isTemplate': true});
   }
 }
 
