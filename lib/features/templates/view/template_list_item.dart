@@ -23,7 +23,7 @@ class TemplateItem extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: CustomPaint(
-            painter: TemplatePainter(lines: template.lines),
+            painter: TemplatePainter(lines: template.scheme.lines),
           ),
         ),
       );

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'drawing_cubit.dart';
+part of 'drawing_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -16,8 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$DrawingState {
-  List<(Offset?, Offset?)> get lines => throw _privateConstructorUsedError;
-  List<Segment> get segments => throw _privateConstructorUsedError;
+  Scheme get scheme => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DrawingStateCopyWith<DrawingState> get copyWith =>
@@ -30,7 +29,9 @@ abstract class $DrawingStateCopyWith<$Res> {
           DrawingState value, $Res Function(DrawingState) then) =
       _$DrawingStateCopyWithImpl<$Res, DrawingState>;
   @useResult
-  $Res call({List<(Offset?, Offset?)> lines, List<Segment> segments});
+  $Res call({Scheme scheme});
+
+  $SchemeCopyWith<$Res> get scheme;
 }
 
 /// @nodoc
@@ -46,19 +47,22 @@ class _$DrawingStateCopyWithImpl<$Res, $Val extends DrawingState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lines = null,
-    Object? segments = null,
+    Object? scheme = null,
   }) {
     return _then(_value.copyWith(
-      lines: null == lines
-          ? _value.lines
-          : lines // ignore: cast_nullable_to_non_nullable
-              as List<(Offset?, Offset?)>,
-      segments: null == segments
-          ? _value.segments
-          : segments // ignore: cast_nullable_to_non_nullable
-              as List<Segment>,
+      scheme: null == scheme
+          ? _value.scheme
+          : scheme // ignore: cast_nullable_to_non_nullable
+              as Scheme,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SchemeCopyWith<$Res> get scheme {
+    return $SchemeCopyWith<$Res>(_value.scheme, (value) {
+      return _then(_value.copyWith(scheme: value) as $Val);
+    });
   }
 }
 
@@ -70,7 +74,10 @@ abstract class _$$DrawingStateImplCopyWith<$Res>
       __$$DrawingStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<(Offset?, Offset?)> lines, List<Segment> segments});
+  $Res call({Scheme scheme});
+
+  @override
+  $SchemeCopyWith<$Res> get scheme;
 }
 
 /// @nodoc
@@ -84,50 +91,28 @@ class __$$DrawingStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? lines = null,
-    Object? segments = null,
+    Object? scheme = null,
   }) {
     return _then(_$DrawingStateImpl(
-      lines: null == lines
-          ? _value._lines
-          : lines // ignore: cast_nullable_to_non_nullable
-              as List<(Offset?, Offset?)>,
-      segments: null == segments
-          ? _value._segments
-          : segments // ignore: cast_nullable_to_non_nullable
-              as List<Segment>,
+      scheme: null == scheme
+          ? _value.scheme
+          : scheme // ignore: cast_nullable_to_non_nullable
+              as Scheme,
     ));
   }
 }
 
 /// @nodoc
 
-class _$DrawingStateImpl implements _DrawingState {
-  const _$DrawingStateImpl(
-      {required final List<(Offset?, Offset?)> lines,
-      required final List<Segment> segments})
-      : _lines = lines,
-        _segments = segments;
+class _$DrawingStateImpl extends _DrawingState {
+  const _$DrawingStateImpl({required this.scheme}) : super._();
 
-  final List<(Offset?, Offset?)> _lines;
   @override
-  List<(Offset?, Offset?)> get lines {
-    if (_lines is EqualUnmodifiableListView) return _lines;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_lines);
-  }
-
-  final List<Segment> _segments;
-  @override
-  List<Segment> get segments {
-    if (_segments is EqualUnmodifiableListView) return _segments;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_segments);
-  }
+  final Scheme scheme;
 
   @override
   String toString() {
-    return 'DrawingState(lines: $lines, segments: $segments)';
+    return 'DrawingState(scheme: $scheme)';
   }
 
   @override
@@ -135,15 +120,11 @@ class _$DrawingStateImpl implements _DrawingState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DrawingStateImpl &&
-            const DeepCollectionEquality().equals(other._lines, _lines) &&
-            const DeepCollectionEquality().equals(other._segments, _segments));
+            (identical(other.scheme, scheme) || other.scheme == scheme));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_lines),
-      const DeepCollectionEquality().hash(_segments));
+  int get hashCode => Object.hash(runtimeType, scheme);
 
   @JsonKey(ignore: true)
   @override
@@ -152,15 +133,13 @@ class _$DrawingStateImpl implements _DrawingState {
       __$$DrawingStateImplCopyWithImpl<_$DrawingStateImpl>(this, _$identity);
 }
 
-abstract class _DrawingState implements DrawingState {
-  const factory _DrawingState(
-      {required final List<(Offset?, Offset?)> lines,
-      required final List<Segment> segments}) = _$DrawingStateImpl;
+abstract class _DrawingState extends DrawingState {
+  const factory _DrawingState({required final Scheme scheme}) =
+      _$DrawingStateImpl;
+  const _DrawingState._() : super._();
 
   @override
-  List<(Offset?, Offset?)> get lines;
-  @override
-  List<Segment> get segments;
+  Scheme get scheme;
   @override
   @JsonKey(ignore: true)
   _$$DrawingStateImplCopyWith<_$DrawingStateImpl> get copyWith =>

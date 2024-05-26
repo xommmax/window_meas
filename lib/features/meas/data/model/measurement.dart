@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 import 'package:window_meas/features/meas/data/model/measurement_db.dart';
+import 'package:window_meas/features/meas/data/model/scheme.dart';
 import 'package:window_meas/features/meas/data/params/assembly_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/building_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/door_opening_type_enum.dart';
@@ -99,6 +100,7 @@ class Measurement with _$Measurement {
     required String howDiscovered,
     required String residentialComplex,
     required String housingCoopNumber,
+    required Scheme? scheme,
   }) = _Measurement;
 
   factory Measurement.initial() => Measurement(
@@ -173,6 +175,7 @@ class Measurement with _$Measurement {
         howDiscovered: '',
         residentialComplex: '',
         housingCoopNumber: '',
+        scheme: null,
       );
 
   MeasurementDB toDB() => MeasurementDB()
@@ -247,7 +250,8 @@ class Measurement with _$Measurement {
     ..vacuumCleaner = vacuumCleaner
     ..howDiscovered = howDiscovered
     ..residentialComplex = residentialComplex
-    ..housingCoopNumber = housingCoopNumber;
+    ..housingCoopNumber = housingCoopNumber
+    ..scheme = scheme?.toDB();
 
   static Measurement fromDB(MeasurementDB db) => Measurement(
         innerId: db.innerId,
@@ -322,5 +326,6 @@ class Measurement with _$Measurement {
         howDiscovered: db.howDiscovered,
         residentialComplex: db.residentialComplex,
         housingCoopNumber: db.housingCoopNumber,
+        scheme: db.scheme != null ? Scheme.fromDB(db.scheme!) : null,
       );
 }

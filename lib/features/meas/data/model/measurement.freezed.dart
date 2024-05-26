@@ -90,6 +90,7 @@ mixin _$Measurement {
   String get howDiscovered => throw _privateConstructorUsedError;
   String get residentialComplex => throw _privateConstructorUsedError;
   String get housingCoopNumber => throw _privateConstructorUsedError;
+  Scheme? get scheme => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementCopyWith<Measurement> get copyWith =>
@@ -174,9 +175,11 @@ abstract class $MeasurementCopyWith<$Res> {
       bool vacuumCleaner,
       String howDiscovered,
       String residentialComplex,
-      String housingCoopNumber});
+      String housingCoopNumber,
+      Scheme? scheme});
 
   $ExpanderOptionCopyWith<$Res> get expanderOption;
+  $SchemeCopyWith<$Res>? get scheme;
 }
 
 /// @nodoc
@@ -264,6 +267,7 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? howDiscovered = null,
     Object? residentialComplex = null,
     Object? housingCoopNumber = null,
+    Object? scheme = freezed,
   }) {
     return _then(_value.copyWith(
       innerId: freezed == innerId
@@ -554,6 +558,10 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.housingCoopNumber
           : housingCoopNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      scheme: freezed == scheme
+          ? _value.scheme
+          : scheme // ignore: cast_nullable_to_non_nullable
+              as Scheme?,
     ) as $Val);
   }
 
@@ -562,6 +570,18 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
   $ExpanderOptionCopyWith<$Res> get expanderOption {
     return $ExpanderOptionCopyWith<$Res>(_value.expanderOption, (value) {
       return _then(_value.copyWith(expanderOption: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SchemeCopyWith<$Res>? get scheme {
+    if (_value.scheme == null) {
+      return null;
+    }
+
+    return $SchemeCopyWith<$Res>(_value.scheme!, (value) {
+      return _then(_value.copyWith(scheme: value) as $Val);
     });
   }
 }
@@ -646,10 +666,13 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       bool vacuumCleaner,
       String howDiscovered,
       String residentialComplex,
-      String housingCoopNumber});
+      String housingCoopNumber,
+      Scheme? scheme});
 
   @override
   $ExpanderOptionCopyWith<$Res> get expanderOption;
+  @override
+  $SchemeCopyWith<$Res>? get scheme;
 }
 
 /// @nodoc
@@ -735,6 +758,7 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? howDiscovered = null,
     Object? residentialComplex = null,
     Object? housingCoopNumber = null,
+    Object? scheme = freezed,
   }) {
     return _then(_$MeasurementImpl(
       innerId: freezed == innerId
@@ -1025,6 +1049,10 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.housingCoopNumber
           : housingCoopNumber // ignore: cast_nullable_to_non_nullable
               as String,
+      scheme: freezed == scheme
+          ? _value.scheme
+          : scheme // ignore: cast_nullable_to_non_nullable
+              as Scheme?,
     ));
   }
 }
@@ -1104,7 +1132,8 @@ class _$MeasurementImpl extends _Measurement {
       required this.vacuumCleaner,
       required this.howDiscovered,
       required this.residentialComplex,
-      required this.housingCoopNumber})
+      required this.housingCoopNumber,
+      required this.scheme})
       : super._();
 
   @override
@@ -1251,10 +1280,12 @@ class _$MeasurementImpl extends _Measurement {
   final String residentialComplex;
   @override
   final String housingCoopNumber;
+  @override
+  final Scheme? scheme;
 
   @override
   String toString() {
-    return 'Measurement(innerId: $innerId, id: $id, date: $date, clientName: $clientName, city: $city, district: $district, street: $street, building: $building, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation, sealing: $sealing, cost: $cost, prepayment: $prepayment, comment: $comment, estimatedAssemblyTime: $estimatedAssemblyTime, vacuumCleaner: $vacuumCleaner, howDiscovered: $howDiscovered, residentialComplex: $residentialComplex, housingCoopNumber: $housingCoopNumber)';
+    return 'Measurement(innerId: $innerId, id: $id, date: $date, clientName: $clientName, city: $city, district: $district, street: $street, building: $building, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation, sealing: $sealing, cost: $cost, prepayment: $prepayment, comment: $comment, estimatedAssemblyTime: $estimatedAssemblyTime, vacuumCleaner: $vacuumCleaner, howDiscovered: $howDiscovered, residentialComplex: $residentialComplex, housingCoopNumber: $housingCoopNumber, scheme: $scheme)';
   }
 
   @override
@@ -1376,7 +1407,8 @@ class _$MeasurementImpl extends _Measurement {
             (identical(other.vacuumCleaner, vacuumCleaner) || other.vacuumCleaner == vacuumCleaner) &&
             (identical(other.howDiscovered, howDiscovered) || other.howDiscovered == howDiscovered) &&
             (identical(other.residentialComplex, residentialComplex) || other.residentialComplex == residentialComplex) &&
-            (identical(other.housingCoopNumber, housingCoopNumber) || other.housingCoopNumber == housingCoopNumber));
+            (identical(other.housingCoopNumber, housingCoopNumber) || other.housingCoopNumber == housingCoopNumber) &&
+            (identical(other.scheme, scheme) || other.scheme == scheme));
   }
 
   @override
@@ -1453,7 +1485,8 @@ class _$MeasurementImpl extends _Measurement {
         vacuumCleaner,
         howDiscovered,
         residentialComplex,
-        housingCoopNumber
+        housingCoopNumber,
+        scheme
       ]);
 
   @JsonKey(ignore: true)
@@ -1536,7 +1569,8 @@ abstract class _Measurement extends Measurement {
       required final bool vacuumCleaner,
       required final String howDiscovered,
       required final String residentialComplex,
-      required final String housingCoopNumber}) = _$MeasurementImpl;
+      required final String housingCoopNumber,
+      required final Scheme? scheme}) = _$MeasurementImpl;
   const _Measurement._() : super._();
 
   @override
@@ -1683,6 +1717,8 @@ abstract class _Measurement extends Measurement {
   String get residentialComplex;
   @override
   String get housingCoopNumber;
+  @override
+  Scheme? get scheme;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementImplCopyWith<_$MeasurementImpl> get copyWith =>

@@ -3,14 +3,12 @@ import 'dart:ui';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:replay_bloc/replay_bloc.dart';
 import 'package:window_meas/common/ext/line_ext.dart';
+import 'package:window_meas/features/editor/bloc/drawing_state.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/view/components.dart';
-
-part 'drawing_cubit.freezed.dart';
 
 @injectable
 class DrawingCubit extends ReplayCubit<DrawingState> {
@@ -18,7 +16,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
 
   void addLine(Line newLine) {
     if (newLine.$1 == newLine.$2 || newLine.$1 == null || newLine.$2 == null) return;
-    final lines = List.of(state.lines);
+    final lines = List.of(state.scheme.lines);
 
     bool isOverlapping;
     do {
@@ -37,7 +35,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
 
     final segments = _recalculateSegments(lines);
 
-    emit(state.copyWith(lines: lines, segments: segments));
+    emit(state.copyWith(scheme: state.scheme.copyWith(lines: lines, segments: segments)));
   }
 
   List<Segment> _recalculateSegments(List<Line> lines) {
@@ -106,7 +104,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     }
 
     for (int i = 0; i < newSegments.length; i++) {
-      final sameSegment = state.segments.firstWhereOrNull(
+      final sameSegment = state.scheme.segments.firstWhereOrNull(
         (e) => e.p1 == newSegments[i].p1 && e.p2 == newSegments[i].p2,
       );
       if (sameSegment != null) newSegments[i] = sameSegment;
@@ -116,22 +114,9 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
   }
 
   void addSegment(Segment segment) {
-    final segments = List.of(state.segments);
+    final segments = List.of(state.scheme.segments);
     segments.removeWhere((e) => e.p1 == segment.p1 && e.p2 == segment.p2);
     segments.add(segment);
-    emit(state.copyWith(segments: segments));
+    emit(state.copyWith(scheme: state.scheme.copyWith(segments: segments)));
   }
-}
-
-@freezed
-class DrawingState with _$DrawingState {
-  const factory DrawingState({
-    required List<Line> lines,
-    required List<Segment> segments,
-  }) = _DrawingState;
-
-  factory DrawingState.initial() => const DrawingState(
-        lines: [],
-        segments: [],
-      );
 }

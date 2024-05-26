@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:window_meas/common/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
+import 'package:window_meas/features/editor/bloc/drawing_state.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/view/components.dart';
 import 'package:window_meas/features/editor/view/painter.dart';
@@ -72,9 +73,8 @@ class DrawingViewState extends State<DrawingView> {
                     child: BlocBuilder<DrawingCubit, DrawingState>(
                       builder: (context, state) => CustomPaint(
                         painter: MyCustomPainter(
-                          lines: state.lines,
                           currentLine: currentLine,
-                          segments: state.segments,
+                          scheme: state.scheme,
                         ),
                       ),
                     ),

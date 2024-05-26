@@ -40,10 +40,7 @@ class EditorView extends StatelessWidget {
               IconButton(
                 icon: const FaIcon(FontAwesomeIcons.floppyDisk),
                 onPressed: () async {
-                  await context.read<EditorCubit>().saveTemplate(
-                        context.read<DrawingCubit>().state.lines,
-                        context.read<DrawingCubit>().state.segments,
-                      );
+                  await context.read<EditorCubit>().saveTemplate(context.read<DrawingCubit>().state.scheme);
                   if (context.mounted) {
                     Navigator.pop(context);
                   }

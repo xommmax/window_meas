@@ -9,7 +9,7 @@ import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/view/meas_input_dialog.dart';
 
 Future<Segment?> onTapUp(Offset position, BuildContext context, Size size) async {
-  final segments = context.read<DrawingCubit>().state.segments;
+  final segments = context.read<DrawingCubit>().state.scheme.segments;
   if (segments.isEmpty) return null;
 
   final selectedSegment = _checkHorizontal(segments, size, position) ?? _checkVertical(segments, size, position);

@@ -22,17 +22,11 @@ const TemplateDBSchema = CollectionSchema(
       name: r'date',
       type: IsarType.dateTime,
     ),
-    r'lines': PropertySchema(
+    r'scheme': PropertySchema(
       id: 1,
-      name: r'lines',
-      type: IsarType.objectList,
-      target: r'LineDB',
-    ),
-    r'segments': PropertySchema(
-      id: 2,
-      name: r'segments',
-      type: IsarType.objectList,
-      target: r'SegmentDB',
+      name: r'scheme',
+      type: IsarType.object,
+      target: r'SchemeDB',
     )
   },
   estimateSize: _templateDBEstimateSize,
@@ -42,7 +36,11 @@ const TemplateDBSchema = CollectionSchema(
   idName: r'id',
   indexes: {},
   links: {},
-  embeddedSchemas: {r'LineDB': LineDBSchema, r'SegmentDB': SegmentDBSchema},
+  embeddedSchemas: {
+    r'SchemeDB': SchemeDBSchema,
+    r'LineDB': LineDBSchema,
+    r'SegmentDB': SegmentDBSchema
+  },
   getId: _templateDBGetId,
   getLinks: _templateDBGetLinks,
   attach: _templateDBAttach,
@@ -55,22 +53,9 @@ int _templateDBEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.lines.length * 3;
-  {
-    final offsets = allOffsets[LineDB]!;
-    for (var i = 0; i < object.lines.length; i++) {
-      final value = object.lines[i];
-      bytesCount += LineDBSchema.estimateSize(value, offsets, allOffsets);
-    }
-  }
-  bytesCount += 3 + object.segments.length * 3;
-  {
-    final offsets = allOffsets[SegmentDB]!;
-    for (var i = 0; i < object.segments.length; i++) {
-      final value = object.segments[i];
-      bytesCount += SegmentDBSchema.estimateSize(value, offsets, allOffsets);
-    }
-  }
+  bytesCount += 3 +
+      SchemeDBSchema.estimateSize(
+          object.scheme, allOffsets[SchemeDB]!, allOffsets);
   return bytesCount;
 }
 
@@ -81,17 +66,11 @@ void _templateDBSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeDateTime(offsets[0], object.date);
-  writer.writeObjectList<LineDB>(
+  writer.writeObject<SchemeDB>(
     offsets[1],
     allOffsets,
-    LineDBSchema.serialize,
-    object.lines,
-  );
-  writer.writeObjectList<SegmentDB>(
-    offsets[2],
-    allOffsets,
-    SegmentDBSchema.serialize,
-    object.segments,
+    SchemeDBSchema.serialize,
+    object.scheme,
   );
 }
 
@@ -104,20 +83,12 @@ TemplateDB _templateDBDeserialize(
   final object = TemplateDB();
   object.date = reader.readDateTime(offsets[0]);
   object.id = id;
-  object.lines = reader.readObjectList<LineDB>(
+  object.scheme = reader.readObjectOrNull<SchemeDB>(
         offsets[1],
-        LineDBSchema.deserialize,
+        SchemeDBSchema.deserialize,
         allOffsets,
-        LineDB(),
       ) ??
-      [];
-  object.segments = reader.readObjectList<SegmentDB>(
-        offsets[2],
-        SegmentDBSchema.deserialize,
-        allOffsets,
-        SegmentDB(),
-      ) ??
-      [];
+      SchemeDB();
   return object;
 }
 
@@ -131,21 +102,12 @@ P _templateDBDeserializeProp<P>(
     case 0:
       return (reader.readDateTime(offset)) as P;
     case 1:
-      return (reader.readObjectList<LineDB>(
+      return (reader.readObjectOrNull<SchemeDB>(
             offset,
-            LineDBSchema.deserialize,
+            SchemeDBSchema.deserialize,
             allOffsets,
-            LineDB(),
           ) ??
-          []) as P;
-    case 2:
-      return (reader.readObjectList<SegmentDB>(
-            offset,
-            SegmentDBSchema.deserialize,
-            allOffsets,
-            SegmentDB(),
-          ) ??
-          []) as P;
+          SchemeDB()) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -363,198 +325,14 @@ extension TemplateDBQueryFilter
       ));
     });
   }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition>
-      linesLengthEqualTo(int length) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'lines',
-        length,
-        true,
-        length,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition> linesIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'lines',
-        0,
-        true,
-        0,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition>
-      linesIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'lines',
-        0,
-        false,
-        999999,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition>
-      linesLengthLessThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'lines',
-        0,
-        true,
-        length,
-        include,
-      );
-    });
-  }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition>
-      linesLengthGreaterThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'lines',
-        length,
-        include,
-        999999,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition>
-      linesLengthBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'lines',
-        lower,
-        includeLower,
-        upper,
-        includeUpper,
-      );
-    });
-  }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition>
-      segmentsLengthEqualTo(int length) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'segments',
-        length,
-        true,
-        length,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition>
-      segmentsIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'segments',
-        0,
-        true,
-        0,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition>
-      segmentsIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'segments',
-        0,
-        false,
-        999999,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition>
-      segmentsLengthLessThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'segments',
-        0,
-        true,
-        length,
-        include,
-      );
-    });
-  }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition>
-      segmentsLengthGreaterThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'segments',
-        length,
-        include,
-        999999,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition>
-      segmentsLengthBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'segments',
-        lower,
-        includeLower,
-        upper,
-        includeUpper,
-      );
-    });
-  }
 }
 
 extension TemplateDBQueryObject
     on QueryBuilder<TemplateDB, TemplateDB, QFilterCondition> {
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition> linesElement(
-      FilterQuery<LineDB> q) {
+  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition> scheme(
+      FilterQuery<SchemeDB> q) {
     return QueryBuilder.apply(this, (query) {
-      return query.object(q, r'lines');
-    });
-  }
-
-  QueryBuilder<TemplateDB, TemplateDB, QAfterFilterCondition> segmentsElement(
-      FilterQuery<SegmentDB> q) {
-    return QueryBuilder.apply(this, (query) {
-      return query.object(q, r'segments');
+      return query.object(q, r'scheme');
     });
   }
 }
@@ -627,16 +405,9 @@ extension TemplateDBQueryProperty
     });
   }
 
-  QueryBuilder<TemplateDB, List<LineDB>, QQueryOperations> linesProperty() {
+  QueryBuilder<TemplateDB, SchemeDB, QQueryOperations> schemeProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'lines');
-    });
-  }
-
-  QueryBuilder<TemplateDB, List<SegmentDB>, QQueryOperations>
-      segmentsProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'segments');
+      return query.addPropertyName(r'scheme');
     });
   }
 }

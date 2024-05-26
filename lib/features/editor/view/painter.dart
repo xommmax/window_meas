@@ -8,18 +8,17 @@ import 'package:window_meas/common/constants.dart';
 import 'package:window_meas/common/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/view/components.dart';
+import 'package:window_meas/features/meas/data/model/scheme.dart';
 
 class MyCustomPainter extends CustomPainter {
   static const lineWidth = 0.5;
 
-  final List<Line> lines;
   final Line? currentLine;
-  final List<Segment> segments;
+  final Scheme scheme;
 
   MyCustomPainter({
-    required this.lines,
+    required this.scheme,
     required this.currentLine,
-    required this.segments,
   });
   @override
   void paint(Canvas canvas, Size size) {
@@ -31,9 +30,9 @@ class MyCustomPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(MyCustomPainter oldDelegate) =>
-      !listEquals(lines, oldDelegate.lines) ||
+      !listEquals(scheme.lines, oldDelegate.scheme.lines) ||
       currentLine != oldDelegate.currentLine ||
-      !listEquals(segments, oldDelegate.segments);
+      !listEquals(scheme.segments, oldDelegate.scheme.segments);
 
   void _drawBg(Canvas canvas, Size size) {
     final pointsPaint = Paint()
@@ -59,7 +58,7 @@ class MyCustomPainter extends CustomPainter {
       ..color = Colors.black
       ..strokeWidth = lineWidth;
 
-    for (final line in lines) {
+    for (final line in scheme.lines) {
       if (line.$1 != null && line.$2 != null) {
         canvas.drawLine(line.$1!.toGlobalCoord(size), line.$2!.toGlobalCoord(size), linePaint);
       }
@@ -87,7 +86,7 @@ class MyCustomPainter extends CustomPainter {
   }
 
   void _drawHorizontalMeasLines(Canvas canvas, Size size, Paint measPaint) {
-    final horSegments = segments.where((e) => e.direction == SegmentDirection.horizontal).toList();
+    final horSegments = scheme.segments.where((e) => e.direction == SegmentDirection.horizontal).toList();
     if (horSegments.isEmpty) return;
 
     double gridSize = size.width / Constants.gridAmount;
@@ -153,7 +152,7 @@ class MyCustomPainter extends CustomPainter {
   }
 
   void _drawVerticalMeasLines(Canvas canvas, Size size, Paint measPaint) {
-    final verSegments = segments.where((e) => e.direction == SegmentDirection.vertical).toList();
+    final verSegments = scheme.segments.where((e) => e.direction == SegmentDirection.vertical).toList();
     if (verSegments.isEmpty) return;
 
     double gridSize = size.width / Constants.gridAmount;

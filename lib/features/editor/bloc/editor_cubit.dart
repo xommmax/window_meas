@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:window_meas/features/editor/data/model/segment.dart';
-import 'package:window_meas/features/editor/view/components.dart';
+import 'package:window_meas/features/meas/data/model/scheme.dart';
 import 'package:window_meas/features/templates/data/model/template.dart';
 import 'package:window_meas/features/templates/data/template_repo.dart';
 
@@ -16,14 +15,10 @@ class EditorCubit extends Cubit<EditorState> {
 
   void changeMode(EditorMode mode) => emit(state.copyWith(mode: mode));
 
-  Future<void> saveTemplate(
-    List<Line> lines,
-    List<Segment> segments,
-  ) async {
+  Future<void> saveTemplate(Scheme scheme) async {
     final template = Template(
       date: DateTime.now(),
-      lines: lines,
-      segments: segments,
+      scheme: scheme,
     );
 
     await _templateRepository.addTemplate(template);

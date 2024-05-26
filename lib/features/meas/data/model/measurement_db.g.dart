@@ -295,97 +295,103 @@ const MeasurementDBSchema = CollectionSchema(
       type: IsarType.string,
       enumMap: _MeasurementDBrubberColorEnumValueMap,
     ),
-    r'screedDisassembly': PropertySchema(
+    r'scheme': PropertySchema(
       id: 53,
+      name: r'scheme',
+      type: IsarType.object,
+      target: r'SchemeDB',
+    ),
+    r'screedDisassembly': PropertySchema(
+      id: 54,
       name: r'screedDisassembly',
       type: IsarType.bool,
     ),
     r'sealing': PropertySchema(
-      id: 54,
+      id: 55,
       name: r'sealing',
       type: IsarType.bool,
     ),
     r'slabExtension': PropertySchema(
-      id: 55,
+      id: 56,
       name: r'slabExtension',
       type: IsarType.bool,
     ),
     r'slopeDepth': PropertySchema(
-      id: 56,
+      id: 57,
       name: r'slopeDepth',
       type: IsarType.string,
     ),
     r'slopeLength': PropertySchema(
-      id: 57,
+      id: 58,
       name: r'slopeLength',
       type: IsarType.string,
     ),
     r'slopeQuantity': PropertySchema(
-      id: 58,
+      id: 59,
       name: r'slopeQuantity',
       type: IsarType.string,
     ),
     r'standProfile': PropertySchema(
-      id: 59,
+      id: 60,
       name: r'standProfile',
       type: IsarType.string,
       enumMap: _MeasurementDBstandProfileEnumValueMap,
     ),
     r'staticCalculation': PropertySchema(
-      id: 60,
+      id: 61,
       name: r'staticCalculation',
       type: IsarType.bool,
     ),
     r'street': PropertySchema(
-      id: 61,
+      id: 62,
       name: r'street',
       type: IsarType.string,
     ),
     r'unloading': PropertySchema(
-      id: 62,
+      id: 63,
       name: r'unloading',
       type: IsarType.bool,
     ),
     r'vacuumCleaner': PropertySchema(
-      id: 63,
+      id: 64,
       name: r'vacuumCleaner',
       type: IsarType.bool,
     ),
     r'windowsillAssembly': PropertySchema(
-      id: 64,
+      id: 65,
       name: r'windowsillAssembly',
       type: IsarType.bool,
     ),
     r'windowsillColor': PropertySchema(
-      id: 65,
+      id: 66,
       name: r'windowsillColor',
       type: IsarType.string,
     ),
     r'windowsillConnector': PropertySchema(
-      id: 66,
+      id: 67,
       name: r'windowsillConnector',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillConnectorEnumValueMap,
     ),
     r'windowsillDepth': PropertySchema(
-      id: 67,
+      id: 68,
       name: r'windowsillDepth',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillDepthEnumValueMap,
     ),
     r'windowsillExtension': PropertySchema(
-      id: 68,
+      id: 69,
       name: r'windowsillExtension',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillExtensionEnumValueMap,
     ),
     r'windowsillSize': PropertySchema(
-      id: 69,
+      id: 70,
       name: r'windowsillSize',
       type: IsarType.string,
     ),
     r'windowsillType': PropertySchema(
-      id: 70,
+      id: 71,
       name: r'windowsillType',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillTypeEnumValueMap,
@@ -412,7 +418,12 @@ const MeasurementDBSchema = CollectionSchema(
     )
   },
   links: {},
-  embeddedSchemas: {r'ExpanderOptionDB': ExpanderOptionDBSchema},
+  embeddedSchemas: {
+    r'ExpanderOptionDB': ExpanderOptionDBSchema,
+    r'SchemeDB': SchemeDBSchema,
+    r'LineDB': LineDBSchema,
+    r'SegmentDB': SegmentDBSchema
+  },
   getId: _measurementDBGetId,
   getLinks: _measurementDBGetLinks,
   attach: _measurementDBAttach,
@@ -470,6 +481,13 @@ int _measurementDBEstimateSize(
   bytesCount += 3 + object.quarterSize.length * 3;
   bytesCount += 3 + object.residentialComplex.length * 3;
   bytesCount += 3 + object.rubberColor.name.length * 3;
+  {
+    final value = object.scheme;
+    if (value != null) {
+      bytesCount += 3 +
+          SchemeDBSchema.estimateSize(value, allOffsets[SchemeDB]!, allOffsets);
+    }
+  }
   bytesCount += 3 + object.slopeDepth.length * 3;
   bytesCount += 3 + object.slopeLength.length * 3;
   bytesCount += 3 + object.slopeQuantity.length * 3;
@@ -548,24 +566,30 @@ void _measurementDBSerialize(
   writer.writeString(offsets[50], object.residentialComplex);
   writer.writeBool(offsets[51], object.roofDisassembly);
   writer.writeString(offsets[52], object.rubberColor.name);
-  writer.writeBool(offsets[53], object.screedDisassembly);
-  writer.writeBool(offsets[54], object.sealing);
-  writer.writeBool(offsets[55], object.slabExtension);
-  writer.writeString(offsets[56], object.slopeDepth);
-  writer.writeString(offsets[57], object.slopeLength);
-  writer.writeString(offsets[58], object.slopeQuantity);
-  writer.writeString(offsets[59], object.standProfile.name);
-  writer.writeBool(offsets[60], object.staticCalculation);
-  writer.writeString(offsets[61], object.street);
-  writer.writeBool(offsets[62], object.unloading);
-  writer.writeBool(offsets[63], object.vacuumCleaner);
-  writer.writeBool(offsets[64], object.windowsillAssembly);
-  writer.writeString(offsets[65], object.windowsillColor);
-  writer.writeString(offsets[66], object.windowsillConnector.name);
-  writer.writeString(offsets[67], object.windowsillDepth.name);
-  writer.writeString(offsets[68], object.windowsillExtension.name);
-  writer.writeString(offsets[69], object.windowsillSize);
-  writer.writeString(offsets[70], object.windowsillType.name);
+  writer.writeObject<SchemeDB>(
+    offsets[53],
+    allOffsets,
+    SchemeDBSchema.serialize,
+    object.scheme,
+  );
+  writer.writeBool(offsets[54], object.screedDisassembly);
+  writer.writeBool(offsets[55], object.sealing);
+  writer.writeBool(offsets[56], object.slabExtension);
+  writer.writeString(offsets[57], object.slopeDepth);
+  writer.writeString(offsets[58], object.slopeLength);
+  writer.writeString(offsets[59], object.slopeQuantity);
+  writer.writeString(offsets[60], object.standProfile.name);
+  writer.writeBool(offsets[61], object.staticCalculation);
+  writer.writeString(offsets[62], object.street);
+  writer.writeBool(offsets[63], object.unloading);
+  writer.writeBool(offsets[64], object.vacuumCleaner);
+  writer.writeBool(offsets[65], object.windowsillAssembly);
+  writer.writeString(offsets[66], object.windowsillColor);
+  writer.writeString(offsets[67], object.windowsillConnector.name);
+  writer.writeString(offsets[68], object.windowsillDepth.name);
+  writer.writeString(offsets[69], object.windowsillExtension.name);
+  writer.writeString(offsets[70], object.windowsillSize);
+  writer.writeString(offsets[71], object.windowsillType.name);
 }
 
 MeasurementDB _measurementDBDeserialize(
@@ -658,33 +682,38 @@ MeasurementDB _measurementDBDeserialize(
   object.rubberColor = _MeasurementDBrubberColorValueEnumMap[
           reader.readStringOrNull(offsets[52])] ??
       RubberColor.none;
-  object.screedDisassembly = reader.readBool(offsets[53]);
-  object.sealing = reader.readBool(offsets[54]);
-  object.slabExtension = reader.readBool(offsets[55]);
-  object.slopeDepth = reader.readString(offsets[56]);
-  object.slopeLength = reader.readString(offsets[57]);
-  object.slopeQuantity = reader.readString(offsets[58]);
+  object.scheme = reader.readObjectOrNull<SchemeDB>(
+    offsets[53],
+    SchemeDBSchema.deserialize,
+    allOffsets,
+  );
+  object.screedDisassembly = reader.readBool(offsets[54]);
+  object.sealing = reader.readBool(offsets[55]);
+  object.slabExtension = reader.readBool(offsets[56]);
+  object.slopeDepth = reader.readString(offsets[57]);
+  object.slopeLength = reader.readString(offsets[58]);
+  object.slopeQuantity = reader.readString(offsets[59]);
   object.standProfile = _MeasurementDBstandProfileValueEnumMap[
-          reader.readStringOrNull(offsets[59])] ??
+          reader.readStringOrNull(offsets[60])] ??
       StandProfile.none;
-  object.staticCalculation = reader.readBool(offsets[60]);
-  object.street = reader.readString(offsets[61]);
-  object.unloading = reader.readBool(offsets[62]);
-  object.vacuumCleaner = reader.readBool(offsets[63]);
-  object.windowsillAssembly = reader.readBool(offsets[64]);
-  object.windowsillColor = reader.readString(offsets[65]);
+  object.staticCalculation = reader.readBool(offsets[61]);
+  object.street = reader.readString(offsets[62]);
+  object.unloading = reader.readBool(offsets[63]);
+  object.vacuumCleaner = reader.readBool(offsets[64]);
+  object.windowsillAssembly = reader.readBool(offsets[65]);
+  object.windowsillColor = reader.readString(offsets[66]);
   object.windowsillConnector = _MeasurementDBwindowsillConnectorValueEnumMap[
-          reader.readStringOrNull(offsets[66])] ??
+          reader.readStringOrNull(offsets[67])] ??
       WindowsillConnector.none;
   object.windowsillDepth = _MeasurementDBwindowsillDepthValueEnumMap[
-          reader.readStringOrNull(offsets[67])] ??
+          reader.readStringOrNull(offsets[68])] ??
       WindowsillDepth.none;
   object.windowsillExtension = _MeasurementDBwindowsillExtensionValueEnumMap[
-          reader.readStringOrNull(offsets[68])] ??
+          reader.readStringOrNull(offsets[69])] ??
       WindowsillExtension.none;
-  object.windowsillSize = reader.readString(offsets[69]);
+  object.windowsillSize = reader.readString(offsets[70]);
   object.windowsillType = _MeasurementDBwindowsillTypeValueEnumMap[
-          reader.readStringOrNull(offsets[70])] ??
+          reader.readStringOrNull(offsets[71])] ??
       WindowsillType.none;
   return object;
 }
@@ -832,48 +861,54 @@ P _measurementDBDeserializeProp<P>(
               reader.readStringOrNull(offset)] ??
           RubberColor.none) as P;
     case 53:
-      return (reader.readBool(offset)) as P;
+      return (reader.readObjectOrNull<SchemeDB>(
+        offset,
+        SchemeDBSchema.deserialize,
+        allOffsets,
+      )) as P;
     case 54:
       return (reader.readBool(offset)) as P;
     case 55:
       return (reader.readBool(offset)) as P;
     case 56:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 57:
       return (reader.readString(offset)) as P;
     case 58:
       return (reader.readString(offset)) as P;
     case 59:
+      return (reader.readString(offset)) as P;
+    case 60:
       return (_MeasurementDBstandProfileValueEnumMap[
               reader.readStringOrNull(offset)] ??
           StandProfile.none) as P;
-    case 60:
-      return (reader.readBool(offset)) as P;
     case 61:
-      return (reader.readString(offset)) as P;
-    case 62:
       return (reader.readBool(offset)) as P;
+    case 62:
+      return (reader.readString(offset)) as P;
     case 63:
       return (reader.readBool(offset)) as P;
     case 64:
       return (reader.readBool(offset)) as P;
     case 65:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 66:
+      return (reader.readString(offset)) as P;
+    case 67:
       return (_MeasurementDBwindowsillConnectorValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillConnector.none) as P;
-    case 67:
+    case 68:
       return (_MeasurementDBwindowsillDepthValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillDepth.none) as P;
-    case 68:
+    case 69:
       return (_MeasurementDBwindowsillExtensionValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillExtension.none) as P;
-    case 69:
-      return (reader.readString(offset)) as P;
     case 70:
+      return (reader.readString(offset)) as P;
+    case 71:
       return (_MeasurementDBwindowsillTypeValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillType.none) as P;
@@ -7230,6 +7265,24 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      schemeIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'scheme',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      schemeIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'scheme',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       screedDisassemblyEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -8802,6 +8855,13 @@ extension MeasurementDBQueryObject
       expanderOption(FilterQuery<ExpanderOptionDB> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'expanderOption');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition> scheme(
+      FilterQuery<SchemeDB> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'scheme');
     });
   }
 }
@@ -11561,6 +11621,12 @@ extension MeasurementDBQueryProperty
       rubberColorProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'rubberColor');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, SchemeDB?, QQueryOperations> schemeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'scheme');
     });
   }
 

@@ -18,8 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Template {
   int? get id => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  List<(Offset?, Offset?)> get lines => throw _privateConstructorUsedError;
-  List<Segment> get segments => throw _privateConstructorUsedError;
+  Scheme get scheme => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TemplateCopyWith<Template> get copyWith =>
@@ -31,11 +30,9 @@ abstract class $TemplateCopyWith<$Res> {
   factory $TemplateCopyWith(Template value, $Res Function(Template) then) =
       _$TemplateCopyWithImpl<$Res, Template>;
   @useResult
-  $Res call(
-      {int? id,
-      DateTime date,
-      List<(Offset?, Offset?)> lines,
-      List<Segment> segments});
+  $Res call({int? id, DateTime date, Scheme scheme});
+
+  $SchemeCopyWith<$Res> get scheme;
 }
 
 /// @nodoc
@@ -53,8 +50,7 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
   $Res call({
     Object? id = freezed,
     Object? date = null,
-    Object? lines = null,
-    Object? segments = null,
+    Object? scheme = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -65,15 +61,19 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      lines: null == lines
-          ? _value.lines
-          : lines // ignore: cast_nullable_to_non_nullable
-              as List<(Offset?, Offset?)>,
-      segments: null == segments
-          ? _value.segments
-          : segments // ignore: cast_nullable_to_non_nullable
-              as List<Segment>,
+      scheme: null == scheme
+          ? _value.scheme
+          : scheme // ignore: cast_nullable_to_non_nullable
+              as Scheme,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SchemeCopyWith<$Res> get scheme {
+    return $SchemeCopyWith<$Res>(_value.scheme, (value) {
+      return _then(_value.copyWith(scheme: value) as $Val);
+    });
   }
 }
 
@@ -85,11 +85,10 @@ abstract class _$$TemplateImplCopyWith<$Res>
       __$$TemplateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {int? id,
-      DateTime date,
-      List<(Offset?, Offset?)> lines,
-      List<Segment> segments});
+  $Res call({int? id, DateTime date, Scheme scheme});
+
+  @override
+  $SchemeCopyWith<$Res> get scheme;
 }
 
 /// @nodoc
@@ -105,8 +104,7 @@ class __$$TemplateImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? date = null,
-    Object? lines = null,
-    Object? segments = null,
+    Object? scheme = null,
   }) {
     return _then(_$TemplateImpl(
       id: freezed == id
@@ -117,14 +115,10 @@ class __$$TemplateImplCopyWithImpl<$Res>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      lines: null == lines
-          ? _value._lines
-          : lines // ignore: cast_nullable_to_non_nullable
-              as List<(Offset?, Offset?)>,
-      segments: null == segments
-          ? _value._segments
-          : segments // ignore: cast_nullable_to_non_nullable
-              as List<Segment>,
+      scheme: null == scheme
+          ? _value.scheme
+          : scheme // ignore: cast_nullable_to_non_nullable
+              as Scheme,
     ));
   }
 }
@@ -132,38 +126,19 @@ class __$$TemplateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TemplateImpl extends _Template {
-  const _$TemplateImpl(
-      {this.id,
-      required this.date,
-      required final List<(Offset?, Offset?)> lines,
-      required final List<Segment> segments})
-      : _lines = lines,
-        _segments = segments,
-        super._();
+  const _$TemplateImpl({this.id, required this.date, required this.scheme})
+      : super._();
 
   @override
   final int? id;
   @override
   final DateTime date;
-  final List<(Offset?, Offset?)> _lines;
   @override
-  List<(Offset?, Offset?)> get lines {
-    if (_lines is EqualUnmodifiableListView) return _lines;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_lines);
-  }
-
-  final List<Segment> _segments;
-  @override
-  List<Segment> get segments {
-    if (_segments is EqualUnmodifiableListView) return _segments;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_segments);
-  }
+  final Scheme scheme;
 
   @override
   String toString() {
-    return 'Template(id: $id, date: $date, lines: $lines, segments: $segments)';
+    return 'Template(id: $id, date: $date, scheme: $scheme)';
   }
 
   @override
@@ -173,17 +148,11 @@ class _$TemplateImpl extends _Template {
             other is _$TemplateImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.date, date) || other.date == date) &&
-            const DeepCollectionEquality().equals(other._lines, _lines) &&
-            const DeepCollectionEquality().equals(other._segments, _segments));
+            (identical(other.scheme, scheme) || other.scheme == scheme));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      date,
-      const DeepCollectionEquality().hash(_lines),
-      const DeepCollectionEquality().hash(_segments));
+  int get hashCode => Object.hash(runtimeType, id, date, scheme);
 
   @JsonKey(ignore: true)
   @override
@@ -196,8 +165,7 @@ abstract class _Template extends Template {
   const factory _Template(
       {final int? id,
       required final DateTime date,
-      required final List<(Offset?, Offset?)> lines,
-      required final List<Segment> segments}) = _$TemplateImpl;
+      required final Scheme scheme}) = _$TemplateImpl;
   const _Template._() : super._();
 
   @override
@@ -205,9 +173,7 @@ abstract class _Template extends Template {
   @override
   DateTime get date;
   @override
-  List<(Offset?, Offset?)> get lines;
-  @override
-  List<Segment> get segments;
+  Scheme get scheme;
   @override
   @JsonKey(ignore: true)
   _$$TemplateImplCopyWith<_$TemplateImpl> get copyWith =>
