@@ -10,13 +10,13 @@ import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/view/components.dart';
 import 'package:window_meas/features/meas/data/model/scheme.dart';
 
-class MyCustomPainter extends CustomPainter {
+class SchemePainter extends CustomPainter {
   static const lineWidth = 0.5;
 
   final Line? currentLine;
   final Scheme scheme;
 
-  MyCustomPainter({
+  SchemePainter({
     required this.scheme,
     required this.currentLine,
   });
@@ -29,7 +29,7 @@ class MyCustomPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(MyCustomPainter oldDelegate) =>
+  bool shouldRepaint(SchemePainter oldDelegate) =>
       !listEquals(scheme.lines, oldDelegate.scheme.lines) ||
       currentLine != oldDelegate.currentLine ||
       !listEquals(scheme.segments, oldDelegate.scheme.segments);

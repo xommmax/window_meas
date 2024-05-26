@@ -5,7 +5,7 @@ import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/drawing_state.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/view/components.dart';
-import 'package:window_meas/features/editor/view/painter.dart';
+import 'package:window_meas/features/editor/view/scheme_painter.dart';
 import 'package:window_meas/features/editor/view/tap_helper.dart';
 
 class DrawingView extends StatefulWidget {
@@ -72,7 +72,7 @@ class DrawingViewState extends State<DrawingView> {
                   child: SizedBox.expand(
                     child: BlocBuilder<DrawingCubit, DrawingState>(
                       builder: (context, state) => CustomPaint(
-                        painter: MyCustomPainter(
+                        painter: SchemePainter(
                           currentLine: currentLine,
                           scheme: state.scheme,
                         ),

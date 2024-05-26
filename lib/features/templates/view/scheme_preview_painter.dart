@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:window_meas/common/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/view/components.dart';
 
-class TemplatePainter extends CustomPainter {
+class SchemePreviewPainter extends CustomPainter {
   static const lineWidth = 1.5;
 
   final List<Line> lines;
 
-  TemplatePainter({
+  SchemePreviewPainter({
     required this.lines,
   });
   @override
@@ -18,7 +18,7 @@ class TemplatePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(TemplatePainter oldDelegate) => !listEquals(lines, oldDelegate.lines);
+  bool shouldRepaint(SchemePreviewPainter oldDelegate) => !listEquals(lines, oldDelegate.lines);
 
   void _drawLines(Canvas canvas, Size size) {
     if (lines.isEmpty) return;

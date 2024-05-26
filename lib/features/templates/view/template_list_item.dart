@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/templates/data/model/template.dart';
-import 'package:window_meas/features/templates/view/template_painter.dart';
+import 'package:window_meas/features/templates/view/scheme_preview_painter.dart';
 
 class TemplateItem extends StatelessWidget {
   const TemplateItem(
@@ -23,7 +23,7 @@ class TemplateItem extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: CustomPaint(
-            painter: TemplatePainter(lines: template.scheme.lines),
+            painter: SchemePreviewPainter(lines: template.scheme.lines),
           ),
         ),
       );

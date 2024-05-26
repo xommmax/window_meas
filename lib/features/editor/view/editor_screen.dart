@@ -34,6 +34,7 @@ class EditorView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
+          leading: BackButton(onPressed: () => Navigator.pop(context, context.read<DrawingCubit>().state.scheme)),
           title: Text(context.l10n.editor),
           actions: [
             if (_isTemplate)
