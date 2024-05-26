@@ -26,23 +26,37 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Divider(),
                   InkWell(
-                    onTap: () => context.push('/editor'),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Text(context.l10n.templates, style: Theme.of(context).textTheme.titleSmall),
+                    onTap: () => context.push('/template_list'),
+                    child: Column(
+                      children: [
+                        const Divider(height: 1),
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Text(
+                            context.l10n.templates,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const Divider(),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: Text(
-                      context.l10n.settings,
-                      style: Theme.of(context).textTheme.titleSmall,
+                  InkWell(
+                    onTap: () {},
+                    child: Column(
+                      children: [
+                        const Divider(height: 1),
+                        Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Text(
+                            context.l10n.settings,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const Divider(),
+                  const Divider(height: 1),
                 ],
               ),
             ),

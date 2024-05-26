@@ -4,6 +4,7 @@ import 'package:window_meas/features/meas/view/details/meas_details_screen.dart'
 import 'package:window_meas/features/meas/view/list/meas_list_screen.dart';
 import 'package:window_meas/features/profile/view/profile_screen.dart';
 import 'package:window_meas/features/splash/view/welcome_screen.dart';
+import 'package:window_meas/features/templates/view/template_list_screen.dart';
 
 import '../view/scaffold_with_nav_bar.dart';
 
@@ -11,14 +12,6 @@ final appRouter = GoRouter(
   initialLocation: '/meas_list',
   debugLogDiagnostics: true,
   routes: [
-    GoRoute(
-      path: '/splash',
-      builder: (context, state) => const SplashScreen(),
-    ),
-    GoRoute(
-      path: '/editor',
-      builder: (context, state) => const EditorScreen(),
-    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) => ScaffoldWithNavBar(navigationShell: navigationShell),
       branches: [
@@ -41,8 +34,20 @@ final appRouter = GoRouter(
       ],
     ),
     GoRoute(
+      path: '/splash',
+      builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
+      path: '/editor',
+      builder: (context, state) => const EditorScreen(),
+    ),
+    GoRoute(
       path: '/meas_details/:id',
       builder: (context, state) => MeasurementDetailsScreen(state.pathParameters['id']!),
+    ),
+    GoRoute(
+      path: '/template_list',
+      builder: (context, state) => const TemplateListScreen(),
     ),
   ],
 );

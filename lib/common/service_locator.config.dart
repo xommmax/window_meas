@@ -11,15 +11,17 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:isar/isar.dart' as _i5;
-import 'package:window_meas/common/register_module.dart' as _i14;
+import 'package:window_meas/common/register_module.dart' as _i15;
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart' as _i4;
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart' as _i3;
 import 'package:window_meas/features/meas/cubit/meas_details_cubit.dart'
-    as _i13;
-import 'package:window_meas/features/meas/cubit/meas_list_cubit.dart' as _i12;
+    as _i14;
+import 'package:window_meas/features/meas/cubit/meas_list_cubit.dart' as _i13;
 import 'package:window_meas/features/meas/data/ds/meas_local_ds.dart' as _i8;
 import 'package:window_meas/features/meas/data/ds/meas_remote_ds.dart' as _i7;
 import 'package:window_meas/features/meas/data/meas_repo.dart' as _i11;
+import 'package:window_meas/features/templates/cubit/template_list_cubit.dart'
+    as _i12;
 import 'package:window_meas/features/templates/data/ds/template_local_ds.dart'
     as _i9;
 import 'package:window_meas/features/templates/data/ds/template_remote_ds.dart'
@@ -60,12 +62,14 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i8.MeasurementLocalDataSource>(),
           gh<_i7.MeasurementRemoteDataSource>(),
         ));
-    gh.factory<_i12.MeasurementListCubit>(
-        () => _i12.MeasurementListCubit(gh<_i11.MeasurementRepository>()));
-    gh.factory<_i13.MeasurementDetailsCubit>(
-        () => _i13.MeasurementDetailsCubit(gh<_i11.MeasurementRepository>()));
+    gh.factory<_i12.TemplateListCubit>(
+        () => _i12.TemplateListCubit(gh<_i10.TemplateRepository>()));
+    gh.factory<_i13.MeasurementListCubit>(
+        () => _i13.MeasurementListCubit(gh<_i11.MeasurementRepository>()));
+    gh.factory<_i14.MeasurementDetailsCubit>(
+        () => _i14.MeasurementDetailsCubit(gh<_i11.MeasurementRepository>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i14.RegisterModule {}
+class _$RegisterModule extends _i15.RegisterModule {}
