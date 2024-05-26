@@ -23,7 +23,7 @@ import 'package:window_meas/features/meas/data/params/windowsill_type_enum.dart'
 part 'measurement.freezed.dart';
 
 @freezed
-abstract class Measurement with _$Measurement {
+class Measurement with _$Measurement {
   const Measurement._();
 
   const factory Measurement({

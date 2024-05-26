@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DrawingState {
   List<(Offset?, Offset?)> get lines => throw _privateConstructorUsedError;
+  List<Segment> get segments => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $DrawingStateCopyWith<DrawingState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $DrawingStateCopyWith<$Res> {
           DrawingState value, $Res Function(DrawingState) then) =
       _$DrawingStateCopyWithImpl<$Res, DrawingState>;
   @useResult
-  $Res call({List<(Offset?, Offset?)> lines});
+  $Res call({List<(Offset?, Offset?)> lines, List<Segment> segments});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$DrawingStateCopyWithImpl<$Res, $Val extends DrawingState>
   @override
   $Res call({
     Object? lines = null,
+    Object? segments = null,
   }) {
     return _then(_value.copyWith(
       lines: null == lines
           ? _value.lines
           : lines // ignore: cast_nullable_to_non_nullable
               as List<(Offset?, Offset?)>,
+      segments: null == segments
+          ? _value.segments
+          : segments // ignore: cast_nullable_to_non_nullable
+              as List<Segment>,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$DrawingStateImplCopyWith<$Res>
       __$$DrawingStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<(Offset?, Offset?)> lines});
+  $Res call({List<(Offset?, Offset?)> lines, List<Segment> segments});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class __$$DrawingStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? lines = null,
+    Object? segments = null,
   }) {
     return _then(_$DrawingStateImpl(
       lines: null == lines
           ? _value._lines
           : lines // ignore: cast_nullable_to_non_nullable
               as List<(Offset?, Offset?)>,
+      segments: null == segments
+          ? _value._segments
+          : segments // ignore: cast_nullable_to_non_nullable
+              as List<Segment>,
     ));
   }
 }
@@ -92,21 +103,31 @@ class __$$DrawingStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DrawingStateImpl implements _DrawingState {
-  const _$DrawingStateImpl({final List<(Offset?, Offset?)> lines = const []})
-      : _lines = lines;
+  const _$DrawingStateImpl(
+      {required final List<(Offset?, Offset?)> lines,
+      required final List<Segment> segments})
+      : _lines = lines,
+        _segments = segments;
 
   final List<(Offset?, Offset?)> _lines;
   @override
-  @JsonKey()
   List<(Offset?, Offset?)> get lines {
     if (_lines is EqualUnmodifiableListView) return _lines;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_lines);
   }
 
+  final List<Segment> _segments;
+  @override
+  List<Segment> get segments {
+    if (_segments is EqualUnmodifiableListView) return _segments;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_segments);
+  }
+
   @override
   String toString() {
-    return 'DrawingState(lines: $lines)';
+    return 'DrawingState(lines: $lines, segments: $segments)';
   }
 
   @override
@@ -114,12 +135,15 @@ class _$DrawingStateImpl implements _DrawingState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DrawingStateImpl &&
-            const DeepCollectionEquality().equals(other._lines, _lines));
+            const DeepCollectionEquality().equals(other._lines, _lines) &&
+            const DeepCollectionEquality().equals(other._segments, _segments));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_lines));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_lines),
+      const DeepCollectionEquality().hash(_segments));
 
   @JsonKey(ignore: true)
   @override
@@ -129,11 +153,14 @@ class _$DrawingStateImpl implements _DrawingState {
 }
 
 abstract class _DrawingState implements DrawingState {
-  const factory _DrawingState({final List<(Offset?, Offset?)> lines}) =
-      _$DrawingStateImpl;
+  const factory _DrawingState(
+      {required final List<(Offset?, Offset?)> lines,
+      required final List<Segment> segments}) = _$DrawingStateImpl;
 
   @override
   List<(Offset?, Offset?)> get lines;
+  @override
+  List<Segment> get segments;
   @override
   @JsonKey(ignore: true)
   _$$DrawingStateImplCopyWith<_$DrawingStateImpl> get copyWith =>

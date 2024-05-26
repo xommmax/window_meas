@@ -130,5 +130,8 @@
   "howDiscovered": "Як дізналися",
   "residentialComplex": "Назва ЖК",
   "housingCoopNumber": "Телефон ОСББ",
-  "address": "Адреса"
+  "address": "Адреса",
+  "enterValue": "Введіть значення",
+  "cancel": "Скасувати",
+  "save": "Зберегти"
 }

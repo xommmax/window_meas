@@ -92,10 +92,9 @@ class __$$EditorStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$EditorStateImpl implements _EditorState {
-  const _$EditorStateImpl({this.mode = EditorMode.draw});
+  const _$EditorStateImpl({required this.mode});
 
   @override
-  @JsonKey()
   final EditorMode mode;
 
   @override
@@ -122,7 +121,8 @@ class _$EditorStateImpl implements _EditorState {
 }
 
 abstract class _EditorState implements EditorState {
-  const factory _EditorState({final EditorMode mode}) = _$EditorStateImpl;
+  const factory _EditorState({required final EditorMode mode}) =
+      _$EditorStateImpl;
 
   @override
   EditorMode get mode;

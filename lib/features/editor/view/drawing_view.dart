@@ -4,6 +4,7 @@ import 'package:window_meas/common/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/view/components.dart';
+import 'package:window_meas/features/editor/view/meas_input_dialog.dart';
 import 'package:window_meas/features/editor/view/painter.dart';
 import 'package:window_meas/features/editor/view/tap_helper.dart';
 
@@ -36,13 +37,7 @@ class DrawingViewState extends State<DrawingView> {
               offset: focalPointDelta,
               child: BlocBuilder<EditorCubit, EditorState>(
                 builder: (context, state) => GestureDetector(
-                  onTapUp: (details) {
-                    final measTap = onTapUp(details, context.read<DrawingCubit>().state.lines, size);
-                    if (measTap != null) {
-                      // hsow dialog
-                      context.read<DrawingCubit>().onMeasurementTap(measTap);
-                    }
-                  },
+                  onTapUp: (d) => _onGridTapUp(d, context, size),
                   onPanDown: state.mode == EditorMode.move
                       ? null
                       : (details) => setState(() => currentLine = (details.localPosition.toInnerCoord(size), null)),
@@ -78,6 +73,7 @@ class DrawingViewState extends State<DrawingView> {
                         painter: MyCustomPainter(
                           lines: state.lines,
                           currentLine: currentLine,
+                          segments: state.segments,
                         ),
                       ),
                     ),
@@ -88,4 +84,11 @@ class DrawingViewState extends State<DrawingView> {
           );
         },
       );
+
+  Future<void> _onGridTapUp(TapUpDetails details, BuildContext context, Size size) async {
+    final segment = await onTapUp(details.localPosition, context, size);
+    if (segment != null && context.mounted) {
+      context.read<DrawingCubit>().addSegment(segment);
+    }
+  }
 }

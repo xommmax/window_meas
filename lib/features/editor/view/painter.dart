@@ -1,11 +1,12 @@
-import 'dart:collection';
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:window_meas/common/constants.dart';
 import 'package:window_meas/common/ext/offset_ext.dart';
+import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/view/components.dart';
 
 class MyCustomPainter extends CustomPainter {
@@ -13,10 +14,12 @@ class MyCustomPainter extends CustomPainter {
 
   final List<Line> lines;
   final Line currentLine;
+  final List<Segment> segments;
 
   MyCustomPainter({
     required this.lines,
     required this.currentLine,
+    required this.segments,
   });
   @override
   void paint(Canvas canvas, Size size) {
@@ -28,7 +31,9 @@ class MyCustomPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(MyCustomPainter oldDelegate) =>
-      !listEquals(lines, oldDelegate.lines) || currentLine != oldDelegate.currentLine;
+      !listEquals(lines, oldDelegate.lines) ||
+      currentLine != oldDelegate.currentLine ||
+      !listEquals(segments, oldDelegate.segments);
 
   void _drawBg(Canvas canvas, Size size) {
     final pointsPaint = Paint()
@@ -72,147 +77,162 @@ class MyCustomPainter extends CustomPainter {
   }
 
   void _drawMeasurements(Canvas canvas, Size size) {
-    double gridSize = size.width / Constants.gridAmount;
-
-    final SplayTreeSet<double> xNodes = SplayTreeSet();
-    final SplayTreeSet<double> yNodes = SplayTreeSet();
-
-    for (final line in lines) {
-      if (line.$1 != null && line.$2 != null) {
-        final p1 = line.$1!.toGlobalCoord(size);
-        final p2 = line.$2!.toGlobalCoord(size);
-        xNodes.addAll([p1.dx, p2.dx]);
-        yNodes.addAll([p1.dy, p2.dy]);
-      }
-    }
-
     final measPaint = Paint()
       ..color = Colors.red
       ..strokeWidth = lineWidth / 2;
 
-    _drawHorizontalMeasLines(canvas, xNodes, yNodes, gridSize, measPaint);
+    _drawHorizontalMeasLines(canvas, size, measPaint);
 
-    _drawVerticalMeasLines(canvas, xNodes, yNodes, gridSize, measPaint);
+    _drawVerticalMeasLines(canvas, size, measPaint);
   }
 
-  void _drawHorizontalMeasLines(Canvas canvas, Iterable xNodes, Iterable yNodes, double gridSize, Paint measPaint) {
-    if (xNodes.length < 2) return;
+  void _drawHorizontalMeasLines(Canvas canvas, Size size, Paint measPaint) {
+    final horSegments = segments.where((e) => e.direction == SegmentDirection.horizontal).toList();
+    if (horSegments.isEmpty) return;
 
-    canvas.drawLine(
-      Offset(xNodes.first, yNodes.first - 2 * gridSize),
-      Offset(xNodes.first, yNodes.first),
-      measPaint,
-    );
-    canvas.drawLine(
-      Offset(xNodes.last, yNodes.first - 2 * gridSize),
-      Offset(xNodes.last, yNodes.first),
-      measPaint,
-    );
-    canvas.drawLine(
-      Offset(xNodes.first, yNodes.first - 1.75 * gridSize),
-      Offset(xNodes.last, yNodes.first - 1.75 * gridSize),
-      measPaint,
-    );
-    canvas.drawPath(
-      _getTrianglePath(Offset(xNodes.first, yNodes.first - 1.75 * gridSize), Direction.left, gridSize),
-      measPaint,
-    );
-    canvas.drawPath(
-      _getTrianglePath(Offset(xNodes.last, yNodes.first - 1.75 * gridSize), Direction.right, gridSize),
-      measPaint,
-    );
+    double gridSize = size.width / Constants.gridAmount;
 
-    _drawHorizontalQuestionMark(canvas, xNodes.first, xNodes.last, yNodes.first - 1.75 * gridSize, gridSize);
+    final mainHorSegment = horSegments.firstWhereOrNull((s) => s.isMain);
 
-    if (xNodes.length < 3) return;
+    if (mainHorSegment != null) {
+      final p1 = mainHorSegment.p1.toGlobalCoord(size);
+      final p2 = mainHorSegment.p2.toGlobalCoord(size);
 
-    for (int i = 1; i < xNodes.length; i++) {
       canvas.drawLine(
-        Offset(xNodes.elementAt(i), yNodes.first - 1 * gridSize),
-        Offset(xNodes.elementAt(i), yNodes.first),
+        Offset(p1.dx, p1.dy - 2 * gridSize),
+        Offset(p1.dx, p1.dy),
         measPaint,
       );
       canvas.drawLine(
-        Offset(xNodes.elementAt(i - 1), yNodes.first - 0.75 * gridSize),
-        Offset(xNodes.elementAt(i), yNodes.first - 0.75 * gridSize),
+        Offset(p2.dx, p1.dy - 2 * gridSize),
+        Offset(p2.dx, p1.dy),
+        measPaint,
+      );
+      canvas.drawLine(
+        Offset(p1.dx, p1.dy - 1.75 * gridSize),
+        Offset(p2.dx, p1.dy - 1.75 * gridSize),
         measPaint,
       );
       canvas.drawPath(
-        _getTrianglePath(Offset(xNodes.elementAt(i - 1), yNodes.first - 0.75 * gridSize), Direction.left, gridSize),
+        _getTrianglePath(Offset(p1.dx, p1.dy - 1.75 * gridSize), Direction.left, gridSize),
         measPaint,
       );
       canvas.drawPath(
-        _getTrianglePath(Offset(xNodes.elementAt(i), yNodes.first - 0.75 * gridSize), Direction.right, gridSize),
+        _getTrianglePath(Offset(p2.dx, p1.dy - 1.75 * gridSize), Direction.right, gridSize),
         measPaint,
       );
-      _drawHorizontalQuestionMark(
-          canvas, xNodes.elementAt(i - 1), xNodes.elementAt(i), yNodes.first - 0.75 * gridSize, gridSize);
+
+      _drawHorizontalSegmentSize(canvas, mainHorSegment.size, p1.dx, p2.dx, p1.dy - 1.75 * gridSize);
+    }
+    horSegments.removeWhere((e) => e.isMain);
+    if (horSegments.isEmpty) return;
+
+    for (final segment in horSegments) {
+      final p1 = segment.p1.toGlobalCoord(size);
+      final p2 = segment.p2.toGlobalCoord(size);
+      canvas.drawLine(
+        Offset(p2.dx, p1.dy - 1 * gridSize),
+        Offset(p2.dx, p1.dy),
+        measPaint,
+      );
+      canvas.drawLine(
+        Offset(p1.dx, p1.dy - 0.75 * gridSize),
+        Offset(p2.dx, p1.dy - 0.75 * gridSize),
+        measPaint,
+      );
+      canvas.drawPath(
+        _getTrianglePath(Offset(p1.dx, p1.dy - 0.75 * gridSize), Direction.left, gridSize),
+        measPaint,
+      );
+      canvas.drawPath(
+        _getTrianglePath(Offset(p2.dx, p1.dy - 0.75 * gridSize), Direction.right, gridSize),
+        measPaint,
+      );
+      _drawHorizontalSegmentSize(canvas, segment.size, p1.dx, p2.dx, p1.dy - 0.75 * gridSize);
     }
   }
 
-  void _drawVerticalMeasLines(Canvas canvas, Iterable xNodes, Iterable yNodes, double gridSize, Paint measPaint) {
-    if (yNodes.length < 2) return;
+  void _drawVerticalMeasLines(Canvas canvas, Size size, Paint measPaint) {
+    final verSegments = segments.where((e) => e.direction == SegmentDirection.vertical).toList();
+    if (verSegments.isEmpty) return;
 
-    canvas.drawLine(
-      Offset(xNodes.first - 2 * gridSize, yNodes.first),
-      Offset(xNodes.first, yNodes.first),
-      measPaint,
-    );
-    canvas.drawLine(
-      Offset(xNodes.first - 2 * gridSize, yNodes.last),
-      Offset(xNodes.first, yNodes.last),
-      measPaint,
-    );
-    canvas.drawLine(
-      Offset(xNodes.first - 1.75 * gridSize, yNodes.first),
-      Offset(xNodes.first - 1.75 * gridSize, yNodes.last),
-      measPaint,
-    );
-    canvas.drawPath(
-      _getTrianglePath(Offset(xNodes.first - 1.75 * gridSize, yNodes.first), Direction.up, gridSize),
-      measPaint,
-    );
-    canvas.drawPath(
-      _getTrianglePath(Offset(xNodes.first - 1.75 * gridSize, yNodes.last), Direction.down, gridSize),
-      measPaint,
-    );
+    double gridSize = size.width / Constants.gridAmount;
 
-    _drawVerticalQuestionMark(canvas, yNodes.first, yNodes.last, xNodes.first - 1.75 * gridSize, gridSize);
+    final mainVerSegment = verSegments.firstWhereOrNull((s) => s.isMain);
 
-    if (yNodes.length < 3) return;
-
-    for (int i = 1; i < yNodes.length; i++) {
+    if (mainVerSegment != null) {
+      final p1 = mainVerSegment.p1.toGlobalCoord(size);
+      final p2 = mainVerSegment.p2.toGlobalCoord(size);
       canvas.drawLine(
-        Offset(xNodes.first - 1 * gridSize, yNodes.elementAt(i)),
-        Offset(xNodes.first, yNodes.elementAt(i)),
+        Offset(p1.dx - 2 * gridSize, p1.dy),
+        Offset(p1.dx, p1.dy),
         measPaint,
       );
       canvas.drawLine(
-        Offset(xNodes.first - 0.75 * gridSize, yNodes.elementAt(i - 1)),
-        Offset(xNodes.first - 0.75 * gridSize, yNodes.elementAt(i)),
+        Offset(p1.dx - 2 * gridSize, p2.dy),
+        Offset(p1.dx, p2.dy),
+        measPaint,
+      );
+      canvas.drawLine(
+        Offset(p1.dx - 1.75 * gridSize, p1.dy),
+        Offset(p1.dx - 1.75 * gridSize, p2.dy),
         measPaint,
       );
       canvas.drawPath(
-        _getTrianglePath(Offset(xNodes.first - 0.75 * gridSize, yNodes.elementAt(i - 1)), Direction.up, gridSize),
+        _getTrianglePath(Offset(p1.dx - 1.75 * gridSize, p1.dy), Direction.up, gridSize),
         measPaint,
       );
       canvas.drawPath(
-        _getTrianglePath(Offset(xNodes.first - 0.75 * gridSize, yNodes.elementAt(i)), Direction.down, gridSize),
+        _getTrianglePath(Offset(p1.dx - 1.75 * gridSize, p2.dy), Direction.down, gridSize),
         measPaint,
       );
-      _drawVerticalQuestionMark(
-          canvas, yNodes.elementAt(i - 1), yNodes.elementAt(i), xNodes.first - 0.75 * gridSize, gridSize);
+
+      _drawVerticalSegmentSize(
+        canvas,
+        mainVerSegment.size,
+        p1.dy,
+        p2.dy,
+        p1.dx - 1.75 * gridSize,
+      );
+    }
+
+    verSegments.removeWhere((e) => e.isMain);
+    if (verSegments.isEmpty) return;
+
+    for (final segment in verSegments) {
+      final p1 = segment.p1.toGlobalCoord(size);
+      final p2 = segment.p2.toGlobalCoord(size);
+
+      canvas.drawLine(
+        Offset(p1.dx - 1 * gridSize, p2.dy),
+        Offset(p1.dx, p2.dy),
+        measPaint,
+      );
+      canvas.drawLine(
+        Offset(p1.dx - 0.75 * gridSize, p1.dy),
+        Offset(p1.dx - 0.75 * gridSize, p2.dy),
+        measPaint,
+      );
+      canvas.drawPath(
+        _getTrianglePath(Offset(p1.dx - 0.75 * gridSize, p1.dy), Direction.up, gridSize),
+        measPaint,
+      );
+      canvas.drawPath(
+        _getTrianglePath(Offset(p1.dx - 0.75 * gridSize, p2.dy), Direction.down, gridSize),
+        measPaint,
+      );
+      _drawVerticalSegmentSize(canvas, segment.size, p1.dy, p2.dy, p1.dx - 0.75 * gridSize);
     }
   }
 
-  void _drawHorizontalQuestionMark(Canvas canvas, double x1, double x2, double y, double gridSize) {
+  void _drawHorizontalSegmentSize(Canvas canvas, String? size, double x1, double x2, double y) {
     final center = Offset(x1 + (x2 - x1) / 2, y);
 
-    const text = TextSpan(
-      text: '?',
-      style: TextStyle(
+    final text = TextSpan(
+      text: size ?? '?',
+      style: const TextStyle(
         color: Colors.red,
-        fontSize: 3,
+        fontSize: 2.5,
       ),
     );
 
@@ -227,14 +247,14 @@ class MyCustomPainter extends CustomPainter {
     textPainter.paint(canvas, textOffset);
   }
 
-  void _drawVerticalQuestionMark(Canvas canvas, double y1, double y2, double x, double gridSize) {
+  void _drawVerticalSegmentSize(Canvas canvas, String? size, double y1, double y2, double x) {
     final center = Offset(x, y1 + (y2 - y1) / 2);
 
-    const text = TextSpan(
-      text: '?',
-      style: TextStyle(
+    final text = TextSpan(
+      text: size ?? '?',
+      style: const TextStyle(
         color: Colors.red,
-        fontSize: 3,
+        fontSize: 2.5,
       ),
     );
 

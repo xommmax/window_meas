@@ -130,5 +130,8 @@
   "howDiscovered": "How discovered",
   "residentialComplex": "Residential complex",
   "housingCoopNumber": "Housing coop number",
-  "address": "Address"
+  "address": "Address",
+  "enterValue": "Enter value",
+  "cancel": "Cancel",
+  "save": "Save"
 }

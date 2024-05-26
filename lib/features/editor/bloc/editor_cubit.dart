@@ -6,7 +6,7 @@ part 'editor_cubit.freezed.dart';
 
 @injectable
 class EditorCubit extends Cubit<EditorState> {
-  EditorCubit() : super(const EditorState());
+  EditorCubit() : super(EditorState.initial());
 
   void changeMode(EditorMode mode) => emit(state.copyWith(mode: mode));
 }
@@ -14,8 +14,12 @@ class EditorCubit extends Cubit<EditorState> {
 @freezed
 class EditorState with _$EditorState {
   const factory EditorState({
-    @Default(EditorMode.draw) EditorMode mode,
+    required EditorMode mode,
   }) = _EditorState;
+
+  factory EditorState.initial() => const EditorState(
+        mode: EditorMode.draw,
+      );
 }
 
 enum EditorMode {
