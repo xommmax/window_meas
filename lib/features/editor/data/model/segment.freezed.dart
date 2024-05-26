@@ -155,14 +155,15 @@ class __$$SegmentImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SegmentImpl implements _Segment {
+class _$SegmentImpl extends _Segment {
   const _$SegmentImpl(
       {required this.p1,
       required this.p2,
       required this.size,
       required this.direction,
       required this.isMain,
-      required this.index});
+      required this.index})
+      : super._();
 
   @override
   final Offset p1;
@@ -207,7 +208,7 @@ class _$SegmentImpl implements _Segment {
       __$$SegmentImplCopyWithImpl<_$SegmentImpl>(this, _$identity);
 }
 
-abstract class _Segment implements Segment {
+abstract class _Segment extends Segment {
   const factory _Segment(
       {required final Offset p1,
       required final Offset p2,
@@ -215,6 +216,7 @@ abstract class _Segment implements Segment {
       required final SegmentDirection direction,
       required final bool isMain,
       required final int index}) = _$SegmentImpl;
+  const _Segment._() : super._();
 
   @override
   Offset get p1;
