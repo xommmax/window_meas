@@ -26,4 +26,16 @@ extension OffsetExt on Offset {
 
     return Offset(x, y);
   }
+
+  Offset toTemplateCoord(Size size, int gridAmount, int minX, int minY) {
+    final gridSize = size.width / gridAmount;
+
+    final shiftX = -minX * gridSize;
+    final shiftY = -minY * gridSize;
+
+    final x = dx * gridSize + shiftX;
+    final y = dy * gridSize + shiftY;
+
+    return Offset(x, y);
+  }
 }

@@ -46,8 +46,13 @@ class TemplateList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<TemplateListCubit, TemplateListState>(
-        builder: (context, state) => ListView.builder(
+        builder: (context, state) => GridView.builder(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
+          ),
           itemCount: state.templates.length,
           itemBuilder: (context, index) => TemplateItem(state.templates[index]),
         ),
