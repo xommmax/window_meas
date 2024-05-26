@@ -4,7 +4,6 @@ import 'package:window_meas/common/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/view/components.dart';
-import 'package:window_meas/features/editor/view/meas_input_dialog.dart';
 import 'package:window_meas/features/editor/view/painter.dart';
 import 'package:window_meas/features/editor/view/tap_helper.dart';
 
