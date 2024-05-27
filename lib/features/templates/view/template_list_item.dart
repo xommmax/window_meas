@@ -14,17 +14,12 @@ class TemplateItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         decoration: BoxDecoration(
-          border: Border.all(
-            color: AppColors.primary.withOpacity(0.5),
-            width: 0.5,
-          ),
+          border: Border.all(color: AppColors.primary.withOpacity(0.5), width: 0.5),
           color: AppColors.primary.withOpacity(0.1),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: CustomPaint(
-            painter: SchemePreviewPainter(lines: template.scheme.lines),
-          ),
+        padding: const EdgeInsets.all(16.0),
+        child: CustomPaint(
+          painter: SchemePreviewPainter(template.scheme),
         ),
       );
 }

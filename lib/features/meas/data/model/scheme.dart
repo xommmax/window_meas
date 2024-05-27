@@ -29,4 +29,6 @@ class Scheme with _$Scheme {
         lines: db.lines.map((e) => LineExt.fromDB(e)).toList(),
         segments: db.segments.map((e) => Segment.fromDB(e)).toList(),
       );
+
+  bool get isEmpty => lines.isEmpty;
 }

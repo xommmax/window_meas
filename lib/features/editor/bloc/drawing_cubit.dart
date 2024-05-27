@@ -9,10 +9,17 @@ import 'package:window_meas/common/ext/line_ext.dart';
 import 'package:window_meas/features/editor/bloc/drawing_state.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/view/components.dart';
+import 'package:window_meas/features/meas/data/model/scheme.dart';
 
 @injectable
 class DrawingCubit extends ReplayCubit<DrawingState> {
   DrawingCubit() : super(DrawingState.initial());
+
+  void setScheme(Scheme? scheme) {
+    if (scheme != null) {
+      emit(state.copyWith(scheme: scheme));
+    }
+  }
 
   void addLine(Line newLine) {
     if (newLine.$1 == newLine.$2 || newLine.$1 == null || newLine.$2 == null) return;
@@ -104,10 +111,12 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     }
 
     for (int i = 0; i < newSegments.length; i++) {
-      final sameSegment = state.scheme.segments.firstWhereOrNull(
+      final prevSegment = state.scheme.segments.firstWhereOrNull(
         (e) => e.p1 == newSegments[i].p1 && e.p2 == newSegments[i].p2,
       );
-      if (sameSegment != null) newSegments[i] = sameSegment;
+      if (prevSegment != null) {
+        newSegments[i] = newSegments[i].copyWith(size: prevSegment.size);
+      }
     }
 
     return newSegments;

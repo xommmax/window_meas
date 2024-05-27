@@ -228,7 +228,7 @@ class SchemePainter extends CustomPainter {
     final center = Offset(x1 + (x2 - x1) / 2, y);
 
     final text = TextSpan(
-      text: size ?? '?',
+      text: (size == null || size.isEmpty) ? '?' : size,
       style: const TextStyle(
         color: Colors.red,
         fontSize: 2.5,

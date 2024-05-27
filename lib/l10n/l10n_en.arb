@@ -137,5 +137,7 @@
   "save": "Save",
   "editor": "Editor",
   "edit": "Edit",
-  "delete": "Delete"
+  "delete": "Delete",
+  "chooseOption": "Choose option",
+  "manualScheme": "Manual scheme"
 }

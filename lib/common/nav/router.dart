@@ -39,9 +39,13 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/editor',
-      builder: (context, state) => EditorScreen(
-        isTemplate: (state.extra as Map?)?['isTemplate'],
-      ),
+      builder: (context, state) {
+        final Map extra = state.extra as Map? ?? {};
+        return EditorScreen(
+          mode: extra['mode'],
+          scheme: extra['scheme'],
+        );
+      },
     ),
     GoRoute(
       path: '/meas_details/:id',
@@ -49,7 +53,12 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/template_list',
-      builder: (context, state) => const TemplateListScreen(),
+      builder: (context, state) {
+        final Map extra = state.extra as Map? ?? {};
+        return TemplateListScreen(
+          mode: extra['mode'],
+        );
+      },
     ),
   ],
 );

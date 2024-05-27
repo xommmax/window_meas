@@ -6,38 +6,53 @@ import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/view/drawing_view.dart';
 import 'package:window_meas/features/editor/view/editor_buttons.dart';
+import 'package:window_meas/features/meas/data/model/scheme.dart';
 import 'package:window_meas/l10n/localization.dart';
+
+enum EditorScreenMode {
+  regular,
+  createTemplate,
+}
 
 class EditorScreen extends StatelessWidget {
   const EditorScreen({
-    bool? isTemplate,
+    this.mode,
+    this.scheme,
     super.key,
-  }) : _isTemplate = isTemplate ?? false;
+  });
 
-  final bool _isTemplate;
+  final EditorScreenMode? mode;
+  final Scheme? scheme;
 
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
         providers: [
-          BlocProvider<EditorCubit>(create: (ctx) => getIt()),
-          BlocProvider<DrawingCubit>(create: (ctx) => getIt()),
+          BlocProvider<EditorCubit>(
+            create: (ctx) => getIt(),
+          ),
+          BlocProvider<DrawingCubit>(
+            create: (ctx) => getIt()..setScheme(scheme),
+          ),
         ],
-        child: EditorView(_isTemplate),
+        child: EditorView(mode ?? EditorScreenMode.regular),
       );
 }
 
 class EditorView extends StatelessWidget {
-  const EditorView(this._isTemplate, {super.key});
+  const EditorView(this.editorScreenMode, {super.key});
 
-  final bool _isTemplate;
+  final EditorScreenMode editorScreenMode;
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          leading: BackButton(onPressed: () => Navigator.pop(context, context.read<DrawingCubit>().state.scheme)),
+          leading: BackButton(onPressed: () {
+            final scheme = context.read<DrawingCubit>().state.scheme;
+            Navigator.pop(context, scheme.isEmpty ? null : scheme);
+          }),
           title: Text(context.l10n.editor),
           actions: [
-            if (_isTemplate)
+            if (editorScreenMode == EditorScreenMode.createTemplate)
               IconButton(
                 icon: const FaIcon(FontAwesomeIcons.floppyDisk),
                 onPressed: () async {

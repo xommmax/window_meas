@@ -4,23 +4,36 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:window_meas/common/service_locator.dart';
 import 'package:window_meas/common/view/colors.dart';
+import 'package:window_meas/features/editor/view/editor_screen.dart';
 import 'package:window_meas/features/templates/cubit/template_list_cubit.dart';
 import 'package:window_meas/features/templates/cubit/template_list_state.dart';
-import 'package:window_meas/features/templates/view/template_list_item.dart';
+import 'package:window_meas/features/templates/view/template_grid.dart';
 import 'package:window_meas/l10n/localization.dart';
 
+enum TemplateListScreenMode {
+  regular,
+  select,
+}
+
 class TemplateListScreen extends StatelessWidget {
-  const TemplateListScreen({super.key});
+  const TemplateListScreen({
+    this.mode,
+    super.key,
+  });
+
+  final TemplateListScreenMode? mode;
 
   @override
   Widget build(BuildContext context) => BlocProvider<TemplateListCubit>(
         create: (context) => getIt()..watchTemplates(),
-        child: const TemplateListView(),
+        child: TemplateListView(mode ?? TemplateListScreenMode.regular),
       );
 }
 
 class TemplateListView extends StatefulWidget {
-  const TemplateListView({super.key});
+  const TemplateListView(this.templatesScreenMode, {super.key});
+
+  final TemplateListScreenMode templatesScreenMode;
 
   @override
   State<TemplateListView> createState() => _TemplateListViewState();
@@ -51,32 +64,26 @@ class _TemplateListViewState extends State<TemplateListView> {
       ),
       body: SafeArea(
         child: BlocBuilder<TemplateListCubit, TemplateListState>(
-          builder: (context, state) => GridView.builder(
-            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-            ),
-            itemCount: state.templates.length,
-            itemBuilder: (context, index) => InkWell(
-              onTap: () => setState(() => index == selectedIndex ? selectedIndex = null : selectedIndex = index),
-              child: ColoredBox(
-                color: selectedIndex == index ? AppColors.primary.withOpacity(0.5) : Colors.transparent,
-                child: TemplateItem(state.templates[index]),
-              ),
-            ),
+          builder: (context, state) => TemplateGridView(
+            templates: state.templates,
+            onSelected: (index) {
+              setState(() => index == selectedIndex ? selectedIndex = null : selectedIndex = index);
+              if (widget.templatesScreenMode == TemplateListScreenMode.select) {
+                Navigator.pop(context, state.templates[index]);
+              }
+            },
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _addTemplate(context),
-        backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-      ));
+      floatingActionButton: (widget.templatesScreenMode != TemplateListScreenMode.select)
+          ? FloatingActionButton(
+              onPressed: () => _addTemplate(context),
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
+              child: const Icon(Icons.add),
+            )
+          : null);
 
-  Future<void> _addTemplate(BuildContext context) async {
-    context.push('/editor', extra: {'isTemplate': true});
-  }
+  Future<void> _addTemplate(BuildContext context) async =>
+      await context.push('/editor', extra: {'mode': EditorScreenMode.createTemplate});
 }

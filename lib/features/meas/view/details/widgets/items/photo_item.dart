@@ -21,7 +21,10 @@ class PhotoItem extends StatelessWidget {
             ),
             Center(
               child: InkWell(
-                child: const FaIcon(FontAwesomeIcons.squarePlus),
+                child: const Padding(
+                  padding: EdgeInsets.all(16),
+                  child: FaIcon(FontAwesomeIcons.squarePlus),
+                ),
                 onTap: () => context.push('/photo'),
               ),
             ),
