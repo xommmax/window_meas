@@ -44,35 +44,44 @@ class EditorView extends StatelessWidget {
   final EditorScreenMode editorScreenMode;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          leading: BackButton(onPressed: () {
+  Widget build(BuildContext context) => PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) {
+          if (!didPop) {
             final scheme = context.read<DrawingCubit>().state.scheme;
             Navigator.pop(context, scheme.isEmpty ? null : scheme);
-          }),
-          title: Text(context.l10n.editor),
-          actions: [
-            if (editorScreenMode == EditorScreenMode.createTemplate)
-              IconButton(
-                icon: const FaIcon(FontAwesomeIcons.floppyDisk),
-                onPressed: () async {
-                  await context.read<EditorCubit>().saveTemplate(context.read<DrawingCubit>().state.scheme);
-                  if (context.mounted) {
-                    Navigator.pop(context);
-                  }
-                },
+          }
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            leading: BackButton(onPressed: () {
+              final scheme = context.read<DrawingCubit>().state.scheme;
+              Navigator.pop(context, scheme.isEmpty ? null : scheme);
+            }),
+            title: Text(context.l10n.editor),
+            actions: [
+              if (editorScreenMode == EditorScreenMode.createTemplate)
+                IconButton(
+                  icon: const FaIcon(FontAwesomeIcons.floppyDisk),
+                  onPressed: () async {
+                    await context.read<EditorCubit>().saveTemplate(context.read<DrawingCubit>().state.scheme);
+                    if (context.mounted) {
+                      Navigator.pop(context);
+                    }
+                  },
+                ),
+            ],
+          ),
+          body: const SafeArea(
+            child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Stack(
+                children: [
+                  DrawingView(),
+                  ToolButtons(),
+                  UndoRedoButtons(),
+                ],
               ),
-          ],
-        ),
-        body: const SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Stack(
-              children: [
-                DrawingView(),
-                ToolButtons(),
-                UndoRedoButtons(),
-              ],
             ),
           ),
         ),
