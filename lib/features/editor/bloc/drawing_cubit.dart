@@ -1,11 +1,13 @@
 import 'dart:collection';
-import 'dart:ui';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:replay_bloc/replay_bloc.dart';
 import 'package:window_meas/common/ext/line_ext.dart';
+import 'package:window_meas/features/calc/polygon/line_segment.dart';
+import 'package:window_meas/features/calc/polygon/point.dart';
+import 'package:window_meas/features/calc/polygon/polygon_finder.dart';
 import 'package:window_meas/features/editor/bloc/drawing_state.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/view/components.dart';
@@ -22,7 +24,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
   }
 
   void addLine(Line newLine) {
-    if (newLine.$1 == newLine.$2 || newLine.$1 == null || newLine.$2 == null) return;
+    if (newLine.$1 == newLine.$2) return;
     final lines = List.of(state.scheme.lines);
 
     bool isOverlapping;
@@ -40,22 +42,20 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
 
     lines.add(newLine);
 
-    final segments = _recalculateSegments(lines);
+    final segments = _calculateSegments(lines);
+
+    calculatePolygons(lines);
 
     emit(state.copyWith(scheme: state.scheme.copyWith(lines: lines, segments: segments)));
   }
 
-  List<Segment> _recalculateSegments(List<Line> lines) {
+  List<Segment> _calculateSegments(List<Line> lines) {
     final List<Segment> newSegments = [];
     final xNodes = SplayTreeSet();
     final yNodes = SplayTreeSet();
     for (final line in lines) {
-      if (line.$1 != null && line.$2 != null) {
-        final p1 = line.$1!;
-        final p2 = line.$2!;
-        xNodes.addAll([p1.dx, p2.dx]);
-        yNodes.addAll([p1.dy, p2.dy]);
-      }
+      xNodes.addAll([line.$1.dx, line.$2.dx]);
+      yNodes.addAll([line.$1.dy, line.$2.dy]);
     }
 
     if (xNodes.length >= 2) {
@@ -120,6 +120,16 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     }
 
     return newSegments;
+  }
+
+  void calculatePolygons(List<Line> lines) {
+    final polygons = PolygonFinder.polygonsFromSegments(
+      lines.map((e) => LineSegment(Point(e.$1.dx, -e.$1.dy), Point(e.$2.dx, -e.$2.dy))).toList(),
+    );
+
+    debugPrint('QAQAQ Polygons count: ${polygons.length}');
+
+    debugPrint('QAQAQ Polygons: $polygons');
   }
 
   void addSegment(Segment segment) {
