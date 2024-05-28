@@ -32,7 +32,15 @@ class MeasurementDetailsView extends StatelessWidget {
   Widget build(BuildContext context) => BlocBuilder<MeasurementDetailsCubit, MeasurementDetailsState>(
         builder: (context, state) => Scaffold(
           appBar: AppBar(
-            title: Text('${context.l10n.measurement} №${state.measurement?.innerId?.toString().padLeft(4, '0') ?? ''}'),
+            title: Text(
+              '${context.l10n.measurement} №${state.measurement?.innerId?.toString().padLeft(4, '0') ?? ''}',
+            ),
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.share),
+                onPressed: () {},
+              ),
+            ],
           ),
           body: SafeArea(
             bottom: false,
