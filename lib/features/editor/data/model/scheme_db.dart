@@ -4,6 +4,8 @@ import 'package:window_meas/features/editor/data/model/line_db.dart';
 import 'package:window_meas/features/editor/data/model/polygon_db.dart';
 import 'package:window_meas/features/editor/data/model/segment_db.dart';
 
+part 'scheme_db.g.dart';
+
 @embedded
 class SchemeDB {
   @Default([])

@@ -27,6 +27,7 @@ class SchemePainter extends CustomPainter {
     _drawLines(canvas, size);
     _drawCurrentLine(canvas, size);
     _drawMeasurements(canvas, size);
+    _drawPolygons(canvas, size);
   }
 
   @override
@@ -76,6 +77,27 @@ class SchemePainter extends CustomPainter {
       currentLine!.p2.toGlobalCoord(size),
       linePaint,
     );
+  }
+
+  void _drawPolygons(Canvas canvas, Size size) {
+    final polygonPaint = Paint()..style = PaintingStyle.fill;
+
+    for (final polygon in scheme.polygons) {
+      final points = polygon.points.map((e) => e.toGlobalCoord(size)).toList();
+      final path = Path();
+      path.moveTo(points.first.dx, points.first.dy);
+
+      for (final point in points) {
+        path.lineTo(point.dx, point.dy);
+      }
+
+      path.close();
+
+      canvas.drawPath(
+        path,
+        polygonPaint..color = Color(Random().nextInt(0xFFFFFF)).withOpacity(0.3),
+      );
+    }
   }
 
   void _drawMeasurements(Canvas canvas, Size size) {
@@ -314,7 +336,7 @@ class SchemePainter extends CustomPainter {
         path.lineTo(p.dx + gridSize / 8, p.dy - gridSize / 3);
     }
 
-    path.lineTo(p.dx, p.dy);
+    path.close();
 
     return path;
   }
