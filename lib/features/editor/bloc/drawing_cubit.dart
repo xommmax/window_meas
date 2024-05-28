@@ -4,14 +4,13 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:replay_bloc/replay_bloc.dart';
-import 'package:window_meas/common/ext/line_ext.dart';
-import 'package:window_meas/features/calc/polygon/line_segment.dart';
-import 'package:window_meas/features/calc/polygon/point.dart';
+import 'package:window_meas/features/editor/data/model/polygon.dart';
+import 'package:window_meas/features/editor/ext/line_ext.dart';
 import 'package:window_meas/features/calc/polygon/polygon_finder.dart';
 import 'package:window_meas/features/editor/bloc/drawing_state.dart';
+import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
-import 'package:window_meas/features/editor/view/components.dart';
-import 'package:window_meas/features/meas/data/model/scheme.dart';
+import 'package:window_meas/features/editor/data/model/scheme.dart';
 
 @injectable
 class DrawingCubit extends ReplayCubit<DrawingState> {
@@ -24,7 +23,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
   }
 
   void addLine(Line newLine) {
-    if (newLine.$1 == newLine.$2) return;
+    if (newLine.p1 == newLine.p2) return;
     final lines = List.of(state.scheme.lines);
 
     bool isOverlapping;
@@ -42,24 +41,26 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
 
     lines.add(newLine);
 
-    final segments = _calculateSegments(lines);
-
-    calculatePolygons(lines);
-
-    emit(state.copyWith(scheme: state.scheme.copyWith(lines: lines, segments: segments)));
+    emit(state.copyWith(
+      scheme: state.scheme.copyWith(
+        lines: lines,
+        sizeSegments: _calculateSegments(lines),
+        polygons: _calculatePolygons(lines),
+      ),
+    ));
   }
 
-  List<Segment> _calculateSegments(List<Line> lines) {
-    final List<Segment> newSegments = [];
+  List<SizeSegment> _calculateSegments(List<Line> lines) {
+    final List<SizeSegment> newSegments = [];
     final xNodes = SplayTreeSet();
     final yNodes = SplayTreeSet();
     for (final line in lines) {
-      xNodes.addAll([line.$1.dx, line.$2.dx]);
-      yNodes.addAll([line.$1.dy, line.$2.dy]);
+      xNodes.addAll([line.p1.dx, line.p2.dx]);
+      yNodes.addAll([line.p1.dy, line.p2.dy]);
     }
 
     if (xNodes.length >= 2) {
-      final mainHorSegment = Segment(
+      final mainHorSegment = SizeSegment(
         p1: Offset(xNodes.first, yNodes.first),
         p2: Offset(xNodes.last, yNodes.first),
         size: null,
@@ -71,7 +72,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
 
       if (xNodes.length >= 3) {
         for (int i = 1; i < xNodes.length; i++) {
-          final horSegment = Segment(
+          final horSegment = SizeSegment(
             p1: Offset(xNodes.elementAt(i - 1), yNodes.first),
             p2: Offset(xNodes.elementAt(i), yNodes.first),
             size: null,
@@ -85,7 +86,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     }
 
     if (yNodes.length >= 2) {
-      final mainVerSegment = Segment(
+      final mainVerSegment = SizeSegment(
         p1: Offset(xNodes.first, yNodes.first),
         p2: Offset(xNodes.first, yNodes.last),
         size: null,
@@ -97,7 +98,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
 
       if (yNodes.length >= 3) {
         for (int i = 1; i < yNodes.length; i++) {
-          final verSegment = Segment(
+          final verSegment = SizeSegment(
             p1: Offset(xNodes.first, yNodes.elementAt(i - 1)),
             p2: Offset(xNodes.first, yNodes.elementAt(i)),
             size: null,
@@ -111,7 +112,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     }
 
     for (int i = 0; i < newSegments.length; i++) {
-      final prevSegment = state.scheme.segments.firstWhereOrNull(
+      final prevSegment = state.scheme.sizeSegments.firstWhereOrNull(
         (e) => e.p1 == newSegments[i].p1 && e.p2 == newSegments[i].p2,
       );
       if (prevSegment != null) {
@@ -122,20 +123,12 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     return newSegments;
   }
 
-  void calculatePolygons(List<Line> lines) {
-    final polygons = PolygonFinder.polygonsFromSegments(
-      lines.map((e) => LineSegment(Point(e.$1.dx, -e.$1.dy), Point(e.$2.dx, -e.$2.dy))).toList(),
-    );
+  List<Polygon> _calculatePolygons(List<Line> lines) => PolygonFinder.polygonsFromSegments(lines);
 
-    debugPrint('QAQAQ Polygons count: ${polygons.length}');
-
-    debugPrint('QAQAQ Polygons: $polygons');
-  }
-
-  void addSegment(Segment segment) {
-    final segments = List.of(state.scheme.segments);
+  void addSizeSegment(SizeSegment segment) {
+    final segments = List.of(state.scheme.sizeSegments);
     segments.removeWhere((e) => e.p1 == segment.p1 && e.p2 == segment.p2);
     segments.add(segment);
-    emit(state.copyWith(scheme: state.scheme.copyWith(segments: segments)));
+    emit(state.copyWith(scheme: state.scheme.copyWith(sizeSegments: segments)));
   }
 }

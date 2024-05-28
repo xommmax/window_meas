@@ -39,7 +39,8 @@ const TemplateDBSchema = CollectionSchema(
   embeddedSchemas: {
     r'SchemeDB': SchemeDBSchema,
     r'LineDB': LineDBSchema,
-    r'SegmentDB': SegmentDBSchema
+    r'SizeSegmentDB': SizeSegmentDBSchema,
+    r'PolygonDB': PolygonDBSchema
   },
   getId: _templateDBGetId,
   getLinks: _templateDBGetLinks,

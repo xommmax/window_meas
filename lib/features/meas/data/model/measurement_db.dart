@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
 import 'package:window_meas/features/meas/data/model/expander_option_db.dart';
-import 'package:window_meas/features/meas/data/model/scheme_db.dart';
+import 'package:window_meas/features/editor/data/model/scheme_db.dart';
 import 'package:window_meas/features/meas/data/params/assembly_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/building_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/door_opening_type_enum.dart';
@@ -19,8 +19,6 @@ import 'package:window_meas/features/meas/data/params/windowsill_connector_enum.
 import 'package:window_meas/features/meas/data/params/windowsill_depth_enum.dart';
 import 'package:window_meas/features/meas/data/params/windowsill_extension_enum.dart';
 import 'package:window_meas/features/meas/data/params/windowsill_type_enum.dart';
-import 'package:window_meas/features/templates/data/model/line_db.dart';
-import 'package:window_meas/features/templates/data/model/segment_db.dart';
 
 part 'measurement_db.g.dart';
 

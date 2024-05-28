@@ -9,15 +9,15 @@ part of 'segment_db.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters, always_specify_types
 
-const SegmentDBSchema = Schema(
-  name: r'SegmentDB',
-  id: 4917864109616370894,
+const SizeSegmentDBSchema = Schema(
+  name: r'SizeSegmentDB',
+  id: -3811068755124285846,
   properties: {
     r'direction': PropertySchema(
       id: 0,
       name: r'direction',
       type: IsarType.string,
-      enumMap: _SegmentDBdirectionEnumValueMap,
+      enumMap: _SizeSegmentDBdirectionEnumValueMap,
     ),
     r'index': PropertySchema(
       id: 1,
@@ -55,14 +55,14 @@ const SegmentDBSchema = Schema(
       type: IsarType.double,
     )
   },
-  estimateSize: _segmentDBEstimateSize,
-  serialize: _segmentDBSerialize,
-  deserialize: _segmentDBDeserialize,
-  deserializeProp: _segmentDBDeserializeProp,
+  estimateSize: _sizeSegmentDBEstimateSize,
+  serialize: _sizeSegmentDBSerialize,
+  deserialize: _sizeSegmentDBDeserialize,
+  deserializeProp: _sizeSegmentDBDeserializeProp,
 );
 
-int _segmentDBEstimateSize(
-  SegmentDB object,
+int _sizeSegmentDBEstimateSize(
+  SizeSegmentDB object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -77,8 +77,8 @@ int _segmentDBEstimateSize(
   return bytesCount;
 }
 
-void _segmentDBSerialize(
-  SegmentDB object,
+void _sizeSegmentDBSerialize(
+  SizeSegmentDB object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
@@ -93,16 +93,16 @@ void _segmentDBSerialize(
   writer.writeDouble(offsets[7], object.y2);
 }
 
-SegmentDB _segmentDBDeserialize(
+SizeSegmentDB _sizeSegmentDBDeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = SegmentDB();
-  object.direction =
-      _SegmentDBdirectionValueEnumMap[reader.readStringOrNull(offsets[0])] ??
-          SegmentDirection.horizontal;
+  final object = SizeSegmentDB();
+  object.direction = _SizeSegmentDBdirectionValueEnumMap[
+          reader.readStringOrNull(offsets[0])] ??
+      SegmentDirection.horizontal;
   object.index = reader.readLong(offsets[1]);
   object.isMain = reader.readBool(offsets[2]);
   object.size = reader.readStringOrNull(offsets[3]);
@@ -113,7 +113,7 @@ SegmentDB _segmentDBDeserialize(
   return object;
 }
 
-P _segmentDBDeserializeProp<P>(
+P _sizeSegmentDBDeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -121,7 +121,7 @@ P _segmentDBDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (_SegmentDBdirectionValueEnumMap[
+      return (_SizeSegmentDBdirectionValueEnumMap[
               reader.readStringOrNull(offset)] ??
           SegmentDirection.horizontal) as P;
     case 1:
@@ -143,18 +143,19 @@ P _segmentDBDeserializeProp<P>(
   }
 }
 
-const _SegmentDBdirectionEnumValueMap = {
+const _SizeSegmentDBdirectionEnumValueMap = {
   r'horizontal': r'horizontal',
   r'vertical': r'vertical',
 };
-const _SegmentDBdirectionValueEnumMap = {
+const _SizeSegmentDBdirectionValueEnumMap = {
   r'horizontal': SegmentDirection.horizontal,
   r'vertical': SegmentDirection.vertical,
 };
 
-extension SegmentDBQueryFilter
-    on QueryBuilder<SegmentDB, SegmentDB, QFilterCondition> {
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> directionEqualTo(
+extension SizeSegmentDBQueryFilter
+    on QueryBuilder<SizeSegmentDB, SizeSegmentDB, QFilterCondition> {
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      directionEqualTo(
     SegmentDirection value, {
     bool caseSensitive = true,
   }) {
@@ -167,7 +168,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition>
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
       directionGreaterThan(
     SegmentDirection value, {
     bool include = false,
@@ -183,7 +184,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> directionLessThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      directionLessThan(
     SegmentDirection value, {
     bool include = false,
     bool caseSensitive = true,
@@ -198,7 +200,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> directionBetween(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      directionBetween(
     SegmentDirection lower,
     SegmentDirection upper, {
     bool includeLower = true,
@@ -217,7 +220,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> directionStartsWith(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      directionStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -230,7 +234,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> directionEndsWith(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      directionEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -243,9 +248,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> directionContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      directionContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'direction',
@@ -255,9 +259,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> directionMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      directionMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
         property: r'direction',
@@ -267,7 +270,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> directionIsEmpty() {
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      directionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'direction',
@@ -276,7 +280,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition>
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
       directionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -286,8 +290,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> indexEqualTo(
-      int value) {
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      indexEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'index',
@@ -296,7 +300,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> indexGreaterThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      indexGreaterThan(
     int value, {
     bool include = false,
   }) {
@@ -309,7 +314,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> indexLessThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      indexLessThan(
     int value, {
     bool include = false,
   }) {
@@ -322,7 +328,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> indexBetween(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      indexBetween(
     int lower,
     int upper, {
     bool includeLower = true,
@@ -339,8 +346,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> isMainEqualTo(
-      bool value) {
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      isMainEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'isMain',
@@ -349,7 +356,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> sizeIsNull() {
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      sizeIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'size',
@@ -357,7 +365,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> sizeIsNotNull() {
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      sizeIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'size',
@@ -365,7 +374,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> sizeEqualTo(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> sizeEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -378,7 +387,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> sizeGreaterThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      sizeGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -393,7 +403,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> sizeLessThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      sizeLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -408,7 +419,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> sizeBetween(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> sizeBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -427,7 +438,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> sizeStartsWith(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      sizeStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -440,7 +452,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> sizeEndsWith(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      sizeEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -453,9 +466,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> sizeContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      sizeContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'size',
@@ -465,7 +477,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> sizeMatches(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> sizeMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -477,7 +489,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> sizeIsEmpty() {
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      sizeIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'size',
@@ -486,7 +499,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> sizeIsNotEmpty() {
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      sizeIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'size',
@@ -495,7 +509,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> x1EqualTo(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> x1EqualTo(
     double value, {
     double epsilon = Query.epsilon,
   }) {
@@ -508,7 +522,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> x1GreaterThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      x1GreaterThan(
     double value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -523,7 +538,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> x1LessThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> x1LessThan(
     double value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -538,7 +553,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> x1Between(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> x1Between(
     double lower,
     double upper, {
     bool includeLower = true,
@@ -557,7 +572,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> x2EqualTo(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> x2EqualTo(
     double value, {
     double epsilon = Query.epsilon,
   }) {
@@ -570,7 +585,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> x2GreaterThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      x2GreaterThan(
     double value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -585,7 +601,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> x2LessThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> x2LessThan(
     double value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -600,7 +616,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> x2Between(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> x2Between(
     double lower,
     double upper, {
     bool includeLower = true,
@@ -619,7 +635,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> y1EqualTo(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> y1EqualTo(
     double value, {
     double epsilon = Query.epsilon,
   }) {
@@ -632,7 +648,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> y1GreaterThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      y1GreaterThan(
     double value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -647,7 +664,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> y1LessThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> y1LessThan(
     double value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -662,7 +679,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> y1Between(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> y1Between(
     double lower,
     double upper, {
     bool includeLower = true,
@@ -681,7 +698,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> y2EqualTo(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> y2EqualTo(
     double value, {
     double epsilon = Query.epsilon,
   }) {
@@ -694,7 +711,8 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> y2GreaterThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      y2GreaterThan(
     double value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -709,7 +727,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> y2LessThan(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> y2LessThan(
     double value, {
     bool include = false,
     double epsilon = Query.epsilon,
@@ -724,7 +742,7 @@ extension SegmentDBQueryFilter
     });
   }
 
-  QueryBuilder<SegmentDB, SegmentDB, QAfterFilterCondition> y2Between(
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition> y2Between(
     double lower,
     double upper, {
     bool includeLower = true,
@@ -744,5 +762,5 @@ extension SegmentDBQueryFilter
   }
 }
 
-extension SegmentDBQueryObject
-    on QueryBuilder<SegmentDB, SegmentDB, QFilterCondition> {}
+extension SizeSegmentDBQueryObject
+    on QueryBuilder<SizeSegmentDB, SizeSegmentDB, QFilterCondition> {}

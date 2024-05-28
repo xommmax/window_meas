@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:window_meas/features/meas/data/model/scheme.dart';
+import 'package:window_meas/features/editor/data/model/scheme.dart';
 
 part 'drawing_state.freezed.dart';
 

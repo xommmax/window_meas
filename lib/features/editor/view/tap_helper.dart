@@ -3,13 +3,13 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:window_meas/common/constants.dart';
-import 'package:window_meas/common/ext/offset_ext.dart';
+import 'package:window_meas/features/editor/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/view/meas_input_dialog.dart';
 
-Future<Segment?> onTapUp(Offset position, BuildContext context, Size size) async {
-  final segments = context.read<DrawingCubit>().state.scheme.segments;
+Future<SizeSegment?> onTapUp(Offset position, BuildContext context, Size size) async {
+  final segments = context.read<DrawingCubit>().state.scheme.sizeSegments;
   if (segments.isEmpty) return null;
 
   final selectedSegment = _checkHorizontal(segments, size, position) ?? _checkVertical(segments, size, position);
@@ -23,7 +23,7 @@ Future<Segment?> onTapUp(Offset position, BuildContext context, Size size) async
   return null;
 }
 
-Segment? _checkHorizontal(List<Segment> segments, Size size, Offset position) {
+SizeSegment? _checkHorizontal(List<SizeSegment> segments, Size size, Offset position) {
   final horSegments = segments.where((e) => e.direction == SegmentDirection.horizontal).toList();
   if (horSegments.isEmpty) return null;
 
@@ -63,7 +63,7 @@ Segment? _checkHorizontal(List<Segment> segments, Size size, Offset position) {
   return null;
 }
 
-Segment? _checkVertical(List<Segment> segments, Size size, Offset position) {
+SizeSegment? _checkVertical(List<SizeSegment> segments, Size size, Offset position) {
   final verSegments = segments.where((e) => e.direction == SegmentDirection.vertical).toList();
 
   if (verSegments.isEmpty) return null;

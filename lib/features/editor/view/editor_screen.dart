@@ -6,7 +6,7 @@ import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/view/drawing_view.dart';
 import 'package:window_meas/features/editor/view/editor_buttons.dart';
-import 'package:window_meas/features/meas/data/model/scheme.dart';
+import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/l10n/localization.dart';
 
 enum EditorScreenMode {

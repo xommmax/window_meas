@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:window_meas/common/ext/offset_ext.dart';
+import 'package:window_meas/features/editor/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/drawing_state.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
-import 'package:window_meas/features/editor/view/components.dart';
+import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/view/scheme_painter.dart';
 import 'package:window_meas/features/editor/view/tap_helper.dart';
 
@@ -40,7 +40,7 @@ class DrawingViewState extends State<DrawingView> {
                   onTapUp: (d) => _onGridTapUp(d, context, size),
                   onPanDown: state.mode == EditorMode.move
                       ? null
-                      : (details) => setState(() => currentLine = (
+                      : (details) => setState(() => currentLine = Line(
                             details.localPosition.toInnerCoord(size),
                             details.localPosition.toInnerCoord(size),
                           )),
@@ -48,8 +48,10 @@ class DrawingViewState extends State<DrawingView> {
                       ? null
                       : (details) => setState(() {
                             if (currentLine != null) {
-                              currentLine =
-                                  (currentLine!.$1, details.localPosition.toInnerCoord(size));
+                              currentLine = Line(
+                                currentLine!.p1,
+                                details.localPosition.toInnerCoord(size),
+                              );
                             }
                           }),
                   onPanEnd: state.mode == EditorMode.move
@@ -99,7 +101,7 @@ class DrawingViewState extends State<DrawingView> {
   Future<void> _onGridTapUp(TapUpDetails details, BuildContext context, Size size) async {
     final segment = await onTapUp(details.localPosition, context, size);
     if (segment != null && context.mounted) {
-      context.read<DrawingCubit>().addSegment(segment);
+      context.read<DrawingCubit>().addSizeSegment(segment);
     }
   }
 }

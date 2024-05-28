@@ -5,10 +5,11 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:window_meas/common/constants.dart';
-import 'package:window_meas/common/ext/offset_ext.dart';
+import 'package:window_meas/features/editor/ext/offset_ext.dart';
+import 'package:window_meas/features/editor/data/model/direction.dart';
+import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
-import 'package:window_meas/features/editor/view/components.dart';
-import 'package:window_meas/features/meas/data/model/scheme.dart';
+import 'package:window_meas/features/editor/data/model/scheme.dart';
 
 class SchemePainter extends CustomPainter {
   static const lineWidth = 0.5;
@@ -32,7 +33,7 @@ class SchemePainter extends CustomPainter {
   bool shouldRepaint(SchemePainter oldDelegate) =>
       !listEquals(scheme.lines, oldDelegate.scheme.lines) ||
       currentLine != oldDelegate.currentLine ||
-      !listEquals(scheme.segments, oldDelegate.scheme.segments);
+      !listEquals(scheme.sizeSegments, oldDelegate.scheme.sizeSegments);
 
   void _drawBg(Canvas canvas, Size size) {
     final pointsPaint = Paint()
@@ -59,9 +60,7 @@ class SchemePainter extends CustomPainter {
       ..strokeWidth = lineWidth;
 
     for (final line in scheme.lines) {
-      if (line.$1 != null && line.$2 != null) {
-        canvas.drawLine(line.$1!.toGlobalCoord(size), line.$2!.toGlobalCoord(size), linePaint);
-      }
+      canvas.drawLine(line.p1.toGlobalCoord(size), line.p2.toGlobalCoord(size), linePaint);
     }
   }
 
@@ -73,8 +72,8 @@ class SchemePainter extends CustomPainter {
       ..strokeWidth = lineWidth;
 
     canvas.drawLine(
-      currentLine!.$1.toGlobalCoord(size),
-      currentLine!.$2.toGlobalCoord(size),
+      currentLine!.p1.toGlobalCoord(size),
+      currentLine!.p2.toGlobalCoord(size),
       linePaint,
     );
   }
@@ -91,7 +90,7 @@ class SchemePainter extends CustomPainter {
 
   void _drawHorizontalMeasLines(Canvas canvas, Size size, Paint measPaint) {
     final horSegments =
-        scheme.segments.where((e) => e.direction == SegmentDirection.horizontal).toList();
+        scheme.sizeSegments.where((e) => e.direction == SegmentDirection.horizontal).toList();
     if (horSegments.isEmpty) return;
 
     double gridSize = size.width / Constants.gridAmount;
@@ -163,7 +162,7 @@ class SchemePainter extends CustomPainter {
   }
 
   void _drawVerticalMeasLines(Canvas canvas, Size size, Paint measPaint) {
-    final verSegments = scheme.segments
+    final verSegments = scheme.sizeSegments
         .where(
           (e) => e.direction == SegmentDirection.vertical,
         )

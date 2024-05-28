@@ -1,24 +1,24 @@
 import 'dart:ui';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:window_meas/features/templates/data/model/segment_db.dart';
+import 'package:window_meas/features/editor/data/model/segment_db.dart';
 
 part 'segment.freezed.dart';
 
 @freezed
-class Segment with _$Segment {
-  const Segment._();
+class SizeSegment with _$SizeSegment {
+  const SizeSegment._();
 
-  const factory Segment({
+  const factory SizeSegment({
     required Offset p1,
     required Offset p2,
     required String? size,
     required SegmentDirection direction,
     required bool isMain,
     required int index,
-  }) = _Segment;
+  }) = _SizeSegment;
 
-  SegmentDB toDB() => SegmentDB()
+  SizeSegmentDB toDB() => SizeSegmentDB()
     ..x1 = p1.dx
     ..y1 = p1.dy
     ..x2 = p2.dx
@@ -28,7 +28,7 @@ class Segment with _$Segment {
     ..isMain = isMain
     ..index = index;
 
-  factory Segment.fromDB(SegmentDB db) => Segment(
+  factory SizeSegment.fromDB(SizeSegmentDB db) => SizeSegment(
         p1: Offset(db.x1, db.y1),
         p2: Offset(db.x2, db.y2),
         size: db.size,

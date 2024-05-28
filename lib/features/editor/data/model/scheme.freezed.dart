@@ -16,8 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Scheme {
-  List<(Offset, Offset)> get lines => throw _privateConstructorUsedError;
-  List<Segment> get segments => throw _privateConstructorUsedError;
+  List<Line> get lines => throw _privateConstructorUsedError;
+  List<SizeSegment> get sizeSegments => throw _privateConstructorUsedError;
+  List<Polygon> get polygons => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SchemeCopyWith<Scheme> get copyWith => throw _privateConstructorUsedError;
@@ -28,7 +29,10 @@ abstract class $SchemeCopyWith<$Res> {
   factory $SchemeCopyWith(Scheme value, $Res Function(Scheme) then) =
       _$SchemeCopyWithImpl<$Res, Scheme>;
   @useResult
-  $Res call({List<(Offset, Offset)> lines, List<Segment> segments});
+  $Res call(
+      {List<Line> lines,
+      List<SizeSegment> sizeSegments,
+      List<Polygon> polygons});
 }
 
 /// @nodoc
@@ -45,17 +49,22 @@ class _$SchemeCopyWithImpl<$Res, $Val extends Scheme>
   @override
   $Res call({
     Object? lines = null,
-    Object? segments = null,
+    Object? sizeSegments = null,
+    Object? polygons = null,
   }) {
     return _then(_value.copyWith(
       lines: null == lines
           ? _value.lines
           : lines // ignore: cast_nullable_to_non_nullable
-              as List<(Offset, Offset)>,
-      segments: null == segments
-          ? _value.segments
-          : segments // ignore: cast_nullable_to_non_nullable
-              as List<Segment>,
+              as List<Line>,
+      sizeSegments: null == sizeSegments
+          ? _value.sizeSegments
+          : sizeSegments // ignore: cast_nullable_to_non_nullable
+              as List<SizeSegment>,
+      polygons: null == polygons
+          ? _value.polygons
+          : polygons // ignore: cast_nullable_to_non_nullable
+              as List<Polygon>,
     ) as $Val);
   }
 }
@@ -67,7 +76,10 @@ abstract class _$$SchemeImplCopyWith<$Res> implements $SchemeCopyWith<$Res> {
       __$$SchemeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<(Offset, Offset)> lines, List<Segment> segments});
+  $Res call(
+      {List<Line> lines,
+      List<SizeSegment> sizeSegments,
+      List<Polygon> polygons});
 }
 
 /// @nodoc
@@ -82,17 +94,22 @@ class __$$SchemeImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? lines = null,
-    Object? segments = null,
+    Object? sizeSegments = null,
+    Object? polygons = null,
   }) {
     return _then(_$SchemeImpl(
       lines: null == lines
           ? _value._lines
           : lines // ignore: cast_nullable_to_non_nullable
-              as List<(Offset, Offset)>,
-      segments: null == segments
-          ? _value._segments
-          : segments // ignore: cast_nullable_to_non_nullable
-              as List<Segment>,
+              as List<Line>,
+      sizeSegments: null == sizeSegments
+          ? _value._sizeSegments
+          : sizeSegments // ignore: cast_nullable_to_non_nullable
+              as List<SizeSegment>,
+      polygons: null == polygons
+          ? _value._polygons
+          : polygons // ignore: cast_nullable_to_non_nullable
+              as List<Polygon>,
     ));
   }
 }
@@ -101,31 +118,41 @@ class __$$SchemeImplCopyWithImpl<$Res>
 
 class _$SchemeImpl extends _Scheme {
   const _$SchemeImpl(
-      {required final List<(Offset, Offset)> lines,
-      required final List<Segment> segments})
+      {required final List<Line> lines,
+      required final List<SizeSegment> sizeSegments,
+      required final List<Polygon> polygons})
       : _lines = lines,
-        _segments = segments,
+        _sizeSegments = sizeSegments,
+        _polygons = polygons,
         super._();
 
-  final List<(Offset, Offset)> _lines;
+  final List<Line> _lines;
   @override
-  List<(Offset, Offset)> get lines {
+  List<Line> get lines {
     if (_lines is EqualUnmodifiableListView) return _lines;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_lines);
   }
 
-  final List<Segment> _segments;
+  final List<SizeSegment> _sizeSegments;
   @override
-  List<Segment> get segments {
-    if (_segments is EqualUnmodifiableListView) return _segments;
+  List<SizeSegment> get sizeSegments {
+    if (_sizeSegments is EqualUnmodifiableListView) return _sizeSegments;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_segments);
+    return EqualUnmodifiableListView(_sizeSegments);
+  }
+
+  final List<Polygon> _polygons;
+  @override
+  List<Polygon> get polygons {
+    if (_polygons is EqualUnmodifiableListView) return _polygons;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_polygons);
   }
 
   @override
   String toString() {
-    return 'Scheme(lines: $lines, segments: $segments)';
+    return 'Scheme(lines: $lines, sizeSegments: $sizeSegments, polygons: $polygons)';
   }
 
   @override
@@ -134,14 +161,17 @@ class _$SchemeImpl extends _Scheme {
         (other.runtimeType == runtimeType &&
             other is _$SchemeImpl &&
             const DeepCollectionEquality().equals(other._lines, _lines) &&
-            const DeepCollectionEquality().equals(other._segments, _segments));
+            const DeepCollectionEquality()
+                .equals(other._sizeSegments, _sizeSegments) &&
+            const DeepCollectionEquality().equals(other._polygons, _polygons));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_lines),
-      const DeepCollectionEquality().hash(_segments));
+      const DeepCollectionEquality().hash(_sizeSegments),
+      const DeepCollectionEquality().hash(_polygons));
 
   @JsonKey(ignore: true)
   @override
@@ -152,14 +182,17 @@ class _$SchemeImpl extends _Scheme {
 
 abstract class _Scheme extends Scheme {
   const factory _Scheme(
-      {required final List<(Offset, Offset)> lines,
-      required final List<Segment> segments}) = _$SchemeImpl;
+      {required final List<Line> lines,
+      required final List<SizeSegment> sizeSegments,
+      required final List<Polygon> polygons}) = _$SchemeImpl;
   const _Scheme._() : super._();
 
   @override
-  List<(Offset, Offset)> get lines;
+  List<Line> get lines;
   @override
-  List<Segment> get segments;
+  List<SizeSegment> get sizeSegments;
+  @override
+  List<Polygon> get polygons;
   @override
   @JsonKey(ignore: true)
   _$$SchemeImplCopyWith<_$SchemeImpl> get copyWith =>

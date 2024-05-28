@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/meas/cubit/meas_details_cubit.dart';
 import 'package:window_meas/features/meas/data/model/measurement.dart';
-import 'package:window_meas/features/meas/data/model/scheme.dart';
+import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/templates/data/model/template.dart';
 import 'package:window_meas/features/templates/view/scheme_preview_painter.dart';
 import 'package:window_meas/features/templates/view/template_list_screen.dart';

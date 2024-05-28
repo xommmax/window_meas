@@ -422,7 +422,8 @@ const MeasurementDBSchema = CollectionSchema(
     r'ExpanderOptionDB': ExpanderOptionDBSchema,
     r'SchemeDB': SchemeDBSchema,
     r'LineDB': LineDBSchema,
-    r'SegmentDB': SegmentDBSchema
+    r'SizeSegmentDB': SizeSegmentDBSchema,
+    r'PolygonDB': PolygonDBSchema
   },
   getId: _measurementDBGetId,
   getLinks: _measurementDBGetLinks,

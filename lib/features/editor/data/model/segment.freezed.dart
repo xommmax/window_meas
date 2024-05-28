@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$Segment {
+mixin _$SizeSegment {
   Offset get p1 => throw _privateConstructorUsedError;
   Offset get p2 => throw _privateConstructorUsedError;
   String? get size => throw _privateConstructorUsedError;
@@ -24,13 +24,15 @@ mixin _$Segment {
   int get index => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SegmentCopyWith<Segment> get copyWith => throw _privateConstructorUsedError;
+  $SizeSegmentCopyWith<SizeSegment> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SegmentCopyWith<$Res> {
-  factory $SegmentCopyWith(Segment value, $Res Function(Segment) then) =
-      _$SegmentCopyWithImpl<$Res, Segment>;
+abstract class $SizeSegmentCopyWith<$Res> {
+  factory $SizeSegmentCopyWith(
+          SizeSegment value, $Res Function(SizeSegment) then) =
+      _$SizeSegmentCopyWithImpl<$Res, SizeSegment>;
   @useResult
   $Res call(
       {Offset p1,
@@ -42,9 +44,9 @@ abstract class $SegmentCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SegmentCopyWithImpl<$Res, $Val extends Segment>
-    implements $SegmentCopyWith<$Res> {
-  _$SegmentCopyWithImpl(this._value, this._then);
+class _$SizeSegmentCopyWithImpl<$Res, $Val extends SizeSegment>
+    implements $SizeSegmentCopyWith<$Res> {
+  _$SizeSegmentCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -91,10 +93,11 @@ class _$SegmentCopyWithImpl<$Res, $Val extends Segment>
 }
 
 /// @nodoc
-abstract class _$$SegmentImplCopyWith<$Res> implements $SegmentCopyWith<$Res> {
-  factory _$$SegmentImplCopyWith(
-          _$SegmentImpl value, $Res Function(_$SegmentImpl) then) =
-      __$$SegmentImplCopyWithImpl<$Res>;
+abstract class _$$SizeSegmentImplCopyWith<$Res>
+    implements $SizeSegmentCopyWith<$Res> {
+  factory _$$SizeSegmentImplCopyWith(
+          _$SizeSegmentImpl value, $Res Function(_$SizeSegmentImpl) then) =
+      __$$SizeSegmentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -107,11 +110,11 @@ abstract class _$$SegmentImplCopyWith<$Res> implements $SegmentCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$SegmentImplCopyWithImpl<$Res>
-    extends _$SegmentCopyWithImpl<$Res, _$SegmentImpl>
-    implements _$$SegmentImplCopyWith<$Res> {
-  __$$SegmentImplCopyWithImpl(
-      _$SegmentImpl _value, $Res Function(_$SegmentImpl) _then)
+class __$$SizeSegmentImplCopyWithImpl<$Res>
+    extends _$SizeSegmentCopyWithImpl<$Res, _$SizeSegmentImpl>
+    implements _$$SizeSegmentImplCopyWith<$Res> {
+  __$$SizeSegmentImplCopyWithImpl(
+      _$SizeSegmentImpl _value, $Res Function(_$SizeSegmentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -124,7 +127,7 @@ class __$$SegmentImplCopyWithImpl<$Res>
     Object? isMain = null,
     Object? index = null,
   }) {
-    return _then(_$SegmentImpl(
+    return _then(_$SizeSegmentImpl(
       p1: null == p1
           ? _value.p1
           : p1 // ignore: cast_nullable_to_non_nullable
@@ -155,8 +158,8 @@ class __$$SegmentImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SegmentImpl extends _Segment {
-  const _$SegmentImpl(
+class _$SizeSegmentImpl extends _SizeSegment {
+  const _$SizeSegmentImpl(
       {required this.p1,
       required this.p2,
       required this.size,
@@ -180,14 +183,14 @@ class _$SegmentImpl extends _Segment {
 
   @override
   String toString() {
-    return 'Segment(p1: $p1, p2: $p2, size: $size, direction: $direction, isMain: $isMain, index: $index)';
+    return 'SizeSegment(p1: $p1, p2: $p2, size: $size, direction: $direction, isMain: $isMain, index: $index)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SegmentImpl &&
+            other is _$SizeSegmentImpl &&
             (identical(other.p1, p1) || other.p1 == p1) &&
             (identical(other.p2, p2) || other.p2 == p2) &&
             (identical(other.size, size) || other.size == size) &&
@@ -204,19 +207,19 @@ class _$SegmentImpl extends _Segment {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SegmentImplCopyWith<_$SegmentImpl> get copyWith =>
-      __$$SegmentImplCopyWithImpl<_$SegmentImpl>(this, _$identity);
+  _$$SizeSegmentImplCopyWith<_$SizeSegmentImpl> get copyWith =>
+      __$$SizeSegmentImplCopyWithImpl<_$SizeSegmentImpl>(this, _$identity);
 }
 
-abstract class _Segment extends Segment {
-  const factory _Segment(
+abstract class _SizeSegment extends SizeSegment {
+  const factory _SizeSegment(
       {required final Offset p1,
       required final Offset p2,
       required final String? size,
       required final SegmentDirection direction,
       required final bool isMain,
-      required final int index}) = _$SegmentImpl;
-  const _Segment._() : super._();
+      required final int index}) = _$SizeSegmentImpl;
+  const _SizeSegment._() : super._();
 
   @override
   Offset get p1;
@@ -232,6 +235,6 @@ abstract class _Segment extends Segment {
   int get index;
   @override
   @JsonKey(ignore: true)
-  _$$SegmentImplCopyWith<_$SegmentImpl> get copyWith =>
+  _$$SizeSegmentImplCopyWith<_$SizeSegmentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

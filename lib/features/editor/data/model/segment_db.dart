@@ -5,7 +5,7 @@ import 'package:window_meas/features/editor/data/model/segment.dart';
 part 'segment_db.g.dart';
 
 @embedded
-class SegmentDB {
+class SizeSegmentDB {
   @Default(0)
   late double x1;
   @Default(0)

@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 import 'package:window_meas/features/meas/data/model/measurement_db.dart';
-import 'package:window_meas/features/meas/data/model/scheme.dart';
+import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/meas/data/params/assembly_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/building_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/door_opening_type_enum.dart';

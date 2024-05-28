@@ -1,4 +1,4 @@
-import 'point.dart';
+import 'package:flutter/material.dart';
 
 class Graph {
   List<Node> nodes = [];
@@ -7,8 +7,8 @@ class Graph {
   void checkForDuplicateNodes() {
     for (int i = 0; i < nodes.length; i++) {
       for (int j = i + 1; j < nodes.length; j++) {
-        if (nodes[i].equals(nodes[j])) {
-          print("DUPLICATE NODES, $i and $j");
+        if (nodes[i] == nodes[j]) {
+          debugPrint("DUPLICATE NODES, $i and $j");
         }
       }
     }
@@ -17,8 +17,8 @@ class Graph {
   void checkForDuplicateConnections() {
     for (int i = 0; i < connections.length; i++) {
       for (int j = i + 1; j < connections.length; j++) {
-        if (connections[i].equals(connections[j])) {
-          print("DUPLICATE CONNECTIONS, $i and $j");
+        if (connections[i] == connections[j]) {
+          debugPrint("DUPLICATE CONNECTIONS, $i and $j");
         }
       }
     }
@@ -81,39 +81,37 @@ class Graph {
       return false;
     }
 
-    if (node1.equals(node2)) {
+    if (node1 == node2) {
       return false;
     }
 
-    List<Node> node1Matches =
-        nodes.where((node) => Point.equals(node.point, node1.point)).toList();
-    List<Node> node2Matches =
-        nodes.where((node) => Point.equals(node.point, node2.point)).toList();
+    List<Node> node1Matches = nodes.where((node) => node.point == node1.point).toList();
+    List<Node> node2Matches = nodes.where((node) => node.point == node2.point).toList();
 
     if (node1Matches.length > 1) {
-      print("Too many matches for node 1. length = ${node1Matches.length}");
+      debugPrint("Too many matches for node 1. length = ${node1Matches.length}");
       return false;
     }
 
     if (node2Matches.length > 1) {
-      print("Too many matches for node 1. length = ${node2Matches.length}");
+      debugPrint("Too many matches for node 1. length = ${node2Matches.length}");
       return false;
     }
 
     if (node1Matches.isEmpty) {
-      print("No matches for node 1, doing nothing");
+      debugPrint("No matches for node 1, doing nothing");
       return false;
     }
 
     if (node2Matches.isEmpty) {
-      print("No matches for node 2, doing nothing");
+      debugPrint("No matches for node 2, doing nothing");
       return false;
     }
 
     Connection newConnection = Connection(node1Matches[0], node2Matches[0]);
 
     List<Connection> duplicateConnections =
-        connections.where((connection) => connection.equals(newConnection)).toList();
+        connections.where((connection) => connection == newConnection).toList();
 
     if (duplicateConnections.length > 1) {
       return false;
@@ -126,11 +124,10 @@ class Graph {
   }
 
   void addNode(Node newNode) {
-    List<Node> duplicateNodes =
-        nodes.where((node) => Point.equals(newNode.point, node.point)).toList();
+    List<Node> duplicateNodes = nodes.where((node) => newNode.point == node.point).toList();
 
     if (duplicateNodes.length > 1) {
-      print("TODO: HANDLE THIS. THIS SHOULD NOT BE HAPPENING");
+      debugPrint("TODO: HANDLE THIS. THIS SHOULD NOT BE HAPPENING");
     }
 
     if (duplicateNodes.isEmpty) {
@@ -266,7 +263,7 @@ class Graph {
 
   static List<int> findShortestPath(List<List<int>> adjacencyList, int source, int target) {
     if (source == target) {
-      print("SOURCE AND TARGET ARE SAME");
+      debugPrint("SOURCE AND TARGET ARE SAME");
       return [target];
     }
     List<int> visitQueue = [source];
@@ -298,20 +295,22 @@ class Graph {
         }
       }
     }
-    print('There is no path from $source to $target');
+    debugPrint('There is no path from $source to $target');
     return [];
   }
 }
 
 class Node {
-  Point point;
+  Offset point;
   int? id;
 
   Node(this.point);
 
-  bool equals(Node node) {
-    return Point.equals(point, node.point) && id == node.id;
-  }
+  @override
+  bool operator ==(Object other) => other is Node && point == other.point && id == other.id;
+
+  @override
+  int get hashCode => point.hashCode ^ id.hashCode;
 }
 
 class Connection {
@@ -320,8 +319,12 @@ class Connection {
 
   Connection(this.node1, this.node2);
 
-  bool equals(Connection connection) {
-    return (node1.equals(connection.node1) && node2.equals(connection.node2)) ||
-        (node2.equals(connection.node1) && node1.equals(connection.node2));
-  }
+  @override
+  bool operator ==(Object other) =>
+      other is Connection &&
+      ((node1 == other.node1 && node2 == other.node2) ||
+          (node2 == other.node1 && node1 == other.node2));
+
+  @override
+  int get hashCode => node1.hashCode ^ node2.hashCode;
 }
