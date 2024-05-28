@@ -111,7 +111,6 @@ class SchemeItem extends StatelessWidget {
               measurement.copyWith(scheme: null),
             );
     }
-    ;
   }
 
   Future<void> _openEditor(BuildContext context, {Template? template}) async {

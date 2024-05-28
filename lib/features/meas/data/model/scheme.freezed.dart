@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Scheme {
-  List<(Offset?, Offset?)> get lines => throw _privateConstructorUsedError;
+  List<(Offset, Offset)> get lines => throw _privateConstructorUsedError;
   List<Segment> get segments => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -28,7 +28,7 @@ abstract class $SchemeCopyWith<$Res> {
   factory $SchemeCopyWith(Scheme value, $Res Function(Scheme) then) =
       _$SchemeCopyWithImpl<$Res, Scheme>;
   @useResult
-  $Res call({List<(Offset?, Offset?)> lines, List<Segment> segments});
+  $Res call({List<(Offset, Offset)> lines, List<Segment> segments});
 }
 
 /// @nodoc
@@ -51,7 +51,7 @@ class _$SchemeCopyWithImpl<$Res, $Val extends Scheme>
       lines: null == lines
           ? _value.lines
           : lines // ignore: cast_nullable_to_non_nullable
-              as List<(Offset?, Offset?)>,
+              as List<(Offset, Offset)>,
       segments: null == segments
           ? _value.segments
           : segments // ignore: cast_nullable_to_non_nullable
@@ -67,7 +67,7 @@ abstract class _$$SchemeImplCopyWith<$Res> implements $SchemeCopyWith<$Res> {
       __$$SchemeImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<(Offset?, Offset?)> lines, List<Segment> segments});
+  $Res call({List<(Offset, Offset)> lines, List<Segment> segments});
 }
 
 /// @nodoc
@@ -88,7 +88,7 @@ class __$$SchemeImplCopyWithImpl<$Res>
       lines: null == lines
           ? _value._lines
           : lines // ignore: cast_nullable_to_non_nullable
-              as List<(Offset?, Offset?)>,
+              as List<(Offset, Offset)>,
       segments: null == segments
           ? _value._segments
           : segments // ignore: cast_nullable_to_non_nullable
@@ -101,15 +101,15 @@ class __$$SchemeImplCopyWithImpl<$Res>
 
 class _$SchemeImpl extends _Scheme {
   const _$SchemeImpl(
-      {required final List<(Offset?, Offset?)> lines,
+      {required final List<(Offset, Offset)> lines,
       required final List<Segment> segments})
       : _lines = lines,
         _segments = segments,
         super._();
 
-  final List<(Offset?, Offset?)> _lines;
+  final List<(Offset, Offset)> _lines;
   @override
-  List<(Offset?, Offset?)> get lines {
+  List<(Offset, Offset)> get lines {
     if (_lines is EqualUnmodifiableListView) return _lines;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_lines);
@@ -152,12 +152,12 @@ class _$SchemeImpl extends _Scheme {
 
 abstract class _Scheme extends Scheme {
   const factory _Scheme(
-      {required final List<(Offset?, Offset?)> lines,
+      {required final List<(Offset, Offset)> lines,
       required final List<Segment> segments}) = _$SchemeImpl;
   const _Scheme._() : super._();
 
   @override
-  List<(Offset?, Offset?)> get lines;
+  List<(Offset, Offset)> get lines;
   @override
   List<Segment> get segments;
   @override

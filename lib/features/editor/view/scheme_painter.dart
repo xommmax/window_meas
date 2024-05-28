@@ -66,13 +66,17 @@ class SchemePainter extends CustomPainter {
   }
 
   void _drawCurrentLine(Canvas canvas, Size size) {
-    if (currentLine?.$1 != null && currentLine?.$2 != null) {
-      final linePaint = Paint()
-        ..color = Colors.green
-        ..strokeWidth = lineWidth;
+    if (currentLine == null) return;
 
-      canvas.drawLine(currentLine!.$1!.toGlobalCoord(size), currentLine!.$2!.toGlobalCoord(size), linePaint);
-    }
+    final linePaint = Paint()
+      ..color = Colors.green
+      ..strokeWidth = lineWidth;
+
+    canvas.drawLine(
+      currentLine!.$1.toGlobalCoord(size),
+      currentLine!.$2.toGlobalCoord(size),
+      linePaint,
+    );
   }
 
   void _drawMeasurements(Canvas canvas, Size size) {
@@ -86,7 +90,8 @@ class SchemePainter extends CustomPainter {
   }
 
   void _drawHorizontalMeasLines(Canvas canvas, Size size, Paint measPaint) {
-    final horSegments = scheme.segments.where((e) => e.direction == SegmentDirection.horizontal).toList();
+    final horSegments =
+        scheme.segments.where((e) => e.direction == SegmentDirection.horizontal).toList();
     if (horSegments.isEmpty) return;
 
     double gridSize = size.width / Constants.gridAmount;
@@ -121,7 +126,13 @@ class SchemePainter extends CustomPainter {
         measPaint,
       );
 
-      _drawHorizontalSegmentSize(canvas, mainHorSegment.size, p1.dx, p2.dx, p1.dy - 1.75 * gridSize);
+      _drawHorizontalSegmentSize(
+        canvas,
+        mainHorSegment.size,
+        p1.dx,
+        p2.dx,
+        p1.dy - 1.75 * gridSize,
+      );
     }
     horSegments.removeWhere((e) => e.isMain);
     if (horSegments.isEmpty) return;
@@ -152,7 +163,11 @@ class SchemePainter extends CustomPainter {
   }
 
   void _drawVerticalMeasLines(Canvas canvas, Size size, Paint measPaint) {
-    final verSegments = scheme.segments.where((e) => e.direction == SegmentDirection.vertical).toList();
+    final verSegments = scheme.segments
+        .where(
+          (e) => e.direction == SegmentDirection.vertical,
+        )
+        .toList();
     if (verSegments.isEmpty) return;
 
     double gridSize = size.width / Constants.gridAmount;

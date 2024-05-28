@@ -40,11 +40,18 @@ class DrawingViewState extends State<DrawingView> {
                   onTapUp: (d) => _onGridTapUp(d, context, size),
                   onPanDown: state.mode == EditorMode.move
                       ? null
-                      : (details) => setState(() => currentLine = (details.localPosition.toInnerCoord(size), null)),
+                      : (details) => setState(() => currentLine = (
+                            details.localPosition.toInnerCoord(size),
+                            details.localPosition.toInnerCoord(size),
+                          )),
                   onPanUpdate: state.mode == EditorMode.move
                       ? null
-                      : (details) =>
-                          setState(() => currentLine = (currentLine?.$1, details.localPosition.toInnerCoord(size))),
+                      : (details) => setState(() {
+                            if (currentLine != null) {
+                              currentLine =
+                                  (currentLine!.$1, details.localPosition.toInnerCoord(size));
+                            }
+                          }),
                   onPanEnd: state.mode == EditorMode.move
                       ? null
                       : (details) => setState(() {
@@ -58,17 +65,20 @@ class DrawingViewState extends State<DrawingView> {
                       : (details) => setState(() {
                             currentScale = (prevScale * details.scale).clamp(minScale, maxScale);
 
-                            final maxBoundaryX = constraints.maxWidth * (currentScale - 1) / 2 / currentScale;
-                            final maxBoundaryY = constraints.maxHeight * (currentScale - 1) / 2 / currentScale;
-                            final deltaX =
-                                (focalPointDelta.dx + details.focalPointDelta.dx).clamp(-maxBoundaryX, maxBoundaryX);
-                            final deltaY =
-                                (focalPointDelta.dy + details.focalPointDelta.dy).clamp(-maxBoundaryY, maxBoundaryY);
+                            final maxBoundaryX =
+                                constraints.maxWidth * (currentScale - 1) / 2 / currentScale;
+                            final maxBoundaryY =
+                                constraints.maxHeight * (currentScale - 1) / 2 / currentScale;
+                            final deltaX = (focalPointDelta.dx + details.focalPointDelta.dx)
+                                .clamp(-maxBoundaryX, maxBoundaryX);
+                            final deltaY = (focalPointDelta.dy + details.focalPointDelta.dy)
+                                .clamp(-maxBoundaryY, maxBoundaryY);
 
                             focalPointDelta = Offset(deltaX, deltaY);
                           }),
-                  onScaleEnd:
-                      state.mode == EditorMode.draw ? null : (details) => setState(() => prevScale = currentScale),
+                  onScaleEnd: state.mode == EditorMode.draw
+                      ? null
+                      : (details) => setState(() => prevScale = currentScale),
                   child: SizedBox.expand(
                     child: BlocBuilder<DrawingCubit, DrawingState>(
                       builder: (context, state) => CustomPaint(
