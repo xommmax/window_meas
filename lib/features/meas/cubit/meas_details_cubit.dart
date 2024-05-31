@@ -19,4 +19,14 @@ class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
     await repo.updateMeasurement(measurement);
     emit(MeasurementDetailsState(measurement: measurement));
   }
+
+  Future<void> deleteMeasurement() async {
+    if (state.measurement == null) return;
+    await repo.deleteMeasurement(state.measurement!.id);
+    emit(const MeasurementDetailsState(measurement: null));
+  }
+
+  Future<void> generatePdf() async {}
+
+  Future<void> shareCrm() async {}
 }

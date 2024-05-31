@@ -10,7 +10,8 @@ class MeasurementRepository {
   final MeasurementLocalDataSource local;
   final MeasurementRemoteDataSource remote;
 
-  Future<void> addMeasurement(Measurement measurement) => local.addMeasurement(measurement.toDB());
+  Future<void> addMeasurement(Measurement measurement) =>
+      local.addMeasurement(measurement.toDB());
 
   Future<List<Measurement>> getMeasurements() async {
     final list = await local.getMeasurements();
@@ -22,8 +23,13 @@ class MeasurementRepository {
     return db != null ? Measurement.fromDB(db) : null;
   }
 
-  Future<void> updateMeasurement(Measurement measurement) => local.updateMeasurement(measurement.toDB());
+  Future<void> updateMeasurement(Measurement measurement) =>
+      local.updateMeasurement(measurement.toDB());
 
-  Stream<List<Measurement>> watchMeasurements() =>
-      local.watchMeasurements().map((list) => list.map((e) => Measurement.fromDB(e)).toList());
+  Stream<List<Measurement>> watchMeasurements() => local
+      .watchMeasurements()
+      .map((list) => list.map((e) => Measurement.fromDB(e)).toList());
+
+  Future<void> deleteMeasurement(String measurementId) =>
+      local.deleteMeasurement(measurementId);
 }

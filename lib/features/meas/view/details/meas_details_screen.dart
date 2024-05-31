@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:window_meas/features/meas/view/details/confirmation_dialog.dart';
 import 'package:window_meas/features/meas/view/details/widgets/sections/address_section.dart';
 import 'package:window_meas/features/meas/view/details/widgets/sections/other_work_section.dart';
 import 'package:window_meas/features/meas/view/details/widgets/sections/position_info_section.dart';
@@ -29,16 +32,38 @@ class MeasurementDetailsView extends StatelessWidget {
   const MeasurementDetailsView({super.key});
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<MeasurementDetailsCubit, MeasurementDetailsState>(
+  Widget build(BuildContext context) =>
+      BlocBuilder<MeasurementDetailsCubit, MeasurementDetailsState>(
         builder: (context, state) => Scaffold(
           appBar: AppBar(
             title: Text(
               '${context.l10n.measurement} №${state.measurement?.innerId?.toString().padLeft(4, '0') ?? ''}',
             ),
             actions: [
-              IconButton(
-                icon: const Icon(Icons.share),
-                onPressed: () {},
+              PopupMenuButton<String>(
+                onSelected: (s) async {
+                  if (s == context.l10n.generatePdf) {
+                    await context.read<MeasurementDetailsCubit>().generatePdf();
+                  } else if (s == context.l10n.shareCrm) {
+                    await context.read<MeasurementDetailsCubit>().shareCrm();
+                  } else if (s == context.l10n.delete) {
+                    final shouldDelete = await ConfirmationDialog.show(
+                      context,
+                      context.l10n.deleteMeasurement,
+                      context.l10n.deleteMeasurementDesc,
+                    );
+                    if (shouldDelete && context.mounted) {
+                      await context.read<MeasurementDetailsCubit>().deleteMeasurement();
+                      if (context.mounted) context.pop();
+                    }
+                  }
+                },
+                icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
+                itemBuilder: (BuildContext context) => [
+                  context.l10n.generatePdf,
+                  context.l10n.shareCrm,
+                  context.l10n.delete,
+                ].map((e) => PopupMenuItem<String>(value: e, child: Text(e))).toList(),
               ),
             ],
           ),
