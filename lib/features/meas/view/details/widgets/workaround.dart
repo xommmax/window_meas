@@ -10,7 +10,7 @@ class WorkaroundForExpandIcon extends StatelessWidget {
   Widget build(BuildContext context) => Theme(
         data: Theme.of(context).copyWith(
           iconButtonTheme: const IconButtonThemeData(
-            style: ButtonStyle(foregroundColor: MaterialStatePropertyAll(iconColor)),
+            style: ButtonStyle(foregroundColor: WidgetStatePropertyAll(iconColor)),
           ),
         ),
         child: child,
