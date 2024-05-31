@@ -146,5 +146,6 @@
   "yes": "Так",
   "deleteMeasurement": "Видалити замір",
   "deleteMeasurementDesc": "Ви впевнені, що хочете видалити цей замір?",
-  "printEmptyFields": "Друкувати пусті поля?"
+  "printEmptyFields": "Друкувати пусті поля?",
+  "measurer": "Замірник"
 }

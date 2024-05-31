@@ -146,5 +146,6 @@
   "yes": "Yes",
   "deleteMeasurement": "Delete measurement",
   "deleteMeasurementDesc": "Are you sure you want to delete this measurement?",
-  "printEmptyFields": "Print empty fields?"
+  "printEmptyFields": "Print empty fields?",
+  "measurer": "Measurer"
 }

@@ -1,8 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:open_file/open_file.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:window_meas/features/meas/cubit/meas_details_state.dart';
 import 'package:window_meas/features/meas/data/meas_repo.dart';
 import 'package:window_meas/features/meas/data/model/measurement.dart';
+import 'package:window_meas/features/meas/view/details/pdf/pdf_generator.dart';
 
 @injectable
 class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
@@ -26,7 +29,13 @@ class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
     emit(const MeasurementDetailsState(measurement: null));
   }
 
-  Future<void> generatePdf() async {}
+  Future<void> generatePdf() async {
+    if (state.measurement == null) return;
+    final file = await PdfGenerator.generate(state.measurement!);
+
+    // await OpenFile.open(file.path);
+    await Share.shareXFiles([XFile(file.path)], text: 'Share Measurement');
+  }
 
   Future<void> shareCrm() async {}
 }

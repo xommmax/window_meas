@@ -5,11 +5,11 @@ import 'package:window_meas/features/editor/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
 
 class SchemePreviewPainter extends CustomPainter {
-  static const lineWidth = 1.5;
+  SchemePreviewPainter(this.scheme);
 
+  static const lineWidth = 1.5;
   final Scheme scheme;
 
-  SchemePreviewPainter(this.scheme);
   @override
   void paint(Canvas canvas, Size size) {
     _drawLines(canvas, size);

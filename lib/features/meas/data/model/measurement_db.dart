@@ -186,4 +186,6 @@ class MeasurementDB {
   @Default('')
   late String housingCoopNumber;
   late SchemeDB? scheme;
+  @Default('')
+  late String measurer;
 }
