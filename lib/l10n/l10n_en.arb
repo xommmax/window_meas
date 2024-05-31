@@ -139,5 +139,12 @@
   "edit": "Edit",
   "delete": "Delete",
   "chooseOption": "Choose option",
-  "manualScheme": "Manual scheme"
+  "manualScheme": "Manual scheme",
+  "shareCrm": "Share CRM",
+  "generatePdf": "Generate PDF",
+  "no": "No",
+  "yes": "Yes",
+  "deleteMeasurement": "Delete measurement",
+  "deleteMeasurementDesc": "Are you sure you want to delete this measurement?",
+  "printEmptyFields": "Print empty fields?"
 }

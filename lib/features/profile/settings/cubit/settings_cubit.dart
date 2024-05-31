@@ -1,0 +1,38 @@
+import 'dart:async';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import 'package:window_meas/features/profile/settings/cubit/settings_state.dart';
+import 'package:window_meas/features/profile/settings/data/model/settings.dart';
+import 'package:window_meas/features/profile/settings/data/settings_repo.dart';
+
+@injectable
+class SettingsCubit extends Cubit<SettingsState> {
+  final SettingsRepository repo;
+  StreamSubscription? settingsSubscription;
+
+  SettingsCubit(this.repo) : super(SettingsState.initial());
+
+  Future<void> updateSettings(Settings settings) async {
+    await repo.saveSettings(settings);
+  }
+
+  void watchSettings() async {
+    settingsSubscription = repo.watchSettingss().listen((settings) {
+      emit(SettingsState(settings: settings));
+    });
+
+    final settings = await repo.getSettings();
+    if (settings == null) {
+      await repo.saveSettings(Settings.initial());
+    } else {
+      emit(SettingsState(settings: settings));
+    }
+  }
+
+  @override
+  Future<void> close() {
+    settingsSubscription?.cancel();
+    return super.close();
+  }
+}

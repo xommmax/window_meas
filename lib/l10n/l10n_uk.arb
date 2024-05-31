@@ -139,5 +139,12 @@
   "edit": "Редагувати",
   "delete": "Видалити",
   "chooseOption": "Виберіть опцію",
-  "manualScheme": "Довільна схема"
+  "manualScheme": "Довільна схема",
+  "shareCrm": "Надіслати в CRM",
+  "generatePdf": "Згенерувати PDF",
+  "no": "Ні",
+  "yes": "Так",
+  "deleteMeasurement": "Видалити замір",
+  "deleteMeasurementDesc": "Ви впевнені, що хочете видалити цей замір?",
+  "printEmptyFields": "Друкувати пусті поля?"
 }
