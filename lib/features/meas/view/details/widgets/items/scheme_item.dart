@@ -107,9 +107,7 @@ class SchemeItem extends StatelessWidget {
       case SchemeItemOption.edit:
         _openEditor(context);
       case SchemeItemOption.delete:
-        context.read<MeasurementDetailsCubit>().updateMeasurement(
-              measurement.copyWith(scheme: null),
-            );
+        context.read<MeasurementDetailsCubit>().deleteScheme();
     }
   }
 

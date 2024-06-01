@@ -101,6 +101,7 @@ class Measurement with _$Measurement {
     required String residentialComplex,
     required String housingCoopNumber,
     required Scheme? scheme,
+    required String? photoPath,
     required String measurer,
   }) = _Measurement;
 
@@ -178,6 +179,7 @@ class Measurement with _$Measurement {
         housingCoopNumber: '',
         scheme: null,
         measurer: '',
+        photoPath: null,
       );
 
   MeasurementDB toDB() => MeasurementDB()
@@ -254,7 +256,8 @@ class Measurement with _$Measurement {
     ..residentialComplex = residentialComplex
     ..housingCoopNumber = housingCoopNumber
     ..scheme = scheme?.toDB()
-    ..measurer = measurer;
+    ..measurer = measurer
+    ..photoPath = photoPath;
 
   static Measurement fromDB(MeasurementDB db) => Measurement(
         innerId: db.innerId,
@@ -331,5 +334,7 @@ class Measurement with _$Measurement {
         housingCoopNumber: db.housingCoopNumber,
         scheme: db.scheme != null ? Scheme.fromDB(db.scheme!) : null,
         measurer: db.measurer,
+        photoPath: db.photoPath,
       );
+      
 }

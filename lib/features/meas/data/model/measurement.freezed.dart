@@ -91,6 +91,7 @@ mixin _$Measurement {
   String get residentialComplex => throw _privateConstructorUsedError;
   String get housingCoopNumber => throw _privateConstructorUsedError;
   Scheme? get scheme => throw _privateConstructorUsedError;
+  String? get photoPath => throw _privateConstructorUsedError;
   String get measurer => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -178,6 +179,7 @@ abstract class $MeasurementCopyWith<$Res> {
       String residentialComplex,
       String housingCoopNumber,
       Scheme? scheme,
+      String? photoPath,
       String measurer});
 
   $ExpanderOptionCopyWith<$Res> get expanderOption;
@@ -270,6 +272,7 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? residentialComplex = null,
     Object? housingCoopNumber = null,
     Object? scheme = freezed,
+    Object? photoPath = freezed,
     Object? measurer = null,
   }) {
     return _then(_value.copyWith(
@@ -565,6 +568,10 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.scheme
           : scheme // ignore: cast_nullable_to_non_nullable
               as Scheme?,
+      photoPath: freezed == photoPath
+          ? _value.photoPath
+          : photoPath // ignore: cast_nullable_to_non_nullable
+              as String?,
       measurer: null == measurer
           ? _value.measurer
           : measurer // ignore: cast_nullable_to_non_nullable
@@ -675,6 +682,7 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       String residentialComplex,
       String housingCoopNumber,
       Scheme? scheme,
+      String? photoPath,
       String measurer});
 
   @override
@@ -767,6 +775,7 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? residentialComplex = null,
     Object? housingCoopNumber = null,
     Object? scheme = freezed,
+    Object? photoPath = freezed,
     Object? measurer = null,
   }) {
     return _then(_$MeasurementImpl(
@@ -1062,6 +1071,10 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.scheme
           : scheme // ignore: cast_nullable_to_non_nullable
               as Scheme?,
+      photoPath: freezed == photoPath
+          ? _value.photoPath
+          : photoPath // ignore: cast_nullable_to_non_nullable
+              as String?,
       measurer: null == measurer
           ? _value.measurer
           : measurer // ignore: cast_nullable_to_non_nullable
@@ -1147,6 +1160,7 @@ class _$MeasurementImpl extends _Measurement {
       required this.residentialComplex,
       required this.housingCoopNumber,
       required this.scheme,
+      required this.photoPath,
       required this.measurer})
       : super._();
 
@@ -1297,11 +1311,13 @@ class _$MeasurementImpl extends _Measurement {
   @override
   final Scheme? scheme;
   @override
+  final String? photoPath;
+  @override
   final String measurer;
 
   @override
   String toString() {
-    return 'Measurement(innerId: $innerId, id: $id, date: $date, clientName: $clientName, city: $city, district: $district, street: $street, building: $building, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation, sealing: $sealing, cost: $cost, prepayment: $prepayment, comment: $comment, estimatedAssemblyTime: $estimatedAssemblyTime, vacuumCleaner: $vacuumCleaner, howDiscovered: $howDiscovered, residentialComplex: $residentialComplex, housingCoopNumber: $housingCoopNumber, scheme: $scheme, measurer: $measurer)';
+    return 'Measurement(innerId: $innerId, id: $id, date: $date, clientName: $clientName, city: $city, district: $district, street: $street, building: $building, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation, sealing: $sealing, cost: $cost, prepayment: $prepayment, comment: $comment, estimatedAssemblyTime: $estimatedAssemblyTime, vacuumCleaner: $vacuumCleaner, howDiscovered: $howDiscovered, residentialComplex: $residentialComplex, housingCoopNumber: $housingCoopNumber, scheme: $scheme, photoPath: $photoPath, measurer: $measurer)';
   }
 
   @override
@@ -1425,6 +1441,7 @@ class _$MeasurementImpl extends _Measurement {
             (identical(other.residentialComplex, residentialComplex) || other.residentialComplex == residentialComplex) &&
             (identical(other.housingCoopNumber, housingCoopNumber) || other.housingCoopNumber == housingCoopNumber) &&
             (identical(other.scheme, scheme) || other.scheme == scheme) &&
+            (identical(other.photoPath, photoPath) || other.photoPath == photoPath) &&
             (identical(other.measurer, measurer) || other.measurer == measurer));
   }
 
@@ -1504,6 +1521,7 @@ class _$MeasurementImpl extends _Measurement {
         residentialComplex,
         housingCoopNumber,
         scheme,
+        photoPath,
         measurer
       ]);
 
@@ -1589,6 +1607,7 @@ abstract class _Measurement extends Measurement {
       required final String residentialComplex,
       required final String housingCoopNumber,
       required final Scheme? scheme,
+      required final String? photoPath,
       required final String measurer}) = _$MeasurementImpl;
   const _Measurement._() : super._();
 
@@ -1738,6 +1757,8 @@ abstract class _Measurement extends Measurement {
   String get housingCoopNumber;
   @override
   Scheme? get scheme;
+  @override
+  String? get photoPath;
   @override
   String get measurer;
   @override

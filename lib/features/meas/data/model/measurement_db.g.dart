@@ -262,141 +262,146 @@ const MeasurementDBSchema = CollectionSchema(
       name: r'phoneNumberMain',
       type: IsarType.string,
     ),
-    r'prepayment': PropertySchema(
+    r'photoPath': PropertySchema(
       id: 47,
+      name: r'photoPath',
+      type: IsarType.string,
+    ),
+    r'prepayment': PropertySchema(
+      id: 48,
       name: r'prepayment',
       type: IsarType.string,
     ),
     r'profileSystem': PropertySchema(
-      id: 48,
+      id: 49,
       name: r'profileSystem',
       type: IsarType.string,
       enumMap: _MeasurementDBprofileSystemEnumValueMap,
     ),
     r'quarterPosition': PropertySchema(
-      id: 49,
+      id: 50,
       name: r'quarterPosition',
       type: IsarType.string,
       enumMap: _MeasurementDBquarterPositionEnumValueMap,
     ),
     r'quarterSize': PropertySchema(
-      id: 50,
+      id: 51,
       name: r'quarterSize',
       type: IsarType.string,
     ),
     r'residentialComplex': PropertySchema(
-      id: 51,
+      id: 52,
       name: r'residentialComplex',
       type: IsarType.string,
     ),
     r'roofDisassembly': PropertySchema(
-      id: 52,
+      id: 53,
       name: r'roofDisassembly',
       type: IsarType.bool,
     ),
     r'rubberColor': PropertySchema(
-      id: 53,
+      id: 54,
       name: r'rubberColor',
       type: IsarType.string,
       enumMap: _MeasurementDBrubberColorEnumValueMap,
     ),
     r'scheme': PropertySchema(
-      id: 54,
+      id: 55,
       name: r'scheme',
       type: IsarType.object,
       target: r'SchemeDB',
     ),
     r'screedDisassembly': PropertySchema(
-      id: 55,
+      id: 56,
       name: r'screedDisassembly',
       type: IsarType.bool,
     ),
     r'sealing': PropertySchema(
-      id: 56,
+      id: 57,
       name: r'sealing',
       type: IsarType.bool,
     ),
     r'slabExtension': PropertySchema(
-      id: 57,
+      id: 58,
       name: r'slabExtension',
       type: IsarType.bool,
     ),
     r'slopeDepth': PropertySchema(
-      id: 58,
+      id: 59,
       name: r'slopeDepth',
       type: IsarType.string,
     ),
     r'slopeLength': PropertySchema(
-      id: 59,
+      id: 60,
       name: r'slopeLength',
       type: IsarType.string,
     ),
     r'slopeQuantity': PropertySchema(
-      id: 60,
+      id: 61,
       name: r'slopeQuantity',
       type: IsarType.string,
     ),
     r'standProfile': PropertySchema(
-      id: 61,
+      id: 62,
       name: r'standProfile',
       type: IsarType.string,
       enumMap: _MeasurementDBstandProfileEnumValueMap,
     ),
     r'staticCalculation': PropertySchema(
-      id: 62,
+      id: 63,
       name: r'staticCalculation',
       type: IsarType.bool,
     ),
     r'street': PropertySchema(
-      id: 63,
+      id: 64,
       name: r'street',
       type: IsarType.string,
     ),
     r'unloading': PropertySchema(
-      id: 64,
+      id: 65,
       name: r'unloading',
       type: IsarType.bool,
     ),
     r'vacuumCleaner': PropertySchema(
-      id: 65,
+      id: 66,
       name: r'vacuumCleaner',
       type: IsarType.bool,
     ),
     r'windowsillAssembly': PropertySchema(
-      id: 66,
+      id: 67,
       name: r'windowsillAssembly',
       type: IsarType.bool,
     ),
     r'windowsillColor': PropertySchema(
-      id: 67,
+      id: 68,
       name: r'windowsillColor',
       type: IsarType.string,
     ),
     r'windowsillConnector': PropertySchema(
-      id: 68,
+      id: 69,
       name: r'windowsillConnector',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillConnectorEnumValueMap,
     ),
     r'windowsillDepth': PropertySchema(
-      id: 69,
+      id: 70,
       name: r'windowsillDepth',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillDepthEnumValueMap,
     ),
     r'windowsillExtension': PropertySchema(
-      id: 70,
+      id: 71,
       name: r'windowsillExtension',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillExtensionEnumValueMap,
     ),
     r'windowsillSize': PropertySchema(
-      id: 71,
+      id: 72,
       name: r'windowsillSize',
       type: IsarType.string,
     ),
     r'windowsillType': PropertySchema(
-      id: 72,
+      id: 73,
       name: r'windowsillType',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillTypeEnumValueMap,
@@ -482,6 +487,12 @@ int _measurementDBEstimateSize(
   bytesCount += 3 + object.panelType.name.length * 3;
   bytesCount += 3 + object.phoneNumberAdditional.length * 3;
   bytesCount += 3 + object.phoneNumberMain.length * 3;
+  {
+    final value = object.photoPath;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.prepayment.length * 3;
   bytesCount += 3 + object.profileSystem.name.length * 3;
   bytesCount += 3 + object.quarterPosition.name.length * 3;
@@ -567,37 +578,38 @@ void _measurementDBSerialize(
   writer.writeBool(offsets[44], object.parapetReinforcement);
   writer.writeString(offsets[45], object.phoneNumberAdditional);
   writer.writeString(offsets[46], object.phoneNumberMain);
-  writer.writeString(offsets[47], object.prepayment);
-  writer.writeString(offsets[48], object.profileSystem.name);
-  writer.writeString(offsets[49], object.quarterPosition.name);
-  writer.writeString(offsets[50], object.quarterSize);
-  writer.writeString(offsets[51], object.residentialComplex);
-  writer.writeBool(offsets[52], object.roofDisassembly);
-  writer.writeString(offsets[53], object.rubberColor.name);
+  writer.writeString(offsets[47], object.photoPath);
+  writer.writeString(offsets[48], object.prepayment);
+  writer.writeString(offsets[49], object.profileSystem.name);
+  writer.writeString(offsets[50], object.quarterPosition.name);
+  writer.writeString(offsets[51], object.quarterSize);
+  writer.writeString(offsets[52], object.residentialComplex);
+  writer.writeBool(offsets[53], object.roofDisassembly);
+  writer.writeString(offsets[54], object.rubberColor.name);
   writer.writeObject<SchemeDB>(
-    offsets[54],
+    offsets[55],
     allOffsets,
     SchemeDBSchema.serialize,
     object.scheme,
   );
-  writer.writeBool(offsets[55], object.screedDisassembly);
-  writer.writeBool(offsets[56], object.sealing);
-  writer.writeBool(offsets[57], object.slabExtension);
-  writer.writeString(offsets[58], object.slopeDepth);
-  writer.writeString(offsets[59], object.slopeLength);
-  writer.writeString(offsets[60], object.slopeQuantity);
-  writer.writeString(offsets[61], object.standProfile.name);
-  writer.writeBool(offsets[62], object.staticCalculation);
-  writer.writeString(offsets[63], object.street);
-  writer.writeBool(offsets[64], object.unloading);
-  writer.writeBool(offsets[65], object.vacuumCleaner);
-  writer.writeBool(offsets[66], object.windowsillAssembly);
-  writer.writeString(offsets[67], object.windowsillColor);
-  writer.writeString(offsets[68], object.windowsillConnector.name);
-  writer.writeString(offsets[69], object.windowsillDepth.name);
-  writer.writeString(offsets[70], object.windowsillExtension.name);
-  writer.writeString(offsets[71], object.windowsillSize);
-  writer.writeString(offsets[72], object.windowsillType.name);
+  writer.writeBool(offsets[56], object.screedDisassembly);
+  writer.writeBool(offsets[57], object.sealing);
+  writer.writeBool(offsets[58], object.slabExtension);
+  writer.writeString(offsets[59], object.slopeDepth);
+  writer.writeString(offsets[60], object.slopeLength);
+  writer.writeString(offsets[61], object.slopeQuantity);
+  writer.writeString(offsets[62], object.standProfile.name);
+  writer.writeBool(offsets[63], object.staticCalculation);
+  writer.writeString(offsets[64], object.street);
+  writer.writeBool(offsets[65], object.unloading);
+  writer.writeBool(offsets[66], object.vacuumCleaner);
+  writer.writeBool(offsets[67], object.windowsillAssembly);
+  writer.writeString(offsets[68], object.windowsillColor);
+  writer.writeString(offsets[69], object.windowsillConnector.name);
+  writer.writeString(offsets[70], object.windowsillDepth.name);
+  writer.writeString(offsets[71], object.windowsillExtension.name);
+  writer.writeString(offsets[72], object.windowsillSize);
+  writer.writeString(offsets[73], object.windowsillType.name);
 }
 
 MeasurementDB _measurementDBDeserialize(
@@ -678,51 +690,52 @@ MeasurementDB _measurementDBDeserialize(
   object.parapetReinforcement = reader.readBool(offsets[44]);
   object.phoneNumberAdditional = reader.readString(offsets[45]);
   object.phoneNumberMain = reader.readString(offsets[46]);
-  object.prepayment = reader.readString(offsets[47]);
+  object.photoPath = reader.readStringOrNull(offsets[47]);
+  object.prepayment = reader.readString(offsets[48]);
   object.profileSystem = _MeasurementDBprofileSystemValueEnumMap[
-          reader.readStringOrNull(offsets[48])] ??
+          reader.readStringOrNull(offsets[49])] ??
       ProfileSystem.none;
   object.quarterPosition = _MeasurementDBquarterPositionValueEnumMap[
-          reader.readStringOrNull(offsets[49])] ??
+          reader.readStringOrNull(offsets[50])] ??
       QuarterPosition.none;
-  object.quarterSize = reader.readString(offsets[50]);
-  object.residentialComplex = reader.readString(offsets[51]);
-  object.roofDisassembly = reader.readBool(offsets[52]);
+  object.quarterSize = reader.readString(offsets[51]);
+  object.residentialComplex = reader.readString(offsets[52]);
+  object.roofDisassembly = reader.readBool(offsets[53]);
   object.rubberColor = _MeasurementDBrubberColorValueEnumMap[
-          reader.readStringOrNull(offsets[53])] ??
+          reader.readStringOrNull(offsets[54])] ??
       RubberColor.none;
   object.scheme = reader.readObjectOrNull<SchemeDB>(
-    offsets[54],
+    offsets[55],
     SchemeDBSchema.deserialize,
     allOffsets,
   );
-  object.screedDisassembly = reader.readBool(offsets[55]);
-  object.sealing = reader.readBool(offsets[56]);
-  object.slabExtension = reader.readBool(offsets[57]);
-  object.slopeDepth = reader.readString(offsets[58]);
-  object.slopeLength = reader.readString(offsets[59]);
-  object.slopeQuantity = reader.readString(offsets[60]);
+  object.screedDisassembly = reader.readBool(offsets[56]);
+  object.sealing = reader.readBool(offsets[57]);
+  object.slabExtension = reader.readBool(offsets[58]);
+  object.slopeDepth = reader.readString(offsets[59]);
+  object.slopeLength = reader.readString(offsets[60]);
+  object.slopeQuantity = reader.readString(offsets[61]);
   object.standProfile = _MeasurementDBstandProfileValueEnumMap[
-          reader.readStringOrNull(offsets[61])] ??
+          reader.readStringOrNull(offsets[62])] ??
       StandProfile.none;
-  object.staticCalculation = reader.readBool(offsets[62]);
-  object.street = reader.readString(offsets[63]);
-  object.unloading = reader.readBool(offsets[64]);
-  object.vacuumCleaner = reader.readBool(offsets[65]);
-  object.windowsillAssembly = reader.readBool(offsets[66]);
-  object.windowsillColor = reader.readString(offsets[67]);
+  object.staticCalculation = reader.readBool(offsets[63]);
+  object.street = reader.readString(offsets[64]);
+  object.unloading = reader.readBool(offsets[65]);
+  object.vacuumCleaner = reader.readBool(offsets[66]);
+  object.windowsillAssembly = reader.readBool(offsets[67]);
+  object.windowsillColor = reader.readString(offsets[68]);
   object.windowsillConnector = _MeasurementDBwindowsillConnectorValueEnumMap[
-          reader.readStringOrNull(offsets[68])] ??
+          reader.readStringOrNull(offsets[69])] ??
       WindowsillConnector.none;
   object.windowsillDepth = _MeasurementDBwindowsillDepthValueEnumMap[
-          reader.readStringOrNull(offsets[69])] ??
+          reader.readStringOrNull(offsets[70])] ??
       WindowsillDepth.none;
   object.windowsillExtension = _MeasurementDBwindowsillExtensionValueEnumMap[
-          reader.readStringOrNull(offsets[70])] ??
+          reader.readStringOrNull(offsets[71])] ??
       WindowsillExtension.none;
-  object.windowsillSize = reader.readString(offsets[71]);
+  object.windowsillSize = reader.readString(offsets[72]);
   object.windowsillType = _MeasurementDBwindowsillTypeValueEnumMap[
-          reader.readStringOrNull(offsets[72])] ??
+          reader.readStringOrNull(offsets[73])] ??
       WindowsillType.none;
   return object;
 }
@@ -852,74 +865,76 @@ P _measurementDBDeserializeProp<P>(
     case 46:
       return (reader.readString(offset)) as P;
     case 47:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 48:
+      return (reader.readString(offset)) as P;
+    case 49:
       return (_MeasurementDBprofileSystemValueEnumMap[
               reader.readStringOrNull(offset)] ??
           ProfileSystem.none) as P;
-    case 49:
+    case 50:
       return (_MeasurementDBquarterPositionValueEnumMap[
               reader.readStringOrNull(offset)] ??
           QuarterPosition.none) as P;
-    case 50:
-      return (reader.readString(offset)) as P;
     case 51:
       return (reader.readString(offset)) as P;
     case 52:
-      return (reader.readBool(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 53:
+      return (reader.readBool(offset)) as P;
+    case 54:
       return (_MeasurementDBrubberColorValueEnumMap[
               reader.readStringOrNull(offset)] ??
           RubberColor.none) as P;
-    case 54:
+    case 55:
       return (reader.readObjectOrNull<SchemeDB>(
         offset,
         SchemeDBSchema.deserialize,
         allOffsets,
       )) as P;
-    case 55:
-      return (reader.readBool(offset)) as P;
     case 56:
       return (reader.readBool(offset)) as P;
     case 57:
       return (reader.readBool(offset)) as P;
     case 58:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 59:
       return (reader.readString(offset)) as P;
     case 60:
       return (reader.readString(offset)) as P;
     case 61:
+      return (reader.readString(offset)) as P;
+    case 62:
       return (_MeasurementDBstandProfileValueEnumMap[
               reader.readStringOrNull(offset)] ??
           StandProfile.none) as P;
-    case 62:
-      return (reader.readBool(offset)) as P;
     case 63:
-      return (reader.readString(offset)) as P;
-    case 64:
       return (reader.readBool(offset)) as P;
+    case 64:
+      return (reader.readString(offset)) as P;
     case 65:
       return (reader.readBool(offset)) as P;
     case 66:
       return (reader.readBool(offset)) as P;
     case 67:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 68:
+      return (reader.readString(offset)) as P;
+    case 69:
       return (_MeasurementDBwindowsillConnectorValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillConnector.none) as P;
-    case 69:
+    case 70:
       return (_MeasurementDBwindowsillDepthValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillDepth.none) as P;
-    case 70:
+    case 71:
       return (_MeasurementDBwindowsillExtensionValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillExtension.none) as P;
-    case 71:
-      return (reader.readString(offset)) as P;
     case 72:
+      return (reader.readString(offset)) as P;
+    case 73:
       return (_MeasurementDBwindowsillTypeValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillType.none) as P;
@@ -6586,6 +6601,160 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      photoPathIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'photoPath',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      photoPathIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'photoPath',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      photoPathEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'photoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      photoPathGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'photoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      photoPathLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'photoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      photoPathBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'photoPath',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      photoPathStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'photoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      photoPathEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'photoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      photoPathContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'photoPath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      photoPathMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'photoPath',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      photoPathIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'photoPath',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      photoPathIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'photoPath',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       prepaymentEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -9628,6 +9797,19 @@ extension MeasurementDBQuerySortBy
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> sortByPhotoPath() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'photoPath', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByPhotoPathDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'photoPath', Sort.desc);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> sortByPrepayment() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'prepayment', Sort.asc);
@@ -10593,6 +10775,19 @@ extension MeasurementDBQuerySortThenBy
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByPhotoPath() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'photoPath', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByPhotoPathDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'photoPath', Sort.desc);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByPrepayment() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'prepayment', Sort.asc);
@@ -11267,6 +11462,13 @@ extension MeasurementDBQueryWhereDistinct
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctByPhotoPath(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'photoPath', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctByPrepayment(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -11760,6 +11962,12 @@ extension MeasurementDBQueryProperty
       phoneNumberMainProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'phoneNumberMain');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, String?, QQueryOperations> photoPathProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'photoPath');
     });
   }
 

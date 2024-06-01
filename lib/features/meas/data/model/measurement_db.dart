@@ -188,4 +188,5 @@ class MeasurementDB {
   late SchemeDB? scheme;
   @Default('')
   late String measurer;
+  late String? photoPath;
 }

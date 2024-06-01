@@ -147,5 +147,7 @@
   "deleteMeasurement": "Видалити замір",
   "deleteMeasurementDesc": "Ви впевнені, що хочете видалити цей замір?",
   "printEmptyFields": "Друкувати пусті поля?",
-  "measurer": "Замірник"
+  "measurer": "Замірник",
+  "deletePhoto": "Видалити фото",
+  "deletePhotoDesc": "Ви впевнені, що хочете видалити це фото?"
 }

@@ -38,7 +38,7 @@ class PositionInfoSection extends StatelessWidget {
             const SizedBox(height: 8),
             SchemeItem(measurement),
             const Divider(),
-            const PhotoItem(),
+            PhotoItem(measurement),
             const Divider(),
             TextItem(title: context.l10n.quarter),
             const Divider(),
@@ -47,8 +47,9 @@ class PositionInfoSection extends StatelessWidget {
                 InputItem(
                   title: context.l10n.size,
                   value: measurement.quarterSize,
-                  onChanged: (s) =>
-                      context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(quarterSize: s)),
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(quarterSize: s)),
                   keyboardType: TextInputType.number,
                 ),
                 const Divider(),
@@ -66,16 +67,18 @@ class PositionInfoSection extends StatelessWidget {
             SwitchItem(
               title: context.l10n.staticCalculation,
               value: measurement.staticCalculation,
-              onChanged: (b) =>
-                  context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(staticCalculation: b)),
+              onChanged: (b) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updateMeasurement(measurement.copyWith(staticCalculation: b)),
             ),
             const Divider(),
             DropdownItem<ProfileSystem>(
               title: context.l10n.profileSystem,
               values: ProfileSystem.values,
               initialValue: measurement.profileSystem,
-              onSelected: (e) =>
-                  context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(profileSystem: e)),
+              onSelected: (e) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updateMeasurement(measurement.copyWith(profileSystem: e)),
             ),
             const Divider(),
             TextItem(title: context.l10n.door),
@@ -95,8 +98,9 @@ class PositionInfoSection extends StatelessWidget {
                   title: context.l10n.doorstep,
                   values: DoorstepOption.values,
                   initialValue: measurement.doorstep,
-                  onSelected: (e) =>
-                      context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(doorstep: e)),
+                  onSelected: (e) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(doorstep: e)),
                 ),
                 const Divider(),
                 if (measurement.doorstep == DoorstepOption.present) ...[
@@ -138,24 +142,27 @@ class PositionInfoSection extends StatelessWidget {
               title: context.l10n.rubberColor,
               values: RubberColor.values,
               initialValue: measurement.rubberColor,
-              onSelected: (e) =>
-                  context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(rubberColor: e)),
+              onSelected: (e) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updateMeasurement(measurement.copyWith(rubberColor: e)),
             ),
             const Divider(),
             DropdownItem<StandProfile>(
               title: context.l10n.standProfile,
               values: StandProfile.values,
               initialValue: measurement.standProfile,
-              onSelected: (e) =>
-                  context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(standProfile: e)),
+              onSelected: (e) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updateMeasurement(measurement.copyWith(standProfile: e)),
             ),
             const Divider(),
             ExpanderSection(measurement),
             InputItem(
               title: context.l10n.glassUnit,
               value: measurement.glassUnit,
-              onChanged: (s) =>
-                  context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(glassUnit: s)),
+              onChanged: (s) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updateMeasurement(measurement.copyWith(glassUnit: s)),
             ),
             const Divider(),
             TextItem(title: context.l10n.panel),
@@ -166,8 +173,9 @@ class PositionInfoSection extends StatelessWidget {
                   title: context.l10n.type,
                   values: PanelType.values,
                   initialValue: measurement.panelType,
-                  onSelected: (e) =>
-                      context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(panelType: e)),
+                  onSelected: (e) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(panelType: e)),
                 ),
                 const Divider(),
                 DropdownItem<PanelThickness>(
@@ -184,8 +192,9 @@ class PositionInfoSection extends StatelessWidget {
             InputItem(
               title: context.l10n.furniture,
               value: measurement.furniture,
-              onChanged: (s) =>
-                  context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(furniture: s)),
+              onChanged: (s) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updateMeasurement(measurement.copyWith(furniture: s)),
             ),
             const Divider(),
             TextItem(title: context.l10n.windowsill),
@@ -255,24 +264,27 @@ class PositionInfoSection extends StatelessWidget {
                 InputItem(
                   title: context.l10n.depth,
                   value: measurement.drainageDepth,
-                  onChanged: (s) =>
-                      context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(drainageDepth: s)),
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(drainageDepth: s)),
                   keyboardType: TextInputType.number,
                 ),
                 const Divider(),
                 InputItem(
                   title: context.l10n.width,
                   value: measurement.drainageWidth,
-                  onChanged: (s) =>
-                      context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(drainageWidth: s)),
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(drainageWidth: s)),
                   keyboardType: TextInputType.number,
                 ),
                 const Divider(),
                 InputItem(
                   title: context.l10n.color,
                   value: measurement.drainageColor,
-                  onChanged: (s) =>
-                      context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(drainageColor: s)),
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(drainageColor: s)),
                 ),
                 const Divider(),
                 SwitchItem(
@@ -292,23 +304,26 @@ class PositionInfoSection extends StatelessWidget {
                 InputItem(
                   title: context.l10n.type,
                   value: measurement.canopyType,
-                  onChanged: (s) =>
-                      context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(canopyType: s)),
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(canopyType: s)),
                 ),
                 const Divider(),
                 InputItem(
                   title: context.l10n.size,
                   value: measurement.canopySize,
-                  onChanged: (s) =>
-                      context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(canopySize: s)),
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(canopySize: s)),
                   keyboardType: TextInputType.number,
                 ),
                 const Divider(),
                 InputItem(
                   title: context.l10n.color,
                   value: measurement.canopyColor,
-                  onChanged: (s) =>
-                      context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(canopyColor: s)),
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(canopyColor: s)),
                 ),
                 const Divider(),
               ],
@@ -320,24 +335,27 @@ class PositionInfoSection extends StatelessWidget {
                 InputItem(
                   title: context.l10n.depth,
                   value: measurement.slopeDepth,
-                  onChanged: (s) =>
-                      context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(slopeDepth: s)),
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(slopeDepth: s)),
                   keyboardType: TextInputType.number,
                 ),
                 const Divider(),
                 InputItem(
                   title: context.l10n.length,
                   value: measurement.slopeLength,
-                  onChanged: (s) =>
-                      context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(slopeLength: s)),
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(slopeLength: s)),
                   keyboardType: TextInputType.number,
                 ),
                 const Divider(),
                 InputItem(
                   title: context.l10n.quantity,
                   value: measurement.slopeQuantity,
-                  onChanged: (s) =>
-                      context.read<MeasurementDetailsCubit>().updateMeasurement(measurement.copyWith(slopeQuantity: s)),
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(slopeQuantity: s)),
                   keyboardType: TextInputType.number,
                 ),
               ],

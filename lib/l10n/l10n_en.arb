@@ -147,5 +147,7 @@
   "deleteMeasurement": "Delete measurement",
   "deleteMeasurementDesc": "Are you sure you want to delete this measurement?",
   "printEmptyFields": "Print empty fields?",
-  "measurer": "Measurer"
+  "measurer": "Measurer",
+  "deletePhoto": "Delete Photo",
+  "deletePhotoDesc": "Are you sure you want to delete this photo?"
 }

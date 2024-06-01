@@ -161,10 +161,12 @@ class PdfGenerator {
             _header(logo),
             pw.Expanded(
               child: pw.Padding(
-                padding: const pw.EdgeInsets.fromLTRB(30, 40, 20, 40),
+                padding: const pw.EdgeInsets.fromLTRB(30, 0, 20, 40),
                 child: pw.Column(
                   children: [
+                    pw.SizedBox(height: 20),
                     _scheme(measurement, context),
+                    pw.SizedBox(height: 30),
                     _photo(measurement),
                     pw.Expanded(
                       child: _footer(context.pageNumber),
@@ -286,16 +288,23 @@ class PdfGenerator {
   static pw.Widget _scheme(Measurement measurement, pw.Context context) =>
       (measurement.scheme != null)
           ? pw.Padding(
-              padding: const pw.EdgeInsets.all(30),
+              padding: const pw.EdgeInsets.all(60),
               child: pw.CustomPaint(
-                size: const PdfPoint(300, 300),
+                size: const PdfPoint(250, 250),
                 painter: (canvas, size) =>
                     PdfCustomPainter(measurement.scheme!, context).paint(canvas, size),
               ),
             )
           : pw.SizedBox.shrink();
 
-  static pw.Widget _photo(Measurement measurement) => pw.SizedBox.shrink();
+  static pw.Widget _photo(Measurement measurement) =>
+      (measurement.photoPath != null && File(measurement.photoPath!).existsSync())
+          ? pw.Image(
+              pw.MemoryImage(File(measurement.photoPath!).readAsBytesSync()),
+              height: 250,
+              width: 250,
+            )
+          : pw.SizedBox.shrink();
 
   static List<pw.Widget> _positionInfo1(Measurement measurement) => [
         _infoTitle(Localization.l10n.position),
