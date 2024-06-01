@@ -30,12 +30,6 @@ final appRouter = GoRouter(
             GoRoute(
               path: '/profile',
               builder: (context, state) => const ProfileScreen(),
-              routes: [
-                GoRoute(
-                  path: 'settings',
-                  builder: (context, state) => const SettingsScreen(),
-                ),
-              ],
             ),
           ],
         ),
@@ -67,6 +61,10 @@ final appRouter = GoRouter(
           mode: extra['mode'],
         );
       },
+    ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) => const SettingsScreen(),
     ),
   ],
 );

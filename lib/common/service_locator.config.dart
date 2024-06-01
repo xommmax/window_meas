@@ -15,8 +15,8 @@ import 'package:window_meas/common/register_module.dart' as _i19;
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart' as _i3;
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart' as _i16;
 import 'package:window_meas/features/meas/cubit/meas_details_cubit.dart'
-    as _i18;
-import 'package:window_meas/features/meas/cubit/meas_list_cubit.dart' as _i17;
+    as _i17;
+import 'package:window_meas/features/meas/cubit/meas_list_cubit.dart' as _i18;
 import 'package:window_meas/features/meas/data/ds/meas_local_ds.dart' as _i9;
 import 'package:window_meas/features/meas/data/ds/meas_remote_ds.dart' as _i6;
 import 'package:window_meas/features/meas/data/meas_repo.dart' as _i13;
@@ -83,10 +83,12 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i15.SettingsCubit(gh<_i11.SettingsRepository>()));
     gh.factory<_i16.EditorCubit>(
         () => _i16.EditorCubit(gh<_i12.TemplateRepository>()));
-    gh.factory<_i17.MeasurementListCubit>(
-        () => _i17.MeasurementListCubit(gh<_i13.MeasurementRepository>()));
-    gh.factory<_i18.MeasurementDetailsCubit>(
-        () => _i18.MeasurementDetailsCubit(gh<_i13.MeasurementRepository>()));
+    gh.factory<_i17.MeasurementDetailsCubit>(() => _i17.MeasurementDetailsCubit(
+          gh<_i13.MeasurementRepository>(),
+          gh<_i11.SettingsRepository>(),
+        ));
+    gh.factory<_i18.MeasurementListCubit>(
+        () => _i18.MeasurementListCubit(gh<_i13.MeasurementRepository>()));
     return this;
   }
 }

@@ -9,8 +9,10 @@ extension OffsetExt on Offset {
     final shiftX = (size.width / 2.0 / gridSize).roundToDouble() * gridSize;
     final shiftY = (size.height / 2.0 / gridSize).roundToDouble() * gridSize;
 
-    final x = ((dx - shiftX) / gridSize).roundToDouble();
-    final y = ((dy - shiftY) / gridSize).roundToDouble();
+    double x = ((dx - shiftX) / gridSize).roundToDouble();
+    if (x == -0.0) x = 0.0;
+    double y = ((dy - shiftY) / gridSize).roundToDouble();
+    if (y == -0.0) y = 0.0;
 
     return Offset(x, y);
   }

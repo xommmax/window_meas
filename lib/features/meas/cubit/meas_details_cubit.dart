@@ -5,36 +5,49 @@ import 'package:share_plus/share_plus.dart';
 import 'package:window_meas/features/meas/cubit/meas_details_state.dart';
 import 'package:window_meas/features/meas/data/meas_repo.dart';
 import 'package:window_meas/features/meas/data/model/measurement.dart';
-import 'package:window_meas/features/meas/view/details/pdf/pdf_generator.dart';
+import 'package:window_meas/features/meas/pdf/pdf_generator.dart';
+import 'package:window_meas/features/profile/settings/data/settings_repo.dart';
 
 @injectable
 class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
-  final MeasurementRepository repo;
+  final MeasurementRepository measRepo;
+  final SettingsRepository settingsRepo;
 
-  MeasurementDetailsCubit(this.repo) : super(MeasurementDetailsState.initial());
+  MeasurementDetailsCubit(
+    this.measRepo,
+    this.settingsRepo,
+  ) : super(MeasurementDetailsState.initial());
 
   Future<void> loadMeasurement(String measurementId) async {
-    final measurement = await repo.getMeasurement(measurementId);
+    final measurement = await measRepo.getMeasurement(measurementId);
     emit(MeasurementDetailsState(measurement: measurement));
   }
 
   Future<void> updateMeasurement(Measurement measurement) async {
-    await repo.updateMeasurement(measurement);
+    await measRepo.updateMeasurement(measurement);
     emit(MeasurementDetailsState(measurement: measurement));
   }
 
   Future<void> deleteMeasurement() async {
     if (state.measurement == null) return;
-    await repo.deleteMeasurement(state.measurement!.id);
+    await measRepo.deleteMeasurement(state.measurement!.id);
     emit(const MeasurementDetailsState(measurement: null));
   }
 
   Future<void> generatePdf() async {
     if (state.measurement == null) return;
-    final file = await PdfGenerator.generate(state.measurement!);
 
-    // await OpenFile.open(file.path);
-    await Share.shareXFiles([XFile(file.path)], text: 'Share Measurement');
+    final printEmptyFields = await settingsRepo.getSettings().then(
+          (settings) => settings?.printEmptyFields ?? false,
+        );
+
+    final file = await PdfGenerator.generate(
+      state.measurement!,
+      showEmptyFields: printEmptyFields,
+    );
+
+    await OpenFile.open(file.path);
+    // await Share.shareXFiles([XFile(file.path)], text: 'Share Measurement');
   }
 
   Future<void> shareCrm() async {}

@@ -42,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () => context.push('/profile/settings'),
+                    onTap: () => context.push('/settings'),
                     child: Column(
                       children: [
                         const Divider(height: 1),

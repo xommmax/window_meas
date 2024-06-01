@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Measurement {
-  int? get innerId => throw _privateConstructorUsedError; //
-  String get id => throw _privateConstructorUsedError; //
+  int? get innerId => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   String get clientName => throw _privateConstructorUsedError;
   String get city => throw _privateConstructorUsedError;
@@ -1152,10 +1152,8 @@ class _$MeasurementImpl extends _Measurement {
 
   @override
   final int? innerId;
-//
   @override
   final String id;
-//
   @override
   final DateTime date;
   @override
@@ -1596,9 +1594,9 @@ abstract class _Measurement extends Measurement {
 
   @override
   int? get innerId;
-  @override //
+  @override
   String get id;
-  @override //
+  @override
   DateTime get date;
   @override
   String get clientName;

@@ -9,11 +9,20 @@ import 'package:printing/printing.dart';
 import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/meas/data/model/measurement.dart';
 import 'package:window_meas/features/meas/data/params/param_enum.dart';
-import 'package:window_meas/features/meas/view/details/pdf/pdf_custom_painter.dart';
+import 'package:window_meas/features/meas/pdf/pdf_custom_painter.dart';
 import 'package:window_meas/l10n/localization.dart';
 
 class PdfGenerator {
-  static Future<File> generate(Measurement measurement) async {
+  static bool _showEmptyFields = false;
+
+  static Future<File> generate(
+    Measurement measurement, {
+    bool? showEmptyFields,
+  }) async {
+    if (showEmptyFields != null) {
+      _showEmptyFields = showEmptyFields;
+    }
+
     final pdf = pw.Document(
       theme: pw.ThemeData.withFont(
         base: await PdfGoogleFonts.robotoRegular(),
@@ -218,10 +227,11 @@ class PdfGenerator {
         _infoRow(Localization.l10n.clientName, measurement.clientName),
         _infoRow(Localization.l10n.cost, measurement.cost),
         _infoRow(Localization.l10n.prepayment, measurement.prepayment),
-        _infoRow(Localization.l10n.phoneNumber, ''),
-        _infoRow(Localization.l10n.phoneNumberMain, measurement.phoneNumberMain, sub: true),
+        _infoRow(Localization.l10n.phoneNumber, null, rowType: _RowType.title),
+        _infoRow(Localization.l10n.phoneNumberMain, measurement.phoneNumberMain,
+            rowType: _RowType.sub),
         _infoRow(Localization.l10n.phoneNumberAdditional, measurement.phoneNumberAdditional,
-            sub: true),
+            rowType: _RowType.sub),
         _infoRow(Localization.l10n.howDiscovered, measurement.howDiscovered),
         _infoRow(Localization.l10n.measurementDate, measurement.date),
         _infoRow(Localization.l10n.measurer, measurement.measurer),
@@ -250,9 +260,12 @@ class PdfGenerator {
         _infoRow(Localization.l10n.elevator, measurement.elevator),
         _infoRow(Localization.l10n.assembly, measurement.assembly),
         _infoRow(Localization.l10n.disassembly, measurement.disassembly),
-        _infoRow(Localization.l10n.screedDisassembly, measurement.screedDisassembly, sub: true),
-        _infoRow(Localization.l10n.gridDisassembly, measurement.gridDisassembly, sub: true),
-        _infoRow(Localization.l10n.roofDisassembly, measurement.roofDisassembly, sub: true),
+        _infoRow(Localization.l10n.screedDisassembly, measurement.screedDisassembly,
+            rowType: _RowType.sub),
+        _infoRow(Localization.l10n.gridDisassembly, measurement.gridDisassembly,
+            rowType: _RowType.sub),
+        _infoRow(Localization.l10n.roofDisassembly, measurement.roofDisassembly,
+            rowType: _RowType.sub),
         _infoRow(Localization.l10n.delivery, measurement.delivery),
         _infoRow(Localization.l10n.unloading, measurement.unloading),
         _infoRow(Localization.l10n.garbageRemoval, measurement.garbageRemoval),
@@ -273,7 +286,7 @@ class PdfGenerator {
   static pw.Widget _scheme(Measurement measurement, pw.Context context) =>
       (measurement.scheme != null)
           ? pw.Padding(
-              padding: const pw.EdgeInsets.all(20),
+              padding: const pw.EdgeInsets.all(30),
               child: pw.CustomPaint(
                 size: const PdfPoint(300, 300),
                 painter: (canvas, size) =>
@@ -286,68 +299,96 @@ class PdfGenerator {
 
   static List<pw.Widget> _positionInfo1(Measurement measurement) => [
         _infoTitle(Localization.l10n.position),
-        _infoRow(Localization.l10n.quarter, ''),
-        _infoRow(Localization.l10n.size, measurement.quarterSize, sub: true),
-        _infoRow(Localization.l10n.quarterPosition, measurement.quarterPosition, sub: true),
+        _infoRow(Localization.l10n.quarter, null, rowType: _RowType.title),
+        _infoRow(Localization.l10n.size, measurement.quarterSize, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.quarterPosition, measurement.quarterPosition,
+            rowType: _RowType.sub),
         _infoRow(Localization.l10n.staticCalculation, measurement.staticCalculation),
         _infoRow(Localization.l10n.profileSystem, measurement.profileSystem),
-        _infoRow(Localization.l10n.door, ''),
-        _infoRow(Localization.l10n.doorOpeningType, measurement.doorOpeningType, sub: true),
-        _infoRow(Localization.l10n.doorstep, measurement.doorstep, sub: true),
-        _infoRow(Localization.l10n.doorstepType, measurement.doorstepType, sub: true),
-        _infoRow(Localization.l10n.lamination, ''),
-        _infoRow(Localization.l10n.laminationInternal, measurement.laminationInternal, sub: true),
-        _infoRow(Localization.l10n.laminationExternal, measurement.laminationExternal, sub: true),
+        _infoRow(Localization.l10n.door, null, rowType: _RowType.title),
+        _infoRow(Localization.l10n.doorOpeningType, measurement.doorOpeningType,
+            rowType: _RowType.sub),
+        _infoRow(Localization.l10n.doorstep, measurement.doorstep, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.doorstepType, measurement.doorstepType, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.lamination, null, rowType: _RowType.title),
+        _infoRow(Localization.l10n.laminationInternal, measurement.laminationInternal,
+            rowType: _RowType.sub),
+        _infoRow(Localization.l10n.laminationExternal, measurement.laminationExternal,
+            rowType: _RowType.sub),
         _infoRow(Localization.l10n.rubberColor, measurement.rubberColor),
         _infoRow(Localization.l10n.standProfile, measurement.standProfile),
-        _infoRow(Localization.l10n.expanders, ''),
+        _infoRow(Localization.l10n.expanders, null, rowType: _RowType.title),
         _infoRow(Localization.l10n.expanderRight, measurement.expanderOption.rightEnabled,
-            sub: true),
-        _infoRow(Localization.l10n.width, measurement.expanderOption.rightWidth, sub: true),
-        _infoRow(Localization.l10n.length, measurement.expanderOption.rightLength, sub: true),
-        _infoRow(Localization.l10n.quantity, measurement.expanderOption.rightAmount, sub: true),
-        _infoRow(Localization.l10n.expanderLeft, measurement.expanderOption.leftEnabled, sub: true),
-        _infoRow(Localization.l10n.width, measurement.expanderOption.leftWidth, sub: true),
-        _infoRow(Localization.l10n.length, measurement.expanderOption.leftLength, sub: true),
-        _infoRow(Localization.l10n.quantity, measurement.expanderOption.leftAmount, sub: true),
-        _infoRow(Localization.l10n.expanderTop, measurement.expanderOption.topEnabled, sub: true),
-        _infoRow(Localization.l10n.width, measurement.expanderOption.topWidth, sub: true),
-        _infoRow(Localization.l10n.length, measurement.expanderOption.topLength, sub: true),
-        _infoRow(Localization.l10n.quantity, measurement.expanderOption.topAmount, sub: true),
+            rowType: _RowType.sub),
+        if (measurement.expanderOption.rightEnabled) ...[
+          _infoRow(Localization.l10n.width, measurement.expanderOption.rightWidth,
+              rowType: _RowType.subSub),
+          _infoRow(Localization.l10n.length, measurement.expanderOption.rightLength,
+              rowType: _RowType.subSub),
+          _infoRow(Localization.l10n.quantity, measurement.expanderOption.rightAmount,
+              rowType: _RowType.subSub),
+        ],
+        _infoRow(Localization.l10n.expanderLeft, measurement.expanderOption.leftEnabled,
+            rowType: _RowType.sub),
+        if (measurement.expanderOption.leftEnabled) ...[
+          _infoRow(Localization.l10n.width, measurement.expanderOption.leftWidth,
+              rowType: _RowType.subSub),
+          _infoRow(Localization.l10n.length, measurement.expanderOption.leftLength,
+              rowType: _RowType.subSub),
+          _infoRow(Localization.l10n.quantity, measurement.expanderOption.leftAmount,
+              rowType: _RowType.subSub),
+        ],
+        _infoRow(Localization.l10n.expanderTop, measurement.expanderOption.topEnabled,
+            rowType: _RowType.sub),
+        if (measurement.expanderOption.topEnabled) ...[
+          _infoRow(Localization.l10n.width, measurement.expanderOption.topWidth,
+              rowType: _RowType.subSub),
+          _infoRow(Localization.l10n.length, measurement.expanderOption.topLength,
+              rowType: _RowType.subSub),
+          _infoRow(Localization.l10n.quantity, measurement.expanderOption.topAmount,
+              rowType: _RowType.subSub),
+        ],
         _infoRow(Localization.l10n.expanderBottom, measurement.expanderOption.bottomEnabled,
-            sub: true),
-        _infoRow(Localization.l10n.width, measurement.expanderOption.bottomWidth, sub: true),
-        _infoRow(Localization.l10n.length, measurement.expanderOption.bottomLength, sub: true),
-        _infoRow(Localization.l10n.quantity, measurement.expanderOption.bottomAmount, sub: true),
+            rowType: _RowType.sub),
+        if (measurement.expanderOption.bottomEnabled) ...[
+          _infoRow(Localization.l10n.width, measurement.expanderOption.bottomWidth,
+              rowType: _RowType.subSub),
+          _infoRow(Localization.l10n.length, measurement.expanderOption.bottomLength,
+              rowType: _RowType.subSub),
+          _infoRow(Localization.l10n.quantity, measurement.expanderOption.bottomAmount,
+              rowType: _RowType.subSub),
+        ],
       ];
 
   static List<pw.Widget> _positionInfo2(Measurement measurement) => [
         pw.SizedBox(height: 20),
         _infoRow(Localization.l10n.glassUnit, measurement.glassUnit),
-        _infoRow(Localization.l10n.panel, ''),
-        _infoRow(Localization.l10n.type, measurement.panelType, sub: true),
-        _infoRow(Localization.l10n.thickness, measurement.panelThickness, sub: true),
+        _infoRow(Localization.l10n.panel, null, rowType: _RowType.title),
+        _infoRow(Localization.l10n.type, measurement.panelType, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.thickness, measurement.panelThickness, rowType: _RowType.sub),
         _infoRow(Localization.l10n.furniture, measurement.furniture),
-        _infoRow(Localization.l10n.windowsill, ''),
-        _infoRow(Localization.l10n.type, measurement.windowsillType, sub: true),
-        _infoRow(Localization.l10n.depth, measurement.windowsillDepth, sub: true),
-        _infoRow(Localization.l10n.size, measurement.windowsillSize, sub: true),
-        _infoRow(Localization.l10n.windowsillConnector, measurement.windowsillConnector, sub: true),
-        _infoRow(Localization.l10n.color, measurement.windowsillColor, sub: true),
-        _infoRow(Localization.l10n.assembly, measurement.windowsillAssembly, sub: true),
-        _infoRow(Localization.l10n.drainage, ''),
-        _infoRow(Localization.l10n.depth, measurement.drainageDepth, sub: true),
-        _infoRow(Localization.l10n.width, measurement.drainageWidth, sub: true),
-        _infoRow(Localization.l10n.color, measurement.drainageColor, sub: true),
-        _infoRow(Localization.l10n.drainageEndCap, measurement.drainageEndCap, sub: true),
-        _infoRow(Localization.l10n.canopy, ''),
-        _infoRow(Localization.l10n.type, measurement.canopyType, sub: true),
-        _infoRow(Localization.l10n.size, measurement.canopySize, sub: true),
-        _infoRow(Localization.l10n.color, measurement.canopyColor, sub: true),
-        _infoRow(Localization.l10n.slope, measurement.slopeDepth),
-        _infoRow(Localization.l10n.depth, measurement.slopeDepth, sub: true),
-        _infoRow(Localization.l10n.length, measurement.slopeLength, sub: true),
-        _infoRow(Localization.l10n.quantity, measurement.slopeQuantity, sub: true),
+        _infoRow(Localization.l10n.windowsill, null, rowType: _RowType.title),
+        _infoRow(Localization.l10n.type, measurement.windowsillType, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.depth, measurement.windowsillDepth, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.size, measurement.windowsillSize, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.windowsillConnector, measurement.windowsillConnector,
+            rowType: _RowType.sub),
+        _infoRow(Localization.l10n.color, measurement.windowsillColor, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.assembly, measurement.windowsillAssembly, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.drainage, null, rowType: _RowType.title),
+        _infoRow(Localization.l10n.depth, measurement.drainageDepth, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.width, measurement.drainageWidth, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.color, measurement.drainageColor, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.drainageEndCap, measurement.drainageEndCap,
+            rowType: _RowType.sub),
+        _infoRow(Localization.l10n.canopy, null, rowType: _RowType.title),
+        _infoRow(Localization.l10n.type, measurement.canopyType, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.size, measurement.canopySize, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.color, measurement.canopyColor, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.slope, null, rowType: _RowType.title),
+        _infoRow(Localization.l10n.depth, measurement.slopeDepth, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.length, measurement.slopeLength, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.quantity, measurement.slopeQuantity, rowType: _RowType.sub),
       ];
 
   static pw.Widget _infoTitle(String title) => pw.Padding(
@@ -362,17 +403,38 @@ class PdfGenerator {
         ),
       );
 
-  static pw.Widget _infoRow<T>(String title, T value, {bool sub = false}) {
+  static pw.Widget _infoRow<T>(
+    String title,
+    T value, {
+    _RowType? rowType,
+  }) {
     final stringValue = switch (value) {
       String _ => value,
-      bool _ => (value as bool) ? Localization.l10n.yes : Localization.l10n.no,
-      ParamEnum _ => (value as ParamEnum).localizedName,
-      DateTime _ => DateFormat('dd.MM.yyyy, HH:mm').format(value),
+      bool b => b ? Localization.l10n.yes : Localization.l10n.no,
+      ParamEnum e => e.localizedName,
+      DateTime d => DateFormat('dd.MM.yyyy, HH:mm').format(d),
       _ => value.toString(),
     };
 
+    final isValueEmpty = switch (value) {
+      String s => s.isEmpty,
+      bool b => !b,
+      ParamEnum e => e.name == 'none',
+      _ => value == null,
+    };
+
+    if (isValueEmpty && !_showEmptyFields && (rowType != _RowType.title)) {
+      return pw.SizedBox.shrink();
+    }
+
+    final leftPadding = rowType == _RowType.subSub
+        ? 30.0
+        : rowType == _RowType.sub
+            ? 15.0
+            : 0.0;
+
     return pw.Padding(
-      padding: pw.EdgeInsets.fromLTRB(sub ? 15 : 0, 2, 0, 2),
+      padding: pw.EdgeInsets.fromLTRB(leftPadding, 2, 0, 2),
       child: pw.Row(
         crossAxisAlignment: pw.CrossAxisAlignment.start,
         children: [
@@ -384,18 +446,25 @@ class PdfGenerator {
               color: PdfColors.black,
             ),
           ),
-          pw.Expanded(
-            child: pw.Text(
-              stringValue,
-              style: pw.TextStyle(
-                fontSize: 12,
-                fontWeight: pw.FontWeight.bold,
-                color: PdfColors.black,
+          if (rowType != _RowType.title)
+            pw.Expanded(
+              child: pw.Text(
+                stringValue,
+                style: pw.TextStyle(
+                  fontSize: 12,
+                  fontWeight: pw.FontWeight.bold,
+                  color: PdfColors.black,
+                ),
               ),
             ),
-          ),
         ],
       ),
     );
   }
+}
+
+enum _RowType {
+  title,
+  sub,
+  subSub,
 }
