@@ -149,5 +149,22 @@
   "printEmptyFields": "Print empty fields?",
   "measurer": "Measurer",
   "deletePhoto": "Delete Photo",
-  "deletePhotoDesc": "Are you sure you want to delete this photo?"
+  "deletePhotoDesc": "Are you sure you want to delete this photo?",
+  "rotaryRightOpeningType": "Rotary",
+  "rotaryLeftOpeningType": "Rotary",
+  "tiltTurnRightOpeningType": "Tilt turn",
+  "tiltTurnLeftOpeningType": "Tilt turn",
+  "rotaryMullionRightOpeningType": "Rotary mullion",
+  "rotaryMullionLeftOpeningType": "Rotary mullion",
+  "slidingRightOpeningType": "Sliding",
+  "slidingLeftOpeningType": "Sliding",
+  "liftAndSlideRightOpeningType": "Lift and slide",
+  "liftAndSlideLeftOpeningType": "Lift and slide",
+  "retractableRightOpeningType": "Retractable",
+  "retractableLeftOpeningType": "Retractable",
+  "transomOpeningType": "Transom",
+  "topHungOpeningType": "Top hung",
+  "midHungOpeningType": "Mid hung",
+  "blindOpeningType": "Blind",
+  "openingTypes": "Opening types"
 }

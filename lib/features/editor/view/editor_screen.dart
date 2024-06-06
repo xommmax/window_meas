@@ -64,7 +64,9 @@ class EditorView extends StatelessWidget {
                 IconButton(
                   icon: const FaIcon(FontAwesomeIcons.floppyDisk),
                   onPressed: () async {
-                    await context.read<EditorCubit>().saveTemplate(context.read<DrawingCubit>().state.scheme);
+                    await context
+                        .read<EditorCubit>()
+                        .saveTemplate(context.read<DrawingCubit>().state.scheme);
                     if (context.mounted) {
                       Navigator.pop(context);
                     }
@@ -73,15 +75,11 @@ class EditorView extends StatelessWidget {
             ],
           ),
           body: const SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Stack(
-                children: [
-                  DrawingView(),
-                  ToolButtons(),
-                  UndoRedoButtons(),
-                ],
-              ),
+            child: Stack(
+              children: [
+                DrawingView(),
+                EditorButtons(),
+              ],
             ),
           ),
         ),

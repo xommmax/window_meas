@@ -14,12 +14,14 @@ import 'package:window_meas/features/editor/data/model/scheme.dart';
 class SchemePainter extends CustomPainter {
   static const lineWidth = 0.5;
 
-  final Line? currentLine;
   final Scheme scheme;
+  final Line? currentLine;
+  final Line? openingTypeSelection;
 
   SchemePainter({
     required this.scheme,
     required this.currentLine,
+    required this.openingTypeSelection,
   });
   @override
   void paint(Canvas canvas, Size size) {
@@ -28,6 +30,7 @@ class SchemePainter extends CustomPainter {
     _drawCurrentLine(canvas, size);
     _drawMeasurements(canvas, size);
     _drawPolygons(canvas, size);
+    _drawOpeningTypeSelection(canvas, size);
   }
 
   @override
@@ -98,6 +101,20 @@ class SchemePainter extends CustomPainter {
         polygonPaint..color = Color(Random().nextInt(0xFFFFFF)).withOpacity(0.3),
       );
     }
+  }
+
+  void _drawOpeningTypeSelection(Canvas canvas, Size size) {
+    if (openingTypeSelection == null) return;
+
+    final rectPaint = Paint()..color = Colors.green.withOpacity(0.3);
+
+    canvas.drawRect(
+      Rect.fromPoints(
+        openingTypeSelection!.p1.toGlobalCoord(size),
+        openingTypeSelection!.p2.toGlobalCoord(size),
+      ),
+      rectPaint,
+    );
   }
 
   void _drawMeasurements(Canvas canvas, Size size) {

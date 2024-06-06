@@ -149,5 +149,22 @@
   "printEmptyFields": "Друкувати пусті поля?",
   "measurer": "Замірник",
   "deletePhoto": "Видалити фото",
-  "deletePhotoDesc": "Ви впевнені, що хочете видалити це фото?"
+  "deletePhotoDesc": "Ви впевнені, що хочете видалити це фото?",
+  "rotaryRightOpeningType": "Поворотний",
+  "rotaryLeftOpeningType": "Поворотний",
+  "tiltTurnRightOpeningType": "Поворотно-відкидний",
+  "tiltTurnLeftOpeningType": "Поворотно-відкидний",
+  "rotaryMullionRightOpeningType": "Поворотний штульповий",
+  "rotaryMullionLeftOpeningType": "Поворотний штульповий",
+  "slidingRightOpeningType": "Розсувний",
+  "slidingLeftOpeningType": "Розсувний",
+  "liftAndSlideRightOpeningType": "Підйомно-розсувний",
+  "liftAndSlideLeftOpeningType": "Підйомно-розсувний",
+  "retractableRightOpeningType": "Відставний",
+  "retractableLeftOpeningType": "Відставний",
+  "transomOpeningType": "Фрамуга",
+  "topHungOpeningType": "Верхньо підвісний",
+  "midHungOpeningType": "Середньо підвісний",
+  "blindOpeningType": "Глухий",
+  "openingTypes": "Варіанти відкриття"
 }

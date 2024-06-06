@@ -8,7 +8,7 @@ import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/view/meas_input_dialog.dart';
 
-Future<SizeSegment?> onTapUp(Offset position, BuildContext context, Size size) async {
+Future<SizeSegment?> onEditorTapUp(Offset position, BuildContext context, Size size) async {
   final segments = context.read<DrawingCubit>().state.scheme.sizeSegments;
   if (segments.isEmpty) return null;
 

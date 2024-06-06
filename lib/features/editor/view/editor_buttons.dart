@@ -4,72 +4,74 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 
-class ToolButtons extends StatelessWidget {
-  const ToolButtons({super.key});
+class EditorButtons extends StatelessWidget {
+  const EditorButtons({super.key});
 
   @override
   Widget build(BuildContext context) => Align(
         alignment: Alignment.bottomLeft,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ElevatedButton(
-              onPressed: () => context.read<EditorCubit>().changeMode(EditorMode.draw),
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(16),
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _Button(
+                onPressed: () => context.read<EditorCubit>().changeMode(EditorMode.openingType),
+                icon: FontAwesomeIcons.rectangleXmark,
               ),
-              child: const FaIcon(FontAwesomeIcons.pencil),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => context.read<EditorCubit>().changeMode(EditorMode.move),
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(16),
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
+              const SizedBox(height: 8),
+              _Button(
+                onPressed: () => context.read<EditorCubit>().changeMode(EditorMode.draw),
+                icon: FontAwesomeIcons.pencil,
               ),
-              child: const FaIcon(FontAwesomeIcons.hand),
-            ),
-          ],
+              const SizedBox(height: 8),
+              _Button(
+                onPressed: () => context.read<EditorCubit>().changeMode(EditorMode.move),
+                icon: FontAwesomeIcons.hand,
+              ),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _Button(
+                    onPressed: () => context.read<DrawingCubit>().undo(),
+                    icon: FontAwesomeIcons.arrowRotateLeft,
+                  ),
+                  const SizedBox(width: 8),
+                  _Button(
+                    onPressed: () => context.read<DrawingCubit>().redo(),
+                    icon: FontAwesomeIcons.arrowRotateRight,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       );
 }
 
-class UndoRedoButtons extends StatelessWidget {
-  const UndoRedoButtons({super.key});
+class _Button extends StatelessWidget {
+  const _Button({
+    required this.onPressed,
+    required this.icon,
+  });
+
+  final VoidCallback onPressed;
+  final IconData icon;
 
   @override
-  Widget build(BuildContext context) => Align(
-        alignment: Alignment.bottomRight,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ElevatedButton(
-              onPressed: () => context.read<DrawingCubit>().undo(),
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(16),
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-              ),
-              child: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
-            ),
-            const SizedBox(width: 20),
-            ElevatedButton(
-              onPressed: () => context.read<DrawingCubit>().redo(),
-              style: ElevatedButton.styleFrom(
-                shape: const CircleBorder(),
-                padding: const EdgeInsets.all(16),
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-              ),
-              child: const FaIcon(FontAwesomeIcons.arrowRotateRight),
-            ),
-          ],
-        ),
-      );
+  Widget build(BuildContext context) {
+    return IconButton(
+      onPressed: onPressed,
+      style: IconButton.styleFrom(
+        shape: const CircleBorder(),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 3,
+        shadowColor: Colors.black,
+      ),
+      icon: FaIcon(icon, size: 20),
+    );
+  }
 }

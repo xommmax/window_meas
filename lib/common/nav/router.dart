@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:window_meas/features/editor/opening_type/view/opening_type_list_screen.dart';
 import 'package:window_meas/features/editor/view/editor_screen.dart';
 import 'package:window_meas/features/meas/view/details/meas_details_screen.dart';
 import 'package:window_meas/features/meas/view/list/meas_list_screen.dart';
@@ -65,6 +66,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/settings',
       builder: (context, state) => const SettingsScreen(),
+    ),
+    GoRoute(
+      path: '/opening_type_list',
+      builder: (context, state) => const OpeningTypeListScreen(),
     ),
   ],
 );

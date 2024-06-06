@@ -39,4 +39,5 @@ class EditorState with _$EditorState {
 enum EditorMode {
   draw,
   move,
+  openingType,
 }

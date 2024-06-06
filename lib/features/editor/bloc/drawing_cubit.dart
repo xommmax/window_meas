@@ -131,4 +131,8 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     segments.add(segment);
     emit(state.copyWith(scheme: state.scheme.copyWith(sizeSegments: segments)));
   }
+
+  void selectOpeningType(Line line) {
+    
+  }
 }
