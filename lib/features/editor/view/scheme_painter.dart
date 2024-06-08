@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:window_meas/common/constants.dart';
+import 'package:window_meas/features/calc/geo_helper.dart';
 import 'package:window_meas/features/editor/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/data/model/direction.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
@@ -29,15 +30,17 @@ class SchemePainter extends CustomPainter {
     _drawLines(canvas, size);
     _drawCurrentLine(canvas, size);
     _drawMeasurements(canvas, size);
-    _drawPolygons(canvas, size);
+    _drawOpeningTypes(canvas, size);
     _drawOpeningTypeSelection(canvas, size);
   }
 
   @override
   bool shouldRepaint(SchemePainter oldDelegate) =>
       !listEquals(scheme.lines, oldDelegate.scheme.lines) ||
+      !listEquals(scheme.sizeSegments, oldDelegate.scheme.sizeSegments) ||
+      !listEquals(scheme.openingTypes, oldDelegate.scheme.openingTypes) ||
       currentLine != oldDelegate.currentLine ||
-      !listEquals(scheme.sizeSegments, oldDelegate.scheme.sizeSegments);
+      openingTypeSelection != oldDelegate.openingTypeSelection;
 
   void _drawBg(Canvas canvas, Size size) {
     final pointsPaint = Paint()
@@ -82,10 +85,48 @@ class SchemePainter extends CustomPainter {
     );
   }
 
-  void _drawPolygons(Canvas canvas, Size size) {
+  void _drawOpeningTypes(Canvas canvas, Size size) {
+    final paint = Paint()..style = PaintingStyle.fill;
+
+    for (final openingType in scheme.openingTypes) {
+      final color = Color(Random().nextInt(0xFFFFFF)).withOpacity(0.3);
+      for (final polygon in openingType.polygons) {
+        final points = polygon.points.map((e) => e.toGlobalCoord(size)).toList();
+        final path = Path();
+        path.moveTo(points.first.dx, points.first.dy);
+
+        for (final point in points) {
+          path.lineTo(point.dx, point.dy);
+        }
+
+        path.close();
+
+        canvas.drawPath(
+          path,
+          paint..color = color,
+        );
+      }
+    }
+  }
+
+  void _drawOpeningTypeSelection(Canvas canvas, Size size) {
+    if (openingTypeSelection == null) return;
+
+    final selectionPaint = Paint()..color = Colors.green.withOpacity(0.3);
+
+    canvas.drawRect(
+      Rect.fromPoints(
+        openingTypeSelection!.p1.toGlobalCoord(size),
+        openingTypeSelection!.p2.toGlobalCoord(size),
+      ),
+      selectionPaint,
+    );
+
+    final overlapPolygons = GeoHelper.getOverlapPolygons(openingTypeSelection!, scheme.polygons);
+
     final polygonPaint = Paint()..style = PaintingStyle.fill;
 
-    for (final polygon in scheme.polygons) {
+    for (final polygon in overlapPolygons) {
       final points = polygon.points.map((e) => e.toGlobalCoord(size)).toList();
       final path = Path();
       path.moveTo(points.first.dx, points.first.dy);
@@ -98,23 +139,9 @@ class SchemePainter extends CustomPainter {
 
       canvas.drawPath(
         path,
-        polygonPaint..color = Color(Random().nextInt(0xFFFFFF)).withOpacity(0.3),
+        polygonPaint..color = Colors.green.withOpacity(0.3),
       );
     }
-  }
-
-  void _drawOpeningTypeSelection(Canvas canvas, Size size) {
-    if (openingTypeSelection == null) return;
-
-    final rectPaint = Paint()..color = Colors.green.withOpacity(0.3);
-
-    canvas.drawRect(
-      Rect.fromPoints(
-        openingTypeSelection!.p1.toGlobalCoord(size),
-        openingTypeSelection!.p2.toGlobalCoord(size),
-      ),
-      rectPaint,
-    );
   }
 
   void _drawMeasurements(Canvas canvas, Size size) {

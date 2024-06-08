@@ -19,6 +19,8 @@ mixin _$Scheme {
   List<Line> get lines => throw _privateConstructorUsedError;
   List<SizeSegment> get sizeSegments => throw _privateConstructorUsedError;
   List<Polygon> get polygons => throw _privateConstructorUsedError;
+  List<OpeningTypeRecord> get openingTypes =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SchemeCopyWith<Scheme> get copyWith => throw _privateConstructorUsedError;
@@ -32,7 +34,8 @@ abstract class $SchemeCopyWith<$Res> {
   $Res call(
       {List<Line> lines,
       List<SizeSegment> sizeSegments,
-      List<Polygon> polygons});
+      List<Polygon> polygons,
+      List<OpeningTypeRecord> openingTypes});
 }
 
 /// @nodoc
@@ -51,6 +54,7 @@ class _$SchemeCopyWithImpl<$Res, $Val extends Scheme>
     Object? lines = null,
     Object? sizeSegments = null,
     Object? polygons = null,
+    Object? openingTypes = null,
   }) {
     return _then(_value.copyWith(
       lines: null == lines
@@ -65,6 +69,10 @@ class _$SchemeCopyWithImpl<$Res, $Val extends Scheme>
           ? _value.polygons
           : polygons // ignore: cast_nullable_to_non_nullable
               as List<Polygon>,
+      openingTypes: null == openingTypes
+          ? _value.openingTypes
+          : openingTypes // ignore: cast_nullable_to_non_nullable
+              as List<OpeningTypeRecord>,
     ) as $Val);
   }
 }
@@ -79,7 +87,8 @@ abstract class _$$SchemeImplCopyWith<$Res> implements $SchemeCopyWith<$Res> {
   $Res call(
       {List<Line> lines,
       List<SizeSegment> sizeSegments,
-      List<Polygon> polygons});
+      List<Polygon> polygons,
+      List<OpeningTypeRecord> openingTypes});
 }
 
 /// @nodoc
@@ -96,6 +105,7 @@ class __$$SchemeImplCopyWithImpl<$Res>
     Object? lines = null,
     Object? sizeSegments = null,
     Object? polygons = null,
+    Object? openingTypes = null,
   }) {
     return _then(_$SchemeImpl(
       lines: null == lines
@@ -110,6 +120,10 @@ class __$$SchemeImplCopyWithImpl<$Res>
           ? _value._polygons
           : polygons // ignore: cast_nullable_to_non_nullable
               as List<Polygon>,
+      openingTypes: null == openingTypes
+          ? _value._openingTypes
+          : openingTypes // ignore: cast_nullable_to_non_nullable
+              as List<OpeningTypeRecord>,
     ));
   }
 }
@@ -120,10 +134,12 @@ class _$SchemeImpl extends _Scheme {
   const _$SchemeImpl(
       {required final List<Line> lines,
       required final List<SizeSegment> sizeSegments,
-      required final List<Polygon> polygons})
+      required final List<Polygon> polygons,
+      required final List<OpeningTypeRecord> openingTypes})
       : _lines = lines,
         _sizeSegments = sizeSegments,
         _polygons = polygons,
+        _openingTypes = openingTypes,
         super._();
 
   final List<Line> _lines;
@@ -150,9 +166,17 @@ class _$SchemeImpl extends _Scheme {
     return EqualUnmodifiableListView(_polygons);
   }
 
+  final List<OpeningTypeRecord> _openingTypes;
+  @override
+  List<OpeningTypeRecord> get openingTypes {
+    if (_openingTypes is EqualUnmodifiableListView) return _openingTypes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_openingTypes);
+  }
+
   @override
   String toString() {
-    return 'Scheme(lines: $lines, sizeSegments: $sizeSegments, polygons: $polygons)';
+    return 'Scheme(lines: $lines, sizeSegments: $sizeSegments, polygons: $polygons, openingTypes: $openingTypes)';
   }
 
   @override
@@ -163,7 +187,9 @@ class _$SchemeImpl extends _Scheme {
             const DeepCollectionEquality().equals(other._lines, _lines) &&
             const DeepCollectionEquality()
                 .equals(other._sizeSegments, _sizeSegments) &&
-            const DeepCollectionEquality().equals(other._polygons, _polygons));
+            const DeepCollectionEquality().equals(other._polygons, _polygons) &&
+            const DeepCollectionEquality()
+                .equals(other._openingTypes, _openingTypes));
   }
 
   @override
@@ -171,7 +197,8 @@ class _$SchemeImpl extends _Scheme {
       runtimeType,
       const DeepCollectionEquality().hash(_lines),
       const DeepCollectionEquality().hash(_sizeSegments),
-      const DeepCollectionEquality().hash(_polygons));
+      const DeepCollectionEquality().hash(_polygons),
+      const DeepCollectionEquality().hash(_openingTypes));
 
   @JsonKey(ignore: true)
   @override
@@ -184,7 +211,8 @@ abstract class _Scheme extends Scheme {
   const factory _Scheme(
       {required final List<Line> lines,
       required final List<SizeSegment> sizeSegments,
-      required final List<Polygon> polygons}) = _$SchemeImpl;
+      required final List<Polygon> polygons,
+      required final List<OpeningTypeRecord> openingTypes}) = _$SchemeImpl;
   const _Scheme._() : super._();
 
   @override
@@ -193,6 +221,8 @@ abstract class _Scheme extends Scheme {
   List<SizeSegment> get sizeSegments;
   @override
   List<Polygon> get polygons;
+  @override
+  List<OpeningTypeRecord> get openingTypes;
   @override
   @JsonKey(ignore: true)
   _$$SchemeImplCopyWith<_$SchemeImpl> get copyWith =>

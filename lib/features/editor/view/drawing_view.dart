@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:window_meas/features/calc/geo_helper.dart';
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/drawing_state.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
+import 'package:window_meas/features/editor/opening_type/data/opening_type_enum.dart';
 import 'package:window_meas/features/editor/view/editor_gesture_detector.dart';
 import 'package:window_meas/features/editor/view/scheme_painter.dart';
+import 'package:window_meas/l10n/localization.dart';
 
 class DrawingView extends StatefulWidget {
   const DrawingView({super.key});
@@ -74,13 +77,30 @@ class DrawingViewState extends State<DrawingView> {
                           : null),
                   onOpeningTypeSelectionCompleted: () async {
                     if (openingTypeSelection != null) {
-                      final openingType = await context.push('/opening_type_list');
-                      if (openingType != null && context.mounted) {
-                        context.read<DrawingCubit>().selectOpeningType(openingTypeSelection!);
+                      final overlapPolygons = GeoHelper.getOverlapPolygons(
+                        openingTypeSelection!,
+                        context.read<DrawingCubit>().state.scheme.polygons,
+                      );
+                      setState(() => openingTypeSelection = null);
+                      if (overlapPolygons.isEmpty) return;
+
+                      final isConvex = GeoHelper.isPolygonsConvex(overlapPolygons);
+                      if (!isConvex) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(context.l10n.polygonNotConvex),
+                            duration: const Duration(milliseconds: 1400),
+                          ),
+                        );
+                        return;
                       }
-                      setState(() {
-                        openingTypeSelection = null;
-                      });
+
+                      final OpeningType? openingType = await context.push('/opening_type_list');
+                      if (openingType != null && context.mounted) {
+                        context
+                            .read<DrawingCubit>()
+                            .addOpeningType(openingType, overlapPolygons);
+                      }
                     }
                   },
                   child: SizedBox.expand(

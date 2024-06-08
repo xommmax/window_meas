@@ -1,16 +1,15 @@
-import 'dart:collection';
-
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:replay_bloc/replay_bloc.dart';
+import 'package:window_meas/features/calc/geo_helper.dart';
 import 'package:window_meas/features/editor/data/model/polygon.dart';
 import 'package:window_meas/features/editor/ext/line_ext.dart';
-import 'package:window_meas/features/calc/polygon/polygon_finder.dart';
+import 'package:window_meas/features/calc/polygon_finder/polygon_finder.dart';
 import 'package:window_meas/features/editor/bloc/drawing_state.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
+import 'package:window_meas/features/editor/opening_type/data/opening_type_enum.dart';
+import 'package:window_meas/features/editor/opening_type/data/opening_type_record.dart';
 
 @injectable
 class DrawingCubit extends ReplayCubit<DrawingState> {
@@ -44,83 +43,10 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     emit(state.copyWith(
       scheme: state.scheme.copyWith(
         lines: lines,
-        sizeSegments: _calculateSegments(lines),
+        sizeSegments: GeoHelper.calculateSegments(lines, state.scheme.sizeSegments),
         polygons: _calculatePolygons(lines),
       ),
     ));
-  }
-
-  List<SizeSegment> _calculateSegments(List<Line> lines) {
-    final List<SizeSegment> newSegments = [];
-    final xNodes = SplayTreeSet();
-    final yNodes = SplayTreeSet();
-    for (final line in lines) {
-      xNodes.addAll([line.p1.dx, line.p2.dx]);
-      yNodes.addAll([line.p1.dy, line.p2.dy]);
-    }
-
-    if (xNodes.length >= 2) {
-      final mainHorSegment = SizeSegment(
-        p1: Offset(xNodes.first, yNodes.first),
-        p2: Offset(xNodes.last, yNodes.first),
-        size: null,
-        direction: SegmentDirection.horizontal,
-        isMain: true,
-        index: -1,
-      );
-      newSegments.add(mainHorSegment);
-
-      if (xNodes.length >= 3) {
-        for (int i = 1; i < xNodes.length; i++) {
-          final horSegment = SizeSegment(
-            p1: Offset(xNodes.elementAt(i - 1), yNodes.first),
-            p2: Offset(xNodes.elementAt(i), yNodes.first),
-            size: null,
-            direction: SegmentDirection.horizontal,
-            isMain: false,
-            index: i - 1,
-          );
-          newSegments.add(horSegment);
-        }
-      }
-    }
-
-    if (yNodes.length >= 2) {
-      final mainVerSegment = SizeSegment(
-        p1: Offset(xNodes.first, yNodes.first),
-        p2: Offset(xNodes.first, yNodes.last),
-        size: null,
-        direction: SegmentDirection.vertical,
-        isMain: true,
-        index: -1,
-      );
-      newSegments.add(mainVerSegment);
-
-      if (yNodes.length >= 3) {
-        for (int i = 1; i < yNodes.length; i++) {
-          final verSegment = SizeSegment(
-            p1: Offset(xNodes.first, yNodes.elementAt(i - 1)),
-            p2: Offset(xNodes.first, yNodes.elementAt(i)),
-            size: null,
-            direction: SegmentDirection.vertical,
-            isMain: false,
-            index: i - 1,
-          );
-          newSegments.add(verSegment);
-        }
-      }
-    }
-
-    for (int i = 0; i < newSegments.length; i++) {
-      final prevSegment = state.scheme.sizeSegments.firstWhereOrNull(
-        (e) => e.p1 == newSegments[i].p1 && e.p2 == newSegments[i].p2,
-      );
-      if (prevSegment != null) {
-        newSegments[i] = newSegments[i].copyWith(size: prevSegment.size);
-      }
-    }
-
-    return newSegments;
   }
 
   List<Polygon> _calculatePolygons(List<Line> lines) => PolygonFinder.polygonsFromSegments(lines);
@@ -132,7 +58,16 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     emit(state.copyWith(scheme: state.scheme.copyWith(sizeSegments: segments)));
   }
 
-  void selectOpeningType(Line line) {
-    
+  void addOpeningType(OpeningType openingType, List<Polygon> polygons) {
+    OpeningTypeRecord openingTypeRecord = OpeningTypeRecord(
+      openingType: openingType,
+      polygons: polygons,
+    );
+
+    emit(state.copyWith(
+      scheme: state.scheme.copyWith(
+        openingTypes: [...state.scheme.openingTypes, openingTypeRecord],
+      ),
+    ));
   }
 }

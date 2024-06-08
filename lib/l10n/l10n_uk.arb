@@ -166,5 +166,6 @@
   "topHungOpeningType": "Верхньо підвісний",
   "midHungOpeningType": "Середньо підвісний",
   "blindOpeningType": "Глухий",
-  "openingTypes": "Варіанти відкриття"
+  "openingTypes": "Варіанти відкриття",
+  "polygonNotConvex": "Вибрана зона не є випуклою"
 }

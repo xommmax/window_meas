@@ -3,6 +3,7 @@ import 'package:isar/isar.dart';
 import 'package:window_meas/features/editor/data/model/line_db.dart';
 import 'package:window_meas/features/editor/data/model/polygon_db.dart';
 import 'package:window_meas/features/editor/data/model/segment_db.dart';
+import 'package:window_meas/features/editor/opening_type/data/opening_type_record_db.dart';
 
 part 'scheme_db.g.dart';
 
@@ -14,4 +15,6 @@ class SchemeDB {
   late List<SizeSegmentDB> sizeSegments;
   @Default([])
   late List<PolygonDB> polygons;
+  @Default([])
+  late List<OpeningTypeRecordDB> openingTypes;
 }

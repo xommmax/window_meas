@@ -19,14 +19,20 @@ const SchemeDBSchema = Schema(
       type: IsarType.objectList,
       target: r'LineDB',
     ),
-    r'polygons': PropertySchema(
+    r'openingTypes': PropertySchema(
       id: 1,
+      name: r'openingTypes',
+      type: IsarType.objectList,
+      target: r'OpeningTypeRecordDB',
+    ),
+    r'polygons': PropertySchema(
+      id: 2,
       name: r'polygons',
       type: IsarType.objectList,
       target: r'PolygonDB',
     ),
     r'sizeSegments': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'sizeSegments',
       type: IsarType.objectList,
       target: r'SizeSegmentDB',
@@ -50,6 +56,15 @@ int _schemeDBEstimateSize(
     for (var i = 0; i < object.lines.length; i++) {
       final value = object.lines[i];
       bytesCount += LineDBSchema.estimateSize(value, offsets, allOffsets);
+    }
+  }
+  bytesCount += 3 + object.openingTypes.length * 3;
+  {
+    final offsets = allOffsets[OpeningTypeRecordDB]!;
+    for (var i = 0; i < object.openingTypes.length; i++) {
+      final value = object.openingTypes[i];
+      bytesCount +=
+          OpeningTypeRecordDBSchema.estimateSize(value, offsets, allOffsets);
     }
   }
   bytesCount += 3 + object.polygons.length * 3;
@@ -84,14 +99,20 @@ void _schemeDBSerialize(
     LineDBSchema.serialize,
     object.lines,
   );
-  writer.writeObjectList<PolygonDB>(
+  writer.writeObjectList<OpeningTypeRecordDB>(
     offsets[1],
+    allOffsets,
+    OpeningTypeRecordDBSchema.serialize,
+    object.openingTypes,
+  );
+  writer.writeObjectList<PolygonDB>(
+    offsets[2],
     allOffsets,
     PolygonDBSchema.serialize,
     object.polygons,
   );
   writer.writeObjectList<SizeSegmentDB>(
-    offsets[2],
+    offsets[3],
     allOffsets,
     SizeSegmentDBSchema.serialize,
     object.sizeSegments,
@@ -112,15 +133,22 @@ SchemeDB _schemeDBDeserialize(
         LineDB(),
       ) ??
       [];
-  object.polygons = reader.readObjectList<PolygonDB>(
+  object.openingTypes = reader.readObjectList<OpeningTypeRecordDB>(
         offsets[1],
+        OpeningTypeRecordDBSchema.deserialize,
+        allOffsets,
+        OpeningTypeRecordDB(),
+      ) ??
+      [];
+  object.polygons = reader.readObjectList<PolygonDB>(
+        offsets[2],
         PolygonDBSchema.deserialize,
         allOffsets,
         PolygonDB(),
       ) ??
       [];
   object.sizeSegments = reader.readObjectList<SizeSegmentDB>(
-        offsets[2],
+        offsets[3],
         SizeSegmentDBSchema.deserialize,
         allOffsets,
         SizeSegmentDB(),
@@ -145,6 +173,14 @@ P _schemeDBDeserializeProp<P>(
           ) ??
           []) as P;
     case 1:
+      return (reader.readObjectList<OpeningTypeRecordDB>(
+            offset,
+            OpeningTypeRecordDBSchema.deserialize,
+            allOffsets,
+            OpeningTypeRecordDB(),
+          ) ??
+          []) as P;
+    case 2:
       return (reader.readObjectList<PolygonDB>(
             offset,
             PolygonDBSchema.deserialize,
@@ -152,7 +188,7 @@ P _schemeDBDeserializeProp<P>(
             PolygonDB(),
           ) ??
           []) as P;
-    case 2:
+    case 3:
       return (reader.readObjectList<SizeSegmentDB>(
             offset,
             SizeSegmentDBSchema.deserialize,
@@ -244,6 +280,95 @@ extension SchemeDBQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.listLength(
         r'lines',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      openingTypesLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'openingTypes',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      openingTypesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'openingTypes',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      openingTypesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'openingTypes',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      openingTypesLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'openingTypes',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      openingTypesLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'openingTypes',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      openingTypesLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'openingTypes',
         lower,
         includeLower,
         upper,
@@ -434,6 +559,13 @@ extension SchemeDBQueryObject
       FilterQuery<LineDB> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'lines');
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> openingTypesElement(
+      FilterQuery<OpeningTypeRecordDB> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'openingTypes');
     });
   }
 
