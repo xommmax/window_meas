@@ -2,18 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_enum.dart';
 
 class OpeningTypePainter extends CustomPainter {
-  OpeningTypePainter(this.openingType);
+  OpeningTypePainter(this.openingType) : drawer = OpeningTypeDrawer(strokeWidth: lineWidth * 2);
 
   static const lineWidth = 1.0;
   final OpeningType openingType;
-  final openingTypePaint = Paint()
-    ..color = Colors.green
-    ..strokeWidth = 2.0;
+  final OpeningTypeDrawer drawer;
 
   @override
   void paint(Canvas canvas, Size size) {
     _drawWindow(canvas, size);
-    _drawOpeningType(canvas, size);
+    drawer.drawOpeningType(canvas, size, openingType);
   }
 
   @override
@@ -28,8 +26,17 @@ class OpeningTypePainter extends CustomPainter {
     final windowRect = Rect.fromLTWH(0, 0, size.width, size.height);
     canvas.drawRect(windowRect, windowPaint);
   }
+}
 
-  void _drawOpeningType(Canvas canvas, Size size) => switch (openingType) {
+class OpeningTypeDrawer {
+  final Paint openingTypePaint;
+
+  OpeningTypeDrawer({required double strokeWidth})
+      : openingTypePaint = Paint()
+          ..color = Colors.green
+          ..strokeWidth = strokeWidth;
+
+  void drawOpeningType(Canvas canvas, Size size, OpeningType openingType) => switch (openingType) {
         OpeningType.rotaryRight => _drawRotaryRight(canvas, size),
         OpeningType.rotaryLeft => _drawRotaryLeft(canvas, size),
         OpeningType.tiltTurnRight => _drawTiltTurnRight(canvas, size),

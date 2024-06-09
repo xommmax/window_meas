@@ -6,11 +6,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:window_meas/common/constants.dart';
 import 'package:window_meas/features/calc/geo_helper.dart';
+import 'package:window_meas/features/calc/polygon_ext.dart';
 import 'package:window_meas/features/editor/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/data/model/direction.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
+import 'package:window_meas/features/editor/opening_type/view/opening_type_painter.dart';
 
 class SchemePainter extends CustomPainter {
   static const lineWidth = 0.5;
@@ -18,12 +20,14 @@ class SchemePainter extends CustomPainter {
   final Scheme scheme;
   final Line? currentLine;
   final Line? openingTypeSelection;
+  final OpeningTypeDrawer drawer;
 
   SchemePainter({
     required this.scheme,
     required this.currentLine,
     required this.openingTypeSelection,
-  });
+  }) : drawer = OpeningTypeDrawer(strokeWidth: lineWidth);
+
   @override
   void paint(Canvas canvas, Size size) {
     _drawBg(canvas, size);
@@ -86,26 +90,19 @@ class SchemePainter extends CustomPainter {
   }
 
   void _drawOpeningTypes(Canvas canvas, Size size) {
-    final paint = Paint()..style = PaintingStyle.fill;
+    for (final openingTypeRecord in scheme.openingTypes) {
+      final combinedPolygon = openingTypeRecord.polygons.reduce((p1, p2) => p1.combine(p2));
 
-    for (final openingType in scheme.openingTypes) {
-      final color = Color(Random().nextInt(0xFFFFFF)).withOpacity(0.3);
-      for (final polygon in openingType.polygons) {
-        final points = polygon.points.map((e) => e.toGlobalCoord(size)).toList();
-        final path = Path();
-        path.moveTo(points.first.dx, points.first.dy);
+      canvas.save();
+      canvas.translate(combinedPolygon.globalLeft(size), combinedPolygon.globalTop(size));
 
-        for (final point in points) {
-          path.lineTo(point.dx, point.dy);
-        }
+      drawer.drawOpeningType(
+        canvas,
+        Size(combinedPolygon.globalWidth(size), combinedPolygon.globalHeight(size)),
+        openingTypeRecord.openingType,
+      );
 
-        path.close();
-
-        canvas.drawPath(
-          path,
-          paint..color = color,
-        );
-      }
+      canvas.restore();
     }
   }
 
