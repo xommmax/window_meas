@@ -40,11 +40,16 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
 
     lines.add(newLine);
 
+    final newSizeSegments = GeoHelper.calculateSegments(lines, state.scheme.sizeSegments);
+    final newPolygons = _calculatePolygons(lines);
+    final newOpeningTypes = _calculateOpeningTypes(newPolygons);
+
     emit(state.copyWith(
       scheme: state.scheme.copyWith(
         lines: lines,
-        sizeSegments: GeoHelper.calculateSegments(lines, state.scheme.sizeSegments),
-        polygons: _calculatePolygons(lines),
+        sizeSegments: newSizeSegments,
+        polygons: newPolygons,
+        openingTypes: newOpeningTypes,
       ),
     ));
   }
@@ -59,15 +64,44 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
   }
 
   void addOpeningType(OpeningType openingType, List<Polygon> polygons) {
-    OpeningTypeRecord openingTypeRecord = OpeningTypeRecord(
+    List<OpeningTypeRecord> openingTypes = List.of(state.scheme.openingTypes);
+
+    for (final openingType in openingTypes) {
+      if (openingType.hasSamePolygons(polygons)) {
+        openingTypes.remove(openingType);
+        break;
+      }
+    }
+
+    openingTypes.add(OpeningTypeRecord(
       openingType: openingType,
       polygons: polygons,
-    );
+    ));
 
     emit(state.copyWith(
       scheme: state.scheme.copyWith(
-        openingTypes: [...state.scheme.openingTypes, openingTypeRecord],
+        openingTypes: openingTypes,
       ),
     ));
+  }
+
+  List<OpeningTypeRecord> _calculateOpeningTypes(List<Polygon> newPolygons) {
+    List<OpeningTypeRecord> newOpeningTypes = [];
+
+    for (final openingType in state.scheme.openingTypes) {
+      bool polygonsNotChanged = true;
+      for (final polygon in openingType.polygons) {
+        if (!newPolygons.contains(polygon)) {
+          polygonsNotChanged = false;
+          break;
+        }
+      }
+
+      if (polygonsNotChanged) {
+        newOpeningTypes.add(openingType);
+      }
+    }
+
+    return newOpeningTypes;
   }
 }

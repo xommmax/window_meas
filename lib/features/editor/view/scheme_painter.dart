@@ -20,13 +20,13 @@ class SchemePainter extends CustomPainter {
   final Scheme scheme;
   final Line? currentLine;
   final Line? openingTypeSelection;
-  final OpeningTypeDrawer drawer;
+  final OpeningTypeDrawer openingTypeDrawer;
 
   SchemePainter({
     required this.scheme,
     required this.currentLine,
     required this.openingTypeSelection,
-  }) : drawer = OpeningTypeDrawer(strokeWidth: lineWidth);
+  }) : openingTypeDrawer = OpeningTypeDrawer(strokeWidth: lineWidth);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -96,7 +96,7 @@ class SchemePainter extends CustomPainter {
       canvas.save();
       canvas.translate(combinedPolygon.globalLeft(size), combinedPolygon.globalTop(size));
 
-      drawer.drawOpeningType(
+      openingTypeDrawer.drawOpeningType(
         canvas,
         Size(combinedPolygon.globalWidth(size), combinedPolygon.globalHeight(size)),
         openingTypeRecord.openingType,

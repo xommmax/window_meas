@@ -5,10 +5,12 @@ import 'package:window_meas/features/editor/opening_type/view/opening_type_item.
 class OpeningTypeGridView extends StatelessWidget {
   const OpeningTypeGridView({
     required this.onSelected,
+    required this.selectedOpeningType,
     super.key,
   });
 
   final Function(OpeningType) onSelected;
+  final OpeningType? selectedOpeningType;
 
   @override
   Widget build(BuildContext context) => GridView.builder(
@@ -22,7 +24,10 @@ class OpeningTypeGridView extends StatelessWidget {
         itemCount: OpeningType.values.length,
         itemBuilder: (context, index) => InkWell(
           onTap: () => onSelected(OpeningType.values[index]),
-          child: OpeningTypeItem(OpeningType.values[index]),
+          child: OpeningTypeItem(
+            OpeningType.values[index],
+            isSelected: OpeningType.values[index] == selectedOpeningType,
+          ),
         ),
       );
 }

@@ -6,7 +6,9 @@ import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/drawing_state.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
+import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_enum.dart';
+import 'package:window_meas/features/editor/opening_type/data/opening_type_record.dart';
 import 'package:window_meas/features/editor/view/editor_gesture_detector.dart';
 import 'package:window_meas/features/editor/view/scheme_painter.dart';
 import 'package:window_meas/l10n/localization.dart';
@@ -20,7 +22,7 @@ class DrawingView extends StatefulWidget {
 
 class DrawingViewState extends State<DrawingView> {
   static const minScale = 2.0;
-  static const initScale = 6.0;
+  static const initScale = 4.0;
   static const maxScale = 8.0;
 
   double currentScale = initScale;
@@ -75,34 +77,10 @@ class DrawingViewState extends State<DrawingView> {
                       (openingTypeSelection != null)
                           ? openingTypeSelection = Line(openingTypeSelection!.p1, point)
                           : null),
-                  onOpeningTypeSelectionCompleted: () async {
-                    if (openingTypeSelection != null) {
-                      final overlapPolygons = GeoHelper.getOverlapPolygons(
-                        openingTypeSelection!,
-                        context.read<DrawingCubit>().state.scheme.polygons,
-                      );
-                      setState(() => openingTypeSelection = null);
-                      if (overlapPolygons.isEmpty) return;
-
-                      final isConvex = GeoHelper.isPolygonsConvex(overlapPolygons);
-                      if (!isConvex) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(context.l10n.polygonNotConvex),
-                            duration: const Duration(milliseconds: 1400),
-                          ),
-                        );
-                        return;
-                      }
-
-                      final OpeningType? openingType = await context.push('/opening_type_list');
-                      if (openingType != null && context.mounted) {
-                        context
-                            .read<DrawingCubit>()
-                            .addOpeningType(openingType, overlapPolygons);
-                      }
-                    }
-                  },
+                  onOpeningTypeSelectionCompleted: () => _onOpeningTypeSelectionCompleted(
+                    context,
+                    context.read<DrawingCubit>().state.scheme,
+                  ),
                   child: SizedBox.expand(
                     child: BlocBuilder<DrawingCubit, DrawingState>(
                       builder: (context, state) => CustomPaint(
@@ -120,4 +98,55 @@ class DrawingViewState extends State<DrawingView> {
           );
         },
       );
+
+  Future<void> _onOpeningTypeSelectionCompleted(BuildContext context, Scheme scheme) async {
+    if (openingTypeSelection == null) return;
+
+    final overlapPolygons = GeoHelper.getOverlapPolygons(
+      openingTypeSelection!,
+      scheme.polygons,
+    );
+    setState(() => openingTypeSelection = null);
+    if (overlapPolygons.isEmpty) return;
+
+    final isConvex = GeoHelper.isPolygonsConvex(overlapPolygons);
+    if (!isConvex) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.polygonNotConvex),
+          duration: const Duration(milliseconds: 1400),
+        ),
+      );
+      return;
+    }
+
+    OpeningTypeRecord? existingOpeningType;
+
+    for (final openingType in scheme.openingTypes) {
+      if (openingType.hasSamePolygons(overlapPolygons)) {
+        existingOpeningType = openingType;
+        break;
+      }
+      for (final polygon in openingType.polygons) {
+        for (final newPolygon in overlapPolygons) {
+          if (polygon == newPolygon) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(context.l10n.openingTypeAlreadySelected),
+                duration: const Duration(milliseconds: 1400),
+              ),
+            );
+            return;
+          }
+        }
+      }
+    }
+    final OpeningType? openingType = await context.push(
+      '/opening_type_list',
+      extra: {'selectedOpeningType': existingOpeningType?.openingType},
+    );
+    if (openingType != null && context.mounted) {
+      context.read<DrawingCubit>().addOpeningType(openingType, overlapPolygons);
+    }
+  }
 }

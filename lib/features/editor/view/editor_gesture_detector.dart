@@ -56,9 +56,13 @@ class EditorGestureDetector extends GestureDetector {
 
   @override
   GestureTapUpCallback? get onTapUp => (details) async {
-        final segment = await onEditorTapUp(details.localPosition, context, size);
-        if (segment != null) {
-          onSizeSegmentAdded(segment);
+        if (_delegateDetector.onTapUp != null) {
+          _delegateDetector.onTapUp!.call(details);
+        } else {
+          final segment = await onEditorTapUp(details.localPosition, context, size);
+          if (segment != null) {
+            onSizeSegmentAdded(segment);
+          }
         }
       };
 
@@ -132,6 +136,12 @@ class _OpeningTypeGestureDetector extends GestureDetector {
     required this.onOpeningTypeSelectionCompleted,
     required this.size,
   });
+
+  @override
+  GestureTapUpCallback? get onTapUp => (details) {
+        onOpeningTypeSelectionStarted(details.localPosition.toInnerCoord(size));
+        onOpeningTypeSelectionCompleted();
+      };
 
   @override
   GestureDragDownCallback? get onPanDown =>

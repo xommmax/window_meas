@@ -69,7 +69,13 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/opening_type_list',
-      builder: (context, state) => const OpeningTypeListScreen(),
+      builder: (context, state) {
+        final Map extra = state.extra as Map? ?? {};
+
+        return OpeningTypeListScreen(
+          selectedOpeningType: extra['selectedOpeningType'],
+        );
+      },
     ),
   ],
 );

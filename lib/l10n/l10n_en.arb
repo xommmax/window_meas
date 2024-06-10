@@ -167,5 +167,6 @@
   "midHungOpeningType": "Mid hung",
   "blindOpeningType": "Blind",
   "openingTypes": "Opening types",
-  "polygonNotConvex": "Polygon is not convex"
+  "polygonNotConvex": "Polygon is not convex",
+  "openingTypeAlreadySelected": "Opening type already selected"
 }

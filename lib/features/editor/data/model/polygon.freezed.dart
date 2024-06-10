@@ -88,7 +88,7 @@ class __$$PolygonImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$PolygonImpl extends _Polygon {
+class _$PolygonImpl extends _Polygon with DiagnosticableTreeMixin {
   const _$PolygonImpl({required final List<Offset> points})
       : _points = points,
         super._();
@@ -102,21 +102,17 @@ class _$PolygonImpl extends _Polygon {
   }
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Polygon(points: $points)';
   }
 
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PolygonImpl &&
-            const DeepCollectionEquality().equals(other._points, _points));
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Polygon'))
+      ..add(DiagnosticsProperty('points', points));
   }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_points));
 
   @JsonKey(ignore: true)
   @override

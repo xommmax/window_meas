@@ -30,8 +30,9 @@ class OpeningTypePainter extends CustomPainter {
 
 class OpeningTypeDrawer {
   final Paint openingTypePaint;
+  final double strokeWidth;
 
-  OpeningTypeDrawer({required double strokeWidth})
+  OpeningTypeDrawer({required this.strokeWidth})
       : openingTypePaint = Paint()
           ..color = Colors.green
           ..strokeWidth = strokeWidth;
@@ -182,9 +183,9 @@ class OpeningTypeDrawer {
 
     canvas.drawPath(
         Path()
-          ..moveTo(size.width * 0.7, size.height / 2 - 4)
-          ..lineTo(size.width * 0.7 + 8, size.height / 2)
-          ..lineTo(size.width * 0.7, size.height / 2 + 4)
+          ..moveTo(size.width * 0.7, size.height / 2 - strokeWidth * 2)
+          ..lineTo(size.width * 0.7 + strokeWidth * 4, size.height / 2)
+          ..lineTo(size.width * 0.7, size.height / 2 + strokeWidth * 2)
           ..close(),
         openingTypePaint);
   }
@@ -198,9 +199,9 @@ class OpeningTypeDrawer {
 
     canvas.drawPath(
         Path()
-          ..moveTo(size.width * 0.3, size.height / 2 - 4)
-          ..lineTo(size.width * 0.3 - 8, size.height / 2)
-          ..lineTo(size.width * 0.3, size.height / 2 + 4)
+          ..moveTo(size.width * 0.3, size.height / 2 - strokeWidth * 2)
+          ..lineTo(size.width * 0.3 - strokeWidth * 4, size.height / 2)
+          ..lineTo(size.width * 0.3, size.height / 2 + strokeWidth * 2)
           ..close(),
         openingTypePaint);
   }
@@ -220,9 +221,9 @@ class OpeningTypeDrawer {
 
     canvas.drawPath(
         Path()
-          ..moveTo(size.width * 0.7, size.height / 2 - 4)
-          ..lineTo(size.width * 0.7 + 8, size.height / 2)
-          ..lineTo(size.width * 0.7, size.height / 2 + 4)
+          ..moveTo(size.width * 0.7, size.height / 2 - strokeWidth * 2)
+          ..lineTo(size.width * 0.7 + strokeWidth * 4, size.height / 2)
+          ..lineTo(size.width * 0.7, size.height / 2 + strokeWidth * 2)
           ..close(),
         openingTypePaint);
   }
@@ -242,9 +243,9 @@ class OpeningTypeDrawer {
 
     canvas.drawPath(
         Path()
-          ..moveTo(size.width * 0.3, size.height / 2 - 4)
-          ..lineTo(size.width * 0.3 - 8, size.height / 2)
-          ..lineTo(size.width * 0.3, size.height / 2 + 4)
+          ..moveTo(size.width * 0.3, size.height / 2 - strokeWidth * 2)
+          ..lineTo(size.width * 0.3 - strokeWidth * 4, size.height / 2)
+          ..lineTo(size.width * 0.3, size.height / 2 + strokeWidth * 2)
           ..close(),
         openingTypePaint);
   }
@@ -261,15 +262,15 @@ class OpeningTypeDrawer {
       openingTypePaint,
     );
     canvas.drawLine(
-      Offset(size.width * 0.3 - 4, size.height / 2),
+      Offset(size.width * 0.3 - strokeWidth * 2, size.height / 2),
       Offset(size.width * 0.7, size.height / 2),
       openingTypePaint,
     );
     canvas.drawPath(
       Path()
-        ..moveTo(size.width * 0.7 - 4, size.height / 2 - 4)
-        ..lineTo(size.width * 0.7 + 4, size.height / 2)
-        ..lineTo(size.width * 0.7 - 4, size.height / 2 + 4)
+        ..moveTo(size.width * 0.7 - strokeWidth * 2, size.height / 2 - strokeWidth * 2)
+        ..lineTo(size.width * 0.7 + strokeWidth * 2, size.height / 2)
+        ..lineTo(size.width * 0.7 - strokeWidth * 2, size.height / 2 + strokeWidth * 2)
         ..close(),
       openingTypePaint,
     );
@@ -287,16 +288,16 @@ class OpeningTypeDrawer {
       openingTypePaint,
     );
     canvas.drawLine(
-      Offset(size.width * 0.7 + 4, size.height / 2),
+      Offset(size.width * 0.7 + strokeWidth * 2, size.height / 2),
       Offset(size.width * 0.3, size.height / 2),
       openingTypePaint,
     );
 
     canvas.drawPath(
         Path()
-          ..moveTo(size.width * 0.3 + 4, size.height / 2 - 4)
-          ..lineTo(size.width * 0.3 - 4, size.height / 2)
-          ..lineTo(size.width * 0.3 + 4, size.height / 2 + 4)
+          ..moveTo(size.width * 0.3 + strokeWidth * 2, size.height / 2 - strokeWidth * 2)
+          ..lineTo(size.width * 0.3 - strokeWidth * 2, size.height / 2)
+          ..lineTo(size.width * 0.3 + strokeWidth * 2, size.height / 2 + strokeWidth * 2)
           ..close(),
         openingTypePaint);
   }

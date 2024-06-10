@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:window_meas/features/editor/data/model/polygon_db.dart';
 
@@ -23,4 +25,11 @@ class Polygon with _$Polygon {
           (index) => Offset(db.dx[index], db.dy[index]),
         ),
       );
+
+  @override
+  operator ==(other) =>
+      other is Polygon && const UnorderedIterableEquality().equals(points, other.points);
+
+  @override
+  int get hashCode => points.hashCode;
 }

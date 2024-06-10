@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:window_meas/features/editor/data/model/polygon.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_enum.dart';
@@ -22,4 +23,7 @@ class OpeningTypeRecord with _$OpeningTypeRecord {
         openingType: db.openingType,
         polygons: db.polygons.map((e) => Polygon.fromDB(e)).toList(),
       );
+
+  bool hasSamePolygons(List<Polygon> otherPolygons) =>
+      const UnorderedIterableEquality().equals(polygons, otherPolygons);
 }

@@ -167,5 +167,6 @@
   "midHungOpeningType": "Середньо підвісний",
   "blindOpeningType": "Глухий",
   "openingTypes": "Варіанти відкриття",
-  "polygonNotConvex": "Вибрана зона не є випуклою"
+  "polygonNotConvex": "Вибрана зона не є випуклою",
+  "openingTypeAlreadySelected": "Для вибраної зони вже визначено варіант відкриття"
 }

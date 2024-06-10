@@ -6,16 +6,18 @@ import 'package:window_meas/features/editor/opening_type/view/opening_type_paint
 class OpeningTypeItem extends StatelessWidget {
   const OpeningTypeItem(
     this.openingType, {
+    required this.isSelected,
     super.key,
   });
 
   final OpeningType openingType;
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) => Container(
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.primary.withOpacity(0.5), width: 0.5),
-          color: AppColors.primary.withOpacity(0.1),
+          color: isSelected ? AppColors.primary.withOpacity(0.4) : AppColors.primary.withOpacity(0.1),
         ),
         padding: const EdgeInsets.only(bottom: 6),
         child: Column(
@@ -36,9 +38,7 @@ class OpeningTypeItem extends StatelessWidget {
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontSize: 10,
-              )
+              style: const TextStyle(fontSize: 10),
             ),
           ],
         ),
