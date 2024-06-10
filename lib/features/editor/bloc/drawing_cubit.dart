@@ -8,6 +8,8 @@ import 'package:window_meas/features/editor/bloc/drawing_state.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
+import 'package:window_meas/features/editor/filling_type/data/filling_type_enum.dart';
+import 'package:window_meas/features/editor/filling_type/data/filling_type_record.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_enum.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_record.dart';
 
@@ -43,6 +45,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     final newSizeSegments = GeoHelper.calculateSegments(lines, state.scheme.sizeSegments);
     final newPolygons = _calculatePolygons(lines);
     final newOpeningTypes = _calculateOpeningTypes(newPolygons);
+    final newFillingTypes = _calculateFillingTypes(newPolygons);
 
     emit(state.copyWith(
       scheme: state.scheme.copyWith(
@@ -50,6 +53,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
         sizeSegments: newSizeSegments,
         polygons: newPolygons,
         openingTypes: newOpeningTypes,
+        fillingTypes: newFillingTypes,
       ),
     ));
   }
@@ -66,12 +70,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
   void addOpeningType(OpeningType openingType, List<Polygon> polygons) {
     List<OpeningTypeRecord> openingTypes = List.of(state.scheme.openingTypes);
 
-    for (final openingType in openingTypes) {
-      if (openingType.hasSamePolygons(polygons)) {
-        openingTypes.remove(openingType);
-        break;
-      }
-    }
+    openingTypes.removeWhere((e) => e.hasSamePolygons(polygons));
 
     if (openingType != OpeningType.blind) {
       openingTypes.add(OpeningTypeRecord(
@@ -83,6 +82,25 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     emit(state.copyWith(
       scheme: state.scheme.copyWith(
         openingTypes: openingTypes,
+      ),
+    ));
+  }
+
+  void addFillingType(FillingType fillingType, List<Polygon> polygons) {
+    List<FillingTypeRecord> fillingTypes = List.of(state.scheme.fillingTypes);
+
+    fillingTypes.removeWhere((e) => polygons.contains(e.polygon));
+
+    for (final polygon in polygons) {
+      fillingTypes.add(FillingTypeRecord(
+        fillingType: fillingType,
+        polygon: polygon,
+      ));
+    }
+
+    emit(state.copyWith(
+      scheme: state.scheme.copyWith(
+        fillingTypes: fillingTypes,
       ),
     ));
   }
@@ -105,5 +123,17 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     }
 
     return newOpeningTypes;
+  }
+
+  List<FillingTypeRecord> _calculateFillingTypes(List<Polygon> newPolygons) {
+    List<FillingTypeRecord> newFillingTypes = [];
+
+    for (final fillingType in state.scheme.fillingTypes) {
+      if (newPolygons.contains(fillingType.polygon)) {
+        newFillingTypes.add(fillingType);
+      }
+    }
+
+    return newFillingTypes;
   }
 }

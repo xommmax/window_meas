@@ -41,7 +41,8 @@ const TemplateDBSchema = CollectionSchema(
     r'LineDB': LineDBSchema,
     r'SizeSegmentDB': SizeSegmentDBSchema,
     r'PolygonDB': PolygonDBSchema,
-    r'OpeningTypeRecordDB': OpeningTypeRecordDBSchema
+    r'OpeningTypeRecordDB': OpeningTypeRecordDBSchema,
+    r'FillingTypeRecordDB': FillingTypeRecordDBSchema
   },
   getId: _templateDBGetId,
   getLinks: _templateDBGetLinks,

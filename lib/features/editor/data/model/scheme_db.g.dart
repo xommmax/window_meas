@@ -13,26 +13,32 @@ const SchemeDBSchema = Schema(
   name: r'SchemeDB',
   id: -7992904371586469471,
   properties: {
-    r'lines': PropertySchema(
+    r'fillingTypes': PropertySchema(
       id: 0,
+      name: r'fillingTypes',
+      type: IsarType.objectList,
+      target: r'FillingTypeRecordDB',
+    ),
+    r'lines': PropertySchema(
+      id: 1,
       name: r'lines',
       type: IsarType.objectList,
       target: r'LineDB',
     ),
     r'openingTypes': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'openingTypes',
       type: IsarType.objectList,
       target: r'OpeningTypeRecordDB',
     ),
     r'polygons': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'polygons',
       type: IsarType.objectList,
       target: r'PolygonDB',
     ),
     r'sizeSegments': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'sizeSegments',
       type: IsarType.objectList,
       target: r'SizeSegmentDB',
@@ -50,6 +56,15 @@ int _schemeDBEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  bytesCount += 3 + object.fillingTypes.length * 3;
+  {
+    final offsets = allOffsets[FillingTypeRecordDB]!;
+    for (var i = 0; i < object.fillingTypes.length; i++) {
+      final value = object.fillingTypes[i];
+      bytesCount +=
+          FillingTypeRecordDBSchema.estimateSize(value, offsets, allOffsets);
+    }
+  }
   bytesCount += 3 + object.lines.length * 3;
   {
     final offsets = allOffsets[LineDB]!;
@@ -93,26 +108,32 @@ void _schemeDBSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeObjectList<LineDB>(
+  writer.writeObjectList<FillingTypeRecordDB>(
     offsets[0],
+    allOffsets,
+    FillingTypeRecordDBSchema.serialize,
+    object.fillingTypes,
+  );
+  writer.writeObjectList<LineDB>(
+    offsets[1],
     allOffsets,
     LineDBSchema.serialize,
     object.lines,
   );
   writer.writeObjectList<OpeningTypeRecordDB>(
-    offsets[1],
+    offsets[2],
     allOffsets,
     OpeningTypeRecordDBSchema.serialize,
     object.openingTypes,
   );
   writer.writeObjectList<PolygonDB>(
-    offsets[2],
+    offsets[3],
     allOffsets,
     PolygonDBSchema.serialize,
     object.polygons,
   );
   writer.writeObjectList<SizeSegmentDB>(
-    offsets[3],
+    offsets[4],
     allOffsets,
     SizeSegmentDBSchema.serialize,
     object.sizeSegments,
@@ -126,29 +147,36 @@ SchemeDB _schemeDBDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = SchemeDB();
-  object.lines = reader.readObjectList<LineDB>(
+  object.fillingTypes = reader.readObjectList<FillingTypeRecordDB>(
         offsets[0],
+        FillingTypeRecordDBSchema.deserialize,
+        allOffsets,
+        FillingTypeRecordDB(),
+      ) ??
+      [];
+  object.lines = reader.readObjectList<LineDB>(
+        offsets[1],
         LineDBSchema.deserialize,
         allOffsets,
         LineDB(),
       ) ??
       [];
   object.openingTypes = reader.readObjectList<OpeningTypeRecordDB>(
-        offsets[1],
+        offsets[2],
         OpeningTypeRecordDBSchema.deserialize,
         allOffsets,
         OpeningTypeRecordDB(),
       ) ??
       [];
   object.polygons = reader.readObjectList<PolygonDB>(
-        offsets[2],
+        offsets[3],
         PolygonDBSchema.deserialize,
         allOffsets,
         PolygonDB(),
       ) ??
       [];
   object.sizeSegments = reader.readObjectList<SizeSegmentDB>(
-        offsets[3],
+        offsets[4],
         SizeSegmentDBSchema.deserialize,
         allOffsets,
         SizeSegmentDB(),
@@ -165,6 +193,14 @@ P _schemeDBDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
+      return (reader.readObjectList<FillingTypeRecordDB>(
+            offset,
+            FillingTypeRecordDBSchema.deserialize,
+            allOffsets,
+            FillingTypeRecordDB(),
+          ) ??
+          []) as P;
+    case 1:
       return (reader.readObjectList<LineDB>(
             offset,
             LineDBSchema.deserialize,
@@ -172,7 +208,7 @@ P _schemeDBDeserializeProp<P>(
             LineDB(),
           ) ??
           []) as P;
-    case 1:
+    case 2:
       return (reader.readObjectList<OpeningTypeRecordDB>(
             offset,
             OpeningTypeRecordDBSchema.deserialize,
@@ -180,7 +216,7 @@ P _schemeDBDeserializeProp<P>(
             OpeningTypeRecordDB(),
           ) ??
           []) as P;
-    case 2:
+    case 3:
       return (reader.readObjectList<PolygonDB>(
             offset,
             PolygonDBSchema.deserialize,
@@ -188,7 +224,7 @@ P _schemeDBDeserializeProp<P>(
             PolygonDB(),
           ) ??
           []) as P;
-    case 3:
+    case 4:
       return (reader.readObjectList<SizeSegmentDB>(
             offset,
             SizeSegmentDBSchema.deserialize,
@@ -203,6 +239,95 @@ P _schemeDBDeserializeProp<P>(
 
 extension SchemeDBQueryFilter
     on QueryBuilder<SchemeDB, SchemeDB, QFilterCondition> {
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      fillingTypesLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'fillingTypes',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      fillingTypesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'fillingTypes',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      fillingTypesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'fillingTypes',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      fillingTypesLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'fillingTypes',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      fillingTypesLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'fillingTypes',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      fillingTypesLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'fillingTypes',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
   QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> linesLengthEqualTo(
       int length) {
     return QueryBuilder.apply(this, (query) {
@@ -555,6 +680,13 @@ extension SchemeDBQueryFilter
 
 extension SchemeDBQueryObject
     on QueryBuilder<SchemeDB, SchemeDB, QFilterCondition> {
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> fillingTypesElement(
+      FilterQuery<FillingTypeRecordDB> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'fillingTypes');
+    });
+  }
+
   QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> linesElement(
       FilterQuery<LineDB> q) {
     return QueryBuilder.apply(this, (query) {

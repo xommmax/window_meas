@@ -16,6 +16,9 @@ class EditorGestureDetector extends GestureDetector {
   final Function(Offset) onOpeningTypeSelectionStarted;
   final Function(Offset) onOpeningTypeSelectionUpdated;
   final Function() onOpeningTypeSelectionCompleted;
+  final Function(Offset) onFillingTypeSelectionStarted;
+  final Function(Offset) onFillingTypeSelectionUpdated;
+  final Function() onFillingTypeSelectionCompleted;
 
   final EditorMode mode;
   final GestureDetector _delegateDetector;
@@ -32,6 +35,9 @@ class EditorGestureDetector extends GestureDetector {
     required this.onOpeningTypeSelectionStarted,
     required this.onOpeningTypeSelectionUpdated,
     required this.onOpeningTypeSelectionCompleted,
+    required this.onFillingTypeSelectionStarted,
+    required this.onFillingTypeSelectionUpdated,
+    required this.onFillingTypeSelectionCompleted,
     required this.mode,
     required super.child,
     super.key,
@@ -50,6 +56,12 @@ class EditorGestureDetector extends GestureDetector {
               onOpeningTypeSelectionStarted: onOpeningTypeSelectionStarted,
               onOpeningTypeSelectionUpdated: onOpeningTypeSelectionUpdated,
               onOpeningTypeSelectionCompleted: onOpeningTypeSelectionCompleted,
+              size: size,
+            ),
+          EditorMode.fillingType => _FillingTypeGestureDetector(
+              onFillingTypeSelectionStarted: onFillingTypeSelectionStarted,
+              onFillingTypeSelectionUpdated: onFillingTypeSelectionUpdated,
+              onFillingTypeSelectionCompleted: onFillingTypeSelectionCompleted,
               size: size,
             ),
         };
@@ -153,4 +165,35 @@ class _OpeningTypeGestureDetector extends GestureDetector {
 
   @override
   GestureDragEndCallback? get onPanEnd => (details) => onOpeningTypeSelectionCompleted();
+}
+
+class _FillingTypeGestureDetector extends GestureDetector {
+  final Function(Offset) onFillingTypeSelectionStarted;
+  final Function(Offset) onFillingTypeSelectionUpdated;
+  final Function() onFillingTypeSelectionCompleted;
+  final Size size;
+
+  _FillingTypeGestureDetector({
+    required this.onFillingTypeSelectionStarted,
+    required this.onFillingTypeSelectionUpdated,
+    required this.onFillingTypeSelectionCompleted,
+    required this.size,
+  });
+
+  @override
+  GestureTapUpCallback? get onTapUp => (details) {
+        onFillingTypeSelectionStarted(details.localPosition.toInnerCoord(size));
+        onFillingTypeSelectionCompleted();
+      };
+
+  @override
+  GestureDragDownCallback? get onPanDown =>
+      (details) => onFillingTypeSelectionStarted(details.localPosition.toInnerCoord(size));
+
+  @override
+  GestureDragUpdateCallback? get onPanUpdate =>
+      (details) => onFillingTypeSelectionUpdated(details.localPosition.toInnerCoord(size));
+
+  @override
+  GestureDragEndCallback? get onPanEnd => (details) => onFillingTypeSelectionCompleted();
 }

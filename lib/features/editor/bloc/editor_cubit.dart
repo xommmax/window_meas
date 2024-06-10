@@ -40,4 +40,5 @@ enum EditorMode {
   draw,
   move,
   openingType,
+  fillingType,
 }

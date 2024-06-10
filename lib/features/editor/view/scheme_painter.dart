@@ -12,6 +12,7 @@ import 'package:window_meas/features/editor/data/model/direction.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
+import 'package:window_meas/features/editor/filling_type/view/filling_type_painter.dart';
 import 'package:window_meas/features/editor/opening_type/view/opening_type_painter.dart';
 
 class SchemePainter extends CustomPainter {
@@ -20,22 +21,28 @@ class SchemePainter extends CustomPainter {
   final Scheme scheme;
   final Line? currentLine;
   final Line? openingTypeSelection;
+  final Line? fillingTypeSelection;
   final OpeningTypeDrawer openingTypeDrawer;
+  final FillingTypeDrawer fillingTypeDrawer;
 
   SchemePainter({
     required this.scheme,
     required this.currentLine,
     required this.openingTypeSelection,
-  }) : openingTypeDrawer = OpeningTypeDrawer(strokeWidth: lineWidth);
+    required this.fillingTypeSelection,
+  })  : openingTypeDrawer = OpeningTypeDrawer(strokeWidth: lineWidth),
+        fillingTypeDrawer = FillingTypeDrawer(strokeWidth: lineWidth);
 
   @override
   void paint(Canvas canvas, Size size) {
     _drawBg(canvas, size);
     _drawLines(canvas, size);
-    _drawCurrentLine(canvas, size);
-    _drawMeasurements(canvas, size);
+    _drawFillingTypes(canvas, size);
     _drawOpeningTypes(canvas, size);
+    _drawFillingTypeSelection(canvas, size);
     _drawOpeningTypeSelection(canvas, size);
+    _drawMeasurements(canvas, size);
+    _drawCurrentLine(canvas, size);
   }
 
   @override
@@ -43,8 +50,10 @@ class SchemePainter extends CustomPainter {
       !listEquals(scheme.lines, oldDelegate.scheme.lines) ||
       !listEquals(scheme.sizeSegments, oldDelegate.scheme.sizeSegments) ||
       !listEquals(scheme.openingTypes, oldDelegate.scheme.openingTypes) ||
+      !listEquals(scheme.fillingTypes, oldDelegate.scheme.fillingTypes) ||
       currentLine != oldDelegate.currentLine ||
-      openingTypeSelection != oldDelegate.openingTypeSelection;
+      openingTypeSelection != oldDelegate.openingTypeSelection ||
+      fillingTypeSelection != oldDelegate.fillingTypeSelection;
 
   void _drawBg(Canvas canvas, Size size) {
     final pointsPaint = Paint()
@@ -106,6 +115,21 @@ class SchemePainter extends CustomPainter {
     }
   }
 
+  void _drawFillingTypes(Canvas canvas, Size size) {
+    for (final fillingType in scheme.fillingTypes) {
+      canvas.save();
+      canvas.translate(fillingType.polygon.globalLeft(size), fillingType.polygon.globalTop(size));
+
+      fillingTypeDrawer.drawFillingType(
+        canvas,
+        Size(fillingType.polygon.globalWidth(size), fillingType.polygon.globalHeight(size)),
+        fillingType.fillingType,
+      );
+
+      canvas.restore();
+    }
+  }
+
   void _drawOpeningTypeSelection(Canvas canvas, Size size) {
     if (openingTypeSelection == null) return;
 
@@ -120,6 +144,41 @@ class SchemePainter extends CustomPainter {
     );
 
     final overlapPolygons = GeoHelper.getOverlapPolygons(openingTypeSelection!, scheme.polygons);
+
+    final polygonPaint = Paint()..style = PaintingStyle.fill;
+
+    for (final polygon in overlapPolygons) {
+      final points = polygon.points.map((e) => e.toGlobalCoord(size)).toList();
+      final path = Path();
+      path.moveTo(points.first.dx, points.first.dy);
+
+      for (final point in points) {
+        path.lineTo(point.dx, point.dy);
+      }
+
+      path.close();
+
+      canvas.drawPath(
+        path,
+        polygonPaint..color = Colors.green.withOpacity(0.3),
+      );
+    }
+  }
+
+  void _drawFillingTypeSelection(Canvas canvas, Size size) {
+    if (fillingTypeSelection == null) return;
+
+    final selectionPaint = Paint()..color = Colors.green.withOpacity(0.3);
+
+    canvas.drawRect(
+      Rect.fromPoints(
+        fillingTypeSelection!.p1.toGlobalCoord(size),
+        fillingTypeSelection!.p2.toGlobalCoord(size),
+      ),
+      selectionPaint,
+    );
+
+    final overlapPolygons = GeoHelper.getOverlapPolygons(fillingTypeSelection!, scheme.polygons);
 
     final polygonPaint = Paint()..style = PaintingStyle.fill;
 

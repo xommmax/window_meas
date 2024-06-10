@@ -168,5 +168,6 @@
   "blindOpeningType": "Blind",
   "openingTypes": "Opening types",
   "polygonNotConvex": "Polygon is not convex",
-  "openingTypeAlreadySelected": "Opening type already selected"
+  "openingTypeAlreadySelected": "Opening type already selected",
+  "fillingTypes": "Filling types"
 }

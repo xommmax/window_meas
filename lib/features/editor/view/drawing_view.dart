@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,7 @@ import 'package:window_meas/features/editor/bloc/drawing_state.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
+import 'package:window_meas/features/editor/filling_type/data/filling_type_enum.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_enum.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_record.dart';
 import 'package:window_meas/features/editor/view/editor_gesture_detector.dart';
@@ -31,6 +33,7 @@ class DrawingViewState extends State<DrawingView> {
   Offset focalPointDelta = const Offset(0, 0);
   Line? currentLine;
   Line? openingTypeSelection;
+  Line? fillingTypeSelection;
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
@@ -81,6 +84,16 @@ class DrawingViewState extends State<DrawingView> {
                     context,
                     context.read<DrawingCubit>().state.scheme,
                   ),
+                  onFillingTypeSelectionStarted: (point) =>
+                      setState(() => fillingTypeSelection = Line(point, point)),
+                  onFillingTypeSelectionUpdated: (point) => setState(() =>
+                      (fillingTypeSelection != null)
+                          ? fillingTypeSelection = Line(fillingTypeSelection!.p1, point)
+                          : null),
+                  onFillingTypeSelectionCompleted: () => _onFillingTypeSelectionCompleted(
+                    context,
+                    context.read<DrawingCubit>().state.scheme,
+                  ),
                   child: SizedBox.expand(
                     child: BlocBuilder<DrawingCubit, DrawingState>(
                       builder: (context, state) => CustomPaint(
@@ -88,6 +101,7 @@ class DrawingViewState extends State<DrawingView> {
                           currentLine: currentLine,
                           scheme: state.scheme,
                           openingTypeSelection: openingTypeSelection,
+                          fillingTypeSelection: fillingTypeSelection,
                         ),
                       ),
                     ),
@@ -147,6 +161,41 @@ class DrawingViewState extends State<DrawingView> {
     );
     if (openingType != null && context.mounted) {
       context.read<DrawingCubit>().addOpeningType(openingType, overlapPolygons);
+    }
+  }
+
+  Future<void> _onFillingTypeSelectionCompleted(BuildContext context, Scheme scheme) async {
+    if (fillingTypeSelection == null) return;
+
+    final overlapPolygons = GeoHelper.getOverlapPolygons(
+      fillingTypeSelection!,
+      scheme.polygons,
+    );
+    setState(() => fillingTypeSelection = null);
+    if (overlapPolygons.isEmpty) return;
+
+    final isConvex = GeoHelper.isPolygonsConvex(overlapPolygons);
+    if (!isConvex) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(context.l10n.polygonNotConvex),
+          duration: const Duration(milliseconds: 1400),
+        ),
+      );
+      return;
+    }
+
+    final FillingType? existingFillingType = (overlapPolygons.length == 1)
+        ? scheme.fillingTypes
+            .firstWhereOrNull((e) => e.polygon == overlapPolygons.first)
+            ?.fillingType
+        : null;
+    final FillingType? fillingType = await context.push(
+      '/filling_type_list',
+      extra: {'selectedFillingType': existingFillingType},
+    );
+    if (fillingType != null && context.mounted) {
+      context.read<DrawingCubit>().addFillingType(fillingType, overlapPolygons);
     }
   }
 }
