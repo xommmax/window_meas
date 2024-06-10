@@ -24,6 +24,7 @@ import 'package:window_meas/features/meas/data/params/windowsill_depth_enum.dart
 import 'package:window_meas/features/meas/data/params/windowsill_extension_enum.dart';
 import 'package:window_meas/features/meas/data/params/windowsill_type_enum.dart';
 import 'package:window_meas/features/editor/filling_type/data/filling_type_record_db.dart';
+import 'package:window_meas/features/editor/data/model/arch_db.dart';
 
 part 'measurement_db.g.dart';
 

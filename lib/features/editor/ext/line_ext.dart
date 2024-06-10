@@ -42,4 +42,23 @@ extension LineExt on Line {
 
     return Line(min!, max!);
   }
+
+  bool contains(Offset p) {
+    double crossProduct = (p.dy - p1.dy) * (p2.dx - p1.dx) - (p.dx - p1.dx) * (p2.dy - p1.dy);
+    if (crossProduct.abs() > 1e-10) {
+      return false;
+    }
+
+    double dotProduct = (p.dx - p1.dx) * (p2.dx - p1.dx) + (p.dy - p1.dy) * (p2.dy - p1.dy);
+    if (dotProduct < 0) {
+      return false;
+    }
+
+    double squaredLengthBA = (p2.dx - p1.dx) * (p2.dx - p1.dx) + (p2.dy - p1.dy) * (p2.dy - p1.dy);
+    if (dotProduct > squaredLengthBA) {
+      return false;
+    }
+
+    return true;
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:replay_bloc/replay_bloc.dart';
 import 'package:window_meas/features/calc/geo_helper.dart';
+import 'package:window_meas/features/editor/data/model/arch.dart';
 import 'package:window_meas/features/editor/data/model/polygon.dart';
 import 'package:window_meas/features/editor/ext/line_ext.dart';
 import 'package:window_meas/features/calc/polygon_finder/polygon_finder.dart';
@@ -135,5 +136,40 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     }
 
     return newFillingTypes;
+  }
+
+  void addArch(Arch newArch) {
+    // if (newLine.p1 == newLine.p2) return;
+    // final lines = List.of(state.scheme.lines);
+
+    // bool isOverlapping;
+    // do {
+    //   isOverlapping = false;
+    //   for (final line in lines) {
+    //     if (line.isOverlapping(newLine)) {
+    //       isOverlapping = true;
+    //       lines.remove(line);
+    //       newLine = line.mergeOverlapping(newLine);
+    //       break;
+    //     }
+    //   }
+    // } while (isOverlapping);
+
+    // lines.add(newLine);
+
+    // final newSizeSegments = GeoHelper.calculateSegments(lines, state.scheme.sizeSegments);
+    // final newPolygons = _calculatePolygons(lines);
+    // final newOpeningTypes = _calculateOpeningTypes(newPolygons);
+    // final newFillingTypes = _calculateFillingTypes(newPolygons);
+
+    // emit(state.copyWith(
+    //   scheme: state.scheme.copyWith(
+    //     lines: lines,
+    //     sizeSegments: newSizeSegments,
+    //     polygons: newPolygons,
+    //     openingTypes: newOpeningTypes,
+    //     fillingTypes: newFillingTypes,
+    //   ),
+    // ));
   }
 }

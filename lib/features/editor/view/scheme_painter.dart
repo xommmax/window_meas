@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:window_meas/common/constants.dart';
 import 'package:window_meas/features/calc/geo_helper.dart';
 import 'package:window_meas/features/calc/polygon_ext.dart';
+import 'package:window_meas/features/editor/data/model/arch.dart';
 import 'package:window_meas/features/editor/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/data/model/direction.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
@@ -24,12 +25,14 @@ class SchemePainter extends CustomPainter {
   final Line? fillingTypeSelection;
   final OpeningTypeDrawer openingTypeDrawer;
   final FillingTypeDrawer fillingTypeDrawer;
+  final Arch? currentArch;
 
   SchemePainter({
     required this.scheme,
     required this.currentLine,
     required this.openingTypeSelection,
     required this.fillingTypeSelection,
+    required this.currentArch,
   })  : openingTypeDrawer = OpeningTypeDrawer(strokeWidth: lineWidth),
         fillingTypeDrawer = FillingTypeDrawer(strokeWidth: lineWidth);
 
@@ -37,11 +40,13 @@ class SchemePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     _drawBg(canvas, size);
     _drawLines(canvas, size);
+    _drawArches(canvas, size);
     _drawFillingTypes(canvas, size);
     _drawOpeningTypes(canvas, size);
     _drawFillingTypeSelection(canvas, size);
     _drawOpeningTypeSelection(canvas, size);
     _drawMeasurements(canvas, size);
+    _drawCurrentArch(canvas, size);
     _drawCurrentLine(canvas, size);
   }
 
@@ -51,7 +56,9 @@ class SchemePainter extends CustomPainter {
       !listEquals(scheme.sizeSegments, oldDelegate.scheme.sizeSegments) ||
       !listEquals(scheme.openingTypes, oldDelegate.scheme.openingTypes) ||
       !listEquals(scheme.fillingTypes, oldDelegate.scheme.fillingTypes) ||
+      !listEquals(scheme.arches, oldDelegate.scheme.arches) ||
       currentLine != oldDelegate.currentLine ||
+      currentArch != oldDelegate.currentArch ||
       openingTypeSelection != oldDelegate.openingTypeSelection ||
       fillingTypeSelection != oldDelegate.fillingTypeSelection;
 
@@ -196,6 +203,46 @@ class SchemePainter extends CustomPainter {
       canvas.drawPath(
         path,
         polygonPaint..color = Colors.green.withOpacity(0.3),
+      );
+    }
+  }
+
+  void _drawArches(Canvas canvas, Size size) {
+    final linePaint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = lineWidth;
+
+    for (final arch in scheme.arches) {
+      canvas.drawLine(arch.p1.toGlobalCoord(size), arch.p2.toGlobalCoord(size), linePaint);
+    }
+  }
+
+  void _drawCurrentArch(Canvas canvas, Size size) {
+    if (currentArch == null) return;
+
+    final linePaint = Paint()
+      ..color = Colors.green
+      ..strokeWidth = lineWidth;
+
+    if (currentArch!.top == null) {
+      canvas.drawLine(
+        currentArch!.p1.toGlobalCoord(size),
+        currentArch!.p2.toGlobalCoord(size),
+        linePaint,
+      );
+    } else {
+      canvas.drawArc(
+        Rect.fromPoints(
+          Offset(currentArch!.p1.dx, currentArch!.top!.dy).toGlobalCoord(size),
+          Offset(
+            currentArch!.p2.dx,
+            currentArch!.p2.dy - (currentArch!.top!.dy - currentArch!.p2.dy),
+          ).toGlobalCoord(size),
+        ),
+        currentArch!.top!.dy < currentArch!.p1.dx ? pi : 0,
+        pi,
+        false,
+        linePaint,
       );
     }
   }

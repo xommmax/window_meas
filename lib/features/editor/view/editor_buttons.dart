@@ -17,6 +17,10 @@ class EditorButtons extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _Button(
+                onPressed: () => context.read<EditorCubit>().changeMode(EditorMode.arch),
+                icon: FontAwesomeIcons.archway,
+              ),
+              _Button(
                 onPressed: () => context.read<EditorCubit>().changeMode(EditorMode.fillingType),
                 icon: FontAwesomeIcons.solidSquare,
               ),

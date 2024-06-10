@@ -6,8 +6,10 @@ import 'package:window_meas/features/calc/geo_helper.dart';
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/drawing_state.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
+import 'package:window_meas/features/editor/data/model/arch.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
+import 'package:window_meas/features/editor/ext/line_ext.dart';
 import 'package:window_meas/features/editor/filling_type/data/filling_type_enum.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_enum.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_record.dart';
@@ -34,6 +36,8 @@ class DrawingViewState extends State<DrawingView> {
   Line? currentLine;
   Line? openingTypeSelection;
   Line? fillingTypeSelection;
+  Arch? currentArch;
+  bool isMovingArchTop = false;
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
@@ -48,10 +52,10 @@ class DrawingViewState extends State<DrawingView> {
                 builder: (context, state) => EditorGestureDetector(
                   context: context,
                   size: size,
+                  mode: state.mode,
                   onSizeSegmentAdded: (segment) => (context.mounted)
                       ? context.read<DrawingCubit>().addSizeSegment(segment)
                       : null,
-                  mode: state.mode,
                   onLineStarted: (point) => setState(() => currentLine = Line(point, point)),
                   onLineUpdated: (point) => setState(() =>
                       (currentLine != null) ? currentLine = Line(currentLine!.p1, point) : null),
@@ -94,6 +98,38 @@ class DrawingViewState extends State<DrawingView> {
                     context,
                     context.read<DrawingCubit>().state.scheme,
                   ),
+                  onArchStarted: (point) => setState(
+                      () => isMovingArchTop ? null : currentArch = Arch(point, point, null)),
+                  onArchUpdated: (point) => setState(() => (currentArch != null)
+                      ? currentArch = Arch(
+                          currentArch!.p1,
+                          isMovingArchTop ? currentArch!.p2 : Offset(point.dx, currentArch!.p1.dy),
+                          isMovingArchTop ? point : null,
+                        )
+                      : null),
+                  onArchCompleted: () {
+                    if (currentArch != null &&
+                        !context.read<DrawingCubit>().state.scheme.lines.any((line) =>
+                            line.contains(currentArch!.p1) && line.contains(currentArch!.p2))) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(context.l10n.archShouldBeOnLine),
+                          duration: const Duration(milliseconds: 1400),
+                        ),
+                      );
+                      setState(() => currentArch = null);
+                    } else {
+                      if (isMovingArchTop) {
+                        isMovingArchTop = false;
+                        if (currentArch != null) {
+                          context.read<DrawingCubit>().addArch(currentArch!);
+                        }
+                        currentArch = null;
+                      } else {
+                        isMovingArchTop = true;
+                      }
+                    }
+                  },
                   child: SizedBox.expand(
                     child: BlocBuilder<DrawingCubit, DrawingState>(
                       builder: (context, state) => CustomPaint(
@@ -102,6 +138,7 @@ class DrawingViewState extends State<DrawingView> {
                           scheme: state.scheme,
                           openingTypeSelection: openingTypeSelection,
                           fillingTypeSelection: fillingTypeSelection,
+                          currentArch: currentArch,
                         ),
                       ),
                     ),

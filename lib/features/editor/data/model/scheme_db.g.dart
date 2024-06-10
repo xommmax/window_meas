@@ -13,32 +13,38 @@ const SchemeDBSchema = Schema(
   name: r'SchemeDB',
   id: -7992904371586469471,
   properties: {
-    r'fillingTypes': PropertySchema(
+    r'arches': PropertySchema(
       id: 0,
+      name: r'arches',
+      type: IsarType.objectList,
+      target: r'ArchDB',
+    ),
+    r'fillingTypes': PropertySchema(
+      id: 1,
       name: r'fillingTypes',
       type: IsarType.objectList,
       target: r'FillingTypeRecordDB',
     ),
     r'lines': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'lines',
       type: IsarType.objectList,
       target: r'LineDB',
     ),
     r'openingTypes': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'openingTypes',
       type: IsarType.objectList,
       target: r'OpeningTypeRecordDB',
     ),
     r'polygons': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'polygons',
       type: IsarType.objectList,
       target: r'PolygonDB',
     ),
     r'sizeSegments': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'sizeSegments',
       type: IsarType.objectList,
       target: r'SizeSegmentDB',
@@ -56,6 +62,14 @@ int _schemeDBEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  bytesCount += 3 + object.arches.length * 3;
+  {
+    final offsets = allOffsets[ArchDB]!;
+    for (var i = 0; i < object.arches.length; i++) {
+      final value = object.arches[i];
+      bytesCount += ArchDBSchema.estimateSize(value, offsets, allOffsets);
+    }
+  }
   bytesCount += 3 + object.fillingTypes.length * 3;
   {
     final offsets = allOffsets[FillingTypeRecordDB]!;
@@ -108,32 +122,38 @@ void _schemeDBSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeObjectList<FillingTypeRecordDB>(
+  writer.writeObjectList<ArchDB>(
     offsets[0],
+    allOffsets,
+    ArchDBSchema.serialize,
+    object.arches,
+  );
+  writer.writeObjectList<FillingTypeRecordDB>(
+    offsets[1],
     allOffsets,
     FillingTypeRecordDBSchema.serialize,
     object.fillingTypes,
   );
   writer.writeObjectList<LineDB>(
-    offsets[1],
+    offsets[2],
     allOffsets,
     LineDBSchema.serialize,
     object.lines,
   );
   writer.writeObjectList<OpeningTypeRecordDB>(
-    offsets[2],
+    offsets[3],
     allOffsets,
     OpeningTypeRecordDBSchema.serialize,
     object.openingTypes,
   );
   writer.writeObjectList<PolygonDB>(
-    offsets[3],
+    offsets[4],
     allOffsets,
     PolygonDBSchema.serialize,
     object.polygons,
   );
   writer.writeObjectList<SizeSegmentDB>(
-    offsets[4],
+    offsets[5],
     allOffsets,
     SizeSegmentDBSchema.serialize,
     object.sizeSegments,
@@ -147,36 +167,43 @@ SchemeDB _schemeDBDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = SchemeDB();
-  object.fillingTypes = reader.readObjectList<FillingTypeRecordDB>(
+  object.arches = reader.readObjectList<ArchDB>(
         offsets[0],
+        ArchDBSchema.deserialize,
+        allOffsets,
+        ArchDB(),
+      ) ??
+      [];
+  object.fillingTypes = reader.readObjectList<FillingTypeRecordDB>(
+        offsets[1],
         FillingTypeRecordDBSchema.deserialize,
         allOffsets,
         FillingTypeRecordDB(),
       ) ??
       [];
   object.lines = reader.readObjectList<LineDB>(
-        offsets[1],
+        offsets[2],
         LineDBSchema.deserialize,
         allOffsets,
         LineDB(),
       ) ??
       [];
   object.openingTypes = reader.readObjectList<OpeningTypeRecordDB>(
-        offsets[2],
+        offsets[3],
         OpeningTypeRecordDBSchema.deserialize,
         allOffsets,
         OpeningTypeRecordDB(),
       ) ??
       [];
   object.polygons = reader.readObjectList<PolygonDB>(
-        offsets[3],
+        offsets[4],
         PolygonDBSchema.deserialize,
         allOffsets,
         PolygonDB(),
       ) ??
       [];
   object.sizeSegments = reader.readObjectList<SizeSegmentDB>(
-        offsets[4],
+        offsets[5],
         SizeSegmentDBSchema.deserialize,
         allOffsets,
         SizeSegmentDB(),
@@ -193,6 +220,14 @@ P _schemeDBDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
+      return (reader.readObjectList<ArchDB>(
+            offset,
+            ArchDBSchema.deserialize,
+            allOffsets,
+            ArchDB(),
+          ) ??
+          []) as P;
+    case 1:
       return (reader.readObjectList<FillingTypeRecordDB>(
             offset,
             FillingTypeRecordDBSchema.deserialize,
@@ -200,7 +235,7 @@ P _schemeDBDeserializeProp<P>(
             FillingTypeRecordDB(),
           ) ??
           []) as P;
-    case 1:
+    case 2:
       return (reader.readObjectList<LineDB>(
             offset,
             LineDBSchema.deserialize,
@@ -208,7 +243,7 @@ P _schemeDBDeserializeProp<P>(
             LineDB(),
           ) ??
           []) as P;
-    case 2:
+    case 3:
       return (reader.readObjectList<OpeningTypeRecordDB>(
             offset,
             OpeningTypeRecordDBSchema.deserialize,
@@ -216,7 +251,7 @@ P _schemeDBDeserializeProp<P>(
             OpeningTypeRecordDB(),
           ) ??
           []) as P;
-    case 3:
+    case 4:
       return (reader.readObjectList<PolygonDB>(
             offset,
             PolygonDBSchema.deserialize,
@@ -224,7 +259,7 @@ P _schemeDBDeserializeProp<P>(
             PolygonDB(),
           ) ??
           []) as P;
-    case 4:
+    case 5:
       return (reader.readObjectList<SizeSegmentDB>(
             offset,
             SizeSegmentDBSchema.deserialize,
@@ -239,6 +274,91 @@ P _schemeDBDeserializeProp<P>(
 
 extension SchemeDBQueryFilter
     on QueryBuilder<SchemeDB, SchemeDB, QFilterCondition> {
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> archesLengthEqualTo(
+      int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'arches',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> archesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'arches',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> archesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'arches',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> archesLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'arches',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
+      archesLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'arches',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> archesLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'arches',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
+    });
+  }
+
   QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition>
       fillingTypesLengthEqualTo(int length) {
     return QueryBuilder.apply(this, (query) {
@@ -680,6 +800,13 @@ extension SchemeDBQueryFilter
 
 extension SchemeDBQueryObject
     on QueryBuilder<SchemeDB, SchemeDB, QFilterCondition> {
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> archesElement(
+      FilterQuery<ArchDB> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'arches');
+    });
+  }
+
   QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> fillingTypesElement(
       FilterQuery<FillingTypeRecordDB> q) {
     return QueryBuilder.apply(this, (query) {

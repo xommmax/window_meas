@@ -169,5 +169,6 @@
   "openingTypes": "Варіанти відкриття",
   "polygonNotConvex": "Вибрана зона не є випуклою",
   "openingTypeAlreadySelected": "Для вибраної зони вже визначено варіант відкриття",
-  "fillingTypes": "Варіанти заповнення"
+  "fillingTypes": "Варіанти заповнення",
+  "archShouldBeOnLine": "Арка повинна знаходитися на лінії"
 }

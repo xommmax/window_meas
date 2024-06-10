@@ -41,4 +41,5 @@ enum EditorMode {
   move,
   openingType,
   fillingType,
+  arch,
 }

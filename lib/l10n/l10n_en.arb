@@ -169,5 +169,6 @@
   "openingTypes": "Opening types",
   "polygonNotConvex": "Polygon is not convex",
   "openingTypeAlreadySelected": "Opening type already selected",
-  "fillingTypes": "Filling types"
+  "fillingTypes": "Filling types",
+  "archShouldBeOnLine": "Arch should be on line"
 }

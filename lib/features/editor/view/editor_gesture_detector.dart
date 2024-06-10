@@ -19,6 +19,9 @@ class EditorGestureDetector extends GestureDetector {
   final Function(Offset) onFillingTypeSelectionStarted;
   final Function(Offset) onFillingTypeSelectionUpdated;
   final Function() onFillingTypeSelectionCompleted;
+  final Function(Offset) onArchStarted;
+  final Function(Offset) onArchUpdated;
+  final Function() onArchCompleted;
 
   final EditorMode mode;
   final GestureDetector _delegateDetector;
@@ -26,6 +29,7 @@ class EditorGestureDetector extends GestureDetector {
   EditorGestureDetector({
     required this.context,
     required this.size,
+    required this.mode,
     required this.onSizeSegmentAdded,
     required this.onLineStarted,
     required this.onLineUpdated,
@@ -38,7 +42,9 @@ class EditorGestureDetector extends GestureDetector {
     required this.onFillingTypeSelectionStarted,
     required this.onFillingTypeSelectionUpdated,
     required this.onFillingTypeSelectionCompleted,
-    required this.mode,
+    required this.onArchStarted,
+    required this.onArchUpdated,
+    required this.onArchCompleted,
     required super.child,
     super.key,
   }) : _delegateDetector = switch (mode) {
@@ -62,6 +68,12 @@ class EditorGestureDetector extends GestureDetector {
               onFillingTypeSelectionStarted: onFillingTypeSelectionStarted,
               onFillingTypeSelectionUpdated: onFillingTypeSelectionUpdated,
               onFillingTypeSelectionCompleted: onFillingTypeSelectionCompleted,
+              size: size,
+            ),
+          EditorMode.arch => _ArchGestureDetector(
+              onArchStarted: onArchStarted,
+              onArchUpdated: onArchUpdated,
+              onArchCompleted: onArchCompleted,
               size: size,
             ),
         };
@@ -196,4 +208,29 @@ class _FillingTypeGestureDetector extends GestureDetector {
 
   @override
   GestureDragEndCallback? get onPanEnd => (details) => onFillingTypeSelectionCompleted();
+}
+
+class _ArchGestureDetector extends GestureDetector {
+  final Function(Offset) onArchStarted;
+  final Function(Offset) onArchUpdated;
+  final Function() onArchCompleted;
+  final Size size;
+
+  _ArchGestureDetector({
+    required this.onArchStarted,
+    required this.onArchUpdated,
+    required this.onArchCompleted,
+    required this.size,
+  });
+
+  @override
+  GestureDragDownCallback? get onPanDown =>
+      (details) => onArchStarted(details.localPosition.toInnerCoord(size));
+
+  @override
+  GestureDragUpdateCallback? get onPanUpdate =>
+      (details) => onArchUpdated(details.localPosition.toInnerCoord(size));
+
+  @override
+  GestureDragEndCallback? get onPanEnd => (details) => onArchCompleted();
 }
