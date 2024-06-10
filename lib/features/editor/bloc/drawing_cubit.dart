@@ -73,10 +73,12 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
       }
     }
 
-    openingTypes.add(OpeningTypeRecord(
-      openingType: openingType,
-      polygons: polygons,
-    ));
+    if (openingType != OpeningType.blind) {
+      openingTypes.add(OpeningTypeRecord(
+        openingType: openingType,
+        polygons: polygons,
+      ));
+    }
 
     emit(state.copyWith(
       scheme: state.scheme.copyWith(
