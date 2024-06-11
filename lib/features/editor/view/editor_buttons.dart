@@ -4,8 +4,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 
-class EditorButtons extends StatelessWidget {
+class EditorButtons extends StatefulWidget {
   const EditorButtons({super.key});
+
+  @override
+  State<EditorButtons> createState() => _EditorButtonsState();
+}
+
+class _EditorButtonsState extends State<EditorButtons> {
+  bool isExpanded = false;
+  IconData selectedModeIcon = FontAwesomeIcons.pencil;
 
   @override
   Widget build(BuildContext context) => Align(
@@ -16,29 +24,21 @@ class EditorButtons extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _Button(
-                onPressed: () => context.read<EditorCubit>().changeMode(EditorMode.arch),
-                icon: FontAwesomeIcons.archway,
-              ),
-              _Button(
-                onPressed: () => context.read<EditorCubit>().changeMode(EditorMode.fillingType),
-                icon: FontAwesomeIcons.solidSquare,
-              ),
-              _Button(
-                onPressed: () => context.read<EditorCubit>().changeMode(EditorMode.openingType),
-                icon: FontAwesomeIcons.rectangleXmark,
-              ),
-              const SizedBox(height: 8),
-              _Button(
-                onPressed: () => context.read<EditorCubit>().changeMode(EditorMode.draw),
-                icon: FontAwesomeIcons.pencil,
-              ),
-              const SizedBox(height: 8),
-              _Button(
-                onPressed: () => context.read<EditorCubit>().changeMode(EditorMode.move),
-                icon: FontAwesomeIcons.hand,
-              ),
-              const SizedBox(height: 8),
+              if (isExpanded) ...[
+                _modeButton(EditorMode.arch),
+                _modeButton(EditorMode.fillingType),
+                _modeButton(EditorMode.openingType),
+                _modeButton(EditorMode.move),
+                _modeButton(EditorMode.draw),
+              ],
+              if (!isExpanded)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: _Button(
+                    onPressed: () => setState(() => isExpanded = true),
+                    icon: selectedModeIcon,
+                  ),
+                ),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -57,6 +57,27 @@ class EditorButtons extends StatelessWidget {
           ),
         ),
       );
+
+  Widget _modeButton(EditorMode mode) => Padding(
+        padding: const EdgeInsets.only(bottom: 8.0),
+        child: _Button(
+            onPressed: () {
+              if (isExpanded) context.read<EditorCubit>().changeMode(mode);
+              setState(() {
+                selectedModeIcon = icons[mode]!;
+                isExpanded = !isExpanded;
+              });
+            },
+            icon: icons[mode]!),
+      );
+
+  static const icons = {
+    EditorMode.arch: FontAwesomeIcons.archway,
+    EditorMode.fillingType: FontAwesomeIcons.solidSquare,
+    EditorMode.openingType: FontAwesomeIcons.rectangleXmark,
+    EditorMode.move: FontAwesomeIcons.hand,
+    EditorMode.draw: FontAwesomeIcons.pencil,
+  };
 }
 
 class _Button extends StatelessWidget {
