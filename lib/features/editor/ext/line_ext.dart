@@ -13,8 +13,11 @@ extension LineExt on Line {
       (p2.dx - p1.dx) * (line.p2.dy - p1.dy) == (p2.dy - p1.dy) * (line.p2.dx - p1.dx);
 
   // check if lines are crossing in 1D (by x coord)
-  bool _isCrossingIn1D(Line line) => !((max(p1.dx, p2.dx) < min(line.p1.dx, line.p2.dx)) ||
-      (max(line.p1.dx, line.p2.dx) < min(p1.dx, p2.dx)));
+  bool _isCrossingIn1D(Line line) =>
+      !((max(p1.dx, p2.dx) < min(line.p1.dx, line.p2.dx)) ||
+          (max(line.p1.dx, line.p2.dx) < min(p1.dx, p2.dx))) &&
+      !((max(p1.dy, p2.dy) < min(line.p1.dy, line.p2.dy)) ||
+          (max(line.p1.dy, line.p2.dy) < min(p1.dy, p2.dy)));
 
   Line mergeOverlapping(Line line) {
     Offset? min;
