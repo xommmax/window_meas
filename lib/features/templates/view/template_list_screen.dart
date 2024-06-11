@@ -43,46 +43,54 @@ class _TemplateListViewState extends State<TemplateListView> {
   int? selectedIndex;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.templates),
-        actions: [
-          if (selectedIndex != null)
-            PopupMenuButton<String>(
-              onSelected: (s) {
-                if (s == context.l10n.delete) {
-                  context.read<TemplateListCubit>().deleteTemplate(selectedIndex!);
-                }
-                selectedIndex = null;
-              },
-              icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
-              itemBuilder: (BuildContext context) => [
-                context.l10n.delete,
-              ].map((e) => PopupMenuItem<String>(value: e, child: Text(e))).toList(),
+  Widget build(BuildContext context) => BlocBuilder<TemplateListCubit, TemplateListState>(
+        builder: (context, state) => Scaffold(
+            appBar: AppBar(
+              title: Text(context.l10n.templates),
+              actions: [
+                if (selectedIndex != null)
+                  PopupMenuButton<String>(
+                    onSelected: (s) {
+                      if (s == context.l10n.delete) {
+                        context.read<TemplateListCubit>().deleteTemplate(selectedIndex!);
+                      } else if (s == context.l10n.edit) {
+                        context.push('/editor', extra: {
+                          'mode': EditorScreenMode.createTemplate,
+                          'template': state.templates[selectedIndex!],
+                        });
+                      }
+                      setState(() => selectedIndex = null);
+                    },
+                    icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
+                    itemBuilder: (BuildContext context) => [
+                      context.l10n.edit,
+                      context.l10n.delete,
+                    ].map((e) => PopupMenuItem<String>(value: e, child: Text(e))).toList(),
+                  ),
+              ],
             ),
-        ],
-      ),
-      body: SafeArea(
-        child: BlocBuilder<TemplateListCubit, TemplateListState>(
-          builder: (context, state) => TemplateGridView(
-            templates: state.templates,
-            onSelected: (index) {
-              setState(() => index == selectedIndex ? selectedIndex = null : selectedIndex = index);
-              if (widget.templatesScreenMode == TemplateListScreenMode.select) {
-                Navigator.pop(context, state.templates[index]);
-              }
-            },
-          ),
-        ),
-      ),
-      floatingActionButton: (widget.templatesScreenMode != TemplateListScreenMode.select)
-          ? FloatingActionButton(
-              onPressed: () => _addTemplate(context),
-              backgroundColor: AppColors.primary,
-              foregroundColor: Colors.white,
-              child: const Icon(Icons.add),
-            )
-          : null);
+            body: SafeArea(
+              child: TemplateGridView(
+                templates: state.templates,
+                selectedIndex: selectedIndex,
+                onSelected: (index) {
+                  setState(
+                      () => index == selectedIndex ? selectedIndex = null : selectedIndex = index);
+                  if (widget.templatesScreenMode == TemplateListScreenMode.select) {
+                    Navigator.pop(context, state.templates[index]);
+                  }
+                },
+              ),
+            ),
+            floatingActionButton: (widget.templatesScreenMode != TemplateListScreenMode.select)
+                ? FloatingActionButton(
+                    onPressed: () => _addTemplate(context),
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                    child: const Icon(Icons.add),
+                  )
+                : null),
+      );
 
   Future<void> _addTemplate(BuildContext context) async =>
       await context.push('/editor', extra: {'mode': EditorScreenMode.createTemplate});

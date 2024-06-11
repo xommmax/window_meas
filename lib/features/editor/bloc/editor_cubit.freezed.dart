@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$EditorState {
   EditorMode get mode => throw _privateConstructorUsedError;
+  Template? get template => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EditorStateCopyWith<EditorState> get copyWith =>
@@ -29,7 +30,9 @@ abstract class $EditorStateCopyWith<$Res> {
           EditorState value, $Res Function(EditorState) then) =
       _$EditorStateCopyWithImpl<$Res, EditorState>;
   @useResult
-  $Res call({EditorMode mode});
+  $Res call({EditorMode mode, Template? template});
+
+  $TemplateCopyWith<$Res>? get template;
 }
 
 /// @nodoc
@@ -46,13 +49,30 @@ class _$EditorStateCopyWithImpl<$Res, $Val extends EditorState>
   @override
   $Res call({
     Object? mode = null,
+    Object? template = freezed,
   }) {
     return _then(_value.copyWith(
       mode: null == mode
           ? _value.mode
           : mode // ignore: cast_nullable_to_non_nullable
               as EditorMode,
+      template: freezed == template
+          ? _value.template
+          : template // ignore: cast_nullable_to_non_nullable
+              as Template?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TemplateCopyWith<$Res>? get template {
+    if (_value.template == null) {
+      return null;
+    }
+
+    return $TemplateCopyWith<$Res>(_value.template!, (value) {
+      return _then(_value.copyWith(template: value) as $Val);
+    });
   }
 }
 
@@ -64,7 +84,10 @@ abstract class _$$EditorStateImplCopyWith<$Res>
       __$$EditorStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({EditorMode mode});
+  $Res call({EditorMode mode, Template? template});
+
+  @override
+  $TemplateCopyWith<$Res>? get template;
 }
 
 /// @nodoc
@@ -79,12 +102,17 @@ class __$$EditorStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? mode = null,
+    Object? template = freezed,
   }) {
     return _then(_$EditorStateImpl(
       mode: null == mode
           ? _value.mode
           : mode // ignore: cast_nullable_to_non_nullable
               as EditorMode,
+      template: freezed == template
+          ? _value.template
+          : template // ignore: cast_nullable_to_non_nullable
+              as Template?,
     ));
   }
 }
@@ -92,14 +120,16 @@ class __$$EditorStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$EditorStateImpl implements _EditorState {
-  const _$EditorStateImpl({required this.mode});
+  const _$EditorStateImpl({required this.mode, this.template});
 
   @override
   final EditorMode mode;
+  @override
+  final Template? template;
 
   @override
   String toString() {
-    return 'EditorState(mode: $mode)';
+    return 'EditorState(mode: $mode, template: $template)';
   }
 
   @override
@@ -107,11 +137,13 @@ class _$EditorStateImpl implements _EditorState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EditorStateImpl &&
-            (identical(other.mode, mode) || other.mode == mode));
+            (identical(other.mode, mode) || other.mode == mode) &&
+            (identical(other.template, template) ||
+                other.template == template));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, mode);
+  int get hashCode => Object.hash(runtimeType, mode, template);
 
   @JsonKey(ignore: true)
   @override
@@ -121,11 +153,14 @@ class _$EditorStateImpl implements _EditorState {
 }
 
 abstract class _EditorState implements EditorState {
-  const factory _EditorState({required final EditorMode mode}) =
-      _$EditorStateImpl;
+  const factory _EditorState(
+      {required final EditorMode mode,
+      final Template? template}) = _$EditorStateImpl;
 
   @override
   EditorMode get mode;
+  @override
+  Template? get template;
   @override
   @JsonKey(ignore: true)
   _$$EditorStateImplCopyWith<_$EditorStateImpl> get copyWith =>

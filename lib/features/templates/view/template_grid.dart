@@ -3,22 +3,17 @@ import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/templates/data/model/template.dart';
 import 'package:window_meas/features/templates/view/template_list_item.dart';
 
-class TemplateGridView extends StatefulWidget {
+class TemplateGridView extends StatelessWidget {
   const TemplateGridView({
     required this.templates,
     required this.onSelected,
+    required this.selectedIndex,
     super.key,
   });
 
   final List<Template> templates;
   final Function(int) onSelected;
-
-  @override
-  State<TemplateGridView> createState() => _TemplateGridViewState();
-}
-
-class _TemplateGridViewState extends State<TemplateGridView> {
-  int? selectedIndex;
+  final int? selectedIndex;
 
   @override
   Widget build(BuildContext context) => GridView.builder(
@@ -28,15 +23,12 @@ class _TemplateGridViewState extends State<TemplateGridView> {
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
         ),
-        itemCount: widget.templates.length,
+        itemCount: templates.length,
         itemBuilder: (context, index) => InkWell(
-          onTap: () {
-            widget.onSelected(index);
-            setState(() => index == selectedIndex ? selectedIndex = null : selectedIndex = index);
-          },
+          onTap: () => onSelected(index),
           child: ColoredBox(
             color: selectedIndex == index ? AppColors.primary.withOpacity(0.5) : Colors.transparent,
-            child: TemplateItem(widget.templates[index]),
+            child: TemplateItem(templates[index]),
           ),
         ),
       );

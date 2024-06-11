@@ -16,12 +16,23 @@ class EditorCubit extends Cubit<EditorState> {
   void changeMode(EditorMode mode) => emit(state.copyWith(mode: mode));
 
   Future<void> saveTemplate(Scheme scheme) async {
-    final template = Template(
-      date: DateTime.now(),
-      scheme: scheme,
-    );
+    final Template template;
+    if (state.template != null) {
+      template = state.template!.copyWith(scheme: scheme);
+    } else {
+      template = Template(
+        date: DateTime.now(),
+        scheme: scheme,
+      );
+    }
 
     await _templateRepository.addTemplate(template);
+  }
+
+  void setTemplate(Template? template) {
+    if (template != null) {
+      emit(state.copyWith(template: template));
+    }
   }
 }
 
@@ -29,10 +40,12 @@ class EditorCubit extends Cubit<EditorState> {
 class EditorState with _$EditorState {
   const factory EditorState({
     required EditorMode mode,
+    Template? template,
   }) = _EditorState;
 
   factory EditorState.initial() => const EditorState(
         mode: EditorMode.draw,
+        template: null,
       );
 }
 

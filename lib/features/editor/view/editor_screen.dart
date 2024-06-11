@@ -7,6 +7,7 @@ import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/view/drawing_view.dart';
 import 'package:window_meas/features/editor/view/editor_buttons.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
+import 'package:window_meas/features/templates/data/model/template.dart';
 import 'package:window_meas/l10n/localization.dart';
 
 enum EditorScreenMode {
@@ -18,20 +19,22 @@ class EditorScreen extends StatelessWidget {
   const EditorScreen({
     this.mode,
     this.scheme,
+    this.template,
     super.key,
   });
 
   final EditorScreenMode? mode;
   final Scheme? scheme;
+  final Template? template;
 
   @override
   Widget build(BuildContext context) => MultiBlocProvider(
         providers: [
           BlocProvider<EditorCubit>(
-            create: (ctx) => getIt(),
+            create: (ctx) => getIt()..setTemplate(template),
           ),
           BlocProvider<DrawingCubit>(
-            create: (ctx) => getIt()..setScheme(scheme),
+            create: (ctx) => getIt()..setScheme(template?.scheme ?? scheme),
           ),
         ],
         child: EditorView(mode ?? EditorScreenMode.regular),
