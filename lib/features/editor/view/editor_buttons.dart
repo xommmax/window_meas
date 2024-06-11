@@ -13,7 +13,7 @@ class EditorButtons extends StatefulWidget {
 
 class _EditorButtonsState extends State<EditorButtons> {
   bool isExpanded = false;
-  IconData selectedModeIcon = FontAwesomeIcons.pencil;
+  Widget selectedModeIcon = const FaIcon(FontAwesomeIcons.hand);
 
   @override
   Widget build(BuildContext context) => Align(
@@ -44,12 +44,12 @@ class _EditorButtonsState extends State<EditorButtons> {
                 children: [
                   _Button(
                     onPressed: () => context.read<DrawingCubit>().undo(),
-                    icon: FontAwesomeIcons.arrowRotateLeft,
+                    icon: const FaIcon(FontAwesomeIcons.arrowRotateLeft),
                   ),
                   const SizedBox(width: 8),
                   _Button(
                     onPressed: () => context.read<DrawingCubit>().redo(),
-                    icon: FontAwesomeIcons.arrowRotateRight,
+                    icon: const FaIcon(FontAwesomeIcons.arrowRotateRight),
                   ),
                 ],
               ),
@@ -58,26 +58,28 @@ class _EditorButtonsState extends State<EditorButtons> {
         ),
       );
 
-  Widget _modeButton(EditorMode mode) => Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
-        child: _Button(
-            onPressed: () {
-              if (isExpanded) context.read<EditorCubit>().changeMode(mode);
-              setState(() {
-                selectedModeIcon = icons[mode]!;
-                isExpanded = !isExpanded;
-              });
-            },
-            icon: icons[mode]!),
-      );
+  Widget _modeButton(EditorMode mode) {
+    final icon = switch (mode) {
+      EditorMode.arch => Image.asset('assets/ic_editor_arc.png', width: 24),
+      EditorMode.fillingType => Image.asset('assets/ic_editor_fill_type.png', width: 24),
+      EditorMode.openingType => Image.asset('assets/ic_editor_open_type.png', width: 24),
+      EditorMode.move => const FaIcon(FontAwesomeIcons.hand),
+      EditorMode.draw => const FaIcon(FontAwesomeIcons.pencil),
+    };
 
-  static const icons = {
-    EditorMode.arch: FontAwesomeIcons.archway,
-    EditorMode.fillingType: FontAwesomeIcons.solidSquare,
-    EditorMode.openingType: FontAwesomeIcons.rectangleXmark,
-    EditorMode.move: FontAwesomeIcons.hand,
-    EditorMode.draw: FontAwesomeIcons.pencil,
-  };
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: _Button(
+          onPressed: () {
+            if (isExpanded) context.read<EditorCubit>().changeMode(mode);
+            setState(() {
+              selectedModeIcon = icon;
+              isExpanded = !isExpanded;
+            });
+          },
+          icon: icon),
+    );
+  }
 }
 
 class _Button extends StatelessWidget {
@@ -87,7 +89,7 @@ class _Button extends StatelessWidget {
   });
 
   final VoidCallback onPressed;
-  final IconData icon;
+  final Widget icon;
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +102,8 @@ class _Button extends StatelessWidget {
         elevation: 3,
         shadowColor: Colors.black,
       ),
-      icon: FaIcon(icon, size: 20),
+      icon: icon,
+      iconSize: 20,
     );
   }
 }

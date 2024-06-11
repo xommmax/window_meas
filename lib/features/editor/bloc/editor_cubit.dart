@@ -44,7 +44,7 @@ class EditorState with _$EditorState {
   }) = _EditorState;
 
   factory EditorState.initial() => const EditorState(
-        mode: EditorMode.draw,
+        mode: EditorMode.move,
         template: null,
       );
 }

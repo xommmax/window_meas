@@ -117,6 +117,7 @@ class SchemePreviewPainter extends CustomPainter {
   }
 
   void _calculate(Scheme scheme) {
+    if (scheme.lines.isEmpty) return;
     minX = scheme.lines.first.p1.dx;
     maxX = scheme.lines.first.p1.dx;
     minY = scheme.lines.first.p1.dy;
