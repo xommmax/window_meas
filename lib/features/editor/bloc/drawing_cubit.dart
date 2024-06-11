@@ -43,7 +43,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
 
     lines.add(newLine);
 
-    final newSizeSegments = GeoHelper.calculateSegments(lines, state.scheme.sizeSegments);
+    final newSizeSegments = GeoHelper.calculateSegments(state.scheme, newLines: lines);
     final newPolygons = _calculatePolygons(lines);
     final newOpeningTypes = _calculateOpeningTypes(newPolygons);
     final newFillingTypes = _calculateFillingTypes(newPolygons);
@@ -139,37 +139,17 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
   }
 
   void addArch(Arch newArch) {
-    // if (newLine.p1 == newLine.p2) return;
-    // final lines = List.of(state.scheme.lines);
+    if (newArch.p1 == newArch.p2 || newArch.top == newArch.p1) return;
+    final arches = List.of(state.scheme.arches);
+    arches.add(newArch);
 
-    // bool isOverlapping;
-    // do {
-    //   isOverlapping = false;
-    //   for (final line in lines) {
-    //     if (line.isOverlapping(newLine)) {
-    //       isOverlapping = true;
-    //       lines.remove(line);
-    //       newLine = line.mergeOverlapping(newLine);
-    //       break;
-    //     }
-    //   }
-    // } while (isOverlapping);
+    final newSizeSegments = GeoHelper.calculateSegments(state.scheme, newArches: arches);
 
-    // lines.add(newLine);
-
-    // final newSizeSegments = GeoHelper.calculateSegments(lines, state.scheme.sizeSegments);
-    // final newPolygons = _calculatePolygons(lines);
-    // final newOpeningTypes = _calculateOpeningTypes(newPolygons);
-    // final newFillingTypes = _calculateFillingTypes(newPolygons);
-
-    // emit(state.copyWith(
-    //   scheme: state.scheme.copyWith(
-    //     lines: lines,
-    //     sizeSegments: newSizeSegments,
-    //     polygons: newPolygons,
-    //     openingTypes: newOpeningTypes,
-    //     fillingTypes: newFillingTypes,
-    //   ),
-    // ));
+    emit(state.copyWith(
+      scheme: state.scheme.copyWith(
+        sizeSegments: newSizeSegments,
+        arches: arches,
+      ),
+    ));
   }
 }

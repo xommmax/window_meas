@@ -110,7 +110,7 @@ class DrawingViewState extends State<DrawingView> {
                   onArchCompleted: () {
                     if (currentArch != null &&
                         !context.read<DrawingCubit>().state.scheme.lines.any((line) =>
-                            line.contains(currentArch!.p1) && line.contains(currentArch!.p2))) {
+                            line.contains(currentArch!.p1) || line.contains(currentArch!.p2))) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(context.l10n.archShouldBeOnLine),
@@ -124,7 +124,7 @@ class DrawingViewState extends State<DrawingView> {
                         if (currentArch != null) {
                           context.read<DrawingCubit>().addArch(currentArch!);
                         }
-                        currentArch = null;
+                        setState(() => currentArch = null);
                       } else {
                         isMovingArchTop = true;
                       }

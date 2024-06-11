@@ -3,21 +3,33 @@ import 'dart:ui';
 
 import 'package:collection/collection.dart';
 import 'package:window_meas/features/calc/polygon_ext.dart';
+import 'package:window_meas/features/editor/data/model/arch.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/data/model/polygon.dart';
+import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 
 class GeoHelper {
   static List<SizeSegment> calculateSegments(
-    List<Line> lines,
-    List<SizeSegment> prevSizeSegments,
-  ) {
+    Scheme scheme, {
+    List<Line>? newLines,
+    List<Arch>? newArches,
+  }) {
+    final prevSizeSegments = scheme.sizeSegments;
+    final lines = newLines ?? scheme.lines;
+    final arches = newArches ?? scheme.arches;
     final List<SizeSegment> newSegments = [];
-    final xNodes = SplayTreeSet();
-    final yNodes = SplayTreeSet();
+    final xNodes = SplayTreeSet<double>();
+    final yNodes = SplayTreeSet<double>();
     for (final line in lines) {
       xNodes.addAll([line.p1.dx, line.p2.dx]);
       yNodes.addAll([line.p1.dy, line.p2.dy]);
+    }
+
+    for (final arch in arches) {
+      xNodes.addAll([arch.p1.dx, arch.p2.dx]);
+      yNodes.addAll([arch.p1.dy, arch.p2.dy]);
+      if (arch.top != null) yNodes.add(arch.top!.dy);
     }
 
     if (xNodes.length >= 2) {

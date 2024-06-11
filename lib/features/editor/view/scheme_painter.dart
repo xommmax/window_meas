@@ -210,10 +210,22 @@ class SchemePainter extends CustomPainter {
   void _drawArches(Canvas canvas, Size size) {
     final linePaint = Paint()
       ..color = Colors.black
-      ..strokeWidth = lineWidth;
+      ..strokeWidth = lineWidth
+      ..style = PaintingStyle.stroke;
 
     for (final arch in scheme.arches) {
       canvas.drawLine(arch.p1.toGlobalCoord(size), arch.p2.toGlobalCoord(size), linePaint);
+
+      canvas.drawArc(
+        Rect.fromPoints(
+          Offset(arch.p1.dx, arch.top!.dy).toGlobalCoord(size),
+          Offset(arch.p2.dx, 2 * arch.p2.dy - arch.top!.dy).toGlobalCoord(size),
+        ),
+        arch.top!.dy <= arch.p1.dx ? pi : 0,
+        pi,
+        false,
+        linePaint,
+      );
     }
   }
 
@@ -222,7 +234,8 @@ class SchemePainter extends CustomPainter {
 
     final linePaint = Paint()
       ..color = Colors.green
-      ..strokeWidth = lineWidth;
+      ..strokeWidth = lineWidth
+      ..style = PaintingStyle.stroke;
 
     if (currentArch!.top == null) {
       canvas.drawLine(
@@ -230,16 +243,39 @@ class SchemePainter extends CustomPainter {
         currentArch!.p2.toGlobalCoord(size),
         linePaint,
       );
+
+      if (currentArch!.p1 != currentArch!.p2) {
+        final gridSize = size.width / Constants.gridAmount;
+        final radius = gridSize / 4;
+        final center = Offset(
+          (currentArch!.p1.dx + currentArch!.p2.dx) / 2,
+          (currentArch!.p1.dy + currentArch!.p2.dy) / 2,
+        ).toGlobalCoord(size);
+
+        canvas.drawCircle(center, radius, linePaint..style = PaintingStyle.fill);
+
+        canvas.drawPath(
+          Path()
+            ..moveTo(center.dx - radius / 2, center.dy - lineWidth / 2)
+            ..lineTo(center.dx, center.dy - radius / 2 - lineWidth / 2)
+            ..lineTo(center.dx + radius / 2, center.dy - lineWidth / 2)
+            ..moveTo(center.dx - radius / 2, center.dy + lineWidth / 2)
+            ..lineTo(center.dx, center.dy + radius / 2 + lineWidth / 2)
+            ..lineTo(center.dx + radius / 2, center.dy + lineWidth / 2),
+          Paint()
+            ..color = Colors.white
+            ..strokeWidth = lineWidth / 2
+            ..style = PaintingStyle.stroke,
+        );
+      }
     } else {
       canvas.drawArc(
         Rect.fromPoints(
           Offset(currentArch!.p1.dx, currentArch!.top!.dy).toGlobalCoord(size),
-          Offset(
-            currentArch!.p2.dx,
-            currentArch!.p2.dy - (currentArch!.top!.dy - currentArch!.p2.dy),
-          ).toGlobalCoord(size),
+          Offset(currentArch!.p2.dx, 2 * currentArch!.p2.dy - currentArch!.top!.dy)
+              .toGlobalCoord(size),
         ),
-        currentArch!.top!.dy < currentArch!.p1.dx ? pi : 0,
+        currentArch!.top!.dy <= currentArch!.p1.dx ? pi : 0,
         pi,
         false,
         linePaint,
