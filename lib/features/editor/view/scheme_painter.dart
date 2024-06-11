@@ -87,7 +87,11 @@ class SchemePainter extends CustomPainter {
       ..strokeWidth = lineWidth;
 
     for (final line in scheme.lines) {
-      canvas.drawLine(line.p1.toGlobalCoord(size), line.p2.toGlobalCoord(size), linePaint);
+      canvas.drawLine(
+        line.p1.toGlobalCoord(size),
+        line.p2.toGlobalCoord(size),
+        linePaint,
+      );
     }
   }
 
@@ -214,8 +218,6 @@ class SchemePainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     for (final arch in scheme.arches) {
-      canvas.drawLine(arch.p1.toGlobalCoord(size), arch.p2.toGlobalCoord(size), linePaint);
-
       canvas.drawArc(
         Rect.fromPoints(
           Offset(arch.p1.dx, arch.top!.dy).toGlobalCoord(size),

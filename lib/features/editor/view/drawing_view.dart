@@ -211,17 +211,6 @@ class DrawingViewState extends State<DrawingView> {
     setState(() => fillingTypeSelection = null);
     if (overlapPolygons.isEmpty) return;
 
-    final isConvex = GeoHelper.isPolygonsConvex(overlapPolygons);
-    if (!isConvex) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(context.l10n.polygonNotConvex),
-          duration: const Duration(milliseconds: 1400),
-        ),
-      );
-      return;
-    }
-
     final FillingType? existingFillingType = (overlapPolygons.length == 1)
         ? scheme.fillingTypes
             .firstWhereOrNull((e) => e.polygon == overlapPolygons.first)

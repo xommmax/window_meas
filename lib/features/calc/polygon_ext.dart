@@ -68,4 +68,60 @@ extension PolygonExt on Polygon {
     }
     return minY;
   }
+
+  double templateWidth(Size size, int gridAmount, int minX, int minY) {
+    var templateMinX = double.infinity;
+    var templateMaxX = double.negativeInfinity;
+    for (var point in points) {
+      final globalPoint = point.toTemplateCoord(size, gridAmount, minX, minY);
+
+      if (globalPoint.dx < templateMinX) {
+        templateMinX = globalPoint.dx;
+      }
+      if (globalPoint.dx > templateMaxX) {
+        templateMaxX = globalPoint.dx;
+      }
+    }
+    return templateMaxX - templateMinX;
+  }
+
+  double templateHeight(Size size, int gridAmount, int minX, int minY) {
+    var templateMinY = double.infinity;
+    var templateMaxY = double.negativeInfinity;
+    for (var point in points) {
+      final globalPoint = point.toTemplateCoord(size, gridAmount, minX, minY);
+
+      if (globalPoint.dy < templateMinY) {
+        templateMinY = globalPoint.dy;
+      }
+      if (globalPoint.dy > templateMaxY) {
+        templateMaxY = globalPoint.dy;
+      }
+    }
+    return templateMaxY - templateMinY;
+  }
+
+  double templateLeft(Size size, int gridAmount, int minX, int minY) {
+    var polygonMinX = double.infinity;
+    for (var point in points) {
+      final templatePoint = point.toTemplateCoord(size, gridAmount, minX, minY);
+
+      if (templatePoint.dx < polygonMinX) {
+        polygonMinX = templatePoint.dx;
+      }
+    }
+    return polygonMinX;
+  }
+
+  double templateTop(Size size, int gridAmount, int minX, int minY) {
+    var polygonMinY = double.infinity;
+    for (var point in points) {
+      final templatePoint = point.toTemplateCoord(size, gridAmount, minX, minY);
+
+      if (templatePoint.dy < polygonMinY) {
+        polygonMinY = templatePoint.dy;
+      }
+    }
+    return polygonMinY;
+  }
 }
