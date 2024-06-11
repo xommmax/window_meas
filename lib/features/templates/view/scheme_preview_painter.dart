@@ -23,10 +23,10 @@ class SchemePreviewPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    _drawLines(canvas, size);
-    _drawArches(canvas, size);
     _drawFillingTypes(canvas, size);
     _drawOpeningTypes(canvas, size);
+    _drawArches(canvas, size);
+    _drawLines(canvas, size);
   }
 
   @override
@@ -64,7 +64,7 @@ class SchemePreviewPainter extends CustomPainter {
           Offset(arch.p2.dx, 2 * arch.p2.dy - arch.top!.dy)
               .toTemplateCoord(size, maxGridAmount, minX.toInt(), minY.toInt()),
         ),
-        arch.top!.dy <= arch.p1.dx ? pi : 0,
+        arch.top!.dy <= arch.p1.dy ? pi : 0,
         pi,
         false,
         linePaint,

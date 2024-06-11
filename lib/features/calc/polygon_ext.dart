@@ -124,4 +124,16 @@ extension PolygonExt on Polygon {
     }
     return polygonMinY;
   }
+
+  double pdfTemplateTop(Size size, int gridAmount, int minX, int minY) {
+    var polygonMinY = double.infinity;
+    for (var point in points) {
+      final templatePoint = point.toTemplateCoord(size, gridAmount, minX, minY);
+
+      if (size.height - templatePoint.dy < polygonMinY) {
+        polygonMinY = size.height - templatePoint.dy;
+      }
+    }
+    return polygonMinY;
+  }
 }

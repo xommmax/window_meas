@@ -3,16 +3,21 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
+import 'package:window_meas/features/calc/polygon_ext.dart';
 import 'package:window_meas/features/editor/data/model/direction.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/ext/offset_ext.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:window_meas/features/meas/pdf/pdf_filling_type_painter.dart';
+import 'package:window_meas/features/meas/pdf/pdf_opening_type_painter.dart';
 
 class PdfCustomPainter {
   static const lineWidth = 1.0;
   final Scheme scheme;
   final pw.Context context;
+  final PdfOpeningTypeDrawer openingTypeDrawer;
+  final PdfFillingTypeDrawer fillingTypeDrawer;
 
   int _gridAmount = 1;
   int _minX = 0;
@@ -20,10 +25,15 @@ class PdfCustomPainter {
   Size size = const Size(0, 0);
   double gridSize = 0;
 
-  PdfCustomPainter(this.scheme, this.context);
+  PdfCustomPainter(this.scheme, this.context)
+      : openingTypeDrawer = PdfOpeningTypeDrawer(strokeWidth: lineWidth),
+        fillingTypeDrawer = PdfFillingTypeDrawer(strokeWidth: lineWidth);
 
   void paint(PdfGraphics canvas, PdfPoint pdfSize) {
     _calculate(pdfSize);
+    _drawFillingTypes(canvas);
+    _drawOpeningTypes(canvas);
+    _drawArches(canvas);
     _drawLines(canvas);
     _drawMeasurements(canvas);
   }
@@ -48,6 +58,23 @@ class PdfCustomPainter {
       if (line.p2.dy > maxY) maxY = line.p2.dy;
     }
 
+    for (final arch in scheme.arches) {
+      if (arch.p1.dx < minX) minX = arch.p1.dx;
+      if (arch.p1.dx > maxX) maxX = arch.p1.dx;
+      if (arch.p1.dy < minY) minY = arch.p1.dy;
+      if (arch.p1.dy > maxY) maxY = arch.p1.dy;
+      if (arch.p2.dx < minX) minX = arch.p2.dx;
+      if (arch.p2.dx > maxX) maxX = arch.p2.dx;
+      if (arch.p2.dy < minY) minY = arch.p2.dy;
+      if (arch.p2.dy > maxY) maxY = arch.p2.dy;
+      if (arch.top != null) {
+        if (arch.top!.dx < minX) minX = arch.top!.dx;
+        if (arch.top!.dx > maxX) maxX = arch.top!.dx;
+        if (arch.top!.dy < minY) minY = arch.top!.dy;
+        if (arch.top!.dy > maxY) maxY = arch.top!.dy;
+      }
+    }
+
     _gridAmount = max(maxX - minX, maxY - minY).toInt();
     gridSize = size.width / _gridAmount;
 
@@ -56,8 +83,6 @@ class PdfCustomPainter {
   }
 
   void _drawLines(PdfGraphics canvas) {
-    if (scheme.lines.isEmpty) return;
-
     canvas
       ..setColor(PdfColors.black)
       ..setLineWidth(lineWidth);
@@ -67,6 +92,87 @@ class PdfCustomPainter {
       final p2 = line.p2.toTemplateCoord(size, _gridAmount, _minX, _minY);
       canvas.drawLine(p1.dx, size.height - p1.dy, p2.dx, size.height - p2.dy);
       canvas.strokePath();
+    }
+  }
+
+  void _drawArches(PdfGraphics canvas) {
+    canvas
+      ..setColor(PdfColors.black)
+      ..setLineWidth(lineWidth);
+
+    for (final arch in scheme.arches) {
+      final p1 = Offset(arch.p1.dx, arch.p1.dy).toTemplateCoord(size, _gridAmount, _minX, _minY);
+      final p2 = Offset(arch.p2.dx, arch.p2.dy).toTemplateCoord(size, _gridAmount, _minX, _minY);
+      final top = Offset((arch.p1.dx + arch.p2.dx) / 2, arch.top!.dy)
+          .toTemplateCoord(size, _gridAmount, _minX, _minY);
+
+      final controlPoint = Offset(
+        (top.dx - 0.125 * p1.dx - 0.125 * p2.dx) / 0.75,
+        (size.height - top.dy - 0.125 * (size.height - p1.dy) - 0.125 * (size.height - p2.dy)) /
+            0.75,
+      );
+      canvas
+        ..moveTo((p1.dx + p2.dx) / 2, size.height - (p1.dy + p2.dy) / 2)
+        ..lineTo(p1.dx, size.height - p1.dy)
+        ..curveTo(
+          controlPoint.dx - gridSize * 2,
+          controlPoint.dy,
+          controlPoint.dx + gridSize * 2,
+          controlPoint.dy,
+          p2.dx,
+          size.height - p2.dy,
+        )
+        ..closePath()
+        ..strokePath();
+    }
+  }
+
+  void _drawOpeningTypes(PdfGraphics canvas) {
+    for (final openingType in scheme.openingTypes) {
+      final combinedPolygon = openingType.polygons.reduce((p1, p2) => p1.combine(p2));
+
+      canvas.saveContext();
+      canvas.setTransform(Matrix4.identity()
+        ..translate(
+          combinedPolygon.templateLeft(size, _gridAmount, _minX, _minY),
+          combinedPolygon.pdfTemplateTop(size, _gridAmount, _minX, _minY),
+        ));
+
+      openingTypeDrawer.drawOpeningType(
+        canvas,
+        Size(
+          combinedPolygon.templateWidth(size, _gridAmount, _minX, _minY),
+          combinedPolygon.templateHeight(size, _gridAmount, _minX, _minY),
+        ),
+        openingType.openingType,
+      );
+      canvas.strokePath();
+      canvas.restoreContext();
+      canvas.setTransform(Matrix4.identity());
+    }
+  }
+
+  void _drawFillingTypes(PdfGraphics canvas) {
+    for (final fillingType in scheme.fillingTypes) {
+      canvas.saveContext();
+      canvas.setTransform(Matrix4.identity()
+        ..translate(
+          fillingType.polygon.templateLeft(size, _gridAmount, _minX, _minY),
+          fillingType.polygon.pdfTemplateTop(size, _gridAmount, _minX, _minY),
+        ));
+
+      fillingTypeDrawer.drawFillingType(
+        canvas,
+        Size(
+          fillingType.polygon.templateWidth(size, _gridAmount, _minX, _minY),
+          fillingType.polygon.templateHeight(size, _gridAmount, _minX, _minY),
+        ),
+        fillingType.fillingType,
+      );
+
+      canvas.strokePath();
+      canvas.restoreContext();
+      canvas.setTransform(Matrix4.identity());
     }
   }
 
@@ -223,11 +329,6 @@ class PdfCustomPainter {
     canvas.strokePath();
     canvas.restoreContext();
     canvas.setTransform(Matrix4.identity());
-    // canvas.save();
-    // canvas.translate(textOffset.dx, textOffset.dy);
-    // canvas.rotate(-pi / 2);
-    // textPainter.paint(canvas, Offset.zero);
-    // canvas.restore();
   }
 
   void _drawTrianglePath(PdfGraphics canvas, Offset p, Direction direction) {

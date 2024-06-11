@@ -39,13 +39,13 @@ class SchemePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     _drawBg(canvas, size);
-    _drawLines(canvas, size);
-    _drawArches(canvas, size);
     _drawFillingTypes(canvas, size);
     _drawOpeningTypes(canvas, size);
+    _drawArches(canvas, size);
+    _drawLines(canvas, size);
+    _drawMeasurements(canvas, size);
     _drawFillingTypeSelection(canvas, size);
     _drawOpeningTypeSelection(canvas, size);
-    _drawMeasurements(canvas, size);
     _drawCurrentArch(canvas, size);
     _drawCurrentLine(canvas, size);
   }
@@ -223,7 +223,7 @@ class SchemePainter extends CustomPainter {
           Offset(arch.p1.dx, arch.top!.dy).toGlobalCoord(size),
           Offset(arch.p2.dx, 2 * arch.p2.dy - arch.top!.dy).toGlobalCoord(size),
         ),
-        arch.top!.dy <= arch.p1.dx ? pi : 0,
+        arch.top!.dy <= arch.p1.dy ? pi : 0,
         pi,
         false,
         linePaint,
@@ -277,7 +277,7 @@ class SchemePainter extends CustomPainter {
           Offset(currentArch!.p2.dx, 2 * currentArch!.p2.dy - currentArch!.top!.dy)
               .toGlobalCoord(size),
         ),
-        currentArch!.top!.dy <= currentArch!.p1.dx ? pi : 0,
+        currentArch!.top!.dy <= currentArch!.p1.dy ? pi : 0,
         pi,
         false,
         linePaint,
