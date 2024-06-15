@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Measurement {
-  int? get innerId => throw _privateConstructorUsedError;
+  int? get localId => throw _privateConstructorUsedError;
+  int? get remoteId => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   String get clientName => throw _privateConstructorUsedError;
@@ -106,7 +107,8 @@ abstract class $MeasurementCopyWith<$Res> {
       _$MeasurementCopyWithImpl<$Res, Measurement>;
   @useResult
   $Res call(
-      {int? innerId,
+      {int? localId,
+      int? remoteId,
       String id,
       DateTime date,
       String clientName,
@@ -199,7 +201,8 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? innerId = freezed,
+    Object? localId = freezed,
+    Object? remoteId = freezed,
     Object? id = null,
     Object? date = null,
     Object? clientName = null,
@@ -276,9 +279,13 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? measurer = null,
   }) {
     return _then(_value.copyWith(
-      innerId: freezed == innerId
-          ? _value.innerId
-          : innerId // ignore: cast_nullable_to_non_nullable
+      localId: freezed == localId
+          ? _value.localId
+          : localId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      remoteId: freezed == remoteId
+          ? _value.remoteId
+          : remoteId // ignore: cast_nullable_to_non_nullable
               as int?,
       id: null == id
           ? _value.id
@@ -609,7 +616,8 @@ abstract class _$$MeasurementImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? innerId,
+      {int? localId,
+      int? remoteId,
       String id,
       DateTime date,
       String clientName,
@@ -702,7 +710,8 @@ class __$$MeasurementImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? innerId = freezed,
+    Object? localId = freezed,
+    Object? remoteId = freezed,
     Object? id = null,
     Object? date = null,
     Object? clientName = null,
@@ -779,9 +788,13 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? measurer = null,
   }) {
     return _then(_$MeasurementImpl(
-      innerId: freezed == innerId
-          ? _value.innerId
-          : innerId // ignore: cast_nullable_to_non_nullable
+      localId: freezed == localId
+          ? _value.localId
+          : localId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      remoteId: freezed == remoteId
+          ? _value.remoteId
+          : remoteId // ignore: cast_nullable_to_non_nullable
               as int?,
       id: null == id
           ? _value.id
@@ -1087,7 +1100,8 @@ class __$$MeasurementImplCopyWithImpl<$Res>
 
 class _$MeasurementImpl extends _Measurement {
   const _$MeasurementImpl(
-      {this.innerId,
+      {this.localId,
+      this.remoteId,
       required this.id,
       required this.date,
       required this.clientName,
@@ -1165,7 +1179,9 @@ class _$MeasurementImpl extends _Measurement {
       : super._();
 
   @override
-  final int? innerId;
+  final int? localId;
+  @override
+  final int? remoteId;
   @override
   final String id;
   @override
@@ -1317,7 +1333,7 @@ class _$MeasurementImpl extends _Measurement {
 
   @override
   String toString() {
-    return 'Measurement(innerId: $innerId, id: $id, date: $date, clientName: $clientName, city: $city, district: $district, street: $street, building: $building, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation, sealing: $sealing, cost: $cost, prepayment: $prepayment, comment: $comment, estimatedAssemblyTime: $estimatedAssemblyTime, vacuumCleaner: $vacuumCleaner, howDiscovered: $howDiscovered, residentialComplex: $residentialComplex, housingCoopNumber: $housingCoopNumber, scheme: $scheme, photoPath: $photoPath, measurer: $measurer)';
+    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, clientName: $clientName, city: $city, district: $district, street: $street, building: $building, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation, sealing: $sealing, cost: $cost, prepayment: $prepayment, comment: $comment, estimatedAssemblyTime: $estimatedAssemblyTime, vacuumCleaner: $vacuumCleaner, howDiscovered: $howDiscovered, residentialComplex: $residentialComplex, housingCoopNumber: $housingCoopNumber, scheme: $scheme, photoPath: $photoPath, measurer: $measurer)';
   }
 
   @override
@@ -1325,7 +1341,9 @@ class _$MeasurementImpl extends _Measurement {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MeasurementImpl &&
-            (identical(other.innerId, innerId) || other.innerId == innerId) &&
+            (identical(other.localId, localId) || other.localId == localId) &&
+            (identical(other.remoteId, remoteId) ||
+                other.remoteId == remoteId) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.clientName, clientName) ||
@@ -1416,8 +1434,7 @@ class _$MeasurementImpl extends _Measurement {
                 other.windowsillAssembly == windowsillAssembly) &&
             (identical(other.drainageDepth, drainageDepth) ||
                 other.drainageDepth == drainageDepth) &&
-            (identical(other.drainageWidth, drainageWidth) ||
-                other.drainageWidth == drainageWidth) &&
+            (identical(other.drainageWidth, drainageWidth) || other.drainageWidth == drainageWidth) &&
             (identical(other.drainageColor, drainageColor) || other.drainageColor == drainageColor) &&
             (identical(other.drainageEndCap, drainageEndCap) || other.drainageEndCap == drainageEndCap) &&
             (identical(other.canopyType, canopyType) || other.canopyType == canopyType) &&
@@ -1448,7 +1465,8 @@ class _$MeasurementImpl extends _Measurement {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
-        innerId,
+        localId,
+        remoteId,
         id,
         date,
         clientName,
@@ -1534,7 +1552,8 @@ class _$MeasurementImpl extends _Measurement {
 
 abstract class _Measurement extends Measurement {
   const factory _Measurement(
-      {final int? innerId,
+      {final int? localId,
+      final int? remoteId,
       required final String id,
       required final DateTime date,
       required final String clientName,
@@ -1612,7 +1631,9 @@ abstract class _Measurement extends Measurement {
   const _Measurement._() : super._();
 
   @override
-  int? get innerId;
+  int? get localId;
+  @override
+  int? get remoteId;
   @override
   String get id;
   @override

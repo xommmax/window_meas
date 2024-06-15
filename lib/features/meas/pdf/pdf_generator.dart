@@ -49,7 +49,7 @@ class PdfGenerator {
                     pw.Container(
                       alignment: pw.Alignment.center,
                       child: pw.Text(
-                        'Замір №${measurement.innerId?.toString().padLeft(4, '0') ?? ''}',
+                        'Замір №${measurement.localId?.toString().padLeft(4, '0') ?? ''}',
                         style: pw.TextStyle(
                           fontSize: 20,
                           fontWeight: pw.FontWeight.bold,

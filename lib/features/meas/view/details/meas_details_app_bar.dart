@@ -15,7 +15,7 @@ class MeasurementDetailsAppBar extends StatelessWidget implements PreferredSizeW
   @override
   Widget build(BuildContext context) => AppBar(
         title: Text(
-          '${context.l10n.measurement} №${measurement?.innerId?.toString().padLeft(4, '0') ?? ''}',
+          '${context.l10n.measurement} №${measurement?.localId?.toString().padLeft(4, '0') ?? ''}',
         ),
         actions: [
           PopupMenuButton<String>(

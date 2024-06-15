@@ -15,11 +15,10 @@ _$CatalogDTOImpl _$$CatalogDTOImplFromJson(Map<String, dynamic> json) =>
           id: $checkedConvert('id', (v) => (v as num).toInt()),
           name: $checkedConvert('name', (v) => v as String),
           createdAt: $checkedConvert('created_at', (v) => (v as num).toInt()),
-          updatedAt: $checkedConvert('updated_at', (v) => (v as num).toInt()),
         );
         return val;
       },
-      fieldKeyMap: const {'createdAt': 'created_at', 'updatedAt': 'updated_at'},
+      fieldKeyMap: const {'createdAt': 'created_at'},
     );
 
 Map<String, dynamic> _$$CatalogDTOImplToJson(_$CatalogDTOImpl instance) =>
@@ -27,5 +26,4 @@ Map<String, dynamic> _$$CatalogDTOImplToJson(_$CatalogDTOImpl instance) =>
       'id': instance.id,
       'name': instance.name,
       'created_at': instance.createdAt,
-      'updated_at': instance.updatedAt,
     };

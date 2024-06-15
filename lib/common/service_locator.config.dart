@@ -19,7 +19,7 @@ import 'package:window_meas/features/meas/cubit/meas_details_cubit.dart'
 import 'package:window_meas/features/meas/cubit/meas_list_cubit.dart' as _i18;
 import 'package:window_meas/features/meas/data/ds/meas_local_ds.dart' as _i9;
 import 'package:window_meas/features/meas/data/ds/meas_remote_ds.dart' as _i6;
-import 'package:window_meas/features/meas/data/meas_repo.dart' as _i13;
+import 'package:window_meas/features/meas/data/meas_repository.dart' as _i13;
 import 'package:window_meas/features/profile/settings/cubit/settings_cubit.dart'
     as _i15;
 import 'package:window_meas/features/profile/settings/data/ds/settings_local_ds.dart'

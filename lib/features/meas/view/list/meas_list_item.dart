@@ -43,7 +43,7 @@ class MeasurementItem extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      '${context.l10n.measurement} №${measurement.innerId?.toString().padLeft(4, '0') ?? ''}',
+                      '${context.l10n.measurement} №${measurement.localId?.toString().padLeft(4, '0') ?? ''}',
                       style: const TextStyle(color: Colors.white),
                     ),
                   ),

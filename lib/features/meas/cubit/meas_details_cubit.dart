@@ -5,9 +5,8 @@ import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:window_meas/features/crm/data/crm_repository.dart';
 import 'package:window_meas/features/meas/cubit/meas_details_state.dart';
-import 'package:window_meas/features/meas/data/meas_repo.dart';
+import 'package:window_meas/features/meas/data/meas_repository.dart';
 import 'package:window_meas/features/meas/data/model/measurement.dart';
 import 'package:window_meas/features/meas/pdf/pdf_generator.dart';
 import 'package:window_meas/features/profile/settings/data/settings_repo.dart';
@@ -17,12 +16,10 @@ import 'package:window_meas/l10n/localization.dart';
 class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
   final MeasurementRepository measRepo;
   final SettingsRepository settingsRepo;
-  final CrmRepository crmRepo;
 
   MeasurementDetailsCubit(
     this.measRepo,
     this.settingsRepo,
-    this.crmRepo,
   ) : super(MeasurementDetailsState.initial());
 
   Future<void> loadMeasurement(String measurementId) async {
@@ -69,7 +66,7 @@ class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
 
     await OpenFile.open(file.path);
     final shareText = '''
-${Localization.l10n.measurement} №${state.measurement!.innerId?.toString().padLeft(4, '0') ?? ''}
+${Localization.l10n.measurement} №${state.measurement!.localId?.toString().padLeft(4, '0') ?? ''}
 ${DateFormat('dd.MM.yyyy, HH:mm').format(state.measurement!.date)}
 ${state.measurement!.clientName}
     ''';
@@ -94,6 +91,7 @@ ${state.measurement!.clientName}
   Future<void> shareCrm() async {
     if (state.measurement == null) return;
 
-    await crmRepo.addMeasurement(state.measurement!);
+    await measRepo.addRemoteMeasurement(state.measurement!);
+    await loadMeasurement(state.measurement!.id);
   }
 }

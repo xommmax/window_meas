@@ -28,7 +28,8 @@ class Measurement with _$Measurement {
   const Measurement._();
 
   const factory Measurement({
-    int? innerId,
+    int? localId,
+    int? remoteId,
     required String id,
     required DateTime date,
     required String clientName,
@@ -183,7 +184,8 @@ class Measurement with _$Measurement {
       );
 
   MeasurementDB toDB() => MeasurementDB()
-    ..innerId = innerId
+    ..localId = localId
+    ..remoteId = remoteId
     ..id = id
     ..date = date
     ..clientName = clientName
@@ -260,7 +262,8 @@ class Measurement with _$Measurement {
     ..photoPath = photoPath;
 
   static Measurement fromDB(MeasurementDB db) => Measurement(
-        innerId: db.innerId,
+        localId: db.localId,
+        remoteId: db.remoteId,
         id: db.id,
         date: db.date,
         clientName: db.clientName,
@@ -336,5 +339,4 @@ class Measurement with _$Measurement {
         measurer: db.measurer,
         photoPath: db.photoPath,
       );
-      
 }

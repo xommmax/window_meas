@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:window_meas/features/meas/data/ds/meas_local_ds.dart';
 import 'package:window_meas/features/meas/data/ds/meas_remote_ds.dart';
 import 'package:window_meas/features/meas/data/model/measurement.dart';
+import 'package:window_meas/features/meas/data/model/measurement_dto.dart';
 
 @singleton
 class MeasurementRepository {
@@ -10,8 +11,17 @@ class MeasurementRepository {
   final MeasurementLocalDataSource local;
   final MeasurementRemoteDataSource remote;
 
-  Future<void> addMeasurement(Measurement measurement) =>
+  Future<void> addLocalMeasurement(Measurement measurement) =>
       local.addMeasurement(measurement.toDB());
+
+  Future<void> addRemoteMeasurement(Measurement measurement) async {
+    if (measurement.remoteId == null) {
+      final remoteId = await remote.addMeasurement(MeasurementDTO.fromDomain(measurement));
+      await local.updateMeasurement(measurement.copyWith(remoteId: remoteId).toDB());
+    } else {
+      await remote.updateMeasurement(MeasurementDTO.fromDomain(measurement));
+    }
+  }
 
   Future<List<Measurement>> getMeasurements() async {
     final list = await local.getMeasurements();
@@ -26,10 +36,8 @@ class MeasurementRepository {
   Future<void> updateMeasurement(Measurement measurement) =>
       local.updateMeasurement(measurement.toDB());
 
-  Stream<List<Measurement>> watchMeasurements() => local
-      .watchMeasurements()
-      .map((list) => list.map((e) => Measurement.fromDB(e)).toList());
+  Stream<List<Measurement>> watchMeasurements() =>
+      local.watchMeasurements().map((list) => list.map((e) => Measurement.fromDB(e)).toList());
 
-  Future<void> deleteMeasurement(String measurementId) =>
-      local.deleteMeasurement(measurementId);
+  Future<void> deleteMeasurement(String measurementId) => local.deleteMeasurement(measurementId);
 }

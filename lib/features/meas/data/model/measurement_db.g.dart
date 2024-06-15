@@ -289,119 +289,124 @@ const MeasurementDBSchema = CollectionSchema(
       name: r'quarterSize',
       type: IsarType.string,
     ),
-    r'residentialComplex': PropertySchema(
+    r'remoteId': PropertySchema(
       id: 52,
+      name: r'remoteId',
+      type: IsarType.long,
+    ),
+    r'residentialComplex': PropertySchema(
+      id: 53,
       name: r'residentialComplex',
       type: IsarType.string,
     ),
     r'roofDisassembly': PropertySchema(
-      id: 53,
+      id: 54,
       name: r'roofDisassembly',
       type: IsarType.bool,
     ),
     r'rubberColor': PropertySchema(
-      id: 54,
+      id: 55,
       name: r'rubberColor',
       type: IsarType.string,
       enumMap: _MeasurementDBrubberColorEnumValueMap,
     ),
     r'scheme': PropertySchema(
-      id: 55,
+      id: 56,
       name: r'scheme',
       type: IsarType.object,
       target: r'SchemeDB',
     ),
     r'screedDisassembly': PropertySchema(
-      id: 56,
+      id: 57,
       name: r'screedDisassembly',
       type: IsarType.bool,
     ),
     r'sealing': PropertySchema(
-      id: 57,
+      id: 58,
       name: r'sealing',
       type: IsarType.bool,
     ),
     r'slabExtension': PropertySchema(
-      id: 58,
+      id: 59,
       name: r'slabExtension',
       type: IsarType.bool,
     ),
     r'slopeDepth': PropertySchema(
-      id: 59,
+      id: 60,
       name: r'slopeDepth',
       type: IsarType.string,
     ),
     r'slopeLength': PropertySchema(
-      id: 60,
+      id: 61,
       name: r'slopeLength',
       type: IsarType.string,
     ),
     r'slopeQuantity': PropertySchema(
-      id: 61,
+      id: 62,
       name: r'slopeQuantity',
       type: IsarType.string,
     ),
     r'standProfile': PropertySchema(
-      id: 62,
+      id: 63,
       name: r'standProfile',
       type: IsarType.string,
       enumMap: _MeasurementDBstandProfileEnumValueMap,
     ),
     r'staticCalculation': PropertySchema(
-      id: 63,
+      id: 64,
       name: r'staticCalculation',
       type: IsarType.bool,
     ),
     r'street': PropertySchema(
-      id: 64,
+      id: 65,
       name: r'street',
       type: IsarType.string,
     ),
     r'unloading': PropertySchema(
-      id: 65,
+      id: 66,
       name: r'unloading',
       type: IsarType.bool,
     ),
     r'vacuumCleaner': PropertySchema(
-      id: 66,
+      id: 67,
       name: r'vacuumCleaner',
       type: IsarType.bool,
     ),
     r'windowsillAssembly': PropertySchema(
-      id: 67,
+      id: 68,
       name: r'windowsillAssembly',
       type: IsarType.bool,
     ),
     r'windowsillColor': PropertySchema(
-      id: 68,
+      id: 69,
       name: r'windowsillColor',
       type: IsarType.string,
     ),
     r'windowsillConnector': PropertySchema(
-      id: 69,
+      id: 70,
       name: r'windowsillConnector',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillConnectorEnumValueMap,
     ),
     r'windowsillDepth': PropertySchema(
-      id: 70,
+      id: 71,
       name: r'windowsillDepth',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillDepthEnumValueMap,
     ),
     r'windowsillExtension': PropertySchema(
-      id: 71,
+      id: 72,
       name: r'windowsillExtension',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillExtensionEnumValueMap,
     ),
     r'windowsillSize': PropertySchema(
-      id: 72,
+      id: 73,
       name: r'windowsillSize',
       type: IsarType.string,
     ),
     r'windowsillType': PropertySchema(
-      id: 73,
+      id: 74,
       name: r'windowsillType',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillTypeEnumValueMap,
@@ -411,7 +416,7 @@ const MeasurementDBSchema = CollectionSchema(
   serialize: _measurementDBSerialize,
   deserialize: _measurementDBDeserialize,
   deserializeProp: _measurementDBDeserializeProp,
-  idName: r'innerId',
+  idName: r'localId',
   indexes: {
     r'id': IndexSchema(
       id: -3268401673993471357,
@@ -586,33 +591,34 @@ void _measurementDBSerialize(
   writer.writeString(offsets[49], object.profileSystem.name);
   writer.writeString(offsets[50], object.quarterPosition.name);
   writer.writeString(offsets[51], object.quarterSize);
-  writer.writeString(offsets[52], object.residentialComplex);
-  writer.writeBool(offsets[53], object.roofDisassembly);
-  writer.writeString(offsets[54], object.rubberColor.name);
+  writer.writeLong(offsets[52], object.remoteId);
+  writer.writeString(offsets[53], object.residentialComplex);
+  writer.writeBool(offsets[54], object.roofDisassembly);
+  writer.writeString(offsets[55], object.rubberColor.name);
   writer.writeObject<SchemeDB>(
-    offsets[55],
+    offsets[56],
     allOffsets,
     SchemeDBSchema.serialize,
     object.scheme,
   );
-  writer.writeBool(offsets[56], object.screedDisassembly);
-  writer.writeBool(offsets[57], object.sealing);
-  writer.writeBool(offsets[58], object.slabExtension);
-  writer.writeString(offsets[59], object.slopeDepth);
-  writer.writeString(offsets[60], object.slopeLength);
-  writer.writeString(offsets[61], object.slopeQuantity);
-  writer.writeString(offsets[62], object.standProfile.name);
-  writer.writeBool(offsets[63], object.staticCalculation);
-  writer.writeString(offsets[64], object.street);
-  writer.writeBool(offsets[65], object.unloading);
-  writer.writeBool(offsets[66], object.vacuumCleaner);
-  writer.writeBool(offsets[67], object.windowsillAssembly);
-  writer.writeString(offsets[68], object.windowsillColor);
-  writer.writeString(offsets[69], object.windowsillConnector.name);
-  writer.writeString(offsets[70], object.windowsillDepth.name);
-  writer.writeString(offsets[71], object.windowsillExtension.name);
-  writer.writeString(offsets[72], object.windowsillSize);
-  writer.writeString(offsets[73], object.windowsillType.name);
+  writer.writeBool(offsets[57], object.screedDisassembly);
+  writer.writeBool(offsets[58], object.sealing);
+  writer.writeBool(offsets[59], object.slabExtension);
+  writer.writeString(offsets[60], object.slopeDepth);
+  writer.writeString(offsets[61], object.slopeLength);
+  writer.writeString(offsets[62], object.slopeQuantity);
+  writer.writeString(offsets[63], object.standProfile.name);
+  writer.writeBool(offsets[64], object.staticCalculation);
+  writer.writeString(offsets[65], object.street);
+  writer.writeBool(offsets[66], object.unloading);
+  writer.writeBool(offsets[67], object.vacuumCleaner);
+  writer.writeBool(offsets[68], object.windowsillAssembly);
+  writer.writeString(offsets[69], object.windowsillColor);
+  writer.writeString(offsets[70], object.windowsillConnector.name);
+  writer.writeString(offsets[71], object.windowsillDepth.name);
+  writer.writeString(offsets[72], object.windowsillExtension.name);
+  writer.writeString(offsets[73], object.windowsillSize);
+  writer.writeString(offsets[74], object.windowsillType.name);
 }
 
 MeasurementDB _measurementDBDeserialize(
@@ -679,10 +685,10 @@ MeasurementDB _measurementDBDeserialize(
   object.housingCoopNumber = reader.readString(offsets[35]);
   object.howDiscovered = reader.readString(offsets[36]);
   object.id = reader.readString(offsets[37]);
-  object.innerId = id;
   object.insulation = reader.readBool(offsets[38]);
   object.laminationExternal = reader.readString(offsets[39]);
   object.laminationInternal = reader.readString(offsets[40]);
+  object.localId = id;
   object.measurer = reader.readString(offsets[41]);
   object.panelThickness = _MeasurementDBpanelThicknessValueEnumMap[
           reader.readStringOrNull(offsets[42])] ??
@@ -702,43 +708,44 @@ MeasurementDB _measurementDBDeserialize(
           reader.readStringOrNull(offsets[50])] ??
       QuarterPosition.none;
   object.quarterSize = reader.readString(offsets[51]);
-  object.residentialComplex = reader.readString(offsets[52]);
-  object.roofDisassembly = reader.readBool(offsets[53]);
+  object.remoteId = reader.readLongOrNull(offsets[52]);
+  object.residentialComplex = reader.readString(offsets[53]);
+  object.roofDisassembly = reader.readBool(offsets[54]);
   object.rubberColor = _MeasurementDBrubberColorValueEnumMap[
-          reader.readStringOrNull(offsets[54])] ??
+          reader.readStringOrNull(offsets[55])] ??
       RubberColor.none;
   object.scheme = reader.readObjectOrNull<SchemeDB>(
-    offsets[55],
+    offsets[56],
     SchemeDBSchema.deserialize,
     allOffsets,
   );
-  object.screedDisassembly = reader.readBool(offsets[56]);
-  object.sealing = reader.readBool(offsets[57]);
-  object.slabExtension = reader.readBool(offsets[58]);
-  object.slopeDepth = reader.readString(offsets[59]);
-  object.slopeLength = reader.readString(offsets[60]);
-  object.slopeQuantity = reader.readString(offsets[61]);
+  object.screedDisassembly = reader.readBool(offsets[57]);
+  object.sealing = reader.readBool(offsets[58]);
+  object.slabExtension = reader.readBool(offsets[59]);
+  object.slopeDepth = reader.readString(offsets[60]);
+  object.slopeLength = reader.readString(offsets[61]);
+  object.slopeQuantity = reader.readString(offsets[62]);
   object.standProfile = _MeasurementDBstandProfileValueEnumMap[
-          reader.readStringOrNull(offsets[62])] ??
+          reader.readStringOrNull(offsets[63])] ??
       StandProfile.none;
-  object.staticCalculation = reader.readBool(offsets[63]);
-  object.street = reader.readString(offsets[64]);
-  object.unloading = reader.readBool(offsets[65]);
-  object.vacuumCleaner = reader.readBool(offsets[66]);
-  object.windowsillAssembly = reader.readBool(offsets[67]);
-  object.windowsillColor = reader.readString(offsets[68]);
+  object.staticCalculation = reader.readBool(offsets[64]);
+  object.street = reader.readString(offsets[65]);
+  object.unloading = reader.readBool(offsets[66]);
+  object.vacuumCleaner = reader.readBool(offsets[67]);
+  object.windowsillAssembly = reader.readBool(offsets[68]);
+  object.windowsillColor = reader.readString(offsets[69]);
   object.windowsillConnector = _MeasurementDBwindowsillConnectorValueEnumMap[
-          reader.readStringOrNull(offsets[69])] ??
+          reader.readStringOrNull(offsets[70])] ??
       WindowsillConnector.none;
   object.windowsillDepth = _MeasurementDBwindowsillDepthValueEnumMap[
-          reader.readStringOrNull(offsets[70])] ??
+          reader.readStringOrNull(offsets[71])] ??
       WindowsillDepth.none;
   object.windowsillExtension = _MeasurementDBwindowsillExtensionValueEnumMap[
-          reader.readStringOrNull(offsets[71])] ??
+          reader.readStringOrNull(offsets[72])] ??
       WindowsillExtension.none;
-  object.windowsillSize = reader.readString(offsets[72]);
+  object.windowsillSize = reader.readString(offsets[73]);
   object.windowsillType = _MeasurementDBwindowsillTypeValueEnumMap[
-          reader.readStringOrNull(offsets[73])] ??
+          reader.readStringOrNull(offsets[74])] ??
       WindowsillType.none;
   return object;
 }
@@ -882,62 +889,64 @@ P _measurementDBDeserializeProp<P>(
     case 51:
       return (reader.readString(offset)) as P;
     case 52:
-      return (reader.readString(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 53:
-      return (reader.readBool(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 54:
+      return (reader.readBool(offset)) as P;
+    case 55:
       return (_MeasurementDBrubberColorValueEnumMap[
               reader.readStringOrNull(offset)] ??
           RubberColor.none) as P;
-    case 55:
+    case 56:
       return (reader.readObjectOrNull<SchemeDB>(
         offset,
         SchemeDBSchema.deserialize,
         allOffsets,
       )) as P;
-    case 56:
-      return (reader.readBool(offset)) as P;
     case 57:
       return (reader.readBool(offset)) as P;
     case 58:
       return (reader.readBool(offset)) as P;
     case 59:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 60:
       return (reader.readString(offset)) as P;
     case 61:
       return (reader.readString(offset)) as P;
     case 62:
+      return (reader.readString(offset)) as P;
+    case 63:
       return (_MeasurementDBstandProfileValueEnumMap[
               reader.readStringOrNull(offset)] ??
           StandProfile.none) as P;
-    case 63:
-      return (reader.readBool(offset)) as P;
     case 64:
-      return (reader.readString(offset)) as P;
-    case 65:
       return (reader.readBool(offset)) as P;
+    case 65:
+      return (reader.readString(offset)) as P;
     case 66:
       return (reader.readBool(offset)) as P;
     case 67:
       return (reader.readBool(offset)) as P;
     case 68:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 69:
+      return (reader.readString(offset)) as P;
+    case 70:
       return (_MeasurementDBwindowsillConnectorValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillConnector.none) as P;
-    case 70:
+    case 71:
       return (_MeasurementDBwindowsillDepthValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillDepth.none) as P;
-    case 71:
+    case 72:
       return (_MeasurementDBwindowsillExtensionValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillExtension.none) as P;
-    case 72:
-      return (reader.readString(offset)) as P;
     case 73:
+      return (reader.readString(offset)) as P;
+    case 74:
       return (_MeasurementDBwindowsillTypeValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillType.none) as P;
@@ -1170,7 +1179,7 @@ const _MeasurementDBwindowsillTypeValueEnumMap = {
 };
 
 Id _measurementDBGetId(MeasurementDB object) {
-  return object.innerId ?? Isar.autoIncrement;
+  return object.localId ?? Isar.autoIncrement;
 }
 
 List<IsarLinkBase<dynamic>> _measurementDBGetLinks(MeasurementDB object) {
@@ -1179,7 +1188,7 @@ List<IsarLinkBase<dynamic>> _measurementDBGetLinks(MeasurementDB object) {
 
 void _measurementDBAttach(
     IsarCollection<dynamic> col, Id id, MeasurementDB object) {
-  object.innerId = id;
+  object.localId = id;
 }
 
 extension MeasurementDBByIndex on IsarCollection<MeasurementDB> {
@@ -1239,7 +1248,7 @@ extension MeasurementDBByIndex on IsarCollection<MeasurementDB> {
 
 extension MeasurementDBQueryWhereSort
     on QueryBuilder<MeasurementDB, MeasurementDB, QWhere> {
-  QueryBuilder<MeasurementDB, MeasurementDB, QAfterWhere> anyInnerId() {
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterWhere> anyLocalId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
@@ -1248,69 +1257,69 @@ extension MeasurementDBQueryWhereSort
 
 extension MeasurementDBQueryWhere
     on QueryBuilder<MeasurementDB, MeasurementDB, QWhereClause> {
-  QueryBuilder<MeasurementDB, MeasurementDB, QAfterWhereClause> innerIdEqualTo(
-      Id innerId) {
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterWhereClause> localIdEqualTo(
+      Id localId) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
-        lower: innerId,
-        upper: innerId,
+        lower: localId,
+        upper: localId,
       ));
     });
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterWhereClause>
-      innerIdNotEqualTo(Id innerId) {
+      localIdNotEqualTo(Id localId) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(
-              IdWhereClause.lessThan(upper: innerId, includeUpper: false),
+              IdWhereClause.lessThan(upper: localId, includeUpper: false),
             )
             .addWhereClause(
-              IdWhereClause.greaterThan(lower: innerId, includeLower: false),
+              IdWhereClause.greaterThan(lower: localId, includeLower: false),
             );
       } else {
         return query
             .addWhereClause(
-              IdWhereClause.greaterThan(lower: innerId, includeLower: false),
+              IdWhereClause.greaterThan(lower: localId, includeLower: false),
             )
             .addWhereClause(
-              IdWhereClause.lessThan(upper: innerId, includeUpper: false),
+              IdWhereClause.lessThan(upper: localId, includeUpper: false),
             );
       }
     });
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterWhereClause>
-      innerIdGreaterThan(Id innerId, {bool include = false}) {
+      localIdGreaterThan(Id localId, {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
-        IdWhereClause.greaterThan(lower: innerId, includeLower: include),
+        IdWhereClause.greaterThan(lower: localId, includeLower: include),
       );
     });
   }
 
-  QueryBuilder<MeasurementDB, MeasurementDB, QAfterWhereClause> innerIdLessThan(
-      Id innerId,
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterWhereClause> localIdLessThan(
+      Id localId,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
-        IdWhereClause.lessThan(upper: innerId, includeUpper: include),
+        IdWhereClause.lessThan(upper: localId, includeUpper: include),
       );
     });
   }
 
-  QueryBuilder<MeasurementDB, MeasurementDB, QAfterWhereClause> innerIdBetween(
-    Id lowerInnerId,
-    Id upperInnerId, {
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterWhereClause> localIdBetween(
+    Id lowerLocalId,
+    Id upperLocalId, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
-        lower: lowerInnerId,
+        lower: lowerLocalId,
         includeLower: includeLower,
-        upper: upperInnerId,
+        upper: upperLocalId,
         includeUpper: includeUpper,
       ));
     });
@@ -5557,80 +5566,6 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
-      innerIdIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'innerId',
-      ));
-    });
-  }
-
-  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
-      innerIdIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'innerId',
-      ));
-    });
-  }
-
-  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
-      innerIdEqualTo(Id? value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'innerId',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
-      innerIdGreaterThan(
-    Id? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'innerId',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
-      innerIdLessThan(
-    Id? value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'innerId',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
-      innerIdBetween(
-    Id? lower,
-    Id? upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'innerId',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
-  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       insulationEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -5908,6 +5843,80 @@ extension MeasurementDBQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'laminationInternal',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      localIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'localId',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      localIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'localId',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      localIdEqualTo(Id? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'localId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      localIdGreaterThan(
+    Id? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'localId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      localIdLessThan(
+    Id? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'localId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      localIdBetween(
+    Id? lower,
+    Id? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'localId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
       ));
     });
   }
@@ -7297,6 +7306,80 @@ extension MeasurementDBQueryFilter
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'quarterSize',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      remoteIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'remoteId',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      remoteIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'remoteId',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      remoteIdEqualTo(int? value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'remoteId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      remoteIdGreaterThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'remoteId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      remoteIdLessThan(
+    int? value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'remoteId',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      remoteIdBetween(
+    int? lower,
+    int? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'remoteId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
       ));
     });
   }
@@ -9867,6 +9950,19 @@ extension MeasurementDBQuerySortBy
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> sortByRemoteId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByRemoteIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteId', Sort.desc);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       sortByResidentialComplex() {
     return QueryBuilder.apply(this, (query) {
@@ -10643,18 +10739,6 @@ extension MeasurementDBQuerySortThenBy
     });
   }
 
-  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByInnerId() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'innerId', Sort.asc);
-    });
-  }
-
-  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByInnerIdDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'innerId', Sort.desc);
-    });
-  }
-
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByInsulation() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'insulation', Sort.asc);
@@ -10693,6 +10777,18 @@ extension MeasurementDBQuerySortThenBy
       thenByLaminationInternalDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'laminationInternal', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByLocalId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'localId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByLocalIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'localId', Sort.desc);
     });
   }
 
@@ -10842,6 +10938,19 @@ extension MeasurementDBQuerySortThenBy
       thenByQuarterSizeDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'quarterSize', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByRemoteId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByRemoteIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'remoteId', Sort.desc);
     });
   }
 
@@ -11502,6 +11611,12 @@ extension MeasurementDBQueryWhereDistinct
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctByRemoteId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'remoteId');
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
       distinctByResidentialComplex({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -11658,9 +11773,9 @@ extension MeasurementDBQueryWhereDistinct
 
 extension MeasurementDBQueryProperty
     on QueryBuilder<MeasurementDB, MeasurementDB, QQueryProperty> {
-  QueryBuilder<MeasurementDB, int, QQueryOperations> innerIdProperty() {
+  QueryBuilder<MeasurementDB, int, QQueryOperations> localIdProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'innerId');
+      return query.addPropertyName(r'localId');
     });
   }
 
@@ -11997,6 +12112,12 @@ extension MeasurementDBQueryProperty
   QueryBuilder<MeasurementDB, String, QQueryOperations> quarterSizeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'quarterSize');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, int?, QQueryOperations> remoteIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'remoteId');
     });
   }
 

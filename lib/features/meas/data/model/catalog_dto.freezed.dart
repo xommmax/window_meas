@@ -23,7 +23,6 @@ mixin _$CatalogDTO {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get createdAt => throw _privateConstructorUsedError;
-  int get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +36,7 @@ abstract class $CatalogDTOCopyWith<$Res> {
           CatalogDTO value, $Res Function(CatalogDTO) then) =
       _$CatalogDTOCopyWithImpl<$Res, CatalogDTO>;
   @useResult
-  $Res call({int id, String name, int createdAt, int updatedAt});
+  $Res call({int id, String name, int createdAt});
 }
 
 /// @nodoc
@@ -56,7 +55,6 @@ class _$CatalogDTOCopyWithImpl<$Res, $Val extends CatalogDTO>
     Object? id = null,
     Object? name = null,
     Object? createdAt = null,
-    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -71,10 +69,6 @@ class _$CatalogDTOCopyWithImpl<$Res, $Val extends CatalogDTO>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as int,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as int,
     ) as $Val);
   }
 }
@@ -87,7 +81,7 @@ abstract class _$$CatalogDTOImplCopyWith<$Res>
       __$$CatalogDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, int createdAt, int updatedAt});
+  $Res call({int id, String name, int createdAt});
 }
 
 /// @nodoc
@@ -104,7 +98,6 @@ class __$$CatalogDTOImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? createdAt = null,
-    Object? updatedAt = null,
   }) {
     return _then(_$CatalogDTOImpl(
       id: null == id
@@ -119,10 +112,6 @@ class __$$CatalogDTOImplCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as int,
-      updatedAt: null == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
@@ -131,10 +120,7 @@ class __$$CatalogDTOImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CatalogDTOImpl extends _CatalogDTO {
   const _$CatalogDTOImpl(
-      {required this.id,
-      required this.name,
-      required this.createdAt,
-      required this.updatedAt})
+      {required this.id, required this.name, required this.createdAt})
       : super._();
 
   factory _$CatalogDTOImpl.fromJson(Map<String, dynamic> json) =>
@@ -146,12 +132,10 @@ class _$CatalogDTOImpl extends _CatalogDTO {
   final String name;
   @override
   final int createdAt;
-  @override
-  final int updatedAt;
 
   @override
   String toString() {
-    return 'CatalogDTO(id: $id, name: $name, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'CatalogDTO(id: $id, name: $name, createdAt: $createdAt)';
   }
 
   @override
@@ -162,14 +146,12 @@ class _$CatalogDTOImpl extends _CatalogDTO {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, createdAt, updatedAt);
+  int get hashCode => Object.hash(runtimeType, id, name, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -189,8 +171,7 @@ abstract class _CatalogDTO extends CatalogDTO {
   const factory _CatalogDTO(
       {required final int id,
       required final String name,
-      required final int createdAt,
-      required final int updatedAt}) = _$CatalogDTOImpl;
+      required final int createdAt}) = _$CatalogDTOImpl;
   const _CatalogDTO._() : super._();
 
   factory _CatalogDTO.fromJson(Map<String, dynamic> json) =
@@ -202,8 +183,6 @@ abstract class _CatalogDTO extends CatalogDTO {
   String get name;
   @override
   int get createdAt;
-  @override
-  int get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$CatalogDTOImplCopyWith<_$CatalogDTOImpl> get copyWith =>

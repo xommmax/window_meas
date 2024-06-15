@@ -41,14 +41,14 @@ class MeasurementListView extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _addMeasurement(context),
+        onPressed: () => _saveMeasurement(context),
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
       ));
 
-  Future<void> _addMeasurement(BuildContext context) async {
-    final id = await context.read<MeasurementListCubit>().addNewMeasurement();
+  Future<void> _saveMeasurement(BuildContext context) async {
+    final id = await context.read<MeasurementListCubit>().saveMeasurement();
 
     if (context.mounted) {
       context.push('/meas_details/$id');

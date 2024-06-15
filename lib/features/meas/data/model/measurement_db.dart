@@ -30,7 +30,8 @@ part 'measurement_db.g.dart';
 
 @collection
 class MeasurementDB {
-  Id? innerId;
+  Id? localId;
+  int? remoteId;
   @Index(unique: true)
   late String id;
   late DateTime date;
