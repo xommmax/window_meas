@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:window_meas/features/crm/data/crm_repository.dart';
 import 'package:window_meas/features/meas/cubit/meas_details_state.dart';
 import 'package:window_meas/features/meas/data/meas_repo.dart';
 import 'package:window_meas/features/meas/data/model/measurement.dart';
@@ -16,10 +17,12 @@ import 'package:window_meas/l10n/localization.dart';
 class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
   final MeasurementRepository measRepo;
   final SettingsRepository settingsRepo;
+  final CrmRepository crmRepo;
 
   MeasurementDetailsCubit(
     this.measRepo,
     this.settingsRepo,
+    this.crmRepo,
   ) : super(MeasurementDetailsState.initial());
 
   Future<void> loadMeasurement(String measurementId) async {
@@ -88,5 +91,9 @@ ${state.measurement!.clientName}
     }
   }
 
-  Future<void> shareCrm() async {}
+  Future<void> shareCrm() async {
+    if (state.measurement == null) return;
+
+    await crmRepo.addMeasurement(state.measurement!);
+  }
 }
