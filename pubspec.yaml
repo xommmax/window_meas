@@ -35,6 +35,8 @@ dependencies:
   open_file: ^3.3.2
   printing: ^5.12.0
   image_picker: ^1.1.2
+  dio: ^5.4.3+1
+  envied: ^0.5.4+1
 
 dev_dependencies:
   flutter_test:
@@ -47,6 +49,7 @@ dev_dependencies:
   mocktail: ^1.0.3
   injectable_generator: ^2.6.1
   isar_generator: ^3.1.0+1
+  envied_generator: ^0.5.4+1
 
 dependency_overrides:
   analyzer: 6.3.0
