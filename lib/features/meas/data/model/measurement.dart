@@ -23,6 +23,9 @@ import 'package:window_meas/features/meas/data/params/windowsill_type_enum.dart'
 
 part 'measurement.freezed.dart';
 
+// !!! After adding or updating the field, don't forget to
+// 1. add/update field manually in CRM
+// 2. add/update field in scheme builder
 @freezed
 class Measurement with _$Measurement {
   const Measurement._();
@@ -32,19 +35,37 @@ class Measurement with _$Measurement {
     int? remoteId,
     required String id,
     required DateTime date,
-    // custom fields
+    required Scheme? scheme,
+    required String? photoPath,
+
+    /* Custom Fields */
+    // Client Info
     required String clientName,
+    required String cost,
+    required String prepayment,
+    required String phoneNumberMain,
+    required String phoneNumberAdditional,
+    required String howDiscovered,
+    required String comment,
+    required String measurer,
+
+    // Address
     required String city,
     required String district,
     required String street,
     required String building,
+    required String residentialComplex,
     required String block,
     required String entrance,
     required String doorphone,
     required String floor,
     required String apartment,
-    required String phoneNumberMain,
-    required String phoneNumberAdditional,
+    required String housingCoopNumber,
+
+    // Building Info
+    required BuildingType buildingType,
+    required FlatStatus flatStatus,
+    required ElevatorOptions elevator,
     required AssemblyType assembly,
     required bool disassembly,
     required bool screedDisassembly,
@@ -52,17 +73,19 @@ class Measurement with _$Measurement {
     required bool roofDisassembly,
     required bool delivery,
     required bool unloading,
-    required BuildingType buildingType,
-    required FlatStatus flatStatus,
     required bool garbageRemoval,
-    required ElevatorOptions elevator,
+    required bool sealing,
+    required bool vacuumCleaner,
+    required String estimatedAssemblyTime,
+
+    // Position info
     required String quarterSize,
     required QuarterPosition quarterPosition,
     required bool staticCalculation,
     required ProfileSystem profileSystem,
+    required DoorOpeningType doorOpeningType,
     required DoorstepOption doorstep,
     required DoorstepType doorstepType,
-    required DoorOpeningType doorOpeningType,
     required String laminationInternal,
     required String laminationExternal,
     required RubberColor rubberColor,
@@ -88,23 +111,13 @@ class Measurement with _$Measurement {
     required String slopeDepth,
     required String slopeLength,
     required String slopeQuantity,
+
+    // Other work
     required bool parapetReinforcement,
     required WindowsillExtension windowsillExtension,
     required bool slabExtension,
     required bool extensionSheathing,
     required bool insulation,
-    required bool sealing,
-    required String cost,
-    required String prepayment,
-    required String comment,
-    required String estimatedAssemblyTime,
-    required bool vacuumCleaner,
-    required String howDiscovered,
-    required String residentialComplex,
-    required String housingCoopNumber,
-    required Scheme? scheme,
-    required String? photoPath,
-    required String measurer,
   }) = _Measurement;
 
   factory Measurement.initial() => Measurement(

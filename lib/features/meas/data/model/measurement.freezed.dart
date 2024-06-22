@@ -19,19 +19,34 @@ mixin _$Measurement {
   int? get localId => throw _privateConstructorUsedError;
   int? get remoteId => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
-  DateTime get date => throw _privateConstructorUsedError; // custom fields
+  DateTime get date => throw _privateConstructorUsedError;
+  Scheme? get scheme => throw _privateConstructorUsedError;
+  String? get photoPath =>
+      throw _privateConstructorUsedError; /* Custom Fields */
+// Client Info
   String get clientName => throw _privateConstructorUsedError;
+  String get cost => throw _privateConstructorUsedError;
+  String get prepayment => throw _privateConstructorUsedError;
+  String get phoneNumberMain => throw _privateConstructorUsedError;
+  String get phoneNumberAdditional => throw _privateConstructorUsedError;
+  String get howDiscovered => throw _privateConstructorUsedError;
+  String get comment => throw _privateConstructorUsedError;
+  String get measurer => throw _privateConstructorUsedError; // Address
   String get city => throw _privateConstructorUsedError;
   String get district => throw _privateConstructorUsedError;
   String get street => throw _privateConstructorUsedError;
   String get building => throw _privateConstructorUsedError;
+  String get residentialComplex => throw _privateConstructorUsedError;
   String get block => throw _privateConstructorUsedError;
   String get entrance => throw _privateConstructorUsedError;
   String get doorphone => throw _privateConstructorUsedError;
   String get floor => throw _privateConstructorUsedError;
   String get apartment => throw _privateConstructorUsedError;
-  String get phoneNumberMain => throw _privateConstructorUsedError;
-  String get phoneNumberAdditional => throw _privateConstructorUsedError;
+  String get housingCoopNumber =>
+      throw _privateConstructorUsedError; // Building Info
+  BuildingType get buildingType => throw _privateConstructorUsedError;
+  FlatStatus get flatStatus => throw _privateConstructorUsedError;
+  ElevatorOptions get elevator => throw _privateConstructorUsedError;
   AssemblyType get assembly => throw _privateConstructorUsedError;
   bool get disassembly => throw _privateConstructorUsedError;
   bool get screedDisassembly => throw _privateConstructorUsedError;
@@ -39,10 +54,11 @@ mixin _$Measurement {
   bool get roofDisassembly => throw _privateConstructorUsedError;
   bool get delivery => throw _privateConstructorUsedError;
   bool get unloading => throw _privateConstructorUsedError;
-  BuildingType get buildingType => throw _privateConstructorUsedError;
-  FlatStatus get flatStatus => throw _privateConstructorUsedError;
   bool get garbageRemoval => throw _privateConstructorUsedError;
-  ElevatorOptions get elevator => throw _privateConstructorUsedError;
+  bool get sealing => throw _privateConstructorUsedError;
+  bool get vacuumCleaner => throw _privateConstructorUsedError;
+  String get estimatedAssemblyTime =>
+      throw _privateConstructorUsedError; // Position info
   String get quarterSize => throw _privateConstructorUsedError;
   QuarterPosition get quarterPosition => throw _privateConstructorUsedError;
   bool get staticCalculation => throw _privateConstructorUsedError;
@@ -75,25 +91,13 @@ mixin _$Measurement {
   String get canopyColor => throw _privateConstructorUsedError;
   String get slopeDepth => throw _privateConstructorUsedError;
   String get slopeLength => throw _privateConstructorUsedError;
-  String get slopeQuantity => throw _privateConstructorUsedError;
+  String get slopeQuantity => throw _privateConstructorUsedError; // Other work
   bool get parapetReinforcement => throw _privateConstructorUsedError;
   WindowsillExtension get windowsillExtension =>
       throw _privateConstructorUsedError;
   bool get slabExtension => throw _privateConstructorUsedError;
   bool get extensionSheathing => throw _privateConstructorUsedError;
   bool get insulation => throw _privateConstructorUsedError;
-  bool get sealing => throw _privateConstructorUsedError;
-  String get cost => throw _privateConstructorUsedError;
-  String get prepayment => throw _privateConstructorUsedError;
-  String get comment => throw _privateConstructorUsedError;
-  String get estimatedAssemblyTime => throw _privateConstructorUsedError;
-  bool get vacuumCleaner => throw _privateConstructorUsedError;
-  String get howDiscovered => throw _privateConstructorUsedError;
-  String get residentialComplex => throw _privateConstructorUsedError;
-  String get housingCoopNumber => throw _privateConstructorUsedError;
-  Scheme? get scheme => throw _privateConstructorUsedError;
-  String? get photoPath => throw _privateConstructorUsedError;
-  String get measurer => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementCopyWith<Measurement> get copyWith =>
@@ -111,18 +115,30 @@ abstract class $MeasurementCopyWith<$Res> {
       int? remoteId,
       String id,
       DateTime date,
+      Scheme? scheme,
+      String? photoPath,
       String clientName,
+      String cost,
+      String prepayment,
+      String phoneNumberMain,
+      String phoneNumberAdditional,
+      String howDiscovered,
+      String comment,
+      String measurer,
       String city,
       String district,
       String street,
       String building,
+      String residentialComplex,
       String block,
       String entrance,
       String doorphone,
       String floor,
       String apartment,
-      String phoneNumberMain,
-      String phoneNumberAdditional,
+      String housingCoopNumber,
+      BuildingType buildingType,
+      FlatStatus flatStatus,
+      ElevatorOptions elevator,
       AssemblyType assembly,
       bool disassembly,
       bool screedDisassembly,
@@ -130,10 +146,10 @@ abstract class $MeasurementCopyWith<$Res> {
       bool roofDisassembly,
       bool delivery,
       bool unloading,
-      BuildingType buildingType,
-      FlatStatus flatStatus,
       bool garbageRemoval,
-      ElevatorOptions elevator,
+      bool sealing,
+      bool vacuumCleaner,
+      String estimatedAssemblyTime,
       String quarterSize,
       QuarterPosition quarterPosition,
       bool staticCalculation,
@@ -170,22 +186,10 @@ abstract class $MeasurementCopyWith<$Res> {
       WindowsillExtension windowsillExtension,
       bool slabExtension,
       bool extensionSheathing,
-      bool insulation,
-      bool sealing,
-      String cost,
-      String prepayment,
-      String comment,
-      String estimatedAssemblyTime,
-      bool vacuumCleaner,
-      String howDiscovered,
-      String residentialComplex,
-      String housingCoopNumber,
-      Scheme? scheme,
-      String? photoPath,
-      String measurer});
+      bool insulation});
 
-  $ExpanderOptionCopyWith<$Res> get expanderOption;
   $SchemeCopyWith<$Res>? get scheme;
+  $ExpanderOptionCopyWith<$Res> get expanderOption;
 }
 
 /// @nodoc
@@ -205,18 +209,30 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? remoteId = freezed,
     Object? id = null,
     Object? date = null,
+    Object? scheme = freezed,
+    Object? photoPath = freezed,
     Object? clientName = null,
+    Object? cost = null,
+    Object? prepayment = null,
+    Object? phoneNumberMain = null,
+    Object? phoneNumberAdditional = null,
+    Object? howDiscovered = null,
+    Object? comment = null,
+    Object? measurer = null,
     Object? city = null,
     Object? district = null,
     Object? street = null,
     Object? building = null,
+    Object? residentialComplex = null,
     Object? block = null,
     Object? entrance = null,
     Object? doorphone = null,
     Object? floor = null,
     Object? apartment = null,
-    Object? phoneNumberMain = null,
-    Object? phoneNumberAdditional = null,
+    Object? housingCoopNumber = null,
+    Object? buildingType = null,
+    Object? flatStatus = null,
+    Object? elevator = null,
     Object? assembly = null,
     Object? disassembly = null,
     Object? screedDisassembly = null,
@@ -224,10 +240,10 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? roofDisassembly = null,
     Object? delivery = null,
     Object? unloading = null,
-    Object? buildingType = null,
-    Object? flatStatus = null,
     Object? garbageRemoval = null,
-    Object? elevator = null,
+    Object? sealing = null,
+    Object? vacuumCleaner = null,
+    Object? estimatedAssemblyTime = null,
     Object? quarterSize = null,
     Object? quarterPosition = null,
     Object? staticCalculation = null,
@@ -265,18 +281,6 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? slabExtension = null,
     Object? extensionSheathing = null,
     Object? insulation = null,
-    Object? sealing = null,
-    Object? cost = null,
-    Object? prepayment = null,
-    Object? comment = null,
-    Object? estimatedAssemblyTime = null,
-    Object? vacuumCleaner = null,
-    Object? howDiscovered = null,
-    Object? residentialComplex = null,
-    Object? housingCoopNumber = null,
-    Object? scheme = freezed,
-    Object? photoPath = freezed,
-    Object? measurer = null,
   }) {
     return _then(_value.copyWith(
       localId: freezed == localId
@@ -295,9 +299,45 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      scheme: freezed == scheme
+          ? _value.scheme
+          : scheme // ignore: cast_nullable_to_non_nullable
+              as Scheme?,
+      photoPath: freezed == photoPath
+          ? _value.photoPath
+          : photoPath // ignore: cast_nullable_to_non_nullable
+              as String?,
       clientName: null == clientName
           ? _value.clientName
           : clientName // ignore: cast_nullable_to_non_nullable
+              as String,
+      cost: null == cost
+          ? _value.cost
+          : cost // ignore: cast_nullable_to_non_nullable
+              as String,
+      prepayment: null == prepayment
+          ? _value.prepayment
+          : prepayment // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumberMain: null == phoneNumberMain
+          ? _value.phoneNumberMain
+          : phoneNumberMain // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumberAdditional: null == phoneNumberAdditional
+          ? _value.phoneNumberAdditional
+          : phoneNumberAdditional // ignore: cast_nullable_to_non_nullable
+              as String,
+      howDiscovered: null == howDiscovered
+          ? _value.howDiscovered
+          : howDiscovered // ignore: cast_nullable_to_non_nullable
+              as String,
+      comment: null == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String,
+      measurer: null == measurer
+          ? _value.measurer
+          : measurer // ignore: cast_nullable_to_non_nullable
               as String,
       city: null == city
           ? _value.city
@@ -314,6 +354,10 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
       building: null == building
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
+              as String,
+      residentialComplex: null == residentialComplex
+          ? _value.residentialComplex
+          : residentialComplex // ignore: cast_nullable_to_non_nullable
               as String,
       block: null == block
           ? _value.block
@@ -335,14 +379,22 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.apartment
           : apartment // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumberMain: null == phoneNumberMain
-          ? _value.phoneNumberMain
-          : phoneNumberMain // ignore: cast_nullable_to_non_nullable
+      housingCoopNumber: null == housingCoopNumber
+          ? _value.housingCoopNumber
+          : housingCoopNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumberAdditional: null == phoneNumberAdditional
-          ? _value.phoneNumberAdditional
-          : phoneNumberAdditional // ignore: cast_nullable_to_non_nullable
-              as String,
+      buildingType: null == buildingType
+          ? _value.buildingType
+          : buildingType // ignore: cast_nullable_to_non_nullable
+              as BuildingType,
+      flatStatus: null == flatStatus
+          ? _value.flatStatus
+          : flatStatus // ignore: cast_nullable_to_non_nullable
+              as FlatStatus,
+      elevator: null == elevator
+          ? _value.elevator
+          : elevator // ignore: cast_nullable_to_non_nullable
+              as ElevatorOptions,
       assembly: null == assembly
           ? _value.assembly
           : assembly // ignore: cast_nullable_to_non_nullable
@@ -371,22 +423,22 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.unloading
           : unloading // ignore: cast_nullable_to_non_nullable
               as bool,
-      buildingType: null == buildingType
-          ? _value.buildingType
-          : buildingType // ignore: cast_nullable_to_non_nullable
-              as BuildingType,
-      flatStatus: null == flatStatus
-          ? _value.flatStatus
-          : flatStatus // ignore: cast_nullable_to_non_nullable
-              as FlatStatus,
       garbageRemoval: null == garbageRemoval
           ? _value.garbageRemoval
           : garbageRemoval // ignore: cast_nullable_to_non_nullable
               as bool,
-      elevator: null == elevator
-          ? _value.elevator
-          : elevator // ignore: cast_nullable_to_non_nullable
-              as ElevatorOptions,
+      sealing: null == sealing
+          ? _value.sealing
+          : sealing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      vacuumCleaner: null == vacuumCleaner
+          ? _value.vacuumCleaner
+          : vacuumCleaner // ignore: cast_nullable_to_non_nullable
+              as bool,
+      estimatedAssemblyTime: null == estimatedAssemblyTime
+          ? _value.estimatedAssemblyTime
+          : estimatedAssemblyTime // ignore: cast_nullable_to_non_nullable
+              as String,
       quarterSize: null == quarterSize
           ? _value.quarterSize
           : quarterSize // ignore: cast_nullable_to_non_nullable
@@ -535,63 +587,7 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.insulation
           : insulation // ignore: cast_nullable_to_non_nullable
               as bool,
-      sealing: null == sealing
-          ? _value.sealing
-          : sealing // ignore: cast_nullable_to_non_nullable
-              as bool,
-      cost: null == cost
-          ? _value.cost
-          : cost // ignore: cast_nullable_to_non_nullable
-              as String,
-      prepayment: null == prepayment
-          ? _value.prepayment
-          : prepayment // ignore: cast_nullable_to_non_nullable
-              as String,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as String,
-      estimatedAssemblyTime: null == estimatedAssemblyTime
-          ? _value.estimatedAssemblyTime
-          : estimatedAssemblyTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      vacuumCleaner: null == vacuumCleaner
-          ? _value.vacuumCleaner
-          : vacuumCleaner // ignore: cast_nullable_to_non_nullable
-              as bool,
-      howDiscovered: null == howDiscovered
-          ? _value.howDiscovered
-          : howDiscovered // ignore: cast_nullable_to_non_nullable
-              as String,
-      residentialComplex: null == residentialComplex
-          ? _value.residentialComplex
-          : residentialComplex // ignore: cast_nullable_to_non_nullable
-              as String,
-      housingCoopNumber: null == housingCoopNumber
-          ? _value.housingCoopNumber
-          : housingCoopNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      scheme: freezed == scheme
-          ? _value.scheme
-          : scheme // ignore: cast_nullable_to_non_nullable
-              as Scheme?,
-      photoPath: freezed == photoPath
-          ? _value.photoPath
-          : photoPath // ignore: cast_nullable_to_non_nullable
-              as String?,
-      measurer: null == measurer
-          ? _value.measurer
-          : measurer // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ExpanderOptionCopyWith<$Res> get expanderOption {
-    return $ExpanderOptionCopyWith<$Res>(_value.expanderOption, (value) {
-      return _then(_value.copyWith(expanderOption: value) as $Val);
-    });
   }
 
   @override
@@ -603,6 +599,14 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
 
     return $SchemeCopyWith<$Res>(_value.scheme!, (value) {
       return _then(_value.copyWith(scheme: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ExpanderOptionCopyWith<$Res> get expanderOption {
+    return $ExpanderOptionCopyWith<$Res>(_value.expanderOption, (value) {
+      return _then(_value.copyWith(expanderOption: value) as $Val);
     });
   }
 }
@@ -620,18 +624,30 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       int? remoteId,
       String id,
       DateTime date,
+      Scheme? scheme,
+      String? photoPath,
       String clientName,
+      String cost,
+      String prepayment,
+      String phoneNumberMain,
+      String phoneNumberAdditional,
+      String howDiscovered,
+      String comment,
+      String measurer,
       String city,
       String district,
       String street,
       String building,
+      String residentialComplex,
       String block,
       String entrance,
       String doorphone,
       String floor,
       String apartment,
-      String phoneNumberMain,
-      String phoneNumberAdditional,
+      String housingCoopNumber,
+      BuildingType buildingType,
+      FlatStatus flatStatus,
+      ElevatorOptions elevator,
       AssemblyType assembly,
       bool disassembly,
       bool screedDisassembly,
@@ -639,10 +655,10 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       bool roofDisassembly,
       bool delivery,
       bool unloading,
-      BuildingType buildingType,
-      FlatStatus flatStatus,
       bool garbageRemoval,
-      ElevatorOptions elevator,
+      bool sealing,
+      bool vacuumCleaner,
+      String estimatedAssemblyTime,
       String quarterSize,
       QuarterPosition quarterPosition,
       bool staticCalculation,
@@ -679,24 +695,12 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       WindowsillExtension windowsillExtension,
       bool slabExtension,
       bool extensionSheathing,
-      bool insulation,
-      bool sealing,
-      String cost,
-      String prepayment,
-      String comment,
-      String estimatedAssemblyTime,
-      bool vacuumCleaner,
-      String howDiscovered,
-      String residentialComplex,
-      String housingCoopNumber,
-      Scheme? scheme,
-      String? photoPath,
-      String measurer});
+      bool insulation});
 
   @override
-  $ExpanderOptionCopyWith<$Res> get expanderOption;
-  @override
   $SchemeCopyWith<$Res>? get scheme;
+  @override
+  $ExpanderOptionCopyWith<$Res> get expanderOption;
 }
 
 /// @nodoc
@@ -714,18 +718,30 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? remoteId = freezed,
     Object? id = null,
     Object? date = null,
+    Object? scheme = freezed,
+    Object? photoPath = freezed,
     Object? clientName = null,
+    Object? cost = null,
+    Object? prepayment = null,
+    Object? phoneNumberMain = null,
+    Object? phoneNumberAdditional = null,
+    Object? howDiscovered = null,
+    Object? comment = null,
+    Object? measurer = null,
     Object? city = null,
     Object? district = null,
     Object? street = null,
     Object? building = null,
+    Object? residentialComplex = null,
     Object? block = null,
     Object? entrance = null,
     Object? doorphone = null,
     Object? floor = null,
     Object? apartment = null,
-    Object? phoneNumberMain = null,
-    Object? phoneNumberAdditional = null,
+    Object? housingCoopNumber = null,
+    Object? buildingType = null,
+    Object? flatStatus = null,
+    Object? elevator = null,
     Object? assembly = null,
     Object? disassembly = null,
     Object? screedDisassembly = null,
@@ -733,10 +749,10 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? roofDisassembly = null,
     Object? delivery = null,
     Object? unloading = null,
-    Object? buildingType = null,
-    Object? flatStatus = null,
     Object? garbageRemoval = null,
-    Object? elevator = null,
+    Object? sealing = null,
+    Object? vacuumCleaner = null,
+    Object? estimatedAssemblyTime = null,
     Object? quarterSize = null,
     Object? quarterPosition = null,
     Object? staticCalculation = null,
@@ -774,18 +790,6 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? slabExtension = null,
     Object? extensionSheathing = null,
     Object? insulation = null,
-    Object? sealing = null,
-    Object? cost = null,
-    Object? prepayment = null,
-    Object? comment = null,
-    Object? estimatedAssemblyTime = null,
-    Object? vacuumCleaner = null,
-    Object? howDiscovered = null,
-    Object? residentialComplex = null,
-    Object? housingCoopNumber = null,
-    Object? scheme = freezed,
-    Object? photoPath = freezed,
-    Object? measurer = null,
   }) {
     return _then(_$MeasurementImpl(
       localId: freezed == localId
@@ -804,9 +808,45 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      scheme: freezed == scheme
+          ? _value.scheme
+          : scheme // ignore: cast_nullable_to_non_nullable
+              as Scheme?,
+      photoPath: freezed == photoPath
+          ? _value.photoPath
+          : photoPath // ignore: cast_nullable_to_non_nullable
+              as String?,
       clientName: null == clientName
           ? _value.clientName
           : clientName // ignore: cast_nullable_to_non_nullable
+              as String,
+      cost: null == cost
+          ? _value.cost
+          : cost // ignore: cast_nullable_to_non_nullable
+              as String,
+      prepayment: null == prepayment
+          ? _value.prepayment
+          : prepayment // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumberMain: null == phoneNumberMain
+          ? _value.phoneNumberMain
+          : phoneNumberMain // ignore: cast_nullable_to_non_nullable
+              as String,
+      phoneNumberAdditional: null == phoneNumberAdditional
+          ? _value.phoneNumberAdditional
+          : phoneNumberAdditional // ignore: cast_nullable_to_non_nullable
+              as String,
+      howDiscovered: null == howDiscovered
+          ? _value.howDiscovered
+          : howDiscovered // ignore: cast_nullable_to_non_nullable
+              as String,
+      comment: null == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
+              as String,
+      measurer: null == measurer
+          ? _value.measurer
+          : measurer // ignore: cast_nullable_to_non_nullable
               as String,
       city: null == city
           ? _value.city
@@ -823,6 +863,10 @@ class __$$MeasurementImplCopyWithImpl<$Res>
       building: null == building
           ? _value.building
           : building // ignore: cast_nullable_to_non_nullable
+              as String,
+      residentialComplex: null == residentialComplex
+          ? _value.residentialComplex
+          : residentialComplex // ignore: cast_nullable_to_non_nullable
               as String,
       block: null == block
           ? _value.block
@@ -844,14 +888,22 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.apartment
           : apartment // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumberMain: null == phoneNumberMain
-          ? _value.phoneNumberMain
-          : phoneNumberMain // ignore: cast_nullable_to_non_nullable
+      housingCoopNumber: null == housingCoopNumber
+          ? _value.housingCoopNumber
+          : housingCoopNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      phoneNumberAdditional: null == phoneNumberAdditional
-          ? _value.phoneNumberAdditional
-          : phoneNumberAdditional // ignore: cast_nullable_to_non_nullable
-              as String,
+      buildingType: null == buildingType
+          ? _value.buildingType
+          : buildingType // ignore: cast_nullable_to_non_nullable
+              as BuildingType,
+      flatStatus: null == flatStatus
+          ? _value.flatStatus
+          : flatStatus // ignore: cast_nullable_to_non_nullable
+              as FlatStatus,
+      elevator: null == elevator
+          ? _value.elevator
+          : elevator // ignore: cast_nullable_to_non_nullable
+              as ElevatorOptions,
       assembly: null == assembly
           ? _value.assembly
           : assembly // ignore: cast_nullable_to_non_nullable
@@ -880,22 +932,22 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.unloading
           : unloading // ignore: cast_nullable_to_non_nullable
               as bool,
-      buildingType: null == buildingType
-          ? _value.buildingType
-          : buildingType // ignore: cast_nullable_to_non_nullable
-              as BuildingType,
-      flatStatus: null == flatStatus
-          ? _value.flatStatus
-          : flatStatus // ignore: cast_nullable_to_non_nullable
-              as FlatStatus,
       garbageRemoval: null == garbageRemoval
           ? _value.garbageRemoval
           : garbageRemoval // ignore: cast_nullable_to_non_nullable
               as bool,
-      elevator: null == elevator
-          ? _value.elevator
-          : elevator // ignore: cast_nullable_to_non_nullable
-              as ElevatorOptions,
+      sealing: null == sealing
+          ? _value.sealing
+          : sealing // ignore: cast_nullable_to_non_nullable
+              as bool,
+      vacuumCleaner: null == vacuumCleaner
+          ? _value.vacuumCleaner
+          : vacuumCleaner // ignore: cast_nullable_to_non_nullable
+              as bool,
+      estimatedAssemblyTime: null == estimatedAssemblyTime
+          ? _value.estimatedAssemblyTime
+          : estimatedAssemblyTime // ignore: cast_nullable_to_non_nullable
+              as String,
       quarterSize: null == quarterSize
           ? _value.quarterSize
           : quarterSize // ignore: cast_nullable_to_non_nullable
@@ -1044,54 +1096,6 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.insulation
           : insulation // ignore: cast_nullable_to_non_nullable
               as bool,
-      sealing: null == sealing
-          ? _value.sealing
-          : sealing // ignore: cast_nullable_to_non_nullable
-              as bool,
-      cost: null == cost
-          ? _value.cost
-          : cost // ignore: cast_nullable_to_non_nullable
-              as String,
-      prepayment: null == prepayment
-          ? _value.prepayment
-          : prepayment // ignore: cast_nullable_to_non_nullable
-              as String,
-      comment: null == comment
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as String,
-      estimatedAssemblyTime: null == estimatedAssemblyTime
-          ? _value.estimatedAssemblyTime
-          : estimatedAssemblyTime // ignore: cast_nullable_to_non_nullable
-              as String,
-      vacuumCleaner: null == vacuumCleaner
-          ? _value.vacuumCleaner
-          : vacuumCleaner // ignore: cast_nullable_to_non_nullable
-              as bool,
-      howDiscovered: null == howDiscovered
-          ? _value.howDiscovered
-          : howDiscovered // ignore: cast_nullable_to_non_nullable
-              as String,
-      residentialComplex: null == residentialComplex
-          ? _value.residentialComplex
-          : residentialComplex // ignore: cast_nullable_to_non_nullable
-              as String,
-      housingCoopNumber: null == housingCoopNumber
-          ? _value.housingCoopNumber
-          : housingCoopNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      scheme: freezed == scheme
-          ? _value.scheme
-          : scheme // ignore: cast_nullable_to_non_nullable
-              as Scheme?,
-      photoPath: freezed == photoPath
-          ? _value.photoPath
-          : photoPath // ignore: cast_nullable_to_non_nullable
-              as String?,
-      measurer: null == measurer
-          ? _value.measurer
-          : measurer // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -1104,18 +1108,30 @@ class _$MeasurementImpl extends _Measurement {
       this.remoteId,
       required this.id,
       required this.date,
+      required this.scheme,
+      required this.photoPath,
       required this.clientName,
+      required this.cost,
+      required this.prepayment,
+      required this.phoneNumberMain,
+      required this.phoneNumberAdditional,
+      required this.howDiscovered,
+      required this.comment,
+      required this.measurer,
       required this.city,
       required this.district,
       required this.street,
       required this.building,
+      required this.residentialComplex,
       required this.block,
       required this.entrance,
       required this.doorphone,
       required this.floor,
       required this.apartment,
-      required this.phoneNumberMain,
-      required this.phoneNumberAdditional,
+      required this.housingCoopNumber,
+      required this.buildingType,
+      required this.flatStatus,
+      required this.elevator,
       required this.assembly,
       required this.disassembly,
       required this.screedDisassembly,
@@ -1123,10 +1139,10 @@ class _$MeasurementImpl extends _Measurement {
       required this.roofDisassembly,
       required this.delivery,
       required this.unloading,
-      required this.buildingType,
-      required this.flatStatus,
       required this.garbageRemoval,
-      required this.elevator,
+      required this.sealing,
+      required this.vacuumCleaner,
+      required this.estimatedAssemblyTime,
       required this.quarterSize,
       required this.quarterPosition,
       required this.staticCalculation,
@@ -1163,19 +1179,7 @@ class _$MeasurementImpl extends _Measurement {
       required this.windowsillExtension,
       required this.slabExtension,
       required this.extensionSheathing,
-      required this.insulation,
-      required this.sealing,
-      required this.cost,
-      required this.prepayment,
-      required this.comment,
-      required this.estimatedAssemblyTime,
-      required this.vacuumCleaner,
-      required this.howDiscovered,
-      required this.residentialComplex,
-      required this.housingCoopNumber,
-      required this.scheme,
-      required this.photoPath,
-      required this.measurer})
+      required this.insulation})
       : super._();
 
   @override
@@ -1186,9 +1190,29 @@ class _$MeasurementImpl extends _Measurement {
   final String id;
   @override
   final DateTime date;
-// custom fields
+  @override
+  final Scheme? scheme;
+  @override
+  final String? photoPath;
+/* Custom Fields */
+// Client Info
   @override
   final String clientName;
+  @override
+  final String cost;
+  @override
+  final String prepayment;
+  @override
+  final String phoneNumberMain;
+  @override
+  final String phoneNumberAdditional;
+  @override
+  final String howDiscovered;
+  @override
+  final String comment;
+  @override
+  final String measurer;
+// Address
   @override
   final String city;
   @override
@@ -1197,6 +1221,8 @@ class _$MeasurementImpl extends _Measurement {
   final String street;
   @override
   final String building;
+  @override
+  final String residentialComplex;
   @override
   final String block;
   @override
@@ -1208,9 +1234,14 @@ class _$MeasurementImpl extends _Measurement {
   @override
   final String apartment;
   @override
-  final String phoneNumberMain;
+  final String housingCoopNumber;
+// Building Info
   @override
-  final String phoneNumberAdditional;
+  final BuildingType buildingType;
+  @override
+  final FlatStatus flatStatus;
+  @override
+  final ElevatorOptions elevator;
   @override
   final AssemblyType assembly;
   @override
@@ -1226,13 +1257,14 @@ class _$MeasurementImpl extends _Measurement {
   @override
   final bool unloading;
   @override
-  final BuildingType buildingType;
-  @override
-  final FlatStatus flatStatus;
-  @override
   final bool garbageRemoval;
   @override
-  final ElevatorOptions elevator;
+  final bool sealing;
+  @override
+  final bool vacuumCleaner;
+  @override
+  final String estimatedAssemblyTime;
+// Position info
   @override
   final String quarterSize;
   @override
@@ -1297,6 +1329,7 @@ class _$MeasurementImpl extends _Measurement {
   final String slopeLength;
   @override
   final String slopeQuantity;
+// Other work
   @override
   final bool parapetReinforcement;
   @override
@@ -1307,34 +1340,10 @@ class _$MeasurementImpl extends _Measurement {
   final bool extensionSheathing;
   @override
   final bool insulation;
-  @override
-  final bool sealing;
-  @override
-  final String cost;
-  @override
-  final String prepayment;
-  @override
-  final String comment;
-  @override
-  final String estimatedAssemblyTime;
-  @override
-  final bool vacuumCleaner;
-  @override
-  final String howDiscovered;
-  @override
-  final String residentialComplex;
-  @override
-  final String housingCoopNumber;
-  @override
-  final Scheme? scheme;
-  @override
-  final String? photoPath;
-  @override
-  final String measurer;
 
   @override
   String toString() {
-    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, clientName: $clientName, city: $city, district: $district, street: $street, building: $building, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, buildingType: $buildingType, flatStatus: $flatStatus, garbageRemoval: $garbageRemoval, elevator: $elevator, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation, sealing: $sealing, cost: $cost, prepayment: $prepayment, comment: $comment, estimatedAssemblyTime: $estimatedAssemblyTime, vacuumCleaner: $vacuumCleaner, howDiscovered: $howDiscovered, residentialComplex: $residentialComplex, housingCoopNumber: $housingCoopNumber, scheme: $scheme, photoPath: $photoPath, measurer: $measurer)';
+    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, scheme: $scheme, photoPath: $photoPath, clientName: $clientName, cost: $cost, prepayment: $prepayment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, howDiscovered: $howDiscovered, comment: $comment, measurer: $measurer, city: $city, district: $district, street: $street, building: $building, residentialComplex: $residentialComplex, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, housingCoopNumber: $housingCoopNumber, buildingType: $buildingType, flatStatus: $flatStatus, elevator: $elevator, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, garbageRemoval: $garbageRemoval, sealing: $sealing, vacuumCleaner: $vacuumCleaner, estimatedAssemblyTime: $estimatedAssemblyTime, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation)';
   }
 
   @override
@@ -1347,14 +1356,31 @@ class _$MeasurementImpl extends _Measurement {
                 other.remoteId == remoteId) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.date, date) || other.date == date) &&
+            (identical(other.scheme, scheme) || other.scheme == scheme) &&
+            (identical(other.photoPath, photoPath) ||
+                other.photoPath == photoPath) &&
             (identical(other.clientName, clientName) ||
                 other.clientName == clientName) &&
+            (identical(other.cost, cost) || other.cost == cost) &&
+            (identical(other.prepayment, prepayment) ||
+                other.prepayment == prepayment) &&
+            (identical(other.phoneNumberMain, phoneNumberMain) ||
+                other.phoneNumberMain == phoneNumberMain) &&
+            (identical(other.phoneNumberAdditional, phoneNumberAdditional) ||
+                other.phoneNumberAdditional == phoneNumberAdditional) &&
+            (identical(other.howDiscovered, howDiscovered) ||
+                other.howDiscovered == howDiscovered) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
+            (identical(other.measurer, measurer) ||
+                other.measurer == measurer) &&
             (identical(other.city, city) || other.city == city) &&
             (identical(other.district, district) ||
                 other.district == district) &&
             (identical(other.street, street) || other.street == street) &&
             (identical(other.building, building) ||
                 other.building == building) &&
+            (identical(other.residentialComplex, residentialComplex) ||
+                other.residentialComplex == residentialComplex) &&
             (identical(other.block, block) || other.block == block) &&
             (identical(other.entrance, entrance) ||
                 other.entrance == entrance) &&
@@ -1363,10 +1389,14 @@ class _$MeasurementImpl extends _Measurement {
             (identical(other.floor, floor) || other.floor == floor) &&
             (identical(other.apartment, apartment) ||
                 other.apartment == apartment) &&
-            (identical(other.phoneNumberMain, phoneNumberMain) ||
-                other.phoneNumberMain == phoneNumberMain) &&
-            (identical(other.phoneNumberAdditional, phoneNumberAdditional) ||
-                other.phoneNumberAdditional == phoneNumberAdditional) &&
+            (identical(other.housingCoopNumber, housingCoopNumber) ||
+                other.housingCoopNumber == housingCoopNumber) &&
+            (identical(other.buildingType, buildingType) ||
+                other.buildingType == buildingType) &&
+            (identical(other.flatStatus, flatStatus) ||
+                other.flatStatus == flatStatus) &&
+            (identical(other.elevator, elevator) ||
+                other.elevator == elevator) &&
             (identical(other.assembly, assembly) ||
                 other.assembly == assembly) &&
             (identical(other.disassembly, disassembly) ||
@@ -1381,14 +1411,13 @@ class _$MeasurementImpl extends _Measurement {
                 other.delivery == delivery) &&
             (identical(other.unloading, unloading) ||
                 other.unloading == unloading) &&
-            (identical(other.buildingType, buildingType) ||
-                other.buildingType == buildingType) &&
-            (identical(other.flatStatus, flatStatus) ||
-                other.flatStatus == flatStatus) &&
             (identical(other.garbageRemoval, garbageRemoval) ||
                 other.garbageRemoval == garbageRemoval) &&
-            (identical(other.elevator, elevator) ||
-                other.elevator == elevator) &&
+            (identical(other.sealing, sealing) || other.sealing == sealing) &&
+            (identical(other.vacuumCleaner, vacuumCleaner) ||
+                other.vacuumCleaner == vacuumCleaner) &&
+            (identical(other.estimatedAssemblyTime, estimatedAssemblyTime) ||
+                other.estimatedAssemblyTime == estimatedAssemblyTime) &&
             (identical(other.quarterSize, quarterSize) ||
                 other.quarterSize == quarterSize) &&
             (identical(other.quarterPosition, quarterPosition) ||
@@ -1419,22 +1448,14 @@ class _$MeasurementImpl extends _Measurement {
                 other.panelType == panelType) &&
             (identical(other.panelThickness, panelThickness) ||
                 other.panelThickness == panelThickness) &&
-            (identical(other.furniture, furniture) ||
-                other.furniture == furniture) &&
-            (identical(other.windowsillType, windowsillType) ||
-                other.windowsillType == windowsillType) &&
-            (identical(other.windowsillDepth, windowsillDepth) ||
-                other.windowsillDepth == windowsillDepth) &&
-            (identical(other.windowsillSize, windowsillSize) ||
-                other.windowsillSize == windowsillSize) &&
-            (identical(other.windowsillConnector, windowsillConnector) ||
-                other.windowsillConnector == windowsillConnector) &&
-            (identical(other.windowsillColor, windowsillColor) ||
-                other.windowsillColor == windowsillColor) &&
-            (identical(other.windowsillAssembly, windowsillAssembly) ||
-                other.windowsillAssembly == windowsillAssembly) &&
-            (identical(other.drainageDepth, drainageDepth) ||
-                other.drainageDepth == drainageDepth) &&
+            (identical(other.furniture, furniture) || other.furniture == furniture) &&
+            (identical(other.windowsillType, windowsillType) || other.windowsillType == windowsillType) &&
+            (identical(other.windowsillDepth, windowsillDepth) || other.windowsillDepth == windowsillDepth) &&
+            (identical(other.windowsillSize, windowsillSize) || other.windowsillSize == windowsillSize) &&
+            (identical(other.windowsillConnector, windowsillConnector) || other.windowsillConnector == windowsillConnector) &&
+            (identical(other.windowsillColor, windowsillColor) || other.windowsillColor == windowsillColor) &&
+            (identical(other.windowsillAssembly, windowsillAssembly) || other.windowsillAssembly == windowsillAssembly) &&
+            (identical(other.drainageDepth, drainageDepth) || other.drainageDepth == drainageDepth) &&
             (identical(other.drainageWidth, drainageWidth) || other.drainageWidth == drainageWidth) &&
             (identical(other.drainageColor, drainageColor) || other.drainageColor == drainageColor) &&
             (identical(other.drainageEndCap, drainageEndCap) || other.drainageEndCap == drainageEndCap) &&
@@ -1448,19 +1469,7 @@ class _$MeasurementImpl extends _Measurement {
             (identical(other.windowsillExtension, windowsillExtension) || other.windowsillExtension == windowsillExtension) &&
             (identical(other.slabExtension, slabExtension) || other.slabExtension == slabExtension) &&
             (identical(other.extensionSheathing, extensionSheathing) || other.extensionSheathing == extensionSheathing) &&
-            (identical(other.insulation, insulation) || other.insulation == insulation) &&
-            (identical(other.sealing, sealing) || other.sealing == sealing) &&
-            (identical(other.cost, cost) || other.cost == cost) &&
-            (identical(other.prepayment, prepayment) || other.prepayment == prepayment) &&
-            (identical(other.comment, comment) || other.comment == comment) &&
-            (identical(other.estimatedAssemblyTime, estimatedAssemblyTime) || other.estimatedAssemblyTime == estimatedAssemblyTime) &&
-            (identical(other.vacuumCleaner, vacuumCleaner) || other.vacuumCleaner == vacuumCleaner) &&
-            (identical(other.howDiscovered, howDiscovered) || other.howDiscovered == howDiscovered) &&
-            (identical(other.residentialComplex, residentialComplex) || other.residentialComplex == residentialComplex) &&
-            (identical(other.housingCoopNumber, housingCoopNumber) || other.housingCoopNumber == housingCoopNumber) &&
-            (identical(other.scheme, scheme) || other.scheme == scheme) &&
-            (identical(other.photoPath, photoPath) || other.photoPath == photoPath) &&
-            (identical(other.measurer, measurer) || other.measurer == measurer));
+            (identical(other.insulation, insulation) || other.insulation == insulation));
   }
 
   @override
@@ -1470,18 +1479,30 @@ class _$MeasurementImpl extends _Measurement {
         remoteId,
         id,
         date,
+        scheme,
+        photoPath,
         clientName,
+        cost,
+        prepayment,
+        phoneNumberMain,
+        phoneNumberAdditional,
+        howDiscovered,
+        comment,
+        measurer,
         city,
         district,
         street,
         building,
+        residentialComplex,
         block,
         entrance,
         doorphone,
         floor,
         apartment,
-        phoneNumberMain,
-        phoneNumberAdditional,
+        housingCoopNumber,
+        buildingType,
+        flatStatus,
+        elevator,
         assembly,
         disassembly,
         screedDisassembly,
@@ -1489,10 +1510,10 @@ class _$MeasurementImpl extends _Measurement {
         roofDisassembly,
         delivery,
         unloading,
-        buildingType,
-        flatStatus,
         garbageRemoval,
-        elevator,
+        sealing,
+        vacuumCleaner,
+        estimatedAssemblyTime,
         quarterSize,
         quarterPosition,
         staticCalculation,
@@ -1529,19 +1550,7 @@ class _$MeasurementImpl extends _Measurement {
         windowsillExtension,
         slabExtension,
         extensionSheathing,
-        insulation,
-        sealing,
-        cost,
-        prepayment,
-        comment,
-        estimatedAssemblyTime,
-        vacuumCleaner,
-        howDiscovered,
-        residentialComplex,
-        housingCoopNumber,
-        scheme,
-        photoPath,
-        measurer
+        insulation
       ]);
 
   @JsonKey(ignore: true)
@@ -1557,18 +1566,30 @@ abstract class _Measurement extends Measurement {
       final int? remoteId,
       required final String id,
       required final DateTime date,
+      required final Scheme? scheme,
+      required final String? photoPath,
       required final String clientName,
+      required final String cost,
+      required final String prepayment,
+      required final String phoneNumberMain,
+      required final String phoneNumberAdditional,
+      required final String howDiscovered,
+      required final String comment,
+      required final String measurer,
       required final String city,
       required final String district,
       required final String street,
       required final String building,
+      required final String residentialComplex,
       required final String block,
       required final String entrance,
       required final String doorphone,
       required final String floor,
       required final String apartment,
-      required final String phoneNumberMain,
-      required final String phoneNumberAdditional,
+      required final String housingCoopNumber,
+      required final BuildingType buildingType,
+      required final FlatStatus flatStatus,
+      required final ElevatorOptions elevator,
       required final AssemblyType assembly,
       required final bool disassembly,
       required final bool screedDisassembly,
@@ -1576,10 +1597,10 @@ abstract class _Measurement extends Measurement {
       required final bool roofDisassembly,
       required final bool delivery,
       required final bool unloading,
-      required final BuildingType buildingType,
-      required final FlatStatus flatStatus,
       required final bool garbageRemoval,
-      required final ElevatorOptions elevator,
+      required final bool sealing,
+      required final bool vacuumCleaner,
+      required final String estimatedAssemblyTime,
       required final String quarterSize,
       required final QuarterPosition quarterPosition,
       required final bool staticCalculation,
@@ -1616,19 +1637,7 @@ abstract class _Measurement extends Measurement {
       required final WindowsillExtension windowsillExtension,
       required final bool slabExtension,
       required final bool extensionSheathing,
-      required final bool insulation,
-      required final bool sealing,
-      required final String cost,
-      required final String prepayment,
-      required final String comment,
-      required final String estimatedAssemblyTime,
-      required final bool vacuumCleaner,
-      required final String howDiscovered,
-      required final String residentialComplex,
-      required final String housingCoopNumber,
-      required final Scheme? scheme,
-      required final String? photoPath,
-      required final String measurer}) = _$MeasurementImpl;
+      required final bool insulation}) = _$MeasurementImpl;
   const _Measurement._() : super._();
 
   @override
@@ -1639,9 +1648,28 @@ abstract class _Measurement extends Measurement {
   String get id;
   @override
   DateTime get date;
-  @override // custom fields
+  @override
+  Scheme? get scheme;
+  @override
+  String? get photoPath;
+  @override /* Custom Fields */
+// Client Info
   String get clientName;
   @override
+  String get cost;
+  @override
+  String get prepayment;
+  @override
+  String get phoneNumberMain;
+  @override
+  String get phoneNumberAdditional;
+  @override
+  String get howDiscovered;
+  @override
+  String get comment;
+  @override
+  String get measurer;
+  @override // Address
   String get city;
   @override
   String get district;
@@ -1649,6 +1677,8 @@ abstract class _Measurement extends Measurement {
   String get street;
   @override
   String get building;
+  @override
+  String get residentialComplex;
   @override
   String get block;
   @override
@@ -1660,9 +1690,13 @@ abstract class _Measurement extends Measurement {
   @override
   String get apartment;
   @override
-  String get phoneNumberMain;
+  String get housingCoopNumber;
+  @override // Building Info
+  BuildingType get buildingType;
   @override
-  String get phoneNumberAdditional;
+  FlatStatus get flatStatus;
+  @override
+  ElevatorOptions get elevator;
   @override
   AssemblyType get assembly;
   @override
@@ -1678,14 +1712,14 @@ abstract class _Measurement extends Measurement {
   @override
   bool get unloading;
   @override
-  BuildingType get buildingType;
-  @override
-  FlatStatus get flatStatus;
-  @override
   bool get garbageRemoval;
   @override
-  ElevatorOptions get elevator;
+  bool get sealing;
   @override
+  bool get vacuumCleaner;
+  @override
+  String get estimatedAssemblyTime;
+  @override // Position info
   String get quarterSize;
   @override
   QuarterPosition get quarterPosition;
@@ -1749,7 +1783,7 @@ abstract class _Measurement extends Measurement {
   String get slopeLength;
   @override
   String get slopeQuantity;
-  @override
+  @override // Other work
   bool get parapetReinforcement;
   @override
   WindowsillExtension get windowsillExtension;
@@ -1759,30 +1793,6 @@ abstract class _Measurement extends Measurement {
   bool get extensionSheathing;
   @override
   bool get insulation;
-  @override
-  bool get sealing;
-  @override
-  String get cost;
-  @override
-  String get prepayment;
-  @override
-  String get comment;
-  @override
-  String get estimatedAssemblyTime;
-  @override
-  bool get vacuumCleaner;
-  @override
-  String get howDiscovered;
-  @override
-  String get residentialComplex;
-  @override
-  String get housingCoopNumber;
-  @override
-  Scheme? get scheme;
-  @override
-  String? get photoPath;
-  @override
-  String get measurer;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementImplCopyWith<_$MeasurementImpl> get copyWith =>

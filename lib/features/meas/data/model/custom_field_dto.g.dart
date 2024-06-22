@@ -15,15 +15,15 @@ _$CustomFieldDTOImpl _$$CustomFieldDTOImplFromJson(Map<String, dynamic> json) =>
           id: $checkedConvert('id', (v) => (v as num?)?.toInt()),
           name: $checkedConvert('name', (v) => v as String),
           type: $checkedConvert('type', (v) => v as String),
+          selectValues: $checkedConvert('select_values',
+              (v) => (v as List<dynamic>?)?.map((e) => e as String).toList()),
+          isDeletable: $checkedConvert('is_deletable', (v) => v as bool?),
+          sort: $checkedConvert('sort', (v) => (v as num?)?.toInt()),
         );
         return val;
       },
+      fieldKeyMap: const {
+        'selectValues': 'select_values',
+        'isDeletable': 'is_deletable'
+      },
     );
-
-Map<String, dynamic> _$$CustomFieldDTOImplToJson(
-        _$CustomFieldDTOImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'type': instance.type,
-    };

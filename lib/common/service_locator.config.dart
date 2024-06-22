@@ -56,7 +56,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i5.TemplateRemoteDataSource>(
         () => _i5.TemplateRemoteDataSourceImpl());
     gh.singleton<_i6.MeasurementRemoteDataSource>(
-        () => _i6.MeasurementRemoteDataSourceImpl());
+        () => const _i6.MeasurementRemoteDataSourceImpl());
     gh.singleton<_i7.SettingsRemoteDataSource>(
         () => _i7.SettingsRemoteDataSourceImpl());
     gh.singleton<_i8.SettingsLocalDataSource>(
