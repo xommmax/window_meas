@@ -19,7 +19,7 @@ mixin _$Measurement {
   int? get localId => throw _privateConstructorUsedError;
   int? get remoteId => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
-  DateTime get date => throw _privateConstructorUsedError; //
+  DateTime get date => throw _privateConstructorUsedError; // custom fields
   String get clientName => throw _privateConstructorUsedError;
   String get city => throw _privateConstructorUsedError;
   String get district => throw _privateConstructorUsedError;
@@ -1186,7 +1186,7 @@ class _$MeasurementImpl extends _Measurement {
   final String id;
   @override
   final DateTime date;
-//
+// custom fields
   @override
   final String clientName;
   @override
@@ -1639,7 +1639,7 @@ abstract class _Measurement extends Measurement {
   String get id;
   @override
   DateTime get date;
-  @override //
+  @override // custom fields
   String get clientName;
   @override
   String get city;
