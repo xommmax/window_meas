@@ -13,10 +13,11 @@ class MeasurementDTO with _$MeasurementDTO {
 
   const factory MeasurementDTO({
     int? id,
+    required String requestId,
     required String name,
     required int createdAt,
     required int updatedAt,
-    required String requestId,
+    // all the measurement param fields
     List<CustomFieldDTO>? customFieldsValues,
   }) = _MeasurementDTO;
 
@@ -24,11 +25,11 @@ class MeasurementDTO with _$MeasurementDTO {
 
   factory MeasurementDTO.fromDomain(Measurement measurement) => MeasurementDTO(
         id: measurement.remoteId,
+        requestId: measurement.id,
         name:
             '${Localization.l10n.measurement} ${DateFormat('dd.MM.yyyy').format(measurement.date)}. ${Localization.l10n.measurer}: ${measurement.measurer}, ${Localization.l10n.client}: ${measurement.clientName}',
         createdAt: measurement.date.millisecondsSinceEpoch ~/ 1000,
         updatedAt: DateTime.now().millisecondsSinceEpoch ~/ 1000,
         customFieldsValues: [],
-        requestId: measurement.id,
       );
 }

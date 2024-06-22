@@ -20,7 +20,7 @@ CustomFieldDTO _$CustomFieldDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CustomFieldDTO {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
 
@@ -36,7 +36,7 @@ abstract class $CustomFieldDTOCopyWith<$Res> {
           CustomFieldDTO value, $Res Function(CustomFieldDTO) then) =
       _$CustomFieldDTOCopyWithImpl<$Res, CustomFieldDTO>;
   @useResult
-  $Res call({int id, String name, String type});
+  $Res call({int? id, String name, String type});
 }
 
 /// @nodoc
@@ -52,15 +52,15 @@ class _$CustomFieldDTOCopyWithImpl<$Res, $Val extends CustomFieldDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
     Object? type = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -81,7 +81,7 @@ abstract class _$$CustomFieldDTOImplCopyWith<$Res>
       __$$CustomFieldDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, String type});
+  $Res call({int? id, String name, String type});
 }
 
 /// @nodoc
@@ -95,15 +95,15 @@ class __$$CustomFieldDTOImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
     Object? type = null,
   }) {
     return _then(_$CustomFieldDTOImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -119,15 +119,14 @@ class __$$CustomFieldDTOImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CustomFieldDTOImpl extends _CustomFieldDTO {
-  const _$CustomFieldDTOImpl(
-      {required this.id, required this.name, required this.type})
+  const _$CustomFieldDTOImpl({this.id, required this.name, required this.type})
       : super._();
 
   factory _$CustomFieldDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$CustomFieldDTOImplFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final String name;
   @override
@@ -169,7 +168,7 @@ class _$CustomFieldDTOImpl extends _CustomFieldDTO {
 
 abstract class _CustomFieldDTO extends CustomFieldDTO {
   const factory _CustomFieldDTO(
-      {required final int id,
+      {final int? id,
       required final String name,
       required final String type}) = _$CustomFieldDTOImpl;
   const _CustomFieldDTO._() : super._();
@@ -178,7 +177,7 @@ abstract class _CustomFieldDTO extends CustomFieldDTO {
       _$CustomFieldDTOImpl.fromJson;
 
   @override
-  int get id;
+  int? get id;
   @override
   String get name;
   @override

@@ -32,6 +32,7 @@ class Measurement with _$Measurement {
     int? remoteId,
     required String id,
     required DateTime date,
+    // custom fields
     required String clientName,
     required String city,
     required String district,

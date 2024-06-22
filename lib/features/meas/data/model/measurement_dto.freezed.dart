@@ -21,10 +21,11 @@ MeasurementDTO _$MeasurementDTOFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MeasurementDTO {
   int? get id => throw _privateConstructorUsedError;
+  String get requestId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   int get createdAt => throw _privateConstructorUsedError;
-  int get updatedAt => throw _privateConstructorUsedError;
-  String get requestId => throw _privateConstructorUsedError;
+  int get updatedAt =>
+      throw _privateConstructorUsedError; // all the measurement param fields
   List<CustomFieldDTO>? get customFieldsValues =>
       throw _privateConstructorUsedError;
 
@@ -42,10 +43,10 @@ abstract class $MeasurementDTOCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
+      String requestId,
       String name,
       int createdAt,
       int updatedAt,
-      String requestId,
       List<CustomFieldDTO>? customFieldsValues});
 }
 
@@ -63,10 +64,10 @@ class _$MeasurementDTOCopyWithImpl<$Res, $Val extends MeasurementDTO>
   @override
   $Res call({
     Object? id = freezed,
+    Object? requestId = null,
     Object? name = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? requestId = null,
     Object? customFieldsValues = freezed,
   }) {
     return _then(_value.copyWith(
@@ -74,6 +75,10 @@ class _$MeasurementDTOCopyWithImpl<$Res, $Val extends MeasurementDTO>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
+      requestId: null == requestId
+          ? _value.requestId
+          : requestId // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -86,10 +91,6 @@ class _$MeasurementDTOCopyWithImpl<$Res, $Val extends MeasurementDTO>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as int,
-      requestId: null == requestId
-          ? _value.requestId
-          : requestId // ignore: cast_nullable_to_non_nullable
-              as String,
       customFieldsValues: freezed == customFieldsValues
           ? _value.customFieldsValues
           : customFieldsValues // ignore: cast_nullable_to_non_nullable
@@ -108,10 +109,10 @@ abstract class _$$MeasurementDTOImplCopyWith<$Res>
   @useResult
   $Res call(
       {int? id,
+      String requestId,
       String name,
       int createdAt,
       int updatedAt,
-      String requestId,
       List<CustomFieldDTO>? customFieldsValues});
 }
 
@@ -127,10 +128,10 @@ class __$$MeasurementDTOImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? requestId = null,
     Object? name = null,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? requestId = null,
     Object? customFieldsValues = freezed,
   }) {
     return _then(_$MeasurementDTOImpl(
@@ -138,6 +139,10 @@ class __$$MeasurementDTOImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
+      requestId: null == requestId
+          ? _value.requestId
+          : requestId // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -150,10 +155,6 @@ class __$$MeasurementDTOImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as int,
-      requestId: null == requestId
-          ? _value.requestId
-          : requestId // ignore: cast_nullable_to_non_nullable
-              as String,
       customFieldsValues: freezed == customFieldsValues
           ? _value._customFieldsValues
           : customFieldsValues // ignore: cast_nullable_to_non_nullable
@@ -167,10 +168,10 @@ class __$$MeasurementDTOImplCopyWithImpl<$Res>
 class _$MeasurementDTOImpl extends _MeasurementDTO {
   const _$MeasurementDTOImpl(
       {this.id,
+      required this.requestId,
       required this.name,
       required this.createdAt,
       required this.updatedAt,
-      required this.requestId,
       final List<CustomFieldDTO>? customFieldsValues})
       : _customFieldsValues = customFieldsValues,
         super._();
@@ -181,14 +182,16 @@ class _$MeasurementDTOImpl extends _MeasurementDTO {
   @override
   final int? id;
   @override
+  final String requestId;
+  @override
   final String name;
   @override
   final int createdAt;
   @override
   final int updatedAt;
-  @override
-  final String requestId;
+// all the measurement param fields
   final List<CustomFieldDTO>? _customFieldsValues;
+// all the measurement param fields
   @override
   List<CustomFieldDTO>? get customFieldsValues {
     final value = _customFieldsValues;
@@ -201,7 +204,7 @@ class _$MeasurementDTOImpl extends _MeasurementDTO {
 
   @override
   String toString() {
-    return 'MeasurementDTO(id: $id, name: $name, createdAt: $createdAt, updatedAt: $updatedAt, requestId: $requestId, customFieldsValues: $customFieldsValues)';
+    return 'MeasurementDTO(id: $id, requestId: $requestId, name: $name, createdAt: $createdAt, updatedAt: $updatedAt, customFieldsValues: $customFieldsValues)';
   }
 
   @override
@@ -210,21 +213,21 @@ class _$MeasurementDTOImpl extends _MeasurementDTO {
         (other.runtimeType == runtimeType &&
             other is _$MeasurementDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.requestId, requestId) ||
+                other.requestId == requestId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            (identical(other.requestId, requestId) ||
-                other.requestId == requestId) &&
             const DeepCollectionEquality()
                 .equals(other._customFieldsValues, _customFieldsValues));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, createdAt, updatedAt,
-      requestId, const DeepCollectionEquality().hash(_customFieldsValues));
+  int get hashCode => Object.hash(runtimeType, id, requestId, name, createdAt,
+      updatedAt, const DeepCollectionEquality().hash(_customFieldsValues));
 
   @JsonKey(ignore: true)
   @override
@@ -244,10 +247,10 @@ class _$MeasurementDTOImpl extends _MeasurementDTO {
 abstract class _MeasurementDTO extends MeasurementDTO {
   const factory _MeasurementDTO(
       {final int? id,
+      required final String requestId,
       required final String name,
       required final int createdAt,
       required final int updatedAt,
-      required final String requestId,
       final List<CustomFieldDTO>? customFieldsValues}) = _$MeasurementDTOImpl;
   const _MeasurementDTO._() : super._();
 
@@ -257,14 +260,14 @@ abstract class _MeasurementDTO extends MeasurementDTO {
   @override
   int? get id;
   @override
+  String get requestId;
+  @override
   String get name;
   @override
   int get createdAt;
   @override
   int get updatedAt;
-  @override
-  String get requestId;
-  @override
+  @override // all the measurement param fields
   List<CustomFieldDTO>? get customFieldsValues;
   @override
   @JsonKey(ignore: true)

@@ -8,7 +8,7 @@ class CustomFieldDTO with _$CustomFieldDTO {
   const CustomFieldDTO._();
 
   const factory CustomFieldDTO({
-    required int id,
+    int? id,
     required String name,
     required String type,
   }) = _CustomFieldDTO;

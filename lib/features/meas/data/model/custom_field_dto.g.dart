@@ -12,7 +12,7 @@ _$CustomFieldDTOImpl _$$CustomFieldDTOImplFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = _$CustomFieldDTOImpl(
-          id: $checkedConvert('id', (v) => (v as num).toInt()),
+          id: $checkedConvert('id', (v) => (v as num?)?.toInt()),
           name: $checkedConvert('name', (v) => v as String),
           type: $checkedConvert('type', (v) => v as String),
         );

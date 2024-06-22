@@ -13,10 +13,10 @@ _$MeasurementDTOImpl _$$MeasurementDTOImplFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         final val = _$MeasurementDTOImpl(
           id: $checkedConvert('id', (v) => (v as num?)?.toInt()),
+          requestId: $checkedConvert('request_id', (v) => v as String),
           name: $checkedConvert('name', (v) => v as String),
           createdAt: $checkedConvert('created_at', (v) => (v as num).toInt()),
           updatedAt: $checkedConvert('updated_at', (v) => (v as num).toInt()),
-          requestId: $checkedConvert('request_id', (v) => v as String),
           customFieldsValues: $checkedConvert(
               'custom_fields_values',
               (v) => (v as List<dynamic>?)
@@ -27,9 +27,9 @@ _$MeasurementDTOImpl _$$MeasurementDTOImplFromJson(Map<String, dynamic> json) =>
         return val;
       },
       fieldKeyMap: const {
+        'requestId': 'request_id',
         'createdAt': 'created_at',
         'updatedAt': 'updated_at',
-        'requestId': 'request_id',
         'customFieldsValues': 'custom_fields_values'
       },
     );
@@ -38,10 +38,10 @@ Map<String, dynamic> _$$MeasurementDTOImplToJson(
         _$MeasurementDTOImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'request_id': instance.requestId,
       'name': instance.name,
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
-      'request_id': instance.requestId,
       'custom_fields_values':
           instance.customFieldsValues?.map((e) => e.toJson()).toList(),
     };
