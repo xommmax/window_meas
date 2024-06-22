@@ -5,6 +5,15 @@ import 'package:window_meas/common/env.dart';
 import 'package:window_meas/features/meas/data/model/custom_field_dto.dart';
 import 'package:window_meas/features/meas/data/model/measurement_dto.dart';
 
+final kommoDio = Dio(BaseOptions(
+  baseUrl: 'https://${Env.kommoCrmSubdomain}.kommo.com/api/v4/',
+  headers: {
+    'Authorization': 'Bearer ${Env.kommoCrmToken}',
+  },
+));
+
+final String kommoListId = Env.kommoCrmListId;
+
 abstract class MeasurementRemoteDataSource {
   Future<int> addMeasurement(MeasurementDTO measurement);
 
@@ -19,15 +28,7 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
     _checkInitialData();
   }
 
-  final String _measurementListId = Env.kommoCrmListId;
   List<CustomFieldDTO>? _customFields;
-
-  final _dio = Dio(BaseOptions(
-    baseUrl: 'https://${Env.kommoCrmSubdomain}.kommo.com/api/v4/',
-    headers: {
-      'Authorization': 'Bearer ${Env.kommoCrmToken}',
-    },
-  ));
 
   @override
   Future<int> addMeasurement(MeasurementDTO measurement) async {
@@ -35,7 +36,7 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
       await _checkInitialData();
 
       final json = measurement.toJson();
-      final response = await _dio.post('catalogs/${_measurementListId!}/elements', data: [json]);
+      final response = await kommoDio.post('catalogs/$kommoListId/elements', data: [json]);
       final measurementJson =
           (response.data['_embedded']['elements'] as List).cast<Map<String, dynamic>>().first;
       return measurementJson['id'];
@@ -50,7 +51,7 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
     try {
       await _checkInitialData();
       final json = measurement.toJson();
-      await _dio.patch('catalogs/${_measurementListId!}/elements', data: [json]);
+      await kommoDio.patch('catalogs/$kommoListId/elements', data: [json]);
     } on DioException catch (e) {
       debugPrint('@@@ Error: $e');
       rethrow;
@@ -62,7 +63,7 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
     try {
       await _checkInitialData();
 
-      final response = await _dio.get('catalogs/${_measurementListId!}/elements');
+      final response = await kommoDio.get('catalogs/$kommoListId/elements');
       final measurementsJson =
           (response.data['_embedded']['elements'] as List).cast<Map<String, dynamic>>();
       return measurementsJson.map((e) => MeasurementDTO.fromJson(e)).toList();
@@ -76,7 +77,7 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
     if (_customFields != null) return;
 
     try {
-      final response = await _dio.get('catalogs/${_measurementListId!}/custom_fields');
+      final response = await kommoDio.get('catalogs/$kommoListId/custom_fields');
       final fieldsJson =
           (response.data['_embedded']['custom_fields'] as List).cast<Map<String, dynamic>>();
       _customFields = fieldsJson.map((e) => CustomFieldDTO.fromJson(e)).toList();
