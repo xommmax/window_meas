@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:window_meas/common/ext/string_ext.dart';
 import 'package:window_meas/features/meas/data/model/custom_field_dto.dart';
 import 'package:window_meas/features/meas/data/model/custom_field_value_dto.dart';
@@ -154,7 +155,9 @@ class CustomFieldsBuilder {
   CustomFieldDTO _enum<T extends ParamEnum>(String name, List<T> values) => CustomFieldDTO(
         name: name.toCapitalized(),
         type: 'select',
-        enums: values.map((e) => CustomFieldValue(value: e.localizedName)).toList(),
+        enums: values
+            .mapIndexed((index, e) => CustomFieldValue(value: e.localizedName, sort: index))
+            .toList(),
         sort: sortCounter++,
       );
 }

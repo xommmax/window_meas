@@ -15,7 +15,7 @@ class CustomFieldDTO with _$CustomFieldDTO {
     int? fieldId,
     List<CustomFieldValue>? enums,
     bool? isDeletable,
-    int? sort,
+    required int sort,
   }) = _CustomFieldDTO;
 
   @override
@@ -28,4 +28,3 @@ class CustomFieldDTO with _$CustomFieldDTO {
 
   factory CustomFieldDTO.fromJson(Map<String, dynamic> json) => _$CustomFieldDTOFromJson(json);
 }
-

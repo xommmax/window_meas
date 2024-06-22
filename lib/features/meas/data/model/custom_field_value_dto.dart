@@ -10,7 +10,7 @@ class CustomFieldValue with _$CustomFieldValue {
   const factory CustomFieldValue({
     int? id,
     required dynamic value,
-    int? sort,
+    required int sort,
   }) = _CustomFieldValue;
 
   @override

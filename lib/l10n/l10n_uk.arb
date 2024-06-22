@@ -41,7 +41,7 @@
   "buildingTypeBlock": "Блочний",
   "buildingTypeBlockMonolithic": "Блочно-монолітний",
   "flatStatus": "Статус квартири",
-  "flatStatusRepair": "на стадії ремонту",
+  "flatStatusRepair": "На стадії ремонту",
   "flatStatusLiving": "Житлова",
   "garbageRemoval": "Вивіз сміття",
   "elevator": "Ліфт",
