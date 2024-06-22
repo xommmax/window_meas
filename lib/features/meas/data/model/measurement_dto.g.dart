@@ -35,13 +35,21 @@ _$MeasurementDTOImpl _$$MeasurementDTOImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$MeasurementDTOImplToJson(
-        _$MeasurementDTOImpl instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'request_id': instance.requestId,
-      'name': instance.name,
-      'created_at': instance.createdAt,
-      'updated_at': instance.updatedAt,
-      'custom_fields_values':
-          instance.customFieldsValues?.map((e) => e.toJson()).toList(),
-    };
+    _$MeasurementDTOImpl instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  val['request_id'] = instance.requestId;
+  val['name'] = instance.name;
+  val['created_at'] = instance.createdAt;
+  val['updated_at'] = instance.updatedAt;
+  val['custom_fields_values'] =
+      instance.customFieldsValues?.map((e) => e.toJson()).toList();
+  return val;
+}

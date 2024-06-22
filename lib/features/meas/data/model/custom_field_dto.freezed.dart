@@ -20,13 +20,15 @@ CustomFieldDTO _$CustomFieldDTOFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CustomFieldDTO {
-  int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
-  List<String>? get selectValues => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  int? get fieldId => throw _privateConstructorUsedError;
+  List<CustomFieldValue>? get enums => throw _privateConstructorUsedError;
   bool? get isDeletable => throw _privateConstructorUsedError;
   int? get sort => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $CustomFieldDTOCopyWith<CustomFieldDTO> get copyWith =>
       throw _privateConstructorUsedError;
@@ -39,10 +41,11 @@ abstract class $CustomFieldDTOCopyWith<$Res> {
       _$CustomFieldDTOCopyWithImpl<$Res, CustomFieldDTO>;
   @useResult
   $Res call(
-      {int? id,
-      String name,
+      {String name,
       String type,
-      List<String>? selectValues,
+      int? id,
+      int? fieldId,
+      List<CustomFieldValue>? enums,
       bool? isDeletable,
       int? sort});
 }
@@ -60,18 +63,15 @@ class _$CustomFieldDTOCopyWithImpl<$Res, $Val extends CustomFieldDTO>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = null,
     Object? type = null,
-    Object? selectValues = freezed,
+    Object? id = freezed,
+    Object? fieldId = freezed,
+    Object? enums = freezed,
     Object? isDeletable = freezed,
     Object? sort = freezed,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -80,10 +80,18 @@ class _$CustomFieldDTOCopyWithImpl<$Res, $Val extends CustomFieldDTO>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      selectValues: freezed == selectValues
-          ? _value.selectValues
-          : selectValues // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      fieldId: freezed == fieldId
+          ? _value.fieldId
+          : fieldId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      enums: freezed == enums
+          ? _value.enums
+          : enums // ignore: cast_nullable_to_non_nullable
+              as List<CustomFieldValue>?,
       isDeletable: freezed == isDeletable
           ? _value.isDeletable
           : isDeletable // ignore: cast_nullable_to_non_nullable
@@ -105,10 +113,11 @@ abstract class _$$CustomFieldDTOImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? id,
-      String name,
+      {String name,
       String type,
-      List<String>? selectValues,
+      int? id,
+      int? fieldId,
+      List<CustomFieldValue>? enums,
       bool? isDeletable,
       int? sort});
 }
@@ -124,18 +133,15 @@ class __$$CustomFieldDTOImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
     Object? name = null,
     Object? type = null,
-    Object? selectValues = freezed,
+    Object? id = freezed,
+    Object? fieldId = freezed,
+    Object? enums = freezed,
     Object? isDeletable = freezed,
     Object? sort = freezed,
   }) {
     return _then(_$CustomFieldDTOImpl(
-      id: freezed == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -144,10 +150,18 @@ class __$$CustomFieldDTOImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as String,
-      selectValues: freezed == selectValues
-          ? _value._selectValues
-          : selectValues // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      fieldId: freezed == fieldId
+          ? _value.fieldId
+          : fieldId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      enums: freezed == enums
+          ? _value._enums
+          : enums // ignore: cast_nullable_to_non_nullable
+              as List<CustomFieldValue>?,
       isDeletable: freezed == isDeletable
           ? _value.isDeletable
           : isDeletable // ignore: cast_nullable_to_non_nullable
@@ -161,33 +175,36 @@ class __$$CustomFieldDTOImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 class _$CustomFieldDTOImpl extends _CustomFieldDTO {
   const _$CustomFieldDTOImpl(
-      {this.id,
-      required this.name,
+      {required this.name,
       required this.type,
-      final List<String>? selectValues,
+      this.id,
+      this.fieldId,
+      final List<CustomFieldValue>? enums,
       this.isDeletable,
       this.sort})
-      : _selectValues = selectValues,
+      : _enums = enums,
         super._();
 
   factory _$CustomFieldDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$CustomFieldDTOImplFromJson(json);
 
   @override
-  final int? id;
-  @override
   final String name;
   @override
   final String type;
-  final List<String>? _selectValues;
   @override
-  List<String>? get selectValues {
-    final value = _selectValues;
+  final int? id;
+  @override
+  final int? fieldId;
+  final List<CustomFieldValue>? _enums;
+  @override
+  List<CustomFieldValue>? get enums {
+    final value = _enums;
     if (value == null) return null;
-    if (_selectValues is EqualUnmodifiableListView) return _selectValues;
+    if (_enums is EqualUnmodifiableListView) return _enums;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -199,7 +216,7 @@ class _$CustomFieldDTOImpl extends _CustomFieldDTO {
 
   @override
   String toString() {
-    return 'CustomFieldDTO(id: $id, name: $name, type: $type, selectValues: $selectValues, isDeletable: $isDeletable, sort: $sort)';
+    return 'CustomFieldDTO(name: $name, type: $type, id: $id, fieldId: $fieldId, enums: $enums, isDeletable: $isDeletable, sort: $sort)';
   }
 
   @override
@@ -207,11 +224,11 @@ class _$CustomFieldDTOImpl extends _CustomFieldDTO {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CustomFieldDTOImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
-            const DeepCollectionEquality()
-                .equals(other._selectValues, _selectValues) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.fieldId, fieldId) || other.fieldId == fieldId) &&
+            const DeepCollectionEquality().equals(other._enums, _enums) &&
             (identical(other.isDeletable, isDeletable) ||
                 other.isDeletable == isDeletable) &&
             (identical(other.sort, sort) || other.sort == sort));
@@ -219,8 +236,8 @@ class _$CustomFieldDTOImpl extends _CustomFieldDTO {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, type,
-      const DeepCollectionEquality().hash(_selectValues), isDeletable, sort);
+  int get hashCode => Object.hash(runtimeType, name, type, id, fieldId,
+      const DeepCollectionEquality().hash(_enums), isDeletable, sort);
 
   @JsonKey(ignore: true)
   @override
@@ -228,14 +245,22 @@ class _$CustomFieldDTOImpl extends _CustomFieldDTO {
   _$$CustomFieldDTOImplCopyWith<_$CustomFieldDTOImpl> get copyWith =>
       __$$CustomFieldDTOImplCopyWithImpl<_$CustomFieldDTOImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CustomFieldDTOImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _CustomFieldDTO extends CustomFieldDTO {
   const factory _CustomFieldDTO(
-      {final int? id,
-      required final String name,
+      {required final String name,
       required final String type,
-      final List<String>? selectValues,
+      final int? id,
+      final int? fieldId,
+      final List<CustomFieldValue>? enums,
       final bool? isDeletable,
       final int? sort}) = _$CustomFieldDTOImpl;
   const _CustomFieldDTO._() : super._();
@@ -244,13 +269,15 @@ abstract class _CustomFieldDTO extends CustomFieldDTO {
       _$CustomFieldDTOImpl.fromJson;
 
   @override
-  int? get id;
-  @override
   String get name;
   @override
   String get type;
   @override
-  List<String>? get selectValues;
+  int? get id;
+  @override
+  int? get fieldId;
+  @override
+  List<CustomFieldValue>? get enums;
   @override
   bool? get isDeletable;
   @override

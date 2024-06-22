@@ -12,18 +12,41 @@ _$CustomFieldDTOImpl _$$CustomFieldDTOImplFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = _$CustomFieldDTOImpl(
-          id: $checkedConvert('id', (v) => (v as num?)?.toInt()),
           name: $checkedConvert('name', (v) => v as String),
           type: $checkedConvert('type', (v) => v as String),
-          selectValues: $checkedConvert('select_values',
-              (v) => (v as List<dynamic>?)?.map((e) => e as String).toList()),
+          id: $checkedConvert('id', (v) => (v as num?)?.toInt()),
+          fieldId: $checkedConvert('field_id', (v) => (v as num?)?.toInt()),
+          enums: $checkedConvert(
+              'enums',
+              (v) => (v as List<dynamic>?)
+                  ?.map((e) =>
+                      CustomFieldValue.fromJson(e as Map<String, dynamic>))
+                  .toList()),
           isDeletable: $checkedConvert('is_deletable', (v) => v as bool?),
           sort: $checkedConvert('sort', (v) => (v as num?)?.toInt()),
         );
         return val;
       },
-      fieldKeyMap: const {
-        'selectValues': 'select_values',
-        'isDeletable': 'is_deletable'
-      },
+      fieldKeyMap: const {'fieldId': 'field_id', 'isDeletable': 'is_deletable'},
     );
+
+Map<String, dynamic> _$$CustomFieldDTOImplToJson(
+    _$CustomFieldDTOImpl instance) {
+  final val = <String, dynamic>{
+    'name': instance.name,
+    'type': instance.type,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('field_id', instance.fieldId);
+  val['enums'] = instance.enums?.map((e) => e.toJson()).toList();
+  val['is_deletable'] = instance.isDeletable;
+  val['sort'] = instance.sort;
+  return val;
+}

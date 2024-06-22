@@ -63,9 +63,9 @@ mixin _$Measurement {
   QuarterPosition get quarterPosition => throw _privateConstructorUsedError;
   bool get staticCalculation => throw _privateConstructorUsedError;
   ProfileSystem get profileSystem => throw _privateConstructorUsedError;
+  DoorOpeningType get doorOpeningType => throw _privateConstructorUsedError;
   DoorstepOption get doorstep => throw _privateConstructorUsedError;
   DoorstepType get doorstepType => throw _privateConstructorUsedError;
-  DoorOpeningType get doorOpeningType => throw _privateConstructorUsedError;
   String get laminationInternal => throw _privateConstructorUsedError;
   String get laminationExternal => throw _privateConstructorUsedError;
   RubberColor get rubberColor => throw _privateConstructorUsedError;
@@ -154,9 +154,9 @@ abstract class $MeasurementCopyWith<$Res> {
       QuarterPosition quarterPosition,
       bool staticCalculation,
       ProfileSystem profileSystem,
+      DoorOpeningType doorOpeningType,
       DoorstepOption doorstep,
       DoorstepType doorstepType,
-      DoorOpeningType doorOpeningType,
       String laminationInternal,
       String laminationExternal,
       RubberColor rubberColor,
@@ -248,9 +248,9 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? quarterPosition = null,
     Object? staticCalculation = null,
     Object? profileSystem = null,
+    Object? doorOpeningType = null,
     Object? doorstep = null,
     Object? doorstepType = null,
-    Object? doorOpeningType = null,
     Object? laminationInternal = null,
     Object? laminationExternal = null,
     Object? rubberColor = null,
@@ -455,6 +455,10 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.profileSystem
           : profileSystem // ignore: cast_nullable_to_non_nullable
               as ProfileSystem,
+      doorOpeningType: null == doorOpeningType
+          ? _value.doorOpeningType
+          : doorOpeningType // ignore: cast_nullable_to_non_nullable
+              as DoorOpeningType,
       doorstep: null == doorstep
           ? _value.doorstep
           : doorstep // ignore: cast_nullable_to_non_nullable
@@ -463,10 +467,6 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.doorstepType
           : doorstepType // ignore: cast_nullable_to_non_nullable
               as DoorstepType,
-      doorOpeningType: null == doorOpeningType
-          ? _value.doorOpeningType
-          : doorOpeningType // ignore: cast_nullable_to_non_nullable
-              as DoorOpeningType,
       laminationInternal: null == laminationInternal
           ? _value.laminationInternal
           : laminationInternal // ignore: cast_nullable_to_non_nullable
@@ -663,9 +663,9 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       QuarterPosition quarterPosition,
       bool staticCalculation,
       ProfileSystem profileSystem,
+      DoorOpeningType doorOpeningType,
       DoorstepOption doorstep,
       DoorstepType doorstepType,
-      DoorOpeningType doorOpeningType,
       String laminationInternal,
       String laminationExternal,
       RubberColor rubberColor,
@@ -757,9 +757,9 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? quarterPosition = null,
     Object? staticCalculation = null,
     Object? profileSystem = null,
+    Object? doorOpeningType = null,
     Object? doorstep = null,
     Object? doorstepType = null,
-    Object? doorOpeningType = null,
     Object? laminationInternal = null,
     Object? laminationExternal = null,
     Object? rubberColor = null,
@@ -964,6 +964,10 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.profileSystem
           : profileSystem // ignore: cast_nullable_to_non_nullable
               as ProfileSystem,
+      doorOpeningType: null == doorOpeningType
+          ? _value.doorOpeningType
+          : doorOpeningType // ignore: cast_nullable_to_non_nullable
+              as DoorOpeningType,
       doorstep: null == doorstep
           ? _value.doorstep
           : doorstep // ignore: cast_nullable_to_non_nullable
@@ -972,10 +976,6 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.doorstepType
           : doorstepType // ignore: cast_nullable_to_non_nullable
               as DoorstepType,
-      doorOpeningType: null == doorOpeningType
-          ? _value.doorOpeningType
-          : doorOpeningType // ignore: cast_nullable_to_non_nullable
-              as DoorOpeningType,
       laminationInternal: null == laminationInternal
           ? _value.laminationInternal
           : laminationInternal // ignore: cast_nullable_to_non_nullable
@@ -1147,9 +1147,9 @@ class _$MeasurementImpl extends _Measurement {
       required this.quarterPosition,
       required this.staticCalculation,
       required this.profileSystem,
+      required this.doorOpeningType,
       required this.doorstep,
       required this.doorstepType,
-      required this.doorOpeningType,
       required this.laminationInternal,
       required this.laminationExternal,
       required this.rubberColor,
@@ -1274,11 +1274,11 @@ class _$MeasurementImpl extends _Measurement {
   @override
   final ProfileSystem profileSystem;
   @override
+  final DoorOpeningType doorOpeningType;
+  @override
   final DoorstepOption doorstep;
   @override
   final DoorstepType doorstepType;
-  @override
-  final DoorOpeningType doorOpeningType;
   @override
   final String laminationInternal;
   @override
@@ -1343,7 +1343,7 @@ class _$MeasurementImpl extends _Measurement {
 
   @override
   String toString() {
-    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, scheme: $scheme, photoPath: $photoPath, clientName: $clientName, cost: $cost, prepayment: $prepayment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, howDiscovered: $howDiscovered, comment: $comment, measurer: $measurer, city: $city, district: $district, street: $street, building: $building, residentialComplex: $residentialComplex, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, housingCoopNumber: $housingCoopNumber, buildingType: $buildingType, flatStatus: $flatStatus, elevator: $elevator, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, garbageRemoval: $garbageRemoval, sealing: $sealing, vacuumCleaner: $vacuumCleaner, estimatedAssemblyTime: $estimatedAssemblyTime, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorstep: $doorstep, doorstepType: $doorstepType, doorOpeningType: $doorOpeningType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation)';
+    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, scheme: $scheme, photoPath: $photoPath, clientName: $clientName, cost: $cost, prepayment: $prepayment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, howDiscovered: $howDiscovered, comment: $comment, measurer: $measurer, city: $city, district: $district, street: $street, building: $building, residentialComplex: $residentialComplex, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, housingCoopNumber: $housingCoopNumber, buildingType: $buildingType, flatStatus: $flatStatus, elevator: $elevator, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, garbageRemoval: $garbageRemoval, sealing: $sealing, vacuumCleaner: $vacuumCleaner, estimatedAssemblyTime: $estimatedAssemblyTime, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorOpeningType: $doorOpeningType, doorstep: $doorstep, doorstepType: $doorstepType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation)';
   }
 
   @override
@@ -1426,12 +1426,12 @@ class _$MeasurementImpl extends _Measurement {
                 other.staticCalculation == staticCalculation) &&
             (identical(other.profileSystem, profileSystem) ||
                 other.profileSystem == profileSystem) &&
+            (identical(other.doorOpeningType, doorOpeningType) ||
+                other.doorOpeningType == doorOpeningType) &&
             (identical(other.doorstep, doorstep) ||
                 other.doorstep == doorstep) &&
             (identical(other.doorstepType, doorstepType) ||
                 other.doorstepType == doorstepType) &&
-            (identical(other.doorOpeningType, doorOpeningType) ||
-                other.doorOpeningType == doorOpeningType) &&
             (identical(other.laminationInternal, laminationInternal) ||
                 other.laminationInternal == laminationInternal) &&
             (identical(other.laminationExternal, laminationExternal) ||
@@ -1518,9 +1518,9 @@ class _$MeasurementImpl extends _Measurement {
         quarterPosition,
         staticCalculation,
         profileSystem,
+        doorOpeningType,
         doorstep,
         doorstepType,
-        doorOpeningType,
         laminationInternal,
         laminationExternal,
         rubberColor,
@@ -1605,9 +1605,9 @@ abstract class _Measurement extends Measurement {
       required final QuarterPosition quarterPosition,
       required final bool staticCalculation,
       required final ProfileSystem profileSystem,
+      required final DoorOpeningType doorOpeningType,
       required final DoorstepOption doorstep,
       required final DoorstepType doorstepType,
-      required final DoorOpeningType doorOpeningType,
       required final String laminationInternal,
       required final String laminationExternal,
       required final RubberColor rubberColor,
@@ -1728,11 +1728,11 @@ abstract class _Measurement extends Measurement {
   @override
   ProfileSystem get profileSystem;
   @override
+  DoorOpeningType get doorOpeningType;
+  @override
   DoorstepOption get doorstep;
   @override
   DoorstepType get doorstepType;
-  @override
-  DoorOpeningType get doorOpeningType;
   @override
   String get laminationInternal;
   @override

@@ -32,4 +32,8 @@ class MeasurementDTO with _$MeasurementDTO {
         updatedAt: DateTime.now().millisecondsSinceEpoch ~/ 1000,
         customFieldsValues: [],
       );
+
+  @override
+  @JsonKey(includeIfNull: false)
+  int? get id => super.id;
 }

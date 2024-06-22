@@ -1,5 +1,6 @@
 import 'package:window_meas/common/ext/string_ext.dart';
 import 'package:window_meas/features/meas/data/model/custom_field_dto.dart';
+import 'package:window_meas/features/meas/data/model/custom_field_value_dto.dart';
 import 'package:window_meas/features/meas/data/params/assembly_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/building_type_enum.dart';
 import 'package:window_meas/features/meas/data/params/door_opening_type_enum.dart';
@@ -153,7 +154,7 @@ class CustomFieldsBuilder {
   CustomFieldDTO _enum<T extends ParamEnum>(String name, List<T> values) => CustomFieldDTO(
         name: name.toCapitalized(),
         type: 'select',
-        selectValues: values.map((e) => e.localizedName).toList(),
+        enums: values.map((e) => CustomFieldValue(value: e.localizedName)).toList(),
         sort: sortCounter++,
       );
 }
