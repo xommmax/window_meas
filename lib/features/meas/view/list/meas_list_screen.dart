@@ -60,13 +60,11 @@ class MeasurementList extends StatelessWidget {
   const MeasurementList({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<MeasurementListCubit, MeasurementListState>(
+  Widget build(BuildContext context) => BlocBuilder<MeasurementListCubit, MeasurementListState>(
         builder: (context, state) => ListView.builder(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
           itemCount: state.measurements.length,
-          itemBuilder: (context, index) =>
-              MeasurementItem(state.measurements[index]),
+          itemBuilder: (context, index) => MeasurementItem(state.measurements[index]),
         ),
       );
 }

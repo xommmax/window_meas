@@ -14,6 +14,7 @@ class CustomFieldDTO with _$CustomFieldDTO {
     int? id,
     int? fieldId,
     List<CustomFieldValue>? enums,
+    List<CustomFieldValue>? values,
     bool? isDeletable,
     required int sort,
   }) = _CustomFieldDTO;
@@ -25,6 +26,14 @@ class CustomFieldDTO with _$CustomFieldDTO {
   @override
   @JsonKey(includeIfNull: false)
   int? get fieldId => super.fieldId;
+
+  @override
+  @JsonKey(includeIfNull: false)
+  List<CustomFieldValue>? get enums => super.enums;
+
+  @override
+  @JsonKey(includeIfNull: false)
+  List<CustomFieldValue>? get values => super.values;
 
   factory CustomFieldDTO.fromJson(Map<String, dynamic> json) => _$CustomFieldDTOFromJson(json);
 }

@@ -22,8 +22,14 @@ _$CustomFieldDTOImpl _$$CustomFieldDTOImplFromJson(Map<String, dynamic> json) =>
                   ?.map((e) =>
                       CustomFieldValue.fromJson(e as Map<String, dynamic>))
                   .toList()),
+          values: $checkedConvert(
+              'values',
+              (v) => (v as List<dynamic>?)
+                  ?.map((e) =>
+                      CustomFieldValue.fromJson(e as Map<String, dynamic>))
+                  .toList()),
           isDeletable: $checkedConvert('is_deletable', (v) => v as bool?),
-          sort: $checkedConvert('sort', (v) => (v as num?)?.toInt()),
+          sort: $checkedConvert('sort', (v) => (v as num).toInt()),
         );
         return val;
       },
@@ -45,7 +51,8 @@ Map<String, dynamic> _$$CustomFieldDTOImplToJson(
 
   writeNotNull('id', instance.id);
   writeNotNull('field_id', instance.fieldId);
-  val['enums'] = instance.enums?.map((e) => e.toJson()).toList();
+  writeNotNull('enums', instance.enums?.map((e) => e.toJson()).toList());
+  writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
   val['is_deletable'] = instance.isDeletable;
   val['sort'] = instance.sort;
   return val;

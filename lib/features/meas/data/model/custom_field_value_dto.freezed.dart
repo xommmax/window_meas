@@ -22,7 +22,7 @@ CustomFieldValue _$CustomFieldValueFromJson(Map<String, dynamic> json) {
 mixin _$CustomFieldValue {
   int? get id => throw _privateConstructorUsedError;
   dynamic get value => throw _privateConstructorUsedError;
-  int? get sort => throw _privateConstructorUsedError;
+  int get sort => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $CustomFieldValueCopyWith<$Res> {
           CustomFieldValue value, $Res Function(CustomFieldValue) then) =
       _$CustomFieldValueCopyWithImpl<$Res, CustomFieldValue>;
   @useResult
-  $Res call({int? id, dynamic value, int? sort});
+  $Res call({int? id, dynamic value, int sort});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$CustomFieldValueCopyWithImpl<$Res, $Val extends CustomFieldValue>
   $Res call({
     Object? id = freezed,
     Object? value = freezed,
-    Object? sort = freezed,
+    Object? sort = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -65,10 +65,10 @@ class _$CustomFieldValueCopyWithImpl<$Res, $Val extends CustomFieldValue>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      sort: freezed == sort
+      sort: null == sort
           ? _value.sort
           : sort // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ) as $Val);
   }
 }
@@ -81,7 +81,7 @@ abstract class _$$CustomFieldValueImplCopyWith<$Res>
       __$$CustomFieldValueImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, dynamic value, int? sort});
+  $Res call({int? id, dynamic value, int sort});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$CustomFieldValueImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? value = freezed,
-    Object? sort = freezed,
+    Object? sort = null,
   }) {
     return _then(_$CustomFieldValueImpl(
       id: freezed == id
@@ -108,10 +108,10 @@ class __$$CustomFieldValueImplCopyWithImpl<$Res>
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      sort: freezed == sort
+      sort: null == sort
           ? _value.sort
           : sort // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
     ));
   }
 }
@@ -119,7 +119,8 @@ class __$$CustomFieldValueImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CustomFieldValueImpl extends _CustomFieldValue {
-  const _$CustomFieldValueImpl({this.id, required this.value, this.sort})
+  const _$CustomFieldValueImpl(
+      {this.id, required this.value, required this.sort})
       : super._();
 
   factory _$CustomFieldValueImpl.fromJson(Map<String, dynamic> json) =>
@@ -130,7 +131,7 @@ class _$CustomFieldValueImpl extends _CustomFieldValue {
   @override
   final dynamic value;
   @override
-  final int? sort;
+  final int sort;
 
   @override
   String toString() {
@@ -171,7 +172,7 @@ abstract class _CustomFieldValue extends CustomFieldValue {
   const factory _CustomFieldValue(
       {final int? id,
       required final dynamic value,
-      final int? sort}) = _$CustomFieldValueImpl;
+      required final int sort}) = _$CustomFieldValueImpl;
   const _CustomFieldValue._() : super._();
 
   factory _CustomFieldValue.fromJson(Map<String, dynamic> json) =
@@ -182,7 +183,7 @@ abstract class _CustomFieldValue extends CustomFieldValue {
   @override
   dynamic get value;
   @override
-  int? get sort;
+  int get sort;
   @override
   @JsonKey(ignore: true)
   _$$CustomFieldValueImplCopyWith<_$CustomFieldValueImpl> get copyWith =>
