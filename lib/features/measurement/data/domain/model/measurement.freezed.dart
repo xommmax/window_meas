@@ -62,7 +62,7 @@ mixin _$Measurement {
   String get quarterSize => throw _privateConstructorUsedError;
   QuarterPosition get quarterPosition => throw _privateConstructorUsedError;
   bool get staticCalculation => throw _privateConstructorUsedError;
-  ProfileSystem get profileSystem => throw _privateConstructorUsedError;
+  String get profileSystem => throw _privateConstructorUsedError;
   DoorOpeningType get doorOpeningType => throw _privateConstructorUsedError;
   DoorstepOption get doorstep => throw _privateConstructorUsedError;
   DoorstepType get doorstepType => throw _privateConstructorUsedError;
@@ -154,7 +154,7 @@ abstract class $MeasurementCopyWith<$Res> {
       String quarterSize,
       QuarterPosition quarterPosition,
       bool staticCalculation,
-      ProfileSystem profileSystem,
+      String profileSystem,
       DoorOpeningType doorOpeningType,
       DoorstepOption doorstep,
       DoorstepType doorstepType,
@@ -455,7 +455,7 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
       profileSystem: null == profileSystem
           ? _value.profileSystem
           : profileSystem // ignore: cast_nullable_to_non_nullable
-              as ProfileSystem,
+              as String,
       doorOpeningType: null == doorOpeningType
           ? _value.doorOpeningType
           : doorOpeningType // ignore: cast_nullable_to_non_nullable
@@ -663,7 +663,7 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       String quarterSize,
       QuarterPosition quarterPosition,
       bool staticCalculation,
-      ProfileSystem profileSystem,
+      String profileSystem,
       DoorOpeningType doorOpeningType,
       DoorstepOption doorstep,
       DoorstepType doorstepType,
@@ -964,7 +964,7 @@ class __$$MeasurementImplCopyWithImpl<$Res>
       profileSystem: null == profileSystem
           ? _value.profileSystem
           : profileSystem // ignore: cast_nullable_to_non_nullable
-              as ProfileSystem,
+              as String,
       doorOpeningType: null == doorOpeningType
           ? _value.doorOpeningType
           : doorOpeningType // ignore: cast_nullable_to_non_nullable
@@ -1273,7 +1273,7 @@ class _$MeasurementImpl extends _Measurement {
   @override
   final bool staticCalculation;
   @override
-  final ProfileSystem profileSystem;
+  final String profileSystem;
   @override
   final DoorOpeningType doorOpeningType;
   @override
@@ -1605,7 +1605,7 @@ abstract class _Measurement extends Measurement {
       required final String quarterSize,
       required final QuarterPosition quarterPosition,
       required final bool staticCalculation,
-      required final ProfileSystem profileSystem,
+      required final String profileSystem,
       required final DoorOpeningType doorOpeningType,
       required final DoorstepOption doorstep,
       required final DoorstepType doorstepType,
@@ -1727,7 +1727,7 @@ abstract class _Measurement extends Measurement {
   @override
   bool get staticCalculation;
   @override
-  ProfileSystem get profileSystem;
+  String get profileSystem;
   @override
   DoorOpeningType get doorOpeningType;
   @override

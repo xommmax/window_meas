@@ -15,7 +15,6 @@ import 'package:window_meas/features/measurement/data/params/elevator_options_en
 import 'package:window_meas/features/measurement/data/params/flat_status_enum.dart';
 import 'package:window_meas/features/measurement/data/params/panel_thickness_enum.dart';
 import 'package:window_meas/features/measurement/data/params/panel_type_enum.dart';
-import 'package:window_meas/features/measurement/data/params/profile_system_enum.dart';
 import 'package:window_meas/features/measurement/data/params/quarter_position_enum.dart';
 import 'package:window_meas/features/measurement/data/params/rubber_color_enum.dart';
 import 'package:window_meas/features/measurement/data/params/stand_profile_enum.dart';
@@ -92,9 +91,8 @@ class MeasurementDB {
   late QuarterPosition quarterPosition;
   @Default(false)
   late bool staticCalculation;
-  @Enumerated(EnumType.name)
-  @Default(ProfileSystem.none)
-  late ProfileSystem profileSystem;
+  @Default('')
+  late String profileSystem;
   @Enumerated(EnumType.name)
   @Default(DoorstepOption.none)
   late DoorstepOption doorstep;

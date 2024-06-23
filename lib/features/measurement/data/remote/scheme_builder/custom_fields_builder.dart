@@ -11,7 +11,6 @@ import 'package:window_meas/features/measurement/data/params/flat_status_enum.da
 import 'package:window_meas/features/measurement/data/params/panel_thickness_enum.dart';
 import 'package:window_meas/features/measurement/data/params/panel_type_enum.dart';
 import 'package:window_meas/features/measurement/data/params/param_enum.dart';
-import 'package:window_meas/features/measurement/data/params/profile_system_enum.dart';
 import 'package:window_meas/features/measurement/data/params/quarter_position_enum.dart';
 import 'package:window_meas/features/measurement/data/params/rubber_color_enum.dart';
 import 'package:window_meas/features/measurement/data/params/stand_profile_enum.dart';
@@ -87,7 +86,7 @@ class CustomFieldsBuilder {
         FieldToCode.quarterPosition,
       ),
       _bool(l10n.staticCalculation, FieldToCode.staticCalculation),
-      _enum(l10n.profileSystem, ProfileSystem.values, FieldToCode.profileSystem),
+      _text(l10n.profileSystem, FieldToCode.profileSystem),
       _enum(
         '${l10n.door} ${l10n.doorOpeningType}',
         DoorOpeningType.values,

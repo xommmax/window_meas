@@ -5,7 +5,6 @@ import 'package:window_meas/features/measurement/data/params/doorstep_option_enu
 import 'package:window_meas/features/measurement/data/params/doorstep_type_enum.dart';
 import 'package:window_meas/features/measurement/data/params/panel_thickness_enum.dart';
 import 'package:window_meas/features/measurement/data/params/panel_type_enum.dart';
-import 'package:window_meas/features/measurement/data/params/profile_system_enum.dart';
 import 'package:window_meas/features/measurement/data/params/quarter_position_enum.dart';
 import 'package:window_meas/features/measurement/data/params/rubber_color_enum.dart';
 import 'package:window_meas/features/measurement/data/params/stand_profile_enum.dart';
@@ -73,11 +72,10 @@ class PositionInfoSection extends StatelessWidget {
                   .updateMeasurement(measurement.copyWith(staticCalculation: b)),
             ),
             const Divider(),
-            DropdownItem<ProfileSystem>(
+            InputItem(
               title: context.l10n.profileSystem,
-              values: ProfileSystem.values,
-              initialValue: measurement.profileSystem,
-              onSelected: (e) => context
+              value: measurement.profileSystem,
+              onChanged: (e) => context
                   .read<MeasurementDetailsCubit>()
                   .updateMeasurement(measurement.copyWith(profileSystem: e)),
             ),

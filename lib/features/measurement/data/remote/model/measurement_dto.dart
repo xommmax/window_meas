@@ -70,7 +70,7 @@ class MeasurementDTO with _$MeasurementDTO {
           _text(FieldToCode.quarterSize, measurement.quarterSize),
           _enum(FieldToCode.quarterPosition, measurement.quarterPosition),
           _bool(FieldToCode.staticCalculation, measurement.staticCalculation),
-          _enum(FieldToCode.profileSystem, measurement.profileSystem),
+          _text(FieldToCode.profileSystem, measurement.profileSystem),
           _enum(FieldToCode.doorOpeningType, measurement.doorOpeningType),
           _enum(FieldToCode.doorstep, measurement.doorstep),
           _enum(FieldToCode.doorstepType, measurement.doorstepType),

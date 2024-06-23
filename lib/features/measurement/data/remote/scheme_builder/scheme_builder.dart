@@ -1,7 +1,9 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:window_meas/features/measurement/data/remote/ds/meas_remote_ds.dart';
 import 'package:window_meas/features/measurement/data/remote/model/custom_field_dto.dart';
 import 'package:window_meas/features/measurement/data/remote/scheme_builder/custom_fields_builder.dart';
+import 'package:window_meas/features/measurement/data/remote/scheme_builder/field_code_mapper.dart';
 
 class SchemeBuilder {
   final customFieldsBuilder = CustomFieldsBuilder();
@@ -67,6 +69,37 @@ class SchemeBuilder {
       debugPrint('@@@ Initialize scheme. Response: $response');
     } catch (e) {
       debugPrint('@@@ Initialize scheme. Error: $e');
+      rethrow;
+    }
+  }
+
+  Future<void> updateField() async {
+    const fieldCode = FieldToCode.profileSystem;
+    try {
+      final customFields = await getScheme();
+      final oldCustomField = customFields.firstWhereOrNull((e) => e.code == fieldCode.code);
+
+      if (oldCustomField == null) return;
+
+      final fieldId = oldCustomField.id;
+      final fieldSort = oldCustomField.sort;
+      final fieldName = oldCustomField.name;
+
+      await kommoDio.delete('catalogs/$kommoListId/custom_fields/$fieldId');
+
+      final newCustomField = CustomFieldDTO(
+        type: 'text',
+        name: fieldName,
+        sort: fieldSort,
+        code: fieldCode.code,
+      );
+
+      final createResponse = await kommoDio
+          .post('catalogs/$kommoListId/custom_fields', data: [newCustomField.toJson()]);
+
+      debugPrint('@@@ Update field. Response: $createResponse');
+    } catch (e) {
+      debugPrint('@@@ Update field. Error: $e');
       rethrow;
     }
   }

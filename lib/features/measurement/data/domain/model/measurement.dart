@@ -12,7 +12,6 @@ import 'package:window_meas/features/measurement/data/params/expander_option.dar
 import 'package:window_meas/features/measurement/data/params/flat_status_enum.dart';
 import 'package:window_meas/features/measurement/data/params/panel_thickness_enum.dart';
 import 'package:window_meas/features/measurement/data/params/panel_type_enum.dart';
-import 'package:window_meas/features/measurement/data/params/profile_system_enum.dart';
 import 'package:window_meas/features/measurement/data/params/quarter_position_enum.dart';
 import 'package:window_meas/features/measurement/data/params/rubber_color_enum.dart';
 import 'package:window_meas/features/measurement/data/params/stand_profile_enum.dart';
@@ -23,8 +22,8 @@ import 'package:window_meas/features/measurement/data/params/windowsill_type_enu
 
 part 'measurement.freezed.dart';
 
-// !!! After adding or updating the field, don't forget to add/update field:
-// 1. in CustomFieldsBuilder
+// !!! After adding or updating the field, don't forget to add/update field in:
+// 1. CustomFieldsBuilder
 // 2. MeasurementDTO.fromDomain
 // 3. MeasurementDTO.toDomain
 // 4. add/update field manually in CRM
@@ -84,7 +83,7 @@ class Measurement with _$Measurement {
     required String quarterSize,
     required QuarterPosition quarterPosition,
     required bool staticCalculation,
-    required ProfileSystem profileSystem,
+    required String profileSystem,
     required DoorOpeningType doorOpeningType,
     required DoorstepOption doorstep,
     required DoorstepType doorstepType,
@@ -151,7 +150,7 @@ class Measurement with _$Measurement {
         quarterSize: '',
         quarterPosition: QuarterPosition.none,
         staticCalculation: false,
-        profileSystem: ProfileSystem.none,
+        profileSystem: '',
         doorstep: DoorstepOption.none,
         doorstepType: DoorstepType.none,
         doorOpeningType: DoorOpeningType.none,

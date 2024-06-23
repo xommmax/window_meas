@@ -276,7 +276,6 @@ const MeasurementDBSchema = CollectionSchema(
       id: 49,
       name: r'profileSystem',
       type: IsarType.string,
-      enumMap: _MeasurementDBprofileSystemEnumValueMap,
     ),
     r'quarterPosition': PropertySchema(
       id: 50,
@@ -502,7 +501,7 @@ int _measurementDBEstimateSize(
     }
   }
   bytesCount += 3 + object.prepayment.length * 3;
-  bytesCount += 3 + object.profileSystem.name.length * 3;
+  bytesCount += 3 + object.profileSystem.length * 3;
   bytesCount += 3 + object.quarterPosition.name.length * 3;
   bytesCount += 3 + object.quarterSize.length * 3;
   bytesCount += 3 + object.residentialComplex.length * 3;
@@ -588,7 +587,7 @@ void _measurementDBSerialize(
   writer.writeString(offsets[46], object.phoneNumberMain);
   writer.writeString(offsets[47], object.photoPath);
   writer.writeString(offsets[48], object.prepayment);
-  writer.writeString(offsets[49], object.profileSystem.name);
+  writer.writeString(offsets[49], object.profileSystem);
   writer.writeString(offsets[50], object.quarterPosition.name);
   writer.writeString(offsets[51], object.quarterSize);
   writer.writeLong(offsets[52], object.remoteId);
@@ -701,9 +700,7 @@ MeasurementDB _measurementDBDeserialize(
   object.phoneNumberMain = reader.readString(offsets[46]);
   object.photoPath = reader.readStringOrNull(offsets[47]);
   object.prepayment = reader.readString(offsets[48]);
-  object.profileSystem = _MeasurementDBprofileSystemValueEnumMap[
-          reader.readStringOrNull(offsets[49])] ??
-      ProfileSystem.none;
+  object.profileSystem = reader.readString(offsets[49]);
   object.quarterPosition = _MeasurementDBquarterPositionValueEnumMap[
           reader.readStringOrNull(offsets[50])] ??
       QuarterPosition.none;
@@ -879,9 +876,7 @@ P _measurementDBDeserializeProp<P>(
     case 48:
       return (reader.readString(offset)) as P;
     case 49:
-      return (_MeasurementDBprofileSystemValueEnumMap[
-              reader.readStringOrNull(offset)] ??
-          ProfileSystem.none) as P;
+      return (reader.readString(offset)) as P;
     case 50:
       return (_MeasurementDBquarterPositionValueEnumMap[
               reader.readStringOrNull(offset)] ??
@@ -1066,14 +1061,6 @@ const _MeasurementDBpanelTypeValueEnumMap = {
   r'metallized': PanelType.metallized,
   r'whiteOneLaminated': PanelType.whiteOneLaminated,
   r'whiteTwoLaminated': PanelType.whiteTwoLaminated,
-};
-const _MeasurementDBprofileSystemEnumValueMap = {
-  r'none': r'none',
-  r'euroline': r'euroline',
-};
-const _MeasurementDBprofileSystemValueEnumMap = {
-  r'none': ProfileSystem.none,
-  r'euroline': ProfileSystem.euroline,
 };
 const _MeasurementDBquarterPositionEnumValueMap = {
   r'none': r'none',
@@ -6904,7 +6891,7 @@ extension MeasurementDBQueryFilter
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       profileSystemEqualTo(
-    ProfileSystem value, {
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -6918,7 +6905,7 @@ extension MeasurementDBQueryFilter
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       profileSystemGreaterThan(
-    ProfileSystem value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -6934,7 +6921,7 @@ extension MeasurementDBQueryFilter
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       profileSystemLessThan(
-    ProfileSystem value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -6950,8 +6937,8 @@ extension MeasurementDBQueryFilter
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       profileSystemBetween(
-    ProfileSystem lower,
-    ProfileSystem upper, {
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -12095,7 +12082,7 @@ extension MeasurementDBQueryProperty
     });
   }
 
-  QueryBuilder<MeasurementDB, ProfileSystem, QQueryOperations>
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
       profileSystemProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'profileSystem');

@@ -4,7 +4,6 @@ import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:window_meas/common/asset_manager.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_state.dart';
 import 'package:window_meas/features/measurement/data/domain/meas_repository.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
@@ -16,12 +15,10 @@ import 'package:window_meas/l10n/localization.dart';
 class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
   final MeasurementRepository measRepo;
   final SettingsRepository settingsRepo;
-  final AssetManager assetManager;
 
   MeasurementDetailsCubit(
     this.measRepo,
     this.settingsRepo,
-    this.assetManager,
   ) : super(MeasurementDetailsState.initial());
 
   Future<void> loadData(String measurementId) async {
