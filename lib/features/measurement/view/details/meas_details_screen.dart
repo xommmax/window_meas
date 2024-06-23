@@ -13,7 +13,7 @@ class MeasurementDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider<MeasurementDetailsCubit>(
-        create: (ctx) => getIt()..loadMeasurement(measurementId),
+        create: (ctx) => getIt()..loadData(measurementId),
         child: const MeasurementDetailsView(),
       );
 }

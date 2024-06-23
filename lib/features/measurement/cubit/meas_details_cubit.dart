@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:window_meas/common/asset_manager.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_state.dart';
 import 'package:window_meas/features/measurement/data/domain/meas_repository.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
@@ -15,40 +16,46 @@ import 'package:window_meas/l10n/localization.dart';
 class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
   final MeasurementRepository measRepo;
   final SettingsRepository settingsRepo;
+  final AssetManager assetManager;
 
   MeasurementDetailsCubit(
     this.measRepo,
     this.settingsRepo,
+    this.assetManager,
   ) : super(MeasurementDetailsState.initial());
 
-  Future<void> loadMeasurement(String measurementId) async {
+  Future<void> loadData(String measurementId) async {
     final measurement = await measRepo.getMeasurement(measurementId);
-    emit(MeasurementDetailsState(measurement: measurement));
+    final articles = await assetManager.getArticles();
+    emit(MeasurementDetailsState(
+      measurement: measurement,
+      articles: articles,
+    ));
   }
 
   Future<void> updateMeasurement(Measurement measurement) async {
     await measRepo.updateMeasurement(measurement);
-    emit(MeasurementDetailsState(measurement: measurement));
+    emit(state.copyWith(measurement: measurement));
   }
 
   Future<void> deleteMeasurement() async {
     if (state.measurement == null) return;
     await measRepo.deleteMeasurement(state.measurement!.id);
-    emit(const MeasurementDetailsState(measurement: null));
+    emit(state.copyWith(measurement: null));
   }
 
   Future<void> deletePhoto() async {
     if (state.measurement == null) return;
     final updatedMeasurement = state.measurement!.copyWith(photoPath: null);
     await measRepo.updateMeasurement(updatedMeasurement);
-    emit(MeasurementDetailsState(measurement: updatedMeasurement));
+    emit(state.copyWith(measurement: updatedMeasurement));
   }
 
   Future<void> deleteScheme() async {
     if (state.measurement == null) return;
     final updatedMeasurement = state.measurement!.copyWith(scheme: null);
     await measRepo.updateMeasurement(updatedMeasurement);
-    emit(MeasurementDetailsState(measurement: updatedMeasurement));
+    emit(state.copyWith(measurement: updatedMeasurement));
   }
 
   Future<void> generatePdf({bool share = true}) async {
@@ -86,7 +93,7 @@ ${state.measurement!.clientName}
     if (file != null && state.measurement != null) {
       final updatedMeasurement = state.measurement!.copyWith(photoPath: file.path);
       await measRepo.updateMeasurement(updatedMeasurement);
-      emit(MeasurementDetailsState(measurement: updatedMeasurement));
+      emit(state.copyWith(measurement: updatedMeasurement));
     }
   }
 
@@ -94,6 +101,6 @@ ${state.measurement!.clientName}
     if (state.measurement == null) return;
 
     await measRepo.addRemoteMeasurement(state.measurement!);
-    await loadMeasurement(state.measurement!.id);
+    await loadData(state.measurement!.id);
   }
 }
