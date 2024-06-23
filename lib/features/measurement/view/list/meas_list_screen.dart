@@ -7,7 +7,7 @@ import 'package:window_meas/common/service_locator.dart';
 import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/measurement/cubit/meas_list_cubit.dart';
 import 'package:window_meas/features/measurement/cubit/meas_list_state.dart';
-import 'package:window_meas/scheme_builder/scheme_builder.dart';
+import 'package:window_meas/features/measurement/data/remote/scheme_builder/scheme_builder.dart';
 
 class MeasurementListScreen extends StatelessWidget {
   const MeasurementListScreen({super.key});

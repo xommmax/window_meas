@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:window_meas/features/measurement/data/remote/ds/meas_remote_ds.dart';
 import 'package:window_meas/features/measurement/data/remote/model/custom_field_dto.dart';
-import 'package:window_meas/scheme_builder/custom_fields_builder.dart';
+import 'package:window_meas/features/measurement/data/remote/scheme_builder/custom_fields_builder.dart';
 
 class SchemeBuilder {
   final customFieldsBuilder = CustomFieldsBuilder();
