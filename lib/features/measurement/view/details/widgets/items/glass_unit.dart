@@ -68,10 +68,10 @@ class _GlassUnitBottomSheetState extends State<_GlassUnitBottomSheet> {
   }
 
   @override
-  Widget build(BuildContext context) => Padding(
+  Widget build(BuildContext context) => Container(
+        height: MediaQuery.of(context).size.height * 0.8,
         padding: const EdgeInsets.all(16),
         child: Column(
-          mainAxisSize: MainAxisSize.max,
           children: [
             TextField(
               controller: controller,
@@ -81,6 +81,7 @@ class _GlassUnitBottomSheetState extends State<_GlassUnitBottomSheet> {
               ),
               textCapitalization: TextCapitalization.sentences,
               maxLines: 1,
+              autofocus: true,
             ),
             Expanded(
               child: FutureBuilder<List<String>>(
