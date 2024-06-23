@@ -12,6 +12,7 @@ class CustomFieldDTO with _$CustomFieldDTO {
     int? id,
     int? fieldId,
     String? code,
+    String? fieldCode,
     String? name,
     String? type,
     List<CustomFieldValue>? enums,

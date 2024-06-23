@@ -124,16 +124,16 @@ class MeasurementDTO with _$MeasurementDTO {
 }
 
 CustomFieldDTO _text(FieldToCode mapper, String value) => CustomFieldDTO(
-      code: mapper.code,
+      fieldCode: mapper.code,
       values: [CustomFieldValue(value: value)],
     );
 
 CustomFieldDTO _bool(FieldToCode mapper, bool value) => CustomFieldDTO(
-      code: mapper.code,
+      fieldCode: mapper.code,
       values: [CustomFieldValue(value: value)],
     );
 
 CustomFieldDTO _enum<T extends ParamEnum>(FieldToCode mapper, T value) => CustomFieldDTO(
-      code: mapper.code,
+      fieldCode: mapper.code,
       values: [CustomFieldValue(value: value.localizedName)],
     );

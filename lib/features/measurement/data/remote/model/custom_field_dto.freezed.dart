@@ -23,6 +23,7 @@ mixin _$CustomFieldDTO {
   int? get id => throw _privateConstructorUsedError;
   int? get fieldId => throw _privateConstructorUsedError;
   String? get code => throw _privateConstructorUsedError;
+  String? get fieldCode => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
   List<CustomFieldValue>? get enums => throw _privateConstructorUsedError;
@@ -46,6 +47,7 @@ abstract class $CustomFieldDTOCopyWith<$Res> {
       {int? id,
       int? fieldId,
       String? code,
+      String? fieldCode,
       String? name,
       String? type,
       List<CustomFieldValue>? enums,
@@ -70,6 +72,7 @@ class _$CustomFieldDTOCopyWithImpl<$Res, $Val extends CustomFieldDTO>
     Object? id = freezed,
     Object? fieldId = freezed,
     Object? code = freezed,
+    Object? fieldCode = freezed,
     Object? name = freezed,
     Object? type = freezed,
     Object? enums = freezed,
@@ -89,6 +92,10 @@ class _$CustomFieldDTOCopyWithImpl<$Res, $Val extends CustomFieldDTO>
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fieldCode: freezed == fieldCode
+          ? _value.fieldCode
+          : fieldCode // ignore: cast_nullable_to_non_nullable
               as String?,
       name: freezed == name
           ? _value.name
@@ -130,6 +137,7 @@ abstract class _$$CustomFieldDTOImplCopyWith<$Res>
       {int? id,
       int? fieldId,
       String? code,
+      String? fieldCode,
       String? name,
       String? type,
       List<CustomFieldValue>? enums,
@@ -152,6 +160,7 @@ class __$$CustomFieldDTOImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? fieldId = freezed,
     Object? code = freezed,
+    Object? fieldCode = freezed,
     Object? name = freezed,
     Object? type = freezed,
     Object? enums = freezed,
@@ -171,6 +180,10 @@ class __$$CustomFieldDTOImplCopyWithImpl<$Res>
       code: freezed == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fieldCode: freezed == fieldCode
+          ? _value.fieldCode
+          : fieldCode // ignore: cast_nullable_to_non_nullable
               as String?,
       name: freezed == name
           ? _value.name
@@ -207,6 +220,7 @@ class _$CustomFieldDTOImpl extends _CustomFieldDTO {
       {this.id,
       this.fieldId,
       this.code,
+      this.fieldCode,
       this.name,
       this.type,
       final List<CustomFieldValue>? enums,
@@ -226,6 +240,8 @@ class _$CustomFieldDTOImpl extends _CustomFieldDTO {
   final int? fieldId;
   @override
   final String? code;
+  @override
+  final String? fieldCode;
   @override
   final String? name;
   @override
@@ -257,7 +273,7 @@ class _$CustomFieldDTOImpl extends _CustomFieldDTO {
 
   @override
   String toString() {
-    return 'CustomFieldDTO(id: $id, fieldId: $fieldId, code: $code, name: $name, type: $type, enums: $enums, values: $values, isDeletable: $isDeletable, sort: $sort)';
+    return 'CustomFieldDTO(id: $id, fieldId: $fieldId, code: $code, fieldCode: $fieldCode, name: $name, type: $type, enums: $enums, values: $values, isDeletable: $isDeletable, sort: $sort)';
   }
 
   @override
@@ -268,6 +284,8 @@ class _$CustomFieldDTOImpl extends _CustomFieldDTO {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.fieldId, fieldId) || other.fieldId == fieldId) &&
             (identical(other.code, code) || other.code == code) &&
+            (identical(other.fieldCode, fieldCode) ||
+                other.fieldCode == fieldCode) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.type, type) || other.type == type) &&
             const DeepCollectionEquality().equals(other._enums, _enums) &&
@@ -284,6 +302,7 @@ class _$CustomFieldDTOImpl extends _CustomFieldDTO {
       id,
       fieldId,
       code,
+      fieldCode,
       name,
       type,
       const DeepCollectionEquality().hash(_enums),
@@ -311,6 +330,7 @@ abstract class _CustomFieldDTO extends CustomFieldDTO {
       {final int? id,
       final int? fieldId,
       final String? code,
+      final String? fieldCode,
       final String? name,
       final String? type,
       final List<CustomFieldValue>? enums,
@@ -328,6 +348,8 @@ abstract class _CustomFieldDTO extends CustomFieldDTO {
   int? get fieldId;
   @override
   String? get code;
+  @override
+  String? get fieldCode;
   @override
   String? get name;
   @override
