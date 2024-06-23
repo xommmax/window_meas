@@ -30,7 +30,7 @@ _$CustomFieldDTOImpl _$$CustomFieldDTOImplFromJson(Map<String, dynamic> json) =>
                   .toList()),
           isDeletable: $checkedConvert('is_deletable', (v) => v as bool?),
           sort: $checkedConvert('sort', (v) => (v as num).toInt()),
-          code: $checkedConvert('code', (v) => v as String),
+          code: $checkedConvert('code', (v) => v as String?),
         );
         return val;
       },

@@ -25,7 +25,7 @@ part 'measurement.freezed.dart';
 
 // !!! After adding or updating the field, don't forget to
 // 1. add/update field manually in CRM
-// 2. add/update field in scheme builder
+// 2. add/update field in custom field builder
 @freezed
 class Measurement with _$Measurement {
   const Measurement._();
@@ -90,7 +90,6 @@ class Measurement with _$Measurement {
     required String laminationExternal,
     required RubberColor rubberColor,
     required StandProfile standProfile,
-    required ExpanderOption expanderOption,
     required String glassUnit,
     required PanelType panelType,
     required PanelThickness panelThickness,
@@ -111,6 +110,7 @@ class Measurement with _$Measurement {
     required String slopeDepth,
     required String slopeLength,
     required String slopeQuantity,
+    required ExpanderOption expanderOption,
 
     // Other work
     required bool parapetReinforcement,

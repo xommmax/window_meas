@@ -17,7 +17,7 @@ class CustomFieldDTO with _$CustomFieldDTO {
     List<CustomFieldValue>? values,
     bool? isDeletable,
     required int sort,
-    required String code,
+    String? code,
   }) = _CustomFieldDTO;
 
   @override
@@ -35,6 +35,10 @@ class CustomFieldDTO with _$CustomFieldDTO {
   @override
   @JsonKey(includeIfNull: false)
   List<CustomFieldValue>? get values => super.values;
+
+  @override
+  @JsonKey(includeIfNull: false)
+  String? get code => super.code;
 
   factory CustomFieldDTO.fromJson(Map<String, dynamic> json) => _$CustomFieldDTOFromJson(json);
 }
