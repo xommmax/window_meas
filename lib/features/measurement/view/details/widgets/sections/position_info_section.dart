@@ -12,6 +12,7 @@ import 'package:window_meas/features/measurement/data/params/stand_profile_enum.
 import 'package:window_meas/features/measurement/data/params/windowsill_connector_enum.dart';
 import 'package:window_meas/features/measurement/data/params/windowsill_depth_enum.dart';
 import 'package:window_meas/features/measurement/data/params/windowsill_type_enum.dart';
+import 'package:window_meas/features/measurement/view/details/widgets/items/glass_unit.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/photo_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/scheme_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/sections/expander_section.dart';
@@ -157,7 +158,7 @@ class PositionInfoSection extends StatelessWidget {
             ),
             const Divider(),
             ExpanderSection(measurement),
-            InputItem(
+            GlassUnitItem(
               title: context.l10n.glassUnit,
               value: measurement.glassUnit,
               onChanged: (s) => context

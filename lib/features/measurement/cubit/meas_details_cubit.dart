@@ -26,10 +26,8 @@ class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
 
   Future<void> loadData(String measurementId) async {
     final measurement = await measRepo.getMeasurement(measurementId);
-    final articles = await assetManager.getArticles();
     emit(MeasurementDetailsState(
       measurement: measurement,
-      articles: articles,
     ));
   }
 

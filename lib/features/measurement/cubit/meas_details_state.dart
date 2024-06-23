@@ -9,11 +9,9 @@ class MeasurementDetailsState with _$MeasurementDetailsState {
 
   const factory MeasurementDetailsState({
     required Measurement? measurement,
-    required List<String> articles,
   }) = _MeasurementDetailsState;
 
   factory MeasurementDetailsState.initial() => const MeasurementDetailsState(
         measurement: null,
-        articles: [],
       );
 }
