@@ -13,7 +13,7 @@ class MeasurementListCubit extends Cubit<MeasurementListState> {
   final MeasurementRepository repo;
   StreamSubscription? measSubscription;
 
-  Future<String> saveMeasurement() async {
+  Future<String> addMeasurement() async {
     final measurement = Measurement.initial();
     await repo.addLocalMeasurement(measurement);
 

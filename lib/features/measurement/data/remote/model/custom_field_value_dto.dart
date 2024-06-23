@@ -9,13 +9,9 @@ class CustomFieldValue with _$CustomFieldValue {
 
   const factory CustomFieldValue({
     int? id,
-    required dynamic value,
-    required int sort,
+    dynamic value,
+    int? sort,
   }) = _CustomFieldValue;
-
-  @override
-  @JsonKey(includeIfNull: false)
-  int? get id => super.id;
 
   factory CustomFieldValue.fromJson(Map<String, dynamic> json) => _$CustomFieldValueFromJson(json);
 }

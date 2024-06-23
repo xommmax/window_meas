@@ -12,10 +12,11 @@ _$CustomFieldDTOImpl _$$CustomFieldDTOImplFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = _$CustomFieldDTOImpl(
-          name: $checkedConvert('name', (v) => v as String),
-          type: $checkedConvert('type', (v) => v as String),
           id: $checkedConvert('id', (v) => (v as num?)?.toInt()),
           fieldId: $checkedConvert('field_id', (v) => (v as num?)?.toInt()),
+          code: $checkedConvert('code', (v) => v as String?),
+          name: $checkedConvert('name', (v) => v as String?),
+          type: $checkedConvert('type', (v) => v as String?),
           enums: $checkedConvert(
               'enums',
               (v) => (v as List<dynamic>?)
@@ -29,8 +30,7 @@ _$CustomFieldDTOImpl _$$CustomFieldDTOImplFromJson(Map<String, dynamic> json) =>
                       CustomFieldValue.fromJson(e as Map<String, dynamic>))
                   .toList()),
           isDeletable: $checkedConvert('is_deletable', (v) => v as bool?),
-          sort: $checkedConvert('sort', (v) => (v as num).toInt()),
-          code: $checkedConvert('code', (v) => v as String?),
+          sort: $checkedConvert('sort', (v) => (v as num?)?.toInt()),
         );
         return val;
       },
@@ -39,10 +39,7 @@ _$CustomFieldDTOImpl _$$CustomFieldDTOImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$CustomFieldDTOImplToJson(
     _$CustomFieldDTOImpl instance) {
-  final val = <String, dynamic>{
-    'name': instance.name,
-    'type': instance.type,
-  };
+  final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
     if (value != null) {
@@ -52,10 +49,12 @@ Map<String, dynamic> _$$CustomFieldDTOImplToJson(
 
   writeNotNull('id', instance.id);
   writeNotNull('field_id', instance.fieldId);
+  writeNotNull('code', instance.code);
+  writeNotNull('name', instance.name);
+  writeNotNull('type', instance.type);
   writeNotNull('enums', instance.enums?.map((e) => e.toJson()).toList());
   writeNotNull('values', instance.values?.map((e) => e.toJson()).toList());
-  val['is_deletable'] = instance.isDeletable;
-  val['sort'] = instance.sort;
-  val['code'] = instance.code;
+  writeNotNull('is_deletable', instance.isDeletable);
+  writeNotNull('sort', instance.sort);
   return val;
 }

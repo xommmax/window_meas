@@ -15,7 +15,7 @@ _$CustomFieldValueImpl _$$CustomFieldValueImplFromJson(
         final val = _$CustomFieldValueImpl(
           id: $checkedConvert('id', (v) => (v as num?)?.toInt()),
           value: $checkedConvert('value', (v) => v),
-          sort: $checkedConvert('sort', (v) => (v as num).toInt()),
+          sort: $checkedConvert('sort', (v) => (v as num?)?.toInt()),
         );
         return val;
       },
@@ -32,7 +32,7 @@ Map<String, dynamic> _$$CustomFieldValueImplToJson(
   }
 
   writeNotNull('id', instance.id);
-  val['value'] = instance.value;
-  val['sort'] = instance.sort;
+  writeNotNull('value', instance.value);
+  writeNotNull('sort', instance.sort);
   return val;
 }

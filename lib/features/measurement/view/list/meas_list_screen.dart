@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-// import 'package:go_router/go_router.dart';
+import 'package:go_router/go_router.dart';
 import 'package:window_meas/features/measurement/view/list/meas_list_item.dart';
 import 'package:window_meas/common/service_locator.dart';
 import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/measurement/cubit/meas_list_cubit.dart';
 import 'package:window_meas/features/measurement/cubit/meas_list_state.dart';
-import 'package:window_meas/features/measurement/data/remote/scheme_builder/scheme_builder.dart';
 
 class MeasurementListScreen extends StatelessWidget {
   const MeasurementListScreen({super.key});
@@ -49,12 +48,11 @@ class MeasurementListView extends StatelessWidget {
       ));
 
   Future<void> _saveMeasurement(BuildContext context) async {
-    // final id = await context.read<MeasurementListCubit>().saveMeasurement();
+    final id = await context.read<MeasurementListCubit>().addMeasurement();
 
-    // if (context.mounted) {
-    //   context.push('/meas_details/$id');
-    // }
-    SchemeBuilder().initScheme();
+    if (context.mounted) {
+      context.push('/meas_details/$id');
+    }
   }
 }
 

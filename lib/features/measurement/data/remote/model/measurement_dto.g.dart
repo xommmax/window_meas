@@ -13,10 +13,10 @@ _$MeasurementDTOImpl _$$MeasurementDTOImplFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         final val = _$MeasurementDTOImpl(
           id: $checkedConvert('id', (v) => (v as num?)?.toInt()),
-          requestId: $checkedConvert('request_id', (v) => v as String),
-          name: $checkedConvert('name', (v) => v as String),
-          createdAt: $checkedConvert('created_at', (v) => (v as num).toInt()),
-          updatedAt: $checkedConvert('updated_at', (v) => (v as num).toInt()),
+          requestId: $checkedConvert('request_id', (v) => v as String?),
+          name: $checkedConvert('name', (v) => v as String?),
+          createdAt: $checkedConvert('created_at', (v) => (v as num?)?.toInt()),
+          updatedAt: $checkedConvert('updated_at', (v) => (v as num?)?.toInt()),
           customFieldsValues: $checkedConvert(
               'custom_fields_values',
               (v) => (v as List<dynamic>?)
@@ -45,11 +45,11 @@ Map<String, dynamic> _$$MeasurementDTOImplToJson(
   }
 
   writeNotNull('id', instance.id);
-  val['request_id'] = instance.requestId;
-  val['name'] = instance.name;
-  val['created_at'] = instance.createdAt;
-  val['updated_at'] = instance.updatedAt;
-  val['custom_fields_values'] =
-      instance.customFieldsValues?.map((e) => e.toJson()).toList();
+  writeNotNull('request_id', instance.requestId);
+  writeNotNull('name', instance.name);
+  writeNotNull('created_at', instance.createdAt);
+  writeNotNull('updated_at', instance.updatedAt);
+  writeNotNull('custom_fields_values',
+      instance.customFieldsValues?.map((e) => e.toJson()).toList());
   return val;
 }

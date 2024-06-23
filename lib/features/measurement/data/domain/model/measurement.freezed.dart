@@ -70,7 +70,6 @@ mixin _$Measurement {
   String get laminationExternal => throw _privateConstructorUsedError;
   RubberColor get rubberColor => throw _privateConstructorUsedError;
   StandProfile get standProfile => throw _privateConstructorUsedError;
-  ExpanderOption get expanderOption => throw _privateConstructorUsedError;
   String get glassUnit => throw _privateConstructorUsedError;
   PanelType get panelType => throw _privateConstructorUsedError;
   PanelThickness get panelThickness => throw _privateConstructorUsedError;
@@ -91,7 +90,9 @@ mixin _$Measurement {
   String get canopyColor => throw _privateConstructorUsedError;
   String get slopeDepth => throw _privateConstructorUsedError;
   String get slopeLength => throw _privateConstructorUsedError;
-  String get slopeQuantity => throw _privateConstructorUsedError; // Other work
+  String get slopeQuantity => throw _privateConstructorUsedError;
+  ExpanderOption get expanderOption =>
+      throw _privateConstructorUsedError; // Other work
   bool get parapetReinforcement => throw _privateConstructorUsedError;
   WindowsillExtension get windowsillExtension =>
       throw _privateConstructorUsedError;
@@ -161,7 +162,6 @@ abstract class $MeasurementCopyWith<$Res> {
       String laminationExternal,
       RubberColor rubberColor,
       StandProfile standProfile,
-      ExpanderOption expanderOption,
       String glassUnit,
       PanelType panelType,
       PanelThickness panelThickness,
@@ -182,6 +182,7 @@ abstract class $MeasurementCopyWith<$Res> {
       String slopeDepth,
       String slopeLength,
       String slopeQuantity,
+      ExpanderOption expanderOption,
       bool parapetReinforcement,
       WindowsillExtension windowsillExtension,
       bool slabExtension,
@@ -255,7 +256,6 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? laminationExternal = null,
     Object? rubberColor = null,
     Object? standProfile = null,
-    Object? expanderOption = null,
     Object? glassUnit = null,
     Object? panelType = null,
     Object? panelThickness = null,
@@ -276,6 +276,7 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? slopeDepth = null,
     Object? slopeLength = null,
     Object? slopeQuantity = null,
+    Object? expanderOption = null,
     Object? parapetReinforcement = null,
     Object? windowsillExtension = null,
     Object? slabExtension = null,
@@ -483,10 +484,6 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.standProfile
           : standProfile // ignore: cast_nullable_to_non_nullable
               as StandProfile,
-      expanderOption: null == expanderOption
-          ? _value.expanderOption
-          : expanderOption // ignore: cast_nullable_to_non_nullable
-              as ExpanderOption,
       glassUnit: null == glassUnit
           ? _value.glassUnit
           : glassUnit // ignore: cast_nullable_to_non_nullable
@@ -567,6 +564,10 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.slopeQuantity
           : slopeQuantity // ignore: cast_nullable_to_non_nullable
               as String,
+      expanderOption: null == expanderOption
+          ? _value.expanderOption
+          : expanderOption // ignore: cast_nullable_to_non_nullable
+              as ExpanderOption,
       parapetReinforcement: null == parapetReinforcement
           ? _value.parapetReinforcement
           : parapetReinforcement // ignore: cast_nullable_to_non_nullable
@@ -670,7 +671,6 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       String laminationExternal,
       RubberColor rubberColor,
       StandProfile standProfile,
-      ExpanderOption expanderOption,
       String glassUnit,
       PanelType panelType,
       PanelThickness panelThickness,
@@ -691,6 +691,7 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       String slopeDepth,
       String slopeLength,
       String slopeQuantity,
+      ExpanderOption expanderOption,
       bool parapetReinforcement,
       WindowsillExtension windowsillExtension,
       bool slabExtension,
@@ -764,7 +765,6 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? laminationExternal = null,
     Object? rubberColor = null,
     Object? standProfile = null,
-    Object? expanderOption = null,
     Object? glassUnit = null,
     Object? panelType = null,
     Object? panelThickness = null,
@@ -785,6 +785,7 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? slopeDepth = null,
     Object? slopeLength = null,
     Object? slopeQuantity = null,
+    Object? expanderOption = null,
     Object? parapetReinforcement = null,
     Object? windowsillExtension = null,
     Object? slabExtension = null,
@@ -992,10 +993,6 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.standProfile
           : standProfile // ignore: cast_nullable_to_non_nullable
               as StandProfile,
-      expanderOption: null == expanderOption
-          ? _value.expanderOption
-          : expanderOption // ignore: cast_nullable_to_non_nullable
-              as ExpanderOption,
       glassUnit: null == glassUnit
           ? _value.glassUnit
           : glassUnit // ignore: cast_nullable_to_non_nullable
@@ -1076,6 +1073,10 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.slopeQuantity
           : slopeQuantity // ignore: cast_nullable_to_non_nullable
               as String,
+      expanderOption: null == expanderOption
+          ? _value.expanderOption
+          : expanderOption // ignore: cast_nullable_to_non_nullable
+              as ExpanderOption,
       parapetReinforcement: null == parapetReinforcement
           ? _value.parapetReinforcement
           : parapetReinforcement // ignore: cast_nullable_to_non_nullable
@@ -1154,7 +1155,6 @@ class _$MeasurementImpl extends _Measurement {
       required this.laminationExternal,
       required this.rubberColor,
       required this.standProfile,
-      required this.expanderOption,
       required this.glassUnit,
       required this.panelType,
       required this.panelThickness,
@@ -1175,6 +1175,7 @@ class _$MeasurementImpl extends _Measurement {
       required this.slopeDepth,
       required this.slopeLength,
       required this.slopeQuantity,
+      required this.expanderOption,
       required this.parapetReinforcement,
       required this.windowsillExtension,
       required this.slabExtension,
@@ -1288,8 +1289,6 @@ class _$MeasurementImpl extends _Measurement {
   @override
   final StandProfile standProfile;
   @override
-  final ExpanderOption expanderOption;
-  @override
   final String glassUnit;
   @override
   final PanelType panelType;
@@ -1329,6 +1328,8 @@ class _$MeasurementImpl extends _Measurement {
   final String slopeLength;
   @override
   final String slopeQuantity;
+  @override
+  final ExpanderOption expanderOption;
 // Other work
   @override
   final bool parapetReinforcement;
@@ -1343,7 +1344,7 @@ class _$MeasurementImpl extends _Measurement {
 
   @override
   String toString() {
-    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, scheme: $scheme, photoPath: $photoPath, clientName: $clientName, cost: $cost, prepayment: $prepayment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, howDiscovered: $howDiscovered, comment: $comment, measurer: $measurer, city: $city, district: $district, street: $street, building: $building, residentialComplex: $residentialComplex, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, housingCoopNumber: $housingCoopNumber, buildingType: $buildingType, flatStatus: $flatStatus, elevator: $elevator, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, garbageRemoval: $garbageRemoval, sealing: $sealing, vacuumCleaner: $vacuumCleaner, estimatedAssemblyTime: $estimatedAssemblyTime, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorOpeningType: $doorOpeningType, doorstep: $doorstep, doorstepType: $doorstepType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, expanderOption: $expanderOption, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation)';
+    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, scheme: $scheme, photoPath: $photoPath, clientName: $clientName, cost: $cost, prepayment: $prepayment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, howDiscovered: $howDiscovered, comment: $comment, measurer: $measurer, city: $city, district: $district, street: $street, building: $building, residentialComplex: $residentialComplex, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, housingCoopNumber: $housingCoopNumber, buildingType: $buildingType, flatStatus: $flatStatus, elevator: $elevator, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, garbageRemoval: $garbageRemoval, sealing: $sealing, vacuumCleaner: $vacuumCleaner, estimatedAssemblyTime: $estimatedAssemblyTime, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorOpeningType: $doorOpeningType, doorstep: $doorstep, doorstepType: $doorstepType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, expanderOption: $expanderOption, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation)';
   }
 
   @override
@@ -1440,15 +1441,14 @@ class _$MeasurementImpl extends _Measurement {
                 other.rubberColor == rubberColor) &&
             (identical(other.standProfile, standProfile) ||
                 other.standProfile == standProfile) &&
-            (identical(other.expanderOption, expanderOption) ||
-                other.expanderOption == expanderOption) &&
             (identical(other.glassUnit, glassUnit) ||
                 other.glassUnit == glassUnit) &&
             (identical(other.panelType, panelType) ||
                 other.panelType == panelType) &&
             (identical(other.panelThickness, panelThickness) ||
                 other.panelThickness == panelThickness) &&
-            (identical(other.furniture, furniture) || other.furniture == furniture) &&
+            (identical(other.furniture, furniture) ||
+                other.furniture == furniture) &&
             (identical(other.windowsillType, windowsillType) || other.windowsillType == windowsillType) &&
             (identical(other.windowsillDepth, windowsillDepth) || other.windowsillDepth == windowsillDepth) &&
             (identical(other.windowsillSize, windowsillSize) || other.windowsillSize == windowsillSize) &&
@@ -1465,6 +1465,7 @@ class _$MeasurementImpl extends _Measurement {
             (identical(other.slopeDepth, slopeDepth) || other.slopeDepth == slopeDepth) &&
             (identical(other.slopeLength, slopeLength) || other.slopeLength == slopeLength) &&
             (identical(other.slopeQuantity, slopeQuantity) || other.slopeQuantity == slopeQuantity) &&
+            (identical(other.expanderOption, expanderOption) || other.expanderOption == expanderOption) &&
             (identical(other.parapetReinforcement, parapetReinforcement) || other.parapetReinforcement == parapetReinforcement) &&
             (identical(other.windowsillExtension, windowsillExtension) || other.windowsillExtension == windowsillExtension) &&
             (identical(other.slabExtension, slabExtension) || other.slabExtension == slabExtension) &&
@@ -1525,7 +1526,6 @@ class _$MeasurementImpl extends _Measurement {
         laminationExternal,
         rubberColor,
         standProfile,
-        expanderOption,
         glassUnit,
         panelType,
         panelThickness,
@@ -1546,6 +1546,7 @@ class _$MeasurementImpl extends _Measurement {
         slopeDepth,
         slopeLength,
         slopeQuantity,
+        expanderOption,
         parapetReinforcement,
         windowsillExtension,
         slabExtension,
@@ -1612,7 +1613,6 @@ abstract class _Measurement extends Measurement {
       required final String laminationExternal,
       required final RubberColor rubberColor,
       required final StandProfile standProfile,
-      required final ExpanderOption expanderOption,
       required final String glassUnit,
       required final PanelType panelType,
       required final PanelThickness panelThickness,
@@ -1633,6 +1633,7 @@ abstract class _Measurement extends Measurement {
       required final String slopeDepth,
       required final String slopeLength,
       required final String slopeQuantity,
+      required final ExpanderOption expanderOption,
       required final bool parapetReinforcement,
       required final WindowsillExtension windowsillExtension,
       required final bool slabExtension,
@@ -1742,8 +1743,6 @@ abstract class _Measurement extends Measurement {
   @override
   StandProfile get standProfile;
   @override
-  ExpanderOption get expanderOption;
-  @override
   String get glassUnit;
   @override
   PanelType get panelType;
@@ -1783,6 +1782,8 @@ abstract class _Measurement extends Measurement {
   String get slopeLength;
   @override
   String get slopeQuantity;
+  @override
+  ExpanderOption get expanderOption;
   @override // Other work
   bool get parapetReinforcement;
   @override
