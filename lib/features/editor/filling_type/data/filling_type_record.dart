@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:window_meas/features/editor/data/model/polygon.dart';
 import 'package:window_meas/features/editor/filling_type/data/filling_type_enum.dart';

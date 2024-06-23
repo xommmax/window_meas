@@ -1,26 +1,26 @@
 import 'package:collection/collection.dart';
 import 'package:window_meas/common/ext/string_ext.dart';
-import 'package:window_meas/features/meas/data/model/custom_field_dto.dart';
-import 'package:window_meas/features/meas/data/model/custom_field_value_dto.dart';
-import 'package:window_meas/features/meas/data/params/assembly_type_enum.dart';
-import 'package:window_meas/features/meas/data/params/building_type_enum.dart';
-import 'package:window_meas/features/meas/data/params/door_opening_type_enum.dart';
-import 'package:window_meas/features/meas/data/params/doorstep_option_enum.dart';
-import 'package:window_meas/features/meas/data/params/doorstep_type_enum.dart';
-import 'package:window_meas/features/meas/data/params/elevator_options_enum.dart';
-import 'package:window_meas/features/meas/data/params/expander_option.dart';
-import 'package:window_meas/features/meas/data/params/flat_status_enum.dart';
-import 'package:window_meas/features/meas/data/params/panel_thickness_enum.dart';
-import 'package:window_meas/features/meas/data/params/panel_type_enum.dart';
-import 'package:window_meas/features/meas/data/params/param_enum.dart';
-import 'package:window_meas/features/meas/data/params/profile_system_enum.dart';
-import 'package:window_meas/features/meas/data/params/quarter_position_enum.dart';
-import 'package:window_meas/features/meas/data/params/rubber_color_enum.dart';
-import 'package:window_meas/features/meas/data/params/stand_profile_enum.dart';
-import 'package:window_meas/features/meas/data/params/windowsill_connector_enum.dart';
-import 'package:window_meas/features/meas/data/params/windowsill_depth_enum.dart';
-import 'package:window_meas/features/meas/data/params/windowsill_extension_enum.dart';
-import 'package:window_meas/features/meas/data/params/windowsill_type_enum.dart';
+import 'package:window_meas/features/measurement/data/params/assembly_type_enum.dart';
+import 'package:window_meas/features/measurement/data/params/building_type_enum.dart';
+import 'package:window_meas/features/measurement/data/params/door_opening_type_enum.dart';
+import 'package:window_meas/features/measurement/data/params/doorstep_option_enum.dart';
+import 'package:window_meas/features/measurement/data/params/doorstep_type_enum.dart';
+import 'package:window_meas/features/measurement/data/params/elevator_options_enum.dart';
+import 'package:window_meas/features/measurement/data/params/expander_option.dart';
+import 'package:window_meas/features/measurement/data/params/flat_status_enum.dart';
+import 'package:window_meas/features/measurement/data/params/panel_thickness_enum.dart';
+import 'package:window_meas/features/measurement/data/params/panel_type_enum.dart';
+import 'package:window_meas/features/measurement/data/params/param_enum.dart';
+import 'package:window_meas/features/measurement/data/params/profile_system_enum.dart';
+import 'package:window_meas/features/measurement/data/params/quarter_position_enum.dart';
+import 'package:window_meas/features/measurement/data/params/rubber_color_enum.dart';
+import 'package:window_meas/features/measurement/data/params/stand_profile_enum.dart';
+import 'package:window_meas/features/measurement/data/params/windowsill_connector_enum.dart';
+import 'package:window_meas/features/measurement/data/params/windowsill_depth_enum.dart';
+import 'package:window_meas/features/measurement/data/params/windowsill_extension_enum.dart';
+import 'package:window_meas/features/measurement/data/params/windowsill_type_enum.dart';
+import 'package:window_meas/features/measurement/data/remote/model/custom_field_dto.dart';
+import 'package:window_meas/features/measurement/data/remote/model/custom_field_value_dto.dart';
 import 'package:window_meas/l10n/localization.dart';
 
 class CustomFieldsBuilder {
@@ -144,12 +144,14 @@ class CustomFieldsBuilder {
         name: name.toCapitalized(),
         type: 'text',
         sort: sortCounter++,
+        code: '1',
       );
 
   CustomFieldDTO _bool(String name) => CustomFieldDTO(
         name: name.toCapitalized(),
         type: 'checkbox',
         sort: sortCounter++,
+        code: '1',
       );
 
   CustomFieldDTO _enum<T extends ParamEnum>(String name, List<T> values) => CustomFieldDTO(
@@ -159,5 +161,6 @@ class CustomFieldsBuilder {
             .mapIndexed((index, e) => CustomFieldValue(value: e.localizedName, sort: index))
             .toList(),
         sort: sortCounter++,
+        code: '1',
       );
 }
