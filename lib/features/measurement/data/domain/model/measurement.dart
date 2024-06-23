@@ -23,9 +23,11 @@ import 'package:window_meas/features/measurement/data/params/windowsill_type_enu
 
 part 'measurement.freezed.dart';
 
-// !!! After adding or updating the field, don't forget to
-// 1. add/update field manually in CRM
-// 2. add/update field in custom field builder
+// !!! After adding or updating the field, don't forget to add/update field:
+// 1. in CustomFieldsBuilder
+// 2. MeasurementDTO.fromDomain
+// 3. MeasurementDTO.toDomain
+// 4. add/update field manually in CRM
 @freezed
 class Measurement with _$Measurement {
   const Measurement._();
