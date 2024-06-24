@@ -24,7 +24,7 @@ class MeasurementListCubit extends Cubit<MeasurementListState> {
     measSubscription = repo.watchMeasurements().listen((measurements) {
       emit(MeasurementListState(measurements: measurements));
     });
-    final measurements = await repo.getMeasurements();
+    final measurements = await repo.getLocalMeasurements();
     emit(MeasurementListState(measurements: measurements));
   }
 

@@ -25,7 +25,7 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
           (response.data['_embedded']['elements'] as List).cast<Map<String, dynamic>>().first;
       return measurementJson['id'];
     } on DioException catch (e) {
-      debugPrint('@@@ Error: $e');
+      debugPrint('@@@ addMeasurement Error: $e');
       rethrow;
     }
   }
@@ -36,7 +36,7 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
       final json = measurement.toJson();
       await kommoDio.patch('catalogs/$kommoListId/elements', data: [json]);
     } on DioException catch (e) {
-      debugPrint('@@@ Error: $e');
+      debugPrint('@@@ updateMeasurement Error: $e');
       rethrow;
     }
   }
@@ -49,7 +49,7 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
           (response.data['_embedded']['elements'] as List).cast<Map<String, dynamic>>();
       return measurementsJson.map((e) => MeasurementDTO.fromJson(e)).toList();
     } on DioException catch (e) {
-      debugPrint('@@@ Error: $e');
+      debugPrint('@@@ getMeasurements Error: $e');
       rethrow;
     }
   }

@@ -26,7 +26,7 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
   Future<void> loadData(String measurementId) async {
     try {
       emit(state.copyWith(isLoading: true));
-      final measurement = await measRepo.getMeasurement(measurementId);
+      final measurement = await measRepo.getLocalMeasurement(measurementId);
       emit(state.copyWith(measurement: measurement));
     } catch (e) {
       emitEvent(state.copyWith(message: Localization.l10n.errorCannotLoadMeasurement));

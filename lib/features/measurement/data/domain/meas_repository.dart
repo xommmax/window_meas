@@ -30,14 +30,19 @@ class MeasurementRepository {
     }
   }
 
-  Future<List<Measurement>> getMeasurements() async {
+  Future<List<Measurement>> getLocalMeasurements() async {
     final list = await local.getMeasurements();
     return list.map((e) => Measurement.fromDB(e)).toList();
   }
 
-  Future<Measurement?> getMeasurement(String id) async {
+  Future<Measurement?> getLocalMeasurement(String id) async {
     final db = await local.getMeasurement(id);
     return db != null ? Measurement.fromDB(db) : null;
+  }
+
+  Future<List<Measurement>> getRemoteMeasurements() async {
+    final list = await remote.getMeasurements();
+    return list.map((e) => e.toDomain()).toList();
   }
 
   Future<void> updateMeasurement(Measurement measurement) =>
