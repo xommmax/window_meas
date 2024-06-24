@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'window-measurement-app.appspot.com',
     iosBundleId: 'com.example.windowMeas',
   );
+
 }
