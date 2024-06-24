@@ -1,11 +1,12 @@
 enum FieldToCode {
-  localId('1'),
-  remoteId('2'),
-  id('3'),
-  date('4'),
-  scheme('5'),
-  photoPath('6'),
+  localId('0'),
+  remoteId('1'),
+  id('2'),
+  date('3'),
+  scheme('4'),
+  photoPath('5'),
 
+  pdfFile('6'),
   clientName('7'),
   cost('8'),
   prepayment('9'),

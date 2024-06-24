@@ -172,5 +172,6 @@
   "polygonNotConvex": "Вибрана зона не є випуклою",
   "openingTypeAlreadySelected": "Для вибраної зони вже визначено варіант відкриття",
   "fillingTypes": "Варіанти заповнення",
-  "archShouldBeOnLine": "Арка повинна знаходитися на лінії"
+  "archShouldBeOnLine": "Арка повинна знаходитися на лінії",
+  "pdfFile": "PDF файл"
 }

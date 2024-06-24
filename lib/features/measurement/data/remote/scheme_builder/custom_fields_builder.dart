@@ -34,6 +34,7 @@ class CustomFieldsBuilder {
 
     // Client Info
     customFields.addAll([
+      _file(l10n.pdfFile, FieldToCode.pdfFile),
       _text(l10n.clientName, FieldToCode.clientName),
       _text(l10n.cost, FieldToCode.cost),
       _text(l10n.prepayment, FieldToCode.prepayment),
@@ -233,6 +234,13 @@ class CustomFieldsBuilder {
         enums: values
             .mapIndexed((index, e) => CustomFieldValue(value: e.localizedName, sort: index))
             .toList(),
+        sort: sortCounter++,
+        code: mapper.code,
+      );
+
+  CustomFieldDTO _file(String name, FieldToCode mapper) => CustomFieldDTO(
+        name: name,
+        type: 'file',
         sort: sortCounter++,
         code: mapper.code,
       );
