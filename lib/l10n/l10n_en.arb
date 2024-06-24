@@ -176,5 +176,6 @@
   "pdfFile": "PDF File",
   "errorCannotLoadMeasurement": "Cannot load measurement",
   "errorCannotSendToCrm": "Cannot send to CRM",
-  "successfullySentToCrm": "Successfully sent to CRM"
+  "successfullySentToCrm": "Successfully sent to CRM",
+  "schemeAndPhoto": "Scheme and photo"
 }

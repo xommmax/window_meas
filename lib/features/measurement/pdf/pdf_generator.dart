@@ -121,6 +121,8 @@ class PdfGenerator {
                 padding: const pw.EdgeInsets.fromLTRB(30, 40, 20, 40),
                 child: pw.Column(
                   children: [
+                    _infoTitle(Localization.l10n.position),
+                    pw.SizedBox(height: 20),
                     pw.Row(
                       crossAxisAlignment: pw.CrossAxisAlignment.start,
                       children: [
@@ -161,9 +163,10 @@ class PdfGenerator {
             _header(logo),
             pw.Expanded(
               child: pw.Padding(
-                padding: const pw.EdgeInsets.fromLTRB(30, 0, 20, 40),
+                padding: const pw.EdgeInsets.fromLTRB(30, 20, 20, 40),
                 child: pw.Column(
                   children: [
+                    _infoTitle(Localization.l10n.schemeAndPhoto),
                     pw.SizedBox(height: 20),
                     _scheme(measurement, context),
                     pw.SizedBox(height: 30),
@@ -307,7 +310,6 @@ class PdfGenerator {
           : pw.SizedBox.shrink();
 
   static List<pw.Widget> _positionInfo1(Measurement measurement) => [
-        _infoTitle(Localization.l10n.position),
         _infoRow(Localization.l10n.quarter, null, rowType: _RowType.title),
         _infoRow(Localization.l10n.size, measurement.quarterSize, rowType: _RowType.sub),
         _infoRow(Localization.l10n.quarterPosition, measurement.quarterPosition,
@@ -370,7 +372,6 @@ class PdfGenerator {
       ];
 
   static List<pw.Widget> _positionInfo2(Measurement measurement) => [
-        pw.SizedBox(height: 20),
         _infoRow(Localization.l10n.glassUnit, measurement.glassUnit),
         _infoRow(Localization.l10n.panel, null, rowType: _RowType.title),
         _infoRow(Localization.l10n.type, measurement.panelType, rowType: _RowType.sub),

@@ -176,5 +176,6 @@
   "pdfFile": "PDF файл",
   "errorCannotLoadMeasurement": "Не вдалося завантажити замір",
   "errorCannotSendToCrm": "Не вдалося надіслати замір в CRM",
-  "successfullySentToCrm": "Замір успішно надіслано в CRM"
+  "successfullySentToCrm": "Замір успішно надіслано в CRM",
+  "schemeAndPhoto": "Схема та фото"
 }
