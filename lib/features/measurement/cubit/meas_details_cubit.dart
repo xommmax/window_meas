@@ -1,9 +1,11 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:io';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:window_meas/common/ext/cubit_ext.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_state.dart';
 import 'package:window_meas/features/measurement/data/domain/meas_repository.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
@@ -12,7 +14,7 @@ import 'package:window_meas/features/profile/settings/data/settings_repo.dart';
 import 'package:window_meas/l10n/localization.dart';
 
 @injectable
-class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
+class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
   final MeasurementRepository measRepo;
   final SettingsRepository settingsRepo;
 
@@ -22,10 +24,15 @@ class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
   ) : super(MeasurementDetailsState.initial());
 
   Future<void> loadData(String measurementId) async {
-    final measurement = await measRepo.getMeasurement(measurementId);
-    emit(MeasurementDetailsState(
-      measurement: measurement,
-    ));
+    try {
+      emit(state.copyWith(isLoading: true));
+      final measurement = await measRepo.getMeasurement(measurementId);
+      emit(state.copyWith(measurement: measurement));
+    } catch (e) {
+      emitEvent(state.copyWith(message: Localization.l10n.errorCannotLoadMeasurement));
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
   }
 
   Future<void> updateMeasurement(Measurement measurement) async {
@@ -56,6 +63,46 @@ class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
   Future<void> generatePdf({bool share = true}) async {
     if (state.measurement == null) return;
 
+    try {
+      emit(state.copyWith(isLoading: true));
+
+      final file = await _getPdfFile();
+
+      if (share) {
+        final shareText = '''
+${Localization.l10n.measurement} №${state.measurement!.localId?.toString().padLeft(4, '0') ?? ''}
+${DateFormat('dd.MM.yyyy, HH:mm').format(state.measurement!.date)}
+${state.measurement!.clientName}
+    ''';
+        await Share.shareXFiles([XFile(file.path)], text: shareText);
+      } else {
+        await OpenFile.open(file.path);
+      }
+    } catch (_) {
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
+  }
+
+  Future<void> sendToCrm() async {
+    if (state.measurement == null) return;
+
+    try {
+      emit(state.copyWith(isLoading: true));
+      final file = await _getPdfFile();
+
+      await measRepo.addRemoteMeasurement(state.measurement!, file);
+      emitEvent(state.copyWith(message: Localization.l10n.successfullySentToCrm));
+    } catch (e) {
+      emitEvent(state.copyWith(message: Localization.l10n.errorCannotSendToCrm));
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
+
+    await loadData(state.measurement!.id);
+  }
+
+  Future<File> _getPdfFile() async {
     final printEmptyFields = await settingsRepo.getSettings().then(
           (settings) => settings?.printEmptyFields ?? false,
         );
@@ -65,16 +112,7 @@ class MeasurementDetailsCubit extends Cubit<MeasurementDetailsState> {
       showEmptyFields: printEmptyFields,
     );
 
-    if (share) {
-      final shareText = '''
-${Localization.l10n.measurement} №${state.measurement!.localId?.toString().padLeft(4, '0') ?? ''}
-${DateFormat('dd.MM.yyyy, HH:mm').format(state.measurement!.date)}
-${state.measurement!.clientName}
-    ''';
-      await Share.shareXFiles([XFile(file.path)], text: shareText);
-    } else {
-      await OpenFile.open(file.path);
-    }
+    return file;
   }
 
   Future<void> takePicture() async {
@@ -90,12 +128,5 @@ ${state.measurement!.clientName}
       await measRepo.updateMeasurement(updatedMeasurement);
       emit(state.copyWith(measurement: updatedMeasurement));
     }
-  }
-
-  Future<void> shareCrm() async {
-    if (state.measurement == null) return;
-
-    await measRepo.addRemoteMeasurement(state.measurement!);
-    await loadData(state.measurement!.id);
   }
 }

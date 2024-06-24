@@ -142,7 +142,7 @@
   "delete": "Delete",
   "chooseOption": "Choose option",
   "manualScheme": "Manual scheme",
-  "shareCrm": "Share CRM",
+  "sendToCrm": "Send to CRM",
   "generatePdf": "Generate PDF",
   "no": "No",
   "yes": "Yes",
@@ -173,5 +173,8 @@
   "openingTypeAlreadySelected": "Opening type already selected",
   "fillingTypes": "Filling types",
   "archShouldBeOnLine": "Arch should be on line",
-  "pdfFile": "PDF File"
+  "pdfFile": "PDF File",
+  "errorCannotLoadMeasurement": "Cannot load measurement",
+  "errorCannotSendToCrm": "Cannot send to CRM",
+  "successfullySentToCrm": "Successfully sent to CRM"
 }

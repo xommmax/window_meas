@@ -9,6 +9,8 @@ class MeasurementDetailsState with _$MeasurementDetailsState {
 
   const factory MeasurementDetailsState({
     required Measurement? measurement,
+    @Default(false) bool isLoading,
+    String? message,
   }) = _MeasurementDetailsState;
 
   factory MeasurementDetailsState.initial() => const MeasurementDetailsState(

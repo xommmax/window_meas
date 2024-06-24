@@ -21,9 +21,9 @@ class MeasurementDetailsAppBar extends StatelessWidget implements PreferredSizeW
           PopupMenuButton<String>(
             onSelected: (s) {
               if (s == context.l10n.generatePdf) {
-                context.read<MeasurementDetailsCubit>().generatePdf();
-              } else if (s == context.l10n.shareCrm) {
-                _shareCrm(context);
+                _generatePdf(context);
+              } else if (s == context.l10n.sendToCrm) {
+                _sendToCrm(context);
               } else if (s == context.l10n.delete) {
                 _delete(context);
               }
@@ -31,7 +31,7 @@ class MeasurementDetailsAppBar extends StatelessWidget implements PreferredSizeW
             icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
             itemBuilder: (BuildContext context) => [
               context.l10n.generatePdf,
-              context.l10n.shareCrm,
+              context.l10n.sendToCrm,
               context.l10n.delete,
             ].map((e) => PopupMenuItem<String>(value: e, child: Text(e))).toList(),
           ),
@@ -41,8 +41,12 @@ class MeasurementDetailsAppBar extends StatelessWidget implements PreferredSizeW
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
-  Future<void> _shareCrm(BuildContext context) async {
-    await context.read<MeasurementDetailsCubit>().shareCrm();
+  Future<void> _generatePdf(BuildContext context) async {
+    await context.read<MeasurementDetailsCubit>().generatePdf();
+  }
+
+  Future<void> _sendToCrm(BuildContext context) async {
+    await context.read<MeasurementDetailsCubit>().sendToCrm();
   }
 
   Future<void> _delete(BuildContext context) async {

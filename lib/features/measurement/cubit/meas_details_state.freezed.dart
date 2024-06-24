@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MeasurementDetailsState {
   Measurement? get measurement => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementDetailsStateCopyWith<MeasurementDetailsState> get copyWith =>
@@ -29,7 +31,7 @@ abstract class $MeasurementDetailsStateCopyWith<$Res> {
           $Res Function(MeasurementDetailsState) then) =
       _$MeasurementDetailsStateCopyWithImpl<$Res, MeasurementDetailsState>;
   @useResult
-  $Res call({Measurement? measurement});
+  $Res call({Measurement? measurement, bool isLoading, String? message});
 
   $MeasurementCopyWith<$Res>? get measurement;
 }
@@ -49,12 +51,22 @@ class _$MeasurementDetailsStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? measurement = freezed,
+    Object? isLoading = null,
+    Object? message = freezed,
   }) {
     return _then(_value.copyWith(
       measurement: freezed == measurement
           ? _value.measurement
           : measurement // ignore: cast_nullable_to_non_nullable
               as Measurement?,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -80,7 +92,7 @@ abstract class _$$MeasurementDetailsStateImplCopyWith<$Res>
       __$$MeasurementDetailsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Measurement? measurement});
+  $Res call({Measurement? measurement, bool isLoading, String? message});
 
   @override
   $MeasurementCopyWith<$Res>? get measurement;
@@ -100,12 +112,22 @@ class __$$MeasurementDetailsStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? measurement = freezed,
+    Object? isLoading = null,
+    Object? message = freezed,
   }) {
     return _then(_$MeasurementDetailsStateImpl(
       measurement: freezed == measurement
           ? _value.measurement
           : measurement // ignore: cast_nullable_to_non_nullable
               as Measurement?,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -113,14 +135,21 @@ class __$$MeasurementDetailsStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MeasurementDetailsStateImpl extends _MeasurementDetailsState {
-  const _$MeasurementDetailsStateImpl({required this.measurement}) : super._();
+  const _$MeasurementDetailsStateImpl(
+      {required this.measurement, this.isLoading = false, this.message})
+      : super._();
 
   @override
   final Measurement? measurement;
+  @override
+  @JsonKey()
+  final bool isLoading;
+  @override
+  final String? message;
 
   @override
   String toString() {
-    return 'MeasurementDetailsState(measurement: $measurement)';
+    return 'MeasurementDetailsState(measurement: $measurement, isLoading: $isLoading, message: $message)';
   }
 
   @override
@@ -129,11 +158,14 @@ class _$MeasurementDetailsStateImpl extends _MeasurementDetailsState {
         (other.runtimeType == runtimeType &&
             other is _$MeasurementDetailsStateImpl &&
             (identical(other.measurement, measurement) ||
-                other.measurement == measurement));
+                other.measurement == measurement) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, measurement);
+  int get hashCode => Object.hash(runtimeType, measurement, isLoading, message);
 
   @JsonKey(ignore: true)
   @override
@@ -145,12 +177,17 @@ class _$MeasurementDetailsStateImpl extends _MeasurementDetailsState {
 
 abstract class _MeasurementDetailsState extends MeasurementDetailsState {
   const factory _MeasurementDetailsState(
-          {required final Measurement? measurement}) =
-      _$MeasurementDetailsStateImpl;
+      {required final Measurement? measurement,
+      final bool isLoading,
+      final String? message}) = _$MeasurementDetailsStateImpl;
   const _MeasurementDetailsState._() : super._();
 
   @override
   Measurement? get measurement;
+  @override
+  bool get isLoading;
+  @override
+  String? get message;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementDetailsStateImplCopyWith<_$MeasurementDetailsStateImpl>

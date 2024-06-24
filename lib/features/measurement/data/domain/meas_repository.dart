@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:injectable/injectable.dart';
 import 'package:window_meas/features/measurement/data/db/ds/meas_local_ds.dart';
 import 'package:window_meas/features/measurement/data/remote/ds/meas_remote_ds.dart';
@@ -14,7 +16,7 @@ class MeasurementRepository {
   Future<void> addLocalMeasurement(Measurement measurement) =>
       local.addMeasurement(measurement.toDB());
 
-  Future<void> addRemoteMeasurement(Measurement measurement) async {
+  Future<void> addRemoteMeasurement(Measurement measurement, File pdfFile) async {
     if (measurement.remoteId == null) {
       final remoteId = await remote.addMeasurement(MeasurementDTO.fromDomain(measurement));
       await local.updateMeasurement(measurement.copyWith(remoteId: remoteId).toDB());

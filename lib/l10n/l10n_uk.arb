@@ -142,7 +142,7 @@
   "delete": "Видалити",
   "chooseOption": "Виберіть опцію",
   "manualScheme": "Довільна схема",
-  "shareCrm": "Надіслати в CRM",
+  "sendToCrm": "Надіслати в CRM",
   "generatePdf": "Згенерувати PDF",
   "no": "Ні",
   "yes": "Так",
@@ -173,5 +173,8 @@
   "openingTypeAlreadySelected": "Для вибраної зони вже визначено варіант відкриття",
   "fillingTypes": "Варіанти заповнення",
   "archShouldBeOnLine": "Арка повинна знаходитися на лінії",
-  "pdfFile": "PDF файл"
+  "pdfFile": "PDF файл",
+  "errorCannotLoadMeasurement": "Не вдалося завантажити замір",
+  "errorCannotSendToCrm": "Не вдалося надіслати замір в CRM",
+  "successfullySentToCrm": "Замір успішно надіслано в CRM"
 }
