@@ -1,0 +1,30 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "window-measurement-app",
+                    "appId": "1:563921810957:android:6d4948fa36c4aea984c744",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "ios": {
+                "default": {
+                    "projectId": "window-measurement-app",
+                    "appId": "1:563921810957:ios:f39d5e125b7c13d584c744",
+                    "uploadDebugSymbols": false,
+                    "fileOutput": "ios/Runner/GoogleService-Info.plist"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "window-measurement-app",
+                    "configurations": {
+                        "android": "1:563921810957:android:6d4948fa36c4aea984c744",
+                        "ios": "1:563921810957:ios:f39d5e125b7c13d584c744"
+                    }
+                }
+            }
+        }
+    }
+}
