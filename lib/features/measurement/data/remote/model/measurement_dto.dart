@@ -29,8 +29,7 @@ class MeasurementDTO with _$MeasurementDTO {
   factory MeasurementDTO.fromDomain(Measurement measurement, String pdfFilePath) => MeasurementDTO(
         id: measurement.remoteId,
         requestId: measurement.id,
-        name:
-            '${Localization.l10n.measurement} ${DateFormat('dd.MM.yyyy').format(measurement.date)}. ${Localization.l10n.measurer}: ${measurement.measurer}, ${Localization.l10n.client}: ${measurement.clientName}',
+        name: measurement.name,
         createdAt: measurement.date.millisecondsSinceEpoch ~/ 1000,
         updatedAt: DateTime.now().millisecondsSinceEpoch ~/ 1000,
         customFieldsValues: [

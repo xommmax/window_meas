@@ -69,12 +69,7 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
       final file = await _getPdfFile();
 
       if (share) {
-        final shareText = '''
-${Localization.l10n.measurement} №${state.measurement!.localId?.toString().padLeft(4, '0') ?? ''}
-${DateFormat('dd.MM.yyyy, HH:mm').format(state.measurement!.date)}
-${state.measurement!.clientName}
-    ''';
-        await Share.shareXFiles([XFile(file.path)], text: shareText);
+        await Share.shareXFiles([XFile(file.path)], text: state.measurement!.name);
       } else {
         await OpenFile.open(file.path);
       }

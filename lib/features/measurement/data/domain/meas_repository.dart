@@ -50,7 +50,13 @@ class MeasurementRepository {
 
   Future<String> _addFileToCDN(File file) async {
     final ref = FirebaseStorage.instance.ref('measurements/pdf').child(basename(file.path));
-    await ref.putFile(file);
-    return ref.getDownloadURL();
+    try {
+      final url = await ref.getDownloadURL();
+      return url;
+    } catch (e) {
+      await ref.putFile(file);
+      final url = await ref.getDownloadURL();
+      return url;
+    }
   }
 }

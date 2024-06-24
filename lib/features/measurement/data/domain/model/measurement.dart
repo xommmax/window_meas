@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/measurement/data/db/model/measurement_db.dart';
@@ -19,6 +20,7 @@ import 'package:window_meas/features/measurement/data/params/windowsill_connecto
 import 'package:window_meas/features/measurement/data/params/windowsill_depth_enum.dart';
 import 'package:window_meas/features/measurement/data/params/windowsill_extension_enum.dart';
 import 'package:window_meas/features/measurement/data/params/windowsill_type_enum.dart';
+import 'package:window_meas/l10n/localization.dart';
 
 part 'measurement.freezed.dart';
 
@@ -354,4 +356,7 @@ class Measurement with _$Measurement {
         measurer: db.measurer,
         photoPath: db.photoPath,
       );
+
+  String get name =>
+      '${Localization.l10n.measurement} ${DateFormat('dd.MM.yyyy').format(date)}. ${Localization.l10n.measurer}: $measurer. ${Localization.l10n.client}: $clientName';
 }
