@@ -34,12 +34,10 @@ class MeasurementDetailsView extends StatelessWidget {
               children: [
                 if (state.measurement != null) MeasurementDetailsList(state.measurement!),
                 if (state.isLoading)
-                  Expanded(
-                    child: ColoredBox(
-                      color: Colors.black.withOpacity(0.3),
-                      child: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
+                  ColoredBox(
+                    color: Colors.black.withOpacity(0.3),
+                    child: const Center(
+                      child: CircularProgressIndicator(),
                     ),
                   ),
               ],
