@@ -34,7 +34,7 @@ class CustomFieldsBuilder {
 
     // Client Info
     customFields.addAll([
-      _file(l10n.pdfFile, FieldToCode.pdfFile),
+      _url(l10n.pdfFile, FieldToCode.pdfFile),
       _text(l10n.clientName, FieldToCode.clientName),
       _text(l10n.cost, FieldToCode.cost),
       _text(l10n.prepayment, FieldToCode.prepayment),
@@ -238,9 +238,9 @@ class CustomFieldsBuilder {
         code: mapper.code,
       );
 
-  CustomFieldDTO _file(String name, FieldToCode mapper) => CustomFieldDTO(
+  CustomFieldDTO _url(String name, FieldToCode mapper) => CustomFieldDTO(
         name: name,
-        type: 'file',
+        type: 'url',
         sort: sortCounter++,
         code: mapper.code,
       );

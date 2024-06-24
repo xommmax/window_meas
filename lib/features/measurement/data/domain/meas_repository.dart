@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path/path.dart';
 import 'package:window_meas/features/measurement/data/db/ds/meas_local_ds.dart';
 import 'package:window_meas/features/measurement/data/remote/ds/meas_remote_ds.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
@@ -17,11 +19,14 @@ class MeasurementRepository {
       local.addMeasurement(measurement.toDB());
 
   Future<void> addRemoteMeasurement(Measurement measurement, File pdfFile) async {
+    final pdfFileRemotePath = await _addFileToCDN(pdfFile);
+    final dto = MeasurementDTO.fromDomain(measurement, pdfFileRemotePath);
+
     if (measurement.remoteId == null) {
-      final remoteId = await remote.addMeasurement(MeasurementDTO.fromDomain(measurement));
+      final remoteId = await remote.addMeasurement(dto);
       await local.updateMeasurement(measurement.copyWith(remoteId: remoteId).toDB());
     } else {
-      await remote.updateMeasurement(MeasurementDTO.fromDomain(measurement));
+      await remote.updateMeasurement(dto);
     }
   }
 
@@ -42,4 +47,10 @@ class MeasurementRepository {
       local.watchMeasurements().map((list) => list.map((e) => Measurement.fromDB(e)).toList());
 
   Future<void> deleteMeasurement(String measurementId) => local.deleteMeasurement(measurementId);
+
+  Future<String> _addFileToCDN(File file) async {
+    final ref = FirebaseStorage.instance.ref('measurements/pdf').child(basename(file.path));
+    await ref.putFile(file);
+    return ref.getDownloadURL();
+  }
 }

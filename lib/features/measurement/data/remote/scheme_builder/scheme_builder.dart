@@ -76,17 +76,20 @@ class SchemeBuilder {
   Future<void> updateField() async {
     const fieldCode = FieldToCode.profileSystem;
     try {
+      // Get scheme and field info
       final customFields = await getScheme();
       final oldCustomField = customFields.firstWhereOrNull((e) => e.code == fieldCode.code);
 
       if (oldCustomField == null) return;
 
+      // Delete old field
       final fieldId = oldCustomField.id;
       final fieldSort = oldCustomField.sort;
       final fieldName = oldCustomField.name;
 
       await kommoDio.delete('catalogs/$kommoListId/custom_fields/$fieldId');
 
+      // Create new field
       final newCustomField = CustomFieldDTO(
         type: 'text',
         name: fieldName,

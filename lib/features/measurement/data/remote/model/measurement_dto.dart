@@ -26,7 +26,7 @@ class MeasurementDTO with _$MeasurementDTO {
 
   factory MeasurementDTO.fromJson(Map<String, dynamic> json) => _$MeasurementDTOFromJson(json);
 
-  factory MeasurementDTO.fromDomain(Measurement measurement) => MeasurementDTO(
+  factory MeasurementDTO.fromDomain(Measurement measurement, String pdfFilePath) => MeasurementDTO(
         id: measurement.remoteId,
         requestId: measurement.id,
         name:
@@ -34,6 +34,7 @@ class MeasurementDTO with _$MeasurementDTO {
         createdAt: measurement.date.millisecondsSinceEpoch ~/ 1000,
         updatedAt: DateTime.now().millisecondsSinceEpoch ~/ 1000,
         customFieldsValues: [
+          _url(FieldToCode.pdfFile, pdfFilePath),
           _text(FieldToCode.clientName, measurement.clientName),
           _text(FieldToCode.cost, measurement.cost),
           _text(FieldToCode.prepayment, measurement.prepayment),
@@ -136,4 +137,9 @@ CustomFieldDTO _bool(FieldToCode mapper, bool value) => CustomFieldDTO(
 CustomFieldDTO _enum<T extends ParamEnum>(FieldToCode mapper, T value) => CustomFieldDTO(
       fieldCode: mapper.code,
       values: [CustomFieldValue(value: value.localizedName)],
+    );
+
+CustomFieldDTO _url(FieldToCode mapper, String value) => CustomFieldDTO(
+      fieldCode: mapper.code,
+      values: [CustomFieldValue(value: value)],
     );
