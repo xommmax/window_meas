@@ -179,5 +179,7 @@
   "successfullySentToCrm": "Замір успішно надіслано в CRM",
   "schemeAndPhoto": "Схема та фото",
   "errorCannotLogin": "Не вдалося увійти",
-  "userName": "Ім'я"
+  "userName": "Ім'я",
+  "logout": "Вийти",
+  "logoutDesc": "Ви впевнені, що хочете вийти?"
 }

@@ -179,5 +179,7 @@
   "successfullySentToCrm": "Successfully sent to CRM",
   "schemeAndPhoto": "Scheme and photo",
   "errorCannotLogin": "Error logging in",
-  "userName": "User name"
+  "userName": "User name",
+  "logout": "Logout",
+  "logoutDesc": "Are you sure you want to log out?"
 }

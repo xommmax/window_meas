@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:window_meas/features/profile/settings/cubit/settings_state.dart';
@@ -34,5 +35,9 @@ class SettingsCubit extends Cubit<SettingsState> {
   Future<void> close() {
     settingsSubscription?.cancel();
     return super.close();
+  }
+
+  Future<void> logout() async {
+    await FirebaseAuth.instance.signOut();
   }
 }

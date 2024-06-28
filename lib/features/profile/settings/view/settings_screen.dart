@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:window_meas/features/measurement/view/details/confirmation_dialog.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/items.dart';
 import 'package:window_meas/features/profile/settings/cubit/settings_cubit.dart';
 import 'package:window_meas/features/profile/settings/cubit/settings_state.dart';
@@ -62,7 +64,30 @@ class SettingsOptionList extends StatelessWidget {
               context.read<SettingsCubit>().updateSettings(settings.copyWith(userName: value)),
         ),
         const Divider(),
+        GestureDetector(
+          onTap: () => _logout(context),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
+            child: Text(
+              context.l10n.logout,
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Colors.red),
+            ),
+          ),
+        ),
+        const Divider(),
       ],
     );
+  }
+
+  Future<void> _logout(BuildContext context) async {
+    final shouldLogout = await ConfirmationDialog.show(
+      context,
+      context.l10n.logout,
+      context.l10n.logoutDesc,
+    );
+    if (shouldLogout && context.mounted) {
+      await context.read<SettingsCubit>().logout();
+      if (context.mounted) context.go('/auth');
+    }
   }
 }
