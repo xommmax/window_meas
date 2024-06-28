@@ -17,6 +17,6 @@ class SettingsRepository {
     return db != null ? Settings.fromDB(db) : null;
   }
 
-  Stream<Settings?> watchSettingss() =>
+  Stream<Settings?> watchSettings() =>
       local.watchSettings().map((e) => e != null ? Settings.fromDB(e) : null);
 }

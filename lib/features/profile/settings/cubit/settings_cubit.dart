@@ -17,8 +17,8 @@ class SettingsCubit extends Cubit<SettingsState> {
     await repo.saveSettings(settings);
   }
 
-  void watchSettings() async {
-    settingsSubscription = repo.watchSettingss().listen((settings) {
+  Future<void> watchSettings() async {
+    settingsSubscription = repo.watchSettings().listen((settings) {
       emit(SettingsState(settings: settings));
     });
 

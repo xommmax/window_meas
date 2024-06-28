@@ -20,8 +20,9 @@ final appRouter = GoRouter(
   ],
   routes: [
     StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) =>
-          ScaffoldWithNavBar(navigationShell: navigationShell),
+      pageBuilder: (context, state, navigationShell) => NoTransitionPage(
+        child: ScaffoldWithNavBar(navigationShell: navigationShell),
+      ),
       branches: [
         StatefulShellBranch(
           routes: [

@@ -4,11 +4,21 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:window_meas/common/ext/cubit_ext.dart';
 import 'package:window_meas/features/auth/bloc/auth_state.dart';
+import 'package:window_meas/features/profile/settings/data/settings_repo.dart';
 import 'package:window_meas/l10n/localization.dart';
 
 @injectable
 class AuthCubit extends EventCubit<AuthState> {
-  AuthCubit() : super(AuthState.initial());
+  AuthCubit(this._settingsRepository) : super(AuthState.initial());
+
+  final SettingsRepository _settingsRepository;
+
+  Future<void> checkUserSignedIn() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      emit(state.copyWith(user: user));
+    }
+  }
 
   Future<void> signInWithGoogle() async {
     try {
@@ -23,12 +33,20 @@ class AuthCubit extends EventCubit<AuthState> {
       final firebaseCredentials = await FirebaseAuth.instance.signInWithCredential(
         googleCredential,
       );
-      emit(state.copyWith(user: firebaseCredentials.user!));
+      _saveAndEmitUser(firebaseCredentials.user!);
     } catch (e) {
       emitEvent(state.copyWith(message: Localization.l10n.errorCannotLogin));
       debugPrint('@@@ Error signing in with Google: $e');
     } finally {
       emit(state.copyWith(isLoading: false));
     }
+  }
+
+  Future<void> _saveAndEmitUser(User user) async {
+    final settings = await _settingsRepository.getSettings();
+    if (settings != null && user.displayName != null) {
+      await _settingsRepository.saveSettings(settings.copyWith(userName: user.displayName!));
+    }
+    emit(state.copyWith(user: user));
   }
 }

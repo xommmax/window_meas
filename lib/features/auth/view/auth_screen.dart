@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:window_meas/common/service_locator.dart';
 import 'package:window_meas/features/auth/bloc/auth_cubit.dart';
 import 'package:window_meas/features/auth/bloc/auth_state.dart';
@@ -14,12 +15,30 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider<AuthCubit>(
         create: (context) => getIt(),
-        child: const AuthView(),
+        child: BlocListener<AuthCubit, AuthState>(
+          listener: (context, state) {
+            if (state.user != null) {
+              context.go('/meas_list');
+            }
+          },
+          child: const AuthView(),
+        ),
       );
 }
 
-class AuthView extends StatelessWidget {
+class AuthView extends StatefulWidget {
   const AuthView({super.key});
+
+  @override
+  State<AuthView> createState() => _AuthViewState();
+}
+
+class _AuthViewState extends State<AuthView> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<AuthCubit>().checkUserSignedIn();
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -44,11 +63,7 @@ class AuthView extends StatelessWidget {
               ],
             ),
             listener: (context, state) {
-              if (state.user != null) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Successfully signed in with Google')),
-                );
-              } else if (state.message != null) {
+              if (state.message != null) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text(state.message!)),
                 );

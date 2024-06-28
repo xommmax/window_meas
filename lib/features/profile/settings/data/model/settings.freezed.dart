@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Settings {
   int get id => throw _privateConstructorUsedError;
   bool get printEmptyFields => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsCopyWith<Settings> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $SettingsCopyWith<$Res> {
   factory $SettingsCopyWith(Settings value, $Res Function(Settings) then) =
       _$SettingsCopyWithImpl<$Res, Settings>;
   @useResult
-  $Res call({int id, bool printEmptyFields});
+  $Res call({int id, bool printEmptyFields, String userName});
 }
 
 /// @nodoc
@@ -47,6 +48,7 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
   $Res call({
     Object? id = null,
     Object? printEmptyFields = null,
+    Object? userName = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -57,6 +59,10 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
           ? _value.printEmptyFields
           : printEmptyFields // ignore: cast_nullable_to_non_nullable
               as bool,
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -69,7 +75,7 @@ abstract class _$$SettingsImplCopyWith<$Res>
       __$$SettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, bool printEmptyFields});
+  $Res call({int id, bool printEmptyFields, String userName});
 }
 
 /// @nodoc
@@ -85,6 +91,7 @@ class __$$SettingsImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? printEmptyFields = null,
+    Object? userName = null,
   }) {
     return _then(_$SettingsImpl(
       id: null == id
@@ -95,6 +102,10 @@ class __$$SettingsImplCopyWithImpl<$Res>
           ? _value.printEmptyFields
           : printEmptyFields // ignore: cast_nullable_to_non_nullable
               as bool,
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -102,17 +113,22 @@ class __$$SettingsImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SettingsImpl extends _Settings {
-  const _$SettingsImpl({required this.id, required this.printEmptyFields})
+  const _$SettingsImpl(
+      {required this.id,
+      required this.printEmptyFields,
+      required this.userName})
       : super._();
 
   @override
   final int id;
   @override
   final bool printEmptyFields;
+  @override
+  final String userName;
 
   @override
   String toString() {
-    return 'Settings(id: $id, printEmptyFields: $printEmptyFields)';
+    return 'Settings(id: $id, printEmptyFields: $printEmptyFields, userName: $userName)';
   }
 
   @override
@@ -122,11 +138,13 @@ class _$SettingsImpl extends _Settings {
             other is _$SettingsImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.printEmptyFields, printEmptyFields) ||
-                other.printEmptyFields == printEmptyFields));
+                other.printEmptyFields == printEmptyFields) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, printEmptyFields);
+  int get hashCode => Object.hash(runtimeType, id, printEmptyFields, userName);
 
   @JsonKey(ignore: true)
   @override
@@ -138,13 +156,16 @@ class _$SettingsImpl extends _Settings {
 abstract class _Settings extends Settings {
   const factory _Settings(
       {required final int id,
-      required final bool printEmptyFields}) = _$SettingsImpl;
+      required final bool printEmptyFields,
+      required final String userName}) = _$SettingsImpl;
   const _Settings._() : super._();
 
   @override
   int get id;
   @override
   bool get printEmptyFields;
+  @override
+  String get userName;
   @override
   @JsonKey(ignore: true)
   _$$SettingsImplCopyWith<_$SettingsImpl> get copyWith =>

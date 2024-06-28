@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:window_meas/common/ext/cubit_ext.dart';
@@ -10,6 +9,7 @@ import 'package:window_meas/features/measurement/cubit/meas_details_state.dart';
 import 'package:window_meas/features/measurement/data/domain/meas_repository.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
 import 'package:window_meas/features/measurement/pdf/pdf_generator.dart';
+import 'package:window_meas/features/profile/settings/data/model/settings.dart';
 import 'package:window_meas/features/profile/settings/data/settings_repo.dart';
 import 'package:window_meas/l10n/localization.dart';
 
@@ -99,7 +99,7 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
 
   Future<File> _getPdfFile() async {
     final printEmptyFields = await settingsRepo.getSettings().then(
-          (settings) => settings?.printEmptyFields ?? false,
+          (settings) => settings?.printEmptyFields ?? Settings.defaultPrintEmptyFields,
         );
 
     final file = await PdfGenerator.generate(

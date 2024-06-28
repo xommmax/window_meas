@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:window_meas/features/profile/settings/cubit/settings_cubit.dart';
+import 'package:window_meas/features/profile/settings/cubit/settings_state.dart';
 import 'package:window_meas/l10n/localization.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -19,7 +22,12 @@ class ProfileScreen extends StatelessWidget {
               child: FaIcon(FontAwesomeIcons.solidUser),
             ),
             const SizedBox(height: 10),
-            Text(context.l10n.myProfile, style: Theme.of(context).textTheme.titleMedium),
+            BlocBuilder<SettingsCubit, SettingsState>(
+              builder: (context, state) => Text(
+                state.settings?.userName ?? '',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
             const SizedBox(height: 50),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40),

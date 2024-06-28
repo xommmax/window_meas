@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:window_meas/common/service_locator.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/items.dart';
 import 'package:window_meas/features/profile/settings/cubit/settings_cubit.dart';
 import 'package:window_meas/features/profile/settings/cubit/settings_state.dart';
@@ -12,10 +11,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   @override
-  Widget build(BuildContext context) => BlocProvider<SettingsCubit>(
-        create: (context) => getIt()..watchSettings(),
-        child: const SettingsView(),
-      );
+  Widget build(BuildContext context) => const SettingsView();
 }
 
 class SettingsView extends StatelessWidget {

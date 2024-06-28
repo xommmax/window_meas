@@ -21,6 +21,11 @@ const SettingsDBSchema = CollectionSchema(
       id: 0,
       name: r'printEmptyFields',
       type: IsarType.bool,
+    ),
+    r'userName': PropertySchema(
+      id: 1,
+      name: r'userName',
+      type: IsarType.string,
     )
   },
   estimateSize: _settingsDBEstimateSize,
@@ -43,6 +48,7 @@ int _settingsDBEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  bytesCount += 3 + object.userName.length * 3;
   return bytesCount;
 }
 
@@ -53,6 +59,7 @@ void _settingsDBSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeBool(offsets[0], object.printEmptyFields);
+  writer.writeString(offsets[1], object.userName);
 }
 
 SettingsDB _settingsDBDeserialize(
@@ -64,6 +71,7 @@ SettingsDB _settingsDBDeserialize(
   final object = SettingsDB();
   object.id = id;
   object.printEmptyFields = reader.readBool(offsets[0]);
+  object.userName = reader.readString(offsets[1]);
   return object;
 }
 
@@ -76,6 +84,8 @@ P _settingsDBDeserializeProp<P>(
   switch (propertyId) {
     case 0:
       return (reader.readBool(offset)) as P;
+    case 1:
+      return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -234,6 +244,140 @@ extension SettingsDBQueryFilter
       ));
     });
   }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition> userNameEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      userNameGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition> userNameLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition> userNameBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'userName',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      userNameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition> userNameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition> userNameContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'userName',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition> userNameMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'userName',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      userNameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'userName',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      userNameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'userName',
+        value: '',
+      ));
+    });
+  }
 }
 
 extension SettingsDBQueryObject
@@ -254,6 +398,18 @@ extension SettingsDBQuerySortBy
       sortByPrintEmptyFieldsDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'printEmptyFields', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> sortByUserName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'userName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> sortByUserNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'userName', Sort.desc);
     });
   }
 }
@@ -284,6 +440,18 @@ extension SettingsDBQuerySortThenBy
       return query.addSortBy(r'printEmptyFields', Sort.desc);
     });
   }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> thenByUserName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'userName', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> thenByUserNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'userName', Sort.desc);
+    });
+  }
 }
 
 extension SettingsDBQueryWhereDistinct
@@ -291,6 +459,13 @@ extension SettingsDBQueryWhereDistinct
   QueryBuilder<SettingsDB, SettingsDB, QDistinct> distinctByPrintEmptyFields() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'printEmptyFields');
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QDistinct> distinctByUserName(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'userName', caseSensitive: caseSensitive);
     });
   }
 }
@@ -306,6 +481,12 @@ extension SettingsDBQueryProperty
   QueryBuilder<SettingsDB, bool, QQueryOperations> printEmptyFieldsProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'printEmptyFields');
+    });
+  }
+
+  QueryBuilder<SettingsDB, String, QQueryOperations> userNameProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'userName');
     });
   }
 }
