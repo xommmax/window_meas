@@ -12,13 +12,13 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:isar/isar.dart' as _i4;
 import 'package:window_meas/common/register_module.dart' as _i20;
-import 'package:window_meas/features/auth/bloc/auth_cubit.dart' as _i17;
+import 'package:window_meas/features/auth/bloc/auth_cubit.dart' as _i16;
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart' as _i3;
-import 'package:window_meas/features/editor/bloc/editor_cubit.dart' as _i19;
+import 'package:window_meas/features/editor/bloc/editor_cubit.dart' as _i18;
 import 'package:window_meas/features/measurement/cubit/meas_details_cubit.dart'
     as _i14;
 import 'package:window_meas/features/measurement/cubit/meas_list_cubit.dart'
-    as _i16;
+    as _i19;
 import 'package:window_meas/features/measurement/data/db/ds/meas_local_ds.dart'
     as _i9;
 import 'package:window_meas/features/measurement/data/domain/meas_repository.dart'
@@ -26,7 +26,7 @@ import 'package:window_meas/features/measurement/data/domain/meas_repository.dar
 import 'package:window_meas/features/measurement/data/remote/ds/meas_remote_ds.dart'
     as _i6;
 import 'package:window_meas/features/profile/settings/cubit/settings_cubit.dart'
-    as _i18;
+    as _i17;
 import 'package:window_meas/features/profile/settings/data/ds/settings_local_ds.dart'
     as _i8;
 import 'package:window_meas/features/profile/settings/data/ds/settings_remote_ds.dart'
@@ -88,14 +88,16 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i15.TemplateListCubit>(
         () => _i15.TemplateListCubit(gh<_i13.TemplateRepository>()));
-    gh.factory<_i16.MeasurementListCubit>(
-        () => _i16.MeasurementListCubit(gh<_i11.MeasurementRepository>()));
-    gh.factory<_i17.AuthCubit>(
-        () => _i17.AuthCubit(gh<_i12.SettingsRepository>()));
-    gh.factory<_i18.SettingsCubit>(
-        () => _i18.SettingsCubit(gh<_i12.SettingsRepository>()));
-    gh.factory<_i19.EditorCubit>(
-        () => _i19.EditorCubit(gh<_i13.TemplateRepository>()));
+    gh.factory<_i16.AuthCubit>(
+        () => _i16.AuthCubit(gh<_i12.SettingsRepository>()));
+    gh.factory<_i17.SettingsCubit>(
+        () => _i17.SettingsCubit(gh<_i12.SettingsRepository>()));
+    gh.factory<_i18.EditorCubit>(
+        () => _i18.EditorCubit(gh<_i13.TemplateRepository>()));
+    gh.factory<_i19.MeasurementListCubit>(() => _i19.MeasurementListCubit(
+          gh<_i11.MeasurementRepository>(),
+          gh<_i12.SettingsRepository>(),
+        ));
     return this;
   }
 }

@@ -46,19 +46,22 @@ class SettingsOptionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SwitchItem(
-            title: context.l10n.printEmptyFields,
-            value: settings.printEmptyFields,
-            onChanged: (value) {
-              context
-                  .read<SettingsCubit>()
-                  .updateSettings(settings.copyWith(printEmptyFields: value));
-            },
-          ),
+        const SizedBox(height: 8),
+        SwitchItem(
+          title: context.l10n.printEmptyFields,
+          value: settings.printEmptyFields,
+          onChanged: (value) => context
+              .read<SettingsCubit>()
+              .updateSettings(settings.copyWith(printEmptyFields: value)),
         ),
-        const Divider(height: 1),
+        const Divider(),
+        InputItem(
+          title: context.l10n.userName,
+          value: settings.userName,
+          onChanged: (value) =>
+              context.read<SettingsCubit>().updateSettings(settings.copyWith(userName: value)),
+        ),
+        const Divider(),
       ],
     );
   }

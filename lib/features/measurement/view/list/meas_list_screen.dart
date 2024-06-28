@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:window_meas/common/view/company_header.dart';
 import 'package:window_meas/features/measurement/view/list/meas_list_item.dart';
 import 'package:window_meas/common/service_locator.dart';
 import 'package:window_meas/common/view/colors.dart';
@@ -23,20 +23,12 @@ class MeasurementListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      body: SafeArea(
+      body: const SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              width: double.infinity,
-              color: AppColors.secondary,
-              child: SvgPicture.asset(
-                'assets/white_logo.svg',
-                width: 200,
-              ),
-            ),
-            const Expanded(child: MeasurementList()),
+            CompanyHeader(),
+            Expanded(child: MeasurementList()),
           ],
         ),
       ),
@@ -48,7 +40,7 @@ class MeasurementListView extends StatelessWidget {
       ));
 
   Future<void> _addMeasurement(BuildContext context) async {
-    final id = await context.read<MeasurementListCubit>().addMeasurement();
+    final id = await context.read<MeasurementListCubit>().createMeasurement();
 
     if (context.mounted) {
       context.push('/meas_details/$id');

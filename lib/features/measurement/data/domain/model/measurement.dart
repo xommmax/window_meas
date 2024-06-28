@@ -123,9 +123,15 @@ class Measurement with _$Measurement {
     required bool insulation,
   }) = _Measurement;
 
-  factory Measurement.initial() => Measurement(
-        id: const Uuid().v4(),
-        date: DateTime.now(),
+  factory Measurement.initial({
+    required String id,
+    required DateTime date,
+    required String measurer,
+  }) =>
+      Measurement(
+        id: id,
+        date: date,
+        measurer: measurer,
         clientName: '',
         city: '',
         district: '',
@@ -196,7 +202,6 @@ class Measurement with _$Measurement {
         residentialComplex: '',
         housingCoopNumber: '',
         scheme: null,
-        measurer: '',
         photoPath: null,
       );
 
