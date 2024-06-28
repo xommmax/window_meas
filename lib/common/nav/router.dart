@@ -1,5 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:go_router/go_router.dart';
+import 'package:window_meas/features/auth/view/auth_screen.dart';
 import 'package:window_meas/features/editor/filling_type/view/filling_type_list_screen.dart';
 import 'package:window_meas/features/editor/opening_type/view/opening_type_list_screen.dart';
 import 'package:window_meas/features/editor/view/editor_screen.dart';
@@ -12,7 +13,7 @@ import 'package:window_meas/features/templates/view/template_list_screen.dart';
 import '../view/scaffold_with_nav_bar.dart';
 
 final appRouter = GoRouter(
-  initialLocation: '/meas_list',
+  initialLocation: '/auth',
   debugLogDiagnostics: true,
   observers: [
     FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
@@ -39,6 +40,10 @@ final appRouter = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '/auth',
+      builder: (context, state) => const AuthScreen(),
     ),
     GoRoute(
       path: '/editor',
