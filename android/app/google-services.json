@@ -12,7 +12,20 @@
           "package_name": "com.xodev.everest"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "563921810957-6gpj6muov12qm9dqadduhvdg51uoe1j9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xodev.everest",
+            "certificate_hash": "9511b7a6b029829f4960f7f0a924b891b9ef91bd"
+          }
+        },
+        {
+          "client_id": "563921810957-4t6snegcm7bhetjd020617gdrsb1i3o5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDKo9e5MYizbrK5vUtfAVPIajHX_10VbbA"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563921810957-4t6snegcm7bhetjd020617gdrsb1i3o5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "563921810957-ce9664rnm57a4v1p0bnmbp1rqtbdf5d7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.windowMeas"
+              }
+            }
+          ]
         }
       }
     }
