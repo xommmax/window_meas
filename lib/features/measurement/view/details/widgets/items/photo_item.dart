@@ -55,6 +55,7 @@ class PhotoItem extends StatelessWidget {
   }
 
   Future<void> _onTakePhotoClick(BuildContext context) async {
+    FocusScope.of(context).requestFocus(FocusNode());
     if (path != null) {
       final shouldDelete = await _showDeletionDialog(context);
       if (shouldDelete && context.mounted) {

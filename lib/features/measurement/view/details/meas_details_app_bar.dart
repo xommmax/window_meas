@@ -27,25 +27,28 @@ class MeasurementDetailsAppBar extends StatelessWidget implements PreferredSizeW
       title: Text(
         '${context.l10n.measurement} №$id',
       ),
-      actions: !isAdminModeEnabled ? [
-        PopupMenuButton<String>(
-          onSelected: (s) {
-            if (s == context.l10n.generatePdf) {
-              _generatePdf(context);
-            } else if (s == context.l10n.sendToCrm) {
-              _sendToCrm(context);
-            } else if (s == context.l10n.delete) {
-              _delete(context);
-            }
-          },
-          icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
-          itemBuilder: (BuildContext context) => [
-            context.l10n.generatePdf,
-            context.l10n.sendToCrm,
-            context.l10n.delete,
-          ].map((e) => PopupMenuItem<String>(value: e, child: Text(e))).toList(),
-        ),
-      ] : null,
+      actions: !isAdminModeEnabled
+          ? [
+              PopupMenuButton<String>(
+                onOpened: () => FocusScope.of(context).requestFocus(FocusNode()),
+                onSelected: (s) {
+                  if (s == context.l10n.generatePdf) {
+                    _generatePdf(context);
+                  } else if (s == context.l10n.sendToCrm) {
+                    _sendToCrm(context);
+                  } else if (s == context.l10n.delete) {
+                    _delete(context);
+                  }
+                },
+                icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
+                itemBuilder: (BuildContext context) => [
+                  context.l10n.generatePdf,
+                  context.l10n.sendToCrm,
+                  context.l10n.delete,
+                ].map((e) => PopupMenuItem<String>(value: e, child: Text(e))).toList(),
+              ),
+            ]
+          : null,
     );
   }
 

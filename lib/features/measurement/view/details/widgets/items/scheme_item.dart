@@ -54,6 +54,7 @@ class SchemeItem extends StatelessWidget {
       );
 
   Future<void> _onSchemeClick(BuildContext context) async {
+    FocusScope.of(context).requestFocus(FocusNode());
     final option = await showDialog<SchemeItemOption>(
         context: context,
         builder: (context) => SimpleDialog(
