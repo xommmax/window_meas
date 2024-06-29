@@ -53,7 +53,7 @@ class MeasurementListCubit extends Cubit<MeasurementListState> {
 
   Future<void> _getMeasurements(bool isAdminModeEnabled) async {
     if (isAdminModeEnabled) {
-      await _getRemoteMeasurements();
+      await getRemoteMeasurements();
     } else {
       await _watchLocalMeasurements();
     }
@@ -68,7 +68,7 @@ class MeasurementListCubit extends Cubit<MeasurementListState> {
     emit(state.copyWith(measurements: measurements));
   }
 
-  Future<void> _getRemoteMeasurements() async {
+  Future<void> getRemoteMeasurements() async {
     final measurements = await _measRepository.getRemoteMeasurements();
     emit(state.copyWith(measurements: measurements));
   }

@@ -23,24 +23,29 @@ class MeasurementListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocBuilder<MeasurementListCubit, MeasurementListState>(
-        builder: (context, state) => Scaffold(
-          body: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(child: _MeasurementList(state.measurements, state.isAdminModeEnabled)),
-              ],
+        builder: (context, state) {
+          Widget listWidget = _MeasurementList(state.measurements, state.isAdminModeEnabled);
+
+          if (state.isAdminModeEnabled) {
+            listWidget = RefreshIndicator(
+              onRefresh: context.read<MeasurementListCubit>().getRemoteMeasurements,
+              child: listWidget,
+            );
+          }
+          return Scaffold(
+            body: SafeArea(
+              child: listWidget,
             ),
-          ),
-          floatingActionButton: !state.isAdminModeEnabled
-              ? FloatingActionButton(
-                  onPressed: () => _addMeasurement(context),
-                  backgroundColor: AppColors.primary,
-                  foregroundColor: Colors.white,
-                  child: const Icon(Icons.add),
-                )
-              : null,
-        ),
+            floatingActionButton: !state.isAdminModeEnabled
+                ? FloatingActionButton(
+                    onPressed: () => _addMeasurement(context),
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                    child: const Icon(Icons.add),
+                  )
+                : null,
+          );
+        },
       );
 
   Future<void> _addMeasurement(BuildContext context) async {
