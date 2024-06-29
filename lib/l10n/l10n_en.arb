@@ -185,5 +185,9 @@
   "signInWithGoogle": "Sign in with Google",
   "signInWithApple": "Sign in with Apple",
   "adminMode": "Admin mode",
-  "admin": "Admin"
+  "admin": "Admin",
+  "errorTryAgain": "Error. Try again",
+  "enterPassword": "Enter password",
+  "next": "Next",
+  "wrongPassword": "Wrong password"
 }

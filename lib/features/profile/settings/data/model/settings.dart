@@ -19,6 +19,11 @@ class Settings with _$Settings {
     required String userName,
     required bool isAdmin,
     required bool isAdminModeEnabled,
+    List<String>? adminsList,
+    String? kommoSubdomain,
+    String? kommoToken,
+    int? kommoListId,
+    String? appPassword,
   }) = _Settings;
 
   factory Settings.initial() => const Settings(
@@ -34,7 +39,12 @@ class Settings with _$Settings {
     ..id = id
     ..userName = userName
     ..isAdmin = isAdmin
-    ..isAdminModeEnabled = isAdminModeEnabled;
+    ..isAdminModeEnabled = isAdminModeEnabled
+    ..adminsList = adminsList
+    ..kommoSubdomain = kommoSubdomain
+    ..kommoToken = kommoToken
+    ..kommoListId = kommoListId
+    ..appPassword = appPassword;
 
   static Settings fromDB(SettingsDB db) => Settings(
         printEmptyFields: db.printEmptyFields,
@@ -42,5 +52,10 @@ class Settings with _$Settings {
         userName: db.userName,
         isAdmin: db.isAdmin,
         isAdminModeEnabled: db.isAdminModeEnabled,
+        adminsList: db.adminsList,
+        kommoSubdomain: db.kommoSubdomain,
+        kommoToken: db.kommoToken,
+        kommoListId: db.kommoListId,
+        appPassword: db.appPassword,
       );
 }

@@ -185,5 +185,9 @@
   "signInWithGoogle": "Увійти через Google",
   "signInWithApple": "Увійти через Apple",
   "adminMode": "Режим адміністратора",
-  "admin": "Адмін"
+  "admin": "Адмін",
+  "errorTryAgain": "Помилка. Спробуйте ще раз",
+  "enterPassword": "Введіть пароль",
+  "next": "Далі",
+  "wrongPassword": "Невірний пароль"
 }

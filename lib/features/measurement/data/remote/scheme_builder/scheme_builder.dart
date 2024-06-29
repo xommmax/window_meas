@@ -1,14 +1,25 @@
 import 'package:collection/collection.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:window_meas/features/measurement/data/remote/ds/meas_remote_ds.dart';
 import 'package:window_meas/features/measurement/data/remote/model/custom_field_dto.dart';
 import 'package:window_meas/features/measurement/data/remote/scheme_builder/custom_fields_builder.dart';
 import 'package:window_meas/features/measurement/data/remote/scheme_builder/field_code_mapper.dart';
 
 class SchemeBuilder {
-  final customFieldsBuilder = CustomFieldsBuilder();
-
   SchemeBuilder();
+
+  static const subdomain = '';
+  static const token = '';
+  static const kommoListId = 0;
+
+  final kommoDio = Dio(BaseOptions(
+    baseUrl: 'https://$subdomain.kommo.com/api/v4/',
+    headers: {
+      'Authorization': 'Bearer $token',
+    },
+  ));
+
+  final customFieldsBuilder = CustomFieldsBuilder();
 
   Future<void> initScheme() async {
     try {

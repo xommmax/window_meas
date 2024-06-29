@@ -20,7 +20,7 @@ class AuthScreen extends StatelessWidget {
         child: BlocListener<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state.user != null) {
-              context.go('/meas_list');
+              context.go('/passwall');
             }
           },
           child: const AuthView(),

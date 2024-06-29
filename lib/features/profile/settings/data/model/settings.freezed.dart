@@ -21,6 +21,11 @@ mixin _$Settings {
   String get userName => throw _privateConstructorUsedError;
   bool get isAdmin => throw _privateConstructorUsedError;
   bool get isAdminModeEnabled => throw _privateConstructorUsedError;
+  List<String>? get adminsList => throw _privateConstructorUsedError;
+  String? get kommoSubdomain => throw _privateConstructorUsedError;
+  String? get kommoToken => throw _privateConstructorUsedError;
+  int? get kommoListId => throw _privateConstructorUsedError;
+  String? get appPassword => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsCopyWith<Settings> get copyWith =>
@@ -37,7 +42,12 @@ abstract class $SettingsCopyWith<$Res> {
       bool printEmptyFields,
       String userName,
       bool isAdmin,
-      bool isAdminModeEnabled});
+      bool isAdminModeEnabled,
+      List<String>? adminsList,
+      String? kommoSubdomain,
+      String? kommoToken,
+      int? kommoListId,
+      String? appPassword});
 }
 
 /// @nodoc
@@ -58,6 +68,11 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
     Object? userName = null,
     Object? isAdmin = null,
     Object? isAdminModeEnabled = null,
+    Object? adminsList = freezed,
+    Object? kommoSubdomain = freezed,
+    Object? kommoToken = freezed,
+    Object? kommoListId = freezed,
+    Object? appPassword = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -80,6 +95,26 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
           ? _value.isAdminModeEnabled
           : isAdminModeEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      adminsList: freezed == adminsList
+          ? _value.adminsList
+          : adminsList // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      kommoSubdomain: freezed == kommoSubdomain
+          ? _value.kommoSubdomain
+          : kommoSubdomain // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kommoToken: freezed == kommoToken
+          ? _value.kommoToken
+          : kommoToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kommoListId: freezed == kommoListId
+          ? _value.kommoListId
+          : kommoListId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      appPassword: freezed == appPassword
+          ? _value.appPassword
+          : appPassword // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -97,7 +132,12 @@ abstract class _$$SettingsImplCopyWith<$Res>
       bool printEmptyFields,
       String userName,
       bool isAdmin,
-      bool isAdminModeEnabled});
+      bool isAdminModeEnabled,
+      List<String>? adminsList,
+      String? kommoSubdomain,
+      String? kommoToken,
+      int? kommoListId,
+      String? appPassword});
 }
 
 /// @nodoc
@@ -116,6 +156,11 @@ class __$$SettingsImplCopyWithImpl<$Res>
     Object? userName = null,
     Object? isAdmin = null,
     Object? isAdminModeEnabled = null,
+    Object? adminsList = freezed,
+    Object? kommoSubdomain = freezed,
+    Object? kommoToken = freezed,
+    Object? kommoListId = freezed,
+    Object? appPassword = freezed,
   }) {
     return _then(_$SettingsImpl(
       id: null == id
@@ -138,6 +183,26 @@ class __$$SettingsImplCopyWithImpl<$Res>
           ? _value.isAdminModeEnabled
           : isAdminModeEnabled // ignore: cast_nullable_to_non_nullable
               as bool,
+      adminsList: freezed == adminsList
+          ? _value._adminsList
+          : adminsList // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      kommoSubdomain: freezed == kommoSubdomain
+          ? _value.kommoSubdomain
+          : kommoSubdomain // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kommoToken: freezed == kommoToken
+          ? _value.kommoToken
+          : kommoToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      kommoListId: freezed == kommoListId
+          ? _value.kommoListId
+          : kommoListId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      appPassword: freezed == appPassword
+          ? _value.appPassword
+          : appPassword // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -150,8 +215,14 @@ class _$SettingsImpl extends _Settings {
       required this.printEmptyFields,
       required this.userName,
       required this.isAdmin,
-      required this.isAdminModeEnabled})
-      : super._();
+      required this.isAdminModeEnabled,
+      final List<String>? adminsList,
+      this.kommoSubdomain,
+      this.kommoToken,
+      this.kommoListId,
+      this.appPassword})
+      : _adminsList = adminsList,
+        super._();
 
   @override
   final int id;
@@ -163,10 +234,28 @@ class _$SettingsImpl extends _Settings {
   final bool isAdmin;
   @override
   final bool isAdminModeEnabled;
+  final List<String>? _adminsList;
+  @override
+  List<String>? get adminsList {
+    final value = _adminsList;
+    if (value == null) return null;
+    if (_adminsList is EqualUnmodifiableListView) return _adminsList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String? kommoSubdomain;
+  @override
+  final String? kommoToken;
+  @override
+  final int? kommoListId;
+  @override
+  final String? appPassword;
 
   @override
   String toString() {
-    return 'Settings(id: $id, printEmptyFields: $printEmptyFields, userName: $userName, isAdmin: $isAdmin, isAdminModeEnabled: $isAdminModeEnabled)';
+    return 'Settings(id: $id, printEmptyFields: $printEmptyFields, userName: $userName, isAdmin: $isAdmin, isAdminModeEnabled: $isAdminModeEnabled, adminsList: $adminsList, kommoSubdomain: $kommoSubdomain, kommoToken: $kommoToken, kommoListId: $kommoListId, appPassword: $appPassword)';
   }
 
   @override
@@ -181,12 +270,32 @@ class _$SettingsImpl extends _Settings {
                 other.userName == userName) &&
             (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
             (identical(other.isAdminModeEnabled, isAdminModeEnabled) ||
-                other.isAdminModeEnabled == isAdminModeEnabled));
+                other.isAdminModeEnabled == isAdminModeEnabled) &&
+            const DeepCollectionEquality()
+                .equals(other._adminsList, _adminsList) &&
+            (identical(other.kommoSubdomain, kommoSubdomain) ||
+                other.kommoSubdomain == kommoSubdomain) &&
+            (identical(other.kommoToken, kommoToken) ||
+                other.kommoToken == kommoToken) &&
+            (identical(other.kommoListId, kommoListId) ||
+                other.kommoListId == kommoListId) &&
+            (identical(other.appPassword, appPassword) ||
+                other.appPassword == appPassword));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, printEmptyFields, userName, isAdmin, isAdminModeEnabled);
+      runtimeType,
+      id,
+      printEmptyFields,
+      userName,
+      isAdmin,
+      isAdminModeEnabled,
+      const DeepCollectionEquality().hash(_adminsList),
+      kommoSubdomain,
+      kommoToken,
+      kommoListId,
+      appPassword);
 
   @JsonKey(ignore: true)
   @override
@@ -201,7 +310,12 @@ abstract class _Settings extends Settings {
       required final bool printEmptyFields,
       required final String userName,
       required final bool isAdmin,
-      required final bool isAdminModeEnabled}) = _$SettingsImpl;
+      required final bool isAdminModeEnabled,
+      final List<String>? adminsList,
+      final String? kommoSubdomain,
+      final String? kommoToken,
+      final int? kommoListId,
+      final String? appPassword}) = _$SettingsImpl;
   const _Settings._() : super._();
 
   @override
@@ -214,6 +328,16 @@ abstract class _Settings extends Settings {
   bool get isAdmin;
   @override
   bool get isAdminModeEnabled;
+  @override
+  List<String>? get adminsList;
+  @override
+  String? get kommoSubdomain;
+  @override
+  String? get kommoToken;
+  @override
+  int? get kommoListId;
+  @override
+  String? get appPassword;
   @override
   @JsonKey(ignore: true)
   _$$SettingsImplCopyWith<_$SettingsImpl> get copyWith =>

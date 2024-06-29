@@ -3,13 +3,25 @@ import 'package:window_meas/features/measurement/data/db/ds/meas_local_ds.dart';
 import 'package:window_meas/features/measurement/data/remote/ds/meas_remote_ds.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
 import 'package:window_meas/features/measurement/data/remote/model/measurement_dto.dart';
+import 'package:window_meas/features/profile/settings/data/ds/settings_local_ds.dart';
 
 @singleton
 class MeasurementRepository {
-  MeasurementRepository(this.local, this.remote);
+  MeasurementRepository(this.local, this.remote, this.settingsDS) {
+    settingsDS.watchSettings().listen((settings) {
+      if (settings != null) {
+        remote.updateWithSettings(
+          subdomain: settings.kommoSubdomain,
+          token: settings.kommoToken,
+          listId: settings.kommoListId,
+        );
+      }
+    });
+  }
 
   final MeasurementLocalDataSource local;
   final MeasurementRemoteDataSource remote;
+  final SettingsLocalDataSource settingsDS;
 
   Future<void> addLocalMeasurement(Measurement measurement) =>
       local.addMeasurement(measurement.toDB());

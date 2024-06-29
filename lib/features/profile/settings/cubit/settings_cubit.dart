@@ -43,6 +43,11 @@ class SettingsCubit extends Cubit<SettingsState> {
         userName: Settings.defaultUserName,
         isAdmin: Settings.defaultIsAdmin,
         isAdminModeEnabled: Settings.defaultIsAdminModeEnabled,
+        adminsList: null,
+        kommoSubdomain: null,
+        kommoToken: null,
+        kommoListId: null,
+        appPassword: null,
       ));
     }
     await FirebaseAuth.instance.signOut();

@@ -11,22 +11,23 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:isar/isar.dart' as _i4;
-import 'package:window_meas/common/register_module.dart' as _i20;
+import 'package:window_meas/common/register_module.dart' as _i21;
 import 'package:window_meas/features/auth/bloc/auth_cubit.dart' as _i15;
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart' as _i3;
-import 'package:window_meas/features/editor/bloc/editor_cubit.dart' as _i17;
+import 'package:window_meas/features/editor/bloc/editor_cubit.dart' as _i18;
 import 'package:window_meas/features/measurement/cubit/meas_details_cubit.dart'
-    as _i19;
+    as _i20;
 import 'package:window_meas/features/measurement/cubit/meas_list_cubit.dart'
-    as _i18;
+    as _i19;
 import 'package:window_meas/features/measurement/data/db/ds/meas_local_ds.dart'
     as _i9;
 import 'package:window_meas/features/measurement/data/domain/meas_repository.dart'
     as _i11;
 import 'package:window_meas/features/measurement/data/remote/ds/meas_remote_ds.dart'
     as _i6;
+import 'package:window_meas/features/passwall/bloc/passwall_cubit.dart' as _i16;
 import 'package:window_meas/features/profile/settings/cubit/settings_cubit.dart'
-    as _i16;
+    as _i17;
 import 'package:window_meas/features/profile/settings/data/ds/settings_local_ds.dart'
     as _i8;
 import 'package:window_meas/features/profile/settings/data/ds/settings_remote_ds.dart'
@@ -61,7 +62,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i5.TemplateRemoteDataSource>(
         () => _i5.TemplateRemoteDataSourceImpl());
     gh.singleton<_i6.MeasurementRemoteDataSource>(
-        () => const _i6.MeasurementRemoteDataSourceImpl());
+        () => _i6.MeasurementRemoteDataSourceImpl());
     gh.singleton<_i7.SettingsRemoteDataSource>(
         () => _i7.SettingsRemoteDataSourceImpl());
     gh.singleton<_i8.SettingsLocalDataSource>(
@@ -73,6 +74,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.singleton<_i11.MeasurementRepository>(() => _i11.MeasurementRepository(
           gh<_i9.MeasurementLocalDataSource>(),
           gh<_i6.MeasurementRemoteDataSource>(),
+          gh<_i8.SettingsLocalDataSource>(),
         ));
     gh.singleton<_i12.SettingsRepository>(() => _i12.SettingsRepository(
           gh<_i8.SettingsLocalDataSource>(),
@@ -86,15 +88,17 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i14.TemplateListCubit(gh<_i13.TemplateRepository>()));
     gh.factory<_i15.AuthCubit>(
         () => _i15.AuthCubit(gh<_i12.SettingsRepository>()));
-    gh.factory<_i16.SettingsCubit>(
-        () => _i16.SettingsCubit(gh<_i12.SettingsRepository>()));
-    gh.factory<_i17.EditorCubit>(
-        () => _i17.EditorCubit(gh<_i13.TemplateRepository>()));
-    gh.factory<_i18.MeasurementListCubit>(() => _i18.MeasurementListCubit(
+    gh.factory<_i16.PassWallCubit>(
+        () => _i16.PassWallCubit(gh<_i12.SettingsRepository>()));
+    gh.factory<_i17.SettingsCubit>(
+        () => _i17.SettingsCubit(gh<_i12.SettingsRepository>()));
+    gh.factory<_i18.EditorCubit>(
+        () => _i18.EditorCubit(gh<_i13.TemplateRepository>()));
+    gh.factory<_i19.MeasurementListCubit>(() => _i19.MeasurementListCubit(
           gh<_i11.MeasurementRepository>(),
           gh<_i12.SettingsRepository>(),
         ));
-    gh.factory<_i19.MeasurementDetailsCubit>(() => _i19.MeasurementDetailsCubit(
+    gh.factory<_i20.MeasurementDetailsCubit>(() => _i20.MeasurementDetailsCubit(
           gh<_i11.MeasurementRepository>(),
           gh<_i12.SettingsRepository>(),
         ));
@@ -102,4 +106,4 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$RegisterModule extends _i20.RegisterModule {}
+class _$RegisterModule extends _i21.RegisterModule {}
