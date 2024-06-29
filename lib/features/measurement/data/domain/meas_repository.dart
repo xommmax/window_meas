@@ -4,19 +4,13 @@ import 'package:window_meas/features/measurement/data/remote/ds/meas_remote_ds.d
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
 import 'package:window_meas/features/measurement/data/remote/model/measurement_dto.dart';
 import 'package:window_meas/features/profile/settings/data/ds/settings_local_ds.dart';
+import 'package:window_meas/features/profile/settings/data/model/settings_db.dart';
 
 @singleton
 class MeasurementRepository {
   MeasurementRepository(this.local, this.remote, this.settingsDS) {
-    settingsDS.watchSettings().listen((settings) {
-      if (settings != null) {
-        remote.updateWithSettings(
-          subdomain: settings.kommoSubdomain,
-          token: settings.kommoToken,
-          listId: settings.kommoListId,
-        );
-      }
-    });
+    settingsDS.watchSettings().listen(_updateWithSettings);
+    settingsDS.getSettings().then(_updateWithSettings);
   }
 
   final MeasurementLocalDataSource local;
@@ -59,4 +53,14 @@ class MeasurementRepository {
       local.watchMeasurements().map((list) => list.map((e) => Measurement.fromDB(e)).toList());
 
   Future<void> deleteMeasurement(String measurementId) => local.deleteMeasurement(measurementId);
+
+  void _updateWithSettings(SettingsDB? settings) {
+    if (settings != null) {
+      remote.updateWithSettings(
+        subdomain: settings.kommoSubdomain,
+        token: settings.kommoToken,
+        listId: settings.kommoListId,
+      );
+    }
+  }
 }
