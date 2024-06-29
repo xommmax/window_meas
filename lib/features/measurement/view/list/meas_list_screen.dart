@@ -27,7 +27,6 @@ class MeasurementListView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CompanyHeader(),
             Expanded(child: MeasurementList()),
           ],
         ),

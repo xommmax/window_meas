@@ -42,6 +42,8 @@ class AuthCubit extends EventCubit<AuthState> {
     }
   }
 
+  Future<void> signInWithApple() async {}
+
   Future<void> _saveAndEmitUser(User user) async {
     final settings = await _settingsRepository.getSettings();
     if (settings != null && user.displayName != null) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:window_meas/common/view/company_header.dart';
 import 'package:window_meas/l10n/localization.dart';
 
 class ScaffoldWithNavBar extends StatelessWidget {
@@ -10,6 +11,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        appBar: const CompanyAppBar(),
         body: navigationShell,
         bottomNavigationBar: BottomNavigationBar(
           iconSize: 20,

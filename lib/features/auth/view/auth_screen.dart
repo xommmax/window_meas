@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:window_meas/common/service_locator.dart';
+import 'package:window_meas/common/view/company_header.dart';
 import 'package:window_meas/features/auth/bloc/auth_cubit.dart';
 import 'package:window_meas/features/auth/bloc/auth_state.dart';
 import 'package:window_meas/features/auth/view/login_button.dart';
+import 'package:window_meas/l10n/localization.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({
@@ -42,6 +44,7 @@ class _AuthViewState extends State<AuthView> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        appBar: const CompanyAppBar(),
         body: SafeArea(
           child: BlocConsumer<AuthCubit, AuthState>(
             builder: (context, state) => Stack(
@@ -53,8 +56,14 @@ class _AuthViewState extends State<AuthView> {
                     children: [
                       LoginButton(
                         icon: FontAwesomeIcons.google,
-                        label: 'Sign In with Google',
+                        label: context.l10n.signInWithGoogle,
                         onPressed: context.read<AuthCubit>().signInWithGoogle,
+                      ),
+                      const SizedBox(height: 24),
+                      LoginButton(
+                        icon: FontAwesomeIcons.apple,
+                        label: context.l10n.signInWithApple,
+                        onPressed: context.read<AuthCubit>().signInWithApple,
                       ),
                     ],
                   ),
