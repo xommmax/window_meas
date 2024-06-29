@@ -41,7 +41,7 @@ class PositionInfoSection extends StatelessWidget {
             const SizedBox(height: 8),
             BlocBuilder<SettingsCubit, SettingsState>(
               builder: (context, state) => state.settings?.isAdminModeEnabled == true
-                  ? (measurement.pdfFile != null
+                  ? (measurement.pdfFile != null && measurement.pdfFile!.isNotEmpty
                       ? PdfItem(measurement.pdfFile!, measurement.remoteId.toString())
                       : const SizedBox.shrink())
                   : Column(
