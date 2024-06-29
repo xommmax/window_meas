@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
-import 'package:uuid/uuid.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/measurement/data/db/model/measurement_db.dart';
 import 'package:window_meas/features/measurement/data/params/assembly_type_enum.dart';
@@ -40,6 +39,7 @@ class Measurement with _$Measurement {
     required DateTime date,
     required Scheme? scheme,
     required String? photoPath,
+    required String? pdfFile,
 
     /* Custom Fields */
     // Client Info
@@ -132,6 +132,9 @@ class Measurement with _$Measurement {
         id: id,
         date: date,
         measurer: measurer,
+        scheme: null,
+        photoPath: null,
+        pdfFile: null,
         clientName: '',
         city: '',
         district: '',
@@ -201,8 +204,6 @@ class Measurement with _$Measurement {
         howDiscovered: '',
         residentialComplex: '',
         housingCoopNumber: '',
-        scheme: null,
-        photoPath: null,
       );
 
   MeasurementDB toDB() => MeasurementDB()
@@ -281,7 +282,8 @@ class Measurement with _$Measurement {
     ..housingCoopNumber = housingCoopNumber
     ..scheme = scheme?.toDB()
     ..measurer = measurer
-    ..photoPath = photoPath;
+    ..photoPath = photoPath
+    ..pdfFile = pdfFile;
 
   static Measurement fromDB(MeasurementDB db) => Measurement(
         localId: db.localId,
@@ -360,6 +362,7 @@ class Measurement with _$Measurement {
         scheme: db.scheme != null ? Scheme.fromDB(db.scheme!) : null,
         measurer: db.measurer,
         photoPath: db.photoPath,
+        pdfFile: db.pdfFile,
       );
 
   String get name =>

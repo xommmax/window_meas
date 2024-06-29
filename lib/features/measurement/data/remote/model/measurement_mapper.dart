@@ -27,14 +27,14 @@ import 'package:window_meas/features/measurement/data/params/windowsill_type_enu
 /* ---------------------------------------------------------*/
 /* ----------------- DOMAIN TO DTO MAPPER ----------------- */
 /* ---------------------------------------------------------*/
-MeasurementDTO convertFromDomain(Measurement measurement, String pdfFilePath) => MeasurementDTO(
+MeasurementDTO convertFromDomain(Measurement measurement) => MeasurementDTO(
       id: measurement.remoteId,
       requestId: measurement.id,
       name: measurement.name,
       createdAt: measurement.date.millisecondsSinceEpoch ~/ 1000,
       updatedAt: DateTime.now().millisecondsSinceEpoch ~/ 1000,
       customFieldsValues: [
-        _urlR(FieldToCode.pdfFile, pdfFilePath),
+        if (measurement.pdfFile != null) _urlR(FieldToCode.pdfFile, measurement.pdfFile!),
         _textR(FieldToCode.clientName, measurement.clientName),
         _textR(FieldToCode.cost, measurement.cost),
         _textR(FieldToCode.prepayment, measurement.prepayment),
@@ -150,15 +150,15 @@ CustomFieldDTO _urlR(FieldToCode mapper, String value) => CustomFieldDTO(
 Measurement convertToDomain(MeasurementDTO dto) => Measurement(
       // id
       // localId
-      // scheme
-      // photoPath
+      id: '',
+      localId: null,
       scheme: null,
       photoPath: null,
-      id: '',
       remoteId: dto.id,
       date: dto.createdAt != null
           ? DateTime.fromMillisecondsSinceEpoch(dto.createdAt! * 1000)
           : DateTime.now(),
+      pdfFile: _textD(FieldToCode.pdfFile, dto.customFieldsValues),
       clientName: _textD(FieldToCode.clientName, dto.customFieldsValues),
       cost: _textD(FieldToCode.cost, dto.customFieldsValues),
       prepayment: _textD(FieldToCode.prepayment, dto.customFieldsValues),

@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:open_file/open_file.dart';
+import 'package:path/path.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:window_meas/common/ext/cubit_ext.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_state.dart';
@@ -83,8 +85,10 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
     try {
       emit(state.copyWith(isLoading: true));
       final file = await _getPdfFile();
+      final fileRemotePath = await _addFileToCDN(file);
+      final measurement = state.measurement!.copyWith(pdfFile: fileRemotePath);
 
-      await _measRepository.addRemoteMeasurement(state.measurement!, file);
+      await _measRepository.addRemoteMeasurement(measurement);
       emitEvent(state.copyWith(message: Localization.l10n.successfullySentToCrm));
     } catch (e) {
       emitEvent(state.copyWith(message: Localization.l10n.errorCannotSendToCrm));
@@ -132,6 +136,18 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
       final updatedMeasurement = state.measurement!.copyWith(photoPath: file.path);
       await _measRepository.updateMeasurement(updatedMeasurement);
       emit(state.copyWith(measurement: updatedMeasurement));
+    }
+  }
+
+  Future<String> _addFileToCDN(File file) async {
+    final ref = FirebaseStorage.instance.ref('measurements/pdf').child(basename(file.path));
+    try {
+      final url = await ref.getDownloadURL();
+      return url;
+    } catch (e) {
+      await ref.putFile(file);
+      final url = await ref.getDownloadURL();
+      return url;
     }
   }
 }

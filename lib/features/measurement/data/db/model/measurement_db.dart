@@ -191,4 +191,5 @@ class MeasurementDB {
   @Default('')
   late String measurer;
   late String? photoPath;
+  late String? pdfFile;
 }

@@ -22,8 +22,7 @@ class MeasurementDTO with _$MeasurementDTO {
 
   factory MeasurementDTO.fromJson(Map<String, dynamic> json) => _$MeasurementDTOFromJson(json);
 
-  factory MeasurementDTO.fromDomain(Measurement measurement, String pdfFilePath) =>
-      convertFromDomain(measurement, pdfFilePath);
+  factory MeasurementDTO.fromDomain(Measurement measurement) => convertFromDomain(measurement);
 
   Measurement toDomain() => convertToDomain(this);
 }

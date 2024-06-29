@@ -12,10 +12,13 @@ import 'package:window_meas/features/measurement/data/params/windowsill_connecto
 import 'package:window_meas/features/measurement/data/params/windowsill_depth_enum.dart';
 import 'package:window_meas/features/measurement/data/params/windowsill_type_enum.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/glass_unit.dart';
+import 'package:window_meas/features/measurement/view/details/widgets/items/pdf_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/photo_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/scheme_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/sections/expander_section.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/subcategory.dart';
+import 'package:window_meas/features/profile/settings/cubit/settings_cubit.dart';
+import 'package:window_meas/features/profile/settings/cubit/settings_state.dart';
 import 'package:window_meas/l10n/localization.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_cubit.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
@@ -36,9 +39,20 @@ class PositionInfoSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 8),
-            SchemeItem(measurement),
-            const Divider(),
-            PhotoItem(measurement),
+            BlocBuilder<SettingsCubit, SettingsState>(
+              builder: (context, state) => state.settings?.isAdminModeEnabled == true
+                  ? (measurement.pdfFile != null
+                      ? PdfItem(measurement.pdfFile!, measurement.remoteId.toString())
+                      : const SizedBox.shrink())
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SchemeItem(measurement),
+                        const Divider(),
+                        PhotoItem(measurement),
+                      ],
+                    ),
+            ),
             const Divider(),
             TextItem(title: context.l10n.quarter),
             const Divider(),

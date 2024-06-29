@@ -21,8 +21,8 @@ mixin _$Measurement {
   String get id => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   Scheme? get scheme => throw _privateConstructorUsedError;
-  String? get photoPath =>
-      throw _privateConstructorUsedError; /* Custom Fields */
+  String? get photoPath => throw _privateConstructorUsedError;
+  String? get pdfFile => throw _privateConstructorUsedError; /* Custom Fields */
 // Client Info
   String get clientName => throw _privateConstructorUsedError;
   String get cost => throw _privateConstructorUsedError;
@@ -118,6 +118,7 @@ abstract class $MeasurementCopyWith<$Res> {
       DateTime date,
       Scheme? scheme,
       String? photoPath,
+      String? pdfFile,
       String clientName,
       String cost,
       String prepayment,
@@ -212,6 +213,7 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? date = null,
     Object? scheme = freezed,
     Object? photoPath = freezed,
+    Object? pdfFile = freezed,
     Object? clientName = null,
     Object? cost = null,
     Object? prepayment = null,
@@ -307,6 +309,10 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
       photoPath: freezed == photoPath
           ? _value.photoPath
           : photoPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pdfFile: freezed == pdfFile
+          ? _value.pdfFile
+          : pdfFile // ignore: cast_nullable_to_non_nullable
               as String?,
       clientName: null == clientName
           ? _value.clientName
@@ -627,6 +633,7 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       DateTime date,
       Scheme? scheme,
       String? photoPath,
+      String? pdfFile,
       String clientName,
       String cost,
       String prepayment,
@@ -721,6 +728,7 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? date = null,
     Object? scheme = freezed,
     Object? photoPath = freezed,
+    Object? pdfFile = freezed,
     Object? clientName = null,
     Object? cost = null,
     Object? prepayment = null,
@@ -816,6 +824,10 @@ class __$$MeasurementImplCopyWithImpl<$Res>
       photoPath: freezed == photoPath
           ? _value.photoPath
           : photoPath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pdfFile: freezed == pdfFile
+          ? _value.pdfFile
+          : pdfFile // ignore: cast_nullable_to_non_nullable
               as String?,
       clientName: null == clientName
           ? _value.clientName
@@ -1111,6 +1123,7 @@ class _$MeasurementImpl extends _Measurement {
       required this.date,
       required this.scheme,
       required this.photoPath,
+      required this.pdfFile,
       required this.clientName,
       required this.cost,
       required this.prepayment,
@@ -1195,6 +1208,8 @@ class _$MeasurementImpl extends _Measurement {
   final Scheme? scheme;
   @override
   final String? photoPath;
+  @override
+  final String? pdfFile;
 /* Custom Fields */
 // Client Info
   @override
@@ -1344,7 +1359,7 @@ class _$MeasurementImpl extends _Measurement {
 
   @override
   String toString() {
-    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, scheme: $scheme, photoPath: $photoPath, clientName: $clientName, cost: $cost, prepayment: $prepayment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, howDiscovered: $howDiscovered, comment: $comment, measurer: $measurer, city: $city, district: $district, street: $street, building: $building, residentialComplex: $residentialComplex, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, housingCoopNumber: $housingCoopNumber, buildingType: $buildingType, flatStatus: $flatStatus, elevator: $elevator, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, garbageRemoval: $garbageRemoval, sealing: $sealing, vacuumCleaner: $vacuumCleaner, estimatedAssemblyTime: $estimatedAssemblyTime, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorOpeningType: $doorOpeningType, doorstep: $doorstep, doorstepType: $doorstepType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, expanderOption: $expanderOption, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation)';
+    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, scheme: $scheme, photoPath: $photoPath, pdfFile: $pdfFile, clientName: $clientName, cost: $cost, prepayment: $prepayment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, howDiscovered: $howDiscovered, comment: $comment, measurer: $measurer, city: $city, district: $district, street: $street, building: $building, residentialComplex: $residentialComplex, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, housingCoopNumber: $housingCoopNumber, buildingType: $buildingType, flatStatus: $flatStatus, elevator: $elevator, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, garbageRemoval: $garbageRemoval, sealing: $sealing, vacuumCleaner: $vacuumCleaner, estimatedAssemblyTime: $estimatedAssemblyTime, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorOpeningType: $doorOpeningType, doorstep: $doorstep, doorstepType: $doorstepType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, expanderOption: $expanderOption, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation)';
   }
 
   @override
@@ -1360,6 +1375,7 @@ class _$MeasurementImpl extends _Measurement {
             (identical(other.scheme, scheme) || other.scheme == scheme) &&
             (identical(other.photoPath, photoPath) ||
                 other.photoPath == photoPath) &&
+            (identical(other.pdfFile, pdfFile) || other.pdfFile == pdfFile) &&
             (identical(other.clientName, clientName) ||
                 other.clientName == clientName) &&
             (identical(other.cost, cost) || other.cost == cost) &&
@@ -1482,6 +1498,7 @@ class _$MeasurementImpl extends _Measurement {
         date,
         scheme,
         photoPath,
+        pdfFile,
         clientName,
         cost,
         prepayment,
@@ -1569,6 +1586,7 @@ abstract class _Measurement extends Measurement {
       required final DateTime date,
       required final Scheme? scheme,
       required final String? photoPath,
+      required final String? pdfFile,
       required final String clientName,
       required final String cost,
       required final String prepayment,
@@ -1653,6 +1671,8 @@ abstract class _Measurement extends Measurement {
   Scheme? get scheme;
   @override
   String? get photoPath;
+  @override
+  String? get pdfFile;
   @override /* Custom Fields */
 // Client Info
   String get clientName;
