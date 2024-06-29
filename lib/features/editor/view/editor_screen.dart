@@ -7,6 +7,7 @@ import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/view/drawing_view.dart';
 import 'package:window_meas/features/editor/view/editor_buttons.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
+import 'package:window_meas/features/measurement/view/details/confirmation_dialog.dart';
 import 'package:window_meas/features/templates/data/model/template.dart';
 import 'package:window_meas/l10n/localization.dart';
 
@@ -51,16 +52,12 @@ class EditorView extends StatelessWidget {
         canPop: false,
         onPopInvoked: (didPop) {
           if (!didPop) {
-            final scheme = context.read<DrawingCubit>().state.scheme;
-            Navigator.pop(context, scheme.isEmpty ? null : scheme);
+            onQuit(context);
           }
         },
         child: Scaffold(
           appBar: AppBar(
-            leading: BackButton(onPressed: () {
-              final scheme = context.read<DrawingCubit>().state.scheme;
-              Navigator.pop(context, scheme.isEmpty ? null : scheme);
-            }),
+            leading: BackButton(onPressed: () => onQuit(context)),
             title: Text(context.l10n.editor),
             actions: [
               if (editorScreenMode == EditorScreenMode.createTemplate)
@@ -87,4 +84,20 @@ class EditorView extends StatelessWidget {
           ),
         ),
       );
+
+  Future<void> onQuit(BuildContext context) async {
+    if (editorScreenMode == EditorScreenMode.createTemplate) {
+      final shouldQuit = await ConfirmationDialog.show(
+        context,
+        context.l10n.quit,
+        context.l10n.quitDesc,
+      );
+      if (shouldQuit && context.mounted) {
+        Navigator.pop(context);
+      }
+    } else {
+      final scheme = context.read<DrawingCubit>().state.scheme;
+      Navigator.pop(context, scheme.isEmpty ? null : scheme);
+    }
+  }
 }

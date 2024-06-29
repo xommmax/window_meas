@@ -189,5 +189,7 @@
   "errorTryAgain": "Error. Try again",
   "enterPassword": "Enter password",
   "next": "Next",
-  "wrongPassword": "Wrong password"
+  "wrongPassword": "Wrong password",
+  "quit": "Quit",
+  "quitDesc": "Are you sure you want to quit?"
 }
