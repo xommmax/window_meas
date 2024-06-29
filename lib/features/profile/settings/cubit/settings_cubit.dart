@@ -39,10 +39,13 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   Future<void> logout() async {
     if (state.settings != null) {
-      await updateSettings(state.settings!.copyWith(
+      await updateSettings(Settings(
+        id: state.settings!.id,
+        printEmptyFields: state.settings!.printEmptyFields,
         userName: Settings.defaultUserName,
         isAdmin: Settings.defaultIsAdmin,
         isAdminModeEnabled: Settings.defaultIsAdminModeEnabled,
+        isPasswordEntered: Settings.defaultIsPasswordEntered,
         adminsList: null,
         kommoSubdomain: null,
         kommoToken: null,

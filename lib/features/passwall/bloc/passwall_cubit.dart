@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:window_meas/features/passwall/bloc/passwall_state.dart';
@@ -17,6 +18,8 @@ class PassWallCubit extends Cubit<PassWallState> {
 
       final adminsField = vars.docs.firstWhere((e) => e.id == 'admins').data();
       final adminsList = (adminsField['admins'] as List).cast<String>();
+      final userEmail = FirebaseAuth.instance.currentUser?.email;
+      final isAdmin = adminsList.contains(userEmail);
 
       final kommoField = vars.docs.firstWhere((e) => e.id == 'kommo').data();
       final kommoSubdomain = kommoField['subdomain'] as String;
@@ -29,6 +32,7 @@ class PassWallCubit extends Cubit<PassWallState> {
       final settings = await _settingsRepository.getSettings();
       if (settings != null) {
         await _settingsRepository.saveSettings(settings.copyWith(
+          isAdmin: isAdmin,
           adminsList: adminsList,
           kommoSubdomain: kommoSubdomain,
           kommoToken: kommoToken,

@@ -64,7 +64,7 @@ class SettingsOptionList extends StatelessWidget {
               context.read<SettingsCubit>().updateSettings(settings.copyWith(userName: value)),
         ),
         const Divider(),
-        if (true) ...[
+        if (settings.isAdmin) ...[
           SwitchItem(
             title: context.l10n.adminMode,
             value: settings.isAdminModeEnabled,

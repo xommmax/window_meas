@@ -20,6 +20,7 @@ class AuthCubit extends EventCubit<AuthState> {
     emit(state.copyWith(
       user: user,
       isPasswordEntered: settings?.isPasswordEntered == true,
+      isLoading: false,
     ));
   }
 
