@@ -55,8 +55,7 @@ class ClientInfoSection extends StatelessWidget {
                 value: measurement.phoneNumberMain,
                 onChanged: (s) => context
                     .read<MeasurementDetailsCubit>()
-                    .updateMeasurement(
-                        measurement.copyWith(phoneNumberMain: s)),
+                    .updateMeasurement(measurement.copyWith(phoneNumberMain: s)),
                 keyboardType: TextInputType.phone,
               ),
               const Divider(),
@@ -65,8 +64,7 @@ class ClientInfoSection extends StatelessWidget {
                 value: measurement.phoneNumberAdditional,
                 onChanged: (s) => context
                     .read<MeasurementDetailsCubit>()
-                    .updateMeasurement(
-                        measurement.copyWith(phoneNumberAdditional: s)),
+                    .updateMeasurement(measurement.copyWith(phoneNumberAdditional: s)),
                 keyboardType: TextInputType.phone,
               ),
               const Divider(),
@@ -85,8 +83,16 @@ class ClientInfoSection extends StatelessWidget {
               onChanged: (s) => context
                   .read<MeasurementDetailsCubit>()
                   .updateMeasurement(measurement.copyWith(comment: s)),
-                  maxLines: 3,
-                  keyboardType: TextInputType.multiline,
+              maxLines: 3,
+              keyboardType: TextInputType.multiline,
+            ),
+            const Divider(),
+            InputItem(
+              title: context.l10n.measurer,
+              value: measurement.measurer,
+              onChanged: (s) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updateMeasurement(measurement.copyWith(measurer: s)),
             ),
             const SizedBox(height: 8),
           ],

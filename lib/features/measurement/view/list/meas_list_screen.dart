@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:window_meas/common/view/company_header.dart';
+import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
 import 'package:window_meas/features/measurement/view/list/meas_list_item.dart';
 import 'package:window_meas/common/service_locator.dart';
 import 'package:window_meas/common/view/colors.dart';
@@ -13,7 +13,7 @@ class MeasurementListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider<MeasurementListCubit>(
-        create: (context) => getIt()..watchMeasurements(),
+        create: (context) => getIt(),
         child: const MeasurementListView(),
       );
 }
@@ -22,40 +22,49 @@ class MeasurementListView extends StatelessWidget {
   const MeasurementListView({super.key});
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-      body: const SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(child: MeasurementList()),
-          ],
+  Widget build(BuildContext context) => BlocBuilder<MeasurementListCubit, MeasurementListState>(
+        builder: (context, state) => Scaffold(
+          body: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(child: _MeasurementList(state.measurements, state.isAdminModeEnabled)),
+              ],
+            ),
+          ),
+          floatingActionButton: !state.isAdminModeEnabled
+              ? FloatingActionButton(
+                  onPressed: () => _addMeasurement(context),
+                  backgroundColor: AppColors.primary,
+                  foregroundColor: Colors.white,
+                  child: const Icon(Icons.add),
+                )
+              : null,
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _addMeasurement(context),
-        backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-      ));
+      );
 
   Future<void> _addMeasurement(BuildContext context) async {
-    final id = await context.read<MeasurementListCubit>().createMeasurement();
+    final measurement = await context.read<MeasurementListCubit>().createMeasurement();
 
     if (context.mounted) {
-      context.push('/meas_details/$id');
+      context.push(
+        '/meas_details',
+        extra: {'measurement': measurement},
+      );
     }
   }
 }
 
-class MeasurementList extends StatelessWidget {
-  const MeasurementList({super.key});
+class _MeasurementList extends StatelessWidget {
+  const _MeasurementList(this.measurements, this.isAdminModeEnabled);
+
+  final List<Measurement> measurements;
+  final bool isAdminModeEnabled;
 
   @override
-  Widget build(BuildContext context) => BlocBuilder<MeasurementListCubit, MeasurementListState>(
-        builder: (context, state) => ListView.builder(
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
-          itemCount: state.measurements.length,
-          itemBuilder: (context, index) => MeasurementItem(state.measurements[index]),
-        ),
+  Widget build(BuildContext context) => ListView.builder(
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
+        itemCount: measurements.length,
+        itemBuilder: (context, index) => MeasurementItem(measurements[index], isAdminModeEnabled),
       );
 }

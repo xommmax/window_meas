@@ -8,35 +8,46 @@ import 'package:window_meas/l10n/localization.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_cubit.dart';
 
 class MeasurementDetailsAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MeasurementDetailsAppBar(this.measurement, {super.key});
+  const MeasurementDetailsAppBar(
+    this.measurement,
+    this.isAdminModeEnabled, {
+    super.key,
+  });
 
   final Measurement? measurement;
+  final bool isAdminModeEnabled;
 
   @override
-  Widget build(BuildContext context) => AppBar(
-        title: Text(
-          '${context.l10n.measurement} №${measurement?.localId?.toString().padLeft(4, '0') ?? ''}',
+  Widget build(BuildContext context) {
+    final id = !isAdminModeEnabled
+        ? measurement?.localId?.toString().padLeft(4, '0') ?? ''
+        : measurement?.remoteId?.toString() ?? '';
+
+    return AppBar(
+      title: Text(
+        '${context.l10n.measurement} №$id',
+      ),
+      actions: !isAdminModeEnabled ? [
+        PopupMenuButton<String>(
+          onSelected: (s) {
+            if (s == context.l10n.generatePdf) {
+              _generatePdf(context);
+            } else if (s == context.l10n.sendToCrm) {
+              _sendToCrm(context);
+            } else if (s == context.l10n.delete) {
+              _delete(context);
+            }
+          },
+          icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
+          itemBuilder: (BuildContext context) => [
+            context.l10n.generatePdf,
+            context.l10n.sendToCrm,
+            context.l10n.delete,
+          ].map((e) => PopupMenuItem<String>(value: e, child: Text(e))).toList(),
         ),
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: (s) {
-              if (s == context.l10n.generatePdf) {
-                _generatePdf(context);
-              } else if (s == context.l10n.sendToCrm) {
-                _sendToCrm(context);
-              } else if (s == context.l10n.delete) {
-                _delete(context);
-              }
-            },
-            icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
-            itemBuilder: (BuildContext context) => [
-              context.l10n.generatePdf,
-              context.l10n.sendToCrm,
-              context.l10n.delete,
-            ].map((e) => PopupMenuItem<String>(value: e, child: Text(e))).toList(),
-          ),
-        ],
-      );
+      ] : null,
+    );
+  }
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

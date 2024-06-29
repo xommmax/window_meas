@@ -181,5 +181,9 @@
   "errorCannotLogin": "Error logging in",
   "userName": "User name",
   "logout": "Logout",
-  "logoutDesc": "Are you sure you want to log out?"
+  "logoutDesc": "Are you sure you want to log out?",
+  "signInWithGoogle": "Sign in with Google",
+  "signInWithApple": "Sign in with Apple",
+  "adminMode": "Admin mode",
+  "admin": "Admin"
 }

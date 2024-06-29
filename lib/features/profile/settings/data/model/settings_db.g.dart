@@ -17,13 +17,23 @@ const SettingsDBSchema = CollectionSchema(
   name: r'SettingsDB',
   id: 7935754647244593775,
   properties: {
-    r'printEmptyFields': PropertySchema(
+    r'isAdmin': PropertySchema(
       id: 0,
+      name: r'isAdmin',
+      type: IsarType.bool,
+    ),
+    r'isAdminModeEnabled': PropertySchema(
+      id: 1,
+      name: r'isAdminModeEnabled',
+      type: IsarType.bool,
+    ),
+    r'printEmptyFields': PropertySchema(
+      id: 2,
       name: r'printEmptyFields',
       type: IsarType.bool,
     ),
     r'userName': PropertySchema(
-      id: 1,
+      id: 3,
       name: r'userName',
       type: IsarType.string,
     )
@@ -58,8 +68,10 @@ void _settingsDBSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeBool(offsets[0], object.printEmptyFields);
-  writer.writeString(offsets[1], object.userName);
+  writer.writeBool(offsets[0], object.isAdmin);
+  writer.writeBool(offsets[1], object.isAdminModeEnabled);
+  writer.writeBool(offsets[2], object.printEmptyFields);
+  writer.writeString(offsets[3], object.userName);
 }
 
 SettingsDB _settingsDBDeserialize(
@@ -70,8 +82,10 @@ SettingsDB _settingsDBDeserialize(
 ) {
   final object = SettingsDB();
   object.id = id;
-  object.printEmptyFields = reader.readBool(offsets[0]);
-  object.userName = reader.readString(offsets[1]);
+  object.isAdmin = reader.readBool(offsets[0]);
+  object.isAdminModeEnabled = reader.readBool(offsets[1]);
+  object.printEmptyFields = reader.readBool(offsets[2]);
+  object.userName = reader.readString(offsets[3]);
   return object;
 }
 
@@ -85,6 +99,10 @@ P _settingsDBDeserializeProp<P>(
     case 0:
       return (reader.readBool(offset)) as P;
     case 1:
+      return (reader.readBool(offset)) as P;
+    case 2:
+      return (reader.readBool(offset)) as P;
+    case 3:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -231,6 +249,26 @@ extension SettingsDBQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition> isAdminEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isAdmin',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      isAdminModeEnabledEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isAdminModeEnabled',
+        value: value,
       ));
     });
   }
@@ -388,6 +426,32 @@ extension SettingsDBQueryLinks
 
 extension SettingsDBQuerySortBy
     on QueryBuilder<SettingsDB, SettingsDB, QSortBy> {
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> sortByIsAdmin() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isAdmin', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> sortByIsAdminDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isAdmin', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy>
+      sortByIsAdminModeEnabled() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isAdminModeEnabled', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy>
+      sortByIsAdminModeEnabledDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isAdminModeEnabled', Sort.desc);
+    });
+  }
+
   QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> sortByPrintEmptyFields() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'printEmptyFields', Sort.asc);
@@ -428,6 +492,32 @@ extension SettingsDBQuerySortThenBy
     });
   }
 
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> thenByIsAdmin() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isAdmin', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> thenByIsAdminDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isAdmin', Sort.desc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy>
+      thenByIsAdminModeEnabled() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isAdminModeEnabled', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy>
+      thenByIsAdminModeEnabledDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isAdminModeEnabled', Sort.desc);
+    });
+  }
+
   QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> thenByPrintEmptyFields() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'printEmptyFields', Sort.asc);
@@ -456,6 +546,19 @@ extension SettingsDBQuerySortThenBy
 
 extension SettingsDBQueryWhereDistinct
     on QueryBuilder<SettingsDB, SettingsDB, QDistinct> {
+  QueryBuilder<SettingsDB, SettingsDB, QDistinct> distinctByIsAdmin() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isAdmin');
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QDistinct>
+      distinctByIsAdminModeEnabled() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isAdminModeEnabled');
+    });
+  }
+
   QueryBuilder<SettingsDB, SettingsDB, QDistinct> distinctByPrintEmptyFields() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'printEmptyFields');
@@ -475,6 +578,19 @@ extension SettingsDBQueryProperty
   QueryBuilder<SettingsDB, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<SettingsDB, bool, QQueryOperations> isAdminProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isAdmin');
+    });
+  }
+
+  QueryBuilder<SettingsDB, bool, QQueryOperations>
+      isAdminModeEnabledProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isAdminModeEnabled');
     });
   }
 

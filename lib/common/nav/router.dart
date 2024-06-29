@@ -58,8 +58,11 @@ final appRouter = GoRouter(
       },
     ),
     GoRoute(
-      path: '/meas_details/:id',
-      builder: (context, state) => MeasurementDetailsScreen(state.pathParameters['id']!),
+      path: '/meas_details',
+      builder: (context, state) {
+        final Map extra = state.extra as Map? ?? {};
+        return MeasurementDetailsScreen(extra['measurement']);
+      },
     ),
     GoRoute(
       path: '/template_list',

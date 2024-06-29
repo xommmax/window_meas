@@ -11,4 +11,8 @@ class SettingsDB {
   late bool printEmptyFields;
   @Default(Settings.defaultUserName)
   late String userName;
+  @Default(Settings.defaultIsAdmin)
+  late bool isAdmin;
+  @Default(Settings.defaultIsAdminModeEnabled)
+  late bool isAdminModeEnabled;
 }

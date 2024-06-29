@@ -64,6 +64,16 @@ class SettingsOptionList extends StatelessWidget {
               context.read<SettingsCubit>().updateSettings(settings.copyWith(userName: value)),
         ),
         const Divider(),
+        if (true) ...[
+          SwitchItem(
+            title: context.l10n.adminMode,
+            value: settings.isAdminModeEnabled,
+            onChanged: (value) => context
+                .read<SettingsCubit>()
+                .updateSettings(settings.copyWith(isAdminModeEnabled: value)),
+          ),
+          const Divider(),
+        ],
         GestureDetector(
           onTap: () => _logout(context),
           child: Padding(

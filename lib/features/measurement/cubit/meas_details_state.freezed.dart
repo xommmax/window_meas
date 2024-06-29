@@ -19,6 +19,7 @@ mixin _$MeasurementDetailsState {
   Measurement? get measurement => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
+  bool get isAdminModeEnabled => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementDetailsStateCopyWith<MeasurementDetailsState> get copyWith =>
@@ -31,7 +32,11 @@ abstract class $MeasurementDetailsStateCopyWith<$Res> {
           $Res Function(MeasurementDetailsState) then) =
       _$MeasurementDetailsStateCopyWithImpl<$Res, MeasurementDetailsState>;
   @useResult
-  $Res call({Measurement? measurement, bool isLoading, String? message});
+  $Res call(
+      {Measurement? measurement,
+      bool isLoading,
+      String? message,
+      bool isAdminModeEnabled});
 
   $MeasurementCopyWith<$Res>? get measurement;
 }
@@ -53,6 +58,7 @@ class _$MeasurementDetailsStateCopyWithImpl<$Res,
     Object? measurement = freezed,
     Object? isLoading = null,
     Object? message = freezed,
+    Object? isAdminModeEnabled = null,
   }) {
     return _then(_value.copyWith(
       measurement: freezed == measurement
@@ -67,6 +73,10 @@ class _$MeasurementDetailsStateCopyWithImpl<$Res,
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      isAdminModeEnabled: null == isAdminModeEnabled
+          ? _value.isAdminModeEnabled
+          : isAdminModeEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -92,7 +102,11 @@ abstract class _$$MeasurementDetailsStateImplCopyWith<$Res>
       __$$MeasurementDetailsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Measurement? measurement, bool isLoading, String? message});
+  $Res call(
+      {Measurement? measurement,
+      bool isLoading,
+      String? message,
+      bool isAdminModeEnabled});
 
   @override
   $MeasurementCopyWith<$Res>? get measurement;
@@ -114,6 +128,7 @@ class __$$MeasurementDetailsStateImplCopyWithImpl<$Res>
     Object? measurement = freezed,
     Object? isLoading = null,
     Object? message = freezed,
+    Object? isAdminModeEnabled = null,
   }) {
     return _then(_$MeasurementDetailsStateImpl(
       measurement: freezed == measurement
@@ -128,6 +143,10 @@ class __$$MeasurementDetailsStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      isAdminModeEnabled: null == isAdminModeEnabled
+          ? _value.isAdminModeEnabled
+          : isAdminModeEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -136,7 +155,10 @@ class __$$MeasurementDetailsStateImplCopyWithImpl<$Res>
 
 class _$MeasurementDetailsStateImpl extends _MeasurementDetailsState {
   const _$MeasurementDetailsStateImpl(
-      {required this.measurement, this.isLoading = false, this.message})
+      {required this.measurement,
+      this.isLoading = false,
+      this.message,
+      required this.isAdminModeEnabled})
       : super._();
 
   @override
@@ -146,10 +168,12 @@ class _$MeasurementDetailsStateImpl extends _MeasurementDetailsState {
   final bool isLoading;
   @override
   final String? message;
+  @override
+  final bool isAdminModeEnabled;
 
   @override
   String toString() {
-    return 'MeasurementDetailsState(measurement: $measurement, isLoading: $isLoading, message: $message)';
+    return 'MeasurementDetailsState(measurement: $measurement, isLoading: $isLoading, message: $message, isAdminModeEnabled: $isAdminModeEnabled)';
   }
 
   @override
@@ -161,11 +185,14 @@ class _$MeasurementDetailsStateImpl extends _MeasurementDetailsState {
                 other.measurement == measurement) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.isAdminModeEnabled, isAdminModeEnabled) ||
+                other.isAdminModeEnabled == isAdminModeEnabled));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, measurement, isLoading, message);
+  int get hashCode => Object.hash(
+      runtimeType, measurement, isLoading, message, isAdminModeEnabled);
 
   @JsonKey(ignore: true)
   @override
@@ -179,7 +206,8 @@ abstract class _MeasurementDetailsState extends MeasurementDetailsState {
   const factory _MeasurementDetailsState(
       {required final Measurement? measurement,
       final bool isLoading,
-      final String? message}) = _$MeasurementDetailsStateImpl;
+      final String? message,
+      required final bool isAdminModeEnabled}) = _$MeasurementDetailsStateImpl;
   const _MeasurementDetailsState._() : super._();
 
   @override
@@ -188,6 +216,8 @@ abstract class _MeasurementDetailsState extends MeasurementDetailsState {
   bool get isLoading;
   @override
   String? get message;
+  @override
+  bool get isAdminModeEnabled;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementDetailsStateImplCopyWith<_$MeasurementDetailsStateImpl>

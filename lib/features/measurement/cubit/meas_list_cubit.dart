@@ -14,13 +14,29 @@ class MeasurementListCubit extends Cubit<MeasurementListState> {
   MeasurementListCubit(
     this._measRepository,
     this._settingsRepository,
-  ) : super(MeasurementListState.empty());
+  ) : super(MeasurementListState.empty()) {
+    _settingsSubscription = _settingsRepository.watchSettings().listen((settings) {
+      if (settings?.isAdminModeEnabled != null &&
+          state.isAdminModeEnabled != settings!.isAdminModeEnabled) {
+        emit(state.copyWith(isAdminModeEnabled: settings.isAdminModeEnabled));
+        _getMeasurements(settings.isAdminModeEnabled);
+      }
+    });
+
+    _settingsRepository.getSettings().then((settings) {
+      if (settings?.isAdminModeEnabled != null) {
+        emit(state.copyWith(isAdminModeEnabled: settings!.isAdminModeEnabled));
+      }
+      _getMeasurements(settings?.isAdminModeEnabled ?? state.isAdminModeEnabled);
+    });
+  }
 
   final MeasurementRepository _measRepository;
   final SettingsRepository _settingsRepository;
-  StreamSubscription? measSubscription;
+  StreamSubscription? _measSubscription;
+  StreamSubscription? _settingsSubscription;
 
-  Future<String> createMeasurement() async {
+  Future<Measurement> createMeasurement() async {
     final settings = await _settingsRepository.getSettings();
     final measurer = settings?.userName ?? Settings.defaultUserName;
 
@@ -31,21 +47,36 @@ class MeasurementListCubit extends Cubit<MeasurementListState> {
     );
 
     await _measRepository.addLocalMeasurement(measurement);
-
-    return measurement.id;
+    final localMeasurement = await _measRepository.getLocalMeasurement(measurement.id);
+    return localMeasurement!;
   }
 
-  void watchMeasurements() async {
-    measSubscription = _measRepository.watchMeasurements().listen((measurements) {
-      emit(MeasurementListState(measurements: measurements));
+  Future<void> _getMeasurements(bool isAdminModeEnabled) async {
+    if (isAdminModeEnabled) {
+      await _getRemoteMeasurements();
+    } else {
+      await _watchLocalMeasurements();
+    }
+  }
+
+  Future<void> _watchLocalMeasurements() async {
+    await _measSubscription?.cancel();
+    _measSubscription = _measRepository.watchMeasurements().listen((measurements) {
+      emit(state.copyWith(measurements: measurements));
     });
     final measurements = await _measRepository.getLocalMeasurements();
-    emit(MeasurementListState(measurements: measurements));
+    emit(state.copyWith(measurements: measurements));
+  }
+
+  Future<void> _getRemoteMeasurements() async {
+    final measurements = await _measRepository.getRemoteMeasurements();
+    emit(state.copyWith(measurements: measurements));
   }
 
   @override
   Future<void> close() {
-    measSubscription?.cancel();
+    _measSubscription?.cancel();
+    _settingsSubscription?.cancel();
     return super.close();
   }
 }

@@ -19,6 +19,8 @@ mixin _$Settings {
   int get id => throw _privateConstructorUsedError;
   bool get printEmptyFields => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
+  bool get isAdmin => throw _privateConstructorUsedError;
+  bool get isAdminModeEnabled => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsCopyWith<Settings> get copyWith =>
@@ -30,7 +32,12 @@ abstract class $SettingsCopyWith<$Res> {
   factory $SettingsCopyWith(Settings value, $Res Function(Settings) then) =
       _$SettingsCopyWithImpl<$Res, Settings>;
   @useResult
-  $Res call({int id, bool printEmptyFields, String userName});
+  $Res call(
+      {int id,
+      bool printEmptyFields,
+      String userName,
+      bool isAdmin,
+      bool isAdminModeEnabled});
 }
 
 /// @nodoc
@@ -49,6 +56,8 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
     Object? id = null,
     Object? printEmptyFields = null,
     Object? userName = null,
+    Object? isAdmin = null,
+    Object? isAdminModeEnabled = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -63,6 +72,14 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      isAdmin: null == isAdmin
+          ? _value.isAdmin
+          : isAdmin // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAdminModeEnabled: null == isAdminModeEnabled
+          ? _value.isAdminModeEnabled
+          : isAdminModeEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -75,7 +92,12 @@ abstract class _$$SettingsImplCopyWith<$Res>
       __$$SettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, bool printEmptyFields, String userName});
+  $Res call(
+      {int id,
+      bool printEmptyFields,
+      String userName,
+      bool isAdmin,
+      bool isAdminModeEnabled});
 }
 
 /// @nodoc
@@ -92,6 +114,8 @@ class __$$SettingsImplCopyWithImpl<$Res>
     Object? id = null,
     Object? printEmptyFields = null,
     Object? userName = null,
+    Object? isAdmin = null,
+    Object? isAdminModeEnabled = null,
   }) {
     return _then(_$SettingsImpl(
       id: null == id
@@ -106,6 +130,14 @@ class __$$SettingsImplCopyWithImpl<$Res>
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
               as String,
+      isAdmin: null == isAdmin
+          ? _value.isAdmin
+          : isAdmin // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isAdminModeEnabled: null == isAdminModeEnabled
+          ? _value.isAdminModeEnabled
+          : isAdminModeEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -116,7 +148,9 @@ class _$SettingsImpl extends _Settings {
   const _$SettingsImpl(
       {required this.id,
       required this.printEmptyFields,
-      required this.userName})
+      required this.userName,
+      required this.isAdmin,
+      required this.isAdminModeEnabled})
       : super._();
 
   @override
@@ -125,10 +159,14 @@ class _$SettingsImpl extends _Settings {
   final bool printEmptyFields;
   @override
   final String userName;
+  @override
+  final bool isAdmin;
+  @override
+  final bool isAdminModeEnabled;
 
   @override
   String toString() {
-    return 'Settings(id: $id, printEmptyFields: $printEmptyFields, userName: $userName)';
+    return 'Settings(id: $id, printEmptyFields: $printEmptyFields, userName: $userName, isAdmin: $isAdmin, isAdminModeEnabled: $isAdminModeEnabled)';
   }
 
   @override
@@ -140,11 +178,15 @@ class _$SettingsImpl extends _Settings {
             (identical(other.printEmptyFields, printEmptyFields) ||
                 other.printEmptyFields == printEmptyFields) &&
             (identical(other.userName, userName) ||
-                other.userName == userName));
+                other.userName == userName) &&
+            (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
+            (identical(other.isAdminModeEnabled, isAdminModeEnabled) ||
+                other.isAdminModeEnabled == isAdminModeEnabled));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, printEmptyFields, userName);
+  int get hashCode => Object.hash(
+      runtimeType, id, printEmptyFields, userName, isAdmin, isAdminModeEnabled);
 
   @JsonKey(ignore: true)
   @override
@@ -157,7 +199,9 @@ abstract class _Settings extends Settings {
   const factory _Settings(
       {required final int id,
       required final bool printEmptyFields,
-      required final String userName}) = _$SettingsImpl;
+      required final String userName,
+      required final bool isAdmin,
+      required final bool isAdminModeEnabled}) = _$SettingsImpl;
   const _Settings._() : super._();
 
   @override
@@ -166,6 +210,10 @@ abstract class _Settings extends Settings {
   bool get printEmptyFields;
   @override
   String get userName;
+  @override
+  bool get isAdmin;
+  @override
+  bool get isAdminModeEnabled;
   @override
   @JsonKey(ignore: true)
   _$$SettingsImplCopyWith<_$SettingsImpl> get copyWith =>

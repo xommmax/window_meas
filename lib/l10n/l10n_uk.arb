@@ -181,5 +181,9 @@
   "errorCannotLogin": "Не вдалося увійти",
   "userName": "Ім'я",
   "logout": "Вийти",
-  "logoutDesc": "Ви впевнені, що хочете вийти?"
+  "logoutDesc": "Ви впевнені, що хочете вийти?",
+  "signInWithGoogle": "Увійти через Google",
+  "signInWithApple": "Увійти через Apple",
+  "adminMode": "Режим адміністратора",
+  "admin": "Адмін"
 }

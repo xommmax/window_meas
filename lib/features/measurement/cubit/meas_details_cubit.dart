@@ -15,48 +15,46 @@ import 'package:window_meas/l10n/localization.dart';
 
 @injectable
 class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
-  final MeasurementRepository measRepo;
-  final SettingsRepository settingsRepo;
+  final MeasurementRepository _measRepository;
+  final SettingsRepository _settingsRepository;
 
   MeasurementDetailsCubit(
-    this.measRepo,
-    this.settingsRepo,
-  ) : super(MeasurementDetailsState.initial());
+    this._measRepository,
+    this._settingsRepository,
+  ) : super(MeasurementDetailsState.initial()) {
+    _settingsRepository.getSettings().then((settings) {
+      if (settings?.isAdminModeEnabled != null) {
+        emit(state.copyWith(isAdminModeEnabled: settings!.isAdminModeEnabled));
+      }
+    });
+  }
 
-  Future<void> loadData(String measurementId) async {
-    try {
-      emit(state.copyWith(isLoading: true));
-      final measurement = await measRepo.getLocalMeasurement(measurementId);
-      emit(state.copyWith(measurement: measurement));
-    } catch (e) {
-      emitEvent(state.copyWith(message: Localization.l10n.errorCannotLoadMeasurement));
-    } finally {
-      emit(state.copyWith(isLoading: false));
-    }
+  void setMeasurement(Measurement measurement) {
+    emit(state.copyWith(measurement: measurement));
   }
 
   Future<void> updateMeasurement(Measurement measurement) async {
-    await measRepo.updateMeasurement(measurement);
+    await _measRepository.updateMeasurement(measurement);
     emit(state.copyWith(measurement: measurement));
   }
 
   Future<void> deleteMeasurement() async {
     if (state.measurement == null) return;
-    await measRepo.deleteMeasurement(state.measurement!.id);
+    await _measRepository.deleteMeasurement(state.measurement!.id);
     emit(state.copyWith(measurement: null));
   }
 
   Future<void> deletePhoto() async {
     if (state.measurement == null) return;
     final updatedMeasurement = state.measurement!.copyWith(photoPath: null);
-    await measRepo.updateMeasurement(updatedMeasurement);
+    await _measRepository.updateMeasurement(updatedMeasurement);
     emit(state.copyWith(measurement: updatedMeasurement));
   }
 
   Future<void> deleteScheme() async {
     if (state.measurement == null) return;
     final updatedMeasurement = state.measurement!.copyWith(scheme: null);
-    await measRepo.updateMeasurement(updatedMeasurement);
+    await _measRepository.updateMeasurement(updatedMeasurement);
     emit(state.copyWith(measurement: updatedMeasurement));
   }
 
@@ -86,7 +84,7 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
       emit(state.copyWith(isLoading: true));
       final file = await _getPdfFile();
 
-      await measRepo.addRemoteMeasurement(state.measurement!, file);
+      await _measRepository.addRemoteMeasurement(state.measurement!, file);
       emitEvent(state.copyWith(message: Localization.l10n.successfullySentToCrm));
     } catch (e) {
       emitEvent(state.copyWith(message: Localization.l10n.errorCannotSendToCrm));
@@ -94,11 +92,23 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
       emit(state.copyWith(isLoading: false));
     }
 
-    await loadData(state.measurement!.id);
+    await _loadLocalMeasurement(state.measurement!.id);
+  }
+
+  Future<void> _loadLocalMeasurement(String measurementId) async {
+    try {
+      emit(state.copyWith(isLoading: true));
+      final measurement = await _measRepository.getLocalMeasurement(measurementId);
+      emit(state.copyWith(measurement: measurement));
+    } catch (e) {
+      emitEvent(state.copyWith(message: Localization.l10n.errorCannotLoadMeasurement));
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
   }
 
   Future<File> _getPdfFile() async {
-    final printEmptyFields = await settingsRepo.getSettings().then(
+    final printEmptyFields = await _settingsRepository.getSettings().then(
           (settings) => settings?.printEmptyFields ?? Settings.defaultPrintEmptyFields,
         );
 
@@ -120,7 +130,7 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
 
     if (file != null && state.measurement != null) {
       final updatedMeasurement = state.measurement!.copyWith(photoPath: file.path);
-      await measRepo.updateMeasurement(updatedMeasurement);
+      await _measRepository.updateMeasurement(updatedMeasurement);
       emit(state.copyWith(measurement: updatedMeasurement));
     }
   }

@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MeasurementListState {
   List<Measurement> get measurements => throw _privateConstructorUsedError;
+  bool get isAdminModeEnabled => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MeasurementListStateCopyWith<MeasurementListState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $MeasurementListStateCopyWith<$Res> {
           $Res Function(MeasurementListState) then) =
       _$MeasurementListStateCopyWithImpl<$Res, MeasurementListState>;
   @useResult
-  $Res call({List<Measurement> measurements});
+  $Res call({List<Measurement> measurements, bool isAdminModeEnabled});
 }
 
 /// @nodoc
@@ -47,12 +48,17 @@ class _$MeasurementListStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? measurements = null,
+    Object? isAdminModeEnabled = null,
   }) {
     return _then(_value.copyWith(
       measurements: null == measurements
           ? _value.measurements
           : measurements // ignore: cast_nullable_to_non_nullable
               as List<Measurement>,
+      isAdminModeEnabled: null == isAdminModeEnabled
+          ? _value.isAdminModeEnabled
+          : isAdminModeEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -65,7 +71,7 @@ abstract class _$$MeasurementListStateImplCopyWith<$Res>
       __$$MeasurementListStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Measurement> measurements});
+  $Res call({List<Measurement> measurements, bool isAdminModeEnabled});
 }
 
 /// @nodoc
@@ -80,12 +86,17 @@ class __$$MeasurementListStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? measurements = null,
+    Object? isAdminModeEnabled = null,
   }) {
     return _then(_$MeasurementListStateImpl(
       measurements: null == measurements
           ? _value._measurements
           : measurements // ignore: cast_nullable_to_non_nullable
               as List<Measurement>,
+      isAdminModeEnabled: null == isAdminModeEnabled
+          ? _value.isAdminModeEnabled
+          : isAdminModeEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -94,7 +105,8 @@ class __$$MeasurementListStateImplCopyWithImpl<$Res>
 
 class _$MeasurementListStateImpl extends _MeasurementListState {
   const _$MeasurementListStateImpl(
-      {required final List<Measurement> measurements})
+      {required final List<Measurement> measurements,
+      required this.isAdminModeEnabled})
       : _measurements = measurements,
         super._();
 
@@ -107,8 +119,11 @@ class _$MeasurementListStateImpl extends _MeasurementListState {
   }
 
   @override
+  final bool isAdminModeEnabled;
+
+  @override
   String toString() {
-    return 'MeasurementListState(measurements: $measurements)';
+    return 'MeasurementListState(measurements: $measurements, isAdminModeEnabled: $isAdminModeEnabled)';
   }
 
   @override
@@ -117,12 +132,14 @@ class _$MeasurementListStateImpl extends _MeasurementListState {
         (other.runtimeType == runtimeType &&
             other is _$MeasurementListStateImpl &&
             const DeepCollectionEquality()
-                .equals(other._measurements, _measurements));
+                .equals(other._measurements, _measurements) &&
+            (identical(other.isAdminModeEnabled, isAdminModeEnabled) ||
+                other.isAdminModeEnabled == isAdminModeEnabled));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_measurements));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_measurements), isAdminModeEnabled);
 
   @JsonKey(ignore: true)
   @override
@@ -135,12 +152,14 @@ class _$MeasurementListStateImpl extends _MeasurementListState {
 
 abstract class _MeasurementListState extends MeasurementListState {
   const factory _MeasurementListState(
-          {required final List<Measurement> measurements}) =
-      _$MeasurementListStateImpl;
+      {required final List<Measurement> measurements,
+      required final bool isAdminModeEnabled}) = _$MeasurementListStateImpl;
   const _MeasurementListState._() : super._();
 
   @override
   List<Measurement> get measurements;
+  @override
+  bool get isAdminModeEnabled;
   @override
   @JsonKey(ignore: true)
   _$$MeasurementListStateImplCopyWith<_$MeasurementListStateImpl>
