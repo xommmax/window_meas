@@ -37,28 +37,33 @@ const SettingsDBSchema = CollectionSchema(
       name: r'isAdminModeEnabled',
       type: IsarType.bool,
     ),
-    r'kommoListId': PropertySchema(
+    r'isPasswordEntered': PropertySchema(
       id: 4,
+      name: r'isPasswordEntered',
+      type: IsarType.bool,
+    ),
+    r'kommoListId': PropertySchema(
+      id: 5,
       name: r'kommoListId',
       type: IsarType.long,
     ),
     r'kommoSubdomain': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'kommoSubdomain',
       type: IsarType.string,
     ),
     r'kommoToken': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'kommoToken',
       type: IsarType.string,
     ),
     r'printEmptyFields': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'printEmptyFields',
       type: IsarType.bool,
     ),
     r'userName': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'userName',
       type: IsarType.string,
     )
@@ -127,11 +132,12 @@ void _settingsDBSerialize(
   writer.writeString(offsets[1], object.appPassword);
   writer.writeBool(offsets[2], object.isAdmin);
   writer.writeBool(offsets[3], object.isAdminModeEnabled);
-  writer.writeLong(offsets[4], object.kommoListId);
-  writer.writeString(offsets[5], object.kommoSubdomain);
-  writer.writeString(offsets[6], object.kommoToken);
-  writer.writeBool(offsets[7], object.printEmptyFields);
-  writer.writeString(offsets[8], object.userName);
+  writer.writeBool(offsets[4], object.isPasswordEntered);
+  writer.writeLong(offsets[5], object.kommoListId);
+  writer.writeString(offsets[6], object.kommoSubdomain);
+  writer.writeString(offsets[7], object.kommoToken);
+  writer.writeBool(offsets[8], object.printEmptyFields);
+  writer.writeString(offsets[9], object.userName);
 }
 
 SettingsDB _settingsDBDeserialize(
@@ -146,11 +152,12 @@ SettingsDB _settingsDBDeserialize(
   object.id = id;
   object.isAdmin = reader.readBool(offsets[2]);
   object.isAdminModeEnabled = reader.readBool(offsets[3]);
-  object.kommoListId = reader.readLongOrNull(offsets[4]);
-  object.kommoSubdomain = reader.readStringOrNull(offsets[5]);
-  object.kommoToken = reader.readStringOrNull(offsets[6]);
-  object.printEmptyFields = reader.readBool(offsets[7]);
-  object.userName = reader.readString(offsets[8]);
+  object.isPasswordEntered = reader.readBool(offsets[4]);
+  object.kommoListId = reader.readLongOrNull(offsets[5]);
+  object.kommoSubdomain = reader.readStringOrNull(offsets[6]);
+  object.kommoToken = reader.readStringOrNull(offsets[7]);
+  object.printEmptyFields = reader.readBool(offsets[8]);
+  object.userName = reader.readString(offsets[9]);
   return object;
 }
 
@@ -170,14 +177,16 @@ P _settingsDBDeserializeProp<P>(
     case 3:
       return (reader.readBool(offset)) as P;
     case 4:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 5:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readLongOrNull(offset)) as P;
     case 6:
       return (reader.readStringOrNull(offset)) as P;
     case 7:
-      return (reader.readBool(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 8:
+      return (reader.readBool(offset)) as P;
+    case 9:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -740,6 +749,16 @@ extension SettingsDBQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'isAdminModeEnabled',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      isPasswordEnteredEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isPasswordEntered',
         value: value,
       ));
     });
@@ -1317,6 +1336,19 @@ extension SettingsDBQuerySortBy
     });
   }
 
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> sortByIsPasswordEntered() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isPasswordEntered', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy>
+      sortByIsPasswordEnteredDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isPasswordEntered', Sort.desc);
+    });
+  }
+
   QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> sortByKommoListId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'kommoListId', Sort.asc);
@@ -1432,6 +1464,19 @@ extension SettingsDBQuerySortThenBy
     });
   }
 
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> thenByIsPasswordEntered() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isPasswordEntered', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy>
+      thenByIsPasswordEnteredDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isPasswordEntered', Sort.desc);
+    });
+  }
+
   QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> thenByKommoListId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'kommoListId', Sort.asc);
@@ -1523,6 +1568,13 @@ extension SettingsDBQueryWhereDistinct
     });
   }
 
+  QueryBuilder<SettingsDB, SettingsDB, QDistinct>
+      distinctByIsPasswordEntered() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isPasswordEntered');
+    });
+  }
+
   QueryBuilder<SettingsDB, SettingsDB, QDistinct> distinctByKommoListId() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'kommoListId');
@@ -1589,6 +1641,12 @@ extension SettingsDBQueryProperty
       isAdminModeEnabledProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isAdminModeEnabled');
+    });
+  }
+
+  QueryBuilder<SettingsDB, bool, QQueryOperations> isPasswordEnteredProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isPasswordEntered');
     });
   }
 

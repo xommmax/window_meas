@@ -21,6 +21,7 @@ mixin _$Settings {
   String get userName => throw _privateConstructorUsedError;
   bool get isAdmin => throw _privateConstructorUsedError;
   bool get isAdminModeEnabled => throw _privateConstructorUsedError;
+  bool get isPasswordEntered => throw _privateConstructorUsedError;
   List<String>? get adminsList => throw _privateConstructorUsedError;
   String? get kommoSubdomain => throw _privateConstructorUsedError;
   String? get kommoToken => throw _privateConstructorUsedError;
@@ -43,6 +44,7 @@ abstract class $SettingsCopyWith<$Res> {
       String userName,
       bool isAdmin,
       bool isAdminModeEnabled,
+      bool isPasswordEntered,
       List<String>? adminsList,
       String? kommoSubdomain,
       String? kommoToken,
@@ -68,6 +70,7 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
     Object? userName = null,
     Object? isAdmin = null,
     Object? isAdminModeEnabled = null,
+    Object? isPasswordEntered = null,
     Object? adminsList = freezed,
     Object? kommoSubdomain = freezed,
     Object? kommoToken = freezed,
@@ -94,6 +97,10 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
       isAdminModeEnabled: null == isAdminModeEnabled
           ? _value.isAdminModeEnabled
           : isAdminModeEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPasswordEntered: null == isPasswordEntered
+          ? _value.isPasswordEntered
+          : isPasswordEntered // ignore: cast_nullable_to_non_nullable
               as bool,
       adminsList: freezed == adminsList
           ? _value.adminsList
@@ -133,6 +140,7 @@ abstract class _$$SettingsImplCopyWith<$Res>
       String userName,
       bool isAdmin,
       bool isAdminModeEnabled,
+      bool isPasswordEntered,
       List<String>? adminsList,
       String? kommoSubdomain,
       String? kommoToken,
@@ -156,6 +164,7 @@ class __$$SettingsImplCopyWithImpl<$Res>
     Object? userName = null,
     Object? isAdmin = null,
     Object? isAdminModeEnabled = null,
+    Object? isPasswordEntered = null,
     Object? adminsList = freezed,
     Object? kommoSubdomain = freezed,
     Object? kommoToken = freezed,
@@ -182,6 +191,10 @@ class __$$SettingsImplCopyWithImpl<$Res>
       isAdminModeEnabled: null == isAdminModeEnabled
           ? _value.isAdminModeEnabled
           : isAdminModeEnabled // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isPasswordEntered: null == isPasswordEntered
+          ? _value.isPasswordEntered
+          : isPasswordEntered // ignore: cast_nullable_to_non_nullable
               as bool,
       adminsList: freezed == adminsList
           ? _value._adminsList
@@ -216,11 +229,12 @@ class _$SettingsImpl extends _Settings {
       required this.userName,
       required this.isAdmin,
       required this.isAdminModeEnabled,
-      final List<String>? adminsList,
-      this.kommoSubdomain,
-      this.kommoToken,
-      this.kommoListId,
-      this.appPassword})
+      required this.isPasswordEntered,
+      required final List<String>? adminsList,
+      required this.kommoSubdomain,
+      required this.kommoToken,
+      required this.kommoListId,
+      required this.appPassword})
       : _adminsList = adminsList,
         super._();
 
@@ -234,6 +248,8 @@ class _$SettingsImpl extends _Settings {
   final bool isAdmin;
   @override
   final bool isAdminModeEnabled;
+  @override
+  final bool isPasswordEntered;
   final List<String>? _adminsList;
   @override
   List<String>? get adminsList {
@@ -255,7 +271,7 @@ class _$SettingsImpl extends _Settings {
 
   @override
   String toString() {
-    return 'Settings(id: $id, printEmptyFields: $printEmptyFields, userName: $userName, isAdmin: $isAdmin, isAdminModeEnabled: $isAdminModeEnabled, adminsList: $adminsList, kommoSubdomain: $kommoSubdomain, kommoToken: $kommoToken, kommoListId: $kommoListId, appPassword: $appPassword)';
+    return 'Settings(id: $id, printEmptyFields: $printEmptyFields, userName: $userName, isAdmin: $isAdmin, isAdminModeEnabled: $isAdminModeEnabled, isPasswordEntered: $isPasswordEntered, adminsList: $adminsList, kommoSubdomain: $kommoSubdomain, kommoToken: $kommoToken, kommoListId: $kommoListId, appPassword: $appPassword)';
   }
 
   @override
@@ -271,6 +287,8 @@ class _$SettingsImpl extends _Settings {
             (identical(other.isAdmin, isAdmin) || other.isAdmin == isAdmin) &&
             (identical(other.isAdminModeEnabled, isAdminModeEnabled) ||
                 other.isAdminModeEnabled == isAdminModeEnabled) &&
+            (identical(other.isPasswordEntered, isPasswordEntered) ||
+                other.isPasswordEntered == isPasswordEntered) &&
             const DeepCollectionEquality()
                 .equals(other._adminsList, _adminsList) &&
             (identical(other.kommoSubdomain, kommoSubdomain) ||
@@ -291,6 +309,7 @@ class _$SettingsImpl extends _Settings {
       userName,
       isAdmin,
       isAdminModeEnabled,
+      isPasswordEntered,
       const DeepCollectionEquality().hash(_adminsList),
       kommoSubdomain,
       kommoToken,
@@ -311,11 +330,12 @@ abstract class _Settings extends Settings {
       required final String userName,
       required final bool isAdmin,
       required final bool isAdminModeEnabled,
-      final List<String>? adminsList,
-      final String? kommoSubdomain,
-      final String? kommoToken,
-      final int? kommoListId,
-      final String? appPassword}) = _$SettingsImpl;
+      required final bool isPasswordEntered,
+      required final List<String>? adminsList,
+      required final String? kommoSubdomain,
+      required final String? kommoToken,
+      required final int? kommoListId,
+      required final String? appPassword}) = _$SettingsImpl;
   const _Settings._() : super._();
 
   @override
@@ -328,6 +348,8 @@ abstract class _Settings extends Settings {
   bool get isAdmin;
   @override
   bool get isAdminModeEnabled;
+  @override
+  bool get isPasswordEntered;
   @override
   List<String>? get adminsList;
   @override

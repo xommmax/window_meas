@@ -15,6 +15,8 @@ class SettingsDB {
   late bool isAdmin;
   @Default(Settings.defaultIsAdminModeEnabled)
   late bool isAdminModeEnabled;
+  @Default(Settings.defaultIsPasswordEntered)
+  late bool isPasswordEntered;
   List<String>? adminsList;
   String? kommoSubdomain;
   String? kommoToken;

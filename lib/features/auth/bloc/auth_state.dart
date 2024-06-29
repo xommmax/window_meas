@@ -9,9 +9,14 @@ class AuthState with _$AuthState {
 
   const factory AuthState({
     required bool isLoading,
-    User? user,
+    required User? user,
+    required bool isPasswordEntered,
     String? message,
   }) = _AuthState;
 
-  factory AuthState.initial() => const AuthState(isLoading: false);
+  factory AuthState.initial() => const AuthState(
+        isLoading: true,
+        user: null,
+        isPasswordEntered: false,
+      );
 }

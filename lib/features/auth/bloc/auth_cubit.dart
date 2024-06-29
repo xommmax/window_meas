@@ -13,11 +13,14 @@ class AuthCubit extends EventCubit<AuthState> {
 
   final SettingsRepository _settingsRepository;
 
-  Future<void> checkUserSignedIn() async {
+  Future<void> checkUserSignedInAndPasswordEntered() async {
     final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      emit(state.copyWith(user: user));
-    }
+    final settings = await _settingsRepository.getSettings();
+
+    emit(state.copyWith(
+      user: user,
+      isPasswordEntered: settings?.isPasswordEntered == true,
+    ));
   }
 
   Future<void> signInWithGoogle() async {

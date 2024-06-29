@@ -44,4 +44,11 @@ class PassWallCubit extends Cubit<PassWallState> {
       emit(state.copyWith(isLoading: false));
     }
   }
+
+  Future<void> setPasswordEntered() async {
+    final settings = await _settingsRepository.getSettings();
+    if (settings != null) {
+      await _settingsRepository.saveSettings(settings.copyWith(isPasswordEntered: true));
+    }
+  }
 }

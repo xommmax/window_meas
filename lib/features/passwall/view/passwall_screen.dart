@@ -71,9 +71,16 @@ class PassWallView extends StatelessWidget {
         ),
       );
 
-  void checkPassword(BuildContext context, String enteredPassword, String appPassword) {
+  Future<void> checkPassword(
+    BuildContext context,
+    String enteredPassword,
+    String appPassword,
+  ) async {
     if (enteredPassword == appPassword) {
-      context.go('/meas_list');
+      await context.read<PassWallCubit>().setPasswordEntered();
+      if (context.mounted) {
+        context.go('/meas_list');
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

@@ -20,7 +20,11 @@ class AuthScreen extends StatelessWidget {
         child: BlocListener<AuthCubit, AuthState>(
           listener: (context, state) {
             if (state.user != null) {
-              context.go('/passwall');
+              if (state.isPasswordEntered) {
+                context.go('/meas_list');
+              } else {
+                context.go('/passwall');
+              }
             }
           },
           child: const AuthView(),
@@ -39,7 +43,7 @@ class _AuthViewState extends State<AuthView> {
   @override
   void initState() {
     super.initState();
-    context.read<AuthCubit>().checkUserSignedIn();
+    context.read<AuthCubit>().checkUserSignedInAndPasswordEntered();
   }
 
   @override
@@ -47,30 +51,26 @@ class _AuthViewState extends State<AuthView> {
         appBar: const CompanyAppBar(),
         body: SafeArea(
           child: BlocConsumer<AuthCubit, AuthState>(
-            builder: (context, state) => Stack(
-              fit: StackFit.expand,
-              children: [
-                Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      LoginButton(
-                        icon: FontAwesomeIcons.google,
-                        label: context.l10n.signInWithGoogle,
-                        onPressed: context.read<AuthCubit>().signInWithGoogle,
-                      ),
-                      const SizedBox(height: 24),
-                      LoginButton(
-                        icon: FontAwesomeIcons.apple,
-                        label: context.l10n.signInWithApple,
-                        onPressed: context.read<AuthCubit>().signInWithApple,
-                      ),
-                    ],
+            builder: (context, state) => (state.isLoading)
+                ? const Center(child: CircularProgressIndicator())
+                : Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        LoginButton(
+                          icon: FontAwesomeIcons.google,
+                          label: context.l10n.signInWithGoogle,
+                          onPressed: context.read<AuthCubit>().signInWithGoogle,
+                        ),
+                        const SizedBox(height: 24),
+                        LoginButton(
+                          icon: FontAwesomeIcons.apple,
+                          label: context.l10n.signInWithApple,
+                          onPressed: context.read<AuthCubit>().signInWithApple,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                if (state.isLoading) const Center(child: CircularProgressIndicator()),
-              ],
-            ),
             listener: (context, state) {
               if (state.message != null) {
                 ScaffoldMessenger.of(context).showSnackBar(

@@ -49,7 +49,7 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/passwall',
-      builder: (context, state) => const PassWallScreen(),
+      pageBuilder: (context, state) => const NoTransitionPage(child: PassWallScreen()),
     ),
     GoRoute(
       path: '/editor',
