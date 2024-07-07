@@ -69,8 +69,12 @@ class MeasurementListCubit extends Cubit<MeasurementListState> {
   }
 
   Future<void> getRemoteMeasurements() async {
-    final measurements = await _measRepository.getRemoteMeasurements();
-    emit(state.copyWith(measurements: measurements));
+    try {
+      final measurements = await _measRepository.getRemoteMeasurements();
+      emit(state.copyWith(measurements: measurements));
+    } catch (_) {
+      emit(state.copyWith(measurements: []));
+    }
   }
 
   @override
