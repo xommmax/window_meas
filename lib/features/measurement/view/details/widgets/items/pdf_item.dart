@@ -54,6 +54,7 @@ class PdfItem extends StatelessWidget {
     final filePath = "${dir.path}/measurement-pdfs/measurement-$remoteId.pdf";
     final file = File(filePath);
     if (!file.existsSync()) {
+      file.createSync(recursive: true);
       await ref.writeToFile(file);
     }
 
