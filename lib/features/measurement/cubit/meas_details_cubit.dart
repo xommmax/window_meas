@@ -1,10 +1,8 @@
 import 'dart:io';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:open_file/open_file.dart';
-import 'package:path/path.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:window_meas/common/ext/cubit_ext.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_state.dart';

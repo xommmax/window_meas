@@ -25,6 +25,7 @@ class PassWallCubit extends Cubit<PassWallState> {
       final kommoSubdomain = kommoField['subdomain'] as String;
       final kommoToken = kommoField['token'] as String;
       final kommoListId = kommoField['listId'] as int;
+      final kommoDrive = kommoField['drive'] as String;
 
       final appField = vars.docs.firstWhere((e) => e.id == 'app').data();
       final appPassword = appField['password'] as String;
@@ -32,12 +33,13 @@ class PassWallCubit extends Cubit<PassWallState> {
       final settings = await _settingsRepository.getSettings();
       if (settings != null) {
         await _settingsRepository.saveSettings(settings.copyWith(
+          appPassword: appPassword,
           isAdmin: isAdmin,
           adminsList: adminsList,
           kommoSubdomain: kommoSubdomain,
           kommoToken: kommoToken,
           kommoListId: kommoListId,
-          appPassword: appPassword,
+          kommoDrive: kommoDrive,
         ));
 
         emit(state.copyWith(password: appPassword));

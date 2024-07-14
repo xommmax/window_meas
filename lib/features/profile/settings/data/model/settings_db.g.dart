@@ -42,28 +42,33 @@ const SettingsDBSchema = CollectionSchema(
       name: r'isPasswordEntered',
       type: IsarType.bool,
     ),
-    r'kommoListId': PropertySchema(
+    r'kommoDrive': PropertySchema(
       id: 5,
+      name: r'kommoDrive',
+      type: IsarType.string,
+    ),
+    r'kommoListId': PropertySchema(
+      id: 6,
       name: r'kommoListId',
       type: IsarType.long,
     ),
     r'kommoSubdomain': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'kommoSubdomain',
       type: IsarType.string,
     ),
     r'kommoToken': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'kommoToken',
       type: IsarType.string,
     ),
     r'printEmptyFields': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'printEmptyFields',
       type: IsarType.bool,
     ),
     r'userName': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'userName',
       type: IsarType.string,
     )
@@ -107,6 +112,12 @@ int _settingsDBEstimateSize(
     }
   }
   {
+    final value = object.kommoDrive;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.kommoSubdomain;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
@@ -133,11 +144,12 @@ void _settingsDBSerialize(
   writer.writeBool(offsets[2], object.isAdmin);
   writer.writeBool(offsets[3], object.isAdminModeEnabled);
   writer.writeBool(offsets[4], object.isPasswordEntered);
-  writer.writeLong(offsets[5], object.kommoListId);
-  writer.writeString(offsets[6], object.kommoSubdomain);
-  writer.writeString(offsets[7], object.kommoToken);
-  writer.writeBool(offsets[8], object.printEmptyFields);
-  writer.writeString(offsets[9], object.userName);
+  writer.writeString(offsets[5], object.kommoDrive);
+  writer.writeLong(offsets[6], object.kommoListId);
+  writer.writeString(offsets[7], object.kommoSubdomain);
+  writer.writeString(offsets[8], object.kommoToken);
+  writer.writeBool(offsets[9], object.printEmptyFields);
+  writer.writeString(offsets[10], object.userName);
 }
 
 SettingsDB _settingsDBDeserialize(
@@ -153,11 +165,12 @@ SettingsDB _settingsDBDeserialize(
   object.isAdmin = reader.readBool(offsets[2]);
   object.isAdminModeEnabled = reader.readBool(offsets[3]);
   object.isPasswordEntered = reader.readBool(offsets[4]);
-  object.kommoListId = reader.readLongOrNull(offsets[5]);
-  object.kommoSubdomain = reader.readStringOrNull(offsets[6]);
-  object.kommoToken = reader.readStringOrNull(offsets[7]);
-  object.printEmptyFields = reader.readBool(offsets[8]);
-  object.userName = reader.readString(offsets[9]);
+  object.kommoDrive = reader.readStringOrNull(offsets[5]);
+  object.kommoListId = reader.readLongOrNull(offsets[6]);
+  object.kommoSubdomain = reader.readStringOrNull(offsets[7]);
+  object.kommoToken = reader.readStringOrNull(offsets[8]);
+  object.printEmptyFields = reader.readBool(offsets[9]);
+  object.userName = reader.readString(offsets[10]);
   return object;
 }
 
@@ -179,14 +192,16 @@ P _settingsDBDeserializeProp<P>(
     case 4:
       return (reader.readBool(offset)) as P;
     case 5:
-      return (reader.readLongOrNull(offset)) as P;
-    case 6:
       return (reader.readStringOrNull(offset)) as P;
+    case 6:
+      return (reader.readLongOrNull(offset)) as P;
     case 7:
       return (reader.readStringOrNull(offset)) as P;
     case 8:
-      return (reader.readBool(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 9:
+      return (reader.readBool(offset)) as P;
+    case 10:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -760,6 +775,159 @@ extension SettingsDBQueryFilter
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'isPasswordEntered',
         value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      kommoDriveIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'kommoDrive',
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      kommoDriveIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'kommoDrive',
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition> kommoDriveEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'kommoDrive',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      kommoDriveGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'kommoDrive',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      kommoDriveLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'kommoDrive',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition> kommoDriveBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'kommoDrive',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      kommoDriveStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'kommoDrive',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      kommoDriveEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'kommoDrive',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      kommoDriveContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'kommoDrive',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition> kommoDriveMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'kommoDrive',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      kommoDriveIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'kommoDrive',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterFilterCondition>
+      kommoDriveIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'kommoDrive',
+        value: '',
       ));
     });
   }
@@ -1349,6 +1517,18 @@ extension SettingsDBQuerySortBy
     });
   }
 
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> sortByKommoDrive() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'kommoDrive', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> sortByKommoDriveDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'kommoDrive', Sort.desc);
+    });
+  }
+
   QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> sortByKommoListId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'kommoListId', Sort.asc);
@@ -1477,6 +1657,18 @@ extension SettingsDBQuerySortThenBy
     });
   }
 
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> thenByKommoDrive() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'kommoDrive', Sort.asc);
+    });
+  }
+
+  QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> thenByKommoDriveDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'kommoDrive', Sort.desc);
+    });
+  }
+
   QueryBuilder<SettingsDB, SettingsDB, QAfterSortBy> thenByKommoListId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'kommoListId', Sort.asc);
@@ -1575,6 +1767,13 @@ extension SettingsDBQueryWhereDistinct
     });
   }
 
+  QueryBuilder<SettingsDB, SettingsDB, QDistinct> distinctByKommoDrive(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'kommoDrive', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<SettingsDB, SettingsDB, QDistinct> distinctByKommoListId() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'kommoListId');
@@ -1647,6 +1846,12 @@ extension SettingsDBQueryProperty
   QueryBuilder<SettingsDB, bool, QQueryOperations> isPasswordEnteredProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isPasswordEntered');
+    });
+  }
+
+  QueryBuilder<SettingsDB, String?, QQueryOperations> kommoDriveProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'kommoDrive');
     });
   }
 

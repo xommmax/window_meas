@@ -91,6 +91,7 @@ class MeasurementRepositoryImpl implements MeasurementRepository {
         subdomain: settings.kommoSubdomain,
         token: settings.kommoToken,
         listId: settings.kommoListId,
+        drive: settings.kommoDrive,
       );
     }
   }

@@ -26,6 +26,7 @@ mixin _$Settings {
   String? get kommoSubdomain => throw _privateConstructorUsedError;
   String? get kommoToken => throw _privateConstructorUsedError;
   int? get kommoListId => throw _privateConstructorUsedError;
+  String? get kommoDrive => throw _privateConstructorUsedError;
   String? get appPassword => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -49,6 +50,7 @@ abstract class $SettingsCopyWith<$Res> {
       String? kommoSubdomain,
       String? kommoToken,
       int? kommoListId,
+      String? kommoDrive,
       String? appPassword});
 }
 
@@ -75,6 +77,7 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
     Object? kommoSubdomain = freezed,
     Object? kommoToken = freezed,
     Object? kommoListId = freezed,
+    Object? kommoDrive = freezed,
     Object? appPassword = freezed,
   }) {
     return _then(_value.copyWith(
@@ -118,6 +121,10 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
           ? _value.kommoListId
           : kommoListId // ignore: cast_nullable_to_non_nullable
               as int?,
+      kommoDrive: freezed == kommoDrive
+          ? _value.kommoDrive
+          : kommoDrive // ignore: cast_nullable_to_non_nullable
+              as String?,
       appPassword: freezed == appPassword
           ? _value.appPassword
           : appPassword // ignore: cast_nullable_to_non_nullable
@@ -145,6 +152,7 @@ abstract class _$$SettingsImplCopyWith<$Res>
       String? kommoSubdomain,
       String? kommoToken,
       int? kommoListId,
+      String? kommoDrive,
       String? appPassword});
 }
 
@@ -169,6 +177,7 @@ class __$$SettingsImplCopyWithImpl<$Res>
     Object? kommoSubdomain = freezed,
     Object? kommoToken = freezed,
     Object? kommoListId = freezed,
+    Object? kommoDrive = freezed,
     Object? appPassword = freezed,
   }) {
     return _then(_$SettingsImpl(
@@ -212,6 +221,10 @@ class __$$SettingsImplCopyWithImpl<$Res>
           ? _value.kommoListId
           : kommoListId // ignore: cast_nullable_to_non_nullable
               as int?,
+      kommoDrive: freezed == kommoDrive
+          ? _value.kommoDrive
+          : kommoDrive // ignore: cast_nullable_to_non_nullable
+              as String?,
       appPassword: freezed == appPassword
           ? _value.appPassword
           : appPassword // ignore: cast_nullable_to_non_nullable
@@ -234,6 +247,7 @@ class _$SettingsImpl extends _Settings {
       required this.kommoSubdomain,
       required this.kommoToken,
       required this.kommoListId,
+      required this.kommoDrive,
       required this.appPassword})
       : _adminsList = adminsList,
         super._();
@@ -267,11 +281,13 @@ class _$SettingsImpl extends _Settings {
   @override
   final int? kommoListId;
   @override
+  final String? kommoDrive;
+  @override
   final String? appPassword;
 
   @override
   String toString() {
-    return 'Settings(id: $id, printEmptyFields: $printEmptyFields, userName: $userName, isAdmin: $isAdmin, isAdminModeEnabled: $isAdminModeEnabled, isPasswordEntered: $isPasswordEntered, adminsList: $adminsList, kommoSubdomain: $kommoSubdomain, kommoToken: $kommoToken, kommoListId: $kommoListId, appPassword: $appPassword)';
+    return 'Settings(id: $id, printEmptyFields: $printEmptyFields, userName: $userName, isAdmin: $isAdmin, isAdminModeEnabled: $isAdminModeEnabled, isPasswordEntered: $isPasswordEntered, adminsList: $adminsList, kommoSubdomain: $kommoSubdomain, kommoToken: $kommoToken, kommoListId: $kommoListId, kommoDrive: $kommoDrive, appPassword: $appPassword)';
   }
 
   @override
@@ -297,6 +313,8 @@ class _$SettingsImpl extends _Settings {
                 other.kommoToken == kommoToken) &&
             (identical(other.kommoListId, kommoListId) ||
                 other.kommoListId == kommoListId) &&
+            (identical(other.kommoDrive, kommoDrive) ||
+                other.kommoDrive == kommoDrive) &&
             (identical(other.appPassword, appPassword) ||
                 other.appPassword == appPassword));
   }
@@ -314,6 +332,7 @@ class _$SettingsImpl extends _Settings {
       kommoSubdomain,
       kommoToken,
       kommoListId,
+      kommoDrive,
       appPassword);
 
   @JsonKey(ignore: true)
@@ -335,6 +354,7 @@ abstract class _Settings extends Settings {
       required final String? kommoSubdomain,
       required final String? kommoToken,
       required final int? kommoListId,
+      required final String? kommoDrive,
       required final String? appPassword}) = _$SettingsImpl;
   const _Settings._() : super._();
 
@@ -358,6 +378,8 @@ abstract class _Settings extends Settings {
   String? get kommoToken;
   @override
   int? get kommoListId;
+  @override
+  String? get kommoDrive;
   @override
   String? get appPassword;
   @override

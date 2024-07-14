@@ -21,5 +21,6 @@ class SettingsDB {
   String? kommoSubdomain;
   String? kommoToken;
   int? kommoListId;
+  String? kommoDrive;
   String? appPassword;
 }

@@ -13,6 +13,7 @@ abstract class MeasurementRemoteDataSource {
     required String? subdomain,
     required String? token,
     required int? listId,
+    required String? drive,
   });
 
   Future<int> addMeasurement(MeasurementDTO measurement);
@@ -30,17 +31,20 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
 
   Dio? kommoDio;
   int? kommoListId;
+  String? kommoDrive;
 
   @override
   Future<void> updateWithSettings({
     required String? subdomain,
     required String? token,
     required int? listId,
+    required String? drive,
   }) async {
     if (kommoDio != null &&
         kommoDio!.options.baseUrl == 'https://$subdomain.kommo.com/api/v4/' &&
         kommoDio!.options.headers['Authorization'] == 'Bearer $token' &&
-        kommoListId == listId) {
+        kommoListId == listId &&
+        kommoDrive == drive) {
       return;
     }
     kommoDio = Dio(BaseOptions(
@@ -50,6 +54,7 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
       },
     ));
     kommoListId = listId;
+    kommoDrive = drive;
   }
 
   @override
@@ -102,7 +107,7 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
       final authHeader = kommoDio?.options.headers['Authorization'];
       final sessionDio = Dio(
         BaseOptions(
-          baseUrl: 'https://drive-c.kommo.com/v1.0/',
+          baseUrl: 'https://$kommoDrive.kommo.com/v1.0/',
           headers: {'Authorization': authHeader},
         ),
       );

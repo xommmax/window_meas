@@ -50,6 +50,7 @@ class SettingsCubit extends Cubit<SettingsState> {
         kommoSubdomain: null,
         kommoToken: null,
         kommoListId: null,
+        kommoDrive: null,
         appPassword: null,
       ));
     }

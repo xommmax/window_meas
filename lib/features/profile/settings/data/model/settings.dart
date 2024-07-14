@@ -25,6 +25,7 @@ class Settings with _$Settings {
     required String? kommoSubdomain,
     required String? kommoToken,
     required int? kommoListId,
+    required String? kommoDrive,
     required String? appPassword,
   }) = _Settings;
 
@@ -39,6 +40,7 @@ class Settings with _$Settings {
         kommoSubdomain: null,
         kommoToken: null,
         kommoListId: null,
+        kommoDrive: null,
         appPassword: null,
       );
 
@@ -53,6 +55,7 @@ class Settings with _$Settings {
     ..kommoSubdomain = kommoSubdomain
     ..kommoToken = kommoToken
     ..kommoListId = kommoListId
+    ..kommoDrive = kommoDrive
     ..appPassword = appPassword;
 
   static Settings fromDB(SettingsDB db) => Settings(
@@ -67,5 +70,6 @@ class Settings with _$Settings {
         kommoToken: db.kommoToken,
         kommoListId: db.kommoListId,
         appPassword: db.appPassword,
+        kommoDrive: db.kommoDrive,
       );
 }
