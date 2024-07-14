@@ -42,8 +42,8 @@ class MeasurementDetailsAppBar extends StatelessWidget implements PreferredSizeW
                 },
                 icon: const FaIcon(FontAwesomeIcons.ellipsisVertical),
                 itemBuilder: (BuildContext context) => [
-                  context.l10n.generatePdf,
                   context.l10n.sendToCrm,
+                  context.l10n.generatePdf,
                   context.l10n.delete,
                 ].map((e) => PopupMenuItem<String>(value: e, child: Text(e))).toList(),
               ),

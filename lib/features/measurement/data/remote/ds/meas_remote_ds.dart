@@ -97,6 +97,9 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
 
   @override
   Future<void> uploadPdfFile(File file, String leadId) async {
+    if (leadId.isEmpty) {
+      throw Exception(Localization.l10n.errorEmptyLeadId);
+    }
     final fileUuid = await _uploadFile(file);
     await _attachFile(fileUuid, leadId);
   }

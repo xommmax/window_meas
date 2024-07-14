@@ -72,7 +72,7 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
 
   Future<void> deleteScheme(Position position) => updatePosition(position.copyWith(scheme: null));
 
-  Future<void> generatePdf({bool share = true}) async {
+  Future<void> generatePdf({bool open = true}) async {
     if (state.measurement == null) return;
 
     try {
@@ -80,10 +80,10 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
 
       final file = await _getPdfFile();
 
-      if (share) {
-        await Share.shareXFiles([XFile(file.path)], text: state.measurement!.name);
-      } else {
+      if (open) {
         await OpenFile.open(file.path);
+      } else {
+        await Share.shareXFiles([XFile(file.path)], text: state.measurement!.name);
       }
     } catch (_) {
     } finally {

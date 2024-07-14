@@ -197,5 +197,6 @@
   "errorUploadingFile": "Не вдалося завантажити файл",
   "errorAttachingFile": "Не вдалося привязати файл. Перевірте правильність ID ліда",
   "add": "Додати",
-  "duplicate": "Дублювати"
+  "duplicate": "Дублювати",
+  "errorEmptyLeadId": "Будь ласка, вкажіть ID ліда"
 }

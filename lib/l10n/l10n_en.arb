@@ -197,5 +197,6 @@
   "errorUploadingFile": "Error uploading file",
   "errorAttachingFile": "Error attaching file",
   "add": "Add",
-  "duplicate": "Duplicate" 
+  "duplicate": "Duplicate",
+  "errorEmptyLeadId": "Lead ID is empty" 
 }
