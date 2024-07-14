@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:window_meas/features/measurement/data/db/model/expander_option_db.dart';
-import 'package:window_meas/features/measurement/data/params/param_enum.dart';
+import 'package:window_meas/features/measurement/data/domain/model/params/param_enum.dart';
 import 'package:window_meas/l10n/localization.dart';
 
 part 'expander_option.freezed.dart';

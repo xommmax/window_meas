@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:window_meas/features/measurement/data/params/assembly_type_enum.dart';
-import 'package:window_meas/features/measurement/data/params/elevator_options_enum.dart';
-import 'package:window_meas/features/measurement/data/params/flat_status_enum.dart';
+import 'package:window_meas/features/measurement/data/domain/model/params/assembly_type_enum.dart';
+import 'package:window_meas/features/measurement/data/domain/model/params/elevator_options_enum.dart';
+import 'package:window_meas/features/measurement/data/domain/model/params/flat_status_enum.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/subcategory.dart';
 import 'package:window_meas/l10n/localization.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_cubit.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
-import 'package:window_meas/features/measurement/data/params/building_type_enum.dart';
+import 'package:window_meas/features/measurement/data/domain/model/params/building_type_enum.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/items.dart';
 
 class BuildingInfoSection extends StatelessWidget {

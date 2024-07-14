@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:window_meas/features/measurement/data/params/param_enum.dart';
+import 'package:window_meas/features/measurement/data/domain/model/params/param_enum.dart';
 
 class TextItem extends StatelessWidget {
   const TextItem({

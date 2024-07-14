@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
-import 'package:window_meas/features/measurement/data/params/expander_option.dart';
+import 'package:window_meas/features/measurement/data/domain/model/expander_option.dart';
 
 part 'expander_option_db.g.dart';
 

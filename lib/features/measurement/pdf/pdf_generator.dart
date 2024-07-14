@@ -8,7 +8,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
-import 'package:window_meas/features/measurement/data/params/param_enum.dart';
+import 'package:window_meas/features/measurement/data/domain/model/params/param_enum.dart';
 import 'package:window_meas/features/measurement/pdf/pdf_custom_painter.dart';
 import 'package:window_meas/l10n/localization.dart';
 

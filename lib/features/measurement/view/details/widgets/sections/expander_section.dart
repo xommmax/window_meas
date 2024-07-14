@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_cubit.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
-import 'package:window_meas/features/measurement/data/params/expander_option.dart';
+import 'package:window_meas/features/measurement/data/domain/model/expander_option.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/items.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/subcategory.dart';
 import 'package:window_meas/l10n/localization.dart';
