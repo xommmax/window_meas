@@ -9,6 +9,7 @@ import 'package:printing/printing.dart';
 import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/param_enum.dart';
+import 'package:window_meas/features/measurement/data/domain/model/position.dart';
 import 'package:window_meas/features/measurement/pdf/pdf_custom_painter.dart';
 import 'package:window_meas/l10n/localization.dart';
 
@@ -34,6 +35,7 @@ class PdfGenerator {
 
     final logo = await rootBundle.loadString('assets/white_logo.svg');
 
+    // Measurement info
     pdf.addPage(
       pw.Page(
         pageFormat: PdfPageFormat.a4,
@@ -109,79 +111,85 @@ class PdfGenerator {
       ),
     );
 
-    pdf.addPage(
-      pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        margin: pw.EdgeInsets.zero,
-        build: (pw.Context context) => pw.Column(
-          children: [
-            _header(logo),
-            pw.Expanded(
-              child: pw.Padding(
-                padding: const pw.EdgeInsets.fromLTRB(30, 40, 20, 40),
-                child: pw.Column(
-                  children: [
-                    _infoTitle(Localization.l10n.position),
-                    pw.SizedBox(height: 20),
-                    pw.Row(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      children: [
-                        pw.Expanded(
-                          flex: 1,
-                          child: pw.Column(
-                            crossAxisAlignment: pw.CrossAxisAlignment.start,
-                            children: _positionInfo1(measurement),
+    for (final position in measurement.positions) {
+      // Position info
+      pdf.addPage(
+        pw.Page(
+          pageFormat: PdfPageFormat.a4,
+          margin: pw.EdgeInsets.zero,
+          build: (pw.Context context) => pw.Column(
+            children: [
+              _header(logo),
+              pw.Expanded(
+                child: pw.Padding(
+                  padding: const pw.EdgeInsets.fromLTRB(30, 40, 20, 40),
+                  child: pw.Column(
+                    children: [
+                      _infoTitle(
+                          '${Localization.l10n.position} ${measurement.positions.indexOf(position) + 1}/${measurement.positions.length}'),
+                      pw.SizedBox(height: 20),
+                      pw.Row(
+                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        children: [
+                          pw.Expanded(
+                            flex: 1,
+                            child: pw.Column(
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: _positionInfo1(position),
+                            ),
                           ),
-                        ),
-                        pw.Expanded(
-                          flex: 1,
-                          child: pw.Column(
-                            crossAxisAlignment: pw.CrossAxisAlignment.start,
-                            children: _positionInfo2(measurement),
+                          pw.Expanded(
+                            flex: 1,
+                            child: pw.Column(
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: _positionInfo2(position),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    pw.Expanded(
-                      child: _footer(context.pageNumber),
-                    ),
-                  ],
+                        ],
+                      ),
+                      pw.Expanded(
+                        child: _footer(context.pageNumber),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
 
-    pdf.addPage(
-      pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        margin: pw.EdgeInsets.zero,
-        build: (pw.Context context) => pw.Column(
-          children: [
-            _header(logo),
-            pw.Expanded(
-              child: pw.Padding(
-                padding: const pw.EdgeInsets.fromLTRB(30, 20, 20, 40),
-                child: pw.Column(
-                  children: [
-                    _infoTitle(Localization.l10n.schemeAndPhoto),
-                    pw.SizedBox(height: 20),
-                    _scheme(measurement, context),
-                    pw.SizedBox(height: 30),
-                    _photo(measurement),
-                    pw.Expanded(
-                      child: _footer(context.pageNumber),
-                    ),
-                  ],
+      // Scheme and photo
+      pdf.addPage(
+        pw.Page(
+          pageFormat: PdfPageFormat.a4,
+          margin: pw.EdgeInsets.zero,
+          build: (pw.Context context) => pw.Column(
+            children: [
+              _header(logo),
+              pw.Expanded(
+                child: pw.Padding(
+                  padding: const pw.EdgeInsets.fromLTRB(30, 20, 20, 40),
+                  child: pw.Column(
+                    children: [
+                      _infoTitle(
+                          '${Localization.l10n.schemeAndPhoto} ${measurement.positions.indexOf(position) + 1}/${measurement.positions.length}'),
+                      pw.SizedBox(height: 20),
+                      _scheme(position, context),
+                      pw.SizedBox(height: 30),
+                      _photo(position),
+                      pw.Expanded(
+                        child: _footer(context.pageNumber),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
 
     final output = await getTemporaryDirectory();
     final file = File('${output.path}/measurement_${measurement.id}.pdf');
@@ -288,117 +296,115 @@ class PdfGenerator {
         _infoRow(Localization.l10n.insulation, measurement.insulation),
       ];
 
-  static pw.Widget _scheme(Measurement measurement, pw.Context context) =>
-      (measurement.scheme != null)
-          ? pw.Padding(
-              padding: const pw.EdgeInsets.all(60),
-              child: pw.CustomPaint(
-                size: const PdfPoint(250, 250),
-                painter: (canvas, size) =>
-                    PdfCustomPainter(measurement.scheme!, context).paint(canvas, size),
-              ),
-            )
-          : pw.SizedBox.shrink();
+  static pw.Widget _scheme(Position position, pw.Context context) => (position.scheme != null)
+      ? pw.Padding(
+          padding: const pw.EdgeInsets.all(60),
+          child: pw.CustomPaint(
+            size: const PdfPoint(250, 250),
+            painter: (canvas, size) =>
+                PdfCustomPainter(position.scheme!, context).paint(canvas, size),
+          ),
+        )
+      : pw.SizedBox.shrink();
 
-  static pw.Widget _photo(Measurement measurement) =>
-      (measurement.photoPath != null && File(measurement.photoPath!).existsSync())
+  static pw.Widget _photo(Position position) =>
+      (position.photoPath != null && File(position.photoPath!).existsSync())
           ? pw.Image(
-              pw.MemoryImage(File(measurement.photoPath!).readAsBytesSync()),
+              pw.MemoryImage(File(position.photoPath!).readAsBytesSync()),
               height: 250,
               width: 250,
             )
           : pw.SizedBox.shrink();
 
-  static List<pw.Widget> _positionInfo1(Measurement measurement) => [
+  static List<pw.Widget> _positionInfo1(Position position) => [
         _infoRow(Localization.l10n.quarter, null, rowType: _RowType.title),
-        _infoRow(Localization.l10n.size, measurement.quarterSize, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.quarterPosition, measurement.quarterPosition,
+        _infoRow(Localization.l10n.size, position.quarterSize, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.quarterPosition, position.quarterPosition,
             rowType: _RowType.sub),
-        _infoRow(Localization.l10n.staticCalculation, measurement.staticCalculation),
-        _infoRow(Localization.l10n.profileSystem, measurement.profileSystem),
+        _infoRow(Localization.l10n.staticCalculation, position.staticCalculation),
+        _infoRow(Localization.l10n.profileSystem, position.profileSystem),
         _infoRow(Localization.l10n.door, null, rowType: _RowType.title),
-        _infoRow(Localization.l10n.doorOpeningType, measurement.doorOpeningType,
+        _infoRow(Localization.l10n.doorOpeningType, position.doorOpeningType,
             rowType: _RowType.sub),
-        _infoRow(Localization.l10n.doorstep, measurement.doorstep, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.doorstepType, measurement.doorstepType, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.doorstep, position.doorstep, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.doorstepType, position.doorstepType, rowType: _RowType.sub),
         _infoRow(Localization.l10n.lamination, null, rowType: _RowType.title),
-        _infoRow(Localization.l10n.laminationInternal, measurement.laminationInternal,
+        _infoRow(Localization.l10n.laminationInternal, position.laminationInternal,
             rowType: _RowType.sub),
-        _infoRow(Localization.l10n.laminationExternal, measurement.laminationExternal,
+        _infoRow(Localization.l10n.laminationExternal, position.laminationExternal,
             rowType: _RowType.sub),
-        _infoRow(Localization.l10n.rubberColor, measurement.rubberColor),
-        _infoRow(Localization.l10n.standProfile, measurement.standProfile),
+        _infoRow(Localization.l10n.rubberColor, position.rubberColor),
+        _infoRow(Localization.l10n.standProfile, position.standProfile),
         _infoRow(Localization.l10n.expanders, null, rowType: _RowType.title),
-        _infoRow(Localization.l10n.expanderRight, measurement.expanderOption.rightEnabled,
+        _infoRow(Localization.l10n.expanderRight, position.expanderOption.rightEnabled,
             rowType: _RowType.sub),
-        if (measurement.expanderOption.rightEnabled) ...[
-          _infoRow(Localization.l10n.width, measurement.expanderOption.rightWidth,
+        if (position.expanderOption.rightEnabled) ...[
+          _infoRow(Localization.l10n.width, position.expanderOption.rightWidth,
               rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.length, measurement.expanderOption.rightLength,
+          _infoRow(Localization.l10n.length, position.expanderOption.rightLength,
               rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.quantity, measurement.expanderOption.rightAmount,
+          _infoRow(Localization.l10n.quantity, position.expanderOption.rightAmount,
               rowType: _RowType.subSub),
         ],
-        _infoRow(Localization.l10n.expanderLeft, measurement.expanderOption.leftEnabled,
+        _infoRow(Localization.l10n.expanderLeft, position.expanderOption.leftEnabled,
             rowType: _RowType.sub),
-        if (measurement.expanderOption.leftEnabled) ...[
-          _infoRow(Localization.l10n.width, measurement.expanderOption.leftWidth,
+        if (position.expanderOption.leftEnabled) ...[
+          _infoRow(Localization.l10n.width, position.expanderOption.leftWidth,
               rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.length, measurement.expanderOption.leftLength,
+          _infoRow(Localization.l10n.length, position.expanderOption.leftLength,
               rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.quantity, measurement.expanderOption.leftAmount,
+          _infoRow(Localization.l10n.quantity, position.expanderOption.leftAmount,
               rowType: _RowType.subSub),
         ],
-        _infoRow(Localization.l10n.expanderTop, measurement.expanderOption.topEnabled,
+        _infoRow(Localization.l10n.expanderTop, position.expanderOption.topEnabled,
             rowType: _RowType.sub),
-        if (measurement.expanderOption.topEnabled) ...[
-          _infoRow(Localization.l10n.width, measurement.expanderOption.topWidth,
+        if (position.expanderOption.topEnabled) ...[
+          _infoRow(Localization.l10n.width, position.expanderOption.topWidth,
               rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.length, measurement.expanderOption.topLength,
+          _infoRow(Localization.l10n.length, position.expanderOption.topLength,
               rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.quantity, measurement.expanderOption.topAmount,
+          _infoRow(Localization.l10n.quantity, position.expanderOption.topAmount,
               rowType: _RowType.subSub),
         ],
-        _infoRow(Localization.l10n.expanderBottom, measurement.expanderOption.bottomEnabled,
+        _infoRow(Localization.l10n.expanderBottom, position.expanderOption.bottomEnabled,
             rowType: _RowType.sub),
-        if (measurement.expanderOption.bottomEnabled) ...[
-          _infoRow(Localization.l10n.width, measurement.expanderOption.bottomWidth,
+        if (position.expanderOption.bottomEnabled) ...[
+          _infoRow(Localization.l10n.width, position.expanderOption.bottomWidth,
               rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.length, measurement.expanderOption.bottomLength,
+          _infoRow(Localization.l10n.length, position.expanderOption.bottomLength,
               rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.quantity, measurement.expanderOption.bottomAmount,
+          _infoRow(Localization.l10n.quantity, position.expanderOption.bottomAmount,
               rowType: _RowType.subSub),
         ],
       ];
 
-  static List<pw.Widget> _positionInfo2(Measurement measurement) => [
-        _infoRow(Localization.l10n.glassUnit, measurement.glassUnit),
+  static List<pw.Widget> _positionInfo2(Position position) => [
+        _infoRow(Localization.l10n.glassUnit, position.glassUnit),
         _infoRow(Localization.l10n.panel, null, rowType: _RowType.title),
-        _infoRow(Localization.l10n.type, measurement.panelType, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.thickness, measurement.panelThickness, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.furniture, measurement.furniture),
+        _infoRow(Localization.l10n.type, position.panelType, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.thickness, position.panelThickness, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.furniture, position.furniture),
         _infoRow(Localization.l10n.windowsill, null, rowType: _RowType.title),
-        _infoRow(Localization.l10n.type, measurement.windowsillType, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.depth, measurement.windowsillDepth, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.size, measurement.windowsillSize, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.windowsillConnector, measurement.windowsillConnector,
+        _infoRow(Localization.l10n.type, position.windowsillType, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.depth, position.windowsillDepth, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.size, position.windowsillSize, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.windowsillConnector, position.windowsillConnector,
             rowType: _RowType.sub),
-        _infoRow(Localization.l10n.color, measurement.windowsillColor, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.assembly, measurement.windowsillAssembly, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.color, position.windowsillColor, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.assembly, position.windowsillAssembly, rowType: _RowType.sub),
         _infoRow(Localization.l10n.drainage, null, rowType: _RowType.title),
-        _infoRow(Localization.l10n.depth, measurement.drainageDepth, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.width, measurement.drainageWidth, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.color, measurement.drainageColor, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.drainageEndCap, measurement.drainageEndCap,
-            rowType: _RowType.sub),
+        _infoRow(Localization.l10n.depth, position.drainageDepth, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.width, position.drainageWidth, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.color, position.drainageColor, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.drainageEndCap, position.drainageEndCap, rowType: _RowType.sub),
         _infoRow(Localization.l10n.canopy, null, rowType: _RowType.title),
-        _infoRow(Localization.l10n.type, measurement.canopyType, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.size, measurement.canopySize, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.color, measurement.canopyColor, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.type, position.canopyType, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.size, position.canopySize, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.color, position.canopyColor, rowType: _RowType.sub),
         _infoRow(Localization.l10n.slope, null, rowType: _RowType.title),
-        _infoRow(Localization.l10n.depth, measurement.slopeDepth, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.length, measurement.slopeLength, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.quantity, measurement.slopeQuantity, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.depth, position.slopeDepth, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.length, position.slopeLength, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.quantity, position.slopeQuantity, rowType: _RowType.sub),
       ];
 
   static pw.Widget _infoTitle(String title) => pw.Padding(
