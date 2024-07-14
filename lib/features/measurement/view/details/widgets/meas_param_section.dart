@@ -6,6 +6,7 @@ class MeasurementParamSection extends ExpansionPanel {
     required this.title,
     required super.isExpanded,
     required super.body,
+    this.trailing,
   }) : super(
           headerBuilder: (context, isExpanded) => ListTile(
             title: Text(
@@ -16,10 +17,12 @@ class MeasurementParamSection extends ExpansionPanel {
                 color: Colors.white,
               ),
             ),
+            trailing: trailing,
           ),
           backgroundColor: AppColors.primary,
           canTapOnHeader: true,
         );
 
   final String title;
+  final Widget? trailing;
 }

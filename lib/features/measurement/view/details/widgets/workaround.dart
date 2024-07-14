@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class WorkaroundForExpandIcon extends StatelessWidget {
-  const WorkaroundForExpandIcon({super.key, required this.child});
+  const WorkaroundForExpandIcon({
+    required this.child,
+    super.key,
+  });
 
   final Widget child;
   static const iconColor = Colors.white;

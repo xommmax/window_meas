@@ -4,10 +4,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:open_file/open_file.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:uuid/uuid.dart';
 import 'package:window_meas/common/ext/cubit_ext.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_state.dart';
 import 'package:window_meas/features/measurement/data/domain/meas_repository.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
+import 'package:window_meas/features/measurement/data/domain/model/position.dart';
 import 'package:window_meas/features/measurement/pdf/pdf_generator.dart';
 import 'package:window_meas/features/profile/settings/data/model/settings.dart';
 import 'package:window_meas/features/profile/settings/data/settings_repo.dart';
@@ -38,13 +40,22 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
     emit(state.copyWith(measurement: measurement));
   }
 
+  Future<void> updatePosition(Position position) async {
+    final index = state.measurement!.positions.indexWhere((e) => e.id == position.id);
+    if (index != -1) {
+      final List<Position> updatedPositions = List.of(state.measurement!.positions);
+      updatedPositions[index] = position;
+      await updateMeasurement(state.measurement!.copyWith(positions: updatedPositions));
+    }
+  }
+
   Future<void> deleteMeasurement() async {
     if (state.measurement == null) return;
     await _measRepository.deleteLocalMeasurement(state.measurement!.id);
     emit(state.copyWith(measurement: null));
   }
 
-  Future<void> takePicture() async {
+  Future<void> takePicture(Position position) async {
     final picker = ImagePicker();
     final file = await picker.pickImage(
       source: ImageSource.camera,
@@ -53,25 +64,13 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
     );
 
     if (file != null && state.measurement != null) {
-      final updatedMeasurement = state.measurement!.copyWith(photoPath: file.path);
-      await _measRepository.updateLocalMeasurement(updatedMeasurement);
-      emit(state.copyWith(measurement: updatedMeasurement));
+      updatePosition(position.copyWith(photoPath: file.path));
     }
   }
 
-  Future<void> deletePhoto() async {
-    if (state.measurement == null) return;
-    final updatedMeasurement = state.measurement!.copyWith(photoPath: null);
-    await _measRepository.updateLocalMeasurement(updatedMeasurement);
-    emit(state.copyWith(measurement: updatedMeasurement));
-  }
+  Future<void> deletePhoto(Position position) => updatePosition(position.copyWith(photoPath: null));
 
-  Future<void> deleteScheme() async {
-    if (state.measurement == null) return;
-    final updatedMeasurement = state.measurement!.copyWith(scheme: null);
-    await _measRepository.updateLocalMeasurement(updatedMeasurement);
-    emit(state.copyWith(measurement: updatedMeasurement));
-  }
+  Future<void> deleteScheme(Position position) => updatePosition(position.copyWith(scheme: null));
 
   Future<void> generatePdf({bool share = true}) async {
     if (state.measurement == null) return;
@@ -108,9 +107,9 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
   }
 
   Future<File> _getPdfFile() async {
-    final printEmptyFields = await _settingsRepository.getSettings().then(
-          (settings) => settings?.printEmptyFields ?? Settings.defaultPrintEmptyFields,
-        );
+    final printEmptyFields = await _settingsRepository
+        .getSettings()
+        .then((settings) => settings?.printEmptyFields ?? Settings.defaultPrintEmptyFields);
 
     final file = await PdfGenerator.generate(
       state.measurement!,
@@ -118,5 +117,36 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
     );
 
     return file;
+  }
+
+  Future<void> addPosition() async {
+    if (state.measurement == null) return;
+
+    final updatedPositions = List.of(state.measurement!.positions);
+    updatedPositions.add(Position.initial());
+    await updateMeasurement(state.measurement!.copyWith(positions: updatedPositions));
+  }
+
+  Future<void> duplicatePosition(String id) async {
+    if (state.measurement == null) return;
+
+    final index = state.measurement!.positions.indexWhere((e) => e.id == id);
+    if (index != -1) {
+      final updatedPositions = List.of(state.measurement!.positions);
+      final newPosition = state.measurement!.positions[index].copyWith(id: const Uuid().v4());
+      updatedPositions.add(newPosition);
+      await updateMeasurement(state.measurement!.copyWith(positions: updatedPositions));
+    }
+  }
+
+  Future<void> deletePosition(String id) async {
+    if (state.measurement == null || state.measurement!.positions.length < 2) return;
+
+    final index = state.measurement!.positions.indexWhere((e) => e.id == id);
+    if (index != -1) {
+      final updatedPositions = List.of(state.measurement!.positions);
+      updatedPositions.removeAt(index);
+      await updateMeasurement(state.measurement!.copyWith(positions: updatedPositions));
+    }
   }
 }

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:uuid/uuid.dart';
 import 'package:window_meas/features/measurement/cubit/meas_list_state.dart';
 import 'package:window_meas/features/measurement/data/domain/meas_repository.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
@@ -41,7 +40,6 @@ class MeasurementListCubit extends Cubit<MeasurementListState> {
     final measurer = settings?.userName ?? Settings.defaultUserName;
 
     final measurement = Measurement.initial(
-      id: const Uuid().v4(),
       date: DateTime.now(),
       measurer: measurer,
     );

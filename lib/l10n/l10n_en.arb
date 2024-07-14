@@ -195,5 +195,7 @@
   "measListEmpty": "Measurement list is empty",
   "leadId": "Lead ID",
   "errorUploadingFile": "Error uploading file",
-  "errorAttachingFile": "Error attaching file"
+  "errorAttachingFile": "Error attaching file",
+  "add": "Add",
+  "duplicate": "Duplicate" 
 }
