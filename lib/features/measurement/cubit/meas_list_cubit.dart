@@ -61,7 +61,7 @@ class MeasurementListCubit extends Cubit<MeasurementListState> {
 
   Future<void> _watchLocalMeasurements() async {
     await _measSubscription?.cancel();
-    _measSubscription = _measRepository.watchMeasurements().listen((measurements) {
+    _measSubscription = _measRepository.watchLocalMeasurements().listen((measurements) {
       emit(state.copyWith(measurements: measurements));
     });
     final measurements = await _measRepository.getLocalMeasurements();

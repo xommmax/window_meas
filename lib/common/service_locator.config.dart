@@ -71,11 +71,12 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i9.MeasurementIsarLocalDataSource(gh<_i4.Isar>()));
     gh.singleton<_i10.TemplateLocalDataSource>(
         () => _i10.TemplateIsarLocalDataSource(gh<_i4.Isar>()));
-    gh.singleton<_i11.MeasurementRepository>(() => _i11.MeasurementRepository(
-          gh<_i9.MeasurementLocalDataSource>(),
-          gh<_i6.MeasurementRemoteDataSource>(),
-          gh<_i8.SettingsLocalDataSource>(),
-        ));
+    gh.singleton<_i11.MeasurementRepository>(
+        () => _i11.MeasurementRepositoryImpl(
+              gh<_i9.MeasurementLocalDataSource>(),
+              gh<_i6.MeasurementRemoteDataSource>(),
+              gh<_i8.SettingsLocalDataSource>(),
+            ));
     gh.singleton<_i12.SettingsRepository>(() => _i12.SettingsRepository(
           gh<_i8.SettingsLocalDataSource>(),
           gh<_i7.SettingsRemoteDataSource>(),

@@ -7,6 +7,7 @@ import 'package:window_meas/common/service_locator.dart';
 import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/measurement/cubit/meas_list_cubit.dart';
 import 'package:window_meas/features/measurement/cubit/meas_list_state.dart';
+import 'package:window_meas/l10n/localization.dart';
 
 class MeasurementListScreen extends StatelessWidget {
   const MeasurementListScreen({super.key});
@@ -67,9 +68,16 @@ class _MeasurementList extends StatelessWidget {
   final bool isAdminModeEnabled;
 
   @override
-  Widget build(BuildContext context) => ListView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
-        itemCount: measurements.length,
-        itemBuilder: (context, index) => MeasurementItem(measurements[index], isAdminModeEnabled),
-      );
+  Widget build(BuildContext context) => measurements.isEmpty
+      ? Center(
+          child: Text(
+            context.l10n.measListEmpty,
+            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+          ),
+        )
+      : ListView.builder(
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
+          itemCount: measurements.length,
+          itemBuilder: (context, index) => MeasurementItem(measurements[index], isAdminModeEnabled),
+        );
 }

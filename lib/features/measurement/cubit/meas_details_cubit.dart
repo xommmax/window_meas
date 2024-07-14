@@ -36,27 +36,42 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
   }
 
   Future<void> updateMeasurement(Measurement measurement) async {
-    await _measRepository.updateMeasurement(measurement);
+    await _measRepository.updateLocalMeasurement(measurement);
     emit(state.copyWith(measurement: measurement));
   }
 
   Future<void> deleteMeasurement() async {
     if (state.measurement == null) return;
-    await _measRepository.deleteMeasurement(state.measurement!.id);
+    await _measRepository.deleteLocalMeasurement(state.measurement!.id);
     emit(state.copyWith(measurement: null));
+  }
+
+  Future<void> takePicture() async {
+    final picker = ImagePicker();
+    final file = await picker.pickImage(
+      source: ImageSource.camera,
+      requestFullMetadata: false,
+      imageQuality: 20,
+    );
+
+    if (file != null && state.measurement != null) {
+      final updatedMeasurement = state.measurement!.copyWith(photoPath: file.path);
+      await _measRepository.updateLocalMeasurement(updatedMeasurement);
+      emit(state.copyWith(measurement: updatedMeasurement));
+    }
   }
 
   Future<void> deletePhoto() async {
     if (state.measurement == null) return;
     final updatedMeasurement = state.measurement!.copyWith(photoPath: null);
-    await _measRepository.updateMeasurement(updatedMeasurement);
+    await _measRepository.updateLocalMeasurement(updatedMeasurement);
     emit(state.copyWith(measurement: updatedMeasurement));
   }
 
   Future<void> deleteScheme() async {
     if (state.measurement == null) return;
     final updatedMeasurement = state.measurement!.copyWith(scheme: null);
-    await _measRepository.updateMeasurement(updatedMeasurement);
+    await _measRepository.updateLocalMeasurement(updatedMeasurement);
     emit(state.copyWith(measurement: updatedMeasurement));
   }
 
@@ -85,27 +100,10 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
     try {
       emit(state.copyWith(isLoading: true));
       final file = await _getPdfFile();
-      final fileRemotePath = await _addFileToCDN(file);
-      final measurement = state.measurement!.copyWith(pdfFile: fileRemotePath);
-
-      await _measRepository.addRemoteMeasurement(measurement);
+      await _measRepository.uploadPdfFile(file);
       emitEvent(state.copyWith(message: Localization.l10n.successfullySentToCrm));
     } catch (e) {
       emitEvent(state.copyWith(message: Localization.l10n.errorCannotSendToCrm));
-    } finally {
-      emit(state.copyWith(isLoading: false));
-    }
-
-    await _loadLocalMeasurement(state.measurement!.id);
-  }
-
-  Future<void> _loadLocalMeasurement(String measurementId) async {
-    try {
-      emit(state.copyWith(isLoading: true));
-      final measurement = await _measRepository.getLocalMeasurement(measurementId);
-      emit(state.copyWith(measurement: measurement));
-    } catch (e) {
-      emitEvent(state.copyWith(message: Localization.l10n.errorCannotLoadMeasurement));
     } finally {
       emit(state.copyWith(isLoading: false));
     }
@@ -122,32 +120,5 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
     );
 
     return file;
-  }
-
-  Future<void> takePicture() async {
-    final picker = ImagePicker();
-    final file = await picker.pickImage(
-      source: ImageSource.camera,
-      requestFullMetadata: false,
-      imageQuality: 20,
-    );
-
-    if (file != null && state.measurement != null) {
-      final updatedMeasurement = state.measurement!.copyWith(photoPath: file.path);
-      await _measRepository.updateMeasurement(updatedMeasurement);
-      emit(state.copyWith(measurement: updatedMeasurement));
-    }
-  }
-
-  Future<String> _addFileToCDN(File file) async {
-    final ref = FirebaseStorage.instance.ref('measurements/pdf').child(basename(file.path));
-    try {
-      final url = await ref.getDownloadURL();
-      return url;
-    } catch (e) {
-      await ref.putFile(file);
-      final url = await ref.getDownloadURL();
-      return url;
-    }
   }
 }

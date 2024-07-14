@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path/path.dart';
+import 'package:window_meas/features/measurement/data/remote/ds/file_uploader.dart';
 import 'package:window_meas/features/measurement/data/remote/model/measurement_dto.dart';
 
 abstract class MeasurementRemoteDataSource {
@@ -15,6 +19,8 @@ abstract class MeasurementRemoteDataSource {
   Future<void> updateMeasurement(MeasurementDTO measurement);
 
   Future<List<MeasurementDTO>> getMeasurements();
+
+  Future<void> uploadPdfFile(File file);
 }
 
 @Singleton(as: MeasurementRemoteDataSource)
@@ -80,6 +86,40 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
     } on DioException catch (e) {
       debugPrint('@@@ getMeasurements Error: $e');
       rethrow;
+    }
+  }
+
+  @override
+  Future<void> uploadPdfFile(File file) async {
+    try {
+      // Create upload session
+      final authHeader = kommoDio?.options.headers['Authorization'];
+      final sessionDio = Dio(
+        BaseOptions(
+          baseUrl: 'https://drive-c.kommo.com/v1.0/',
+          headers: {'Authorization': authHeader},
+        ),
+      );
+
+      final fileName = basename(file.path);
+
+      final sessionResponse = await sessionDio.post('sessions', data: {
+        'file_name': fileName,
+        'file_size': file.lengthSync(),
+      });
+
+      // Upload file
+      final fileUploader = FileUploader(
+        initialUrl: sessionResponse.data['upload_url'],
+        maxPartSize: sessionResponse.data['max_part_size'],
+        authHeader: authHeader,
+      );
+
+      final uploadResponse = await fileUploader.uploadFile(file);
+
+      debugPrint('@@@ Successfully uploaded pdf file: $uploadResponse');
+    } catch (e) {
+      debugPrint('@@@ uploadPdfFile Error: $e');
     }
   }
 }

@@ -191,5 +191,6 @@
   "next": "Next",
   "wrongPassword": "Wrong password",
   "quit": "Quit",
-  "quitDesc": "Are you sure you want to quit?"
+  "quitDesc": "Are you sure you want to quit?",
+  "measListEmpty": "Measurement list is empty"
 }
