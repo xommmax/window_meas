@@ -35,6 +35,7 @@ MeasurementDTO convertFromDomain(Measurement measurement) => MeasurementDTO(
       updatedAt: DateTime.now().millisecondsSinceEpoch ~/ 1000,
       customFieldsValues: [
         if (measurement.pdfFile != null) _urlR(FieldToCode.pdfFile, measurement.pdfFile!),
+        _textR(FieldToCode.leadId, measurement.leadId),
         _textR(FieldToCode.clientName, measurement.clientName),
         _textR(FieldToCode.cost, measurement.cost),
         _textR(FieldToCode.prepayment, measurement.prepayment),
@@ -159,6 +160,7 @@ Measurement convertToDomain(MeasurementDTO dto) => Measurement(
           ? DateTime.fromMillisecondsSinceEpoch(dto.createdAt! * 1000)
           : DateTime.now(),
       pdfFile: _textD(FieldToCode.pdfFile, dto.customFieldsValues),
+      leadId: _textD(FieldToCode.leadId, dto.customFieldsValues),
       clientName: _textD(FieldToCode.clientName, dto.customFieldsValues),
       cost: _textD(FieldToCode.cost, dto.customFieldsValues),
       prepayment: _textD(FieldToCode.prepayment, dto.customFieldsValues),

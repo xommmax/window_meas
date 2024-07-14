@@ -35,6 +35,7 @@ class CustomFieldsBuilder {
     // Client Info
     customFields.addAll([
       _url(l10n.pdfFile, FieldToCode.pdfFile),
+      _text(l10n.leadId, FieldToCode.leadId),
       _text(l10n.clientName, FieldToCode.clientName),
       _text(l10n.cost, FieldToCode.cost),
       _text(l10n.prepayment, FieldToCode.prepayment),

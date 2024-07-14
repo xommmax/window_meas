@@ -43,6 +43,7 @@ class Measurement with _$Measurement {
 
     /* Custom Fields */
     // Client Info
+    required String leadId,
     required String clientName,
     required String cost,
     required String prepayment,
@@ -135,6 +136,7 @@ class Measurement with _$Measurement {
         scheme: null,
         photoPath: null,
         pdfFile: null,
+        leadId: '',
         clientName: '',
         city: '',
         district: '',
@@ -211,6 +213,7 @@ class Measurement with _$Measurement {
     ..remoteId = remoteId
     ..id = id
     ..date = date
+    ..leadId = leadId
     ..clientName = clientName
     ..city = city
     ..district = district
@@ -290,6 +293,7 @@ class Measurement with _$Measurement {
         remoteId: db.remoteId,
         id: db.id,
         date: db.date,
+        leadId: db.leadId,
         clientName: db.clientName,
         city: db.city,
         district: db.district,

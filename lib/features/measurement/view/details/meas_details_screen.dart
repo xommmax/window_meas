@@ -47,7 +47,7 @@ class MeasurementDetailsView extends StatelessWidget {
         ),
         listener: (context, state) {
           if (state.message != null) {
-            Fluttertoast.showToast(msg: state.message!);
+            Fluttertoast.showToast(msg: state.message!, toastLength: Toast.LENGTH_LONG);
           }
         },
       );

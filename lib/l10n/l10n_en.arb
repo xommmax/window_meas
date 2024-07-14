@@ -192,5 +192,8 @@
   "wrongPassword": "Wrong password",
   "quit": "Quit",
   "quitDesc": "Are you sure you want to quit?",
-  "measListEmpty": "Measurement list is empty"
+  "measListEmpty": "Measurement list is empty",
+  "leadId": "Lead ID",
+  "errorUploadingFile": "Error uploading file",
+  "errorAttachingFile": "Error attaching file"
 }

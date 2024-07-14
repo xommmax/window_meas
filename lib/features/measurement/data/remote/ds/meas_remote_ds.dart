@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
 import 'package:window_meas/features/measurement/data/remote/ds/file_uploader.dart';
 import 'package:window_meas/features/measurement/data/remote/model/measurement_dto.dart';
+import 'package:window_meas/l10n/localization.dart';
 
 abstract class MeasurementRemoteDataSource {
   Future<void> updateWithSettings({
@@ -91,6 +92,11 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
 
   @override
   Future<void> uploadPdfFile(File file, String leadId) async {
+    final fileUuid = await _uploadFile(file);
+    await _attachFile(fileUuid, leadId);
+  }
+
+  Future<String> _uploadFile(File file) async {
     try {
       // Create upload session
       final authHeader = kommoDio?.options.headers['Authorization'];
@@ -101,10 +107,8 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
         ),
       );
 
-      final fileName = basename(file.path);
-
       final sessionResponse = await sessionDio.post('sessions', data: {
-        'file_name': fileName,
+        'file_name': basename(file.path),
         'file_size': file.lengthSync(),
       });
 
@@ -116,9 +120,15 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
       );
 
       final uploadResponse = await fileUploader.uploadFile(file);
+      debugPrint('@@@ Successfully uploaded pdf file. Upload response :${uploadResponse.data}');
+      return uploadResponse.data['uuid'];
+    } catch (e) {
+      throw Exception(Localization.l10n.errorUploadingFile);
+    }
+  }
 
-      // Attach file to lead
-      final fileUuid = uploadResponse.data['uuid'];
+  Future<void> _attachFile(String fileUuid, String leadId) async {
+    try {
       final attachResponse = await kommoDio?.put(
         'leads/$leadId/files',
         data: [
@@ -126,11 +136,9 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
         ],
       );
 
-      debugPrint(
-          '@@@ Successfully uploaded pdf file.\nUpload response :${uploadResponse.data}\nAttach response: ${attachResponse?.data}');
+      debugPrint('@@@ Successfully attached file. Attach response: ${attachResponse?.data}');
     } catch (e) {
-      debugPrint('@@@ uploadPdfFile Error: $e');
-      rethrow;
+      throw Exception(Localization.l10n.errorAttachingFile);
     }
   }
 }

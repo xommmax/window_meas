@@ -22,6 +22,15 @@ class ClientInfoSection extends StatelessWidget {
           children: [
             const SizedBox(height: 8),
             InputItem(
+              title: context.l10n.leadId,
+              value: measurement.leadId,
+              onChanged: (s) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updateMeasurement(measurement.copyWith(leadId: s)),
+              keyboardType: TextInputType.number,
+            ),
+            const Divider(),
+            InputItem(
               title: context.l10n.clientName,
               value: measurement.clientName,
               onChanged: (s) => context

@@ -35,6 +35,8 @@ class MeasurementDB {
   late String id;
   late DateTime date;
   @Default('')
+  late String leadId;
+  @Default('')
   late String clientName;
   @Default('')
   late String city;
