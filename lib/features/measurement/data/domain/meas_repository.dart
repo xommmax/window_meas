@@ -25,7 +25,7 @@ abstract class MeasurementRepository {
 
   Future<void> deleteLocalMeasurement(String measurementId);
 
-  Future<void> uploadPdfFile(File file);
+  Future<void> uploadPdfFile(File file, String leadId);
 }
 
 @Singleton(as: MeasurementRepository)
@@ -96,5 +96,5 @@ class MeasurementRepositoryImpl implements MeasurementRepository {
   }
 
   @override
-  Future<void> uploadPdfFile(File file) => remote.uploadPdfFile(file);
+  Future<void> uploadPdfFile(File file, String leadId) => remote.uploadPdfFile(file, leadId);
 }

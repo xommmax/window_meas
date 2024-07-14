@@ -100,7 +100,7 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
     try {
       emit(state.copyWith(isLoading: true));
       final file = await _getPdfFile();
-      await _measRepository.uploadPdfFile(file);
+      await _measRepository.uploadPdfFile(file, '4500386');
       emitEvent(state.copyWith(message: Localization.l10n.successfullySentToCrm));
     } catch (e) {
       emitEvent(state.copyWith(message: Localization.l10n.errorCannotSendToCrm));

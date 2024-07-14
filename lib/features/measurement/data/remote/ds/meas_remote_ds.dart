@@ -20,7 +20,7 @@ abstract class MeasurementRemoteDataSource {
 
   Future<List<MeasurementDTO>> getMeasurements();
 
-  Future<void> uploadPdfFile(File file);
+  Future<void> uploadPdfFile(File file, String leadId);
 }
 
 @Singleton(as: MeasurementRemoteDataSource)
@@ -90,7 +90,7 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
   }
 
   @override
-  Future<void> uploadPdfFile(File file) async {
+  Future<void> uploadPdfFile(File file, String leadId) async {
     try {
       // Create upload session
       final authHeader = kommoDio?.options.headers['Authorization'];
@@ -117,9 +117,20 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
 
       final uploadResponse = await fileUploader.uploadFile(file);
 
-      debugPrint('@@@ Successfully uploaded pdf file: $uploadResponse');
+      // Attach file to lead
+      final fileUuid = uploadResponse.data['uuid'];
+      final attachResponse = await kommoDio?.put(
+        'leads/$leadId/files',
+        data: [
+          {'file_uuid': fileUuid}
+        ],
+      );
+
+      debugPrint(
+          '@@@ Successfully uploaded pdf file.\nUpload response :${uploadResponse.data}\nAttach response: ${attachResponse?.data}');
     } catch (e) {
       debugPrint('@@@ uploadPdfFile Error: $e');
+      rethrow;
     }
   }
 }
