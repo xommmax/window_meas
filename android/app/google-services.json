@@ -22,6 +22,22 @@
           }
         },
         {
+          "client_id": "563921810957-ju4g5qvhffm5eu0du2a4s8r8e3k6aaoi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xodev.everest",
+            "certificate_hash": "dda9308902ab4c3ea15dfd04c33cf0b898a1d26a"
+          }
+        },
+        {
+          "client_id": "563921810957-t4qjt4rkiav086tc475sjn34ncuemecl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xodev.everest",
+            "certificate_hash": "7d14e74d362d5137ed4fe6c835a107ad0c8a3280"
+          }
+        },
+        {
           "client_id": "563921810957-4t6snegcm7bhetjd020617gdrsb1i3o5.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -39,10 +55,10 @@
               "client_type": 3
             },
             {
-              "client_id": "563921810957-ce9664rnm57a4v1p0bnmbp1rqtbdf5d7.apps.googleusercontent.com",
+              "client_id": "563921810957-6ir9d1ohaiah3ovbn8cdsqohnlk1sn84.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.windowMeas"
+                "bundle_id": "com.xodev.everest"
               }
             }
           ]

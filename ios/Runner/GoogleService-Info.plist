@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>563921810957-ce9664rnm57a4v1p0bnmbp1rqtbdf5d7.apps.googleusercontent.com</string>
+	<string>563921810957-6ir9d1ohaiah3ovbn8cdsqohnlk1sn84.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.563921810957-ce9664rnm57a4v1p0bnmbp1rqtbdf5d7</string>
+	<string>com.googleusercontent.apps.563921810957-6ir9d1ohaiah3ovbn8cdsqohnlk1sn84</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>563921810957-6gpj6muov12qm9dqadduhvdg51uoe1j9.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.windowMeas</string>
+	<string>com.xodev.everest</string>
 	<key>PROJECT_ID</key>
 	<string>window-measurement-app</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:563921810957:ios:f39d5e125b7c13d584c744</string>
+	<string>1:563921810957:ios:a81a51590f47442184c744</string>
 </dict>
 </plist>

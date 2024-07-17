@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:window_meas/common/ext/cubit_ext.dart';
@@ -37,7 +37,7 @@ class AuthCubit extends EventCubit<AuthState> {
       final firebaseCredentials = await FirebaseAuth.instance.signInWithCredential(
         googleCredential,
       );
-      _saveAndEmitUser(firebaseCredentials.user!);
+      await _saveAndEmitUser(firebaseCredentials.user!);
     } catch (e) {
       emitEvent(state.copyWith(message: Localization.l10n.errorCannotLogin));
       debugPrint('@@@ Error signing in with Google: $e');
@@ -46,12 +46,37 @@ class AuthCubit extends EventCubit<AuthState> {
     }
   }
 
-  Future<void> signInWithApple() async {}
+  Future<void> signInWithApple() async {
+    try {
+      emit(state.copyWith(isLoading: true));
+
+      final appleProvider = AppleAuthProvider();
+      appleProvider.addScope('name');
+      appleProvider.addScope('email');
+      final credentials = await FirebaseAuth.instance.signInWithProvider(appleProvider);
+      await _saveAndEmitUser(credentials.user!);
+    } catch (e) {
+      emitEvent(state.copyWith(message: Localization.l10n.errorCannotLogin));
+      debugPrint('@@@ Error signing in with Apple: $e');
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
+  }
 
   Future<void> _saveAndEmitUser(User user) async {
     final settings = await _settingsRepository.getSettings();
-    if (settings != null && user.displayName != null) {
-      await _settingsRepository.saveSettings(settings.copyWith(userName: user.displayName!));
+    if (settings != null) {
+      String? name;
+
+      if (user.displayName != null) {
+        name = user.displayName;
+      } else if (user.providerData.firstOrNull?.displayName != null) {
+        name = user.providerData.firstOrNull?.displayName;
+      }
+
+      if (name != null) {
+        await _settingsRepository.saveSettings(settings.copyWith(userName: name));
+      }
     }
     emit(state.copyWith(user: user));
   }
