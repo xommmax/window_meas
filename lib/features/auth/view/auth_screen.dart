@@ -19,7 +19,9 @@ class AuthScreen extends StatelessWidget {
         create: (context) => getIt(),
         child: BlocListener<AuthCubit, AuthState>(
           listener: (context, state) {
-            if (state.user != null) {
+            if (state.skipAuth) {
+              context.go('/meas_list');
+            } else if (state.user != null) {
               if (state.isPasswordEntered) {
                 context.go('/meas_list');
               } else {

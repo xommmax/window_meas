@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -74,17 +75,20 @@ class SettingsOptionList extends StatelessWidget {
           ),
           const Divider(),
         ],
-        GestureDetector(
-          onTap: () => _logout(context),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
-            child: Text(
-              context.l10n.logout,
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Colors.red),
+        if (FirebaseAuth.instance.currentUser != null) ...[
+          GestureDetector(
+            onTap: () => _logout(context),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12.0),
+              child: Text(
+                context.l10n.logout,
+                style:
+                    const TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: Colors.red),
+              ),
             ),
           ),
-        ),
-        const Divider(),
+          const Divider(),
+        ],
       ],
     );
   }

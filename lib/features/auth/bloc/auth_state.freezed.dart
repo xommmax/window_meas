@@ -20,6 +20,7 @@ mixin _$AuthState {
   User? get user => throw _privateConstructorUsedError;
   bool get isPasswordEntered => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
+  bool get skipAuth => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AuthStateCopyWith<AuthState> get copyWith =>
@@ -32,7 +33,11 @@ abstract class $AuthStateCopyWith<$Res> {
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
   $Res call(
-      {bool isLoading, User? user, bool isPasswordEntered, String? message});
+      {bool isLoading,
+      User? user,
+      bool isPasswordEntered,
+      String? message,
+      bool skipAuth});
 }
 
 /// @nodoc
@@ -52,6 +57,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
     Object? user = freezed,
     Object? isPasswordEntered = null,
     Object? message = freezed,
+    Object? skipAuth = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -70,6 +76,10 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      skipAuth: null == skipAuth
+          ? _value.skipAuth
+          : skipAuth // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -83,7 +93,11 @@ abstract class _$$AuthStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isLoading, User? user, bool isPasswordEntered, String? message});
+      {bool isLoading,
+      User? user,
+      bool isPasswordEntered,
+      String? message,
+      bool skipAuth});
 }
 
 /// @nodoc
@@ -101,6 +115,7 @@ class __$$AuthStateImplCopyWithImpl<$Res>
     Object? user = freezed,
     Object? isPasswordEntered = null,
     Object? message = freezed,
+    Object? skipAuth = null,
   }) {
     return _then(_$AuthStateImpl(
       isLoading: null == isLoading
@@ -119,6 +134,10 @@ class __$$AuthStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      skipAuth: null == skipAuth
+          ? _value.skipAuth
+          : skipAuth // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -130,7 +149,8 @@ class _$AuthStateImpl extends _AuthState {
       {required this.isLoading,
       required this.user,
       required this.isPasswordEntered,
-      this.message})
+      this.message,
+      this.skipAuth = false})
       : super._();
 
   @override
@@ -141,10 +161,13 @@ class _$AuthStateImpl extends _AuthState {
   final bool isPasswordEntered;
   @override
   final String? message;
+  @override
+  @JsonKey()
+  final bool skipAuth;
 
   @override
   String toString() {
-    return 'AuthState(isLoading: $isLoading, user: $user, isPasswordEntered: $isPasswordEntered, message: $message)';
+    return 'AuthState(isLoading: $isLoading, user: $user, isPasswordEntered: $isPasswordEntered, message: $message, skipAuth: $skipAuth)';
   }
 
   @override
@@ -157,12 +180,14 @@ class _$AuthStateImpl extends _AuthState {
             (identical(other.user, user) || other.user == user) &&
             (identical(other.isPasswordEntered, isPasswordEntered) ||
                 other.isPasswordEntered == isPasswordEntered) &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.skipAuth, skipAuth) ||
+                other.skipAuth == skipAuth));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, user, isPasswordEntered, message);
+  int get hashCode => Object.hash(
+      runtimeType, isLoading, user, isPasswordEntered, message, skipAuth);
 
   @JsonKey(ignore: true)
   @override
@@ -176,7 +201,8 @@ abstract class _AuthState extends AuthState {
       {required final bool isLoading,
       required final User? user,
       required final bool isPasswordEntered,
-      final String? message}) = _$AuthStateImpl;
+      final String? message,
+      final bool skipAuth}) = _$AuthStateImpl;
   const _AuthState._() : super._();
 
   @override
@@ -187,6 +213,8 @@ abstract class _AuthState extends AuthState {
   bool get isPasswordEntered;
   @override
   String? get message;
+  @override
+  bool get skipAuth;
   @override
   @JsonKey(ignore: true)
   _$$AuthStateImplCopyWith<_$AuthStateImpl> get copyWith =>

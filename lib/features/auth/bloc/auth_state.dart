@@ -12,11 +12,14 @@ class AuthState with _$AuthState {
     required User? user,
     required bool isPasswordEntered,
     String? message,
+    @Default(false) bool skipAuth,
   }) = _AuthState;
 
   factory AuthState.initial() => const AuthState(
         isLoading: true,
         user: null,
         isPasswordEntered: false,
+        message: null,
+        skipAuth: false,
       );
 }

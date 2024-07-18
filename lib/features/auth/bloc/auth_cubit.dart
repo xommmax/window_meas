@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,6 +15,8 @@ class AuthCubit extends EventCubit<AuthState> {
   final SettingsRepository _settingsRepository;
 
   Future<void> checkUserSignedInAndPasswordEntered() async {
+    _checkAuthSkip();
+
     final user = FirebaseAuth.instance.currentUser;
     final settings = await _settingsRepository.getSettings();
 
@@ -22,6 +25,19 @@ class AuthCubit extends EventCubit<AuthState> {
       isPasswordEntered: settings?.isPasswordEntered == true,
       isLoading: false,
     ));
+  }
+
+  Future<void> _checkAuthSkip() async {
+    try {
+      final appField =await FirebaseFirestore.instance.collection('app_variables').doc('app').get();
+      final skipAuth = appField['skipAuth'] as bool;
+
+      if (skipAuth) {
+        emit(state.copyWith(skipAuth: true));
+      }
+    } catch (e) {
+      debugPrint('@@@ $e');
+    }
   }
 
   Future<void> signInWithGoogle() async {
