@@ -1,7 +1,7 @@
 name: window_meas
 description: "Windows measurement app for the construction industry."
 publish_to: "none"
-version: 1.0.3+9
+version: 1.0.3+11
 
 environment:
   sdk: ">=3.3.0 <4.0.0"
