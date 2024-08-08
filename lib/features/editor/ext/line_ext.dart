@@ -64,4 +64,6 @@ extension LineExt on Line {
 
     return true;
   }
+
+  Offset get middlePoint => Offset((p1.dx + p2.dx) / 2, (p1.dy + p2.dy) / 2);
 }

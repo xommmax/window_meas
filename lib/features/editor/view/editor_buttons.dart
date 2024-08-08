@@ -25,6 +25,7 @@ class _EditorButtonsState extends State<EditorButtons> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (isExpanded) ...[
+                _modeButton(EditorMode.eraser),
                 _modeButton(EditorMode.arch),
                 _modeButton(EditorMode.fillingType),
                 _modeButton(EditorMode.openingType),
@@ -65,6 +66,7 @@ class _EditorButtonsState extends State<EditorButtons> {
       EditorMode.openingType => Image.asset('assets/ic_editor_open_type.png', width: 24),
       EditorMode.move => const FaIcon(FontAwesomeIcons.hand),
       EditorMode.draw => const FaIcon(FontAwesomeIcons.pencil),
+      EditorMode.eraser => const FaIcon(FontAwesomeIcons.eraser),
     };
 
     return Padding(

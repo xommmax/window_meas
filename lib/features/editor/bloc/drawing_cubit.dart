@@ -152,4 +152,24 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
       ),
     ));
   }
+
+  void removeLine(Line line) {
+    final lines = List.of(state.scheme.lines);
+    lines.remove(line);
+
+    final newSizeSegments = GeoHelper.calculateSegments(state.scheme, newLines: lines);
+    final newPolygons = _calculatePolygons(lines);
+    final newOpeningTypes = _calculateOpeningTypes(newPolygons);
+    final newFillingTypes = _calculateFillingTypes(newPolygons);
+
+    emit(state.copyWith(
+      scheme: state.scheme.copyWith(
+        lines: lines,
+        sizeSegments: newSizeSegments,
+        polygons: newPolygons,
+        openingTypes: newOpeningTypes,
+        fillingTypes: newFillingTypes,
+      ),
+    ));
+  }
 }

@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:window_meas/common/constants.dart';
 import 'package:window_meas/features/calc/geo_helper.dart';
 import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/bloc/drawing_state.dart';
@@ -10,6 +11,7 @@ import 'package:window_meas/features/editor/data/model/arch.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/editor/ext/line_ext.dart';
+import 'package:window_meas/features/editor/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/filling_type/data/filling_type_enum.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_enum.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_record.dart';
@@ -49,10 +51,10 @@ class DrawingViewState extends State<DrawingView> {
             child: Transform.translate(
               offset: focalPointDelta,
               child: BlocBuilder<EditorCubit, EditorState>(
-                builder: (context, state) => EditorGestureDetector(
+                builder: (context, editorState) => EditorGestureDetector(
                   context: context,
                   size: size,
-                  mode: state.mode,
+                  mode: editorState.mode,
                   onSizeSegmentAdded: (segment) => (context.mounted)
                       ? context.read<DrawingCubit>().addSizeSegment(segment)
                       : null,
@@ -130,15 +132,25 @@ class DrawingViewState extends State<DrawingView> {
                       }
                     }
                   },
+                  onEraseClicked: (globalPoint) {
+                    for (final line in context.read<DrawingCubit>().state.scheme.lines) {
+                      if (line.middlePoint.toGlobalCoord(size).distanceBetween(globalPoint) <
+                          size.width / Constants.gridAmount) {
+                        context.read<DrawingCubit>().removeLine(line);
+                        return;
+                      }
+                    }
+                  },
                   child: SizedBox.expand(
                     child: BlocBuilder<DrawingCubit, DrawingState>(
-                      builder: (context, state) => CustomPaint(
+                      builder: (context, drawingState) => CustomPaint(
                         painter: SchemePainter(
                           currentLine: currentLine,
-                          scheme: state.scheme,
+                          scheme: drawingState.scheme,
                           openingTypeSelection: openingTypeSelection,
                           fillingTypeSelection: fillingTypeSelection,
                           currentArch: currentArch,
+                          mode: editorState.mode,
                         ),
                       ),
                     ),

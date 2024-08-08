@@ -22,6 +22,7 @@ class EditorGestureDetector extends GestureDetector {
   final Function(Offset) onArchStarted;
   final Function(Offset) onArchUpdated;
   final Function() onArchCompleted;
+  final Function(Offset) onEraseClicked;
 
   final EditorMode mode;
   final GestureDetector _delegateDetector;
@@ -45,6 +46,7 @@ class EditorGestureDetector extends GestureDetector {
     required this.onArchStarted,
     required this.onArchUpdated,
     required this.onArchCompleted,
+    required this.onEraseClicked,
     required super.child,
     super.key,
   }) : _delegateDetector = switch (mode) {
@@ -75,6 +77,9 @@ class EditorGestureDetector extends GestureDetector {
               onArchUpdated: onArchUpdated,
               onArchCompleted: onArchCompleted,
               size: size,
+            ),
+          EditorMode.eraser => _EraserGestureDetector(
+              onEraseClicked: onEraseClicked,
             ),
         };
 
@@ -233,4 +238,15 @@ class _ArchGestureDetector extends GestureDetector {
 
   @override
   GestureDragEndCallback? get onPanEnd => (details) => onArchCompleted();
+}
+
+class _EraserGestureDetector extends GestureDetector {
+  final Function(Offset) onEraseClicked;
+
+  _EraserGestureDetector({
+    required this.onEraseClicked,
+  });
+
+  @override
+  GestureTapUpCallback? get onTapUp => (details) => onEraseClicked(details.localPosition);
 }

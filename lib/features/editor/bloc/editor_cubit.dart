@@ -55,4 +55,5 @@ enum EditorMode {
   openingType,
   fillingType,
   arch,
+  eraser,
 }

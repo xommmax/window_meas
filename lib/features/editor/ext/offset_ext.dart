@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:window_meas/common/constants.dart';
@@ -40,4 +41,6 @@ extension OffsetExt on Offset {
 
     return Offset(x, y);
   }
+
+  double distanceBetween(Offset p2) => sqrt(pow(dx - p2.dx, 2) + pow(dy - p2.dy, 2));
 }

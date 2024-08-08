@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:window_meas/common/constants.dart';
 import 'package:window_meas/features/calc/geo_helper.dart';
 import 'package:window_meas/features/calc/polygon_ext.dart';
+import 'package:window_meas/features/editor/bloc/editor_cubit.dart';
 import 'package:window_meas/features/editor/data/model/arch.dart';
+import 'package:window_meas/features/editor/ext/line_ext.dart';
 import 'package:window_meas/features/editor/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/data/model/direction.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
@@ -26,6 +28,7 @@ class SchemePainter extends CustomPainter {
   final OpeningTypeDrawer openingTypeDrawer;
   final FillingTypeDrawer fillingTypeDrawer;
   final Arch? currentArch;
+  final EditorMode mode;
 
   SchemePainter({
     required this.scheme,
@@ -33,6 +36,7 @@ class SchemePainter extends CustomPainter {
     required this.openingTypeSelection,
     required this.fillingTypeSelection,
     required this.currentArch,
+    required this.mode,
   })  : openingTypeDrawer = OpeningTypeDrawer(strokeWidth: lineWidth),
         fillingTypeDrawer = FillingTypeDrawer(strokeWidth: lineWidth);
 
@@ -48,6 +52,7 @@ class SchemePainter extends CustomPainter {
     _drawOpeningTypeSelection(canvas, size);
     _drawCurrentArch(canvas, size);
     _drawCurrentLine(canvas, size);
+    _drawEraserMarkers(canvas, size);
   }
 
   @override
@@ -524,5 +529,30 @@ class SchemePainter extends CustomPainter {
     path.close();
 
     return path;
+  }
+
+  void _drawEraserMarkers(Canvas canvas, Size size) {
+    if (mode != EditorMode.eraser) return;
+
+    double gridSize = size.width / Constants.gridAmount;
+    final radius = gridSize / 4;
+
+    final circlePaint = Paint()..color = Colors.red;
+    final crossPaint = Paint()
+      ..color = Colors.white
+      ..strokeWidth = lineWidth
+      ..style = PaintingStyle.stroke;
+
+    for (final line in scheme.lines) {
+      final mPoint = line.middlePoint.toGlobalCoord(size);
+      canvas.drawCircle(mPoint, radius, circlePaint);
+
+      Path crossPath = Path()
+        ..moveTo(mPoint.dx - radius / 2, mPoint.dy - radius / 2)
+        ..lineTo(mPoint.dx + radius / 2, mPoint.dy + radius / 2)
+        ..moveTo(mPoint.dx + radius / 2, mPoint.dy - radius / 2)
+        ..lineTo(mPoint.dx - radius / 2, mPoint.dy + radius / 2);
+      canvas.drawPath(crossPath, crossPaint);
+    }
   }
 }
