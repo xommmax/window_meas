@@ -20,8 +20,7 @@ mixin _$Measurement {
   int? get remoteId => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
-  String? get pdfFile => throw _privateConstructorUsedError; /* Custom Fields */
-// Client Info
+  String? get pdfFile => throw _privateConstructorUsedError; // Client Info
   String get leadId => throw _privateConstructorUsedError;
   String get clientName => throw _privateConstructorUsedError;
   String get cost => throw _privateConstructorUsedError;
@@ -49,21 +48,37 @@ mixin _$Measurement {
   AssemblyType get assembly => throw _privateConstructorUsedError;
   bool get disassembly => throw _privateConstructorUsedError;
   bool get screedDisassembly => throw _privateConstructorUsedError;
+  String get screedDisassemblyPrice => throw _privateConstructorUsedError;
   bool get gridDisassembly => throw _privateConstructorUsedError;
+  String get gridDisassemblyPrice => throw _privateConstructorUsedError;
   bool get roofDisassembly => throw _privateConstructorUsedError;
+  String get roofDisassemblyPrice => throw _privateConstructorUsedError;
   bool get delivery => throw _privateConstructorUsedError;
+  String get deliveryPrice => throw _privateConstructorUsedError;
   bool get unloading => throw _privateConstructorUsedError;
+  String get unloadingPrice => throw _privateConstructorUsedError;
   bool get garbageRemoval => throw _privateConstructorUsedError;
+  String get garbageRemovalPrice => throw _privateConstructorUsedError;
   bool get sealing => throw _privateConstructorUsedError;
+  String get sealingPrice => throw _privateConstructorUsedError;
   bool get vacuumCleaner => throw _privateConstructorUsedError;
   String get estimatedAssemblyTime =>
       throw _privateConstructorUsedError; // Other work
   bool get parapetReinforcement => throw _privateConstructorUsedError;
+  String get parapetReinforcementPrice => throw _privateConstructorUsedError;
   WindowsillExtension get windowsillExtension =>
       throw _privateConstructorUsedError;
+  String get windowsillExtensionPrice => throw _privateConstructorUsedError;
   bool get slabExtension => throw _privateConstructorUsedError;
+  String get slabExtensionPrice => throw _privateConstructorUsedError;
   bool get extensionSheathing => throw _privateConstructorUsedError;
-  bool get insulation => throw _privateConstructorUsedError; // Positions info
+  String get extensionSheathingPrice => throw _privateConstructorUsedError;
+  bool get insulation => throw _privateConstructorUsedError;
+  String get insulationPrice => throw _privateConstructorUsedError;
+  bool get flooring => throw _privateConstructorUsedError;
+  String get flooringCovering => throw _privateConstructorUsedError;
+  String get flooringPrice =>
+      throw _privateConstructorUsedError; // Positions info
   List<Position> get positions => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -109,19 +124,34 @@ abstract class $MeasurementCopyWith<$Res> {
       AssemblyType assembly,
       bool disassembly,
       bool screedDisassembly,
+      String screedDisassemblyPrice,
       bool gridDisassembly,
+      String gridDisassemblyPrice,
       bool roofDisassembly,
+      String roofDisassemblyPrice,
       bool delivery,
+      String deliveryPrice,
       bool unloading,
+      String unloadingPrice,
       bool garbageRemoval,
+      String garbageRemovalPrice,
       bool sealing,
+      String sealingPrice,
       bool vacuumCleaner,
       String estimatedAssemblyTime,
       bool parapetReinforcement,
+      String parapetReinforcementPrice,
       WindowsillExtension windowsillExtension,
+      String windowsillExtensionPrice,
       bool slabExtension,
+      String slabExtensionPrice,
       bool extensionSheathing,
+      String extensionSheathingPrice,
       bool insulation,
+      String insulationPrice,
+      bool flooring,
+      String flooringCovering,
+      String flooringPrice,
       List<Position> positions});
 }
 
@@ -169,19 +199,34 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? assembly = null,
     Object? disassembly = null,
     Object? screedDisassembly = null,
+    Object? screedDisassemblyPrice = null,
     Object? gridDisassembly = null,
+    Object? gridDisassemblyPrice = null,
     Object? roofDisassembly = null,
+    Object? roofDisassemblyPrice = null,
     Object? delivery = null,
+    Object? deliveryPrice = null,
     Object? unloading = null,
+    Object? unloadingPrice = null,
     Object? garbageRemoval = null,
+    Object? garbageRemovalPrice = null,
     Object? sealing = null,
+    Object? sealingPrice = null,
     Object? vacuumCleaner = null,
     Object? estimatedAssemblyTime = null,
     Object? parapetReinforcement = null,
+    Object? parapetReinforcementPrice = null,
     Object? windowsillExtension = null,
+    Object? windowsillExtensionPrice = null,
     Object? slabExtension = null,
+    Object? slabExtensionPrice = null,
     Object? extensionSheathing = null,
+    Object? extensionSheathingPrice = null,
     Object? insulation = null,
+    Object? insulationPrice = null,
+    Object? flooring = null,
+    Object? flooringCovering = null,
+    Object? flooringPrice = null,
     Object? positions = null,
   }) {
     return _then(_value.copyWith(
@@ -309,30 +354,58 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.screedDisassembly
           : screedDisassembly // ignore: cast_nullable_to_non_nullable
               as bool,
+      screedDisassemblyPrice: null == screedDisassemblyPrice
+          ? _value.screedDisassemblyPrice
+          : screedDisassemblyPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       gridDisassembly: null == gridDisassembly
           ? _value.gridDisassembly
           : gridDisassembly // ignore: cast_nullable_to_non_nullable
               as bool,
+      gridDisassemblyPrice: null == gridDisassemblyPrice
+          ? _value.gridDisassemblyPrice
+          : gridDisassemblyPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       roofDisassembly: null == roofDisassembly
           ? _value.roofDisassembly
           : roofDisassembly // ignore: cast_nullable_to_non_nullable
               as bool,
+      roofDisassemblyPrice: null == roofDisassemblyPrice
+          ? _value.roofDisassemblyPrice
+          : roofDisassemblyPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       delivery: null == delivery
           ? _value.delivery
           : delivery // ignore: cast_nullable_to_non_nullable
               as bool,
+      deliveryPrice: null == deliveryPrice
+          ? _value.deliveryPrice
+          : deliveryPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       unloading: null == unloading
           ? _value.unloading
           : unloading // ignore: cast_nullable_to_non_nullable
               as bool,
+      unloadingPrice: null == unloadingPrice
+          ? _value.unloadingPrice
+          : unloadingPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       garbageRemoval: null == garbageRemoval
           ? _value.garbageRemoval
           : garbageRemoval // ignore: cast_nullable_to_non_nullable
               as bool,
+      garbageRemovalPrice: null == garbageRemovalPrice
+          ? _value.garbageRemovalPrice
+          : garbageRemovalPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       sealing: null == sealing
           ? _value.sealing
           : sealing // ignore: cast_nullable_to_non_nullable
               as bool,
+      sealingPrice: null == sealingPrice
+          ? _value.sealingPrice
+          : sealingPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       vacuumCleaner: null == vacuumCleaner
           ? _value.vacuumCleaner
           : vacuumCleaner // ignore: cast_nullable_to_non_nullable
@@ -345,22 +418,54 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.parapetReinforcement
           : parapetReinforcement // ignore: cast_nullable_to_non_nullable
               as bool,
+      parapetReinforcementPrice: null == parapetReinforcementPrice
+          ? _value.parapetReinforcementPrice
+          : parapetReinforcementPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       windowsillExtension: null == windowsillExtension
           ? _value.windowsillExtension
           : windowsillExtension // ignore: cast_nullable_to_non_nullable
               as WindowsillExtension,
+      windowsillExtensionPrice: null == windowsillExtensionPrice
+          ? _value.windowsillExtensionPrice
+          : windowsillExtensionPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       slabExtension: null == slabExtension
           ? _value.slabExtension
           : slabExtension // ignore: cast_nullable_to_non_nullable
               as bool,
+      slabExtensionPrice: null == slabExtensionPrice
+          ? _value.slabExtensionPrice
+          : slabExtensionPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       extensionSheathing: null == extensionSheathing
           ? _value.extensionSheathing
           : extensionSheathing // ignore: cast_nullable_to_non_nullable
               as bool,
+      extensionSheathingPrice: null == extensionSheathingPrice
+          ? _value.extensionSheathingPrice
+          : extensionSheathingPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       insulation: null == insulation
           ? _value.insulation
           : insulation // ignore: cast_nullable_to_non_nullable
               as bool,
+      insulationPrice: null == insulationPrice
+          ? _value.insulationPrice
+          : insulationPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      flooring: null == flooring
+          ? _value.flooring
+          : flooring // ignore: cast_nullable_to_non_nullable
+              as bool,
+      flooringCovering: null == flooringCovering
+          ? _value.flooringCovering
+          : flooringCovering // ignore: cast_nullable_to_non_nullable
+              as String,
+      flooringPrice: null == flooringPrice
+          ? _value.flooringPrice
+          : flooringPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       positions: null == positions
           ? _value.positions
           : positions // ignore: cast_nullable_to_non_nullable
@@ -409,19 +514,34 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       AssemblyType assembly,
       bool disassembly,
       bool screedDisassembly,
+      String screedDisassemblyPrice,
       bool gridDisassembly,
+      String gridDisassemblyPrice,
       bool roofDisassembly,
+      String roofDisassemblyPrice,
       bool delivery,
+      String deliveryPrice,
       bool unloading,
+      String unloadingPrice,
       bool garbageRemoval,
+      String garbageRemovalPrice,
       bool sealing,
+      String sealingPrice,
       bool vacuumCleaner,
       String estimatedAssemblyTime,
       bool parapetReinforcement,
+      String parapetReinforcementPrice,
       WindowsillExtension windowsillExtension,
+      String windowsillExtensionPrice,
       bool slabExtension,
+      String slabExtensionPrice,
       bool extensionSheathing,
+      String extensionSheathingPrice,
       bool insulation,
+      String insulationPrice,
+      bool flooring,
+      String flooringCovering,
+      String flooringPrice,
       List<Position> positions});
 }
 
@@ -467,19 +587,34 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? assembly = null,
     Object? disassembly = null,
     Object? screedDisassembly = null,
+    Object? screedDisassemblyPrice = null,
     Object? gridDisassembly = null,
+    Object? gridDisassemblyPrice = null,
     Object? roofDisassembly = null,
+    Object? roofDisassemblyPrice = null,
     Object? delivery = null,
+    Object? deliveryPrice = null,
     Object? unloading = null,
+    Object? unloadingPrice = null,
     Object? garbageRemoval = null,
+    Object? garbageRemovalPrice = null,
     Object? sealing = null,
+    Object? sealingPrice = null,
     Object? vacuumCleaner = null,
     Object? estimatedAssemblyTime = null,
     Object? parapetReinforcement = null,
+    Object? parapetReinforcementPrice = null,
     Object? windowsillExtension = null,
+    Object? windowsillExtensionPrice = null,
     Object? slabExtension = null,
+    Object? slabExtensionPrice = null,
     Object? extensionSheathing = null,
+    Object? extensionSheathingPrice = null,
     Object? insulation = null,
+    Object? insulationPrice = null,
+    Object? flooring = null,
+    Object? flooringCovering = null,
+    Object? flooringPrice = null,
     Object? positions = null,
   }) {
     return _then(_$MeasurementImpl(
@@ -607,30 +742,58 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.screedDisassembly
           : screedDisassembly // ignore: cast_nullable_to_non_nullable
               as bool,
+      screedDisassemblyPrice: null == screedDisassemblyPrice
+          ? _value.screedDisassemblyPrice
+          : screedDisassemblyPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       gridDisassembly: null == gridDisassembly
           ? _value.gridDisassembly
           : gridDisassembly // ignore: cast_nullable_to_non_nullable
               as bool,
+      gridDisassemblyPrice: null == gridDisassemblyPrice
+          ? _value.gridDisassemblyPrice
+          : gridDisassemblyPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       roofDisassembly: null == roofDisassembly
           ? _value.roofDisassembly
           : roofDisassembly // ignore: cast_nullable_to_non_nullable
               as bool,
+      roofDisassemblyPrice: null == roofDisassemblyPrice
+          ? _value.roofDisassemblyPrice
+          : roofDisassemblyPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       delivery: null == delivery
           ? _value.delivery
           : delivery // ignore: cast_nullable_to_non_nullable
               as bool,
+      deliveryPrice: null == deliveryPrice
+          ? _value.deliveryPrice
+          : deliveryPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       unloading: null == unloading
           ? _value.unloading
           : unloading // ignore: cast_nullable_to_non_nullable
               as bool,
+      unloadingPrice: null == unloadingPrice
+          ? _value.unloadingPrice
+          : unloadingPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       garbageRemoval: null == garbageRemoval
           ? _value.garbageRemoval
           : garbageRemoval // ignore: cast_nullable_to_non_nullable
               as bool,
+      garbageRemovalPrice: null == garbageRemovalPrice
+          ? _value.garbageRemovalPrice
+          : garbageRemovalPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       sealing: null == sealing
           ? _value.sealing
           : sealing // ignore: cast_nullable_to_non_nullable
               as bool,
+      sealingPrice: null == sealingPrice
+          ? _value.sealingPrice
+          : sealingPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       vacuumCleaner: null == vacuumCleaner
           ? _value.vacuumCleaner
           : vacuumCleaner // ignore: cast_nullable_to_non_nullable
@@ -643,22 +806,54 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.parapetReinforcement
           : parapetReinforcement // ignore: cast_nullable_to_non_nullable
               as bool,
+      parapetReinforcementPrice: null == parapetReinforcementPrice
+          ? _value.parapetReinforcementPrice
+          : parapetReinforcementPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       windowsillExtension: null == windowsillExtension
           ? _value.windowsillExtension
           : windowsillExtension // ignore: cast_nullable_to_non_nullable
               as WindowsillExtension,
+      windowsillExtensionPrice: null == windowsillExtensionPrice
+          ? _value.windowsillExtensionPrice
+          : windowsillExtensionPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       slabExtension: null == slabExtension
           ? _value.slabExtension
           : slabExtension // ignore: cast_nullable_to_non_nullable
               as bool,
+      slabExtensionPrice: null == slabExtensionPrice
+          ? _value.slabExtensionPrice
+          : slabExtensionPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       extensionSheathing: null == extensionSheathing
           ? _value.extensionSheathing
           : extensionSheathing // ignore: cast_nullable_to_non_nullable
               as bool,
+      extensionSheathingPrice: null == extensionSheathingPrice
+          ? _value.extensionSheathingPrice
+          : extensionSheathingPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       insulation: null == insulation
           ? _value.insulation
           : insulation // ignore: cast_nullable_to_non_nullable
               as bool,
+      insulationPrice: null == insulationPrice
+          ? _value.insulationPrice
+          : insulationPrice // ignore: cast_nullable_to_non_nullable
+              as String,
+      flooring: null == flooring
+          ? _value.flooring
+          : flooring // ignore: cast_nullable_to_non_nullable
+              as bool,
+      flooringCovering: null == flooringCovering
+          ? _value.flooringCovering
+          : flooringCovering // ignore: cast_nullable_to_non_nullable
+              as String,
+      flooringPrice: null == flooringPrice
+          ? _value.flooringPrice
+          : flooringPrice // ignore: cast_nullable_to_non_nullable
+              as String,
       positions: null == positions
           ? _value._positions
           : positions // ignore: cast_nullable_to_non_nullable
@@ -702,19 +897,34 @@ class _$MeasurementImpl extends _Measurement {
       required this.assembly,
       required this.disassembly,
       required this.screedDisassembly,
+      required this.screedDisassemblyPrice,
       required this.gridDisassembly,
+      required this.gridDisassemblyPrice,
       required this.roofDisassembly,
+      required this.roofDisassemblyPrice,
       required this.delivery,
+      required this.deliveryPrice,
       required this.unloading,
+      required this.unloadingPrice,
       required this.garbageRemoval,
+      required this.garbageRemovalPrice,
       required this.sealing,
+      required this.sealingPrice,
       required this.vacuumCleaner,
       required this.estimatedAssemblyTime,
       required this.parapetReinforcement,
+      required this.parapetReinforcementPrice,
       required this.windowsillExtension,
+      required this.windowsillExtensionPrice,
       required this.slabExtension,
+      required this.slabExtensionPrice,
       required this.extensionSheathing,
+      required this.extensionSheathingPrice,
       required this.insulation,
+      required this.insulationPrice,
+      required this.flooring,
+      required this.flooringCovering,
+      required this.flooringPrice,
       required final List<Position> positions})
       : _positions = positions,
         super._();
@@ -729,7 +939,6 @@ class _$MeasurementImpl extends _Measurement {
   final DateTime date;
   @override
   final String? pdfFile;
-/* Custom Fields */
 // Client Info
   @override
   final String leadId;
@@ -786,17 +995,31 @@ class _$MeasurementImpl extends _Measurement {
   @override
   final bool screedDisassembly;
   @override
+  final String screedDisassemblyPrice;
+  @override
   final bool gridDisassembly;
+  @override
+  final String gridDisassemblyPrice;
   @override
   final bool roofDisassembly;
   @override
+  final String roofDisassemblyPrice;
+  @override
   final bool delivery;
+  @override
+  final String deliveryPrice;
   @override
   final bool unloading;
   @override
+  final String unloadingPrice;
+  @override
   final bool garbageRemoval;
   @override
+  final String garbageRemovalPrice;
+  @override
   final bool sealing;
+  @override
+  final String sealingPrice;
   @override
   final bool vacuumCleaner;
   @override
@@ -805,13 +1028,29 @@ class _$MeasurementImpl extends _Measurement {
   @override
   final bool parapetReinforcement;
   @override
+  final String parapetReinforcementPrice;
+  @override
   final WindowsillExtension windowsillExtension;
+  @override
+  final String windowsillExtensionPrice;
   @override
   final bool slabExtension;
   @override
+  final String slabExtensionPrice;
+  @override
   final bool extensionSheathing;
   @override
+  final String extensionSheathingPrice;
+  @override
   final bool insulation;
+  @override
+  final String insulationPrice;
+  @override
+  final bool flooring;
+  @override
+  final String flooringCovering;
+  @override
+  final String flooringPrice;
 // Positions info
   final List<Position> _positions;
 // Positions info
@@ -824,7 +1063,7 @@ class _$MeasurementImpl extends _Measurement {
 
   @override
   String toString() {
-    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, pdfFile: $pdfFile, leadId: $leadId, clientName: $clientName, cost: $cost, prepayment: $prepayment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, howDiscovered: $howDiscovered, comment: $comment, measurer: $measurer, city: $city, district: $district, street: $street, building: $building, residentialComplex: $residentialComplex, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, housingCoopNumber: $housingCoopNumber, buildingType: $buildingType, flatStatus: $flatStatus, elevator: $elevator, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, gridDisassembly: $gridDisassembly, roofDisassembly: $roofDisassembly, delivery: $delivery, unloading: $unloading, garbageRemoval: $garbageRemoval, sealing: $sealing, vacuumCleaner: $vacuumCleaner, estimatedAssemblyTime: $estimatedAssemblyTime, parapetReinforcement: $parapetReinforcement, windowsillExtension: $windowsillExtension, slabExtension: $slabExtension, extensionSheathing: $extensionSheathing, insulation: $insulation, positions: $positions)';
+    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, pdfFile: $pdfFile, leadId: $leadId, clientName: $clientName, cost: $cost, prepayment: $prepayment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, howDiscovered: $howDiscovered, comment: $comment, measurer: $measurer, city: $city, district: $district, street: $street, building: $building, residentialComplex: $residentialComplex, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, housingCoopNumber: $housingCoopNumber, buildingType: $buildingType, flatStatus: $flatStatus, elevator: $elevator, assembly: $assembly, disassembly: $disassembly, screedDisassembly: $screedDisassembly, screedDisassemblyPrice: $screedDisassemblyPrice, gridDisassembly: $gridDisassembly, gridDisassemblyPrice: $gridDisassemblyPrice, roofDisassembly: $roofDisassembly, roofDisassemblyPrice: $roofDisassemblyPrice, delivery: $delivery, deliveryPrice: $deliveryPrice, unloading: $unloading, unloadingPrice: $unloadingPrice, garbageRemoval: $garbageRemoval, garbageRemovalPrice: $garbageRemovalPrice, sealing: $sealing, sealingPrice: $sealingPrice, vacuumCleaner: $vacuumCleaner, estimatedAssemblyTime: $estimatedAssemblyTime, parapetReinforcement: $parapetReinforcement, parapetReinforcementPrice: $parapetReinforcementPrice, windowsillExtension: $windowsillExtension, windowsillExtensionPrice: $windowsillExtensionPrice, slabExtension: $slabExtension, slabExtensionPrice: $slabExtensionPrice, extensionSheathing: $extensionSheathing, extensionSheathingPrice: $extensionSheathingPrice, insulation: $insulation, insulationPrice: $insulationPrice, flooring: $flooring, flooringCovering: $flooringCovering, flooringPrice: $flooringPrice, positions: $positions)';
   }
 
   @override
@@ -883,33 +1122,58 @@ class _$MeasurementImpl extends _Measurement {
                 other.disassembly == disassembly) &&
             (identical(other.screedDisassembly, screedDisassembly) ||
                 other.screedDisassembly == screedDisassembly) &&
+            (identical(other.screedDisassemblyPrice, screedDisassemblyPrice) ||
+                other.screedDisassemblyPrice == screedDisassemblyPrice) &&
             (identical(other.gridDisassembly, gridDisassembly) ||
                 other.gridDisassembly == gridDisassembly) &&
+            (identical(other.gridDisassemblyPrice, gridDisassemblyPrice) ||
+                other.gridDisassemblyPrice == gridDisassemblyPrice) &&
             (identical(other.roofDisassembly, roofDisassembly) ||
                 other.roofDisassembly == roofDisassembly) &&
+            (identical(other.roofDisassemblyPrice, roofDisassemblyPrice) ||
+                other.roofDisassemblyPrice == roofDisassemblyPrice) &&
             (identical(other.delivery, delivery) ||
                 other.delivery == delivery) &&
+            (identical(other.deliveryPrice, deliveryPrice) ||
+                other.deliveryPrice == deliveryPrice) &&
             (identical(other.unloading, unloading) ||
                 other.unloading == unloading) &&
+            (identical(other.unloadingPrice, unloadingPrice) ||
+                other.unloadingPrice == unloadingPrice) &&
             (identical(other.garbageRemoval, garbageRemoval) ||
                 other.garbageRemoval == garbageRemoval) &&
+            (identical(other.garbageRemovalPrice, garbageRemovalPrice) ||
+                other.garbageRemovalPrice == garbageRemovalPrice) &&
             (identical(other.sealing, sealing) || other.sealing == sealing) &&
+            (identical(other.sealingPrice, sealingPrice) ||
+                other.sealingPrice == sealingPrice) &&
             (identical(other.vacuumCleaner, vacuumCleaner) ||
                 other.vacuumCleaner == vacuumCleaner) &&
             (identical(other.estimatedAssemblyTime, estimatedAssemblyTime) ||
                 other.estimatedAssemblyTime == estimatedAssemblyTime) &&
             (identical(other.parapetReinforcement, parapetReinforcement) ||
                 other.parapetReinforcement == parapetReinforcement) &&
+            (identical(other.parapetReinforcementPrice, parapetReinforcementPrice) ||
+                other.parapetReinforcementPrice == parapetReinforcementPrice) &&
             (identical(other.windowsillExtension, windowsillExtension) ||
                 other.windowsillExtension == windowsillExtension) &&
+            (identical(other.windowsillExtensionPrice, windowsillExtensionPrice) ||
+                other.windowsillExtensionPrice == windowsillExtensionPrice) &&
             (identical(other.slabExtension, slabExtension) ||
                 other.slabExtension == slabExtension) &&
+            (identical(other.slabExtensionPrice, slabExtensionPrice) ||
+                other.slabExtensionPrice == slabExtensionPrice) &&
             (identical(other.extensionSheathing, extensionSheathing) ||
                 other.extensionSheathing == extensionSheathing) &&
+            (identical(other.extensionSheathingPrice, extensionSheathingPrice) ||
+                other.extensionSheathingPrice == extensionSheathingPrice) &&
             (identical(other.insulation, insulation) ||
                 other.insulation == insulation) &&
-            const DeepCollectionEquality()
-                .equals(other._positions, _positions));
+            (identical(other.insulationPrice, insulationPrice) || other.insulationPrice == insulationPrice) &&
+            (identical(other.flooring, flooring) || other.flooring == flooring) &&
+            (identical(other.flooringCovering, flooringCovering) || other.flooringCovering == flooringCovering) &&
+            (identical(other.flooringPrice, flooringPrice) || other.flooringPrice == flooringPrice) &&
+            const DeepCollectionEquality().equals(other._positions, _positions));
   }
 
   @override
@@ -946,19 +1210,34 @@ class _$MeasurementImpl extends _Measurement {
         assembly,
         disassembly,
         screedDisassembly,
+        screedDisassemblyPrice,
         gridDisassembly,
+        gridDisassemblyPrice,
         roofDisassembly,
+        roofDisassemblyPrice,
         delivery,
+        deliveryPrice,
         unloading,
+        unloadingPrice,
         garbageRemoval,
+        garbageRemovalPrice,
         sealing,
+        sealingPrice,
         vacuumCleaner,
         estimatedAssemblyTime,
         parapetReinforcement,
+        parapetReinforcementPrice,
         windowsillExtension,
+        windowsillExtensionPrice,
         slabExtension,
+        slabExtensionPrice,
         extensionSheathing,
+        extensionSheathingPrice,
         insulation,
+        insulationPrice,
+        flooring,
+        flooringCovering,
+        flooringPrice,
         const DeepCollectionEquality().hash(_positions)
       ]);
 
@@ -1002,19 +1281,34 @@ abstract class _Measurement extends Measurement {
       required final AssemblyType assembly,
       required final bool disassembly,
       required final bool screedDisassembly,
+      required final String screedDisassemblyPrice,
       required final bool gridDisassembly,
+      required final String gridDisassemblyPrice,
       required final bool roofDisassembly,
+      required final String roofDisassemblyPrice,
       required final bool delivery,
+      required final String deliveryPrice,
       required final bool unloading,
+      required final String unloadingPrice,
       required final bool garbageRemoval,
+      required final String garbageRemovalPrice,
       required final bool sealing,
+      required final String sealingPrice,
       required final bool vacuumCleaner,
       required final String estimatedAssemblyTime,
       required final bool parapetReinforcement,
+      required final String parapetReinforcementPrice,
       required final WindowsillExtension windowsillExtension,
+      required final String windowsillExtensionPrice,
       required final bool slabExtension,
+      required final String slabExtensionPrice,
       required final bool extensionSheathing,
+      required final String extensionSheathingPrice,
       required final bool insulation,
+      required final String insulationPrice,
+      required final bool flooring,
+      required final String flooringCovering,
+      required final String flooringPrice,
       required final List<Position> positions}) = _$MeasurementImpl;
   const _Measurement._() : super._();
 
@@ -1028,8 +1322,7 @@ abstract class _Measurement extends Measurement {
   DateTime get date;
   @override
   String? get pdfFile;
-  @override /* Custom Fields */
-// Client Info
+  @override // Client Info
   String get leadId;
   @override
   String get clientName;
@@ -1082,17 +1375,31 @@ abstract class _Measurement extends Measurement {
   @override
   bool get screedDisassembly;
   @override
+  String get screedDisassemblyPrice;
+  @override
   bool get gridDisassembly;
+  @override
+  String get gridDisassemblyPrice;
   @override
   bool get roofDisassembly;
   @override
+  String get roofDisassemblyPrice;
+  @override
   bool get delivery;
+  @override
+  String get deliveryPrice;
   @override
   bool get unloading;
   @override
+  String get unloadingPrice;
+  @override
   bool get garbageRemoval;
   @override
+  String get garbageRemovalPrice;
+  @override
   bool get sealing;
+  @override
+  String get sealingPrice;
   @override
   bool get vacuumCleaner;
   @override
@@ -1100,13 +1407,29 @@ abstract class _Measurement extends Measurement {
   @override // Other work
   bool get parapetReinforcement;
   @override
+  String get parapetReinforcementPrice;
+  @override
   WindowsillExtension get windowsillExtension;
+  @override
+  String get windowsillExtensionPrice;
   @override
   bool get slabExtension;
   @override
+  String get slabExtensionPrice;
+  @override
   bool get extensionSheathing;
   @override
+  String get extensionSheathingPrice;
+  @override
   bool get insulation;
+  @override
+  String get insulationPrice;
+  @override
+  bool get flooring;
+  @override
+  String get flooringCovering;
+  @override
+  String get flooringPrice;
   @override // Positions info
   List<Position> get positions;
   @override

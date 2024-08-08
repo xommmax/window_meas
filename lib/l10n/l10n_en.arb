@@ -201,5 +201,8 @@
   "errorEmptyLeadId": "Lead ID is empty",
   "tinting": "Tinting",
   "sateen": "Sateen",
-  "mosquito": "Mosquito net"
+  "mosquito": "Mosquito net",
+  "price": "Price",
+  "flooring": "Flooring",
+  "flooringCovering": "Covering"
 }

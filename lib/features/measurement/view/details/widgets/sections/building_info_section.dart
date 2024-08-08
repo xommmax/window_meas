@@ -76,28 +76,61 @@ class BuildingInfoSection extends StatelessWidget {
                     value: measurement.screedDisassembly,
                     onChanged: (b) => context
                         .read<MeasurementDetailsCubit>()
-                        .updateMeasurement(
-                            measurement.copyWith(screedDisassembly: b)),
+                        .updateMeasurement(measurement.copyWith(screedDisassembly: b)),
                   ),
                   const Divider(),
+                  if (measurement.screedDisassembly)
+                    Subcategory(children: [
+                      InputItem(
+                        title: context.l10n.price,
+                        value: measurement.screedDisassemblyPrice,
+                        onChanged: (s) => context
+                            .read<MeasurementDetailsCubit>()
+                            .updateMeasurement(measurement.copyWith(screedDisassemblyPrice: s)),
+                        keyboardType: TextInputType.number,
+                      ),
+                      const Divider(),
+                    ]),
                   SwitchItem(
                     title: context.l10n.gridDisassembly,
                     value: measurement.gridDisassembly,
                     onChanged: (b) => context
                         .read<MeasurementDetailsCubit>()
-                        .updateMeasurement(
-                            measurement.copyWith(gridDisassembly: b)),
+                        .updateMeasurement(measurement.copyWith(gridDisassembly: b)),
                   ),
                   const Divider(),
+                  if (measurement.gridDisassembly)
+                    Subcategory(children: [
+                      InputItem(
+                        title: context.l10n.price,
+                        value: measurement.gridDisassemblyPrice,
+                        onChanged: (s) => context
+                            .read<MeasurementDetailsCubit>()
+                            .updateMeasurement(measurement.copyWith(gridDisassemblyPrice: s)),
+                        keyboardType: TextInputType.number,
+                      ),
+                      const Divider(),
+                    ]),
                   SwitchItem(
                     title: context.l10n.roofDisassembly,
                     value: measurement.roofDisassembly,
                     onChanged: (b) => context
                         .read<MeasurementDetailsCubit>()
-                        .updateMeasurement(
-                            measurement.copyWith(roofDisassembly: b)),
+                        .updateMeasurement(measurement.copyWith(roofDisassembly: b)),
                   ),
                   const Divider(),
+                  if (measurement.roofDisassembly)
+                    Subcategory(children: [
+                      InputItem(
+                        title: context.l10n.price,
+                        value: measurement.roofDisassemblyPrice,
+                        onChanged: (s) => context
+                            .read<MeasurementDetailsCubit>()
+                            .updateMeasurement(measurement.copyWith(roofDisassemblyPrice: s)),
+                        keyboardType: TextInputType.number,
+                      ),
+                      const Divider(),
+                    ]),
                 ],
               ),
             SwitchItem(
@@ -108,6 +141,18 @@ class BuildingInfoSection extends StatelessWidget {
                   .updateMeasurement(measurement.copyWith(delivery: b)),
             ),
             const Divider(),
+            if (measurement.delivery)
+              Subcategory(children: [
+                InputItem(
+                  title: context.l10n.price,
+                  value: measurement.deliveryPrice,
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(deliveryPrice: s)),
+                  keyboardType: TextInputType.number,
+                ),
+                const Divider(),
+              ]),
             SwitchItem(
               title: context.l10n.unloading,
               value: measurement.unloading,
@@ -116,6 +161,18 @@ class BuildingInfoSection extends StatelessWidget {
                   .updateMeasurement(measurement.copyWith(unloading: b)),
             ),
             const Divider(),
+            if (measurement.unloading)
+              Subcategory(children: [
+                InputItem(
+                  title: context.l10n.price,
+                  value: measurement.unloadingPrice,
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(unloadingPrice: s)),
+                  keyboardType: TextInputType.number,
+                ),
+                const Divider(),
+              ]),
             SwitchItem(
               title: context.l10n.garbageRemoval,
               value: measurement.garbageRemoval,
@@ -124,6 +181,18 @@ class BuildingInfoSection extends StatelessWidget {
                   .updateMeasurement(measurement.copyWith(garbageRemoval: b)),
             ),
             const Divider(),
+            if (measurement.garbageRemoval)
+              Subcategory(children: [
+                InputItem(
+                  title: context.l10n.price,
+                  value: measurement.garbageRemovalPrice,
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(garbageRemovalPrice: s)),
+                  keyboardType: TextInputType.number,
+                ),
+                const Divider(),
+              ]),
             SwitchItem(
               title: context.l10n.sealing,
               value: measurement.sealing,
@@ -132,6 +201,18 @@ class BuildingInfoSection extends StatelessWidget {
                   .updateMeasurement(measurement.copyWith(sealing: b)),
             ),
             const Divider(),
+            if (measurement.sealing)
+              Subcategory(children: [
+                InputItem(
+                  title: context.l10n.price,
+                  value: measurement.sealingPrice,
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updateMeasurement(measurement.copyWith(sealingPrice: s)),
+                  keyboardType: TextInputType.number,
+                ),
+                const Divider(),
+              ]),
             SwitchItem(
               title: context.l10n.vacuumCleaner,
               value: measurement.vacuumCleaner,
@@ -145,8 +226,7 @@ class BuildingInfoSection extends StatelessWidget {
               value: measurement.estimatedAssemblyTime,
               onChanged: (s) => context
                   .read<MeasurementDetailsCubit>()
-                  .updateMeasurement(
-                      measurement.copyWith(estimatedAssemblyTime: s)),
+                  .updateMeasurement(measurement.copyWith(estimatedAssemblyTime: s)),
             ),
             const SizedBox(height: 8),
           ],

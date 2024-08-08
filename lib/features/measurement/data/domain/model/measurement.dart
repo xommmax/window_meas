@@ -12,11 +12,6 @@ import 'package:window_meas/l10n/localization.dart';
 
 part 'measurement.freezed.dart';
 
-// !!! After adding or updating the field, don't forget to add/update field in:
-// 1. CustomFieldsBuilder
-// 2. MeasurementDTO.fromDomain
-// 3. MeasurementDTO.toDomain
-// 4. add/update field manually in CRM
 @freezed
 class Measurement with _$Measurement {
   const Measurement._();
@@ -28,7 +23,6 @@ class Measurement with _$Measurement {
     required DateTime date,
     required String? pdfFile,
 
-    /* Custom Fields */
     // Client Info
     required String leadId,
     required String clientName,
@@ -60,21 +54,36 @@ class Measurement with _$Measurement {
     required AssemblyType assembly,
     required bool disassembly,
     required bool screedDisassembly,
+    required String screedDisassemblyPrice,
     required bool gridDisassembly,
+    required String gridDisassemblyPrice,
     required bool roofDisassembly,
+    required String roofDisassemblyPrice,
     required bool delivery,
+    required String deliveryPrice,
     required bool unloading,
+    required String unloadingPrice,
     required bool garbageRemoval,
+    required String garbageRemovalPrice,
     required bool sealing,
+    required String sealingPrice,
     required bool vacuumCleaner,
     required String estimatedAssemblyTime,
 
     // Other work
     required bool parapetReinforcement,
+    required String parapetReinforcementPrice,
     required WindowsillExtension windowsillExtension,
+    required String windowsillExtensionPrice,
     required bool slabExtension,
+    required String slabExtensionPrice,
     required bool extensionSheathing,
+    required String extensionSheathingPrice,
     required bool insulation,
+    required String insulationPrice,
+    required bool flooring,
+    required String flooringCovering,
+    required String flooringPrice,
 
     // Positions info
     required List<Position> positions,
@@ -105,23 +114,25 @@ class Measurement with _$Measurement {
         assembly: AssemblyType.none,
         disassembly: false,
         screedDisassembly: false,
+        screedDisassemblyPrice: '',
         gridDisassembly: false,
+        gridDisassemblyPrice: '',
         roofDisassembly: false,
+        roofDisassemblyPrice: '',
         delivery: false,
+        deliveryPrice: '',
         unloading: false,
+        unloadingPrice: '',
         buildingType: BuildingType.none,
         flatStatus: FlatStatus.none,
         garbageRemoval: false,
+        garbageRemovalPrice: '',
         elevator: ElevatorOptions.none,
         positions: [
           Position.initial(),
         ],
-        parapetReinforcement: false,
-        windowsillExtension: WindowsillExtension.none,
-        slabExtension: false,
-        extensionSheathing: false,
-        insulation: false,
         sealing: false,
+        sealingPrice: '',
         cost: '',
         prepayment: '',
         comment: '',
@@ -130,6 +141,21 @@ class Measurement with _$Measurement {
         howDiscovered: '',
         residentialComplex: '',
         housingCoopNumber: '',
+
+        // Other work
+        parapetReinforcement: false,
+        parapetReinforcementPrice: '',
+        windowsillExtension: WindowsillExtension.none,
+        windowsillExtensionPrice: '',
+        slabExtension: false,
+        slabExtensionPrice: '',
+        extensionSheathing: false,
+        extensionSheathingPrice: '',
+        insulation: false,
+        insulationPrice: '',
+        flooring: false,
+        flooringCovering: '',
+        flooringPrice: '',
       );
 
   MeasurementDB toDB() => MeasurementDB()
@@ -154,20 +180,22 @@ class Measurement with _$Measurement {
     ..assembly = assembly
     ..disassembly = disassembly
     ..screedDisassembly = screedDisassembly
+    ..screedDisassemblyPrice = screedDisassemblyPrice
     ..gridDisassembly = gridDisassembly
+    ..gridDisassemblyPrice = gridDisassemblyPrice
     ..roofDisassembly = roofDisassembly
+    ..roofDisassemblyPrice = roofDisassemblyPrice
     ..delivery = delivery
+    ..deliveryPrice = deliveryPrice
     ..unloading = unloading
+    ..unloadingPrice = unloadingPrice
+    ..garbageRemoval = garbageRemoval
+    ..garbageRemovalPrice = garbageRemovalPrice
+    ..sealing = sealing
+    ..sealingPrice = sealingPrice
     ..buildingType = buildingType
     ..flatStatus = flatStatus
-    ..garbageRemoval = garbageRemoval
     ..elevator = elevator
-    ..parapetReinforcement = parapetReinforcement
-    ..windowsillExtension = windowsillExtension
-    ..slabExtension = slabExtension
-    ..extensionSheathing = extensionSheathing
-    ..insulation = insulation
-    ..sealing = sealing
     ..cost = cost
     ..prepayment = prepayment
     ..comment = comment
@@ -177,7 +205,22 @@ class Measurement with _$Measurement {
     ..residentialComplex = residentialComplex
     ..housingCoopNumber = housingCoopNumber
     ..measurer = measurer
-    ..positions = positions.map((e) => e.toDB()).toList();
+    ..positions = positions.map((e) => e.toDB()).toList()
+
+    // Other work
+    ..parapetReinforcement = parapetReinforcement
+    ..parapetReinforcementPrice = parapetReinforcementPrice
+    ..windowsillExtension = windowsillExtension
+    ..windowsillExtensionPrice = windowsillExtensionPrice
+    ..slabExtension = slabExtension
+    ..slabExtensionPrice = slabExtensionPrice
+    ..extensionSheathing = extensionSheathing
+    ..extensionSheathingPrice = extensionSheathingPrice
+    ..insulation = insulation
+    ..insulationPrice = insulationPrice
+    ..flooring = flooring
+    ..flooringCovering = flooringCovering
+    ..flooringPrice = flooringPrice;
 
   static Measurement fromDB(MeasurementDB db) => Measurement(
         localId: db.localId,
@@ -201,20 +244,22 @@ class Measurement with _$Measurement {
         assembly: db.assembly,
         disassembly: db.disassembly,
         screedDisassembly: db.screedDisassembly,
+        screedDisassemblyPrice: db.screedDisassemblyPrice,
         gridDisassembly: db.gridDisassembly,
+        gridDisassemblyPrice: db.gridDisassemblyPrice,
         roofDisassembly: db.roofDisassembly,
+        roofDisassemblyPrice: db.roofDisassemblyPrice,
         delivery: db.delivery,
+        deliveryPrice: db.deliveryPrice,
         unloading: db.unloading,
+        unloadingPrice: db.unloadingPrice,
+        sealing: db.sealing,
+        sealingPrice: db.sealingPrice,
+        garbageRemoval: db.garbageRemoval,
+        garbageRemovalPrice: db.garbageRemovalPrice,
         buildingType: db.buildingType,
         flatStatus: db.flatStatus,
-        garbageRemoval: db.garbageRemoval,
         elevator: db.elevator,
-        parapetReinforcement: db.parapetReinforcement,
-        windowsillExtension: db.windowsillExtension,
-        slabExtension: db.slabExtension,
-        extensionSheathing: db.extensionSheathing,
-        insulation: db.insulation,
-        sealing: db.sealing,
         cost: db.cost,
         prepayment: db.prepayment,
         comment: db.comment,
@@ -225,6 +270,21 @@ class Measurement with _$Measurement {
         housingCoopNumber: db.housingCoopNumber,
         measurer: db.measurer,
         positions: db.positions.map((e) => Position.fromDB(e)).toList(),
+
+        // Other work
+        parapetReinforcement: db.parapetReinforcement,
+        parapetReinforcementPrice: db.parapetReinforcementPrice,
+        windowsillExtension: db.windowsillExtension,
+        windowsillExtensionPrice: db.windowsillExtensionPrice,
+        slabExtension: db.slabExtension,
+        slabExtensionPrice: db.slabExtensionPrice,
+        extensionSheathing: db.extensionSheathing,
+        extensionSheathingPrice: db.extensionSheathingPrice,
+        insulation: db.insulation,
+        insulationPrice: db.insulationPrice,
+        flooring: db.flooring,
+        flooringCovering: db.flooringCovering,
+        flooringPrice: db.flooringPrice,
       );
 
   String get name =>

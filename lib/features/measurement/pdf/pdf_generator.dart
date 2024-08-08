@@ -9,6 +9,7 @@ import 'package:printing/printing.dart';
 import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/param_enum.dart';
+import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_extension_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/position.dart';
 import 'package:window_meas/features/measurement/pdf/pdf_custom_painter.dart';
 import 'package:window_meas/l10n/localization.dart';
@@ -273,16 +274,35 @@ class PdfGenerator {
         _infoRow(Localization.l10n.elevator, measurement.elevator),
         _infoRow(Localization.l10n.assembly, measurement.assembly),
         _infoRow(Localization.l10n.disassembly, measurement.disassembly),
-        _infoRow(Localization.l10n.screedDisassembly, measurement.screedDisassembly,
-            rowType: _RowType.sub),
-        _infoRow(Localization.l10n.gridDisassembly, measurement.gridDisassembly,
-            rowType: _RowType.sub),
-        _infoRow(Localization.l10n.roofDisassembly, measurement.roofDisassembly,
-            rowType: _RowType.sub),
+        if (measurement.disassembly) ...[
+          _infoRow(Localization.l10n.screedDisassembly, measurement.screedDisassembly,
+              rowType: _RowType.sub),
+          if (measurement.screedDisassembly)
+            _infoRow(Localization.l10n.price, measurement.screedDisassemblyPrice,
+                rowType: _RowType.subSub),
+          _infoRow(Localization.l10n.gridDisassembly, measurement.gridDisassembly,
+              rowType: _RowType.sub),
+          if (measurement.gridDisassembly)
+            _infoRow(Localization.l10n.price, measurement.gridDisassemblyPrice,
+                rowType: _RowType.subSub),
+          _infoRow(Localization.l10n.roofDisassembly, measurement.roofDisassembly,
+              rowType: _RowType.sub),
+          if (measurement.roofDisassembly)
+            _infoRow(Localization.l10n.price, measurement.roofDisassemblyPrice,
+                rowType: _RowType.subSub),
+        ],
         _infoRow(Localization.l10n.delivery, measurement.delivery),
+        if (measurement.delivery)
+          _infoRow(Localization.l10n.price, measurement.deliveryPrice, rowType: _RowType.sub),
         _infoRow(Localization.l10n.unloading, measurement.unloading),
+        if (measurement.unloading)
+          _infoRow(Localization.l10n.price, measurement.unloadingPrice, rowType: _RowType.sub),
         _infoRow(Localization.l10n.garbageRemoval, measurement.garbageRemoval),
+        if (measurement.garbageRemoval)
+          _infoRow(Localization.l10n.price, measurement.garbageRemovalPrice, rowType: _RowType.sub),
         _infoRow(Localization.l10n.sealing, measurement.sealing),
+        if (measurement.sealing)
+          _infoRow(Localization.l10n.price, measurement.sealingPrice, rowType: _RowType.sub),
         _infoRow(Localization.l10n.vacuumCleaner, measurement.vacuumCleaner),
         _infoRow(Localization.l10n.estimatedAssemblyTime, measurement.estimatedAssemblyTime),
       ];
@@ -290,10 +310,29 @@ class PdfGenerator {
   static List<pw.Widget> _otherWork(Measurement measurement) => [
         _infoTitle(Localization.l10n.otherWork),
         _infoRow(Localization.l10n.parapetReinforcement, measurement.parapetReinforcement),
+        if (measurement.parapetReinforcement)
+          _infoRow(Localization.l10n.price, measurement.parapetReinforcementPrice,
+              rowType: _RowType.sub),
         _infoRow(Localization.l10n.windowsillExtension, measurement.windowsillExtension),
+        if (measurement.windowsillExtension != WindowsillExtension.none)
+          _infoRow(Localization.l10n.price, measurement.windowsillExtensionPrice,
+              rowType: _RowType.sub),
         _infoRow(Localization.l10n.slabExtension, measurement.slabExtension),
+        if (measurement.slabExtension)
+          _infoRow(Localization.l10n.price, measurement.slabExtensionPrice, rowType: _RowType.sub),
         _infoRow(Localization.l10n.extensionSheathing, measurement.extensionSheathing),
+        if (measurement.extensionSheathing)
+          _infoRow(Localization.l10n.price, measurement.extensionSheathingPrice,
+              rowType: _RowType.sub),
         _infoRow(Localization.l10n.insulation, measurement.insulation),
+        if (measurement.insulation)
+          _infoRow(Localization.l10n.price, measurement.insulationPrice, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.flooring, measurement.flooring),
+        if (measurement.flooring) ...[
+          _infoRow(Localization.l10n.flooringCovering, measurement.flooringCovering,
+              rowType: _RowType.sub),
+          _infoRow(Localization.l10n.price, measurement.flooringPrice, rowType: _RowType.sub),
+        ]
       ];
 
   static pw.Widget _scheme(Position position, pw.Context context) => (position.scheme != null)

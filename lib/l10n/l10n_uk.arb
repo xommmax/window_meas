@@ -201,5 +201,8 @@
   "errorEmptyLeadId": "Будь ласка, вкажіть ID ліда",
   "tinting": "Тонування",
   "sateen": "Сатин",
-  "mosquito": "Москітна сітка"
+  "mosquito": "Москітна сітка",
+  "price": "Ціна",
+  "flooring": "Підлога",
+  "flooringCovering": "Покриття"
 }

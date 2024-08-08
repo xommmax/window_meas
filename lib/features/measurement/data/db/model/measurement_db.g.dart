@@ -74,174 +74,249 @@ const MeasurementDBSchema = CollectionSchema(
       name: r'delivery',
       type: IsarType.bool,
     ),
-    r'disassembly': PropertySchema(
+    r'deliveryPrice': PropertySchema(
       id: 11,
+      name: r'deliveryPrice',
+      type: IsarType.string,
+    ),
+    r'disassembly': PropertySchema(
+      id: 12,
       name: r'disassembly',
       type: IsarType.bool,
     ),
     r'district': PropertySchema(
-      id: 12,
+      id: 13,
       name: r'district',
       type: IsarType.string,
     ),
     r'doorphone': PropertySchema(
-      id: 13,
+      id: 14,
       name: r'doorphone',
       type: IsarType.string,
     ),
     r'elevator': PropertySchema(
-      id: 14,
+      id: 15,
       name: r'elevator',
       type: IsarType.string,
       enumMap: _MeasurementDBelevatorEnumValueMap,
     ),
     r'entrance': PropertySchema(
-      id: 15,
+      id: 16,
       name: r'entrance',
       type: IsarType.string,
     ),
     r'estimatedAssemblyTime': PropertySchema(
-      id: 16,
+      id: 17,
       name: r'estimatedAssemblyTime',
       type: IsarType.string,
     ),
     r'extensionSheathing': PropertySchema(
-      id: 17,
+      id: 18,
       name: r'extensionSheathing',
       type: IsarType.bool,
     ),
+    r'extensionSheathingPrice': PropertySchema(
+      id: 19,
+      name: r'extensionSheathingPrice',
+      type: IsarType.string,
+    ),
     r'flatStatus': PropertySchema(
-      id: 18,
+      id: 20,
       name: r'flatStatus',
       type: IsarType.string,
       enumMap: _MeasurementDBflatStatusEnumValueMap,
     ),
     r'floor': PropertySchema(
-      id: 19,
+      id: 21,
       name: r'floor',
       type: IsarType.string,
     ),
+    r'flooring': PropertySchema(
+      id: 22,
+      name: r'flooring',
+      type: IsarType.bool,
+    ),
+    r'flooringCovering': PropertySchema(
+      id: 23,
+      name: r'flooringCovering',
+      type: IsarType.string,
+    ),
+    r'flooringPrice': PropertySchema(
+      id: 24,
+      name: r'flooringPrice',
+      type: IsarType.string,
+    ),
     r'garbageRemoval': PropertySchema(
-      id: 20,
+      id: 25,
       name: r'garbageRemoval',
       type: IsarType.bool,
     ),
+    r'garbageRemovalPrice': PropertySchema(
+      id: 26,
+      name: r'garbageRemovalPrice',
+      type: IsarType.string,
+    ),
     r'gridDisassembly': PropertySchema(
-      id: 21,
+      id: 27,
       name: r'gridDisassembly',
       type: IsarType.bool,
     ),
+    r'gridDisassemblyPrice': PropertySchema(
+      id: 28,
+      name: r'gridDisassemblyPrice',
+      type: IsarType.string,
+    ),
     r'housingCoopNumber': PropertySchema(
-      id: 22,
+      id: 29,
       name: r'housingCoopNumber',
       type: IsarType.string,
     ),
     r'howDiscovered': PropertySchema(
-      id: 23,
+      id: 30,
       name: r'howDiscovered',
       type: IsarType.string,
     ),
     r'id': PropertySchema(
-      id: 24,
+      id: 31,
       name: r'id',
       type: IsarType.string,
     ),
     r'insulation': PropertySchema(
-      id: 25,
+      id: 32,
       name: r'insulation',
       type: IsarType.bool,
     ),
+    r'insulationPrice': PropertySchema(
+      id: 33,
+      name: r'insulationPrice',
+      type: IsarType.string,
+    ),
     r'leadId': PropertySchema(
-      id: 26,
+      id: 34,
       name: r'leadId',
       type: IsarType.string,
     ),
     r'measurer': PropertySchema(
-      id: 27,
+      id: 35,
       name: r'measurer',
       type: IsarType.string,
     ),
     r'parapetReinforcement': PropertySchema(
-      id: 28,
+      id: 36,
       name: r'parapetReinforcement',
       type: IsarType.bool,
     ),
+    r'parapetReinforcementPrice': PropertySchema(
+      id: 37,
+      name: r'parapetReinforcementPrice',
+      type: IsarType.string,
+    ),
     r'pdfFile': PropertySchema(
-      id: 29,
+      id: 38,
       name: r'pdfFile',
       type: IsarType.string,
     ),
     r'phoneNumberAdditional': PropertySchema(
-      id: 30,
+      id: 39,
       name: r'phoneNumberAdditional',
       type: IsarType.string,
     ),
     r'phoneNumberMain': PropertySchema(
-      id: 31,
+      id: 40,
       name: r'phoneNumberMain',
       type: IsarType.string,
     ),
     r'positions': PropertySchema(
-      id: 32,
+      id: 41,
       name: r'positions',
       type: IsarType.objectList,
       target: r'PositionDB',
     ),
     r'prepayment': PropertySchema(
-      id: 33,
+      id: 42,
       name: r'prepayment',
       type: IsarType.string,
     ),
     r'remoteId': PropertySchema(
-      id: 34,
+      id: 43,
       name: r'remoteId',
       type: IsarType.long,
     ),
     r'residentialComplex': PropertySchema(
-      id: 35,
+      id: 44,
       name: r'residentialComplex',
       type: IsarType.string,
     ),
     r'roofDisassembly': PropertySchema(
-      id: 36,
+      id: 45,
       name: r'roofDisassembly',
       type: IsarType.bool,
     ),
+    r'roofDisassemblyPrice': PropertySchema(
+      id: 46,
+      name: r'roofDisassemblyPrice',
+      type: IsarType.string,
+    ),
     r'screedDisassembly': PropertySchema(
-      id: 37,
+      id: 47,
       name: r'screedDisassembly',
       type: IsarType.bool,
     ),
+    r'screedDisassemblyPrice': PropertySchema(
+      id: 48,
+      name: r'screedDisassemblyPrice',
+      type: IsarType.string,
+    ),
     r'sealing': PropertySchema(
-      id: 38,
+      id: 49,
       name: r'sealing',
       type: IsarType.bool,
     ),
+    r'sealingPrice': PropertySchema(
+      id: 50,
+      name: r'sealingPrice',
+      type: IsarType.string,
+    ),
     r'slabExtension': PropertySchema(
-      id: 39,
+      id: 51,
       name: r'slabExtension',
       type: IsarType.bool,
     ),
+    r'slabExtensionPrice': PropertySchema(
+      id: 52,
+      name: r'slabExtensionPrice',
+      type: IsarType.string,
+    ),
     r'street': PropertySchema(
-      id: 40,
+      id: 53,
       name: r'street',
       type: IsarType.string,
     ),
     r'unloading': PropertySchema(
-      id: 41,
+      id: 54,
       name: r'unloading',
       type: IsarType.bool,
     ),
+    r'unloadingPrice': PropertySchema(
+      id: 55,
+      name: r'unloadingPrice',
+      type: IsarType.string,
+    ),
     r'vacuumCleaner': PropertySchema(
-      id: 42,
+      id: 56,
       name: r'vacuumCleaner',
       type: IsarType.bool,
     ),
     r'windowsillExtension': PropertySchema(
-      id: 43,
+      id: 57,
       name: r'windowsillExtension',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillExtensionEnumValueMap,
+    ),
+    r'windowsillExtensionPrice': PropertySchema(
+      id: 58,
+      name: r'windowsillExtensionPrice',
+      type: IsarType.string,
     )
   },
   estimateSize: _measurementDBEstimateSize,
@@ -297,18 +372,26 @@ int _measurementDBEstimateSize(
   bytesCount += 3 + object.clientName.length * 3;
   bytesCount += 3 + object.comment.length * 3;
   bytesCount += 3 + object.cost.length * 3;
+  bytesCount += 3 + object.deliveryPrice.length * 3;
   bytesCount += 3 + object.district.length * 3;
   bytesCount += 3 + object.doorphone.length * 3;
   bytesCount += 3 + object.elevator.name.length * 3;
   bytesCount += 3 + object.entrance.length * 3;
   bytesCount += 3 + object.estimatedAssemblyTime.length * 3;
+  bytesCount += 3 + object.extensionSheathingPrice.length * 3;
   bytesCount += 3 + object.flatStatus.name.length * 3;
   bytesCount += 3 + object.floor.length * 3;
+  bytesCount += 3 + object.flooringCovering.length * 3;
+  bytesCount += 3 + object.flooringPrice.length * 3;
+  bytesCount += 3 + object.garbageRemovalPrice.length * 3;
+  bytesCount += 3 + object.gridDisassemblyPrice.length * 3;
   bytesCount += 3 + object.housingCoopNumber.length * 3;
   bytesCount += 3 + object.howDiscovered.length * 3;
   bytesCount += 3 + object.id.length * 3;
+  bytesCount += 3 + object.insulationPrice.length * 3;
   bytesCount += 3 + object.leadId.length * 3;
   bytesCount += 3 + object.measurer.length * 3;
+  bytesCount += 3 + object.parapetReinforcementPrice.length * 3;
   {
     final value = object.pdfFile;
     if (value != null) {
@@ -327,8 +410,14 @@ int _measurementDBEstimateSize(
   }
   bytesCount += 3 + object.prepayment.length * 3;
   bytesCount += 3 + object.residentialComplex.length * 3;
+  bytesCount += 3 + object.roofDisassemblyPrice.length * 3;
+  bytesCount += 3 + object.screedDisassemblyPrice.length * 3;
+  bytesCount += 3 + object.sealingPrice.length * 3;
+  bytesCount += 3 + object.slabExtensionPrice.length * 3;
   bytesCount += 3 + object.street.length * 3;
+  bytesCount += 3 + object.unloadingPrice.length * 3;
   bytesCount += 3 + object.windowsillExtension.name.length * 3;
+  bytesCount += 3 + object.windowsillExtensionPrice.length * 3;
   return bytesCount;
 }
 
@@ -349,44 +438,59 @@ void _measurementDBSerialize(
   writer.writeString(offsets[8], object.cost);
   writer.writeDateTime(offsets[9], object.date);
   writer.writeBool(offsets[10], object.delivery);
-  writer.writeBool(offsets[11], object.disassembly);
-  writer.writeString(offsets[12], object.district);
-  writer.writeString(offsets[13], object.doorphone);
-  writer.writeString(offsets[14], object.elevator.name);
-  writer.writeString(offsets[15], object.entrance);
-  writer.writeString(offsets[16], object.estimatedAssemblyTime);
-  writer.writeBool(offsets[17], object.extensionSheathing);
-  writer.writeString(offsets[18], object.flatStatus.name);
-  writer.writeString(offsets[19], object.floor);
-  writer.writeBool(offsets[20], object.garbageRemoval);
-  writer.writeBool(offsets[21], object.gridDisassembly);
-  writer.writeString(offsets[22], object.housingCoopNumber);
-  writer.writeString(offsets[23], object.howDiscovered);
-  writer.writeString(offsets[24], object.id);
-  writer.writeBool(offsets[25], object.insulation);
-  writer.writeString(offsets[26], object.leadId);
-  writer.writeString(offsets[27], object.measurer);
-  writer.writeBool(offsets[28], object.parapetReinforcement);
-  writer.writeString(offsets[29], object.pdfFile);
-  writer.writeString(offsets[30], object.phoneNumberAdditional);
-  writer.writeString(offsets[31], object.phoneNumberMain);
+  writer.writeString(offsets[11], object.deliveryPrice);
+  writer.writeBool(offsets[12], object.disassembly);
+  writer.writeString(offsets[13], object.district);
+  writer.writeString(offsets[14], object.doorphone);
+  writer.writeString(offsets[15], object.elevator.name);
+  writer.writeString(offsets[16], object.entrance);
+  writer.writeString(offsets[17], object.estimatedAssemblyTime);
+  writer.writeBool(offsets[18], object.extensionSheathing);
+  writer.writeString(offsets[19], object.extensionSheathingPrice);
+  writer.writeString(offsets[20], object.flatStatus.name);
+  writer.writeString(offsets[21], object.floor);
+  writer.writeBool(offsets[22], object.flooring);
+  writer.writeString(offsets[23], object.flooringCovering);
+  writer.writeString(offsets[24], object.flooringPrice);
+  writer.writeBool(offsets[25], object.garbageRemoval);
+  writer.writeString(offsets[26], object.garbageRemovalPrice);
+  writer.writeBool(offsets[27], object.gridDisassembly);
+  writer.writeString(offsets[28], object.gridDisassemblyPrice);
+  writer.writeString(offsets[29], object.housingCoopNumber);
+  writer.writeString(offsets[30], object.howDiscovered);
+  writer.writeString(offsets[31], object.id);
+  writer.writeBool(offsets[32], object.insulation);
+  writer.writeString(offsets[33], object.insulationPrice);
+  writer.writeString(offsets[34], object.leadId);
+  writer.writeString(offsets[35], object.measurer);
+  writer.writeBool(offsets[36], object.parapetReinforcement);
+  writer.writeString(offsets[37], object.parapetReinforcementPrice);
+  writer.writeString(offsets[38], object.pdfFile);
+  writer.writeString(offsets[39], object.phoneNumberAdditional);
+  writer.writeString(offsets[40], object.phoneNumberMain);
   writer.writeObjectList<PositionDB>(
-    offsets[32],
+    offsets[41],
     allOffsets,
     PositionDBSchema.serialize,
     object.positions,
   );
-  writer.writeString(offsets[33], object.prepayment);
-  writer.writeLong(offsets[34], object.remoteId);
-  writer.writeString(offsets[35], object.residentialComplex);
-  writer.writeBool(offsets[36], object.roofDisassembly);
-  writer.writeBool(offsets[37], object.screedDisassembly);
-  writer.writeBool(offsets[38], object.sealing);
-  writer.writeBool(offsets[39], object.slabExtension);
-  writer.writeString(offsets[40], object.street);
-  writer.writeBool(offsets[41], object.unloading);
-  writer.writeBool(offsets[42], object.vacuumCleaner);
-  writer.writeString(offsets[43], object.windowsillExtension.name);
+  writer.writeString(offsets[42], object.prepayment);
+  writer.writeLong(offsets[43], object.remoteId);
+  writer.writeString(offsets[44], object.residentialComplex);
+  writer.writeBool(offsets[45], object.roofDisassembly);
+  writer.writeString(offsets[46], object.roofDisassemblyPrice);
+  writer.writeBool(offsets[47], object.screedDisassembly);
+  writer.writeString(offsets[48], object.screedDisassemblyPrice);
+  writer.writeBool(offsets[49], object.sealing);
+  writer.writeString(offsets[50], object.sealingPrice);
+  writer.writeBool(offsets[51], object.slabExtension);
+  writer.writeString(offsets[52], object.slabExtensionPrice);
+  writer.writeString(offsets[53], object.street);
+  writer.writeBool(offsets[54], object.unloading);
+  writer.writeString(offsets[55], object.unloadingPrice);
+  writer.writeBool(offsets[56], object.vacuumCleaner);
+  writer.writeString(offsets[57], object.windowsillExtension.name);
+  writer.writeString(offsets[58], object.windowsillExtensionPrice);
 }
 
 MeasurementDB _measurementDBDeserialize(
@@ -411,52 +515,67 @@ MeasurementDB _measurementDBDeserialize(
   object.cost = reader.readString(offsets[8]);
   object.date = reader.readDateTime(offsets[9]);
   object.delivery = reader.readBool(offsets[10]);
-  object.disassembly = reader.readBool(offsets[11]);
-  object.district = reader.readString(offsets[12]);
-  object.doorphone = reader.readString(offsets[13]);
+  object.deliveryPrice = reader.readString(offsets[11]);
+  object.disassembly = reader.readBool(offsets[12]);
+  object.district = reader.readString(offsets[13]);
+  object.doorphone = reader.readString(offsets[14]);
   object.elevator = _MeasurementDBelevatorValueEnumMap[
-          reader.readStringOrNull(offsets[14])] ??
+          reader.readStringOrNull(offsets[15])] ??
       ElevatorOptions.none;
-  object.entrance = reader.readString(offsets[15]);
-  object.estimatedAssemblyTime = reader.readString(offsets[16]);
-  object.extensionSheathing = reader.readBool(offsets[17]);
+  object.entrance = reader.readString(offsets[16]);
+  object.estimatedAssemblyTime = reader.readString(offsets[17]);
+  object.extensionSheathing = reader.readBool(offsets[18]);
+  object.extensionSheathingPrice = reader.readString(offsets[19]);
   object.flatStatus = _MeasurementDBflatStatusValueEnumMap[
-          reader.readStringOrNull(offsets[18])] ??
+          reader.readStringOrNull(offsets[20])] ??
       FlatStatus.none;
-  object.floor = reader.readString(offsets[19]);
-  object.garbageRemoval = reader.readBool(offsets[20]);
-  object.gridDisassembly = reader.readBool(offsets[21]);
-  object.housingCoopNumber = reader.readString(offsets[22]);
-  object.howDiscovered = reader.readString(offsets[23]);
-  object.id = reader.readString(offsets[24]);
-  object.insulation = reader.readBool(offsets[25]);
-  object.leadId = reader.readString(offsets[26]);
+  object.floor = reader.readString(offsets[21]);
+  object.flooring = reader.readBool(offsets[22]);
+  object.flooringCovering = reader.readString(offsets[23]);
+  object.flooringPrice = reader.readString(offsets[24]);
+  object.garbageRemoval = reader.readBool(offsets[25]);
+  object.garbageRemovalPrice = reader.readString(offsets[26]);
+  object.gridDisassembly = reader.readBool(offsets[27]);
+  object.gridDisassemblyPrice = reader.readString(offsets[28]);
+  object.housingCoopNumber = reader.readString(offsets[29]);
+  object.howDiscovered = reader.readString(offsets[30]);
+  object.id = reader.readString(offsets[31]);
+  object.insulation = reader.readBool(offsets[32]);
+  object.insulationPrice = reader.readString(offsets[33]);
+  object.leadId = reader.readString(offsets[34]);
   object.localId = id;
-  object.measurer = reader.readString(offsets[27]);
-  object.parapetReinforcement = reader.readBool(offsets[28]);
-  object.pdfFile = reader.readStringOrNull(offsets[29]);
-  object.phoneNumberAdditional = reader.readString(offsets[30]);
-  object.phoneNumberMain = reader.readString(offsets[31]);
+  object.measurer = reader.readString(offsets[35]);
+  object.parapetReinforcement = reader.readBool(offsets[36]);
+  object.parapetReinforcementPrice = reader.readString(offsets[37]);
+  object.pdfFile = reader.readStringOrNull(offsets[38]);
+  object.phoneNumberAdditional = reader.readString(offsets[39]);
+  object.phoneNumberMain = reader.readString(offsets[40]);
   object.positions = reader.readObjectList<PositionDB>(
-        offsets[32],
+        offsets[41],
         PositionDBSchema.deserialize,
         allOffsets,
         PositionDB(),
       ) ??
       [];
-  object.prepayment = reader.readString(offsets[33]);
-  object.remoteId = reader.readLongOrNull(offsets[34]);
-  object.residentialComplex = reader.readString(offsets[35]);
-  object.roofDisassembly = reader.readBool(offsets[36]);
-  object.screedDisassembly = reader.readBool(offsets[37]);
-  object.sealing = reader.readBool(offsets[38]);
-  object.slabExtension = reader.readBool(offsets[39]);
-  object.street = reader.readString(offsets[40]);
-  object.unloading = reader.readBool(offsets[41]);
-  object.vacuumCleaner = reader.readBool(offsets[42]);
+  object.prepayment = reader.readString(offsets[42]);
+  object.remoteId = reader.readLongOrNull(offsets[43]);
+  object.residentialComplex = reader.readString(offsets[44]);
+  object.roofDisassembly = reader.readBool(offsets[45]);
+  object.roofDisassemblyPrice = reader.readString(offsets[46]);
+  object.screedDisassembly = reader.readBool(offsets[47]);
+  object.screedDisassemblyPrice = reader.readString(offsets[48]);
+  object.sealing = reader.readBool(offsets[49]);
+  object.sealingPrice = reader.readString(offsets[50]);
+  object.slabExtension = reader.readBool(offsets[51]);
+  object.slabExtensionPrice = reader.readString(offsets[52]);
+  object.street = reader.readString(offsets[53]);
+  object.unloading = reader.readBool(offsets[54]);
+  object.unloadingPrice = reader.readString(offsets[55]);
+  object.vacuumCleaner = reader.readBool(offsets[56]);
   object.windowsillExtension = _MeasurementDBwindowsillExtensionValueEnumMap[
-          reader.readStringOrNull(offsets[43])] ??
+          reader.readStringOrNull(offsets[57])] ??
       WindowsillExtension.none;
+  object.windowsillExtensionPrice = reader.readString(offsets[58]);
   return object;
 }
 
@@ -494,33 +613,33 @@ P _measurementDBDeserializeProp<P>(
     case 10:
       return (reader.readBool(offset)) as P;
     case 11:
-      return (reader.readBool(offset)) as P;
-    case 12:
       return (reader.readString(offset)) as P;
+    case 12:
+      return (reader.readBool(offset)) as P;
     case 13:
       return (reader.readString(offset)) as P;
     case 14:
+      return (reader.readString(offset)) as P;
+    case 15:
       return (_MeasurementDBelevatorValueEnumMap[
               reader.readStringOrNull(offset)] ??
           ElevatorOptions.none) as P;
-    case 15:
-      return (reader.readString(offset)) as P;
     case 16:
       return (reader.readString(offset)) as P;
     case 17:
-      return (reader.readBool(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 18:
-      return (_MeasurementDBflatStatusValueEnumMap[
-              reader.readStringOrNull(offset)] ??
-          FlatStatus.none) as P;
+      return (reader.readBool(offset)) as P;
     case 19:
       return (reader.readString(offset)) as P;
     case 20:
-      return (reader.readBool(offset)) as P;
+      return (_MeasurementDBflatStatusValueEnumMap[
+              reader.readStringOrNull(offset)] ??
+          FlatStatus.none) as P;
     case 21:
-      return (reader.readBool(offset)) as P;
-    case 22:
       return (reader.readString(offset)) as P;
+    case 22:
+      return (reader.readBool(offset)) as P;
     case 23:
       return (reader.readString(offset)) as P;
     case 24:
@@ -530,16 +649,34 @@ P _measurementDBDeserializeProp<P>(
     case 26:
       return (reader.readString(offset)) as P;
     case 27:
-      return (reader.readString(offset)) as P;
-    case 28:
       return (reader.readBool(offset)) as P;
+    case 28:
+      return (reader.readString(offset)) as P;
     case 29:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 30:
       return (reader.readString(offset)) as P;
     case 31:
       return (reader.readString(offset)) as P;
     case 32:
+      return (reader.readBool(offset)) as P;
+    case 33:
+      return (reader.readString(offset)) as P;
+    case 34:
+      return (reader.readString(offset)) as P;
+    case 35:
+      return (reader.readString(offset)) as P;
+    case 36:
+      return (reader.readBool(offset)) as P;
+    case 37:
+      return (reader.readString(offset)) as P;
+    case 38:
+      return (reader.readStringOrNull(offset)) as P;
+    case 39:
+      return (reader.readString(offset)) as P;
+    case 40:
+      return (reader.readString(offset)) as P;
+    case 41:
       return (reader.readObjectList<PositionDB>(
             offset,
             PositionDBSchema.deserialize,
@@ -547,30 +684,42 @@ P _measurementDBDeserializeProp<P>(
             PositionDB(),
           ) ??
           []) as P;
-    case 33:
-      return (reader.readString(offset)) as P;
-    case 34:
-      return (reader.readLongOrNull(offset)) as P;
-    case 35:
-      return (reader.readString(offset)) as P;
-    case 36:
-      return (reader.readBool(offset)) as P;
-    case 37:
-      return (reader.readBool(offset)) as P;
-    case 38:
-      return (reader.readBool(offset)) as P;
-    case 39:
-      return (reader.readBool(offset)) as P;
-    case 40:
-      return (reader.readString(offset)) as P;
-    case 41:
-      return (reader.readBool(offset)) as P;
     case 42:
-      return (reader.readBool(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 43:
+      return (reader.readLongOrNull(offset)) as P;
+    case 44:
+      return (reader.readString(offset)) as P;
+    case 45:
+      return (reader.readBool(offset)) as P;
+    case 46:
+      return (reader.readString(offset)) as P;
+    case 47:
+      return (reader.readBool(offset)) as P;
+    case 48:
+      return (reader.readString(offset)) as P;
+    case 49:
+      return (reader.readBool(offset)) as P;
+    case 50:
+      return (reader.readString(offset)) as P;
+    case 51:
+      return (reader.readBool(offset)) as P;
+    case 52:
+      return (reader.readString(offset)) as P;
+    case 53:
+      return (reader.readString(offset)) as P;
+    case 54:
+      return (reader.readBool(offset)) as P;
+    case 55:
+      return (reader.readString(offset)) as P;
+    case 56:
+      return (reader.readBool(offset)) as P;
+    case 57:
       return (_MeasurementDBwindowsillExtensionValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillExtension.none) as P;
+    case 58:
+      return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -2124,6 +2273,142 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      deliveryPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'deliveryPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      deliveryPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'deliveryPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      deliveryPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'deliveryPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      deliveryPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'deliveryPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      deliveryPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'deliveryPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      deliveryPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'deliveryPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      deliveryPriceContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'deliveryPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      deliveryPriceMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'deliveryPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      deliveryPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'deliveryPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      deliveryPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'deliveryPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       disassemblyEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -2825,6 +3110,144 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      extensionSheathingPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'extensionSheathingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      extensionSheathingPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'extensionSheathingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      extensionSheathingPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'extensionSheathingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      extensionSheathingPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'extensionSheathingPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      extensionSheathingPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'extensionSheathingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      extensionSheathingPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'extensionSheathingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      extensionSheathingPriceContains(String value,
+          {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'extensionSheathingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      extensionSheathingPriceMatches(String pattern,
+          {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'extensionSheathingPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      extensionSheathingPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'extensionSheathingPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      extensionSheathingPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'extensionSheathingPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       flatStatusEqualTo(
     FlatStatus value, {
     bool caseSensitive = true,
@@ -3097,6 +3520,288 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'flooring',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringCoveringEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'flooringCovering',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringCoveringGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'flooringCovering',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringCoveringLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'flooringCovering',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringCoveringBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'flooringCovering',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringCoveringStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'flooringCovering',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringCoveringEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'flooringCovering',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringCoveringContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'flooringCovering',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringCoveringMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'flooringCovering',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringCoveringIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'flooringCovering',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringCoveringIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'flooringCovering',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'flooringPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'flooringPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'flooringPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'flooringPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'flooringPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'flooringPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringPriceContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'flooringPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringPriceMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'flooringPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'flooringPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      flooringPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'flooringPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       garbageRemovalEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -3107,11 +3812,283 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      garbageRemovalPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'garbageRemovalPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      garbageRemovalPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'garbageRemovalPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      garbageRemovalPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'garbageRemovalPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      garbageRemovalPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'garbageRemovalPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      garbageRemovalPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'garbageRemovalPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      garbageRemovalPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'garbageRemovalPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      garbageRemovalPriceContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'garbageRemovalPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      garbageRemovalPriceMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'garbageRemovalPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      garbageRemovalPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'garbageRemovalPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      garbageRemovalPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'garbageRemovalPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       gridDisassemblyEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'gridDisassembly',
         value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      gridDisassemblyPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'gridDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      gridDisassemblyPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'gridDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      gridDisassemblyPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'gridDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      gridDisassemblyPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'gridDisassemblyPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      gridDisassemblyPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'gridDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      gridDisassemblyPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'gridDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      gridDisassemblyPriceContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'gridDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      gridDisassemblyPriceMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'gridDisassemblyPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      gridDisassemblyPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'gridDisassemblyPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      gridDisassemblyPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'gridDisassemblyPrice',
+        value: '',
       ));
     });
   }
@@ -3533,6 +4510,142 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      insulationPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'insulationPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      insulationPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'insulationPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      insulationPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'insulationPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      insulationPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'insulationPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      insulationPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'insulationPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      insulationPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'insulationPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      insulationPriceContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'insulationPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      insulationPriceMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'insulationPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      insulationPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'insulationPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      insulationPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'insulationPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       leadIdEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -3884,6 +4997,144 @@ extension MeasurementDBQueryFilter
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'parapetReinforcement',
         value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      parapetReinforcementPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'parapetReinforcementPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      parapetReinforcementPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'parapetReinforcementPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      parapetReinforcementPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'parapetReinforcementPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      parapetReinforcementPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'parapetReinforcementPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      parapetReinforcementPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'parapetReinforcementPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      parapetReinforcementPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'parapetReinforcementPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      parapetReinforcementPriceContains(String value,
+          {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'parapetReinforcementPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      parapetReinforcementPriceMatches(String pattern,
+          {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'parapetReinforcementPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      parapetReinforcementPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'parapetReinforcementPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      parapetReinforcementPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'parapetReinforcementPrice',
+        value: '',
       ));
     });
   }
@@ -4761,11 +6012,285 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      roofDisassemblyPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'roofDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      roofDisassemblyPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'roofDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      roofDisassemblyPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'roofDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      roofDisassemblyPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'roofDisassemblyPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      roofDisassemblyPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'roofDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      roofDisassemblyPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'roofDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      roofDisassemblyPriceContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'roofDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      roofDisassemblyPriceMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'roofDisassemblyPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      roofDisassemblyPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'roofDisassemblyPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      roofDisassemblyPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'roofDisassemblyPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       screedDisassemblyEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'screedDisassembly',
         value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      screedDisassemblyPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'screedDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      screedDisassemblyPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'screedDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      screedDisassemblyPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'screedDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      screedDisassemblyPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'screedDisassemblyPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      screedDisassemblyPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'screedDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      screedDisassemblyPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'screedDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      screedDisassemblyPriceContains(String value,
+          {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'screedDisassemblyPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      screedDisassemblyPriceMatches(String pattern,
+          {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'screedDisassemblyPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      screedDisassemblyPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'screedDisassemblyPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      screedDisassemblyPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'screedDisassemblyPrice',
+        value: '',
       ));
     });
   }
@@ -4781,11 +6306,283 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      sealingPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'sealingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      sealingPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'sealingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      sealingPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'sealingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      sealingPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'sealingPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      sealingPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'sealingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      sealingPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'sealingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      sealingPriceContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'sealingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      sealingPriceMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'sealingPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      sealingPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'sealingPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      sealingPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'sealingPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       slabExtensionEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'slabExtension',
         value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      slabExtensionPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'slabExtensionPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      slabExtensionPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'slabExtensionPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      slabExtensionPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'slabExtensionPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      slabExtensionPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'slabExtensionPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      slabExtensionPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'slabExtensionPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      slabExtensionPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'slabExtensionPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      slabExtensionPriceContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'slabExtensionPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      slabExtensionPriceMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'slabExtensionPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      slabExtensionPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'slabExtensionPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      slabExtensionPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'slabExtensionPrice',
+        value: '',
       ));
     });
   }
@@ -4937,6 +6734,142 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      unloadingPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'unloadingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      unloadingPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'unloadingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      unloadingPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'unloadingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      unloadingPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'unloadingPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      unloadingPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'unloadingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      unloadingPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'unloadingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      unloadingPriceContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'unloadingPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      unloadingPriceMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'unloadingPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      unloadingPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'unloadingPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      unloadingPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'unloadingPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       vacuumCleanerEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -5077,6 +7010,144 @@ extension MeasurementDBQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'windowsillExtension',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      windowsillExtensionPriceEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'windowsillExtensionPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      windowsillExtensionPriceGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'windowsillExtensionPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      windowsillExtensionPriceLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'windowsillExtensionPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      windowsillExtensionPriceBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'windowsillExtensionPrice',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      windowsillExtensionPriceStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'windowsillExtensionPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      windowsillExtensionPriceEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'windowsillExtensionPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      windowsillExtensionPriceContains(String value,
+          {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'windowsillExtensionPrice',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      windowsillExtensionPriceMatches(String pattern,
+          {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'windowsillExtensionPrice',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      windowsillExtensionPriceIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'windowsillExtensionPrice',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      windowsillExtensionPriceIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'windowsillExtensionPrice',
         value: '',
       ));
     });
@@ -5237,6 +7308,20 @@ extension MeasurementDBQuerySortBy
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByDeliveryPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deliveryPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByDeliveryPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deliveryPrice', Sort.desc);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> sortByDisassembly() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'disassembly', Sort.asc);
@@ -5330,6 +7415,20 @@ extension MeasurementDBQuerySortBy
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByExtensionSheathingPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'extensionSheathingPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByExtensionSheathingPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'extensionSheathingPrice', Sort.desc);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> sortByFlatStatus() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'flatStatus', Sort.asc);
@@ -5355,6 +7454,47 @@ extension MeasurementDBQuerySortBy
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> sortByFlooring() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'flooring', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByFlooringDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'flooring', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByFlooringCovering() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'flooringCovering', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByFlooringCoveringDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'flooringCovering', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByFlooringPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'flooringPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByFlooringPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'flooringPrice', Sort.desc);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       sortByGarbageRemoval() {
     return QueryBuilder.apply(this, (query) {
@@ -5370,6 +7510,20 @@ extension MeasurementDBQuerySortBy
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByGarbageRemovalPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'garbageRemovalPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByGarbageRemovalPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'garbageRemovalPrice', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       sortByGridDisassembly() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'gridDisassembly', Sort.asc);
@@ -5380,6 +7534,20 @@ extension MeasurementDBQuerySortBy
       sortByGridDisassemblyDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'gridDisassembly', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByGridDisassemblyPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'gridDisassemblyPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByGridDisassemblyPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'gridDisassemblyPrice', Sort.desc);
     });
   }
 
@@ -5436,6 +7604,20 @@ extension MeasurementDBQuerySortBy
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByInsulationPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'insulationPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByInsulationPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'insulationPrice', Sort.desc);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> sortByLeadId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'leadId', Sort.asc);
@@ -5472,6 +7654,20 @@ extension MeasurementDBQuerySortBy
       sortByParapetReinforcementDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'parapetReinforcement', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByParapetReinforcementPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'parapetReinforcementPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByParapetReinforcementPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'parapetReinforcementPrice', Sort.desc);
     });
   }
 
@@ -5570,6 +7766,20 @@ extension MeasurementDBQuerySortBy
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByRoofDisassemblyPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'roofDisassemblyPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByRoofDisassemblyPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'roofDisassemblyPrice', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       sortByScreedDisassembly() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'screedDisassembly', Sort.asc);
@@ -5580,6 +7790,20 @@ extension MeasurementDBQuerySortBy
       sortByScreedDisassemblyDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'screedDisassembly', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByScreedDisassemblyPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'screedDisassemblyPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByScreedDisassemblyPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'screedDisassemblyPrice', Sort.desc);
     });
   }
 
@@ -5596,6 +7820,20 @@ extension MeasurementDBQuerySortBy
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortBySealingPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sealingPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortBySealingPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sealingPrice', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       sortBySlabExtension() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'slabExtension', Sort.asc);
@@ -5606,6 +7844,20 @@ extension MeasurementDBQuerySortBy
       sortBySlabExtensionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'slabExtension', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortBySlabExtensionPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'slabExtensionPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortBySlabExtensionPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'slabExtensionPrice', Sort.desc);
     });
   }
 
@@ -5635,6 +7887,20 @@ extension MeasurementDBQuerySortBy
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByUnloadingPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'unloadingPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByUnloadingPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'unloadingPrice', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       sortByVacuumCleaner() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'vacuumCleaner', Sort.asc);
@@ -5659,6 +7925,20 @@ extension MeasurementDBQuerySortBy
       sortByWindowsillExtensionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'windowsillExtension', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByWindowsillExtensionPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'windowsillExtensionPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortByWindowsillExtensionPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'windowsillExtensionPrice', Sort.desc);
     });
   }
 }
@@ -5804,6 +8084,20 @@ extension MeasurementDBQuerySortThenBy
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByDeliveryPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deliveryPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByDeliveryPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'deliveryPrice', Sort.desc);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByDisassembly() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'disassembly', Sort.asc);
@@ -5897,6 +8191,20 @@ extension MeasurementDBQuerySortThenBy
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByExtensionSheathingPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'extensionSheathingPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByExtensionSheathingPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'extensionSheathingPrice', Sort.desc);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByFlatStatus() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'flatStatus', Sort.asc);
@@ -5922,6 +8230,47 @@ extension MeasurementDBQuerySortThenBy
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByFlooring() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'flooring', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByFlooringDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'flooring', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByFlooringCovering() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'flooringCovering', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByFlooringCoveringDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'flooringCovering', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByFlooringPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'flooringPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByFlooringPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'flooringPrice', Sort.desc);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       thenByGarbageRemoval() {
     return QueryBuilder.apply(this, (query) {
@@ -5937,6 +8286,20 @@ extension MeasurementDBQuerySortThenBy
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByGarbageRemovalPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'garbageRemovalPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByGarbageRemovalPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'garbageRemovalPrice', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       thenByGridDisassembly() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'gridDisassembly', Sort.asc);
@@ -5947,6 +8310,20 @@ extension MeasurementDBQuerySortThenBy
       thenByGridDisassemblyDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'gridDisassembly', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByGridDisassemblyPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'gridDisassemblyPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByGridDisassemblyPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'gridDisassemblyPrice', Sort.desc);
     });
   }
 
@@ -6003,6 +8380,20 @@ extension MeasurementDBQuerySortThenBy
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByInsulationPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'insulationPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByInsulationPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'insulationPrice', Sort.desc);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy> thenByLeadId() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'leadId', Sort.asc);
@@ -6051,6 +8442,20 @@ extension MeasurementDBQuerySortThenBy
       thenByParapetReinforcementDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'parapetReinforcement', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByParapetReinforcementPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'parapetReinforcementPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByParapetReinforcementPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'parapetReinforcementPrice', Sort.desc);
     });
   }
 
@@ -6149,6 +8554,20 @@ extension MeasurementDBQuerySortThenBy
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByRoofDisassemblyPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'roofDisassemblyPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByRoofDisassemblyPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'roofDisassemblyPrice', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       thenByScreedDisassembly() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'screedDisassembly', Sort.asc);
@@ -6159,6 +8578,20 @@ extension MeasurementDBQuerySortThenBy
       thenByScreedDisassemblyDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'screedDisassembly', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByScreedDisassemblyPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'screedDisassemblyPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByScreedDisassemblyPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'screedDisassemblyPrice', Sort.desc);
     });
   }
 
@@ -6175,6 +8608,20 @@ extension MeasurementDBQuerySortThenBy
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenBySealingPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sealingPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenBySealingPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'sealingPrice', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       thenBySlabExtension() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'slabExtension', Sort.asc);
@@ -6185,6 +8632,20 @@ extension MeasurementDBQuerySortThenBy
       thenBySlabExtensionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'slabExtension', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenBySlabExtensionPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'slabExtensionPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenBySlabExtensionPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'slabExtensionPrice', Sort.desc);
     });
   }
 
@@ -6214,6 +8675,20 @@ extension MeasurementDBQuerySortThenBy
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByUnloadingPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'unloadingPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByUnloadingPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'unloadingPrice', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       thenByVacuumCleaner() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'vacuumCleaner', Sort.asc);
@@ -6238,6 +8713,20 @@ extension MeasurementDBQuerySortThenBy
       thenByWindowsillExtensionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'windowsillExtension', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByWindowsillExtensionPrice() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'windowsillExtensionPrice', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenByWindowsillExtensionPriceDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'windowsillExtensionPrice', Sort.desc);
     });
   }
 }
@@ -6319,6 +8808,14 @@ extension MeasurementDBQueryWhereDistinct
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctByDeliveryPrice(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'deliveryPrice',
+          caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
       distinctByDisassembly() {
     return QueryBuilder.apply(this, (query) {
@@ -6369,6 +8866,14 @@ extension MeasurementDBQueryWhereDistinct
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctByExtensionSheathingPrice({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'extensionSheathingPrice',
+          caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctByFlatStatus(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -6383,6 +8888,28 @@ extension MeasurementDBQueryWhereDistinct
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctByFlooring() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'flooring');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctByFlooringCovering({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'flooringCovering',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctByFlooringPrice(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'flooringPrice',
+          caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
       distinctByGarbageRemoval() {
     return QueryBuilder.apply(this, (query) {
@@ -6391,9 +8918,25 @@ extension MeasurementDBQueryWhereDistinct
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctByGarbageRemovalPrice({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'garbageRemovalPrice',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
       distinctByGridDisassembly() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'gridDisassembly');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctByGridDisassemblyPrice({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'gridDisassemblyPrice',
+          caseSensitive: caseSensitive);
     });
   }
 
@@ -6426,6 +8969,14 @@ extension MeasurementDBQueryWhereDistinct
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctByInsulationPrice({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'insulationPrice',
+          caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctByLeadId(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -6444,6 +8995,14 @@ extension MeasurementDBQueryWhereDistinct
       distinctByParapetReinforcement() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'parapetReinforcement');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctByParapetReinforcementPrice({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'parapetReinforcementPrice',
+          caseSensitive: caseSensitive);
     });
   }
 
@@ -6499,9 +9058,25 @@ extension MeasurementDBQueryWhereDistinct
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctByRoofDisassemblyPrice({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'roofDisassemblyPrice',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
       distinctByScreedDisassembly() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'screedDisassembly');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctByScreedDisassemblyPrice({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'screedDisassemblyPrice',
+          caseSensitive: caseSensitive);
     });
   }
 
@@ -6511,10 +9086,25 @@ extension MeasurementDBQueryWhereDistinct
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctBySealingPrice(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'sealingPrice', caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
       distinctBySlabExtension() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'slabExtension');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctBySlabExtensionPrice({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'slabExtensionPrice',
+          caseSensitive: caseSensitive);
     });
   }
 
@@ -6532,6 +9122,14 @@ extension MeasurementDBQueryWhereDistinct
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctByUnloadingPrice({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'unloadingPrice',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
       distinctByVacuumCleaner() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'vacuumCleaner');
@@ -6542,6 +9140,14 @@ extension MeasurementDBQueryWhereDistinct
       distinctByWindowsillExtension({bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'windowsillExtension',
+          caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
+      distinctByWindowsillExtensionPrice({bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'windowsillExtensionPrice',
           caseSensitive: caseSensitive);
     });
   }
@@ -6623,6 +9229,13 @@ extension MeasurementDBQueryProperty
     });
   }
 
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      deliveryPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'deliveryPrice');
+    });
+  }
+
   QueryBuilder<MeasurementDB, bool, QQueryOperations> disassemblyProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'disassembly');
@@ -6668,6 +9281,13 @@ extension MeasurementDBQueryProperty
     });
   }
 
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      extensionSheathingPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'extensionSheathingPrice');
+    });
+  }
+
   QueryBuilder<MeasurementDB, FlatStatus, QQueryOperations>
       flatStatusProperty() {
     return QueryBuilder.apply(this, (query) {
@@ -6681,9 +9301,36 @@ extension MeasurementDBQueryProperty
     });
   }
 
+  QueryBuilder<MeasurementDB, bool, QQueryOperations> flooringProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'flooring');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      flooringCoveringProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'flooringCovering');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      flooringPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'flooringPrice');
+    });
+  }
+
   QueryBuilder<MeasurementDB, bool, QQueryOperations> garbageRemovalProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'garbageRemoval');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      garbageRemovalPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'garbageRemovalPrice');
     });
   }
 
@@ -6691,6 +9338,13 @@ extension MeasurementDBQueryProperty
       gridDisassemblyProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'gridDisassembly');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      gridDisassemblyPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'gridDisassemblyPrice');
     });
   }
 
@@ -6720,6 +9374,13 @@ extension MeasurementDBQueryProperty
     });
   }
 
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      insulationPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'insulationPrice');
+    });
+  }
+
   QueryBuilder<MeasurementDB, String, QQueryOperations> leadIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'leadId');
@@ -6736,6 +9397,13 @@ extension MeasurementDBQueryProperty
       parapetReinforcementProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'parapetReinforcement');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      parapetReinforcementPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'parapetReinforcementPrice');
     });
   }
 
@@ -6792,10 +9460,24 @@ extension MeasurementDBQueryProperty
     });
   }
 
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      roofDisassemblyPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'roofDisassemblyPrice');
+    });
+  }
+
   QueryBuilder<MeasurementDB, bool, QQueryOperations>
       screedDisassemblyProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'screedDisassembly');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      screedDisassemblyPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'screedDisassemblyPrice');
     });
   }
 
@@ -6805,9 +9487,22 @@ extension MeasurementDBQueryProperty
     });
   }
 
+  QueryBuilder<MeasurementDB, String, QQueryOperations> sealingPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'sealingPrice');
+    });
+  }
+
   QueryBuilder<MeasurementDB, bool, QQueryOperations> slabExtensionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'slabExtension');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      slabExtensionPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'slabExtensionPrice');
     });
   }
 
@@ -6823,6 +9518,13 @@ extension MeasurementDBQueryProperty
     });
   }
 
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      unloadingPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'unloadingPrice');
+    });
+  }
+
   QueryBuilder<MeasurementDB, bool, QQueryOperations> vacuumCleanerProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'vacuumCleaner');
@@ -6833,6 +9535,13 @@ extension MeasurementDBQueryProperty
       windowsillExtensionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'windowsillExtension');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, String, QQueryOperations>
+      windowsillExtensionPriceProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'windowsillExtensionPrice');
     });
   }
 }

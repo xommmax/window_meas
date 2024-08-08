@@ -58,39 +58,42 @@ class MeasurementDB {
   late bool disassembly;
   @Default(false)
   late bool screedDisassembly;
+  @Default('')
+  late String screedDisassemblyPrice;
   @Default(false)
   late bool gridDisassembly;
+  @Default('')
+  late String gridDisassemblyPrice;
   @Default(false)
   late bool roofDisassembly;
+  @Default('')
+  late String roofDisassemblyPrice;
   @Default(false)
   late bool delivery;
+  @Default('')
+  late String deliveryPrice;
   @Default(false)
   late bool unloading;
+  @Default('')
+  late String unloadingPrice;
+  @Default(false)
+  late bool garbageRemoval;
+  @Default('')
+  late String garbageRemovalPrice;
+  @Default(false)
+  late bool sealing;
+  @Default('')
+  late String sealingPrice;
   @Enumerated(EnumType.name)
   @Default(BuildingType.none)
   late BuildingType buildingType;
   @Enumerated(EnumType.name)
   @Default(FlatStatus.none)
   late FlatStatus flatStatus;
-  @Default(false)
-  late bool garbageRemoval;
   @Enumerated(EnumType.name)
   @Default(ElevatorOptions.none)
   late ElevatorOptions elevator;
 
-  @Default(false)
-  late bool parapetReinforcement;
-  @Enumerated(EnumType.name)
-  @Default(WindowsillExtension.none)
-  late WindowsillExtension windowsillExtension;
-  @Default(false)
-  late bool slabExtension;
-  @Default(false)
-  late bool extensionSheathing;
-  @Default(false)
-  late bool insulation;
-  @Default(false)
-  late bool sealing;
   @Default('')
   late String cost;
   @Default('')
@@ -111,4 +114,33 @@ class MeasurementDB {
   late String measurer;
   @Default([])
   late List<PositionDB> positions;
+
+  // Other work
+  @Default(false)
+  late bool parapetReinforcement;
+  @Default('')
+  late String parapetReinforcementPrice;
+  @Enumerated(EnumType.name)
+  @Default(WindowsillExtension.none)
+  late WindowsillExtension windowsillExtension;
+  @Default('')
+  late String windowsillExtensionPrice;
+  @Default(false)
+  late bool slabExtension;
+  @Default('')
+  late String slabExtensionPrice;
+  @Default(false)
+  late bool extensionSheathing;
+  @Default('')
+  late String extensionSheathingPrice;
+  @Default(false)
+  late bool insulation;
+  @Default('')
+  late String insulationPrice;
+  @Default(false)
+  late bool flooring;
+  @Default('')
+  late String flooringCovering;
+  @Default('')
+  late String flooringPrice;
 }
