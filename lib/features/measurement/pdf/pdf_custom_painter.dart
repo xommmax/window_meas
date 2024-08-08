@@ -181,7 +181,7 @@ class PdfCustomPainter {
 
       canvas.setColor(PdfColors.red);
       canvas.drawString(
-        canvas.defaultFont!,
+        PdfFont.helveticaBold(context.document),
         gridSize,
         text,
         textOffset.dx,
