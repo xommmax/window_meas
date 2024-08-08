@@ -2,22 +2,17 @@ import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 import 'package:window_meas/features/measurement/data/db/ds/meas_local_ds.dart';
-import 'package:window_meas/features/measurement/data/remote/ds/meas_remote_ds.dart';
+import 'package:window_meas/features/measurement/data/remote/meas_remote_ds.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
-import 'package:window_meas/features/measurement/data/remote/model/measurement_dto.dart';
 import 'package:window_meas/features/profile/settings/data/ds/settings_local_ds.dart';
 import 'package:window_meas/features/profile/settings/data/model/settings_db.dart';
 
 abstract class MeasurementRepository {
   Future<void> addLocalMeasurement(Measurement measurement);
 
-  Future<void> addRemoteMeasurement(Measurement measurement);
-
   Future<List<Measurement>> getLocalMeasurements();
 
   Future<Measurement?> getLocalMeasurement(String id);
-
-  Future<List<Measurement>> getRemoteMeasurements();
 
   Future<void> updateLocalMeasurement(Measurement measurement);
 
@@ -44,18 +39,6 @@ class MeasurementRepositoryImpl implements MeasurementRepository {
       local.addMeasurement(measurement.toDB());
 
   @override
-  Future<void> addRemoteMeasurement(Measurement measurement) async {
-    final dto = MeasurementDTO.fromDomain(measurement);
-
-    if (measurement.remoteId == null) {
-      final remoteId = await remote.addMeasurement(dto);
-      await local.updateMeasurement(measurement.copyWith(remoteId: remoteId).toDB());
-    } else {
-      await remote.updateMeasurement(dto);
-    }
-  }
-
-  @override
   Future<List<Measurement>> getLocalMeasurements() async {
     final list = await local.getMeasurements();
     return list.map((e) => Measurement.fromDB(e)).toList();
@@ -65,12 +48,6 @@ class MeasurementRepositoryImpl implements MeasurementRepository {
   Future<Measurement?> getLocalMeasurement(String id) async {
     final db = await local.getMeasurement(id);
     return db != null ? Measurement.fromDB(db) : null;
-  }
-
-  @override
-  Future<List<Measurement>> getRemoteMeasurements() async {
-    final list = await remote.getMeasurements();
-    return list.map((e) => e.toDomain()).toList();
   }
 
   @override

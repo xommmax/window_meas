@@ -27,12 +27,6 @@ class MeasurementListView extends StatelessWidget {
         builder: (context, state) {
           Widget listWidget = _MeasurementList(state.measurements, state.isAdminModeEnabled);
 
-          if (state.isAdminModeEnabled) {
-            listWidget = RefreshIndicator(
-              onRefresh: context.read<MeasurementListCubit>().getRemoteMeasurements,
-              child: listWidget,
-            );
-          }
           return Scaffold(
             body: SafeArea(
               child: listWidget,

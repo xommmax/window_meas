@@ -23,7 +23,7 @@ import 'package:window_meas/features/measurement/data/db/ds/meas_local_ds.dart'
     as _i9;
 import 'package:window_meas/features/measurement/data/domain/meas_repository.dart'
     as _i11;
-import 'package:window_meas/features/measurement/data/remote/ds/meas_remote_ds.dart'
+import 'package:window_meas/features/measurement/data/remote/meas_remote_ds.dart'
     as _i6;
 import 'package:window_meas/features/passwall/bloc/passwall_cubit.dart' as _i16;
 import 'package:window_meas/features/profile/settings/cubit/settings_cubit.dart'

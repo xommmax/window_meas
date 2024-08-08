@@ -4,8 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
-import 'package:window_meas/features/measurement/data/remote/ds/file_uploader.dart';
-import 'package:window_meas/features/measurement/data/remote/model/measurement_dto.dart';
+import 'package:window_meas/features/measurement/data/remote/file_uploader.dart';
 import 'package:window_meas/l10n/localization.dart';
 
 abstract class MeasurementRemoteDataSource {
@@ -15,12 +14,6 @@ abstract class MeasurementRemoteDataSource {
     required int? listId,
     required String? drive,
   });
-
-  Future<int> addMeasurement(MeasurementDTO measurement);
-
-  Future<void> updateMeasurement(MeasurementDTO measurement);
-
-  Future<List<MeasurementDTO>> getMeasurements();
 
   Future<void> uploadPdfFile(File file, String leadId);
 }
@@ -55,44 +48,6 @@ class MeasurementRemoteDataSourceImpl implements MeasurementRemoteDataSource {
     ));
     kommoListId = listId;
     kommoDrive = drive;
-  }
-
-  @override
-  Future<int> addMeasurement(MeasurementDTO measurement) async {
-    try {
-      final json = measurement.toJson();
-      final response = await kommoDio?.post('catalogs/$kommoListId/elements', data: [json]);
-      final measurementJson =
-          (response?.data['_embedded']['elements'] as List).cast<Map<String, dynamic>>().first;
-      return measurementJson['id'];
-    } on DioException catch (e) {
-      debugPrint('@@@ addMeasurement Error: $e');
-      rethrow;
-    }
-  }
-
-  @override
-  Future<void> updateMeasurement(MeasurementDTO measurement) async {
-    try {
-      final json = measurement.toJson();
-      await kommoDio?.patch('catalogs/$kommoListId/elements', data: [json]);
-    } on DioException catch (e) {
-      debugPrint('@@@ updateMeasurement Error: $e');
-      rethrow;
-    }
-  }
-
-  @override
-  Future<List<MeasurementDTO>> getMeasurements() async {
-    try {
-      final response = await kommoDio?.get('catalogs/$kommoListId/elements');
-      final measurementsJson =
-          (response?.data['_embedded']['elements'] as List).cast<Map<String, dynamic>>();
-      return measurementsJson.map((e) => MeasurementDTO.fromJson(e)).toList();
-    } on DioException catch (e) {
-      debugPrint('@@@ getMeasurements Error: $e');
-      rethrow;
-    }
   }
 
   @override

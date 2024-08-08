@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:window_meas/l10n/localization.dart';
 
 class FillingTypeCheckboxOption extends StatelessWidget {
   const FillingTypeCheckboxOption({
