@@ -13,6 +13,7 @@ import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/editor/ext/line_ext.dart';
 import 'package:window_meas/features/editor/ext/offset_ext.dart';
 import 'package:window_meas/features/editor/filling_type/data/filling_type_enum.dart';
+import 'package:window_meas/features/editor/filling_type/data/filling_type_record.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_enum.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_record.dart';
 import 'package:window_meas/features/editor/view/editor_gesture_detector.dart';
@@ -216,24 +217,31 @@ class DrawingViewState extends State<DrawingView> {
   Future<void> _onFillingTypeSelectionCompleted(BuildContext context, Scheme scheme) async {
     if (fillingTypeSelection == null) return;
 
-    final overlapPolygons = GeoHelper.getOverlapPolygons(
+    final selectedPolygons = GeoHelper.getOverlapPolygons(
       fillingTypeSelection!,
       scheme.polygons,
     );
     setState(() => fillingTypeSelection = null);
-    if (overlapPolygons.isEmpty) return;
+    if (selectedPolygons.isEmpty) return;
 
-    final FillingType? existingFillingType = (overlapPolygons.length == 1)
-        ? scheme.fillingTypes
-            .firstWhereOrNull((e) => e.polygon == overlapPolygons.first)
-            ?.fillingType
+    final FillingTypeRecord? existingFillingType = (selectedPolygons.length == 1)
+        ? scheme.fillingTypes.firstWhereOrNull((e) => e.polygon == selectedPolygons.first)
         : null;
-    final FillingType? fillingType = await context.push(
+    final (FillingType, bool, bool)? fillingType = await context.push(
       '/filling_type_list',
-      extra: {'selectedFillingType': existingFillingType},
+      extra: {
+        'selectedFillingType': existingFillingType?.fillingType,
+        'sateen': existingFillingType?.sateen,
+        'mosquito': existingFillingType?.mosquito,
+      },
     );
     if (fillingType != null && context.mounted) {
-      context.read<DrawingCubit>().addFillingType(fillingType, overlapPolygons);
+      context.read<DrawingCubit>().addFillingType(
+            fillingType.$1,
+            fillingType.$2,
+            fillingType.$3,
+            selectedPolygons,
+          );
     }
   }
 }

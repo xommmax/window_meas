@@ -199,5 +199,7 @@
   "add": "Додати",
   "duplicate": "Дублювати",
   "errorEmptyLeadId": "Будь ласка, вкажіть ID ліда",
-  "tinting": "Тонування"
+  "tinting": "Тонування",
+  "sateen": "Сатин",
+  "mosquito": "Москітна сітка"
 }

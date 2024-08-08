@@ -97,6 +97,8 @@ final appRouter = GoRouter(
         final Map extra = state.extra as Map? ?? {};
         return FillingTypeListScreen(
           selectedFillingType: extra['selectedFillingType'],
+          sateen: extra['sateen'],
+          mosquito: extra['mosquito'],
         );
       },
     ),

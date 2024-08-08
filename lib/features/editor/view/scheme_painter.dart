@@ -141,6 +141,30 @@ class SchemePainter extends CustomPainter {
         fillingType.fillingType,
       );
 
+      String text = '';
+      if (fillingType.sateen) text += 'C';
+      if (fillingType.mosquito) text += ' M';
+      final textSpan = TextSpan(
+        text: text,
+        style: TextStyle(
+          fontSize: gridSize(size) / 1.5,
+          fontWeight: FontWeight.bold,
+          color: Colors.red,
+        ),
+      );
+
+      final textPainter = TextPainter(
+        text: textSpan,
+        textDirection: TextDirection.ltr,
+      );
+
+      textPainter.layout();
+
+      final x = fillingType.polygon.globalWidth(size) / 2 - textPainter.width / 2;
+      final y = fillingType.polygon.globalHeight(size) / 2 - textPainter.height / 2;
+
+      textPainter.paint(canvas, Offset(x, y));
+
       canvas.restore();
     }
   }
@@ -338,6 +362,7 @@ class SchemePainter extends CustomPainter {
       _drawHorizontalSegmentSize(
         canvas,
         mainHorSegment.size,
+        gridSize / 3,
         p1.dx,
         p2.dx,
         p1.dy - 1.75 * gridSize,
@@ -367,7 +392,14 @@ class SchemePainter extends CustomPainter {
         _getTrianglePath(Offset(p2.dx, p1.dy - 0.75 * gridSize), Direction.right, gridSize),
         measPaint,
       );
-      _drawHorizontalSegmentSize(canvas, segment.size, p1.dx, p2.dx, p1.dy - 0.75 * gridSize);
+      _drawHorizontalSegmentSize(
+        canvas,
+        segment.size,
+        gridSize / 3,
+        p1.dx,
+        p2.dx,
+        p1.dy - 0.75 * gridSize,
+      );
     }
   }
 
@@ -413,6 +445,7 @@ class SchemePainter extends CustomPainter {
       _drawVerticalSegmentSize(
         canvas,
         mainVerSegment.size,
+        gridSize / 3,
         p1.dy,
         p2.dy,
         p1.dx - 1.75 * gridSize,
@@ -444,18 +477,26 @@ class SchemePainter extends CustomPainter {
         _getTrianglePath(Offset(p1.dx - 0.75 * gridSize, p2.dy), Direction.down, gridSize),
         measPaint,
       );
-      _drawVerticalSegmentSize(canvas, segment.size, p1.dy, p2.dy, p1.dx - 0.75 * gridSize);
+      _drawVerticalSegmentSize(
+        canvas,
+        segment.size,
+        gridSize / 3,
+        p1.dy,
+        p2.dy,
+        p1.dx - 0.75 * gridSize,
+      );
     }
   }
 
-  void _drawHorizontalSegmentSize(Canvas canvas, String? size, double x1, double x2, double y) {
+  void _drawHorizontalSegmentSize(
+      Canvas canvas, String? size, double textSize, double x1, double x2, double y) {
     final center = Offset(x1 + (x2 - x1) / 2, y);
 
     final text = TextSpan(
       text: (size == null || size.isEmpty) ? '?' : size,
-      style: const TextStyle(
+      style: TextStyle(
         color: Colors.red,
-        fontSize: 2.5,
+        fontSize: textSize,
       ),
     );
 
@@ -470,14 +511,15 @@ class SchemePainter extends CustomPainter {
     textPainter.paint(canvas, textOffset);
   }
 
-  void _drawVerticalSegmentSize(Canvas canvas, String? size, double y1, double y2, double x) {
+  void _drawVerticalSegmentSize(
+      Canvas canvas, String? size, double textSize, double y1, double y2, double x) {
     final center = Offset(x, y1 + (y2 - y1) / 2);
 
     final text = TextSpan(
       text: size ?? '?',
-      style: const TextStyle(
+      style: TextStyle(
         color: Colors.red,
-        fontSize: 2.5,
+        fontSize: textSize,
       ),
     );
 

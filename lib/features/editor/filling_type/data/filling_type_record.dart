@@ -12,14 +12,20 @@ class FillingTypeRecord with _$FillingTypeRecord {
   const factory FillingTypeRecord({
     required FillingType fillingType,
     required Polygon polygon,
+    required bool sateen,
+    required bool mosquito,
   }) = _FillingTypeRecord;
 
   FillingTypeRecordDB toDB() => FillingTypeRecordDB()
     ..fillingType = fillingType
-    ..polygon = polygon.toDB();
+    ..polygon = polygon.toDB()
+    ..sateen = sateen
+    ..mosquito = mosquito;
 
   static FillingTypeRecord fromDB(FillingTypeRecordDB db) => FillingTypeRecord(
         fillingType: db.fillingType,
         polygon: Polygon.fromDB(db.polygon),
+        sateen: db.sateen,
+        mosquito: db.mosquito,
       );
 }

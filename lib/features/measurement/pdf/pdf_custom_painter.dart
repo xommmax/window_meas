@@ -161,16 +161,33 @@ class PdfCustomPainter {
           fillingType.polygon.pdfTemplateTop(size, _gridAmount, _minX, _minY),
         ));
 
+      final width = fillingType.polygon.templateWidth(size, _gridAmount, _minX, _minY);
+      final height = fillingType.polygon.templateHeight(size, _gridAmount, _minX, _minY);
       fillingTypeDrawer.drawFillingType(
         canvas,
-        Size(
-          fillingType.polygon.templateWidth(size, _gridAmount, _minX, _minY),
-          fillingType.polygon.templateHeight(size, _gridAmount, _minX, _minY),
-        ),
+        Size(width, height),
         fillingType.fillingType,
       );
 
       canvas.strokePath();
+
+      String text = '';
+      if (fillingType.sateen) text += 'C';
+      if (fillingType.mosquito) text += ' M';
+
+      final center = Offset(width / 2, height / 2);
+
+      final textOffset = Offset(center.dx - gridSize / 2, center.dy - gridSize / 2);
+
+      canvas.setColor(PdfColors.red);
+      canvas.drawString(
+        canvas.defaultFont!,
+        gridSize,
+        text,
+        textOffset.dx,
+        textOffset.dy,
+      );
+
       canvas.restoreContext();
       canvas.setTransform(Matrix4.identity());
     }

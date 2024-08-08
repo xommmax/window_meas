@@ -103,14 +103,37 @@ class SchemePreviewPainter extends CustomPainter {
         fillingType.polygon.templateTop(size, maxGridAmount, minX.toInt(), minY.toInt()),
       );
 
+      final width =
+          fillingType.polygon.templateWidth(size, maxGridAmount, minX.toInt(), minY.toInt());
+      final height =
+          fillingType.polygon.templateHeight(size, maxGridAmount, minX.toInt(), minY.toInt());
+
       fillingTypeDrawer.drawFillingType(
         canvas,
-        Size(
-          fillingType.polygon.templateWidth(size, maxGridAmount, minX.toInt(), minY.toInt()),
-          fillingType.polygon.templateHeight(size, maxGridAmount, minX.toInt(), minY.toInt()),
-        ),
+        Size(width, height),
         fillingType.fillingType,
       );
+
+      String text = '';
+      if (fillingType.sateen) text += 'C';
+      if (fillingType.mosquito) text += ' M';
+      final textSpan = TextSpan(
+        text: text,
+        style: const TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+          color: Colors.red,
+        ),
+      );
+
+      final textPainter = TextPainter(
+        text: textSpan,
+        textDirection: TextDirection.ltr,
+      );
+
+      textPainter.layout();
+
+      textPainter.paint(canvas, Offset(width / 2 - 5, height / 2 - 5));
 
       canvas.restore();
     }

@@ -199,5 +199,7 @@
   "add": "Add",
   "duplicate": "Duplicate",
   "errorEmptyLeadId": "Lead ID is empty",
-  "tinting": "Tinting"
+  "tinting": "Tinting",
+  "sateen": "Sateen",
+  "mosquito": "Mosquito net"
 }

@@ -87,15 +87,22 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     ));
   }
 
-  void addFillingType(FillingType fillingType, List<Polygon> polygons) {
+  void addFillingType(
+    FillingType fillingType,
+    bool sateen,
+    bool mosquito,
+    List<Polygon> selectedPolygons,
+  ) {
     List<FillingTypeRecord> fillingTypes = List.of(state.scheme.fillingTypes);
 
-    fillingTypes.removeWhere((e) => polygons.contains(e.polygon));
+    fillingTypes.removeWhere((e) => selectedPolygons.contains(e.polygon));
 
-    for (final polygon in polygons) {
+    for (final polygon in selectedPolygons) {
       fillingTypes.add(FillingTypeRecord(
         fillingType: fillingType,
         polygon: polygon,
+        sateen: sateen,
+        mosquito: mosquito,
       ));
     }
 

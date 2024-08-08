@@ -11,4 +11,8 @@ class FillingTypeRecordDB {
   @Default(FillingType.glass)
   late FillingType fillingType;
   late PolygonDB polygon;
+  @Default(false)
+  late bool sateen;
+  @Default(false)
+  late bool mosquito;
 }

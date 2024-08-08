@@ -19,11 +19,21 @@ const FillingTypeRecordDBSchema = Schema(
       type: IsarType.string,
       enumMap: _FillingTypeRecordDBfillingTypeEnumValueMap,
     ),
-    r'polygon': PropertySchema(
+    r'mosquito': PropertySchema(
       id: 1,
+      name: r'mosquito',
+      type: IsarType.bool,
+    ),
+    r'polygon': PropertySchema(
+      id: 2,
       name: r'polygon',
       type: IsarType.object,
       target: r'PolygonDB',
+    ),
+    r'sateen': PropertySchema(
+      id: 3,
+      name: r'sateen',
+      type: IsarType.bool,
     )
   },
   estimateSize: _fillingTypeRecordDBEstimateSize,
@@ -52,12 +62,14 @@ void _fillingTypeRecordDBSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeString(offsets[0], object.fillingType.name);
+  writer.writeBool(offsets[1], object.mosquito);
   writer.writeObject<PolygonDB>(
-    offsets[1],
+    offsets[2],
     allOffsets,
     PolygonDBSchema.serialize,
     object.polygon,
   );
+  writer.writeBool(offsets[3], object.sateen);
 }
 
 FillingTypeRecordDB _fillingTypeRecordDBDeserialize(
@@ -70,12 +82,14 @@ FillingTypeRecordDB _fillingTypeRecordDBDeserialize(
   object.fillingType = _FillingTypeRecordDBfillingTypeValueEnumMap[
           reader.readStringOrNull(offsets[0])] ??
       FillingType.glass;
+  object.mosquito = reader.readBool(offsets[1]);
   object.polygon = reader.readObjectOrNull<PolygonDB>(
-        offsets[1],
+        offsets[2],
         PolygonDBSchema.deserialize,
         allOffsets,
       ) ??
       PolygonDB();
+  object.sateen = reader.readBool(offsets[3]);
   return object;
 }
 
@@ -91,12 +105,16 @@ P _fillingTypeRecordDBDeserializeProp<P>(
               reader.readStringOrNull(offset)] ??
           FillingType.glass) as P;
     case 1:
+      return (reader.readBool(offset)) as P;
+    case 2:
       return (reader.readObjectOrNull<PolygonDB>(
             offset,
             PolygonDBSchema.deserialize,
             allOffsets,
           ) ??
           PolygonDB()) as P;
+    case 3:
+      return (reader.readBool(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -105,10 +123,12 @@ P _fillingTypeRecordDBDeserializeProp<P>(
 const _FillingTypeRecordDBfillingTypeEnumValueMap = {
   r'glass': r'glass',
   r'panel': r'panel',
+  r'tinting': r'tinting',
 };
 const _FillingTypeRecordDBfillingTypeValueEnumMap = {
   r'glass': FillingType.glass,
   r'panel': FillingType.panel,
+  r'tinting': FillingType.tinting,
 };
 
 extension FillingTypeRecordDBQueryFilter on QueryBuilder<FillingTypeRecordDB,
@@ -245,6 +265,26 @@ extension FillingTypeRecordDBQueryFilter on QueryBuilder<FillingTypeRecordDB,
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'fillingType',
         value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      mosquitoEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'mosquito',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      sateenEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'sateen',
+        value: value,
       ));
     });
   }
