@@ -4,7 +4,7 @@ import 'package:window_meas/features/editor/filling_type/data/filling_type_enum.
 class FillingTypePainter extends CustomPainter {
   FillingTypePainter(this.fillingType) : drawer = FillingTypeDrawer(strokeWidth: lineWidth * 2);
 
-  static const lineWidth = 1.0;
+  static const lineWidth = 0.5;
   final FillingType fillingType;
   final FillingTypeDrawer drawer;
 
@@ -29,6 +29,8 @@ class FillingTypePainter extends CustomPainter {
 }
 
 class FillingTypeDrawer {
+  static const lineWidth = 0.5;
+
   final _glassPaint = Paint()
     ..color = Colors.transparent
     ..style = PaintingStyle.fill;
@@ -43,10 +45,11 @@ class FillingTypeDrawer {
   void drawFillingType(Canvas canvas, Size size, FillingType fillingType) => switch (fillingType) {
         FillingType.glass => _drawGlass(canvas, size),
         FillingType.panel => _drawPanel(canvas, size),
+        FillingType.tinting => _drawTinting(canvas, size),
       };
 
   void _drawGlass(Canvas canvas, Size size) {
-     final windowRect = Rect.fromLTWH(
+    final windowRect = Rect.fromLTWH(
       strokeWidth / 2,
       strokeWidth / 2,
       size.width - strokeWidth,
@@ -63,5 +66,31 @@ class FillingTypeDrawer {
       size.height - strokeWidth,
     );
     canvas.drawRect(windowRect, _panelPaint);
+  }
+
+  void _drawTinting(Canvas canvas, Size size) {
+    final windowRect = Rect.fromLTWH(
+      strokeWidth / 2,
+      strokeWidth / 2,
+      size.width - strokeWidth,
+      size.height - strokeWidth,
+    );
+    canvas.drawRect(windowRect, _glassPaint);
+
+    final Paint linePaint = Paint()
+      ..color = Colors.black
+      ..strokeWidth = lineWidth
+      ..style = PaintingStyle.stroke;
+
+    Path diagonalsPath = Path();
+    double p = -(size.width > size.height ? size.width : size.height) - lineWidth;
+    while (p <= size.width) {
+      diagonalsPath.moveTo(p - lineWidth, -lineWidth);
+      diagonalsPath.lineTo(p + lineWidth + size.height, lineWidth + size.height);
+
+      p += size.width / 10 + 2 * lineWidth;
+    }
+    canvas.clipRect(windowRect);
+    canvas.drawPath(diagonalsPath, linePaint);
   }
 }

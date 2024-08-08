@@ -198,5 +198,6 @@
   "errorAttachingFile": "Error attaching file",
   "add": "Add",
   "duplicate": "Duplicate",
-  "errorEmptyLeadId": "Lead ID is empty" 
+  "errorEmptyLeadId": "Lead ID is empty",
+  "tinting": "Tinting"
 }

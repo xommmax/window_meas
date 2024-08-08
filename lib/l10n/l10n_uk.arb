@@ -198,5 +198,6 @@
   "errorAttachingFile": "Не вдалося привязати файл. Перевірте правильність ID ліда",
   "add": "Додати",
   "duplicate": "Дублювати",
-  "errorEmptyLeadId": "Будь ласка, вкажіть ID ліда"
+  "errorEmptyLeadId": "Будь ласка, вкажіть ID ліда",
+  "tinting": "Тонування"
 }
