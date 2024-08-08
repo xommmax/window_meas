@@ -96,4 +96,8 @@ class PositionDB {
   late String slopeLength;
   @Default('')
   late String slopeQuantity;
+  @Default('')
+  late String positionComment;
+  @Default('')
+  late String schemeComment;
 }

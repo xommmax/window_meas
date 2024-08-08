@@ -204,5 +204,7 @@
   "mosquito": "Mosquito net",
   "price": "Price",
   "flooring": "Flooring",
-  "flooringCovering": "Covering"
+  "flooringCovering": "Covering",
+  "schemeComment": "Scheme comment",
+  "positionComment": "Position comment"
 }

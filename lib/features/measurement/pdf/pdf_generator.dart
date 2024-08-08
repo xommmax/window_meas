@@ -175,10 +175,19 @@ class PdfGenerator {
                     children: [
                       _infoTitle(
                           '${Localization.l10n.schemeAndPhoto} ${measurement.positions.indexOf(position) + 1}/${measurement.positions.length}'),
-                      pw.SizedBox(height: 20),
+                      pw.SizedBox(height: 60),
                       _scheme(position, context),
-                      pw.SizedBox(height: 30),
-                      _photo(position),
+                      pw.Container(
+                        height: 160,
+                        child: pw.Text(
+                          '${Localization.l10n.schemeComment}: ${position.schemeComment}',
+                          style: const pw.TextStyle(
+                            fontSize: 12,
+                            color: PdfColors.black,
+                          ),
+                          overflow: pw.TextOverflow.clip,
+                        ),
+                      ),
                       pw.Expanded(
                         child: _footer(context.pageNumber),
                       ),
@@ -190,6 +199,33 @@ class PdfGenerator {
           ),
         ),
       );
+
+      if (position.photoPath != null) {
+        pdf.addPage(
+          pw.Page(
+            pageFormat: PdfPageFormat.a4,
+            margin: pw.EdgeInsets.zero,
+            build: (pw.Context context) => pw.Column(
+              children: [
+                _header(logo),
+                pw.Expanded(
+                  child: pw.Padding(
+                    padding: const pw.EdgeInsets.fromLTRB(30, 20, 20, 40),
+                    child: pw.Column(
+                      children: [
+                        _photo(position),
+                        pw.Expanded(
+                          child: _footer(context.pageNumber),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }
     }
 
     final output = await getTemporaryDirectory();
@@ -336,13 +372,10 @@ class PdfGenerator {
       ];
 
   static pw.Widget _scheme(Position position, pw.Context context) => (position.scheme != null)
-      ? pw.Padding(
-          padding: const pw.EdgeInsets.all(60),
-          child: pw.CustomPaint(
-            size: const PdfPoint(250, 250),
-            painter: (canvas, size) =>
-                PdfCustomPainter(position.scheme!, context).paint(canvas, size),
-          ),
+      ? pw.CustomPaint(
+          size: const PdfPoint(450, 450),
+          painter: (canvas, size) =>
+              PdfCustomPainter(position.scheme!, context).paint(canvas, size),
         )
       : pw.SizedBox.shrink();
 
@@ -350,8 +383,8 @@ class PdfGenerator {
       (position.photoPath != null && File(position.photoPath!).existsSync())
           ? pw.Image(
               pw.MemoryImage(File(position.photoPath!).readAsBytesSync()),
-              height: 250,
-              width: 250,
+              height: 500,
+              width: 500,
             )
           : pw.SizedBox.shrink();
 
@@ -415,6 +448,7 @@ class PdfGenerator {
           _infoRow(Localization.l10n.quantity, position.expanderOption.bottomAmount,
               rowType: _RowType.subSub),
         ],
+        _infoRow(Localization.l10n.positionComment, position.positionComment),
       ];
 
   static List<pw.Widget> _positionInfo2(Position position) => [

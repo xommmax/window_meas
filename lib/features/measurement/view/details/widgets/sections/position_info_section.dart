@@ -38,20 +38,23 @@ class PositionInfoSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 8),
-            BlocBuilder<SettingsCubit, SettingsState>(
-              builder: (context, state) => state.settings?.isAdminModeEnabled == true
-                  ? const SizedBox.shrink()
-                  // (position.pdfFile != null && position.pdfFile!.isNotEmpty
-                  //     ? PdfItem(position.pdfFile!, position.remoteId.toString())
-                  //     : const SizedBox.shrink())
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SchemeItem(position),
-                        const Divider(),
-                        PhotoItem(position),
-                      ],
-                    ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SchemeItem(position),
+                const Divider(),
+                InputItem(
+                  title: context.l10n.schemeComment,
+                  value: position.schemeComment,
+                  onChanged: (s) => context
+                      .read<MeasurementDetailsCubit>()
+                      .updatePosition(position.copyWith(schemeComment: s)),
+                  maxLines: 3,
+                  keyboardType: TextInputType.multiline,
+                ),
+                const Divider(),
+                PhotoItem(position),
+              ],
             ),
             const Divider(),
             TextItem(title: context.l10n.quarter),
@@ -372,6 +375,16 @@ class PositionInfoSection extends StatelessWidget {
                   keyboardType: TextInputType.number,
                 ),
               ],
+            ),
+            const Divider(),
+            InputItem(
+              title: context.l10n.positionComment,
+              value: position.positionComment,
+              onChanged: (s) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updatePosition(position.copyWith(positionComment: s)),
+              maxLines: 3,
+              keyboardType: TextInputType.multiline,
             ),
             const SizedBox(height: 8),
           ],

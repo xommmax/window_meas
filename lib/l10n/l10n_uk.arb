@@ -204,5 +204,7 @@
   "mosquito": "Москітна сітка",
   "price": "Ціна",
   "flooring": "Підлога",
-  "flooringCovering": "Покриття"
+  "flooringCovering": "Покриття",
+  "schemeComment": "Коментар до схеми",
+  "positionComment": "Коментар до позиції"
 }

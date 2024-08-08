@@ -114,89 +114,99 @@ const PositionDBSchema = Schema(
       name: r'photoPath',
       type: IsarType.string,
     ),
-    r'profileSystem': PropertySchema(
+    r'positionComment': PropertySchema(
       id: 19,
+      name: r'positionComment',
+      type: IsarType.string,
+    ),
+    r'profileSystem': PropertySchema(
+      id: 20,
       name: r'profileSystem',
       type: IsarType.string,
     ),
     r'quarterPosition': PropertySchema(
-      id: 20,
+      id: 21,
       name: r'quarterPosition',
       type: IsarType.string,
       enumMap: _PositionDBquarterPositionEnumValueMap,
     ),
     r'quarterSize': PropertySchema(
-      id: 21,
+      id: 22,
       name: r'quarterSize',
       type: IsarType.string,
     ),
     r'rubberColor': PropertySchema(
-      id: 22,
+      id: 23,
       name: r'rubberColor',
       type: IsarType.string,
       enumMap: _PositionDBrubberColorEnumValueMap,
     ),
     r'scheme': PropertySchema(
-      id: 23,
+      id: 24,
       name: r'scheme',
       type: IsarType.object,
       target: r'SchemeDB',
     ),
+    r'schemeComment': PropertySchema(
+      id: 25,
+      name: r'schemeComment',
+      type: IsarType.string,
+    ),
     r'slopeDepth': PropertySchema(
-      id: 24,
+      id: 26,
       name: r'slopeDepth',
       type: IsarType.string,
     ),
     r'slopeLength': PropertySchema(
-      id: 25,
+      id: 27,
       name: r'slopeLength',
       type: IsarType.string,
     ),
     r'slopeQuantity': PropertySchema(
-      id: 26,
+      id: 28,
       name: r'slopeQuantity',
       type: IsarType.string,
     ),
     r'standProfile': PropertySchema(
-      id: 27,
+      id: 29,
       name: r'standProfile',
       type: IsarType.string,
       enumMap: _PositionDBstandProfileEnumValueMap,
     ),
     r'staticCalculation': PropertySchema(
-      id: 28,
+      id: 30,
       name: r'staticCalculation',
       type: IsarType.bool,
     ),
     r'windowsillAssembly': PropertySchema(
-      id: 29,
+      id: 31,
       name: r'windowsillAssembly',
       type: IsarType.bool,
     ),
     r'windowsillColor': PropertySchema(
-      id: 30,
+      id: 32,
       name: r'windowsillColor',
       type: IsarType.string,
     ),
     r'windowsillConnector': PropertySchema(
-      id: 31,
+      id: 33,
       name: r'windowsillConnector',
       type: IsarType.string,
       enumMap: _PositionDBwindowsillConnectorEnumValueMap,
     ),
     r'windowsillDepth': PropertySchema(
-      id: 32,
+      id: 34,
       name: r'windowsillDepth',
       type: IsarType.string,
       enumMap: _PositionDBwindowsillDepthEnumValueMap,
     ),
     r'windowsillSize': PropertySchema(
-      id: 33,
+      id: 35,
       name: r'windowsillSize',
       type: IsarType.string,
     ),
     r'windowsillType': PropertySchema(
-      id: 34,
+      id: 36,
       name: r'windowsillType',
       type: IsarType.string,
       enumMap: _PositionDBwindowsillTypeEnumValueMap,
@@ -239,6 +249,7 @@ int _positionDBEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  bytesCount += 3 + object.positionComment.length * 3;
   bytesCount += 3 + object.profileSystem.length * 3;
   bytesCount += 3 + object.quarterPosition.name.length * 3;
   bytesCount += 3 + object.quarterSize.length * 3;
@@ -250,6 +261,7 @@ int _positionDBEstimateSize(
           SchemeDBSchema.estimateSize(value, allOffsets[SchemeDB]!, allOffsets);
     }
   }
+  bytesCount += 3 + object.schemeComment.length * 3;
   bytesCount += 3 + object.slopeDepth.length * 3;
   bytesCount += 3 + object.slopeLength.length * 3;
   bytesCount += 3 + object.slopeQuantity.length * 3;
@@ -292,27 +304,29 @@ void _positionDBSerialize(
   writer.writeString(offsets[16], object.panelThickness.name);
   writer.writeString(offsets[17], object.panelType.name);
   writer.writeString(offsets[18], object.photoPath);
-  writer.writeString(offsets[19], object.profileSystem);
-  writer.writeString(offsets[20], object.quarterPosition.name);
-  writer.writeString(offsets[21], object.quarterSize);
-  writer.writeString(offsets[22], object.rubberColor.name);
+  writer.writeString(offsets[19], object.positionComment);
+  writer.writeString(offsets[20], object.profileSystem);
+  writer.writeString(offsets[21], object.quarterPosition.name);
+  writer.writeString(offsets[22], object.quarterSize);
+  writer.writeString(offsets[23], object.rubberColor.name);
   writer.writeObject<SchemeDB>(
-    offsets[23],
+    offsets[24],
     allOffsets,
     SchemeDBSchema.serialize,
     object.scheme,
   );
-  writer.writeString(offsets[24], object.slopeDepth);
-  writer.writeString(offsets[25], object.slopeLength);
-  writer.writeString(offsets[26], object.slopeQuantity);
-  writer.writeString(offsets[27], object.standProfile.name);
-  writer.writeBool(offsets[28], object.staticCalculation);
-  writer.writeBool(offsets[29], object.windowsillAssembly);
-  writer.writeString(offsets[30], object.windowsillColor);
-  writer.writeString(offsets[31], object.windowsillConnector.name);
-  writer.writeString(offsets[32], object.windowsillDepth.name);
-  writer.writeString(offsets[33], object.windowsillSize);
-  writer.writeString(offsets[34], object.windowsillType.name);
+  writer.writeString(offsets[25], object.schemeComment);
+  writer.writeString(offsets[26], object.slopeDepth);
+  writer.writeString(offsets[27], object.slopeLength);
+  writer.writeString(offsets[28], object.slopeQuantity);
+  writer.writeString(offsets[29], object.standProfile.name);
+  writer.writeBool(offsets[30], object.staticCalculation);
+  writer.writeBool(offsets[31], object.windowsillAssembly);
+  writer.writeString(offsets[32], object.windowsillColor);
+  writer.writeString(offsets[33], object.windowsillConnector.name);
+  writer.writeString(offsets[34], object.windowsillDepth.name);
+  writer.writeString(offsets[35], object.windowsillSize);
+  writer.writeString(offsets[36], object.windowsillType.name);
 }
 
 PositionDB _positionDBDeserialize(
@@ -356,37 +370,39 @@ PositionDB _positionDBDeserialize(
       _PositionDBpanelTypeValueEnumMap[reader.readStringOrNull(offsets[17])] ??
           PanelType.none;
   object.photoPath = reader.readStringOrNull(offsets[18]);
-  object.profileSystem = reader.readString(offsets[19]);
+  object.positionComment = reader.readString(offsets[19]);
+  object.profileSystem = reader.readString(offsets[20]);
   object.quarterPosition = _PositionDBquarterPositionValueEnumMap[
-          reader.readStringOrNull(offsets[20])] ??
+          reader.readStringOrNull(offsets[21])] ??
       QuarterPosition.none;
-  object.quarterSize = reader.readString(offsets[21]);
+  object.quarterSize = reader.readString(offsets[22]);
   object.rubberColor = _PositionDBrubberColorValueEnumMap[
-          reader.readStringOrNull(offsets[22])] ??
+          reader.readStringOrNull(offsets[23])] ??
       RubberColor.none;
   object.scheme = reader.readObjectOrNull<SchemeDB>(
-    offsets[23],
+    offsets[24],
     SchemeDBSchema.deserialize,
     allOffsets,
   );
-  object.slopeDepth = reader.readString(offsets[24]);
-  object.slopeLength = reader.readString(offsets[25]);
-  object.slopeQuantity = reader.readString(offsets[26]);
+  object.schemeComment = reader.readString(offsets[25]);
+  object.slopeDepth = reader.readString(offsets[26]);
+  object.slopeLength = reader.readString(offsets[27]);
+  object.slopeQuantity = reader.readString(offsets[28]);
   object.standProfile = _PositionDBstandProfileValueEnumMap[
-          reader.readStringOrNull(offsets[27])] ??
+          reader.readStringOrNull(offsets[29])] ??
       StandProfile.none;
-  object.staticCalculation = reader.readBool(offsets[28]);
-  object.windowsillAssembly = reader.readBool(offsets[29]);
-  object.windowsillColor = reader.readString(offsets[30]);
+  object.staticCalculation = reader.readBool(offsets[30]);
+  object.windowsillAssembly = reader.readBool(offsets[31]);
+  object.windowsillColor = reader.readString(offsets[32]);
   object.windowsillConnector = _PositionDBwindowsillConnectorValueEnumMap[
-          reader.readStringOrNull(offsets[31])] ??
+          reader.readStringOrNull(offsets[33])] ??
       WindowsillConnector.none;
   object.windowsillDepth = _PositionDBwindowsillDepthValueEnumMap[
-          reader.readStringOrNull(offsets[32])] ??
-      WindowsillDepth.none;
-  object.windowsillSize = reader.readString(offsets[33]);
-  object.windowsillType = _PositionDBwindowsillTypeValueEnumMap[
           reader.readStringOrNull(offsets[34])] ??
+      WindowsillDepth.none;
+  object.windowsillSize = reader.readString(offsets[35]);
+  object.windowsillType = _PositionDBwindowsillTypeValueEnumMap[
+          reader.readStringOrNull(offsets[36])] ??
       WindowsillType.none;
   return object;
 }
@@ -454,48 +470,52 @@ P _positionDBDeserializeProp<P>(
     case 19:
       return (reader.readString(offset)) as P;
     case 20:
+      return (reader.readString(offset)) as P;
+    case 21:
       return (_PositionDBquarterPositionValueEnumMap[
               reader.readStringOrNull(offset)] ??
           QuarterPosition.none) as P;
-    case 21:
-      return (reader.readString(offset)) as P;
     case 22:
+      return (reader.readString(offset)) as P;
+    case 23:
       return (_PositionDBrubberColorValueEnumMap[
               reader.readStringOrNull(offset)] ??
           RubberColor.none) as P;
-    case 23:
+    case 24:
       return (reader.readObjectOrNull<SchemeDB>(
         offset,
         SchemeDBSchema.deserialize,
         allOffsets,
       )) as P;
-    case 24:
-      return (reader.readString(offset)) as P;
     case 25:
       return (reader.readString(offset)) as P;
     case 26:
       return (reader.readString(offset)) as P;
     case 27:
+      return (reader.readString(offset)) as P;
+    case 28:
+      return (reader.readString(offset)) as P;
+    case 29:
       return (_PositionDBstandProfileValueEnumMap[
               reader.readStringOrNull(offset)] ??
           StandProfile.none) as P;
-    case 28:
-      return (reader.readBool(offset)) as P;
-    case 29:
-      return (reader.readBool(offset)) as P;
     case 30:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 31:
+      return (reader.readBool(offset)) as P;
+    case 32:
+      return (reader.readString(offset)) as P;
+    case 33:
       return (_PositionDBwindowsillConnectorValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillConnector.none) as P;
-    case 32:
+    case 34:
       return (_PositionDBwindowsillDepthValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillDepth.none) as P;
-    case 33:
+    case 35:
       return (reader.readString(offset)) as P;
-    case 34:
+    case 36:
       return (_PositionDBwindowsillTypeValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillType.none) as P;
@@ -2980,6 +3000,142 @@ extension PositionDBQueryFilter
   }
 
   QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      positionCommentEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'positionComment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      positionCommentGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'positionComment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      positionCommentLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'positionComment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      positionCommentBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'positionComment',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      positionCommentStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'positionComment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      positionCommentEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'positionComment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      positionCommentContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'positionComment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      positionCommentMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'positionComment',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      positionCommentIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'positionComment',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      positionCommentIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'positionComment',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
       profileSystemEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -3536,6 +3692,142 @@ extension PositionDBQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
         property: r'scheme',
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      schemeCommentEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'schemeComment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      schemeCommentGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'schemeComment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      schemeCommentLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'schemeComment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      schemeCommentBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'schemeComment',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      schemeCommentStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'schemeComment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      schemeCommentEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'schemeComment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      schemeCommentContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'schemeComment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      schemeCommentMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'schemeComment',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      schemeCommentIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'schemeComment',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      schemeCommentIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'schemeComment',
+        value: '',
       ));
     });
   }

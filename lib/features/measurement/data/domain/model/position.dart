@@ -57,6 +57,8 @@ class Position with _$Position {
     required String slopeLength,
     required String slopeQuantity,
     required ExpanderOption expanderOption,
+    required String positionComment,
+    required String schemeComment,
   }) = _Position;
 
   factory Position.initial() => Position(
@@ -95,6 +97,8 @@ class Position with _$Position {
         slopeDepth: '',
         slopeLength: '',
         slopeQuantity: '',
+        positionComment: '',
+        schemeComment: '',
       );
 
   PositionDB toDB() => PositionDB()
@@ -132,7 +136,9 @@ class Position with _$Position {
     ..canopyColor = canopyColor
     ..slopeDepth = slopeDepth
     ..slopeLength = slopeLength
-    ..slopeQuantity = slopeQuantity;
+    ..slopeQuantity = slopeQuantity
+    ..positionComment = positionComment
+    ..schemeComment = schemeComment;
 
   static Position fromDB(PositionDB db) => Position(
         id: db.id,
@@ -170,5 +176,7 @@ class Position with _$Position {
         slopeDepth: db.slopeDepth,
         slopeLength: db.slopeLength,
         slopeQuantity: db.slopeQuantity,
+        positionComment: db.positionComment,
+        schemeComment: db.schemeComment,
       );
 }

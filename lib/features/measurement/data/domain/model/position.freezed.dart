@@ -52,6 +52,8 @@ mixin _$Position {
   String get slopeLength => throw _privateConstructorUsedError;
   String get slopeQuantity => throw _privateConstructorUsedError;
   ExpanderOption get expanderOption => throw _privateConstructorUsedError;
+  String get positionComment => throw _privateConstructorUsedError;
+  String get schemeComment => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PositionCopyWith<Position> get copyWith =>
@@ -98,7 +100,9 @@ abstract class $PositionCopyWith<$Res> {
       String slopeDepth,
       String slopeLength,
       String slopeQuantity,
-      ExpanderOption expanderOption});
+      ExpanderOption expanderOption,
+      String positionComment,
+      String schemeComment});
 
   $SchemeCopyWith<$Res>? get scheme;
   $ExpanderOptionCopyWith<$Res> get expanderOption;
@@ -152,6 +156,8 @@ class _$PositionCopyWithImpl<$Res, $Val extends Position>
     Object? slopeLength = null,
     Object? slopeQuantity = null,
     Object? expanderOption = null,
+    Object? positionComment = null,
+    Object? schemeComment = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -294,6 +300,14 @@ class _$PositionCopyWithImpl<$Res, $Val extends Position>
           ? _value.expanderOption
           : expanderOption // ignore: cast_nullable_to_non_nullable
               as ExpanderOption,
+      positionComment: null == positionComment
+          ? _value.positionComment
+          : positionComment // ignore: cast_nullable_to_non_nullable
+              as String,
+      schemeComment: null == schemeComment
+          ? _value.schemeComment
+          : schemeComment // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -361,7 +375,9 @@ abstract class _$$PositionImplCopyWith<$Res>
       String slopeDepth,
       String slopeLength,
       String slopeQuantity,
-      ExpanderOption expanderOption});
+      ExpanderOption expanderOption,
+      String positionComment,
+      String schemeComment});
 
   @override
   $SchemeCopyWith<$Res>? get scheme;
@@ -415,6 +431,8 @@ class __$$PositionImplCopyWithImpl<$Res>
     Object? slopeLength = null,
     Object? slopeQuantity = null,
     Object? expanderOption = null,
+    Object? positionComment = null,
+    Object? schemeComment = null,
   }) {
     return _then(_$PositionImpl(
       id: null == id
@@ -557,6 +575,14 @@ class __$$PositionImplCopyWithImpl<$Res>
           ? _value.expanderOption
           : expanderOption // ignore: cast_nullable_to_non_nullable
               as ExpanderOption,
+      positionComment: null == positionComment
+          ? _value.positionComment
+          : positionComment // ignore: cast_nullable_to_non_nullable
+              as String,
+      schemeComment: null == schemeComment
+          ? _value.schemeComment
+          : schemeComment // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -599,7 +625,9 @@ class _$PositionImpl extends _Position {
       required this.slopeDepth,
       required this.slopeLength,
       required this.slopeQuantity,
-      required this.expanderOption})
+      required this.expanderOption,
+      required this.positionComment,
+      required this.schemeComment})
       : super._();
 
   @override
@@ -672,10 +700,14 @@ class _$PositionImpl extends _Position {
   final String slopeQuantity;
   @override
   final ExpanderOption expanderOption;
+  @override
+  final String positionComment;
+  @override
+  final String schemeComment;
 
   @override
   String toString() {
-    return 'Position(id: $id, scheme: $scheme, photoPath: $photoPath, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorOpeningType: $doorOpeningType, doorstep: $doorstep, doorstepType: $doorstepType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, expanderOption: $expanderOption)';
+    return 'Position(id: $id, scheme: $scheme, photoPath: $photoPath, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorOpeningType: $doorOpeningType, doorstep: $doorstep, doorstepType: $doorstepType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, expanderOption: $expanderOption, positionComment: $positionComment, schemeComment: $schemeComment)';
   }
 
   @override
@@ -750,7 +782,11 @@ class _$PositionImpl extends _Position {
             (identical(other.slopeQuantity, slopeQuantity) ||
                 other.slopeQuantity == slopeQuantity) &&
             (identical(other.expanderOption, expanderOption) ||
-                other.expanderOption == expanderOption));
+                other.expanderOption == expanderOption) &&
+            (identical(other.positionComment, positionComment) ||
+                other.positionComment == positionComment) &&
+            (identical(other.schemeComment, schemeComment) ||
+                other.schemeComment == schemeComment));
   }
 
   @override
@@ -790,7 +826,9 @@ class _$PositionImpl extends _Position {
         slopeDepth,
         slopeLength,
         slopeQuantity,
-        expanderOption
+        expanderOption,
+        positionComment,
+        schemeComment
       ]);
 
   @JsonKey(ignore: true)
@@ -836,7 +874,9 @@ abstract class _Position extends Position {
       required final String slopeDepth,
       required final String slopeLength,
       required final String slopeQuantity,
-      required final ExpanderOption expanderOption}) = _$PositionImpl;
+      required final ExpanderOption expanderOption,
+      required final String positionComment,
+      required final String schemeComment}) = _$PositionImpl;
   const _Position._() : super._();
 
   @override
@@ -909,6 +949,10 @@ abstract class _Position extends Position {
   String get slopeQuantity;
   @override
   ExpanderOption get expanderOption;
+  @override
+  String get positionComment;
+  @override
+  String get schemeComment;
   @override
   @JsonKey(ignore: true)
   _$$PositionImplCopyWith<_$PositionImpl> get copyWith =>
