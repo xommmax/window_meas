@@ -19,7 +19,8 @@ import 'package:window_meas/features/editor/filling_type/view/filling_type_paint
 import 'package:window_meas/features/editor/opening_type/view/opening_type_painter.dart';
 
 class SchemePainter extends CustomPainter {
-  static const lineWidth = 0.5;
+  double gridSize(Size size) => size.width / Constants.gridAmount;
+  double lineWidth(Size size) => gridSize(size) / 10;
 
   final Scheme scheme;
   final Line? currentLine;
@@ -37,8 +38,8 @@ class SchemePainter extends CustomPainter {
     required this.fillingTypeSelection,
     required this.currentArch,
     required this.mode,
-  })  : openingTypeDrawer = OpeningTypeDrawer(strokeWidth: lineWidth),
-        fillingTypeDrawer = FillingTypeDrawer(strokeWidth: lineWidth);
+  })  : openingTypeDrawer = OpeningTypeDrawer(strokeWidth: 0.5),
+        fillingTypeDrawer = FillingTypeDrawer(strokeWidth: 0.5);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -70,16 +71,14 @@ class SchemePainter extends CustomPainter {
   void _drawBg(Canvas canvas, Size size) {
     final pointsPaint = Paint()
       ..color = Colors.grey.shade400
-      ..strokeWidth = lineWidth
+      ..strokeWidth = lineWidth(size)
       ..strokeCap = StrokeCap.round;
 
     final List<Offset> points = [];
 
-    double gridSize = size.width / Constants.gridAmount;
-
     for (int x = 0; x <= Constants.gridAmount; x++) {
-      for (int y = 0; y <= (size.height / gridSize).ceil(); y++) {
-        points.add(Offset(x * gridSize, y * gridSize));
+      for (int y = 0; y <= (size.height / gridSize(size)).ceil(); y++) {
+        points.add(Offset(x * gridSize(size), y * gridSize(size)));
       }
     }
 
@@ -89,7 +88,7 @@ class SchemePainter extends CustomPainter {
   void _drawLines(Canvas canvas, Size size) {
     final linePaint = Paint()
       ..color = Colors.black
-      ..strokeWidth = lineWidth;
+      ..strokeWidth = lineWidth(size);
 
     for (final line in scheme.lines) {
       canvas.drawLine(
@@ -105,7 +104,7 @@ class SchemePainter extends CustomPainter {
 
     final linePaint = Paint()
       ..color = Colors.green
-      ..strokeWidth = lineWidth;
+      ..strokeWidth = lineWidth(size);
 
     canvas.drawLine(
       currentLine!.p1.toGlobalCoord(size),
@@ -219,7 +218,7 @@ class SchemePainter extends CustomPainter {
   void _drawArches(Canvas canvas, Size size) {
     final linePaint = Paint()
       ..color = Colors.black
-      ..strokeWidth = lineWidth
+      ..strokeWidth = lineWidth(size)
       ..style = PaintingStyle.stroke;
 
     for (final arch in scheme.arches) {
@@ -241,7 +240,7 @@ class SchemePainter extends CustomPainter {
 
     final linePaint = Paint()
       ..color = Colors.green
-      ..strokeWidth = lineWidth
+      ..strokeWidth = lineWidth(size)
       ..style = PaintingStyle.stroke;
 
     if (currentArch!.top == null) {
@@ -252,8 +251,7 @@ class SchemePainter extends CustomPainter {
       );
 
       if (currentArch!.p1 != currentArch!.p2) {
-        final gridSize = size.width / Constants.gridAmount;
-        final radius = gridSize / 4;
+        final radius = gridSize(size) / 4;
         final center = Offset(
           (currentArch!.p1.dx + currentArch!.p2.dx) / 2,
           (currentArch!.p1.dy + currentArch!.p2.dy) / 2,
@@ -263,15 +261,15 @@ class SchemePainter extends CustomPainter {
 
         canvas.drawPath(
           Path()
-            ..moveTo(center.dx - radius / 2, center.dy - lineWidth / 2)
-            ..lineTo(center.dx, center.dy - radius / 2 - lineWidth / 2)
-            ..lineTo(center.dx + radius / 2, center.dy - lineWidth / 2)
-            ..moveTo(center.dx - radius / 2, center.dy + lineWidth / 2)
-            ..lineTo(center.dx, center.dy + radius / 2 + lineWidth / 2)
-            ..lineTo(center.dx + radius / 2, center.dy + lineWidth / 2),
+            ..moveTo(center.dx - radius / 2, center.dy - lineWidth(size) / 2)
+            ..lineTo(center.dx, center.dy - radius / 2 - lineWidth(size) / 2)
+            ..lineTo(center.dx + radius / 2, center.dy - lineWidth(size) / 2)
+            ..moveTo(center.dx - radius / 2, center.dy + lineWidth(size) / 2)
+            ..lineTo(center.dx, center.dy + radius / 2 + lineWidth(size) / 2)
+            ..lineTo(center.dx + radius / 2, center.dy + lineWidth(size) / 2),
           Paint()
             ..color = Colors.white
-            ..strokeWidth = lineWidth / 2
+            ..strokeWidth = lineWidth(size) / 2
             ..style = PaintingStyle.stroke,
         );
       }
@@ -293,7 +291,7 @@ class SchemePainter extends CustomPainter {
   void _drawMeasurements(Canvas canvas, Size size) {
     final measPaint = Paint()
       ..color = Colors.red
-      ..strokeWidth = lineWidth / 2;
+      ..strokeWidth = lineWidth(size) / 2;
 
     _drawHorizontalMeasLines(canvas, size, measPaint);
 
@@ -534,13 +532,12 @@ class SchemePainter extends CustomPainter {
   void _drawEraserMarkers(Canvas canvas, Size size) {
     if (mode != EditorMode.eraser) return;
 
-    double gridSize = size.width / Constants.gridAmount;
-    final radius = gridSize / 4;
+    final radius = gridSize(size) / 4;
 
     final circlePaint = Paint()..color = Colors.red;
     final crossPaint = Paint()
       ..color = Colors.white
-      ..strokeWidth = lineWidth
+      ..strokeWidth = lineWidth(size)
       ..style = PaintingStyle.stroke;
 
     for (final line in scheme.lines) {
