@@ -12,13 +12,12 @@ import 'package:window_meas/features/measurement/data/domain/model/params/window
 import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_depth_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_type_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/position.dart';
-import 'package:window_meas/features/measurement/view/details/widgets/items/glass_unit.dart';
+import 'package:window_meas/features/measurement/view/details/widgets/items/glass_unit_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/photo_item.dart';
+import 'package:window_meas/features/measurement/view/details/widgets/items/profile_system_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/scheme_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/sections/expander_section.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/subcategory.dart';
-import 'package:window_meas/features/profile/settings/cubit/settings_cubit.dart';
-import 'package:window_meas/features/profile/settings/cubit/settings_state.dart';
 import 'package:window_meas/l10n/localization.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_cubit.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/items.dart';
@@ -89,12 +88,20 @@ class PositionInfoSection extends StatelessWidget {
                   .updatePosition(position.copyWith(staticCalculation: b)),
             ),
             const Divider(),
-            InputItem(
+            ProfileSystemItem(
               title: context.l10n.profileSystem,
               value: position.profileSystem,
-              onChanged: (e) => context
+              onChanged: (s) => context
                   .read<MeasurementDetailsCubit>()
-                  .updatePosition(position.copyWith(profileSystem: e)),
+                  .updatePosition(position.copyWith(profileSystem: s)),
+            ),
+            const Divider(),
+            GlassUnitItem(
+              title: context.l10n.glassUnit,
+              value: position.glassUnit,
+              onChanged: (s) => context
+                  .read<MeasurementDetailsCubit>()
+                  .updatePosition(position.copyWith(glassUnit: s)),
             ),
             const Divider(),
             TextItem(title: context.l10n.door),
@@ -173,14 +180,6 @@ class PositionInfoSection extends StatelessWidget {
             ),
             const Divider(),
             ExpanderSection(position),
-            GlassUnitItem(
-              title: context.l10n.glassUnit,
-              value: position.glassUnit,
-              onChanged: (s) => context
-                  .read<MeasurementDetailsCubit>()
-                  .updatePosition(position.copyWith(glassUnit: s)),
-            ),
-            const Divider(),
             TextItem(title: context.l10n.panel),
             const Divider(),
             Subcategory(

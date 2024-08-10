@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:window_meas/common/asset_manager.dart';
 import 'package:window_meas/l10n/localization.dart';
 
-class GlassUnitItem extends StatelessWidget {
-  const GlassUnitItem({
+class ProfileSystemItem extends StatelessWidget {
+  const ProfileSystemItem({
     required this.title,
     required this.value,
     this.onChanged,
@@ -21,7 +21,7 @@ class GlassUnitItem extends StatelessWidget {
             context: context,
             isScrollControlled: true,
             useSafeArea: true,
-            builder: (context) => const _GlassUnitBottomSheet(),
+            builder: (context) => const _ProfileSystemBottomSheet(),
           );
           if (option != null) {
             onChanged?.call(option);
@@ -49,14 +49,14 @@ class GlassUnitItem extends StatelessWidget {
       );
 }
 
-class _GlassUnitBottomSheet extends StatefulWidget {
-  const _GlassUnitBottomSheet();
+class _ProfileSystemBottomSheet extends StatefulWidget {
+  const _ProfileSystemBottomSheet();
 
   @override
-  State<_GlassUnitBottomSheet> createState() => _GlassUnitBottomSheetState();
+  State<_ProfileSystemBottomSheet> createState() => _ProfileSystemBottomSheetState();
 }
 
-class _GlassUnitBottomSheetState extends State<_GlassUnitBottomSheet> {
+class _ProfileSystemBottomSheetState extends State<_ProfileSystemBottomSheet> {
   late final TextEditingController controller;
   String query = '';
 
@@ -85,19 +85,20 @@ class _GlassUnitBottomSheetState extends State<_GlassUnitBottomSheet> {
             ),
             Expanded(
               child: FutureBuilder<List<String>>(
-                  future: AssetManager.getArticles(),
+                  future: AssetManager.getProfileSystems(),
                   builder: (context, snapshot) {
-                    final articles = snapshot.data ?? [];
-                    final filteredArticles = articles
+                    final profileSystems = snapshot.data ?? [];
+                    final filteredProfileSystems = profileSystems
                         .where((e) => e.toLowerCase().contains(query.toLowerCase()))
                         .toList();
+                    filteredProfileSystems.add(query);
                     return ListView.builder(
-                      itemCount: filteredArticles.length,
+                      itemCount: filteredProfileSystems.length,
                       itemBuilder: (context, index) {
-                        final article = filteredArticles[index];
+                        final profileSystem = filteredProfileSystems[index];
                         return ListTile(
-                          title: Text(article),
-                          onTap: () => Navigator.of(context).pop(article),
+                          title: Text(profileSystem),
+                          onTap: () => Navigator.of(context).pop(profileSystem),
                         );
                       },
                     );
