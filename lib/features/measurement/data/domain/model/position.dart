@@ -24,6 +24,7 @@ class Position with _$Position {
   const factory Position({
     required String id,
     required Scheme? scheme,
+    required List<Scheme> flexibles,
     required String? photoPath,
     required String quarterSize,
     required QuarterPosition quarterPosition,
@@ -64,6 +65,7 @@ class Position with _$Position {
   factory Position.initial() => Position(
         id: const Uuid().v4(),
         scheme: null,
+        flexibles: [],
         photoPath: null,
         quarterSize: '',
         quarterPosition: QuarterPosition.none,
@@ -104,6 +106,7 @@ class Position with _$Position {
   PositionDB toDB() => PositionDB()
     ..id = id
     ..scheme = scheme?.toDB()
+    ..flexibles = flexibles.map((e) => e.toDB()).toList()
     ..photoPath = photoPath
     ..quarterSize = quarterSize
     ..quarterPosition = quarterPosition
@@ -143,6 +146,7 @@ class Position with _$Position {
   static Position fromDB(PositionDB db) => Position(
         id: db.id,
         scheme: db.scheme != null ? Scheme.fromDB(db.scheme!) : null,
+        flexibles: db.flexibles.map(Scheme.fromDB).toList(),
         photoPath: db.photoPath,
         quarterSize: db.quarterSize,
         quarterPosition: db.quarterPosition,

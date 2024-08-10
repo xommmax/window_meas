@@ -21,6 +21,8 @@ class PositionDB {
   @Default('')
   late String id;
   late SchemeDB? scheme;
+  @Default([])
+  late List<SchemeDB> flexibles;
   late String? photoPath;
   @Default('')
   late String quarterSize;

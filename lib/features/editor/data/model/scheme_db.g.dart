@@ -25,26 +25,31 @@ const SchemeDBSchema = Schema(
       type: IsarType.objectList,
       target: r'FillingTypeRecordDB',
     ),
-    r'lines': PropertySchema(
+    r'id': PropertySchema(
       id: 2,
+      name: r'id',
+      type: IsarType.string,
+    ),
+    r'lines': PropertySchema(
+      id: 3,
       name: r'lines',
       type: IsarType.objectList,
       target: r'LineDB',
     ),
     r'openingTypes': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'openingTypes',
       type: IsarType.objectList,
       target: r'OpeningTypeRecordDB',
     ),
     r'polygons': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'polygons',
       type: IsarType.objectList,
       target: r'PolygonDB',
     ),
     r'sizeSegments': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'sizeSegments',
       type: IsarType.objectList,
       target: r'SizeSegmentDB',
@@ -79,6 +84,7 @@ int _schemeDBEstimateSize(
           FillingTypeRecordDBSchema.estimateSize(value, offsets, allOffsets);
     }
   }
+  bytesCount += 3 + object.id.length * 3;
   bytesCount += 3 + object.lines.length * 3;
   {
     final offsets = allOffsets[LineDB]!;
@@ -134,26 +140,27 @@ void _schemeDBSerialize(
     FillingTypeRecordDBSchema.serialize,
     object.fillingTypes,
   );
+  writer.writeString(offsets[2], object.id);
   writer.writeObjectList<LineDB>(
-    offsets[2],
+    offsets[3],
     allOffsets,
     LineDBSchema.serialize,
     object.lines,
   );
   writer.writeObjectList<OpeningTypeRecordDB>(
-    offsets[3],
+    offsets[4],
     allOffsets,
     OpeningTypeRecordDBSchema.serialize,
     object.openingTypes,
   );
   writer.writeObjectList<PolygonDB>(
-    offsets[4],
+    offsets[5],
     allOffsets,
     PolygonDBSchema.serialize,
     object.polygons,
   );
   writer.writeObjectList<SizeSegmentDB>(
-    offsets[5],
+    offsets[6],
     allOffsets,
     SizeSegmentDBSchema.serialize,
     object.sizeSegments,
@@ -181,29 +188,30 @@ SchemeDB _schemeDBDeserialize(
         FillingTypeRecordDB(),
       ) ??
       [];
+  object.id = reader.readString(offsets[2]);
   object.lines = reader.readObjectList<LineDB>(
-        offsets[2],
+        offsets[3],
         LineDBSchema.deserialize,
         allOffsets,
         LineDB(),
       ) ??
       [];
   object.openingTypes = reader.readObjectList<OpeningTypeRecordDB>(
-        offsets[3],
+        offsets[4],
         OpeningTypeRecordDBSchema.deserialize,
         allOffsets,
         OpeningTypeRecordDB(),
       ) ??
       [];
   object.polygons = reader.readObjectList<PolygonDB>(
-        offsets[4],
+        offsets[5],
         PolygonDBSchema.deserialize,
         allOffsets,
         PolygonDB(),
       ) ??
       [];
   object.sizeSegments = reader.readObjectList<SizeSegmentDB>(
-        offsets[5],
+        offsets[6],
         SizeSegmentDBSchema.deserialize,
         allOffsets,
         SizeSegmentDB(),
@@ -236,6 +244,8 @@ P _schemeDBDeserializeProp<P>(
           ) ??
           []) as P;
     case 2:
+      return (reader.readString(offset)) as P;
+    case 3:
       return (reader.readObjectList<LineDB>(
             offset,
             LineDBSchema.deserialize,
@@ -243,7 +253,7 @@ P _schemeDBDeserializeProp<P>(
             LineDB(),
           ) ??
           []) as P;
-    case 3:
+    case 4:
       return (reader.readObjectList<OpeningTypeRecordDB>(
             offset,
             OpeningTypeRecordDBSchema.deserialize,
@@ -251,7 +261,7 @@ P _schemeDBDeserializeProp<P>(
             OpeningTypeRecordDB(),
           ) ??
           []) as P;
-    case 4:
+    case 5:
       return (reader.readObjectList<PolygonDB>(
             offset,
             PolygonDBSchema.deserialize,
@@ -259,7 +269,7 @@ P _schemeDBDeserializeProp<P>(
             PolygonDB(),
           ) ??
           []) as P;
-    case 5:
+    case 6:
       return (reader.readObjectList<SizeSegmentDB>(
             offset,
             SizeSegmentDBSchema.deserialize,
@@ -445,6 +455,136 @@ extension SchemeDBQueryFilter
         upper,
         includeUpper,
       );
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> idEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> idGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> idLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> idBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'id',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> idStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> idEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> idContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'id',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> idMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'id',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> idIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'id',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SchemeDB, SchemeDB, QAfterFilterCondition> idIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'id',
+        value: '',
+      ));
     });
   }
 

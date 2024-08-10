@@ -14,7 +14,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 18,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-9.0, -12.0), Offset(-9.0, 14.0)),
             Line(Offset(-9.0, 14.0), Offset(7.0, 14.0)),
             Line(Offset(-1.0, -12.0), Offset(-1.0, 14.0)),
@@ -159,7 +159,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 17,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-7.0, -11.0), Offset(-7.0, 14.0)),
             Line(Offset(-7.0, 14.0), Offset(2.0, 14.0)),
             Line(Offset(2.0, 14.0), Offset(2.0, -11.0)),
@@ -246,7 +246,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 16,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-7.0, -12.0), Offset(-7.0, 14.0)),
             Line(Offset(-7.0, 14.0), Offset(2.0, 14.0)),
             Line(Offset(2.0, 14.0), Offset(2.0, -12.0)),
@@ -333,7 +333,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 15,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(14.0, -15.0), Offset(14.0, 13.0)),
             Line(Offset(14.0, 13.0), Offset(5.0, 13.0)),
             Line(Offset(5.0, 13.0), Offset(5.0, -15.0)),
@@ -480,7 +480,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 14,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(3.0, 14.0), Offset(12.0, 14.0)),
             Line(Offset(-12.0, -15.0), Offset(-12.0, 3.0)),
             Line(Offset(-12.0, 3.0), Offset(12.0, 3.0)),
@@ -591,7 +591,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 13,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-12.0, -13.0), Offset(-12.0, 15.0)),
             Line(Offset(-12.0, 15.0), Offset(-3.0, 15.0)),
             Line(Offset(-3.0, 15.0), Offset(-3.0, -13.0)),
@@ -738,7 +738,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 12,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-12.0, -13.0), Offset(-12.0, 15.0)),
             Line(Offset(-12.0, 15.0), Offset(-3.0, 15.0)),
             Line(Offset(-12.0, -13.0), Offset(14.0, -13.0)),
@@ -849,7 +849,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 11,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-11.0, -10.0), Offset(-11.0, 14.0)),
             Line(Offset(-3.0, -10.0), Offset(-3.0, 14.0)),
             Line(Offset(5.0, -10.0), Offset(5.0, 14.0)),
@@ -954,7 +954,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 10,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-11.0, -12.0), Offset(-11.0, 15.0)),
             Line(Offset(-3.0, -12.0), Offset(-3.0, 15.0)),
             Line(Offset(5.0, -12.0), Offset(5.0, 15.0)),
@@ -1050,7 +1050,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 9,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-10.0, -11.0), Offset(-10.0, 14.0)),
             Line(Offset(0.0, 14.0), Offset(0.0, -11.0)),
             Line(Offset(-10.0, -11.0), Offset(10.0, -11.0)),
@@ -1127,7 +1127,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 8,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(10.0, 14.0), Offset(10.0, -11.0)),
             Line(Offset(0.0, -11.0), Offset(0.0, 14.0)),
             Line(Offset(-10.0, -11.0), Offset(10.0, -11.0)),
@@ -1207,7 +1207,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 7,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-9.0, -11.0), Offset(-9.0, 13.0)),
             Line(Offset(-9.0, 13.0), Offset(10.0, 13.0)),
             Line(Offset(10.0, 13.0), Offset(10.0, -11.0)),
@@ -1287,7 +1287,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 6,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-8.0, -10.0), Offset(-8.0, 13.0)),
             Line(Offset(-8.0, 13.0), Offset(7.0, 13.0)),
             Line(Offset(7.0, 13.0), Offset(7.0, -10.0)),
@@ -1343,7 +1343,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 5,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-10.0, 13.0), Offset(8.0, 13.0)),
             Line(Offset(-1.0, 13.0), Offset(-1.0, -7.0)),
             Line(Offset(-10.0, -7.0), Offset(8.0, -7.0)),
@@ -1426,7 +1426,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 4,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-11.0, -10.0), Offset(-11.0, 13.0)),
             Line(Offset(-3.0, 13.0), Offset(-3.0, -10.0)),
             Line(Offset(5.0, -10.0), Offset(5.0, 13.0)),
@@ -1500,7 +1500,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 3,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-11.0, -10.0), Offset(-11.0, 10.0)),
             Line(Offset(-11.0, 10.0), Offset(8.0, 10.0)),
             Line(Offset(8.0, 10.0), Offset(8.0, -10.0)),
@@ -1558,7 +1558,7 @@ List<Template> getDefaultTemplates() => [
       Template(
           id: 2,
           date: DateTime(2024),
-          scheme: const Scheme(lines: [
+          scheme: const Scheme(id: '1', lines: [
             Line(Offset(-7.0, 9.0), Offset(6.0, 9.0)),
             Line(Offset(6.0, 9.0), Offset(6.0, -10.0)),
             Line(Offset(6.0, -10.0), Offset(-7.0, -10.0)),

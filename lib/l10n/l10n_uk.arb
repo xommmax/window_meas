@@ -206,5 +206,6 @@
   "flooring": "Підлога",
   "flooringCovering": "Покриття",
   "schemeComment": "Коментар до схеми",
-  "positionComment": "Коментар до позиції"
+  "positionComment": "Коментар до позиції",
+  "flexibles": "Гнучкі"
 }

@@ -6,6 +6,7 @@ import 'package:open_file/open_file.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:uuid/uuid.dart';
 import 'package:window_meas/common/ext/cubit_ext.dart';
+import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_state.dart';
 import 'package:window_meas/features/measurement/data/domain/meas_repository.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
@@ -147,6 +148,30 @@ class MeasurementDetailsCubit extends EventCubit<MeasurementDetailsState> {
       final updatedPositions = List.of(state.measurement!.positions);
       updatedPositions.removeAt(index);
       await updateMeasurement(state.measurement!.copyWith(positions: updatedPositions));
+    }
+  }
+
+  Future<void> deleteFlexible(Position position, Scheme? flexible) async {
+    if (flexible == null) return;
+    final index = position.flexibles.indexWhere((e) => e.id == flexible.id);
+    if (index != -1) {
+      final List<Scheme> updatedFlexibles = List.of(position.flexibles);
+      updatedFlexibles.removeAt(index);
+      await updatePosition(position.copyWith(flexibles: updatedFlexibles));
+    }
+  }
+
+  Future<void> insertFlexible(Position position, Scheme? flexible) async {
+    if (flexible == null) return;
+    final index = position.flexibles.indexWhere((e) => e.id == flexible.id);
+    if (index != -1) {
+      final List<Scheme> updatedFlexibles = List.of(position.flexibles);
+      updatedFlexibles[index] = flexible;
+      await updatePosition(position.copyWith(flexibles: updatedFlexibles));
+    } else {
+      final List<Scheme> updatedFlexibles = List.of(position.flexibles);
+      updatedFlexibles.add(flexible);
+      await updatePosition(position.copyWith(flexibles: updatedFlexibles));
     }
   }
 }

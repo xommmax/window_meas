@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Position {
   String get id => throw _privateConstructorUsedError;
   Scheme? get scheme => throw _privateConstructorUsedError;
+  List<Scheme> get flexibles => throw _privateConstructorUsedError;
   String? get photoPath => throw _privateConstructorUsedError;
   String get quarterSize => throw _privateConstructorUsedError;
   QuarterPosition get quarterPosition => throw _privateConstructorUsedError;
@@ -68,6 +69,7 @@ abstract class $PositionCopyWith<$Res> {
   $Res call(
       {String id,
       Scheme? scheme,
+      List<Scheme> flexibles,
       String? photoPath,
       String quarterSize,
       QuarterPosition quarterPosition,
@@ -123,6 +125,7 @@ class _$PositionCopyWithImpl<$Res, $Val extends Position>
   $Res call({
     Object? id = null,
     Object? scheme = freezed,
+    Object? flexibles = null,
     Object? photoPath = freezed,
     Object? quarterSize = null,
     Object? quarterPosition = null,
@@ -168,6 +171,10 @@ class _$PositionCopyWithImpl<$Res, $Val extends Position>
           ? _value.scheme
           : scheme // ignore: cast_nullable_to_non_nullable
               as Scheme?,
+      flexibles: null == flexibles
+          ? _value.flexibles
+          : flexibles // ignore: cast_nullable_to_non_nullable
+              as List<Scheme>,
       photoPath: freezed == photoPath
           ? _value.photoPath
           : photoPath // ignore: cast_nullable_to_non_nullable
@@ -343,6 +350,7 @@ abstract class _$$PositionImplCopyWith<$Res>
   $Res call(
       {String id,
       Scheme? scheme,
+      List<Scheme> flexibles,
       String? photoPath,
       String quarterSize,
       QuarterPosition quarterPosition,
@@ -398,6 +406,7 @@ class __$$PositionImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? scheme = freezed,
+    Object? flexibles = null,
     Object? photoPath = freezed,
     Object? quarterSize = null,
     Object? quarterPosition = null,
@@ -443,6 +452,10 @@ class __$$PositionImplCopyWithImpl<$Res>
           ? _value.scheme
           : scheme // ignore: cast_nullable_to_non_nullable
               as Scheme?,
+      flexibles: null == flexibles
+          ? _value._flexibles
+          : flexibles // ignore: cast_nullable_to_non_nullable
+              as List<Scheme>,
       photoPath: freezed == photoPath
           ? _value.photoPath
           : photoPath // ignore: cast_nullable_to_non_nullable
@@ -593,6 +606,7 @@ class _$PositionImpl extends _Position {
   const _$PositionImpl(
       {required this.id,
       required this.scheme,
+      required final List<Scheme> flexibles,
       required this.photoPath,
       required this.quarterSize,
       required this.quarterPosition,
@@ -628,12 +642,21 @@ class _$PositionImpl extends _Position {
       required this.expanderOption,
       required this.positionComment,
       required this.schemeComment})
-      : super._();
+      : _flexibles = flexibles,
+        super._();
 
   @override
   final String id;
   @override
   final Scheme? scheme;
+  final List<Scheme> _flexibles;
+  @override
+  List<Scheme> get flexibles {
+    if (_flexibles is EqualUnmodifiableListView) return _flexibles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_flexibles);
+  }
+
   @override
   final String? photoPath;
   @override
@@ -707,7 +730,7 @@ class _$PositionImpl extends _Position {
 
   @override
   String toString() {
-    return 'Position(id: $id, scheme: $scheme, photoPath: $photoPath, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorOpeningType: $doorOpeningType, doorstep: $doorstep, doorstepType: $doorstepType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, expanderOption: $expanderOption, positionComment: $positionComment, schemeComment: $schemeComment)';
+    return 'Position(id: $id, scheme: $scheme, flexibles: $flexibles, photoPath: $photoPath, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorOpeningType: $doorOpeningType, doorstep: $doorstep, doorstepType: $doorstepType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, expanderOption: $expanderOption, positionComment: $positionComment, schemeComment: $schemeComment)';
   }
 
   @override
@@ -717,6 +740,8 @@ class _$PositionImpl extends _Position {
             other is _$PositionImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.scheme, scheme) || other.scheme == scheme) &&
+            const DeepCollectionEquality()
+                .equals(other._flexibles, _flexibles) &&
             (identical(other.photoPath, photoPath) ||
                 other.photoPath == photoPath) &&
             (identical(other.quarterSize, quarterSize) ||
@@ -794,6 +819,7 @@ class _$PositionImpl extends _Position {
         runtimeType,
         id,
         scheme,
+        const DeepCollectionEquality().hash(_flexibles),
         photoPath,
         quarterSize,
         quarterPosition,
@@ -842,6 +868,7 @@ abstract class _Position extends Position {
   const factory _Position(
       {required final String id,
       required final Scheme? scheme,
+      required final List<Scheme> flexibles,
       required final String? photoPath,
       required final String quarterSize,
       required final QuarterPosition quarterPosition,
@@ -883,6 +910,8 @@ abstract class _Position extends Position {
   String get id;
   @override
   Scheme? get scheme;
+  @override
+  List<Scheme> get flexibles;
   @override
   String? get photoPath;
   @override

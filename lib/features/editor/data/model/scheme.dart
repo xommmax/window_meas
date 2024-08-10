@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
 import 'package:window_meas/features/editor/data/model/arch.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/data/model/polygon.dart';
@@ -14,6 +15,7 @@ class Scheme with _$Scheme {
   const Scheme._();
 
   const factory Scheme({
+    required String id,
     required List<Line> lines,
     required List<SizeSegment> sizeSegments,
     required List<Polygon> polygons,
@@ -22,7 +24,8 @@ class Scheme with _$Scheme {
     required List<Arch> arches,
   }) = _Scheme;
 
-  factory Scheme.initial() => const Scheme(
+  factory Scheme.initial() => Scheme(
+        id: const Uuid().v4(),
         lines: [],
         sizeSegments: [],
         polygons: [],
@@ -32,6 +35,7 @@ class Scheme with _$Scheme {
       );
 
   SchemeDB toDB() => SchemeDB()
+    ..id = id
     ..lines = lines.map((e) => e.toDB()).toList()
     ..sizeSegments = sizeSegments.map((e) => e.toDB()).toList()
     ..polygons = polygons.map((e) => e.toDB()).toList()
@@ -40,6 +44,7 @@ class Scheme with _$Scheme {
     ..arches = arches.map((e) => e.toDB()).toList();
 
   static Scheme fromDB(SchemeDB db) => Scheme(
+        id: db.id,
         lines: db.lines.map((e) => Line.fromDB(e)).toList(),
         sizeSegments: db.sizeSegments.map((e) => SizeSegment.fromDB(e)).toList(),
         polygons: db.polygons.map((e) => Polygon.fromDB(e)).toList(),

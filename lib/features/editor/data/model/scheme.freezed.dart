@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Scheme {
+  String get id => throw _privateConstructorUsedError;
   List<Line> get lines => throw _privateConstructorUsedError;
   List<SizeSegment> get sizeSegments => throw _privateConstructorUsedError;
   List<Polygon> get polygons => throw _privateConstructorUsedError;
@@ -35,7 +36,8 @@ abstract class $SchemeCopyWith<$Res> {
       _$SchemeCopyWithImpl<$Res, Scheme>;
   @useResult
   $Res call(
-      {List<Line> lines,
+      {String id,
+      List<Line> lines,
       List<SizeSegment> sizeSegments,
       List<Polygon> polygons,
       List<OpeningTypeRecord> openingTypes,
@@ -56,6 +58,7 @@ class _$SchemeCopyWithImpl<$Res, $Val extends Scheme>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? lines = null,
     Object? sizeSegments = null,
     Object? polygons = null,
@@ -64,6 +67,10 @@ class _$SchemeCopyWithImpl<$Res, $Val extends Scheme>
     Object? arches = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       lines: null == lines
           ? _value.lines
           : lines // ignore: cast_nullable_to_non_nullable
@@ -100,7 +107,8 @@ abstract class _$$SchemeImplCopyWith<$Res> implements $SchemeCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {List<Line> lines,
+      {String id,
+      List<Line> lines,
       List<SizeSegment> sizeSegments,
       List<Polygon> polygons,
       List<OpeningTypeRecord> openingTypes,
@@ -119,6 +127,7 @@ class __$$SchemeImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? lines = null,
     Object? sizeSegments = null,
     Object? polygons = null,
@@ -127,6 +136,10 @@ class __$$SchemeImplCopyWithImpl<$Res>
     Object? arches = null,
   }) {
     return _then(_$SchemeImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       lines: null == lines
           ? _value._lines
           : lines // ignore: cast_nullable_to_non_nullable
@@ -159,7 +172,8 @@ class __$$SchemeImplCopyWithImpl<$Res>
 
 class _$SchemeImpl extends _Scheme {
   const _$SchemeImpl(
-      {required final List<Line> lines,
+      {required this.id,
+      required final List<Line> lines,
       required final List<SizeSegment> sizeSegments,
       required final List<Polygon> polygons,
       required final List<OpeningTypeRecord> openingTypes,
@@ -173,6 +187,8 @@ class _$SchemeImpl extends _Scheme {
         _arches = arches,
         super._();
 
+  @override
+  final String id;
   final List<Line> _lines;
   @override
   List<Line> get lines {
@@ -223,7 +239,7 @@ class _$SchemeImpl extends _Scheme {
 
   @override
   String toString() {
-    return 'Scheme(lines: $lines, sizeSegments: $sizeSegments, polygons: $polygons, openingTypes: $openingTypes, fillingTypes: $fillingTypes, arches: $arches)';
+    return 'Scheme(id: $id, lines: $lines, sizeSegments: $sizeSegments, polygons: $polygons, openingTypes: $openingTypes, fillingTypes: $fillingTypes, arches: $arches)';
   }
 
   @override
@@ -231,6 +247,7 @@ class _$SchemeImpl extends _Scheme {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SchemeImpl &&
+            (identical(other.id, id) || other.id == id) &&
             const DeepCollectionEquality().equals(other._lines, _lines) &&
             const DeepCollectionEquality()
                 .equals(other._sizeSegments, _sizeSegments) &&
@@ -245,6 +262,7 @@ class _$SchemeImpl extends _Scheme {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       const DeepCollectionEquality().hash(_lines),
       const DeepCollectionEquality().hash(_sizeSegments),
       const DeepCollectionEquality().hash(_polygons),
@@ -261,7 +279,8 @@ class _$SchemeImpl extends _Scheme {
 
 abstract class _Scheme extends Scheme {
   const factory _Scheme(
-      {required final List<Line> lines,
+      {required final String id,
+      required final List<Line> lines,
       required final List<SizeSegment> sizeSegments,
       required final List<Polygon> polygons,
       required final List<OpeningTypeRecord> openingTypes,
@@ -269,6 +288,8 @@ abstract class _Scheme extends Scheme {
       required final List<Arch> arches}) = _$SchemeImpl;
   const _Scheme._() : super._();
 
+  @override
+  String get id;
   @override
   List<Line> get lines;
   @override

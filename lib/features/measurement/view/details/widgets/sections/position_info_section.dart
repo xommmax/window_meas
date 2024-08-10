@@ -12,6 +12,7 @@ import 'package:window_meas/features/measurement/data/domain/model/params/window
 import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_depth_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_type_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/position.dart';
+import 'package:window_meas/features/measurement/view/details/widgets/items/flexibles_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/glass_unit_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/photo_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/profile_system_item.dart';
@@ -51,6 +52,8 @@ class PositionInfoSection extends StatelessWidget {
                   maxLines: 3,
                   keyboardType: TextInputType.multiline,
                 ),
+                const Divider(),
+                FlexiblesItem(position),
                 const Divider(),
                 PhotoItem(position),
               ],

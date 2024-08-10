@@ -11,6 +11,8 @@ part 'scheme_db.g.dart';
 
 @embedded
 class SchemeDB {
+  @Default('')
+  late String id;
   @Default([])
   late List<LineDB> lines;
   @Default([])

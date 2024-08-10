@@ -206,5 +206,6 @@
   "flooring": "Flooring",
   "flooringCovering": "Covering",
   "schemeComment": "Scheme comment",
-  "positionComment": "Position comment"
+  "positionComment": "Position comment",
+  "flexibles": "Flexibles"
 }

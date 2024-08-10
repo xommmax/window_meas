@@ -72,141 +72,147 @@ const PositionDBSchema = Schema(
       type: IsarType.object,
       target: r'ExpanderOptionDB',
     ),
-    r'furniture': PropertySchema(
+    r'flexibles': PropertySchema(
       id: 11,
+      name: r'flexibles',
+      type: IsarType.objectList,
+      target: r'SchemeDB',
+    ),
+    r'furniture': PropertySchema(
+      id: 12,
       name: r'furniture',
       type: IsarType.string,
     ),
     r'glassUnit': PropertySchema(
-      id: 12,
+      id: 13,
       name: r'glassUnit',
       type: IsarType.string,
     ),
     r'id': PropertySchema(
-      id: 13,
+      id: 14,
       name: r'id',
       type: IsarType.string,
     ),
     r'laminationExternal': PropertySchema(
-      id: 14,
+      id: 15,
       name: r'laminationExternal',
       type: IsarType.string,
     ),
     r'laminationInternal': PropertySchema(
-      id: 15,
+      id: 16,
       name: r'laminationInternal',
       type: IsarType.string,
     ),
     r'panelThickness': PropertySchema(
-      id: 16,
+      id: 17,
       name: r'panelThickness',
       type: IsarType.string,
       enumMap: _PositionDBpanelThicknessEnumValueMap,
     ),
     r'panelType': PropertySchema(
-      id: 17,
+      id: 18,
       name: r'panelType',
       type: IsarType.string,
       enumMap: _PositionDBpanelTypeEnumValueMap,
     ),
     r'photoPath': PropertySchema(
-      id: 18,
+      id: 19,
       name: r'photoPath',
       type: IsarType.string,
     ),
     r'positionComment': PropertySchema(
-      id: 19,
+      id: 20,
       name: r'positionComment',
       type: IsarType.string,
     ),
     r'profileSystem': PropertySchema(
-      id: 20,
+      id: 21,
       name: r'profileSystem',
       type: IsarType.string,
     ),
     r'quarterPosition': PropertySchema(
-      id: 21,
+      id: 22,
       name: r'quarterPosition',
       type: IsarType.string,
       enumMap: _PositionDBquarterPositionEnumValueMap,
     ),
     r'quarterSize': PropertySchema(
-      id: 22,
+      id: 23,
       name: r'quarterSize',
       type: IsarType.string,
     ),
     r'rubberColor': PropertySchema(
-      id: 23,
+      id: 24,
       name: r'rubberColor',
       type: IsarType.string,
       enumMap: _PositionDBrubberColorEnumValueMap,
     ),
     r'scheme': PropertySchema(
-      id: 24,
+      id: 25,
       name: r'scheme',
       type: IsarType.object,
       target: r'SchemeDB',
     ),
     r'schemeComment': PropertySchema(
-      id: 25,
+      id: 26,
       name: r'schemeComment',
       type: IsarType.string,
     ),
     r'slopeDepth': PropertySchema(
-      id: 26,
+      id: 27,
       name: r'slopeDepth',
       type: IsarType.string,
     ),
     r'slopeLength': PropertySchema(
-      id: 27,
+      id: 28,
       name: r'slopeLength',
       type: IsarType.string,
     ),
     r'slopeQuantity': PropertySchema(
-      id: 28,
+      id: 29,
       name: r'slopeQuantity',
       type: IsarType.string,
     ),
     r'standProfile': PropertySchema(
-      id: 29,
+      id: 30,
       name: r'standProfile',
       type: IsarType.string,
       enumMap: _PositionDBstandProfileEnumValueMap,
     ),
     r'staticCalculation': PropertySchema(
-      id: 30,
+      id: 31,
       name: r'staticCalculation',
       type: IsarType.bool,
     ),
     r'windowsillAssembly': PropertySchema(
-      id: 31,
+      id: 32,
       name: r'windowsillAssembly',
       type: IsarType.bool,
     ),
     r'windowsillColor': PropertySchema(
-      id: 32,
+      id: 33,
       name: r'windowsillColor',
       type: IsarType.string,
     ),
     r'windowsillConnector': PropertySchema(
-      id: 33,
+      id: 34,
       name: r'windowsillConnector',
       type: IsarType.string,
       enumMap: _PositionDBwindowsillConnectorEnumValueMap,
     ),
     r'windowsillDepth': PropertySchema(
-      id: 34,
+      id: 35,
       name: r'windowsillDepth',
       type: IsarType.string,
       enumMap: _PositionDBwindowsillDepthEnumValueMap,
     ),
     r'windowsillSize': PropertySchema(
-      id: 35,
+      id: 36,
       name: r'windowsillSize',
       type: IsarType.string,
     ),
     r'windowsillType': PropertySchema(
-      id: 36,
+      id: 37,
       name: r'windowsillType',
       type: IsarType.string,
       enumMap: _PositionDBwindowsillTypeEnumValueMap,
@@ -236,6 +242,14 @@ int _positionDBEstimateSize(
   bytesCount += 3 +
       ExpanderOptionDBSchema.estimateSize(
           object.expanderOption, allOffsets[ExpanderOptionDB]!, allOffsets);
+  bytesCount += 3 + object.flexibles.length * 3;
+  {
+    final offsets = allOffsets[SchemeDB]!;
+    for (var i = 0; i < object.flexibles.length; i++) {
+      final value = object.flexibles[i];
+      bytesCount += SchemeDBSchema.estimateSize(value, offsets, allOffsets);
+    }
+  }
   bytesCount += 3 + object.furniture.length * 3;
   bytesCount += 3 + object.glassUnit.length * 3;
   bytesCount += 3 + object.id.length * 3;
@@ -296,37 +310,43 @@ void _positionDBSerialize(
     ExpanderOptionDBSchema.serialize,
     object.expanderOption,
   );
-  writer.writeString(offsets[11], object.furniture);
-  writer.writeString(offsets[12], object.glassUnit);
-  writer.writeString(offsets[13], object.id);
-  writer.writeString(offsets[14], object.laminationExternal);
-  writer.writeString(offsets[15], object.laminationInternal);
-  writer.writeString(offsets[16], object.panelThickness.name);
-  writer.writeString(offsets[17], object.panelType.name);
-  writer.writeString(offsets[18], object.photoPath);
-  writer.writeString(offsets[19], object.positionComment);
-  writer.writeString(offsets[20], object.profileSystem);
-  writer.writeString(offsets[21], object.quarterPosition.name);
-  writer.writeString(offsets[22], object.quarterSize);
-  writer.writeString(offsets[23], object.rubberColor.name);
+  writer.writeObjectList<SchemeDB>(
+    offsets[11],
+    allOffsets,
+    SchemeDBSchema.serialize,
+    object.flexibles,
+  );
+  writer.writeString(offsets[12], object.furniture);
+  writer.writeString(offsets[13], object.glassUnit);
+  writer.writeString(offsets[14], object.id);
+  writer.writeString(offsets[15], object.laminationExternal);
+  writer.writeString(offsets[16], object.laminationInternal);
+  writer.writeString(offsets[17], object.panelThickness.name);
+  writer.writeString(offsets[18], object.panelType.name);
+  writer.writeString(offsets[19], object.photoPath);
+  writer.writeString(offsets[20], object.positionComment);
+  writer.writeString(offsets[21], object.profileSystem);
+  writer.writeString(offsets[22], object.quarterPosition.name);
+  writer.writeString(offsets[23], object.quarterSize);
+  writer.writeString(offsets[24], object.rubberColor.name);
   writer.writeObject<SchemeDB>(
-    offsets[24],
+    offsets[25],
     allOffsets,
     SchemeDBSchema.serialize,
     object.scheme,
   );
-  writer.writeString(offsets[25], object.schemeComment);
-  writer.writeString(offsets[26], object.slopeDepth);
-  writer.writeString(offsets[27], object.slopeLength);
-  writer.writeString(offsets[28], object.slopeQuantity);
-  writer.writeString(offsets[29], object.standProfile.name);
-  writer.writeBool(offsets[30], object.staticCalculation);
-  writer.writeBool(offsets[31], object.windowsillAssembly);
-  writer.writeString(offsets[32], object.windowsillColor);
-  writer.writeString(offsets[33], object.windowsillConnector.name);
-  writer.writeString(offsets[34], object.windowsillDepth.name);
-  writer.writeString(offsets[35], object.windowsillSize);
-  writer.writeString(offsets[36], object.windowsillType.name);
+  writer.writeString(offsets[26], object.schemeComment);
+  writer.writeString(offsets[27], object.slopeDepth);
+  writer.writeString(offsets[28], object.slopeLength);
+  writer.writeString(offsets[29], object.slopeQuantity);
+  writer.writeString(offsets[30], object.standProfile.name);
+  writer.writeBool(offsets[31], object.staticCalculation);
+  writer.writeBool(offsets[32], object.windowsillAssembly);
+  writer.writeString(offsets[33], object.windowsillColor);
+  writer.writeString(offsets[34], object.windowsillConnector.name);
+  writer.writeString(offsets[35], object.windowsillDepth.name);
+  writer.writeString(offsets[36], object.windowsillSize);
+  writer.writeString(offsets[37], object.windowsillType.name);
 }
 
 PositionDB _positionDBDeserialize(
@@ -358,51 +378,58 @@ PositionDB _positionDBDeserialize(
         allOffsets,
       ) ??
       ExpanderOptionDB();
-  object.furniture = reader.readString(offsets[11]);
-  object.glassUnit = reader.readString(offsets[12]);
-  object.id = reader.readString(offsets[13]);
-  object.laminationExternal = reader.readString(offsets[14]);
-  object.laminationInternal = reader.readString(offsets[15]);
+  object.flexibles = reader.readObjectList<SchemeDB>(
+        offsets[11],
+        SchemeDBSchema.deserialize,
+        allOffsets,
+        SchemeDB(),
+      ) ??
+      [];
+  object.furniture = reader.readString(offsets[12]);
+  object.glassUnit = reader.readString(offsets[13]);
+  object.id = reader.readString(offsets[14]);
+  object.laminationExternal = reader.readString(offsets[15]);
+  object.laminationInternal = reader.readString(offsets[16]);
   object.panelThickness = _PositionDBpanelThicknessValueEnumMap[
-          reader.readStringOrNull(offsets[16])] ??
+          reader.readStringOrNull(offsets[17])] ??
       PanelThickness.none;
   object.panelType =
-      _PositionDBpanelTypeValueEnumMap[reader.readStringOrNull(offsets[17])] ??
+      _PositionDBpanelTypeValueEnumMap[reader.readStringOrNull(offsets[18])] ??
           PanelType.none;
-  object.photoPath = reader.readStringOrNull(offsets[18]);
-  object.positionComment = reader.readString(offsets[19]);
-  object.profileSystem = reader.readString(offsets[20]);
+  object.photoPath = reader.readStringOrNull(offsets[19]);
+  object.positionComment = reader.readString(offsets[20]);
+  object.profileSystem = reader.readString(offsets[21]);
   object.quarterPosition = _PositionDBquarterPositionValueEnumMap[
-          reader.readStringOrNull(offsets[21])] ??
+          reader.readStringOrNull(offsets[22])] ??
       QuarterPosition.none;
-  object.quarterSize = reader.readString(offsets[22]);
+  object.quarterSize = reader.readString(offsets[23]);
   object.rubberColor = _PositionDBrubberColorValueEnumMap[
-          reader.readStringOrNull(offsets[23])] ??
+          reader.readStringOrNull(offsets[24])] ??
       RubberColor.none;
   object.scheme = reader.readObjectOrNull<SchemeDB>(
-    offsets[24],
+    offsets[25],
     SchemeDBSchema.deserialize,
     allOffsets,
   );
-  object.schemeComment = reader.readString(offsets[25]);
-  object.slopeDepth = reader.readString(offsets[26]);
-  object.slopeLength = reader.readString(offsets[27]);
-  object.slopeQuantity = reader.readString(offsets[28]);
+  object.schemeComment = reader.readString(offsets[26]);
+  object.slopeDepth = reader.readString(offsets[27]);
+  object.slopeLength = reader.readString(offsets[28]);
+  object.slopeQuantity = reader.readString(offsets[29]);
   object.standProfile = _PositionDBstandProfileValueEnumMap[
-          reader.readStringOrNull(offsets[29])] ??
+          reader.readStringOrNull(offsets[30])] ??
       StandProfile.none;
-  object.staticCalculation = reader.readBool(offsets[30]);
-  object.windowsillAssembly = reader.readBool(offsets[31]);
-  object.windowsillColor = reader.readString(offsets[32]);
+  object.staticCalculation = reader.readBool(offsets[31]);
+  object.windowsillAssembly = reader.readBool(offsets[32]);
+  object.windowsillColor = reader.readString(offsets[33]);
   object.windowsillConnector = _PositionDBwindowsillConnectorValueEnumMap[
-          reader.readStringOrNull(offsets[33])] ??
+          reader.readStringOrNull(offsets[34])] ??
       WindowsillConnector.none;
   object.windowsillDepth = _PositionDBwindowsillDepthValueEnumMap[
-          reader.readStringOrNull(offsets[34])] ??
+          reader.readStringOrNull(offsets[35])] ??
       WindowsillDepth.none;
-  object.windowsillSize = reader.readString(offsets[35]);
+  object.windowsillSize = reader.readString(offsets[36]);
   object.windowsillType = _PositionDBwindowsillTypeValueEnumMap[
-          reader.readStringOrNull(offsets[36])] ??
+          reader.readStringOrNull(offsets[37])] ??
       WindowsillType.none;
   return object;
 }
@@ -448,7 +475,13 @@ P _positionDBDeserializeProp<P>(
           ) ??
           ExpanderOptionDB()) as P;
     case 11:
-      return (reader.readString(offset)) as P;
+      return (reader.readObjectList<SchemeDB>(
+            offset,
+            SchemeDBSchema.deserialize,
+            allOffsets,
+            SchemeDB(),
+          ) ??
+          []) as P;
     case 12:
       return (reader.readString(offset)) as P;
     case 13:
@@ -458,37 +491,37 @@ P _positionDBDeserializeProp<P>(
     case 15:
       return (reader.readString(offset)) as P;
     case 16:
+      return (reader.readString(offset)) as P;
+    case 17:
       return (_PositionDBpanelThicknessValueEnumMap[
               reader.readStringOrNull(offset)] ??
           PanelThickness.none) as P;
-    case 17:
+    case 18:
       return (_PositionDBpanelTypeValueEnumMap[
               reader.readStringOrNull(offset)] ??
           PanelType.none) as P;
-    case 18:
-      return (reader.readStringOrNull(offset)) as P;
     case 19:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 20:
       return (reader.readString(offset)) as P;
     case 21:
+      return (reader.readString(offset)) as P;
+    case 22:
       return (_PositionDBquarterPositionValueEnumMap[
               reader.readStringOrNull(offset)] ??
           QuarterPosition.none) as P;
-    case 22:
-      return (reader.readString(offset)) as P;
     case 23:
+      return (reader.readString(offset)) as P;
+    case 24:
       return (_PositionDBrubberColorValueEnumMap[
               reader.readStringOrNull(offset)] ??
           RubberColor.none) as P;
-    case 24:
+    case 25:
       return (reader.readObjectOrNull<SchemeDB>(
         offset,
         SchemeDBSchema.deserialize,
         allOffsets,
       )) as P;
-    case 25:
-      return (reader.readString(offset)) as P;
     case 26:
       return (reader.readString(offset)) as P;
     case 27:
@@ -496,26 +529,28 @@ P _positionDBDeserializeProp<P>(
     case 28:
       return (reader.readString(offset)) as P;
     case 29:
+      return (reader.readString(offset)) as P;
+    case 30:
       return (_PositionDBstandProfileValueEnumMap[
               reader.readStringOrNull(offset)] ??
           StandProfile.none) as P;
-    case 30:
-      return (reader.readBool(offset)) as P;
     case 31:
       return (reader.readBool(offset)) as P;
     case 32:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 33:
+      return (reader.readString(offset)) as P;
+    case 34:
       return (_PositionDBwindowsillConnectorValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillConnector.none) as P;
-    case 34:
+    case 35:
       return (_PositionDBwindowsillDepthValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillDepth.none) as P;
-    case 35:
-      return (reader.readString(offset)) as P;
     case 36:
+      return (reader.readString(offset)) as P;
+    case 37:
       return (_PositionDBwindowsillTypeValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillType.none) as P;
@@ -1904,6 +1939,95 @@ extension PositionDBQueryFilter
         property: r'drainageWidth',
         value: '',
       ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      flexiblesLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'flexibles',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      flexiblesIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'flexibles',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      flexiblesIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'flexibles',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      flexiblesLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'flexibles',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      flexiblesLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'flexibles',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      flexiblesLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'flexibles',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -5082,6 +5206,13 @@ extension PositionDBQueryObject
       FilterQuery<ExpanderOptionDB> q) {
     return QueryBuilder.apply(this, (query) {
       return query.object(q, r'expanderOption');
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition> flexiblesElement(
+      FilterQuery<SchemeDB> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'flexibles');
     });
   }
 
