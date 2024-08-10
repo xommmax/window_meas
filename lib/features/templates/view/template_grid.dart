@@ -18,8 +18,8 @@ class TemplateGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GridView.builder(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: MediaQuery.of(context).size.shortestSide > 600 ? 5 : 3,
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
         ),

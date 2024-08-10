@@ -17,7 +17,11 @@ class TemplateListCubit extends Cubit<TemplateListState> {
       emit(TemplateListState(templates: templates));
     });
     final templates = await repo.getTemplates();
-    emit(TemplateListState(templates: templates));
+    if (templates.isEmpty) {
+      await repo.addDefaultTemplates();
+    } else {
+      emit(TemplateListState(templates: templates));
+    }
   }
 
   Future<void> deleteTemplate(int index) async {

@@ -1,14 +1,13 @@
 import 'package:injectable/injectable.dart';
+import 'package:window_meas/features/templates/data/default_templates.dart';
 import 'package:window_meas/features/templates/data/ds/template_local_ds.dart';
-import 'package:window_meas/features/templates/data/ds/template_remote_ds.dart';
 import 'package:window_meas/features/templates/data/model/template.dart';
 
 @singleton
 class TemplateRepository {
-  TemplateRepository(this.local, this.remote);
+  TemplateRepository(this.local);
 
   final TemplateLocalDataSource local;
-  final TemplateRemoteDataSource remote;
 
   Future<void> addTemplate(Template template) => local.addTemplate(template.toDB());
 
@@ -28,4 +27,7 @@ class TemplateRepository {
       local.watchTemplates().map((list) => list.map((e) => Template.fromDB(e)).toList());
 
   Future<void> deleteTemplate(int id) => local.deleteTemplate(id);
+
+  Future<void> addDefaultTemplates() =>
+      local.addTemplates(getDefaultTemplates().map((e) => e.toDB()).toList());
 }
