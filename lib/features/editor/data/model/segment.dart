@@ -13,6 +13,7 @@ class SizeSegment with _$SizeSegment {
     required Offset p1,
     required Offset p2,
     required String? size,
+    required String? comment,
     required SegmentDirection direction,
     required bool isMain,
     required int index,
@@ -24,6 +25,7 @@ class SizeSegment with _$SizeSegment {
     ..x2 = p2.dx
     ..y2 = p2.dy
     ..size = size
+    ..comment = comment
     ..direction = direction
     ..isMain = isMain
     ..index = index;
@@ -32,6 +34,7 @@ class SizeSegment with _$SizeSegment {
         p1: Offset(db.x1, db.y1),
         p2: Offset(db.x2, db.y2),
         size: db.size,
+        comment: db.comment,
         direction: db.direction,
         isMain: db.isMain,
         index: db.index,

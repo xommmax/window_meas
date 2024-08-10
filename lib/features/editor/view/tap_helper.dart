@@ -8,16 +8,18 @@ import 'package:window_meas/features/editor/bloc/drawing_cubit.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/view/meas_input_dialog.dart';
 
-Future<SizeSegment?> onEditorTapUp(Offset position, BuildContext context, Size size) async {
+Future<SizeSegment?> onEditorSegmentTapUp(Offset position, BuildContext context, Size size) async {
   final segments = context.read<DrawingCubit>().state.scheme.sizeSegments;
   if (segments.isEmpty) return null;
 
-  final selectedSegment = _checkHorizontal(segments, size, position) ?? _checkVertical(segments, size, position);
+  final selectedSegment =
+      _checkHorizontal(segments, size, position) ?? _checkVertical(segments, size, position);
 
   if (selectedSegment != null && context.mounted) {
-    final size = await MeasurementInputDialog.show(context);
-    if (size != null) {
-      return selectedSegment.copyWith(size: size);
+    final (String, String)? sizeAndComment =
+        await MeasurementInputDialog.show(context, selectedSegment);
+    if (sizeAndComment != null) {
+      return selectedSegment.copyWith(size: sizeAndComment.$1, comment: sizeAndComment.$2);
     }
   }
   return null;
@@ -33,11 +35,16 @@ SizeSegment? _checkHorizontal(List<SizeSegment> segments, Size size, Offset posi
 
   if (mainHorSegment != null) {
     final horMainPath = Path()
-      ..moveTo(mainHorSegment.p1.toGlobalCoord(size).dx, mainHorSegment.p1.toGlobalCoord(size).dy - 2.25 * gridSize)
-      ..lineTo(mainHorSegment.p1.toGlobalCoord(size).dx, mainHorSegment.p1.toGlobalCoord(size).dy - 1.25 * gridSize)
-      ..lineTo(mainHorSegment.p2.toGlobalCoord(size).dx, mainHorSegment.p1.toGlobalCoord(size).dy - 1.25 * gridSize)
-      ..lineTo(mainHorSegment.p2.toGlobalCoord(size).dx, mainHorSegment.p1.toGlobalCoord(size).dy - 2.25 * gridSize)
-      ..lineTo(mainHorSegment.p1.toGlobalCoord(size).dx, mainHorSegment.p1.toGlobalCoord(size).dy - 2.25 * gridSize);
+      ..moveTo(mainHorSegment.p1.toGlobalCoord(size).dx,
+          mainHorSegment.p1.toGlobalCoord(size).dy - 2.5 * gridSize)
+      ..lineTo(mainHorSegment.p1.toGlobalCoord(size).dx,
+          mainHorSegment.p1.toGlobalCoord(size).dy - 1.5 * gridSize)
+      ..lineTo(mainHorSegment.p2.toGlobalCoord(size).dx,
+          mainHorSegment.p1.toGlobalCoord(size).dy - 1.5 * gridSize)
+      ..lineTo(mainHorSegment.p2.toGlobalCoord(size).dx,
+          mainHorSegment.p1.toGlobalCoord(size).dy - 2.5 * gridSize)
+      ..lineTo(mainHorSegment.p1.toGlobalCoord(size).dx,
+          mainHorSegment.p1.toGlobalCoord(size).dy - 2.5 * gridSize);
 
     if (horMainPath.contains(position)) {
       return mainHorSegment;
@@ -49,11 +56,16 @@ SizeSegment? _checkHorizontal(List<SizeSegment> segments, Size size, Offset posi
 
   for (final segment in horSegments) {
     final horSubPath = Path()
-      ..moveTo(segment.p1.toGlobalCoord(size).dx, segment.p1.toGlobalCoord(size).dy - 1.25 * gridSize)
-      ..lineTo(segment.p1.toGlobalCoord(size).dx, segment.p1.toGlobalCoord(size).dy - 0.25 * gridSize)
-      ..lineTo(segment.p2.toGlobalCoord(size).dx, segment.p1.toGlobalCoord(size).dy - 0.25 * gridSize)
-      ..lineTo(segment.p2.toGlobalCoord(size).dx, segment.p1.toGlobalCoord(size).dy - 1.25 * gridSize)
-      ..lineTo(segment.p1.toGlobalCoord(size).dx, segment.p1.toGlobalCoord(size).dy - 1.25 * gridSize);
+      ..moveTo(
+          segment.p1.toGlobalCoord(size).dx, segment.p1.toGlobalCoord(size).dy - 1.5 * gridSize)
+      ..lineTo(
+          segment.p1.toGlobalCoord(size).dx, segment.p1.toGlobalCoord(size).dy - 0.5 * gridSize)
+      ..lineTo(
+          segment.p2.toGlobalCoord(size).dx, segment.p1.toGlobalCoord(size).dy - 0.5 * gridSize)
+      ..lineTo(
+          segment.p2.toGlobalCoord(size).dx, segment.p1.toGlobalCoord(size).dy - 1.5 * gridSize)
+      ..lineTo(
+          segment.p1.toGlobalCoord(size).dx, segment.p1.toGlobalCoord(size).dy - 1.5 * gridSize);
 
     if (horSubPath.contains(position)) {
       return segment;
@@ -74,11 +86,16 @@ SizeSegment? _checkVertical(List<SizeSegment> segments, Size size, Offset positi
 
   if (mainVerSegment != null) {
     final verMainPath = Path()
-      ..moveTo(mainVerSegment.p1.toGlobalCoord(size).dx - 2.25 * gridSize, mainVerSegment.p1.toGlobalCoord(size).dy)
-      ..lineTo(mainVerSegment.p1.toGlobalCoord(size).dx - 1.25 * gridSize, mainVerSegment.p1.toGlobalCoord(size).dy)
-      ..lineTo(mainVerSegment.p1.toGlobalCoord(size).dx - 1.25 * gridSize, mainVerSegment.p2.toGlobalCoord(size).dy)
-      ..lineTo(mainVerSegment.p1.toGlobalCoord(size).dx - 2.25 * gridSize, mainVerSegment.p2.toGlobalCoord(size).dy)
-      ..lineTo(mainVerSegment.p1.toGlobalCoord(size).dx - 2.25 * gridSize, mainVerSegment.p1.toGlobalCoord(size).dy);
+      ..moveTo(mainVerSegment.p1.toGlobalCoord(size).dx - 2.5 * gridSize,
+          mainVerSegment.p1.toGlobalCoord(size).dy)
+      ..lineTo(mainVerSegment.p1.toGlobalCoord(size).dx - 1.5 * gridSize,
+          mainVerSegment.p1.toGlobalCoord(size).dy)
+      ..lineTo(mainVerSegment.p1.toGlobalCoord(size).dx - 1.5 * gridSize,
+          mainVerSegment.p2.toGlobalCoord(size).dy)
+      ..lineTo(mainVerSegment.p1.toGlobalCoord(size).dx - 2.5 * gridSize,
+          mainVerSegment.p2.toGlobalCoord(size).dy)
+      ..lineTo(mainVerSegment.p1.toGlobalCoord(size).dx - 2.5 * gridSize,
+          mainVerSegment.p1.toGlobalCoord(size).dy);
 
     if (verMainPath.contains(position)) {
       return mainVerSegment;
@@ -90,11 +107,16 @@ SizeSegment? _checkVertical(List<SizeSegment> segments, Size size, Offset positi
 
   for (final segment in verSegments) {
     final verSubPath = Path()
-      ..moveTo(segment.p1.toGlobalCoord(size).dx - 1.25 * gridSize, segment.p1.toGlobalCoord(size).dy)
-      ..lineTo(segment.p1.toGlobalCoord(size).dx - 0.25 * gridSize, segment.p1.toGlobalCoord(size).dy)
-      ..lineTo(segment.p1.toGlobalCoord(size).dx - 0.25 * gridSize, segment.p2.toGlobalCoord(size).dy)
-      ..lineTo(segment.p1.toGlobalCoord(size).dx - 1.25 * gridSize, segment.p2.toGlobalCoord(size).dy)
-      ..lineTo(segment.p1.toGlobalCoord(size).dx - 1.25 * gridSize, segment.p1.toGlobalCoord(size).dy);
+      ..moveTo(
+          segment.p1.toGlobalCoord(size).dx - 1.5 * gridSize, segment.p1.toGlobalCoord(size).dy)
+      ..lineTo(
+          segment.p1.toGlobalCoord(size).dx - 0.5 * gridSize, segment.p1.toGlobalCoord(size).dy)
+      ..lineTo(
+          segment.p1.toGlobalCoord(size).dx - 0.5 * gridSize, segment.p2.toGlobalCoord(size).dy)
+      ..lineTo(
+          segment.p1.toGlobalCoord(size).dx - 1.5 * gridSize, segment.p2.toGlobalCoord(size).dy)
+      ..lineTo(
+          segment.p1.toGlobalCoord(size).dx - 1.5 * gridSize, segment.p1.toGlobalCoord(size).dy);
 
     if (verSubPath.contains(position)) {
       return segment;

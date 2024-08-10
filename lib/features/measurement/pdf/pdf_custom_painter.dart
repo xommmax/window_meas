@@ -214,22 +214,22 @@ class PdfCustomPainter {
       final p1 = mainHorSegment.p1.toTemplateCoord(size, _gridAmount, _minX, _minY);
       final p2 = mainHorSegment.p2.toTemplateCoord(size, _gridAmount, _minX, _minY);
 
-      canvas.drawLine(p1.dx, size.height - (p1.dy - 2 * gridSize), p1.dx, size.height - p1.dy);
-      canvas.drawLine(p2.dx, size.height - (p1.dy - 2 * gridSize), p2.dx, size.height - p1.dy);
-      canvas.drawLine(p1.dx, size.height - (p1.dy - 1.75 * gridSize), p2.dx,
-          size.height - (p1.dy - 1.75 * gridSize));
+      canvas.drawLine(p1.dx, size.height - (p1.dy - 2.25 * gridSize), p1.dx, size.height - p1.dy);
+      canvas.drawLine(p2.dx, size.height - (p1.dy - 2.25 * gridSize), p2.dx, size.height - p1.dy);
+      canvas.drawLine(
+          p1.dx, size.height - (p1.dy - 2 * gridSize), p2.dx, size.height - (p1.dy - 2 * gridSize));
 
       canvas.strokePath();
 
-      _drawTrianglePath(canvas, Offset(p1.dx, p1.dy - 1.75 * gridSize), Direction.left);
-      _drawTrianglePath(canvas, Offset(p2.dx, p1.dy - 1.75 * gridSize), Direction.right);
+      _drawTrianglePath(canvas, Offset(p1.dx, p1.dy - 2 * gridSize), Direction.left);
+      _drawTrianglePath(canvas, Offset(p2.dx, p1.dy - 2 * gridSize), Direction.right);
 
-      _drawHorizontalSegmentSize(
+      _drawHorizontalSegmentSizeText(
         canvas,
-        mainHorSegment.size,
+        mainHorSegment,
         p1.dx,
         p2.dx,
-        p1.dy - 1.75 * gridSize,
+        p1.dy - 2 * gridSize,
       );
     }
     horSegments.removeWhere((e) => e.isMain);
@@ -238,16 +238,16 @@ class PdfCustomPainter {
     for (final segment in horSegments) {
       final p1 = segment.p1.toTemplateCoord(size, _gridAmount, _minX, _minY);
       final p2 = segment.p2.toTemplateCoord(size, _gridAmount, _minX, _minY);
-      canvas.drawLine(p2.dx, size.height - (p1.dy - 1 * gridSize), p2.dx, size.height - p1.dy);
-      canvas.drawLine(p1.dx, size.height - (p1.dy - 0.75 * gridSize), p2.dx,
-          size.height - (p1.dy - 0.75 * gridSize));
+      canvas.drawLine(p2.dx, size.height - (p1.dy - 1.25 * gridSize), p2.dx, size.height - p1.dy);
+      canvas.drawLine(
+          p1.dx, size.height - (p1.dy - 1 * gridSize), p2.dx, size.height - (p1.dy - 1 * gridSize));
 
       canvas.strokePath();
 
-      _drawTrianglePath(canvas, Offset(p1.dx, p1.dy - 0.75 * gridSize), Direction.left);
-      _drawTrianglePath(canvas, Offset(p2.dx, p1.dy - 0.75 * gridSize), Direction.right);
+      _drawTrianglePath(canvas, Offset(p1.dx, p1.dy - 1 * gridSize), Direction.left);
+      _drawTrianglePath(canvas, Offset(p2.dx, p1.dy - 1 * gridSize), Direction.right);
 
-      _drawHorizontalSegmentSize(canvas, segment.size, p1.dx, p2.dx, p1.dy - 0.75 * gridSize);
+      _drawHorizontalSegmentSizeText(canvas, segment, p1.dx, p2.dx, p1.dy - 1 * gridSize);
     }
   }
 
@@ -264,22 +264,22 @@ class PdfCustomPainter {
     if (mainVerSegment != null) {
       final p1 = mainVerSegment.p1.toTemplateCoord(size, _gridAmount, _minX, _minY);
       final p2 = mainVerSegment.p2.toTemplateCoord(size, _gridAmount, _minX, _minY);
-      canvas.drawLine(p1.dx - 2 * gridSize, size.height - p1.dy, p1.dx, size.height - p1.dy);
-      canvas.drawLine(p1.dx - 2 * gridSize, size.height - p2.dy, p1.dx, size.height - p2.dy);
-      canvas.drawLine(p1.dx - 1.75 * gridSize, size.height - p1.dy, p1.dx - 1.75 * gridSize,
-          size.height - p2.dy);
+      canvas.drawLine(p1.dx - 2.25 * gridSize, size.height - p1.dy, p1.dx, size.height - p1.dy);
+      canvas.drawLine(p1.dx - 2.25 * gridSize, size.height - p2.dy, p1.dx, size.height - p2.dy);
+      canvas.drawLine(
+          p1.dx - 2 * gridSize, size.height - p1.dy, p1.dx - 2 * gridSize, size.height - p2.dy);
 
       canvas.strokePath();
 
-      _drawTrianglePath(canvas, Offset(p1.dx - 1.75 * gridSize, p1.dy), Direction.up);
-      _drawTrianglePath(canvas, Offset(p1.dx - 1.75 * gridSize, p2.dy), Direction.down);
+      _drawTrianglePath(canvas, Offset(p1.dx - 2 * gridSize, p1.dy), Direction.up);
+      _drawTrianglePath(canvas, Offset(p1.dx - 2 * gridSize, p2.dy), Direction.down);
 
-      _drawVerticalSegmentSize(
+      _drawVerticalSegmentSizeText(
         canvas,
-        mainVerSegment.size,
+        mainVerSegment,
         p1.dy,
         p2.dy,
-        p1.dx - 1.75 * gridSize,
+        p1.dx - 2 * gridSize,
       );
     }
 
@@ -290,60 +290,131 @@ class PdfCustomPainter {
       final p1 = segment.p1.toTemplateCoord(size, _gridAmount, _minX, _minY);
       final p2 = segment.p2.toTemplateCoord(size, _gridAmount, _minX, _minY);
 
-      canvas.drawLine(p1.dx - 1 * gridSize, size.height - p2.dy, p1.dx, size.height - p2.dy);
-      canvas.drawLine(p1.dx - 0.75 * gridSize, size.height - p1.dy, p1.dx - 0.75 * gridSize,
-          size.height - p2.dy);
+      canvas.drawLine(p1.dx - 1.25 * gridSize, size.height - p2.dy, p1.dx, size.height - p2.dy);
+      canvas.drawLine(
+          p1.dx - 1 * gridSize, size.height - p1.dy, p1.dx - 1 * gridSize, size.height - p2.dy);
 
       canvas.strokePath();
 
-      _drawTrianglePath(canvas, Offset(p1.dx - 0.75 * gridSize, p1.dy), Direction.up);
-      _drawTrianglePath(canvas, Offset(p1.dx - 0.75 * gridSize, p2.dy), Direction.down);
+      _drawTrianglePath(canvas, Offset(p1.dx - 1 * gridSize, p1.dy), Direction.up);
+      _drawTrianglePath(canvas, Offset(p1.dx - 1 * gridSize, p2.dy), Direction.down);
 
-      _drawVerticalSegmentSize(canvas, segment.size, p1.dy, p2.dy, p1.dx - 0.75 * gridSize);
+      _drawVerticalSegmentSizeText(canvas, segment, p1.dy, p2.dy, p1.dx - 1 * gridSize);
     }
   }
 
-  void _drawHorizontalSegmentSize(
-      PdfGraphics canvas, String? sizeString, double x1, double x2, double y) {
+  void _drawHorizontalSegmentSizeText(
+    PdfGraphics canvas,
+    SizeSegment segment,
+    double x1,
+    double x2,
+    double y,
+  ) {
     final center = Offset(x1 + (x2 - x1) / 2, size.height - y);
 
-    final text = (sizeString == null || sizeString.isEmpty) ? '?' : sizeString;
-
-    final textWidget = pw.Text(text);
-    textWidget.layout(context, const pw.BoxConstraints.tightForFinite());
-    final textLayoutSize = textWidget.box?.size ?? const PdfPoint(0, 0);
-
-    final textOffset = Offset(center.dx - textLayoutSize.x / 2, center.dy + textLayoutSize.y / 4);
-
-    canvas.drawString(
-      canvas.defaultFont!,
-      10,
-      text,
-      textOffset.dx,
-      textOffset.dy,
+    final sizeText = (segment.size == null || segment.size!.isEmpty) ? '?' : segment.size!;
+    final sizeTextWidget = pw.Text(
+      sizeText,
+      style: const pw.TextStyle(fontSize: 10, color: PdfColors.red),
     );
-    canvas.strokePath();
+    sizeTextWidget.layout(context, const pw.BoxConstraints.tightForFinite());
+    final sizeTextLayoutSize = sizeTextWidget.box?.size ?? const PdfPoint(0, 0);
+    final sizeTextOffset = PdfPoint(
+      center.dx - sizeTextLayoutSize.x / 2,
+      center.dy + sizeTextLayoutSize.y / 4,
+    );
+
+    final commentText = segment.comment ?? '';
+    final commentTextWidget = pw.Text(
+      commentText,
+      style: const pw.TextStyle(fontSize: 8, color: PdfColors.red),
+    );
+    commentTextWidget.layout(context, const pw.BoxConstraints.tightForFinite());
+    final commentTextLayoutSize = commentTextWidget.box?.size ?? const PdfPoint(0, 0);
+    final commentTextOffset = PdfPoint(
+      center.dx - commentTextLayoutSize.x / 2,
+      center.dy - commentTextLayoutSize.y,
+    );
+
+    pw.Widget.draw(
+      sizeTextWidget,
+      page: context.page,
+      canvas: canvas,
+      offset: sizeTextOffset,
+      context: context,
+    );
+
+    pw.Widget.draw(
+      commentTextWidget,
+      page: context.page,
+      canvas: canvas,
+      offset: commentTextOffset,
+      context: context,
+    );
   }
 
-  void _drawVerticalSegmentSize(
-      PdfGraphics canvas, String? sizeString, double y1, double y2, double x) {
+  void _drawVerticalSegmentSizeText(
+    PdfGraphics canvas,
+    SizeSegment segment,
+    double y1,
+    double y2,
+    double x,
+  ) {
     final center = Offset(x, size.height - (y1 + (y2 - y1) / 2));
 
-    final text = (sizeString == null || sizeString.isEmpty) ? '?' : sizeString;
+    final sizeText = (segment.size == null || segment.size!.isEmpty) ? '?' : segment.size!;
+    final sizeTextWidget = pw.Text(
+      sizeText,
+      style: const pw.TextStyle(fontSize: 10, color: PdfColors.red),
+    );
+    sizeTextWidget.layout(context, const pw.BoxConstraints.tightForFinite());
+    final sizeTextLayoutSize = sizeTextWidget.box?.size ?? const PdfPoint(0, 0);
+    final sizeTextOffset = PdfPoint(
+      center.dx - sizeTextLayoutSize.y / 4,
+      center.dy - sizeTextLayoutSize.x / 2,
+    );
 
-    final textWidget = pw.Text(text);
-    textWidget.layout(context, const pw.BoxConstraints.tightForFinite());
-    final textLayoutSize = textWidget.box?.size ?? const PdfPoint(0, 0);
-
-    final textOffset = Offset(center.dx - textLayoutSize.y / 4, center.dy - textLayoutSize.x / 2);
+    final commentText = segment.comment ?? '';
+    final commentTextWidget = pw.Text(
+      commentText,
+      style: const pw.TextStyle(fontSize: 8, color: PdfColors.red),
+    );
+    commentTextWidget.layout(context, const pw.BoxConstraints.tightForFinite());
+    final commentTextLayoutSize = commentTextWidget.box?.size ?? const PdfPoint(0, 0);
+    final commentTextOffset = PdfPoint(
+      center.dx + commentTextLayoutSize.y,
+      center.dy - commentTextLayoutSize.x / 2,
+    );
 
     canvas.saveContext();
     canvas.setTransform(Matrix4.identity()
-      ..translate(textOffset.dx, textOffset.dy)
+      ..translate(sizeTextOffset.x, sizeTextOffset.y)
       ..rotateZ(pi / 2));
 
-    canvas.drawString(canvas.defaultFont!, 10, text, 0, 0);
-    canvas.strokePath();
+    pw.Widget.draw(
+      sizeTextWidget,
+      page: context.page,
+      canvas: canvas,
+      offset: PdfPoint.zero,
+      context: context,
+    );
+
+    canvas.restoreContext();
+    canvas.setTransform(Matrix4.identity());
+
+    canvas.saveContext();
+    canvas.setTransform(Matrix4.identity()
+      ..translate(commentTextOffset.x, commentTextOffset.y)
+      ..rotateZ(pi / 2));
+
+    pw.Widget.draw(
+      commentTextWidget,
+      page: context.page,
+      canvas: canvas,
+      offset: PdfPoint.zero,
+      context: context,
+    );
+
     canvas.restoreContext();
     canvas.setTransform(Matrix4.identity());
   }

@@ -15,6 +15,7 @@ class SizeSegmentDB {
   @Default(0)
   late double y2;
   late String? size;
+  late String? comment;
   @Enumerated(EnumType.name)
   @Default(SegmentDirection.horizontal)
   late SegmentDirection direction;

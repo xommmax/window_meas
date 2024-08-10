@@ -19,6 +19,7 @@ mixin _$SizeSegment {
   Offset get p1 => throw _privateConstructorUsedError;
   Offset get p2 => throw _privateConstructorUsedError;
   String? get size => throw _privateConstructorUsedError;
+  String? get comment => throw _privateConstructorUsedError;
   SegmentDirection get direction => throw _privateConstructorUsedError;
   bool get isMain => throw _privateConstructorUsedError;
   int get index => throw _privateConstructorUsedError;
@@ -38,6 +39,7 @@ abstract class $SizeSegmentCopyWith<$Res> {
       {Offset p1,
       Offset p2,
       String? size,
+      String? comment,
       SegmentDirection direction,
       bool isMain,
       int index});
@@ -59,6 +61,7 @@ class _$SizeSegmentCopyWithImpl<$Res, $Val extends SizeSegment>
     Object? p1 = null,
     Object? p2 = null,
     Object? size = freezed,
+    Object? comment = freezed,
     Object? direction = null,
     Object? isMain = null,
     Object? index = null,
@@ -75,6 +78,10 @@ class _$SizeSegmentCopyWithImpl<$Res, $Val extends SizeSegment>
       size: freezed == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
+              as String?,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
               as String?,
       direction: null == direction
           ? _value.direction
@@ -104,6 +111,7 @@ abstract class _$$SizeSegmentImplCopyWith<$Res>
       {Offset p1,
       Offset p2,
       String? size,
+      String? comment,
       SegmentDirection direction,
       bool isMain,
       int index});
@@ -123,6 +131,7 @@ class __$$SizeSegmentImplCopyWithImpl<$Res>
     Object? p1 = null,
     Object? p2 = null,
     Object? size = freezed,
+    Object? comment = freezed,
     Object? direction = null,
     Object? isMain = null,
     Object? index = null,
@@ -139,6 +148,10 @@ class __$$SizeSegmentImplCopyWithImpl<$Res>
       size: freezed == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
+              as String?,
+      comment: freezed == comment
+          ? _value.comment
+          : comment // ignore: cast_nullable_to_non_nullable
               as String?,
       direction: null == direction
           ? _value.direction
@@ -163,6 +176,7 @@ class _$SizeSegmentImpl extends _SizeSegment {
       {required this.p1,
       required this.p2,
       required this.size,
+      required this.comment,
       required this.direction,
       required this.isMain,
       required this.index})
@@ -175,6 +189,8 @@ class _$SizeSegmentImpl extends _SizeSegment {
   @override
   final String? size;
   @override
+  final String? comment;
+  @override
   final SegmentDirection direction;
   @override
   final bool isMain;
@@ -183,7 +199,7 @@ class _$SizeSegmentImpl extends _SizeSegment {
 
   @override
   String toString() {
-    return 'SizeSegment(p1: $p1, p2: $p2, size: $size, direction: $direction, isMain: $isMain, index: $index)';
+    return 'SizeSegment(p1: $p1, p2: $p2, size: $size, comment: $comment, direction: $direction, isMain: $isMain, index: $index)';
   }
 
   @override
@@ -194,6 +210,7 @@ class _$SizeSegmentImpl extends _SizeSegment {
             (identical(other.p1, p1) || other.p1 == p1) &&
             (identical(other.p2, p2) || other.p2 == p2) &&
             (identical(other.size, size) || other.size == size) &&
+            (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.direction, direction) ||
                 other.direction == direction) &&
             (identical(other.isMain, isMain) || other.isMain == isMain) &&
@@ -202,7 +219,7 @@ class _$SizeSegmentImpl extends _SizeSegment {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, p1, p2, size, direction, isMain, index);
+      Object.hash(runtimeType, p1, p2, size, comment, direction, isMain, index);
 
   @JsonKey(ignore: true)
   @override
@@ -216,6 +233,7 @@ abstract class _SizeSegment extends SizeSegment {
       {required final Offset p1,
       required final Offset p2,
       required final String? size,
+      required final String? comment,
       required final SegmentDirection direction,
       required final bool isMain,
       required final int index}) = _$SizeSegmentImpl;
@@ -227,6 +245,8 @@ abstract class _SizeSegment extends SizeSegment {
   Offset get p2;
   @override
   String? get size;
+  @override
+  String? get comment;
   @override
   SegmentDirection get direction;
   @override

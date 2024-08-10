@@ -88,7 +88,7 @@ class EditorGestureDetector extends GestureDetector {
         if (_delegateDetector.onTapUp != null) {
           _delegateDetector.onTapUp!.call(details);
         } else {
-          final segment = await onEditorTapUp(details.localPosition, context, size);
+          final segment = await onEditorSegmentTapUp(details.localPosition, context, size);
           if (segment != null) {
             onSizeSegmentAdded(segment);
           }

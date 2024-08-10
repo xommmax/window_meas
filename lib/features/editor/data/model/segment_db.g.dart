@@ -13,44 +13,49 @@ const SizeSegmentDBSchema = Schema(
   name: r'SizeSegmentDB',
   id: -3811068755124285846,
   properties: {
-    r'direction': PropertySchema(
+    r'comment': PropertySchema(
       id: 0,
+      name: r'comment',
+      type: IsarType.string,
+    ),
+    r'direction': PropertySchema(
+      id: 1,
       name: r'direction',
       type: IsarType.string,
       enumMap: _SizeSegmentDBdirectionEnumValueMap,
     ),
     r'index': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'index',
       type: IsarType.long,
     ),
     r'isMain': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'isMain',
       type: IsarType.bool,
     ),
     r'size': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'size',
       type: IsarType.string,
     ),
     r'x1': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'x1',
       type: IsarType.double,
     ),
     r'x2': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'x2',
       type: IsarType.double,
     ),
     r'y1': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'y1',
       type: IsarType.double,
     ),
     r'y2': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'y2',
       type: IsarType.double,
     )
@@ -67,6 +72,12 @@ int _sizeSegmentDBEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  {
+    final value = object.comment;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.direction.name.length * 3;
   {
     final value = object.size;
@@ -83,14 +94,15 @@ void _sizeSegmentDBSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.direction.name);
-  writer.writeLong(offsets[1], object.index);
-  writer.writeBool(offsets[2], object.isMain);
-  writer.writeString(offsets[3], object.size);
-  writer.writeDouble(offsets[4], object.x1);
-  writer.writeDouble(offsets[5], object.x2);
-  writer.writeDouble(offsets[6], object.y1);
-  writer.writeDouble(offsets[7], object.y2);
+  writer.writeString(offsets[0], object.comment);
+  writer.writeString(offsets[1], object.direction.name);
+  writer.writeLong(offsets[2], object.index);
+  writer.writeBool(offsets[3], object.isMain);
+  writer.writeString(offsets[4], object.size);
+  writer.writeDouble(offsets[5], object.x1);
+  writer.writeDouble(offsets[6], object.x2);
+  writer.writeDouble(offsets[7], object.y1);
+  writer.writeDouble(offsets[8], object.y2);
 }
 
 SizeSegmentDB _sizeSegmentDBDeserialize(
@@ -100,16 +112,17 @@ SizeSegmentDB _sizeSegmentDBDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = SizeSegmentDB();
+  object.comment = reader.readStringOrNull(offsets[0]);
   object.direction = _SizeSegmentDBdirectionValueEnumMap[
-          reader.readStringOrNull(offsets[0])] ??
+          reader.readStringOrNull(offsets[1])] ??
       SegmentDirection.horizontal;
-  object.index = reader.readLong(offsets[1]);
-  object.isMain = reader.readBool(offsets[2]);
-  object.size = reader.readStringOrNull(offsets[3]);
-  object.x1 = reader.readDouble(offsets[4]);
-  object.x2 = reader.readDouble(offsets[5]);
-  object.y1 = reader.readDouble(offsets[6]);
-  object.y2 = reader.readDouble(offsets[7]);
+  object.index = reader.readLong(offsets[2]);
+  object.isMain = reader.readBool(offsets[3]);
+  object.size = reader.readStringOrNull(offsets[4]);
+  object.x1 = reader.readDouble(offsets[5]);
+  object.x2 = reader.readDouble(offsets[6]);
+  object.y1 = reader.readDouble(offsets[7]);
+  object.y2 = reader.readDouble(offsets[8]);
   return object;
 }
 
@@ -121,22 +134,24 @@ P _sizeSegmentDBDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
+      return (reader.readStringOrNull(offset)) as P;
+    case 1:
       return (_SizeSegmentDBdirectionValueEnumMap[
               reader.readStringOrNull(offset)] ??
           SegmentDirection.horizontal) as P;
-    case 1:
-      return (reader.readLong(offset)) as P;
     case 2:
-      return (reader.readBool(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 3:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 4:
-      return (reader.readDouble(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 5:
       return (reader.readDouble(offset)) as P;
     case 6:
       return (reader.readDouble(offset)) as P;
     case 7:
+      return (reader.readDouble(offset)) as P;
+    case 8:
       return (reader.readDouble(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -154,6 +169,160 @@ const _SizeSegmentDBdirectionValueEnumMap = {
 
 extension SizeSegmentDBQueryFilter
     on QueryBuilder<SizeSegmentDB, SizeSegmentDB, QFilterCondition> {
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      commentIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'comment',
+      ));
+    });
+  }
+
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      commentIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'comment',
+      ));
+    });
+  }
+
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      commentEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'comment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      commentGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'comment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      commentLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'comment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      commentBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'comment',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      commentStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'comment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      commentEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'comment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      commentContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'comment',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      commentMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'comment',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      commentIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'comment',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
+      commentIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'comment',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<SizeSegmentDB, SizeSegmentDB, QAfterFilterCondition>
       directionEqualTo(
     SegmentDirection value, {

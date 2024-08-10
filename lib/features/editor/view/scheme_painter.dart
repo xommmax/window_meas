@@ -327,7 +327,9 @@ class SchemePainter extends CustomPainter {
         scheme.sizeSegments.where((e) => e.direction == SegmentDirection.horizontal).toList();
     if (horSegments.isEmpty) return;
 
-    double gridSize = size.width / Constants.gridAmount;
+    final gridSize = size.width / Constants.gridAmount;
+
+    final textSize = gridSize / 2.25;
 
     final mainHorSegment = horSegments.firstWhereOrNull((s) => s.isMain);
 
@@ -336,36 +338,36 @@ class SchemePainter extends CustomPainter {
       final p2 = mainHorSegment.p2.toGlobalCoord(size);
 
       canvas.drawLine(
-        Offset(p1.dx, p1.dy - 2 * gridSize),
+        Offset(p1.dx, p1.dy - 2.25 * gridSize),
         Offset(p1.dx, p1.dy),
         measPaint,
       );
       canvas.drawLine(
-        Offset(p2.dx, p1.dy - 2 * gridSize),
+        Offset(p2.dx, p1.dy - 2.25 * gridSize),
         Offset(p2.dx, p1.dy),
         measPaint,
       );
       canvas.drawLine(
-        Offset(p1.dx, p1.dy - 1.75 * gridSize),
-        Offset(p2.dx, p1.dy - 1.75 * gridSize),
+        Offset(p1.dx, p1.dy - 2 * gridSize),
+        Offset(p2.dx, p1.dy - 2 * gridSize),
         measPaint,
       );
       canvas.drawPath(
-        _getTrianglePath(Offset(p1.dx, p1.dy - 1.75 * gridSize), Direction.left, gridSize),
+        _getTrianglePath(Offset(p1.dx, p1.dy - 2 * gridSize), Direction.left, gridSize),
         measPaint,
       );
       canvas.drawPath(
-        _getTrianglePath(Offset(p2.dx, p1.dy - 1.75 * gridSize), Direction.right, gridSize),
+        _getTrianglePath(Offset(p2.dx, p1.dy - 2 * gridSize), Direction.right, gridSize),
         measPaint,
       );
 
-      _drawHorizontalSegmentSize(
+      _drawHorizontalSegmentSizeText(
         canvas,
-        mainHorSegment.size,
-        gridSize / 3,
+        mainHorSegment,
+        textSize,
         p1.dx,
         p2.dx,
-        p1.dy - 1.75 * gridSize,
+        p1.dy - 2 * gridSize,
       );
     }
     horSegments.removeWhere((e) => e.isMain);
@@ -375,30 +377,30 @@ class SchemePainter extends CustomPainter {
       final p1 = segment.p1.toGlobalCoord(size);
       final p2 = segment.p2.toGlobalCoord(size);
       canvas.drawLine(
-        Offset(p2.dx, p1.dy - 1 * gridSize),
+        Offset(p2.dx, p1.dy - 1.25 * gridSize),
         Offset(p2.dx, p1.dy),
         measPaint,
       );
       canvas.drawLine(
-        Offset(p1.dx, p1.dy - 0.75 * gridSize),
-        Offset(p2.dx, p1.dy - 0.75 * gridSize),
+        Offset(p1.dx, p1.dy - 1 * gridSize),
+        Offset(p2.dx, p1.dy - 1 * gridSize),
         measPaint,
       );
       canvas.drawPath(
-        _getTrianglePath(Offset(p1.dx, p1.dy - 0.75 * gridSize), Direction.left, gridSize),
+        _getTrianglePath(Offset(p1.dx, p1.dy - 1 * gridSize), Direction.left, gridSize),
         measPaint,
       );
       canvas.drawPath(
-        _getTrianglePath(Offset(p2.dx, p1.dy - 0.75 * gridSize), Direction.right, gridSize),
+        _getTrianglePath(Offset(p2.dx, p1.dy - 1 * gridSize), Direction.right, gridSize),
         measPaint,
       );
-      _drawHorizontalSegmentSize(
+      _drawHorizontalSegmentSizeText(
         canvas,
-        segment.size,
-        gridSize / 3,
+        segment,
+        textSize,
         p1.dx,
         p2.dx,
-        p1.dy - 0.75 * gridSize,
+        p1.dy - 1 * gridSize,
       );
     }
   }
@@ -413,42 +415,44 @@ class SchemePainter extends CustomPainter {
 
     double gridSize = size.width / Constants.gridAmount;
 
+    final textSize = gridSize / 2.25;
+
     final mainVerSegment = verSegments.firstWhereOrNull((s) => s.isMain);
 
     if (mainVerSegment != null) {
       final p1 = mainVerSegment.p1.toGlobalCoord(size);
       final p2 = mainVerSegment.p2.toGlobalCoord(size);
       canvas.drawLine(
-        Offset(p1.dx - 2 * gridSize, p1.dy),
+        Offset(p1.dx - 2.25 * gridSize, p1.dy),
         Offset(p1.dx, p1.dy),
         measPaint,
       );
       canvas.drawLine(
-        Offset(p1.dx - 2 * gridSize, p2.dy),
+        Offset(p1.dx - 2.25 * gridSize, p2.dy),
         Offset(p1.dx, p2.dy),
         measPaint,
       );
       canvas.drawLine(
-        Offset(p1.dx - 1.75 * gridSize, p1.dy),
-        Offset(p1.dx - 1.75 * gridSize, p2.dy),
+        Offset(p1.dx - 2 * gridSize, p1.dy),
+        Offset(p1.dx - 2 * gridSize, p2.dy),
         measPaint,
       );
       canvas.drawPath(
-        _getTrianglePath(Offset(p1.dx - 1.75 * gridSize, p1.dy), Direction.up, gridSize),
+        _getTrianglePath(Offset(p1.dx - 2 * gridSize, p1.dy), Direction.up, gridSize),
         measPaint,
       );
       canvas.drawPath(
-        _getTrianglePath(Offset(p1.dx - 1.75 * gridSize, p2.dy), Direction.down, gridSize),
+        _getTrianglePath(Offset(p1.dx - 2 * gridSize, p2.dy), Direction.down, gridSize),
         measPaint,
       );
 
-      _drawVerticalSegmentSize(
+      _drawVerticalSegmentSizeText(
         canvas,
-        mainVerSegment.size,
-        gridSize / 3,
+        mainVerSegment,
+        textSize,
         p1.dy,
         p2.dy,
-        p1.dx - 1.75 * gridSize,
+        p1.dx - 2 * gridSize,
       );
     }
 
@@ -460,82 +464,130 @@ class SchemePainter extends CustomPainter {
       final p2 = segment.p2.toGlobalCoord(size);
 
       canvas.drawLine(
-        Offset(p1.dx - 1 * gridSize, p2.dy),
+        Offset(p1.dx - 1.25 * gridSize, p2.dy),
         Offset(p1.dx, p2.dy),
         measPaint,
       );
       canvas.drawLine(
-        Offset(p1.dx - 0.75 * gridSize, p1.dy),
-        Offset(p1.dx - 0.75 * gridSize, p2.dy),
+        Offset(p1.dx - 1 * gridSize, p1.dy),
+        Offset(p1.dx - 1 * gridSize, p2.dy),
         measPaint,
       );
       canvas.drawPath(
-        _getTrianglePath(Offset(p1.dx - 0.75 * gridSize, p1.dy), Direction.up, gridSize),
+        _getTrianglePath(Offset(p1.dx - 1 * gridSize, p1.dy), Direction.up, gridSize),
         measPaint,
       );
       canvas.drawPath(
-        _getTrianglePath(Offset(p1.dx - 0.75 * gridSize, p2.dy), Direction.down, gridSize),
+        _getTrianglePath(Offset(p1.dx - 1 * gridSize, p2.dy), Direction.down, gridSize),
         measPaint,
       );
-      _drawVerticalSegmentSize(
+      _drawVerticalSegmentSizeText(
         canvas,
-        segment.size,
-        gridSize / 3,
+        segment,
+        textSize,
         p1.dy,
         p2.dy,
-        p1.dx - 0.75 * gridSize,
+        p1.dx - 1 * gridSize,
       );
     }
   }
 
-  void _drawHorizontalSegmentSize(
-      Canvas canvas, String? size, double textSize, double x1, double x2, double y) {
+  void _drawHorizontalSegmentSizeText(
+    Canvas canvas,
+    SizeSegment segment,
+    double textSize,
+    double x1,
+    double x2,
+    double y,
+  ) {
     final center = Offset(x1 + (x2 - x1) / 2, y);
 
-    final text = TextSpan(
-      text: (size == null || size.isEmpty) ? '?' : size,
+    final sizeText = TextSpan(
+      text: (segment.size == null || segment.size!.isEmpty) ? '?' : segment.size!,
       style: TextStyle(
         color: Colors.red,
         fontSize: textSize,
       ),
     );
+    final commentText = TextSpan(
+      text: segment.comment ?? '',
+      style: TextStyle(
+        color: Colors.red,
+        fontSize: textSize * 0.8,
+      ),
+    );
 
-    final textPainter = TextPainter(
-      text: text,
+    final sizeTextPainter = TextPainter(
+      text: sizeText,
+      textDirection: TextDirection.ltr,
+    );
+    final commentTextPainter = TextPainter(
+      text: commentText,
       textDirection: TextDirection.ltr,
     );
 
-    textPainter.layout();
+    sizeTextPainter.layout();
+    commentTextPainter.layout();
 
-    final textOffset = Offset(center.dx - textPainter.width / 2, center.dy - textPainter.height);
-    textPainter.paint(canvas, textOffset);
+    final sizeTextOffset =
+        Offset(center.dx - sizeTextPainter.width / 2, center.dy - sizeTextPainter.height);
+    final commentTextOffset = Offset(center.dx - commentTextPainter.width / 2, center.dy);
+
+    sizeTextPainter.paint(canvas, sizeTextOffset);
+    commentTextPainter.paint(canvas, commentTextOffset);
   }
 
-  void _drawVerticalSegmentSize(
-      Canvas canvas, String? size, double textSize, double y1, double y2, double x) {
+  void _drawVerticalSegmentSizeText(
+    Canvas canvas,
+    SizeSegment segment,
+    double textSize,
+    double y1,
+    double y2,
+    double x,
+  ) {
     final center = Offset(x, y1 + (y2 - y1) / 2);
 
-    final text = TextSpan(
-      text: size ?? '?',
+    final sizeText = TextSpan(
+      text: (segment.size == null || segment.size!.isEmpty) ? '?' : segment.size!,
       style: TextStyle(
         color: Colors.red,
         fontSize: textSize,
       ),
     );
+    final commentText = TextSpan(
+      text: segment.comment ?? '',
+      style: TextStyle(
+        color: Colors.red,
+        fontSize: textSize * 0.8,
+      ),
+    );
 
-    final textPainter = TextPainter(
-      text: text,
+    final sizeTextPainter = TextPainter(
+      text: sizeText,
+      textDirection: TextDirection.ltr,
+    );
+    final commentTextPainter = TextPainter(
+      text: commentText,
       textDirection: TextDirection.ltr,
     );
 
-    textPainter.layout();
+    sizeTextPainter.layout();
+    commentTextPainter.layout();
 
-    final textOffset = Offset(center.dx - textPainter.height, center.dy + textPainter.width / 2);
+    final sizeTextOffset =
+        Offset(center.dx - sizeTextPainter.height, center.dy + sizeTextPainter.width / 2);
+    final commentTextOffset = Offset(center.dx, center.dy + commentTextPainter.width / 2);
 
     canvas.save();
-    canvas.translate(textOffset.dx, textOffset.dy);
+    canvas.translate(sizeTextOffset.dx, sizeTextOffset.dy);
     canvas.rotate(-pi / 2);
-    textPainter.paint(canvas, Offset.zero);
+    sizeTextPainter.paint(canvas, Offset.zero);
+    canvas.restore();
+
+    canvas.save();
+    canvas.translate(commentTextOffset.dx, commentTextOffset.dy);
+    canvas.rotate(-pi / 2);
+    commentTextPainter.paint(canvas, Offset.zero);
     canvas.restore();
   }
 
