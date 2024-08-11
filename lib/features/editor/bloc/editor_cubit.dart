@@ -50,7 +50,7 @@ class EditorState with _$EditorState {
   }) = _EditorState;
 
   factory EditorState.initial() => const EditorState(
-        mode: EditorMode.move,
+        mode: EditorMode.draw,
         template: null,
         templateType: TemplateType.scheme,
       );

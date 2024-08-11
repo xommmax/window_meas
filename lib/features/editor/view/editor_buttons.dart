@@ -13,7 +13,7 @@ class EditorButtons extends StatefulWidget {
 
 class _EditorButtonsState extends State<EditorButtons> {
   bool isExpanded = false;
-  Widget selectedModeIcon = const FaIcon(FontAwesomeIcons.hand);
+  Widget selectedModeIcon = const FaIcon(FontAwesomeIcons.pencil);
 
   @override
   Widget build(BuildContext context) => Align(
@@ -31,6 +31,7 @@ class _EditorButtonsState extends State<EditorButtons> {
                 _modeButton(EditorMode.openingType),
                 _modeButton(EditorMode.move),
                 _modeButton(EditorMode.draw),
+                const SizedBox(height: 56),
               ],
               if (!isExpanded)
                 Padding(
