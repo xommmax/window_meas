@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:window_meas/common/view/colors.dart';
+import 'package:window_meas/features/editor/view/editor_screen.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_cubit.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/measurement/data/domain/model/position.dart';
@@ -101,7 +102,10 @@ class SchemeItem extends StatelessWidget {
         {
           final Template? template = await context.push(
             '/template_list',
-            extra: {'mode': TemplateListScreenMode.select},
+            extra: {
+              'mode': TemplateListScreenMode.select,
+              'type': TemplateType.scheme,
+            },
           );
           if (template != null && context.mounted) {
             _openEditor(context, template: template);
@@ -119,7 +123,12 @@ class SchemeItem extends StatelessWidget {
   Future<void> _openEditor(BuildContext context, {Template? template}) async {
     final Scheme? scheme = await context.push(
       '/editor',
-      extra: {'scheme': template?.scheme ?? position.scheme},
+      extra: {
+        'mode': EditorScreenMode.regular,
+        'scheme': template?.scheme ?? position.scheme,
+        'template': null,
+        'type': TemplateType.scheme,
+      },
     );
     if (scheme != null && context.mounted) {
       context.read<MeasurementDetailsCubit>().updatePosition(

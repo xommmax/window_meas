@@ -15,25 +15,37 @@ enum TemplateListScreenMode {
   select,
 }
 
+enum TemplateType {
+  scheme,
+  flexibles,
+}
+
 class TemplateListScreen extends StatelessWidget {
   const TemplateListScreen({
-    this.mode,
+    required this.mode,
+    required this.type,
     super.key,
   });
 
-  final TemplateListScreenMode? mode;
+  final TemplateListScreenMode mode;
+  final TemplateType type;
 
   @override
   Widget build(BuildContext context) => BlocProvider<TemplateListCubit>(
-        create: (context) => getIt()..watchTemplates(),
-        child: TemplateListView(mode ?? TemplateListScreenMode.regular),
+        create: (context) => getIt()..watchTemplates(type),
+        child: TemplateListView(mode, type),
       );
 }
 
 class TemplateListView extends StatefulWidget {
-  const TemplateListView(this.templatesScreenMode, {super.key});
+  const TemplateListView(
+    this.mode,
+    this.type, {
+    super.key,
+  });
 
-  final TemplateListScreenMode templatesScreenMode;
+  final TemplateListScreenMode mode;
+  final TemplateType type;
 
   @override
   State<TemplateListView> createState() => _TemplateListViewState();
@@ -46,7 +58,9 @@ class _TemplateListViewState extends State<TemplateListView> {
   Widget build(BuildContext context) => BlocBuilder<TemplateListCubit, TemplateListState>(
         builder: (context, state) => Scaffold(
             appBar: AppBar(
-              title: Text(context.l10n.templates),
+              title: widget.type == TemplateType.scheme
+                  ? Text(context.l10n.schemeTemplates)
+                  : Text(context.l10n.flexiblesTemplates),
               actions: [
                 if (selectedIndex != null)
                   PopupMenuButton<String>(
@@ -56,7 +70,9 @@ class _TemplateListViewState extends State<TemplateListView> {
                       } else if (s == context.l10n.edit) {
                         context.push('/editor', extra: {
                           'mode': EditorScreenMode.createTemplate,
+                          'scheme': null,
                           'template': state.templates[selectedIndex!],
+                          'type': widget.type,
                         });
                       }
                       setState(() => selectedIndex = null);
@@ -76,13 +92,13 @@ class _TemplateListViewState extends State<TemplateListView> {
                 onSelected: (index) {
                   setState(
                       () => index == selectedIndex ? selectedIndex = null : selectedIndex = index);
-                  if (widget.templatesScreenMode == TemplateListScreenMode.select) {
+                  if (widget.mode == TemplateListScreenMode.select) {
                     Navigator.pop(context, state.templates[index]);
                   }
                 },
               ),
             ),
-            floatingActionButton: (widget.templatesScreenMode != TemplateListScreenMode.select)
+            floatingActionButton: (widget.mode != TemplateListScreenMode.select)
                 ? FloatingActionButton(
                     onPressed: () => _addTemplate(context),
                     backgroundColor: AppColors.primary,
@@ -92,6 +108,10 @@ class _TemplateListViewState extends State<TemplateListView> {
                 : null),
       );
 
-  Future<void> _addTemplate(BuildContext context) async =>
-      await context.push('/editor', extra: {'mode': EditorScreenMode.createTemplate});
+  Future<void> _addTemplate(BuildContext context) async => await context.push('/editor', extra: {
+        'mode': EditorScreenMode.createTemplate,
+        'scheme': null,
+        'template': null,
+        'type': widget.type,
+      });
 }

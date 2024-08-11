@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
+import 'package:window_meas/features/editor/view/editor_screen.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_cubit.dart';
 import 'package:window_meas/features/measurement/data/domain/model/position.dart';
 import 'package:window_meas/features/templates/data/model/template.dart';
@@ -115,9 +116,11 @@ class FlexiblesItem extends StatelessWidget {
       case FlexiblesItemOption.template:
         {
           final Template? template = await context.push(
-            // TODO:
-            '/flexibles_template_list',
-            extra: {'mode': TemplateListScreenMode.select},
+            '/template_list',
+            extra: {
+              'mode': TemplateListScreenMode.select,
+              'type': TemplateType.flexibles,
+            },
           );
           if (template != null && context.mounted) {
             _openEditor(context, template: template);
@@ -135,7 +138,12 @@ class FlexiblesItem extends StatelessWidget {
   Future<void> _openEditor(BuildContext context, {Template? template, Scheme? flexible}) async {
     final Scheme? flexiblesScheme = await context.push(
       '/editor',
-      extra: {'scheme': template?.scheme ?? flexible},
+      extra: {
+        'mode': EditorScreenMode.regular,
+        'scheme': template?.scheme ?? flexible,
+        'template': null,
+        'type': TemplateType.flexibles,
+      },
     );
     if (flexiblesScheme != null && context.mounted) {
       context.read<MeasurementDetailsCubit>().insertFlexible(position, flexiblesScheme);

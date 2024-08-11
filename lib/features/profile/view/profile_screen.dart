@@ -6,6 +6,7 @@ import 'package:window_meas/common/view/colors.dart';
 import 'package:window_meas/features/profile/settings/cubit/settings_cubit.dart';
 import 'package:window_meas/features/profile/settings/cubit/settings_state.dart';
 import 'package:window_meas/features/profile/settings/data/model/settings.dart';
+import 'package:window_meas/features/templates/view/template_list_screen.dart';
 import 'package:window_meas/l10n/localization.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -39,14 +40,41 @@ class ProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     InkWell(
-                      onTap: () => context.push('/template_list'),
+                      onTap: () => context.push(
+                        '/template_list',
+                        extra: {
+                          'mode': TemplateListScreenMode.regular,
+                          'type': TemplateType.scheme,
+                        },
+                      ),
                       child: Column(
                         children: [
                           const Divider(height: 1, color: Colors.black12),
                           Padding(
                             padding: const EdgeInsets.all(20),
                             child: Text(
-                              context.l10n.templates,
+                              context.l10n.schemeTemplates,
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => context.push(
+                        '/template_list',
+                        extra: {
+                          'mode': TemplateListScreenMode.regular,
+                          'type': TemplateType.flexibles,
+                        },
+                      ),
+                      child: Column(
+                        children: [
+                          const Divider(height: 1, color: Colors.black12),
+                          Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Text(
+                              context.l10n.flexiblesTemplates,
                               style: Theme.of(context).textTheme.titleSmall,
                             ),
                           ),

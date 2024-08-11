@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:window_meas/features/templates/data/default_templates.dart';
 import 'package:window_meas/features/templates/data/ds/template_local_ds.dart';
 import 'package:window_meas/features/templates/data/model/template.dart';
+import 'package:window_meas/features/templates/view/template_list_screen.dart';
 
 @singleton
 class TemplateRepository {
@@ -11,8 +12,8 @@ class TemplateRepository {
 
   Future<void> addTemplate(Template template) => local.addTemplate(template.toDB());
 
-  Future<List<Template>> getTemplates() async {
-    final list = await local.getTemplates();
+  Future<List<Template>> getTemplates(TemplateType type) async {
+    final list = await local.getTemplates(type);
     return list.map((e) => Template.fromDB(e)).toList();
   }
 
@@ -23,11 +24,13 @@ class TemplateRepository {
 
   Future<void> updateTemplate(Template template) => local.updateTemplate(template.toDB());
 
-  Stream<List<Template>> watchTemplates() =>
-      local.watchTemplates().map((list) => list.map((e) => Template.fromDB(e)).toList());
+  Stream<List<Template>> watchTemplates(TemplateType type) =>
+      local.watchTemplates(type).map((list) => list.map((e) => Template.fromDB(e)).toList());
 
-  Future<void> deleteTemplate(int id) => local.deleteTemplate(id);
+  Future<void> deleteTemplate(String id) => local.deleteTemplate(id);
 
-  Future<void> addDefaultTemplates() =>
-      local.addTemplates(getDefaultTemplates().map((e) => e.toDB()).toList());
+  Future<void> addDefaultTemplates() async {
+    await local.addTemplates(getDefaultSchemeTemplates().map((e) => e.toDB()).toList());
+    await local.addTemplates(getDefaultFlexiblesTemplates().map((e) => e.toDB()).toList());
+  }
 }

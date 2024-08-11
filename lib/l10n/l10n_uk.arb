@@ -11,6 +11,8 @@
   "myProfile": "Мій профіль",
   "settings": "Налаштування",
   "templates": "Шаблони",
+  "schemeTemplates": "Шаблони схем",
+  "flexiblesTemplates": "Шаблони гнучких",
   "none": "Не вибрано",
   "width": "Ширина, мм",
   "thickness": "Товщина, мм",

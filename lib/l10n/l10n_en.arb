@@ -11,6 +11,8 @@
   "myProfile": "My profile",
   "settings": "Settings",
   "templates": "Templates",
+  "schemeTemplates": "Scheme templates",
+  "flexiblesTemplates": "Flexibles templates",
   "none": "None",
   "width": "Width, mm",
   "thickness": "Thickness, mm",

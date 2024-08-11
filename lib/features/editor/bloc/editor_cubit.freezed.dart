@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$EditorState {
   EditorMode get mode => throw _privateConstructorUsedError;
+  TemplateType get templateType => throw _privateConstructorUsedError;
   Template? get template => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,7 @@ abstract class $EditorStateCopyWith<$Res> {
           EditorState value, $Res Function(EditorState) then) =
       _$EditorStateCopyWithImpl<$Res, EditorState>;
   @useResult
-  $Res call({EditorMode mode, Template? template});
+  $Res call({EditorMode mode, TemplateType templateType, Template? template});
 
   $TemplateCopyWith<$Res>? get template;
 }
@@ -49,6 +50,7 @@ class _$EditorStateCopyWithImpl<$Res, $Val extends EditorState>
   @override
   $Res call({
     Object? mode = null,
+    Object? templateType = null,
     Object? template = freezed,
   }) {
     return _then(_value.copyWith(
@@ -56,6 +58,10 @@ class _$EditorStateCopyWithImpl<$Res, $Val extends EditorState>
           ? _value.mode
           : mode // ignore: cast_nullable_to_non_nullable
               as EditorMode,
+      templateType: null == templateType
+          ? _value.templateType
+          : templateType // ignore: cast_nullable_to_non_nullable
+              as TemplateType,
       template: freezed == template
           ? _value.template
           : template // ignore: cast_nullable_to_non_nullable
@@ -84,7 +90,7 @@ abstract class _$$EditorStateImplCopyWith<$Res>
       __$$EditorStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({EditorMode mode, Template? template});
+  $Res call({EditorMode mode, TemplateType templateType, Template? template});
 
   @override
   $TemplateCopyWith<$Res>? get template;
@@ -102,6 +108,7 @@ class __$$EditorStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? mode = null,
+    Object? templateType = null,
     Object? template = freezed,
   }) {
     return _then(_$EditorStateImpl(
@@ -109,6 +116,10 @@ class __$$EditorStateImplCopyWithImpl<$Res>
           ? _value.mode
           : mode // ignore: cast_nullable_to_non_nullable
               as EditorMode,
+      templateType: null == templateType
+          ? _value.templateType
+          : templateType // ignore: cast_nullable_to_non_nullable
+              as TemplateType,
       template: freezed == template
           ? _value.template
           : template // ignore: cast_nullable_to_non_nullable
@@ -120,16 +131,19 @@ class __$$EditorStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$EditorStateImpl implements _EditorState {
-  const _$EditorStateImpl({required this.mode, this.template});
+  const _$EditorStateImpl(
+      {required this.mode, required this.templateType, this.template});
 
   @override
   final EditorMode mode;
+  @override
+  final TemplateType templateType;
   @override
   final Template? template;
 
   @override
   String toString() {
-    return 'EditorState(mode: $mode, template: $template)';
+    return 'EditorState(mode: $mode, templateType: $templateType, template: $template)';
   }
 
   @override
@@ -138,12 +152,14 @@ class _$EditorStateImpl implements _EditorState {
         (other.runtimeType == runtimeType &&
             other is _$EditorStateImpl &&
             (identical(other.mode, mode) || other.mode == mode) &&
+            (identical(other.templateType, templateType) ||
+                other.templateType == templateType) &&
             (identical(other.template, template) ||
                 other.template == template));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, mode, template);
+  int get hashCode => Object.hash(runtimeType, mode, templateType, template);
 
   @JsonKey(ignore: true)
   @override
@@ -155,10 +171,13 @@ class _$EditorStateImpl implements _EditorState {
 abstract class _EditorState implements EditorState {
   const factory _EditorState(
       {required final EditorMode mode,
+      required final TemplateType templateType,
       final Template? template}) = _$EditorStateImpl;
 
   @override
   EditorMode get mode;
+  @override
+  TemplateType get templateType;
   @override
   Template? get template;
   @override

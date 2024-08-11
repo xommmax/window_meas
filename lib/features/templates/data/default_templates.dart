@@ -9,10 +9,12 @@ import 'package:window_meas/features/editor/filling_type/data/filling_type_recor
 import 'package:window_meas/features/editor/opening_type/data/opening_type_enum.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_record.dart';
 import 'package:window_meas/features/templates/data/model/template.dart';
+import 'package:window_meas/features/templates/view/template_list_screen.dart';
 
-List<Template> getDefaultTemplates() => [
+List<Template> getDefaultSchemeTemplates() => [
       Template(
-          id: 18,
+          type: TemplateType.scheme,
+          id: '104e9ba1-d143-47b3-81e2-eadf4bd607ae',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-9.0, -12.0), Offset(-9.0, 14.0)),
@@ -157,7 +159,8 @@ List<Template> getDefaultTemplates() => [
                 mosquito: false)
           ], arches: [])),
       Template(
-          id: 17,
+          type: TemplateType.scheme,
+          id: '04d213a7-3cb8-4d0b-b3a0-3d0ce4d7ef88',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-7.0, -11.0), Offset(-7.0, 14.0)),
@@ -244,7 +247,8 @@ List<Template> getDefaultTemplates() => [
                 mosquito: false)
           ], arches: [])),
       Template(
-          id: 16,
+          type: TemplateType.scheme,
+          id: 'ca931255-4ec7-4903-9877-3108b41ffec5',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-7.0, -12.0), Offset(-7.0, 14.0)),
@@ -331,7 +335,8 @@ List<Template> getDefaultTemplates() => [
                 mosquito: false)
           ], arches: [])),
       Template(
-          id: 15,
+          type: TemplateType.scheme,
+          id: 'd7c1c654-128b-4764-b4bb-7d4d00b36117',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(14.0, -15.0), Offset(14.0, 13.0)),
@@ -478,7 +483,8 @@ List<Template> getDefaultTemplates() => [
                 mosquito: true)
           ], arches: [])),
       Template(
-          id: 14,
+          type: TemplateType.scheme,
+          id: 'b4334570-1635-4ecd-8afc-f5f8364bf69e',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(3.0, 14.0), Offset(12.0, 14.0)),
@@ -589,7 +595,8 @@ List<Template> getDefaultTemplates() => [
                 mosquito: false)
           ], arches: [])),
       Template(
-          id: 13,
+          type: TemplateType.scheme,
+          id: 'd182f0a8-c13a-4867-9e07-6620f969b288',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-12.0, -13.0), Offset(-12.0, 15.0)),
@@ -736,7 +743,8 @@ List<Template> getDefaultTemplates() => [
                 mosquito: true)
           ], arches: [])),
       Template(
-          id: 12,
+          type: TemplateType.scheme,
+          id: '6a531ea5-0413-42af-aad7-244cb4740411',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-12.0, -13.0), Offset(-12.0, 15.0)),
@@ -847,7 +855,8 @@ List<Template> getDefaultTemplates() => [
                 mosquito: false)
           ], arches: [])),
       Template(
-          id: 11,
+          type: TemplateType.scheme,
+          id: 'ae4c8215-22ac-41e0-a676-97b6dc43d293',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-11.0, -10.0), Offset(-11.0, 14.0)),
@@ -952,7 +961,8 @@ List<Template> getDefaultTemplates() => [
                 mosquito: true)
           ], arches: [])),
       Template(
-          id: 10,
+          type: TemplateType.scheme,
+          id: 'ed693083-f022-4119-96f3-de5b0927c3d0',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-11.0, -12.0), Offset(-11.0, 15.0)),
@@ -1048,7 +1058,8 @@ List<Template> getDefaultTemplates() => [
                 mosquito: true)
           ], arches: [])),
       Template(
-          id: 9,
+          type: TemplateType.scheme,
+          id: '7e5a057e-199e-4bc5-b279-44ac4a9946e1',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-10.0, -11.0), Offset(-10.0, 14.0)),
@@ -1125,7 +1136,8 @@ List<Template> getDefaultTemplates() => [
             ])
           ], fillingTypes: [], arches: [])),
       Template(
-          id: 8,
+          type: TemplateType.scheme,
+          id: '2b79438d-7aff-4a63-a315-52e190f1be94',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(10.0, 14.0), Offset(10.0, -11.0)),
@@ -1205,7 +1217,8 @@ List<Template> getDefaultTemplates() => [
                 mosquito: true)
           ], arches: [])),
       Template(
-          id: 7,
+          type: TemplateType.scheme,
+          id: '161cd0e5-0a3c-4ec4-9a3e-abf606cb18d0',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-9.0, -11.0), Offset(-9.0, 13.0)),
@@ -1285,7 +1298,8 @@ List<Template> getDefaultTemplates() => [
                 mosquito: true)
           ], arches: [])),
       Template(
-          id: 6,
+          type: TemplateType.scheme,
+          id: '2023ed21-923b-4c77-b604-688faf567c5d',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-8.0, -10.0), Offset(-8.0, 13.0)),
@@ -1341,7 +1355,8 @@ List<Template> getDefaultTemplates() => [
                 mosquito: true)
           ], arches: [])),
       Template(
-          id: 5,
+          type: TemplateType.scheme,
+          id: 'b2cda686-64cd-47a0-8cb4-3e4d27ef1396',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-10.0, 13.0), Offset(8.0, 13.0)),
@@ -1424,7 +1439,8 @@ List<Template> getDefaultTemplates() => [
             ])
           ], openingTypes: [], fillingTypes: [], arches: [])),
       Template(
-          id: 4,
+          type: TemplateType.scheme,
+          id: '397d4c35-b2d5-486d-9601-5dc0b1b37082',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-11.0, -10.0), Offset(-11.0, 13.0)),
@@ -1498,7 +1514,8 @@ List<Template> getDefaultTemplates() => [
             ])
           ], openingTypes: [], fillingTypes: [], arches: [])),
       Template(
-          id: 3,
+          type: TemplateType.scheme,
+          id: 'a2b56472-e866-43e7-ba32-08f657e136e9',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-11.0, -10.0), Offset(-11.0, 10.0)),
@@ -1556,7 +1573,8 @@ List<Template> getDefaultTemplates() => [
             ])
           ], openingTypes: [], fillingTypes: [], arches: [])),
       Template(
-          id: 2,
+          type: TemplateType.scheme,
+          id: '8986602e-fb62-4127-94be-05307533ab7f',
           date: DateTime(2024),
           scheme: const Scheme(id: '1', lines: [
             Line(Offset(-7.0, 9.0), Offset(6.0, 9.0)),
@@ -1590,3 +1608,5 @@ List<Template> getDefaultTemplates() => [
             ])
           ], openingTypes: [], fillingTypes: [], arches: [])),
     ].reversed.toList();
+
+List<Template> getDefaultFlexiblesTemplates() => [];

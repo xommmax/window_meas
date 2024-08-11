@@ -16,9 +16,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Template {
-  int? get id => throw _privateConstructorUsedError;
+  int? get localId => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   Scheme get scheme => throw _privateConstructorUsedError;
+  TemplateType get type => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $TemplateCopyWith<Template> get copyWith =>
@@ -30,7 +32,12 @@ abstract class $TemplateCopyWith<$Res> {
   factory $TemplateCopyWith(Template value, $Res Function(Template) then) =
       _$TemplateCopyWithImpl<$Res, Template>;
   @useResult
-  $Res call({int? id, DateTime date, Scheme scheme});
+  $Res call(
+      {int? localId,
+      String id,
+      DateTime date,
+      Scheme scheme,
+      TemplateType type});
 
   $SchemeCopyWith<$Res> get scheme;
 }
@@ -48,15 +55,21 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? localId = freezed,
+    Object? id = null,
     Object? date = null,
     Object? scheme = null,
+    Object? type = null,
   }) {
     return _then(_value.copyWith(
-      id: freezed == id
+      localId: freezed == localId
+          ? _value.localId
+          : localId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -65,6 +78,10 @@ class _$TemplateCopyWithImpl<$Res, $Val extends Template>
           ? _value.scheme
           : scheme // ignore: cast_nullable_to_non_nullable
               as Scheme,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TemplateType,
     ) as $Val);
   }
 
@@ -85,7 +102,12 @@ abstract class _$$TemplateImplCopyWith<$Res>
       __$$TemplateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, DateTime date, Scheme scheme});
+  $Res call(
+      {int? localId,
+      String id,
+      DateTime date,
+      Scheme scheme,
+      TemplateType type});
 
   @override
   $SchemeCopyWith<$Res> get scheme;
@@ -102,15 +124,21 @@ class __$$TemplateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
+    Object? localId = freezed,
+    Object? id = null,
     Object? date = null,
     Object? scheme = null,
+    Object? type = null,
   }) {
     return _then(_$TemplateImpl(
-      id: freezed == id
+      localId: freezed == localId
+          ? _value.localId
+          : localId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String,
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -119,6 +147,10 @@ class __$$TemplateImplCopyWithImpl<$Res>
           ? _value.scheme
           : scheme // ignore: cast_nullable_to_non_nullable
               as Scheme,
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as TemplateType,
     ));
   }
 }
@@ -126,19 +158,28 @@ class __$$TemplateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TemplateImpl extends _Template {
-  const _$TemplateImpl({this.id, required this.date, required this.scheme})
+  const _$TemplateImpl(
+      {this.localId,
+      required this.id,
+      required this.date,
+      required this.scheme,
+      required this.type})
       : super._();
 
   @override
-  final int? id;
+  final int? localId;
+  @override
+  final String id;
   @override
   final DateTime date;
   @override
   final Scheme scheme;
+  @override
+  final TemplateType type;
 
   @override
   String toString() {
-    return 'Template(id: $id, date: $date, scheme: $scheme)';
+    return 'Template(localId: $localId, id: $id, date: $date, scheme: $scheme, type: $type)';
   }
 
   @override
@@ -146,13 +187,15 @@ class _$TemplateImpl extends _Template {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TemplateImpl &&
+            (identical(other.localId, localId) || other.localId == localId) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.scheme, scheme) || other.scheme == scheme));
+            (identical(other.scheme, scheme) || other.scheme == scheme) &&
+            (identical(other.type, type) || other.type == type));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, date, scheme);
+  int get hashCode => Object.hash(runtimeType, localId, id, date, scheme, type);
 
   @JsonKey(ignore: true)
   @override
@@ -163,17 +206,23 @@ class _$TemplateImpl extends _Template {
 
 abstract class _Template extends Template {
   const factory _Template(
-      {final int? id,
+      {final int? localId,
+      required final String id,
       required final DateTime date,
-      required final Scheme scheme}) = _$TemplateImpl;
+      required final Scheme scheme,
+      required final TemplateType type}) = _$TemplateImpl;
   const _Template._() : super._();
 
   @override
-  int? get id;
+  int? get localId;
+  @override
+  String get id;
   @override
   DateTime get date;
   @override
   Scheme get scheme;
+  @override
+  TemplateType get type;
   @override
   @JsonKey(ignore: true)
   _$$TemplateImplCopyWith<_$TemplateImpl> get copyWith =>

@@ -59,6 +59,7 @@ final appRouter = GoRouter(
           mode: extra['mode'],
           scheme: extra['scheme'],
           template: extra['template'],
+          templateType: extra['type'],
         );
       },
     ),
@@ -75,6 +76,7 @@ final appRouter = GoRouter(
         final Map extra = state.extra as Map? ?? {};
         return TemplateListScreen(
           mode: extra['mode'],
+          type: extra['type'],
         );
       },
     ),

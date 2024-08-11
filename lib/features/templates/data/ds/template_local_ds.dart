@@ -1,11 +1,12 @@
 import 'package:injectable/injectable.dart';
 import 'package:isar/isar.dart';
 import 'package:window_meas/features/templates/data/model/template_db.dart';
+import 'package:window_meas/features/templates/view/template_list_screen.dart';
 
 abstract class TemplateLocalDataSource {
-  Future<List<TemplateDB>> getTemplates();
+  Future<List<TemplateDB>> getTemplates(TemplateType type);
 
-  Stream<List<TemplateDB>> watchTemplates();
+  Stream<List<TemplateDB>> watchTemplates(TemplateType type);
 
   Future<TemplateDB?> getTemplate(int id);
 
@@ -15,7 +16,7 @@ abstract class TemplateLocalDataSource {
 
   Future<void> updateTemplate(TemplateDB template);
 
-  Future<void> deleteTemplate(int id);
+  Future<void> deleteTemplate(String id);
 }
 
 @Singleton(as: TemplateLocalDataSource)
@@ -33,18 +34,20 @@ class TemplateIsarLocalDataSource implements TemplateLocalDataSource {
       isar.writeTxn(() => isar.templateDBs.putAll(templates));
 
   @override
-  Future<void> deleteTemplate(int id) => isar.writeTxn(() => isar.templateDBs.delete(id));
+  Future<void> deleteTemplate(String id) => isar.writeTxn(() => isar.templateDBs.deleteById(id));
 
   @override
   Future<TemplateDB?> getTemplate(int id) => isar.templateDBs.get(id);
 
   @override
-  Future<List<TemplateDB>> getTemplates() => isar.templateDBs.where().sortByDateDesc().findAll();
+  Future<List<TemplateDB>> getTemplates(TemplateType type) =>
+      isar.templateDBs.filter().typeEqualTo(type).sortByDateDesc().findAll();
 
   @override
   Future<void> updateTemplate(TemplateDB template) =>
       isar.writeTxn(() => isar.templateDBs.put(template));
 
   @override
-  Stream<List<TemplateDB>> watchTemplates() => isar.templateDBs.where().sortByDateDesc().watch();
+  Stream<List<TemplateDB>> watchTemplates(TemplateType type) =>
+      isar.templateDBs.filter().typeEqualTo(type).sortByDateDesc().watch();
 }
