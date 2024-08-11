@@ -93,7 +93,7 @@ class GeoHelper {
         (e) => e.p1 == newSegments[i].p1 && e.p2 == newSegments[i].p2,
       );
       if (prevSegment != null) {
-        newSegments[i] = newSegments[i].copyWith(size: prevSegment.size);
+        newSegments[i] = newSegments[i].copyWith(size: prevSegment.size, comment: prevSegment.comment);
       }
     }
 

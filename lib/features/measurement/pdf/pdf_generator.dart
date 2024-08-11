@@ -7,6 +7,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:window_meas/common/view/colors.dart';
+import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/measurement/data/domain/model/measurement.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/param_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_extension_enum.dart';
@@ -160,46 +161,7 @@ class PdfGenerator {
         ),
       );
 
-      // Scheme and photo
-      pdf.addPage(
-        pw.Page(
-          pageFormat: PdfPageFormat.a4,
-          margin: pw.EdgeInsets.zero,
-          build: (pw.Context context) => pw.Column(
-            children: [
-              _header(logo),
-              pw.Expanded(
-                child: pw.Padding(
-                  padding: const pw.EdgeInsets.fromLTRB(30, 20, 20, 40),
-                  child: pw.Column(
-                    children: [
-                      _infoTitle(
-                          '${Localization.l10n.schemeAndPhoto} ${measurement.positions.indexOf(position) + 1}/${measurement.positions.length}'),
-                      pw.SizedBox(height: 60),
-                      _scheme(position, context),
-                      pw.Container(
-                        height: 160,
-                        child: pw.Text(
-                          '${Localization.l10n.schemeComment}: ${position.schemeComment}',
-                          style: const pw.TextStyle(
-                            fontSize: 12,
-                            color: PdfColors.black,
-                          ),
-                          overflow: pw.TextOverflow.clip,
-                        ),
-                      ),
-                      pw.Expanded(
-                        child: _footer(context.pageNumber),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
-
+      // Photo
       if (position.photoPath != null) {
         pdf.addPage(
           pw.Page(
@@ -213,6 +175,9 @@ class PdfGenerator {
                     padding: const pw.EdgeInsets.fromLTRB(30, 20, 20, 40),
                     child: pw.Column(
                       children: [
+                        _infoTitle(
+                            '${Localization.l10n.photo} ${measurement.positions.indexOf(position) + 1}/${measurement.positions.length}'),
+                        pw.SizedBox(height: 50),
                         _photo(position),
                         pw.Expanded(
                           child: _footer(context.pageNumber),
@@ -223,6 +188,70 @@ class PdfGenerator {
                 ),
               ],
             ),
+          ),
+        );
+      }
+
+      // Scheme
+      if (position.scheme != null) {
+        pdf.addPage(
+          pw.Page(
+            pageFormat: PdfPageFormat.a4,
+            margin: pw.EdgeInsets.zero,
+            build: (pw.Context context) => pw.Column(
+              children: [
+                _header(logo),
+                pw.Expanded(
+                  child: pw.Padding(
+                    padding: const pw.EdgeInsets.fromLTRB(30, 20, 20, 40),
+                    child: pw.Column(
+                      children: [
+                        _infoTitle(
+                            '${Localization.l10n.scheme} ${measurement.positions.indexOf(position) + 1}/${measurement.positions.length}'),
+                        pw.SizedBox(height: 50),
+                        _scheme(context: context, scheme: position.scheme!, size: 450),
+                        // scheme comment
+                        pw.SizedBox(height: 10),
+                        pw.Container(
+                          height: 160,
+                          child: pw.Text(
+                            '${Localization.l10n.schemeComment}: ${position.schemeComment}',
+                            style: const pw.TextStyle(
+                              fontSize: 12,
+                              color: PdfColors.black,
+                            ),
+                            overflow: pw.TextOverflow.clip,
+                          ),
+                        ),
+                        pw.Expanded(
+                          child: _footer(context.pageNumber),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+
+      // Flexibles
+      if (position.flexibles.isNotEmpty) {
+        pdf.addPage(
+          pw.MultiPage(
+            header: (_) => _header(logo),
+            footer: (context) => _footer(context.pageNumber),
+            pageFormat: PdfPageFormat.a4,
+            margin: pw.EdgeInsets.zero,
+            crossAxisAlignment: pw.CrossAxisAlignment.center,
+            build: (pw.Context context) => [
+              for (final flexible in position.flexibles)
+                pw.Padding(
+                  padding: const pw.EdgeInsets.only(top: 60),
+                  child: _scheme(context: context, scheme: flexible, size: 180),
+                ),
+            ],
           ),
         );
       }
@@ -371,13 +400,18 @@ class PdfGenerator {
         ]
       ];
 
-  static pw.Widget _scheme(Position position, pw.Context context) => (position.scheme != null)
-      ? pw.CustomPaint(
-          size: const PdfPoint(450, 450),
-          painter: (canvas, size) =>
-              PdfCustomPainter(position.scheme!, context).paint(canvas, size),
-        )
-      : pw.SizedBox.shrink();
+  static pw.Widget _scheme({
+    required pw.Context context,
+    required Scheme scheme,
+    required double size,
+  }) =>
+      pw.CustomPaint(
+        size: PdfPoint(size, size),
+        painter: (canvas, _) => PdfCustomPainter(scheme, context).paint(
+          canvas,
+          PdfPoint(size, size),
+        ),
+      );
 
   static pw.Widget _photo(Position position) =>
       (position.photoPath != null && File(position.photoPath!).existsSync())

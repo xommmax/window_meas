@@ -24,13 +24,14 @@ class PdfCustomPainter {
   int _minY = 0;
   Size size = const Size(0, 0);
   double gridSize = 0;
+  pw.Context? widgetContext;
 
   PdfCustomPainter(this.scheme, this.context)
       : openingTypeDrawer = PdfOpeningTypeDrawer(strokeWidth: lineWidth),
         fillingTypeDrawer = PdfFillingTypeDrawer(strokeWidth: lineWidth);
 
   void paint(PdfGraphics canvas, PdfPoint pdfSize) {
-    _calculate(pdfSize);
+    _calculate(canvas, pdfSize);
     _drawFillingTypes(canvas);
     _drawOpeningTypes(canvas);
     _drawArches(canvas);
@@ -38,7 +39,7 @@ class PdfCustomPainter {
     _drawMeasurements(canvas);
   }
 
-  void _calculate(PdfPoint pdfSize) {
+  void _calculate(PdfGraphics canvas, PdfPoint pdfSize) {
     size = Size(pdfSize.x, pdfSize.y);
 
     if (scheme.lines.isEmpty) return;
@@ -80,6 +81,11 @@ class PdfCustomPainter {
 
     _minX = minX.toInt();
     _minY = minY.toInt();
+
+    widgetContext = pw.Context(
+      document: context.document,
+      canvas: canvas,
+    ).inheritFromAll([pw.ThemeData.base()]);
   }
 
   void _drawLines(PdfGraphics canvas) {
@@ -315,7 +321,7 @@ class PdfCustomPainter {
     final sizeText = (segment.size == null || segment.size!.isEmpty) ? '?' : segment.size!;
     final sizeTextWidget = pw.Text(
       sizeText,
-      style: const pw.TextStyle(fontSize: 10, color: PdfColors.red),
+      style: pw.TextStyle(fontSize: gridSize / 2 + 1, color: PdfColors.red),
     );
     sizeTextWidget.layout(context, const pw.BoxConstraints.tightForFinite());
     final sizeTextLayoutSize = sizeTextWidget.box?.size ?? const PdfPoint(0, 0);
@@ -327,7 +333,7 @@ class PdfCustomPainter {
     final commentText = segment.comment ?? '';
     final commentTextWidget = pw.Text(
       commentText,
-      style: const pw.TextStyle(fontSize: 8, color: PdfColors.red),
+      style: pw.TextStyle(fontSize: gridSize / 3 + 1, color: PdfColors.red),
     );
     commentTextWidget.layout(context, const pw.BoxConstraints.tightForFinite());
     final commentTextLayoutSize = commentTextWidget.box?.size ?? const PdfPoint(0, 0);
@@ -338,18 +344,16 @@ class PdfCustomPainter {
 
     pw.Widget.draw(
       sizeTextWidget,
-      page: context.page,
       canvas: canvas,
       offset: sizeTextOffset,
-      context: context,
+      context: widgetContext,
     );
 
     pw.Widget.draw(
       commentTextWidget,
-      page: context.page,
       canvas: canvas,
       offset: commentTextOffset,
-      context: context,
+      context: widgetContext,
     );
   }
 
@@ -365,7 +369,7 @@ class PdfCustomPainter {
     final sizeText = (segment.size == null || segment.size!.isEmpty) ? '?' : segment.size!;
     final sizeTextWidget = pw.Text(
       sizeText,
-      style: const pw.TextStyle(fontSize: 10, color: PdfColors.red),
+      style: pw.TextStyle(fontSize: gridSize / 2 + 1, color: PdfColors.red),
     );
     sizeTextWidget.layout(context, const pw.BoxConstraints.tightForFinite());
     final sizeTextLayoutSize = sizeTextWidget.box?.size ?? const PdfPoint(0, 0);
@@ -377,7 +381,7 @@ class PdfCustomPainter {
     final commentText = segment.comment ?? '';
     final commentTextWidget = pw.Text(
       commentText,
-      style: const pw.TextStyle(fontSize: 8, color: PdfColors.red),
+      style: pw.TextStyle(fontSize: gridSize / 3 + 1, color: PdfColors.red),
     );
     commentTextWidget.layout(context, const pw.BoxConstraints.tightForFinite());
     final commentTextLayoutSize = commentTextWidget.box?.size ?? const PdfPoint(0, 0);
@@ -393,10 +397,9 @@ class PdfCustomPainter {
 
     pw.Widget.draw(
       sizeTextWidget,
-      page: context.page,
       canvas: canvas,
       offset: PdfPoint.zero,
-      context: context,
+      context: widgetContext,
     );
 
     canvas.restoreContext();
@@ -409,10 +412,9 @@ class PdfCustomPainter {
 
     pw.Widget.draw(
       commentTextWidget,
-      page: context.page,
       canvas: canvas,
       offset: PdfPoint.zero,
-      context: context,
+      context: widgetContext,
     );
 
     canvas.restoreContext();
