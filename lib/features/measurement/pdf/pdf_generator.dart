@@ -212,17 +212,18 @@ class PdfGenerator {
                         _scheme(context: context, scheme: position.scheme!, size: 450),
                         // scheme comment
                         pw.SizedBox(height: 10),
-                        pw.Container(
-                          height: 160,
-                          child: pw.Text(
-                            '${Localization.l10n.schemeComment}: ${position.schemeComment}',
-                            style: const pw.TextStyle(
-                              fontSize: 12,
-                              color: PdfColors.black,
+                        if (position.schemeComment.isNotEmpty)
+                          pw.Container(
+                            height: 160,
+                            child: pw.Text(
+                              '${Localization.l10n.schemeComment}: ${position.schemeComment}',
+                              style: const pw.TextStyle(
+                                fontSize: 12,
+                                color: PdfColors.black,
+                              ),
+                              overflow: pw.TextOverflow.clip,
                             ),
-                            overflow: pw.TextOverflow.clip,
                           ),
-                        ),
                         pw.Expanded(
                           child: _footer(context.pageNumber),
                         ),
