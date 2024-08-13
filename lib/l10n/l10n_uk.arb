@@ -32,6 +32,8 @@
   "screedDisassembly": "Демонтаж стяжки",
   "gridDisassembly": "Демонтаж решітки",
   "roofDisassembly": "Демонтаж даху",
+  "railingDisassembly": "Демонтаж перил",
+  "balconyDisassembly": "Демонтаж балкона",
   "delivery": "Доставка",
   "unloading": "Розвантаження",
   "buildingType": "Тип дому",
@@ -115,7 +117,6 @@
   "windowsillExtensionShort": "Короткий",
   "windowsillExtensionOffSlab": "Від плити",
   "slabExtension": "Винос по плиті",
-  "extensionSheathing": "Обшивка виносу",
   "insulation": "Утеплення",
   "city": "Місто",
   "district": "Район",
@@ -209,5 +210,14 @@
   "flooringCovering": "Покриття",
   "schemeComment": "Коментар до схеми",
   "positionComment": "Коментар до позиції",
-  "flexibles": "Гнучкі"
+  "flexibles": "Гнучкі",
+  "installation": "Встановлення",
+  "lift": "Підйом",
+  "sheathing": "Обшивка",
+  "welding": "Зварювання",
+  "inside": "Всередині",
+  "outside": "Ззовні",
+  "railingSheathing": "Обшивка перил",
+  "ceiling": "Стеля",
+  "loadBearingWall": "Несуча стіна"
 }

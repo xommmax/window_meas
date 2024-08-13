@@ -47,7 +47,7 @@ class PdfGenerator {
             _header(logo),
             pw.Expanded(
               child: pw.Padding(
-                padding: const pw.EdgeInsets.fromLTRB(30, 40, 20, 40),
+                padding: const pw.EdgeInsets.fromLTRB(30, 30, 20, 40),
                 child: pw.Column(
                   children: [
                     pw.Container(
@@ -81,7 +81,7 @@ class PdfGenerator {
                         ),
                       ],
                     ),
-                    pw.SizedBox(height: 30),
+                    pw.SizedBox(height: 20),
                     pw.Row(
                       crossAxisAlignment: pw.CrossAxisAlignment.start,
                       children: [
@@ -89,14 +89,58 @@ class PdfGenerator {
                           flex: 1,
                           child: pw.Column(
                             crossAxisAlignment: pw.CrossAxisAlignment.start,
-                            children: _buildingInfo(measurement),
+                            children: _buildingInfo1(measurement),
                           ),
                         ),
                         pw.Expanded(
                           flex: 1,
                           child: pw.Column(
                             crossAxisAlignment: pw.CrossAxisAlignment.start,
-                            children: _otherWork(measurement),
+                            children: _otherWork1(measurement),
+                          ),
+                        ),
+                      ],
+                    ),
+                    pw.Expanded(
+                      child: _footer(context.pageNumber),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    // Other work
+    pdf.addPage(
+      pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        margin: pw.EdgeInsets.zero,
+        build: (pw.Context context) => pw.Column(
+          children: [
+            _header(logo),
+            pw.Expanded(
+              child: pw.Padding(
+                padding: const pw.EdgeInsets.fromLTRB(30, 30, 20, 40),
+                child: pw.Column(
+                  children: [
+                    pw.Row(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        pw.Expanded(
+                          flex: 1,
+                          child: pw.Column(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: _otherWork2(measurement),
+                          ),
+                        ),
+                        pw.Expanded(
+                          flex: 1,
+                          child: pw.Column(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: _otherWork3(measurement),
                           ),
                         ),
                       ],
@@ -333,12 +377,30 @@ class PdfGenerator {
         _infoRow(Localization.l10n.housingCoopNumber, measurement.housingCoopNumber),
       ];
 
-  static List<pw.Widget> _buildingInfo(Measurement measurement) => [
+  static List<pw.Widget> _buildingInfo1(Measurement measurement) => [
         _infoTitle(Localization.l10n.buildingInfo),
         _infoRow(Localization.l10n.buildingType, measurement.buildingType),
         _infoRow(Localization.l10n.flatStatus, measurement.flatStatus),
         _infoRow(Localization.l10n.elevator, measurement.elevator),
         _infoRow(Localization.l10n.assembly, measurement.assembly),
+        _infoRow(Localization.l10n.delivery, measurement.delivery),
+        if (measurement.delivery)
+          _infoRow(Localization.l10n.price, measurement.deliveryPrice, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.unloading, measurement.unloading),
+        if (measurement.unloading)
+          _infoRow(Localization.l10n.price, measurement.unloadingPrice, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.garbageRemoval, measurement.garbageRemoval),
+        if (measurement.garbageRemoval)
+          _infoRow(Localization.l10n.price, measurement.garbageRemovalPrice, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.sealing, measurement.sealing),
+        if (measurement.sealing)
+          _infoRow(Localization.l10n.price, measurement.sealingPrice, rowType: _RowType.sub),
+        _infoRow(Localization.l10n.vacuumCleaner, measurement.vacuumCleaner),
+        _infoRow(Localization.l10n.estimatedAssemblyTime, measurement.estimatedAssemblyTime),
+      ];
+
+  static List<pw.Widget> _otherWork1(Measurement measurement) => [
+        _infoTitle(Localization.l10n.otherWork),
         _infoRow(Localization.l10n.disassembly, measurement.disassembly),
         if (measurement.disassembly) ...[
           _infoRow(Localization.l10n.screedDisassembly, measurement.screedDisassembly,
@@ -356,39 +418,70 @@ class PdfGenerator {
           if (measurement.roofDisassembly)
             _infoRow(Localization.l10n.price, measurement.roofDisassemblyPrice,
                 rowType: _RowType.subSub),
+          _infoRow(Localization.l10n.railingDisassembly, measurement.railingDisassembly,
+              rowType: _RowType.sub),
+          if (measurement.railingDisassembly)
+            _infoRow(Localization.l10n.price, measurement.railingDisassemblyPrice,
+                rowType: _RowType.subSub),
+          _infoRow(Localization.l10n.balconyDisassembly, measurement.balconyDisassembly,
+              rowType: _RowType.sub),
+          if (measurement.balconyDisassembly)
+            _infoRow(Localization.l10n.price, measurement.balconyDisassemblyPrice,
+                rowType: _RowType.subSub),
         ],
-        _infoRow(Localization.l10n.delivery, measurement.delivery),
-        if (measurement.delivery)
-          _infoRow(Localization.l10n.price, measurement.deliveryPrice, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.unloading, measurement.unloading),
-        if (measurement.unloading)
-          _infoRow(Localization.l10n.price, measurement.unloadingPrice, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.garbageRemoval, measurement.garbageRemoval),
-        if (measurement.garbageRemoval)
-          _infoRow(Localization.l10n.price, measurement.garbageRemovalPrice, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.sealing, measurement.sealing),
-        if (measurement.sealing)
-          _infoRow(Localization.l10n.price, measurement.sealingPrice, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.vacuumCleaner, measurement.vacuumCleaner),
-        _infoRow(Localization.l10n.estimatedAssemblyTime, measurement.estimatedAssemblyTime),
       ];
 
-  static List<pw.Widget> _otherWork(Measurement measurement) => [
-        _infoTitle(Localization.l10n.otherWork),
+  static List<pw.Widget> _otherWork2(Measurement measurement) => [
         _infoRow(Localization.l10n.parapetReinforcement, measurement.parapetReinforcement),
         if (measurement.parapetReinforcement)
           _infoRow(Localization.l10n.price, measurement.parapetReinforcementPrice,
               rowType: _RowType.sub),
+        _infoRow(Localization.l10n.slabExtension, measurement.slabExtension),
+        if (measurement.slabExtension) ...[
+          _infoRow(Localization.l10n.price, measurement.slabExtensionPrice, rowType: _RowType.sub),
+          _infoRow(Localization.l10n.installation, measurement.slabExtensionInstallation,
+              rowType: _RowType.sub),
+          _infoRow(Localization.l10n.insulation, measurement.slabExtensionInsulation,
+              rowType: _RowType.sub),
+          _infoRow(Localization.l10n.flooring, measurement.slabExtensionFlooring,
+              rowType: _RowType.sub),
+          _infoRow(Localization.l10n.lift, measurement.slabExtensionLift, rowType: _RowType.sub),
+          _infoRow(Localization.l10n.sheathing, measurement.slabExtensionSheathing,
+              rowType: _RowType.sub),
+          _infoRow(Localization.l10n.delivery, measurement.slabExtensionDelivery,
+              rowType: _RowType.sub),
+        ],
         _infoRow(Localization.l10n.windowsillExtension, measurement.windowsillExtension),
-        if (measurement.windowsillExtension != WindowsillExtension.none)
+        if (measurement.windowsillExtension != WindowsillExtension.none) ...[
           _infoRow(Localization.l10n.price, measurement.windowsillExtensionPrice,
               rowType: _RowType.sub),
-        _infoRow(Localization.l10n.slabExtension, measurement.slabExtension),
-        if (measurement.slabExtension)
-          _infoRow(Localization.l10n.price, measurement.slabExtensionPrice, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.extensionSheathing, measurement.extensionSheathing),
-        if (measurement.extensionSheathing)
-          _infoRow(Localization.l10n.price, measurement.extensionSheathingPrice,
+          _infoRow(Localization.l10n.welding, measurement.windowsillExtensionWelding,
+              rowType: _RowType.sub),
+          _infoRow(Localization.l10n.sheathing, measurement.windowsillExtensionSheathing,
+              rowType: _RowType.sub),
+          _infoRow(Localization.l10n.insulation, measurement.windowsillExtensionInsulation,
+              rowType: _RowType.sub),
+        ],
+      ];
+  static List<pw.Widget> _otherWork3(Measurement measurement) => [
+        _infoRow(Localization.l10n.railingSheathing, measurement.railingSheathing),
+        if (measurement.railingSheathing) ...[
+          _infoRow(Localization.l10n.inside, measurement.railingSheathingInside,
+              rowType: _RowType.sub),
+          _infoRow(Localization.l10n.outside, measurement.railingSheathingOutside,
+              rowType: _RowType.sub),
+          _infoRow(Localization.l10n.insulation, measurement.railingSheathingInsulation,
+              rowType: _RowType.sub),
+        ],
+        _infoRow(Localization.l10n.ceiling, measurement.ceiling),
+        if (measurement.ceiling) ...[
+          _infoRow(Localization.l10n.price, measurement.ceilingPrice, rowType: _RowType.sub),
+          _infoRow(Localization.l10n.insulation, measurement.ceilingInsulation,
+              rowType: _RowType.sub),
+        ],
+        _infoRow(Localization.l10n.loadBearingWall, measurement.loadBearingWall),
+        if (measurement.loadBearingWall)
+          _infoRow(Localization.l10n.sheathing, measurement.loadBearingWallSheathing,
               rowType: _RowType.sub),
         _infoRow(Localization.l10n.insulation, measurement.insulation),
         if (measurement.insulation)

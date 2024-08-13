@@ -32,6 +32,8 @@
   "screedDisassembly": "Screed disassembly",
   "gridDisassembly": "Grid disassembly",
   "roofDisassembly": "Roof disassembly",
+  "railingDisassembly": "Railing disassembly",
+  "balconyDisassembly": "Balcony disassembly",
   "delivery": "Delivery",
   "unloading": "Unloading",
   "buildingType": "Building type",
@@ -115,7 +117,6 @@
   "windowsillExtensionShort": "Short",
   "windowsillExtensionOffSlab": "Off slab",
   "slabExtension": "Slab extension",
-  "extensionSheathing": "Extension sheathing",
   "insulation": "Insulation",
   "city": "City",
   "district": "District",
@@ -209,5 +210,14 @@
   "flooringCovering": "Covering",
   "schemeComment": "Scheme comment",
   "positionComment": "Position comment",
-  "flexibles": "Flexibles"
+  "flexibles": "Flexibles",
+  "installation": "Installation",
+  "lift": "Lift",
+  "sheathing": "Sheathing",
+  "welding": "Welding",
+  "inside": "Inside",
+  "outside": "Outside",
+  "railingSheathing": "Railing sheathing",
+  "ceiling": "Ceiling",
+  "loadBearingWall": "Load-bearing wall"
 }

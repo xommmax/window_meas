@@ -69,6 +69,14 @@ class MeasurementDB {
   @Default('')
   late String roofDisassemblyPrice;
   @Default(false)
+  late bool railingDisassembly;
+  @Default('')
+  late String railingDisassemblyPrice;
+  @Default(false)
+  late bool balconyDisassembly;
+  @Default('')
+  late String balconyDisassemblyPrice;
+  @Default(false)
   late bool delivery;
   @Default('')
   late String deliveryPrice;
@@ -120,19 +128,53 @@ class MeasurementDB {
   late bool parapetReinforcement;
   @Default('')
   late String parapetReinforcementPrice;
+
+  @Default(false)
+  late bool slabExtension;
+  @Default('')
+  late String slabExtensionPrice;
+  @Default('')
+  late String slabExtensionInstallation;
+  @Default('')
+  late String slabExtensionInsulation;
+  @Default('')
+  late String slabExtensionFlooring;
+  @Default('')
+  late String slabExtensionLift;
+  @Default('')
+  late String slabExtensionSheathing;
+  @Default('')
+  late String slabExtensionDelivery;
   @Enumerated(EnumType.name)
   @Default(WindowsillExtension.none)
   late WindowsillExtension windowsillExtension;
   @Default('')
   late String windowsillExtensionPrice;
-  @Default(false)
-  late bool slabExtension;
   @Default('')
-  late String slabExtensionPrice;
-  @Default(false)
-  late bool extensionSheathing;
+  late String windowsillExtensionWelding;
   @Default('')
-  late String extensionSheathingPrice;
+  late String windowsillExtensionSheathing;
+  @Default('')
+  late String windowsillExtensionInsulation;
+  @Default(false)
+  late bool railingSheathing;
+  @Default('')
+  late String railingSheathingInside;
+  @Default('')
+  late String railingSheathingOutside;
+  @Default('')
+  late String railingSheathingInsulation;
+  @Default(false)
+  late bool ceiling;
+  @Default('')
+  late String ceilingPrice;
+  @Default('')
+  late String ceilingInsulation;
+  @Default(false)
+  late bool loadBearingWall;
+  @Default('')
+  late String loadBearingWallSheathing;
+
   @Default(false)
   late bool insulation;
   @Default('')

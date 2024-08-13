@@ -52,13 +52,6 @@ class Measurement with _$Measurement {
     required FlatStatus flatStatus,
     required ElevatorOptions elevator,
     required AssemblyType assembly,
-    required bool disassembly,
-    required bool screedDisassembly,
-    required String screedDisassemblyPrice,
-    required bool gridDisassembly,
-    required String gridDisassemblyPrice,
-    required bool roofDisassembly,
-    required String roofDisassemblyPrice,
     required bool delivery,
     required String deliveryPrice,
     required bool unloading,
@@ -71,14 +64,44 @@ class Measurement with _$Measurement {
     required String estimatedAssemblyTime,
 
     // Other work
+    required bool disassembly,
+    required bool screedDisassembly,
+    required String screedDisassemblyPrice,
+    required bool gridDisassembly,
+    required String gridDisassemblyPrice,
+    required bool roofDisassembly,
+    required String roofDisassemblyPrice,
+    required bool railingDisassembly,
+    required String railingDisassemblyPrice,
+    required bool balconyDisassembly,
+    required String balconyDisassemblyPrice,
     required bool parapetReinforcement,
     required String parapetReinforcementPrice,
-    required WindowsillExtension windowsillExtension,
-    required String windowsillExtensionPrice,
     required bool slabExtension,
     required String slabExtensionPrice,
-    required bool extensionSheathing,
-    required String extensionSheathingPrice,
+    required String slabExtensionInstallation,
+    required String slabExtensionInsulation,
+    required String slabExtensionFlooring,
+    required String slabExtensionLift,
+    required String slabExtensionSheathing,
+    required String slabExtensionDelivery,
+    //
+    required WindowsillExtension windowsillExtension,
+    required String windowsillExtensionPrice,
+    required String windowsillExtensionWelding,
+    required String windowsillExtensionSheathing,
+    required String windowsillExtensionInsulation,
+    //
+    required bool railingSheathing,
+    required String railingSheathingInside,
+    required String railingSheathingOutside,
+    required String railingSheathingInsulation,
+    //
+    required bool ceiling,
+    required String ceilingPrice,
+    required String ceilingInsulation,
+    required bool loadBearingWall,
+    required String loadBearingWallSheathing,
     required bool insulation,
     required String insulationPrice,
     required bool flooring,
@@ -112,13 +135,7 @@ class Measurement with _$Measurement {
         phoneNumberMain: '',
         phoneNumberAdditional: '',
         assembly: AssemblyType.none,
-        disassembly: false,
-        screedDisassembly: false,
-        screedDisassemblyPrice: '',
-        gridDisassembly: false,
-        gridDisassemblyPrice: '',
-        roofDisassembly: false,
-        roofDisassemblyPrice: '',
+
         delivery: false,
         deliveryPrice: '',
         unloading: false,
@@ -143,14 +160,41 @@ class Measurement with _$Measurement {
         housingCoopNumber: '',
 
         // Other work
+        disassembly: false,
+        screedDisassembly: false,
+        screedDisassemblyPrice: '',
+        gridDisassembly: false,
+        gridDisassemblyPrice: '',
+        roofDisassembly: false,
+        roofDisassemblyPrice: '',
+        railingDisassembly: false,
+        railingDisassemblyPrice: '',
+        balconyDisassembly: false,
+        balconyDisassemblyPrice: '',
         parapetReinforcement: false,
         parapetReinforcementPrice: '',
-        windowsillExtension: WindowsillExtension.none,
-        windowsillExtensionPrice: '',
         slabExtension: false,
         slabExtensionPrice: '',
-        extensionSheathing: false,
-        extensionSheathingPrice: '',
+        slabExtensionInstallation: '',
+        slabExtensionInsulation: '',
+        slabExtensionFlooring: '',
+        slabExtensionLift: '',
+        slabExtensionSheathing: '',
+        slabExtensionDelivery: '',
+        windowsillExtension: WindowsillExtension.none,
+        windowsillExtensionPrice: '',
+        windowsillExtensionWelding: '',
+        windowsillExtensionSheathing: '',
+        windowsillExtensionInsulation: '',
+        railingSheathing: false,
+        railingSheathingInside: '',
+        railingSheathingOutside: '',
+        railingSheathingInsulation: '',
+        ceiling: false,
+        ceilingPrice: '',
+        ceilingInsulation: '',
+        loadBearingWall: false,
+        loadBearingWallSheathing: '',
         insulation: false,
         insulationPrice: '',
         flooring: false,
@@ -185,6 +229,10 @@ class Measurement with _$Measurement {
     ..gridDisassemblyPrice = gridDisassemblyPrice
     ..roofDisassembly = roofDisassembly
     ..roofDisassemblyPrice = roofDisassemblyPrice
+    ..railingDisassembly = railingDisassembly
+    ..railingDisassemblyPrice = railingDisassemblyPrice
+    ..balconyDisassembly = balconyDisassembly
+    ..balconyDisassemblyPrice = balconyDisassemblyPrice
     ..delivery = delivery
     ..deliveryPrice = deliveryPrice
     ..unloading = unloading
@@ -210,12 +258,28 @@ class Measurement with _$Measurement {
     // Other work
     ..parapetReinforcement = parapetReinforcement
     ..parapetReinforcementPrice = parapetReinforcementPrice
-    ..windowsillExtension = windowsillExtension
-    ..windowsillExtensionPrice = windowsillExtensionPrice
     ..slabExtension = slabExtension
     ..slabExtensionPrice = slabExtensionPrice
-    ..extensionSheathing = extensionSheathing
-    ..extensionSheathingPrice = extensionSheathingPrice
+    ..slabExtensionInstallation = slabExtensionInstallation
+    ..slabExtensionInsulation = slabExtensionInsulation
+    ..slabExtensionFlooring = slabExtensionFlooring
+    ..slabExtensionLift = slabExtensionLift
+    ..slabExtensionSheathing = slabExtensionSheathing
+    ..slabExtensionDelivery = slabExtensionDelivery
+    ..windowsillExtension = windowsillExtension
+    ..windowsillExtensionPrice = windowsillExtensionPrice
+    ..windowsillExtensionWelding = windowsillExtensionWelding
+    ..windowsillExtensionSheathing = windowsillExtensionSheathing
+    ..windowsillExtensionInsulation = windowsillExtensionInsulation
+    ..railingSheathing = railingSheathing
+    ..railingSheathingInside = railingSheathingInside
+    ..railingSheathingOutside = railingSheathingOutside
+    ..railingSheathingInsulation = railingSheathingInsulation
+    ..ceiling = ceiling
+    ..ceilingPrice = ceilingPrice
+    ..ceilingInsulation = ceilingInsulation
+    ..loadBearingWall = loadBearingWall
+    ..loadBearingWallSheathing = loadBearingWallSheathing
     ..insulation = insulation
     ..insulationPrice = insulationPrice
     ..flooring = flooring
@@ -249,6 +313,10 @@ class Measurement with _$Measurement {
         gridDisassemblyPrice: db.gridDisassemblyPrice,
         roofDisassembly: db.roofDisassembly,
         roofDisassemblyPrice: db.roofDisassemblyPrice,
+        railingDisassembly: db.railingDisassembly,
+        railingDisassemblyPrice: db.railingDisassemblyPrice,
+        balconyDisassembly: db.balconyDisassembly,
+        balconyDisassemblyPrice: db.balconyDisassemblyPrice,
         delivery: db.delivery,
         deliveryPrice: db.deliveryPrice,
         unloading: db.unloading,
@@ -274,12 +342,29 @@ class Measurement with _$Measurement {
         // Other work
         parapetReinforcement: db.parapetReinforcement,
         parapetReinforcementPrice: db.parapetReinforcementPrice,
-        windowsillExtension: db.windowsillExtension,
-        windowsillExtensionPrice: db.windowsillExtensionPrice,
+
         slabExtension: db.slabExtension,
         slabExtensionPrice: db.slabExtensionPrice,
-        extensionSheathing: db.extensionSheathing,
-        extensionSheathingPrice: db.extensionSheathingPrice,
+        slabExtensionInstallation: db.slabExtensionInstallation,
+        slabExtensionInsulation: db.slabExtensionInsulation,
+        slabExtensionFlooring: db.slabExtensionFlooring,
+        slabExtensionLift: db.slabExtensionLift,
+        slabExtensionSheathing: db.slabExtensionSheathing,
+        slabExtensionDelivery: db.slabExtensionDelivery,
+        windowsillExtension: db.windowsillExtension,
+        windowsillExtensionPrice: db.windowsillExtensionPrice,
+        windowsillExtensionWelding: db.windowsillExtensionWelding,
+        windowsillExtensionSheathing: db.windowsillExtensionSheathing,
+        windowsillExtensionInsulation: db.windowsillExtensionInsulation,
+        railingSheathing: db.railingSheathing,
+        railingSheathingInside: db.railingSheathingInside,
+        railingSheathingOutside: db.railingSheathingOutside,
+        railingSheathingInsulation: db.railingSheathingInsulation,
+        ceiling: db.ceiling,
+        ceilingPrice: db.ceilingPrice,
+        ceilingInsulation: db.ceilingInsulation,
+        loadBearingWall: db.loadBearingWall,
+        loadBearingWallSheathing: db.loadBearingWallSheathing,
         insulation: db.insulation,
         insulationPrice: db.insulationPrice,
         flooring: db.flooring,
