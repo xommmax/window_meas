@@ -139,11 +139,13 @@ const _FillingTypeRecordDBfillingTypeEnumValueMap = {
   r'glass': r'glass',
   r'panel': r'panel',
   r'tinting': r'tinting',
+  r'connector': r'connector',
 };
 const _FillingTypeRecordDBfillingTypeValueEnumMap = {
   r'glass': FillingType.glass,
   r'panel': FillingType.panel,
   r'tinting': FillingType.tinting,
+  r'connector': FillingType.connector,
 };
 
 extension FillingTypeRecordDBQueryFilter on QueryBuilder<FillingTypeRecordDB,

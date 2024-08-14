@@ -216,6 +216,8 @@ PODS:
   - isar_flutter_libs (1.0.0):
     - Flutter
   - leveldb-library (1.22.5)
+  - maps_launcher (0.0.1):
+    - Flutter
   - nanopb (2.30910.0):
     - nanopb/decode (= 2.30910.0)
     - nanopb/encode (= 2.30910.0)
@@ -238,6 +240,8 @@ PODS:
     - Flutter
     - FlutterMacOS
   - Toast (4.1.1)
+  - url_launcher_ios (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
@@ -253,11 +257,13 @@ DEPENDENCIES:
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/darwin`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - isar_flutter_libs (from `.symlinks/plugins/isar_flutter_libs/ios`)
+  - maps_launcher (from `.symlinks/plugins/maps_launcher/ios`)
   - open_file (from `.symlinks/plugins/open_file/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - printing (from `.symlinks/plugins/printing/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/darwin`)
+  - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
   trunk:
@@ -323,6 +329,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_picker_ios/ios"
   isar_flutter_libs:
     :path: ".symlinks/plugins/isar_flutter_libs/ios"
+  maps_launcher:
+    :path: ".symlinks/plugins/maps_launcher/ios"
   open_file:
     :path: ".symlinks/plugins/open_file/ios"
   path_provider_foundation:
@@ -333,6 +341,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/share_plus/ios"
   sqflite:
     :path: ".symlinks/plugins/sqflite/darwin"
+  url_launcher_ios:
+    :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 CHECKOUT OPTIONS:
   FirebaseFirestore:
@@ -381,6 +391,7 @@ SPEC CHECKSUMS:
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   isar_flutter_libs: b69f437aeab9c521821c3f376198c4371fa21073
   leveldb-library: e8eadf9008a61f9e1dde3978c086d2b6d9b9dc28
+  maps_launcher: 2e5b6a2d664ec6c27f82ffa81b74228d770ab203
   nanopb: 438bc412db1928dac798aa6fd75726007be04262
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
@@ -391,6 +402,7 @@ SPEC CHECKSUMS:
   share_plus: 8875f4f2500512ea181eef553c3e27dba5135aad
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
+  url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
 PODFILE CHECKSUM: 692846102f59e5c4c26ac7d03ed726bc6a9d9796
 
