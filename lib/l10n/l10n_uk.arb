@@ -219,5 +219,10 @@
   "outside": "Ззовні",
   "railingSheathing": "Обшивка перил",
   "ceiling": "Стеля",
-  "loadBearingWall": "Несуча стіна"
+  "loadBearingWall": "Несуча стіна",
+  "connectors": "З'єднувачі",
+  "side": "Сторона",
+  "description": "Опис",
+  "connector": "З'єднувач",
+  "angle": "Кут"
 }

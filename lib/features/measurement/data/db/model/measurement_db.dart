@@ -7,6 +7,7 @@ import 'package:window_meas/features/editor/opening_type/data/opening_type_recor
 import 'package:window_meas/features/editor/data/model/scheme_db.dart';
 import 'package:window_meas/features/measurement/data/db/model/expander_db.dart';
 import 'package:window_meas/features/measurement/data/db/model/position_db.dart';
+import 'package:window_meas/features/measurement/data/db/model/connector_db.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/assembly_type_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/building_type_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/elevator_options_enum.dart';

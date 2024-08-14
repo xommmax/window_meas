@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
 import 'package:window_meas/features/editor/data/model/scheme_db.dart';
+import 'package:window_meas/features/measurement/data/db/model/connector_db.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/panel_thickness_enum.dart';
 import 'package:window_meas/features/measurement/data/db/model/expander_db.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/door_opening_type_enum.dart';

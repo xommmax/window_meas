@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/measurement/data/db/model/position_db.dart';
+import 'package:window_meas/features/measurement/data/domain/model/connector.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/door_opening_type_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/doorstep_option_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/doorstep_type_enum.dart';

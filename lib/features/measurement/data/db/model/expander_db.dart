@@ -7,6 +7,9 @@ part 'expander_db.g.dart';
 @embedded
 class ExpanderDB {
   @Enumerated(EnumType.name)
+  @Default(ExpanderSide.none)
+  late ExpanderSide side;
+  @Enumerated(EnumType.name)
   @Default(ExpanderWidth.none)
   late ExpanderWidth width;
   @Default('')

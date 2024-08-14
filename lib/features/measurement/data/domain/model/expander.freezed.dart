@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Expander {
+  ExpanderSide get side => throw _privateConstructorUsedError;
   ExpanderWidth get width => throw _privateConstructorUsedError;
   String get length => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -30,7 +31,11 @@ abstract class $ExpanderCopyWith<$Res> {
   factory $ExpanderCopyWith(Expander value, $Res Function(Expander) then) =
       _$ExpanderCopyWithImpl<$Res, Expander>;
   @useResult
-  $Res call({ExpanderWidth width, String length, DateTime createdAt});
+  $Res call(
+      {ExpanderSide side,
+      ExpanderWidth width,
+      String length,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -46,11 +51,16 @@ class _$ExpanderCopyWithImpl<$Res, $Val extends Expander>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? side = null,
     Object? width = null,
     Object? length = null,
     Object? createdAt = null,
   }) {
     return _then(_value.copyWith(
+      side: null == side
+          ? _value.side
+          : side // ignore: cast_nullable_to_non_nullable
+              as ExpanderSide,
       width: null == width
           ? _value.width
           : width // ignore: cast_nullable_to_non_nullable
@@ -75,7 +85,11 @@ abstract class _$$ExpanderImplCopyWith<$Res>
       __$$ExpanderImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ExpanderWidth width, String length, DateTime createdAt});
+  $Res call(
+      {ExpanderSide side,
+      ExpanderWidth width,
+      String length,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -89,11 +103,16 @@ class __$$ExpanderImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? side = null,
     Object? width = null,
     Object? length = null,
     Object? createdAt = null,
   }) {
     return _then(_$ExpanderImpl(
+      side: null == side
+          ? _value.side
+          : side // ignore: cast_nullable_to_non_nullable
+              as ExpanderSide,
       width: null == width
           ? _value.width
           : width // ignore: cast_nullable_to_non_nullable
@@ -114,9 +133,14 @@ class __$$ExpanderImplCopyWithImpl<$Res>
 
 class _$ExpanderImpl extends _Expander {
   const _$ExpanderImpl(
-      {required this.width, required this.length, required this.createdAt})
+      {required this.side,
+      required this.width,
+      required this.length,
+      required this.createdAt})
       : super._();
 
+  @override
+  final ExpanderSide side;
   @override
   final ExpanderWidth width;
   @override
@@ -126,7 +150,7 @@ class _$ExpanderImpl extends _Expander {
 
   @override
   String toString() {
-    return 'Expander(width: $width, length: $length, createdAt: $createdAt)';
+    return 'Expander(side: $side, width: $width, length: $length, createdAt: $createdAt)';
   }
 
   @override
@@ -134,6 +158,7 @@ class _$ExpanderImpl extends _Expander {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ExpanderImpl &&
+            (identical(other.side, side) || other.side == side) &&
             (identical(other.width, width) || other.width == width) &&
             (identical(other.length, length) || other.length == length) &&
             (identical(other.createdAt, createdAt) ||
@@ -141,7 +166,7 @@ class _$ExpanderImpl extends _Expander {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, width, length, createdAt);
+  int get hashCode => Object.hash(runtimeType, side, width, length, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -152,11 +177,14 @@ class _$ExpanderImpl extends _Expander {
 
 abstract class _Expander extends Expander {
   const factory _Expander(
-      {required final ExpanderWidth width,
+      {required final ExpanderSide side,
+      required final ExpanderWidth width,
       required final String length,
       required final DateTime createdAt}) = _$ExpanderImpl;
   const _Expander._() : super._();
 
+  @override
+  ExpanderSide get side;
   @override
   ExpanderWidth get width;
   @override

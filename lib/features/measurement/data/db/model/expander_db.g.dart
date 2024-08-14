@@ -23,8 +23,14 @@ const ExpanderDBSchema = Schema(
       name: r'length',
       type: IsarType.string,
     ),
-    r'width': PropertySchema(
+    r'side': PropertySchema(
       id: 2,
+      name: r'side',
+      type: IsarType.string,
+      enumMap: _ExpanderDBsideEnumValueMap,
+    ),
+    r'width': PropertySchema(
+      id: 3,
       name: r'width',
       type: IsarType.string,
       enumMap: _ExpanderDBwidthEnumValueMap,
@@ -43,6 +49,7 @@ int _expanderDBEstimateSize(
 ) {
   var bytesCount = offsets.last;
   bytesCount += 3 + object.length.length * 3;
+  bytesCount += 3 + object.side.name.length * 3;
   bytesCount += 3 + object.width.name.length * 3;
   return bytesCount;
 }
@@ -55,7 +62,8 @@ void _expanderDBSerialize(
 ) {
   writer.writeDateTime(offsets[0], object.createdAt);
   writer.writeString(offsets[1], object.length);
-  writer.writeString(offsets[2], object.width.name);
+  writer.writeString(offsets[2], object.side.name);
+  writer.writeString(offsets[3], object.width.name);
 }
 
 ExpanderDB _expanderDBDeserialize(
@@ -67,8 +75,11 @@ ExpanderDB _expanderDBDeserialize(
   final object = ExpanderDB();
   object.createdAt = reader.readDateTime(offsets[0]);
   object.length = reader.readString(offsets[1]);
+  object.side =
+      _ExpanderDBsideValueEnumMap[reader.readStringOrNull(offsets[2])] ??
+          ExpanderSide.none;
   object.width =
-      _ExpanderDBwidthValueEnumMap[reader.readStringOrNull(offsets[2])] ??
+      _ExpanderDBwidthValueEnumMap[reader.readStringOrNull(offsets[3])] ??
           ExpanderWidth.none;
   return object;
 }
@@ -85,6 +96,9 @@ P _expanderDBDeserializeProp<P>(
     case 1:
       return (reader.readString(offset)) as P;
     case 2:
+      return (_ExpanderDBsideValueEnumMap[reader.readStringOrNull(offset)] ??
+          ExpanderSide.none) as P;
+    case 3:
       return (_ExpanderDBwidthValueEnumMap[reader.readStringOrNull(offset)] ??
           ExpanderWidth.none) as P;
     default:
@@ -92,6 +106,20 @@ P _expanderDBDeserializeProp<P>(
   }
 }
 
+const _ExpanderDBsideEnumValueMap = {
+  r'none': r'none',
+  r'left': r'left',
+  r'right': r'right',
+  r'top': r'top',
+  r'bottom': r'bottom',
+};
+const _ExpanderDBsideValueEnumMap = {
+  r'none': ExpanderSide.none,
+  r'left': ExpanderSide.left,
+  r'right': ExpanderSide.right,
+  r'top': ExpanderSide.top,
+  r'bottom': ExpanderSide.bottom,
+};
 const _ExpanderDBwidthEnumValueMap = {
   r'none': r'none',
   r'w20': r'w20',
@@ -291,6 +319,136 @@ extension ExpanderDBQueryFilter
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         property: r'length',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ExpanderDB, ExpanderDB, QAfterFilterCondition> sideEqualTo(
+    ExpanderSide value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'side',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExpanderDB, ExpanderDB, QAfterFilterCondition> sideGreaterThan(
+    ExpanderSide value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'side',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExpanderDB, ExpanderDB, QAfterFilterCondition> sideLessThan(
+    ExpanderSide value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'side',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExpanderDB, ExpanderDB, QAfterFilterCondition> sideBetween(
+    ExpanderSide lower,
+    ExpanderSide upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'side',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExpanderDB, ExpanderDB, QAfterFilterCondition> sideStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'side',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExpanderDB, ExpanderDB, QAfterFilterCondition> sideEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'side',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExpanderDB, ExpanderDB, QAfterFilterCondition> sideContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'side',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExpanderDB, ExpanderDB, QAfterFilterCondition> sideMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'side',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ExpanderDB, ExpanderDB, QAfterFilterCondition> sideIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'side',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ExpanderDB, ExpanderDB, QAfterFilterCondition> sideIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'side',
         value: '',
       ));
     });

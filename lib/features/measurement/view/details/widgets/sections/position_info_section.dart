@@ -8,16 +8,16 @@ import 'package:window_meas/features/measurement/data/domain/model/params/panel_
 import 'package:window_meas/features/measurement/data/domain/model/params/quarter_position_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/rubber_color_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/stand_profile_enum.dart';
-import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_connector_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_depth_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_type_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/position.dart';
+import 'package:window_meas/features/measurement/view/details/widgets/items/connectors_item.dart';
+import 'package:window_meas/features/measurement/view/details/widgets/items/expanders_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/flexibles_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/glass_unit_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/photo_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/profile_system_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/items/scheme_item.dart';
-import 'package:window_meas/features/measurement/view/details/widgets/sections/expander_section.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/subcategory.dart';
 import 'package:window_meas/l10n/localization.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_cubit.dart';
@@ -182,7 +182,6 @@ class PositionInfoSection extends StatelessWidget {
                   .updatePosition(position.copyWith(standProfile: e)),
             ),
             const Divider(),
-            ExpanderSection(position),
             TextItem(title: context.l10n.panel),
             const Divider(),
             Subcategory(
@@ -245,15 +244,6 @@ class PositionInfoSection extends StatelessWidget {
                         .read<MeasurementDetailsCubit>()
                         .updatePosition(position.copyWith(windowsillSize: s)),
                     keyboardType: TextInputType.number,
-                  ),
-                  const Divider(),
-                  DropdownItem<WindowsillConnector>(
-                    title: context.l10n.windowsillConnector,
-                    values: WindowsillConnector.values,
-                    initialValue: position.windowsillConnector,
-                    onSelected: (e) => context
-                        .read<MeasurementDetailsCubit>()
-                        .updatePosition(position.copyWith(windowsillConnector: e)),
                   ),
                   const Divider(),
                   InputItem(
@@ -378,6 +368,10 @@ class PositionInfoSection extends StatelessWidget {
                 ),
               ],
             ),
+            const Divider(),
+            ExpandersItem(position),
+            const Divider(),
+            ConnectorsItem(position),
             const Divider(),
             InputItem(
               title: context.l10n.positionComment,

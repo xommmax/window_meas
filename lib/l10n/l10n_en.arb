@@ -219,5 +219,10 @@
   "outside": "Outside",
   "railingSheathing": "Railing sheathing",
   "ceiling": "Ceiling",
-  "loadBearingWall": "Load-bearing wall"
+  "loadBearingWall": "Load-bearing wall",
+  "connectors": "Connectors",
+  "side": "Side",
+  "description": "Description",
+  "connector": "Connector",
+  "angle": "Angle"
 }

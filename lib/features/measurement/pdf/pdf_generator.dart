@@ -205,6 +205,68 @@ class PdfGenerator {
         ),
       );
 
+      if (position.connectors.isNotEmpty || position.expanders.isNotEmpty) {
+        pdf.addPage(
+          pw.Page(
+            pageFormat: PdfPageFormat.a4,
+            margin: pw.EdgeInsets.zero,
+            build: (pw.Context context) => pw.Padding(
+              padding: const pw.EdgeInsets.fromLTRB(30, 40, 20, 40),
+              child: pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Expanded(
+                    flex: 1,
+                    child: pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        _infoTitle(Localization.l10n.connectors),
+                        for (final connector in position.connectors) ...[
+                          pw.SizedBox(height: 20),
+                          pw.Text(
+                            '${Localization.l10n.connector} №${position.connectors.indexOf(connector) + 1}',
+                            style: pw.TextStyle(
+                              fontSize: 12,
+                              fontWeight: pw.FontWeight.bold,
+                            ),
+                          ),
+                          pw.SizedBox(height: 10),
+                          _infoRow(Localization.l10n.angle, connector.angle),
+                          _infoRow(Localization.l10n.description, connector.description),
+                        ],
+                      ],
+                    ),
+                  ),
+                  pw.Expanded(
+                    flex: 1,
+                    child: pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      children: [
+                        _infoTitle(Localization.l10n.expanders),
+                        for (final expander in position.expanders) ...[
+                          pw.SizedBox(height: 20),
+                          pw.Text(
+                            '${Localization.l10n.expander} №${position.expanders.indexOf(expander) + 1}',
+                            style: pw.TextStyle(
+                              fontSize: 12,
+                              fontWeight: pw.FontWeight.bold,
+                            ),
+                          ),
+                          pw.SizedBox(height: 10),
+                          _infoRow(Localization.l10n.side, expander.side),
+                          _infoRow(Localization.l10n.width, expander.width),
+                          _infoRow(Localization.l10n.length, expander.length),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+
       // Photo
       if (position.photoPath != null) {
         pdf.addPage(
@@ -535,47 +597,6 @@ class PdfGenerator {
             rowType: _RowType.sub),
         _infoRow(Localization.l10n.rubberColor, position.rubberColor),
         _infoRow(Localization.l10n.standProfile, position.standProfile),
-        _infoRow(Localization.l10n.expanders, null, rowType: _RowType.title),
-        _infoRow(Localization.l10n.expanderRight, position.expanderOption.rightEnabled,
-            rowType: _RowType.sub),
-        if (position.expanderOption.rightEnabled) ...[
-          _infoRow(Localization.l10n.width, position.expanderOption.rightWidth,
-              rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.length, position.expanderOption.rightLength,
-              rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.quantity, position.expanderOption.rightAmount,
-              rowType: _RowType.subSub),
-        ],
-        _infoRow(Localization.l10n.expanderLeft, position.expanderOption.leftEnabled,
-            rowType: _RowType.sub),
-        if (position.expanderOption.leftEnabled) ...[
-          _infoRow(Localization.l10n.width, position.expanderOption.leftWidth,
-              rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.length, position.expanderOption.leftLength,
-              rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.quantity, position.expanderOption.leftAmount,
-              rowType: _RowType.subSub),
-        ],
-        _infoRow(Localization.l10n.expanderTop, position.expanderOption.topEnabled,
-            rowType: _RowType.sub),
-        if (position.expanderOption.topEnabled) ...[
-          _infoRow(Localization.l10n.width, position.expanderOption.topWidth,
-              rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.length, position.expanderOption.topLength,
-              rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.quantity, position.expanderOption.topAmount,
-              rowType: _RowType.subSub),
-        ],
-        _infoRow(Localization.l10n.expanderBottom, position.expanderOption.bottomEnabled,
-            rowType: _RowType.sub),
-        if (position.expanderOption.bottomEnabled) ...[
-          _infoRow(Localization.l10n.width, position.expanderOption.bottomWidth,
-              rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.length, position.expanderOption.bottomLength,
-              rowType: _RowType.subSub),
-          _infoRow(Localization.l10n.quantity, position.expanderOption.bottomAmount,
-              rowType: _RowType.subSub),
-        ],
         _infoRow(Localization.l10n.positionComment, position.positionComment),
       ];
 
@@ -589,8 +610,6 @@ class PdfGenerator {
         _infoRow(Localization.l10n.type, position.windowsillType, rowType: _RowType.sub),
         _infoRow(Localization.l10n.depth, position.windowsillDepth, rowType: _RowType.sub),
         _infoRow(Localization.l10n.size, position.windowsillSize, rowType: _RowType.sub),
-        _infoRow(Localization.l10n.windowsillConnector, position.windowsillConnector,
-            rowType: _RowType.sub),
         _infoRow(Localization.l10n.color, position.windowsillColor, rowType: _RowType.sub),
         _infoRow(Localization.l10n.assembly, position.windowsillAssembly, rowType: _RowType.sub),
         _infoRow(Localization.l10n.drainage, null, rowType: _RowType.title),
