@@ -9,8 +9,10 @@ import 'package:window_meas/features/editor/data/model/scheme.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/ext/offset_ext.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:window_meas/features/editor/filling_type/data/filling_type_enum.dart';
 import 'package:window_meas/features/measurement/pdf/pdf_filling_type_painter.dart';
 import 'package:window_meas/features/measurement/pdf/pdf_opening_type_painter.dart';
+import 'package:window_meas/l10n/localization.dart';
 
 class PdfCustomPainter {
   static const lineWidth = 1.0;
@@ -193,6 +195,31 @@ class PdfCustomPainter {
         textOffset.dx,
         textOffset.dy,
       );
+
+      if (fillingType.fillingType == FillingType.connector) {
+        final connectorText = '${Localization.l10n.connector} ${fillingType.text ?? ''}';
+        final connectorTextWidget = pw.Text(
+          connectorText,
+          style: pw.TextStyle(fontSize: gridSize / 2 + 1, color: PdfColors.black),
+        );
+        connectorTextWidget.layout(context, const pw.BoxConstraints.tightForFinite());
+        final connectorTextLayoutSize = connectorTextWidget.box?.size ?? const PdfPoint(0, 0);
+        final connectorTextOffset = PdfPoint(
+          center.dx + connectorTextLayoutSize.y / 2,
+          center.dy - connectorTextLayoutSize.x / 2,
+        );
+
+        canvas.setTransform(Matrix4.identity()
+          ..translate(connectorTextOffset.x, connectorTextOffset.y)
+          ..rotateZ(pi / 2));
+
+        pw.Widget.draw(
+          connectorTextWidget,
+          canvas: canvas,
+          offset: PdfPoint.zero,
+          context: widgetContext,
+        );
+      }
 
       canvas.restoreContext();
       canvas.setTransform(Matrix4.identity());

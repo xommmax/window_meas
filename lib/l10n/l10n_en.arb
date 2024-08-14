@@ -224,5 +224,6 @@
   "side": "Side",
   "description": "Description",
   "connector": "Connector",
-  "angle": "Angle"
+  "angle": "Angle",
+  "number": "Number"
 }

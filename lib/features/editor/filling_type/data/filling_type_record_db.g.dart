@@ -34,6 +34,11 @@ const FillingTypeRecordDBSchema = Schema(
       id: 3,
       name: r'sateen',
       type: IsarType.bool,
+    ),
+    r'text': PropertySchema(
+      id: 4,
+      name: r'text',
+      type: IsarType.string,
     )
   },
   estimateSize: _fillingTypeRecordDBEstimateSize,
@@ -52,6 +57,12 @@ int _fillingTypeRecordDBEstimateSize(
   bytesCount += 3 +
       PolygonDBSchema.estimateSize(
           object.polygon, allOffsets[PolygonDB]!, allOffsets);
+  {
+    final value = object.text;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   return bytesCount;
 }
 
@@ -70,6 +81,7 @@ void _fillingTypeRecordDBSerialize(
     object.polygon,
   );
   writer.writeBool(offsets[3], object.sateen);
+  writer.writeString(offsets[4], object.text);
 }
 
 FillingTypeRecordDB _fillingTypeRecordDBDeserialize(
@@ -90,6 +102,7 @@ FillingTypeRecordDB _fillingTypeRecordDBDeserialize(
       ) ??
       PolygonDB();
   object.sateen = reader.readBool(offsets[3]);
+  object.text = reader.readStringOrNull(offsets[4]);
   return object;
 }
 
@@ -115,6 +128,8 @@ P _fillingTypeRecordDBDeserializeProp<P>(
           PolygonDB()) as P;
     case 3:
       return (reader.readBool(offset)) as P;
+    case 4:
+      return (reader.readStringOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -285,6 +300,160 @@ extension FillingTypeRecordDBQueryFilter on QueryBuilder<FillingTypeRecordDB,
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'sateen',
         value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      textIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'text',
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      textIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'text',
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      textEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'text',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      textGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'text',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      textLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'text',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      textBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'text',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      textStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'text',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      textEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'text',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      textContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'text',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      textMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'text',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      textIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'text',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<FillingTypeRecordDB, FillingTypeRecordDB, QAfterFilterCondition>
+      textIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'text',
+        value: '',
       ));
     });
   }

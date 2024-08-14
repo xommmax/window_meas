@@ -46,6 +46,7 @@ class FillingTypeDrawer {
         FillingType.glass => _drawGlass(canvas, size),
         FillingType.panel => _drawPanel(canvas, size),
         FillingType.tinting => _drawTinting(canvas, size),
+        FillingType.connector => _drawPanel(canvas, size),
       };
 
   void _drawGlass(Canvas canvas, Size size) {

@@ -227,7 +227,7 @@ class DrawingViewState extends State<DrawingView> {
     final FillingTypeRecord? existingFillingType = (selectedPolygons.length == 1)
         ? scheme.fillingTypes.firstWhereOrNull((e) => e.polygon == selectedPolygons.first)
         : null;
-    final (FillingType, bool, bool)? fillingType = await context.push(
+    final (FillingType, bool, bool, String?)? fillingType = await context.push(
       '/filling_type_list',
       extra: {
         'selectedFillingType': existingFillingType?.fillingType,
@@ -241,6 +241,7 @@ class DrawingViewState extends State<DrawingView> {
             fillingType.$2,
             fillingType.$3,
             selectedPolygons,
+            fillingType.$4,
           );
     }
   }

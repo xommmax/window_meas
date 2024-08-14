@@ -92,6 +92,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
     bool sateen,
     bool mosquito,
     List<Polygon> selectedPolygons,
+    String? text,
   ) {
     List<FillingTypeRecord> fillingTypes = List.of(state.scheme.fillingTypes);
 
@@ -103,6 +104,7 @@ class DrawingCubit extends ReplayCubit<DrawingState> {
         polygon: polygon,
         sateen: sateen,
         mosquito: mosquito,
+        text: text,
       ));
     }
 

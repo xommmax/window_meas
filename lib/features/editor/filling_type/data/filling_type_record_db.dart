@@ -15,4 +15,5 @@ class FillingTypeRecordDB {
   late bool sateen;
   @Default(false)
   late bool mosquito;
+  late String? text;
 }

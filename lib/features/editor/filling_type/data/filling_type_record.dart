@@ -14,18 +14,21 @@ class FillingTypeRecord with _$FillingTypeRecord {
     required Polygon polygon,
     required bool sateen,
     required bool mosquito,
+    String? text,
   }) = _FillingTypeRecord;
 
   FillingTypeRecordDB toDB() => FillingTypeRecordDB()
     ..fillingType = fillingType
     ..polygon = polygon.toDB()
     ..sateen = sateen
-    ..mosquito = mosquito;
+    ..mosquito = mosquito
+    ..text = text;
 
   static FillingTypeRecord fromDB(FillingTypeRecordDB db) => FillingTypeRecord(
         fillingType: db.fillingType,
         polygon: Polygon.fromDB(db.polygon),
         sateen: db.sateen,
         mosquito: db.mosquito,
+        text: db.text,
       );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:window_meas/features/editor/filling_type/data/filling_type_enum.dart';
+import 'package:window_meas/features/editor/filling_type/view/input_dialog.dart';
 import 'package:window_meas/features/editor/filling_type/view/filling_type_grid.dart';
 import 'package:window_meas/features/editor/filling_type/view/filling_type_sateen.dart';
 import 'package:window_meas/l10n/localization.dart';
@@ -40,6 +41,7 @@ class _FillingTypeListScreenState extends State<FillingTypeListScreen> {
               widget.selectedFillingType ?? FillingType.glass,
               sateen,
               mosquito,
+              null,
             ));
           }
         },
@@ -52,11 +54,20 @@ class _FillingTypeListScreenState extends State<FillingTypeListScreen> {
               fit: StackFit.expand,
               children: [
                 FillingTypeGridView(
-                  onSelected: (fillingType) => Navigator.pop(context, (
-                    fillingType,
-                    sateen,
-                    mosquito,
-                  )),
+                  onSelected: (fillingType) async {
+                    String? text;
+                    if (fillingType == FillingType.connector) {
+                      text = await InputDialog.show(context);
+                    }
+                    if (!context.mounted) return;
+
+                    Navigator.pop(context, (
+                      fillingType,
+                      sateen,
+                      mosquito,
+                      text,
+                    ));
+                  },
                   selectedFillingType: widget.selectedFillingType,
                 ),
                 Align(

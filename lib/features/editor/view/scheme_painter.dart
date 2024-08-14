@@ -15,8 +15,10 @@ import 'package:window_meas/features/editor/data/model/direction.dart';
 import 'package:window_meas/features/editor/data/model/line.dart';
 import 'package:window_meas/features/editor/data/model/segment.dart';
 import 'package:window_meas/features/editor/data/model/scheme.dart';
+import 'package:window_meas/features/editor/filling_type/data/filling_type_enum.dart';
 import 'package:window_meas/features/editor/filling_type/view/filling_type_painter.dart';
 import 'package:window_meas/features/editor/opening_type/view/opening_type_painter.dart';
+import 'package:window_meas/l10n/localization.dart';
 
 class SchemePainter extends CustomPainter {
   double gridSize(Size size) => size.width / Constants.gridAmount;
@@ -164,6 +166,31 @@ class SchemePainter extends CustomPainter {
       final y = fillingType.polygon.globalHeight(size) / 2 - textPainter.height / 2;
 
       textPainter.paint(canvas, Offset(x, y));
+
+      if (fillingType.fillingType == FillingType.connector) {
+        final connectorText = TextSpan(
+          text: '${Localization.l10n.connector} ${fillingType.text ?? ''}',
+          style: TextStyle(
+            fontSize: gridSize(size) / 1.3,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        );
+
+        final connectorTextPainter = TextPainter(
+          text: connectorText,
+          textDirection: TextDirection.ltr,
+        );
+
+        connectorTextPainter.layout();
+
+        final x = fillingType.polygon.globalWidth(size) / 2 - connectorTextPainter.height / 2;
+        final y = fillingType.polygon.globalHeight(size) / 2 + connectorTextPainter.width / 2;
+
+        canvas.translate(x, y);
+        canvas.rotate(-pi / 2);
+        connectorTextPainter.paint(canvas, Offset.zero);
+      }
 
       canvas.restore();
     }

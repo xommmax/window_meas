@@ -20,6 +20,7 @@ mixin _$FillingTypeRecord {
   Polygon get polygon => throw _privateConstructorUsedError;
   bool get sateen => throw _privateConstructorUsedError;
   bool get mosquito => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FillingTypeRecordCopyWith<FillingTypeRecord> get copyWith =>
@@ -33,7 +34,11 @@ abstract class $FillingTypeRecordCopyWith<$Res> {
       _$FillingTypeRecordCopyWithImpl<$Res, FillingTypeRecord>;
   @useResult
   $Res call(
-      {FillingType fillingType, Polygon polygon, bool sateen, bool mosquito});
+      {FillingType fillingType,
+      Polygon polygon,
+      bool sateen,
+      bool mosquito,
+      String? text});
 
   $PolygonCopyWith<$Res> get polygon;
 }
@@ -55,6 +60,7 @@ class _$FillingTypeRecordCopyWithImpl<$Res, $Val extends FillingTypeRecord>
     Object? polygon = null,
     Object? sateen = null,
     Object? mosquito = null,
+    Object? text = freezed,
   }) {
     return _then(_value.copyWith(
       fillingType: null == fillingType
@@ -73,6 +79,10 @@ class _$FillingTypeRecordCopyWithImpl<$Res, $Val extends FillingTypeRecord>
           ? _value.mosquito
           : mosquito // ignore: cast_nullable_to_non_nullable
               as bool,
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -94,7 +104,11 @@ abstract class _$$FillingTypeRecordImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {FillingType fillingType, Polygon polygon, bool sateen, bool mosquito});
+      {FillingType fillingType,
+      Polygon polygon,
+      bool sateen,
+      bool mosquito,
+      String? text});
 
   @override
   $PolygonCopyWith<$Res> get polygon;
@@ -115,6 +129,7 @@ class __$$FillingTypeRecordImplCopyWithImpl<$Res>
     Object? polygon = null,
     Object? sateen = null,
     Object? mosquito = null,
+    Object? text = freezed,
   }) {
     return _then(_$FillingTypeRecordImpl(
       fillingType: null == fillingType
@@ -133,6 +148,10 @@ class __$$FillingTypeRecordImplCopyWithImpl<$Res>
           ? _value.mosquito
           : mosquito // ignore: cast_nullable_to_non_nullable
               as bool,
+      text: freezed == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -144,7 +163,8 @@ class _$FillingTypeRecordImpl extends _FillingTypeRecord {
       {required this.fillingType,
       required this.polygon,
       required this.sateen,
-      required this.mosquito})
+      required this.mosquito,
+      this.text})
       : super._();
 
   @override
@@ -155,10 +175,12 @@ class _$FillingTypeRecordImpl extends _FillingTypeRecord {
   final bool sateen;
   @override
   final bool mosquito;
+  @override
+  final String? text;
 
   @override
   String toString() {
-    return 'FillingTypeRecord(fillingType: $fillingType, polygon: $polygon, sateen: $sateen, mosquito: $mosquito)';
+    return 'FillingTypeRecord(fillingType: $fillingType, polygon: $polygon, sateen: $sateen, mosquito: $mosquito, text: $text)';
   }
 
   @override
@@ -171,12 +193,13 @@ class _$FillingTypeRecordImpl extends _FillingTypeRecord {
             (identical(other.polygon, polygon) || other.polygon == polygon) &&
             (identical(other.sateen, sateen) || other.sateen == sateen) &&
             (identical(other.mosquito, mosquito) ||
-                other.mosquito == mosquito));
+                other.mosquito == mosquito) &&
+            (identical(other.text, text) || other.text == text));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, fillingType, polygon, sateen, mosquito);
+      Object.hash(runtimeType, fillingType, polygon, sateen, mosquito, text);
 
   @JsonKey(ignore: true)
   @override
@@ -191,7 +214,8 @@ abstract class _FillingTypeRecord extends FillingTypeRecord {
       {required final FillingType fillingType,
       required final Polygon polygon,
       required final bool sateen,
-      required final bool mosquito}) = _$FillingTypeRecordImpl;
+      required final bool mosquito,
+      final String? text}) = _$FillingTypeRecordImpl;
   const _FillingTypeRecord._() : super._();
 
   @override
@@ -202,6 +226,8 @@ abstract class _FillingTypeRecord extends FillingTypeRecord {
   bool get sateen;
   @override
   bool get mosquito;
+  @override
+  String? get text;
   @override
   @JsonKey(ignore: true)
   _$$FillingTypeRecordImplCopyWith<_$FillingTypeRecordImpl> get copyWith =>

@@ -224,5 +224,6 @@
   "side": "Сторона",
   "description": "Опис",
   "connector": "З'єднувач",
-  "angle": "Кут"
+  "angle": "Кут",
+  "number": "Номер"
 }
