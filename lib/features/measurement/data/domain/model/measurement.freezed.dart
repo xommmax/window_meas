@@ -29,7 +29,8 @@ mixin _$Measurement {
   String get phoneNumberAdditional => throw _privateConstructorUsedError;
   String get howDiscovered => throw _privateConstructorUsedError;
   String get comment => throw _privateConstructorUsedError;
-  String get measurer => throw _privateConstructorUsedError; // Address
+  String get measurer => throw _privateConstructorUsedError;
+  String? get signaturePath => throw _privateConstructorUsedError; // Address
   String get city => throw _privateConstructorUsedError;
   String get district => throw _privateConstructorUsedError;
   String get street => throw _privateConstructorUsedError;
@@ -129,6 +130,7 @@ abstract class $MeasurementCopyWith<$Res> {
       String howDiscovered,
       String comment,
       String measurer,
+      String? signaturePath,
       String city,
       String district,
       String street,
@@ -224,6 +226,7 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
     Object? howDiscovered = null,
     Object? comment = null,
     Object? measurer = null,
+    Object? signaturePath = freezed,
     Object? city = null,
     Object? district = null,
     Object? street = null,
@@ -348,6 +351,10 @@ class _$MeasurementCopyWithImpl<$Res, $Val extends Measurement>
           ? _value.measurer
           : measurer // ignore: cast_nullable_to_non_nullable
               as String,
+      signaturePath: freezed == signaturePath
+          ? _value.signaturePath
+          : signaturePath // ignore: cast_nullable_to_non_nullable
+              as String?,
       city: null == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
@@ -639,6 +646,7 @@ abstract class _$$MeasurementImplCopyWith<$Res>
       String howDiscovered,
       String comment,
       String measurer,
+      String? signaturePath,
       String city,
       String district,
       String street,
@@ -732,6 +740,7 @@ class __$$MeasurementImplCopyWithImpl<$Res>
     Object? howDiscovered = null,
     Object? comment = null,
     Object? measurer = null,
+    Object? signaturePath = freezed,
     Object? city = null,
     Object? district = null,
     Object? street = null,
@@ -856,6 +865,10 @@ class __$$MeasurementImplCopyWithImpl<$Res>
           ? _value.measurer
           : measurer // ignore: cast_nullable_to_non_nullable
               as String,
+      signaturePath: freezed == signaturePath
+          ? _value.signaturePath
+          : signaturePath // ignore: cast_nullable_to_non_nullable
+              as String?,
       city: null == city
           ? _value.city
           : city // ignore: cast_nullable_to_non_nullable
@@ -1142,6 +1155,7 @@ class _$MeasurementImpl extends _Measurement {
       required this.howDiscovered,
       required this.comment,
       required this.measurer,
+      required this.signaturePath,
       required this.city,
       required this.district,
       required this.street,
@@ -1240,6 +1254,8 @@ class _$MeasurementImpl extends _Measurement {
   final String comment;
   @override
   final String measurer;
+  @override
+  final String? signaturePath;
 // Address
   @override
   final String city;
@@ -1388,7 +1404,7 @@ class _$MeasurementImpl extends _Measurement {
 
   @override
   String toString() {
-    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, pdfFile: $pdfFile, leadId: $leadId, clientName: $clientName, cost: $cost, prepayment: $prepayment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, howDiscovered: $howDiscovered, comment: $comment, measurer: $measurer, city: $city, district: $district, street: $street, building: $building, residentialComplex: $residentialComplex, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, housingCoopNumber: $housingCoopNumber, buildingType: $buildingType, flatStatus: $flatStatus, elevator: $elevator, assembly: $assembly, delivery: $delivery, deliveryPrice: $deliveryPrice, unloading: $unloading, unloadingPrice: $unloadingPrice, garbageRemoval: $garbageRemoval, garbageRemovalPrice: $garbageRemovalPrice, sealing: $sealing, sealingPrice: $sealingPrice, vacuumCleaner: $vacuumCleaner, estimatedAssemblyTime: $estimatedAssemblyTime, disassembly: $disassembly, screedDisassembly: $screedDisassembly, screedDisassemblyPrice: $screedDisassemblyPrice, gridDisassembly: $gridDisassembly, gridDisassemblyPrice: $gridDisassemblyPrice, roofDisassembly: $roofDisassembly, roofDisassemblyPrice: $roofDisassemblyPrice, railingDisassembly: $railingDisassembly, railingDisassemblyPrice: $railingDisassemblyPrice, balconyDisassembly: $balconyDisassembly, balconyDisassemblyPrice: $balconyDisassemblyPrice, parapetReinforcement: $parapetReinforcement, parapetReinforcementPrice: $parapetReinforcementPrice, slabExtension: $slabExtension, slabExtensionPrice: $slabExtensionPrice, slabExtensionInstallation: $slabExtensionInstallation, slabExtensionInsulation: $slabExtensionInsulation, slabExtensionFlooring: $slabExtensionFlooring, slabExtensionLift: $slabExtensionLift, slabExtensionSheathing: $slabExtensionSheathing, slabExtensionDelivery: $slabExtensionDelivery, windowsillExtension: $windowsillExtension, windowsillExtensionPrice: $windowsillExtensionPrice, windowsillExtensionWelding: $windowsillExtensionWelding, windowsillExtensionSheathing: $windowsillExtensionSheathing, windowsillExtensionInsulation: $windowsillExtensionInsulation, railingSheathing: $railingSheathing, railingSheathingInside: $railingSheathingInside, railingSheathingOutside: $railingSheathingOutside, railingSheathingInsulation: $railingSheathingInsulation, ceiling: $ceiling, ceilingPrice: $ceilingPrice, ceilingInsulation: $ceilingInsulation, loadBearingWall: $loadBearingWall, loadBearingWallSheathing: $loadBearingWallSheathing, insulation: $insulation, insulationPrice: $insulationPrice, flooring: $flooring, flooringCovering: $flooringCovering, flooringPrice: $flooringPrice, positions: $positions)';
+    return 'Measurement(localId: $localId, remoteId: $remoteId, id: $id, date: $date, pdfFile: $pdfFile, leadId: $leadId, clientName: $clientName, cost: $cost, prepayment: $prepayment, phoneNumberMain: $phoneNumberMain, phoneNumberAdditional: $phoneNumberAdditional, howDiscovered: $howDiscovered, comment: $comment, measurer: $measurer, signaturePath: $signaturePath, city: $city, district: $district, street: $street, building: $building, residentialComplex: $residentialComplex, block: $block, entrance: $entrance, doorphone: $doorphone, floor: $floor, apartment: $apartment, housingCoopNumber: $housingCoopNumber, buildingType: $buildingType, flatStatus: $flatStatus, elevator: $elevator, assembly: $assembly, delivery: $delivery, deliveryPrice: $deliveryPrice, unloading: $unloading, unloadingPrice: $unloadingPrice, garbageRemoval: $garbageRemoval, garbageRemovalPrice: $garbageRemovalPrice, sealing: $sealing, sealingPrice: $sealingPrice, vacuumCleaner: $vacuumCleaner, estimatedAssemblyTime: $estimatedAssemblyTime, disassembly: $disassembly, screedDisassembly: $screedDisassembly, screedDisassemblyPrice: $screedDisassemblyPrice, gridDisassembly: $gridDisassembly, gridDisassemblyPrice: $gridDisassemblyPrice, roofDisassembly: $roofDisassembly, roofDisassemblyPrice: $roofDisassemblyPrice, railingDisassembly: $railingDisassembly, railingDisassemblyPrice: $railingDisassemblyPrice, balconyDisassembly: $balconyDisassembly, balconyDisassemblyPrice: $balconyDisassemblyPrice, parapetReinforcement: $parapetReinforcement, parapetReinforcementPrice: $parapetReinforcementPrice, slabExtension: $slabExtension, slabExtensionPrice: $slabExtensionPrice, slabExtensionInstallation: $slabExtensionInstallation, slabExtensionInsulation: $slabExtensionInsulation, slabExtensionFlooring: $slabExtensionFlooring, slabExtensionLift: $slabExtensionLift, slabExtensionSheathing: $slabExtensionSheathing, slabExtensionDelivery: $slabExtensionDelivery, windowsillExtension: $windowsillExtension, windowsillExtensionPrice: $windowsillExtensionPrice, windowsillExtensionWelding: $windowsillExtensionWelding, windowsillExtensionSheathing: $windowsillExtensionSheathing, windowsillExtensionInsulation: $windowsillExtensionInsulation, railingSheathing: $railingSheathing, railingSheathingInside: $railingSheathingInside, railingSheathingOutside: $railingSheathingOutside, railingSheathingInsulation: $railingSheathingInsulation, ceiling: $ceiling, ceilingPrice: $ceilingPrice, ceilingInsulation: $ceilingInsulation, loadBearingWall: $loadBearingWall, loadBearingWallSheathing: $loadBearingWallSheathing, insulation: $insulation, insulationPrice: $insulationPrice, flooring: $flooring, flooringCovering: $flooringCovering, flooringPrice: $flooringPrice, positions: $positions)';
   }
 
   @override
@@ -1417,6 +1433,8 @@ class _$MeasurementImpl extends _Measurement {
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.measurer, measurer) ||
                 other.measurer == measurer) &&
+            (identical(other.signaturePath, signaturePath) ||
+                other.signaturePath == signaturePath) &&
             (identical(other.city, city) || other.city == city) &&
             (identical(other.district, district) ||
                 other.district == district) &&
@@ -1492,8 +1510,7 @@ class _$MeasurementImpl extends _Measurement {
                 other.slabExtension == slabExtension) &&
             (identical(other.slabExtensionPrice, slabExtensionPrice) ||
                 other.slabExtensionPrice == slabExtensionPrice) &&
-            (identical(other.slabExtensionInstallation, slabExtensionInstallation) ||
-                other.slabExtensionInstallation == slabExtensionInstallation) &&
+            (identical(other.slabExtensionInstallation, slabExtensionInstallation) || other.slabExtensionInstallation == slabExtensionInstallation) &&
             (identical(other.slabExtensionInsulation, slabExtensionInsulation) || other.slabExtensionInsulation == slabExtensionInsulation) &&
             (identical(other.slabExtensionFlooring, slabExtensionFlooring) || other.slabExtensionFlooring == slabExtensionFlooring) &&
             (identical(other.slabExtensionLift, slabExtensionLift) || other.slabExtensionLift == slabExtensionLift) &&
@@ -1538,6 +1555,7 @@ class _$MeasurementImpl extends _Measurement {
         howDiscovered,
         comment,
         measurer,
+        signaturePath,
         city,
         district,
         street,
@@ -1629,6 +1647,7 @@ abstract class _Measurement extends Measurement {
       required final String howDiscovered,
       required final String comment,
       required final String measurer,
+      required final String? signaturePath,
       required final String city,
       required final String district,
       required final String street,
@@ -1725,6 +1744,8 @@ abstract class _Measurement extends Measurement {
   String get comment;
   @override
   String get measurer;
+  @override
+  String? get signaturePath;
   @override // Address
   String get city;
   @override

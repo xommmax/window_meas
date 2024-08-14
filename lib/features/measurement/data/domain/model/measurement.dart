@@ -33,6 +33,7 @@ class Measurement with _$Measurement {
     required String howDiscovered,
     required String comment,
     required String measurer,
+    required String? signaturePath,
 
     // Address
     required String city,
@@ -121,6 +122,7 @@ class Measurement with _$Measurement {
         date: date,
         measurer: measurer,
         pdfFile: null,
+        signaturePath: null,
         leadId: '',
         clientName: '',
         city: '',
@@ -210,6 +212,7 @@ class Measurement with _$Measurement {
     ..pdfFile = pdfFile
     ..leadId = leadId
     ..clientName = clientName
+    ..signaturePath = signaturePath
     ..city = city
     ..district = district
     ..street = street
@@ -294,6 +297,7 @@ class Measurement with _$Measurement {
         pdfFile: db.pdfFile,
         leadId: db.leadId,
         clientName: db.clientName,
+        signaturePath: db.signaturePath,
         city: db.city,
         district: db.district,
         street: db.street,

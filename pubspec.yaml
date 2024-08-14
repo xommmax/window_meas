@@ -46,6 +46,7 @@ dependencies:
   google_sign_in: ^6.2.1
   cloud_firestore: ^5.0.2
   maps_launcher: ^2.2.1
+  signature: ^5.5.0
 
 dev_dependencies:
   flutter_test:

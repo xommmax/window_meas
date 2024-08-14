@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:window_meas/features/measurement/view/details/widgets/items/signature_item.dart';
 import 'package:window_meas/features/measurement/view/details/widgets/subcategory.dart';
 import 'package:window_meas/l10n/localization.dart';
 import 'package:window_meas/features/measurement/cubit/meas_details_cubit.dart';
@@ -103,6 +104,8 @@ class ClientInfoSection extends StatelessWidget {
                   .read<MeasurementDetailsCubit>()
                   .updateMeasurement(measurement.copyWith(measurer: s)),
             ),
+            const Divider(),
+            SignatureItem(measurement),
             const SizedBox(height: 8),
           ],
         ),

@@ -225,5 +225,6 @@
   "description": "Опис",
   "connector": "З'єднувач",
   "angle": "Кут",
-  "number": "Номер"
+  "number": "Номер",
+  "signature": "Підпис"
 }

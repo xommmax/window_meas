@@ -332,89 +332,94 @@ const MeasurementDBSchema = CollectionSchema(
       name: r'sealingPrice',
       type: IsarType.string,
     ),
-    r'slabExtension': PropertySchema(
+    r'signaturePath': PropertySchema(
       id: 62,
+      name: r'signaturePath',
+      type: IsarType.string,
+    ),
+    r'slabExtension': PropertySchema(
+      id: 63,
       name: r'slabExtension',
       type: IsarType.bool,
     ),
     r'slabExtensionDelivery': PropertySchema(
-      id: 63,
+      id: 64,
       name: r'slabExtensionDelivery',
       type: IsarType.string,
     ),
     r'slabExtensionFlooring': PropertySchema(
-      id: 64,
+      id: 65,
       name: r'slabExtensionFlooring',
       type: IsarType.string,
     ),
     r'slabExtensionInstallation': PropertySchema(
-      id: 65,
+      id: 66,
       name: r'slabExtensionInstallation',
       type: IsarType.string,
     ),
     r'slabExtensionInsulation': PropertySchema(
-      id: 66,
+      id: 67,
       name: r'slabExtensionInsulation',
       type: IsarType.string,
     ),
     r'slabExtensionLift': PropertySchema(
-      id: 67,
+      id: 68,
       name: r'slabExtensionLift',
       type: IsarType.string,
     ),
     r'slabExtensionPrice': PropertySchema(
-      id: 68,
+      id: 69,
       name: r'slabExtensionPrice',
       type: IsarType.string,
     ),
     r'slabExtensionSheathing': PropertySchema(
-      id: 69,
+      id: 70,
       name: r'slabExtensionSheathing',
       type: IsarType.string,
     ),
     r'street': PropertySchema(
-      id: 70,
+      id: 71,
       name: r'street',
       type: IsarType.string,
     ),
     r'unloading': PropertySchema(
-      id: 71,
+      id: 72,
       name: r'unloading',
       type: IsarType.bool,
     ),
     r'unloadingPrice': PropertySchema(
-      id: 72,
+      id: 73,
       name: r'unloadingPrice',
       type: IsarType.string,
     ),
     r'vacuumCleaner': PropertySchema(
-      id: 73,
+      id: 74,
       name: r'vacuumCleaner',
       type: IsarType.bool,
     ),
     r'windowsillExtension': PropertySchema(
-      id: 74,
+      id: 75,
       name: r'windowsillExtension',
       type: IsarType.string,
       enumMap: _MeasurementDBwindowsillExtensionEnumValueMap,
     ),
     r'windowsillExtensionInsulation': PropertySchema(
-      id: 75,
+      id: 76,
       name: r'windowsillExtensionInsulation',
       type: IsarType.string,
     ),
     r'windowsillExtensionPrice': PropertySchema(
-      id: 76,
+      id: 77,
       name: r'windowsillExtensionPrice',
       type: IsarType.string,
     ),
     r'windowsillExtensionSheathing': PropertySchema(
-      id: 77,
+      id: 78,
       name: r'windowsillExtensionSheathing',
       type: IsarType.string,
     ),
     r'windowsillExtensionWelding': PropertySchema(
-      id: 78,
+      id: 79,
       name: r'windowsillExtensionWelding',
       type: IsarType.string,
     )
@@ -521,6 +526,12 @@ int _measurementDBEstimateSize(
   bytesCount += 3 + object.roofDisassemblyPrice.length * 3;
   bytesCount += 3 + object.screedDisassemblyPrice.length * 3;
   bytesCount += 3 + object.sealingPrice.length * 3;
+  {
+    final value = object.signaturePath;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.slabExtensionDelivery.length * 3;
   bytesCount += 3 + object.slabExtensionFlooring.length * 3;
   bytesCount += 3 + object.slabExtensionInstallation.length * 3;
@@ -611,23 +622,24 @@ void _measurementDBSerialize(
   writer.writeString(offsets[59], object.screedDisassemblyPrice);
   writer.writeBool(offsets[60], object.sealing);
   writer.writeString(offsets[61], object.sealingPrice);
-  writer.writeBool(offsets[62], object.slabExtension);
-  writer.writeString(offsets[63], object.slabExtensionDelivery);
-  writer.writeString(offsets[64], object.slabExtensionFlooring);
-  writer.writeString(offsets[65], object.slabExtensionInstallation);
-  writer.writeString(offsets[66], object.slabExtensionInsulation);
-  writer.writeString(offsets[67], object.slabExtensionLift);
-  writer.writeString(offsets[68], object.slabExtensionPrice);
-  writer.writeString(offsets[69], object.slabExtensionSheathing);
-  writer.writeString(offsets[70], object.street);
-  writer.writeBool(offsets[71], object.unloading);
-  writer.writeString(offsets[72], object.unloadingPrice);
-  writer.writeBool(offsets[73], object.vacuumCleaner);
-  writer.writeString(offsets[74], object.windowsillExtension.name);
-  writer.writeString(offsets[75], object.windowsillExtensionInsulation);
-  writer.writeString(offsets[76], object.windowsillExtensionPrice);
-  writer.writeString(offsets[77], object.windowsillExtensionSheathing);
-  writer.writeString(offsets[78], object.windowsillExtensionWelding);
+  writer.writeString(offsets[62], object.signaturePath);
+  writer.writeBool(offsets[63], object.slabExtension);
+  writer.writeString(offsets[64], object.slabExtensionDelivery);
+  writer.writeString(offsets[65], object.slabExtensionFlooring);
+  writer.writeString(offsets[66], object.slabExtensionInstallation);
+  writer.writeString(offsets[67], object.slabExtensionInsulation);
+  writer.writeString(offsets[68], object.slabExtensionLift);
+  writer.writeString(offsets[69], object.slabExtensionPrice);
+  writer.writeString(offsets[70], object.slabExtensionSheathing);
+  writer.writeString(offsets[71], object.street);
+  writer.writeBool(offsets[72], object.unloading);
+  writer.writeString(offsets[73], object.unloadingPrice);
+  writer.writeBool(offsets[74], object.vacuumCleaner);
+  writer.writeString(offsets[75], object.windowsillExtension.name);
+  writer.writeString(offsets[76], object.windowsillExtensionInsulation);
+  writer.writeString(offsets[77], object.windowsillExtensionPrice);
+  writer.writeString(offsets[78], object.windowsillExtensionSheathing);
+  writer.writeString(offsets[79], object.windowsillExtensionWelding);
 }
 
 MeasurementDB _measurementDBDeserialize(
@@ -714,25 +726,26 @@ MeasurementDB _measurementDBDeserialize(
   object.screedDisassemblyPrice = reader.readString(offsets[59]);
   object.sealing = reader.readBool(offsets[60]);
   object.sealingPrice = reader.readString(offsets[61]);
-  object.slabExtension = reader.readBool(offsets[62]);
-  object.slabExtensionDelivery = reader.readString(offsets[63]);
-  object.slabExtensionFlooring = reader.readString(offsets[64]);
-  object.slabExtensionInstallation = reader.readString(offsets[65]);
-  object.slabExtensionInsulation = reader.readString(offsets[66]);
-  object.slabExtensionLift = reader.readString(offsets[67]);
-  object.slabExtensionPrice = reader.readString(offsets[68]);
-  object.slabExtensionSheathing = reader.readString(offsets[69]);
-  object.street = reader.readString(offsets[70]);
-  object.unloading = reader.readBool(offsets[71]);
-  object.unloadingPrice = reader.readString(offsets[72]);
-  object.vacuumCleaner = reader.readBool(offsets[73]);
+  object.signaturePath = reader.readStringOrNull(offsets[62]);
+  object.slabExtension = reader.readBool(offsets[63]);
+  object.slabExtensionDelivery = reader.readString(offsets[64]);
+  object.slabExtensionFlooring = reader.readString(offsets[65]);
+  object.slabExtensionInstallation = reader.readString(offsets[66]);
+  object.slabExtensionInsulation = reader.readString(offsets[67]);
+  object.slabExtensionLift = reader.readString(offsets[68]);
+  object.slabExtensionPrice = reader.readString(offsets[69]);
+  object.slabExtensionSheathing = reader.readString(offsets[70]);
+  object.street = reader.readString(offsets[71]);
+  object.unloading = reader.readBool(offsets[72]);
+  object.unloadingPrice = reader.readString(offsets[73]);
+  object.vacuumCleaner = reader.readBool(offsets[74]);
   object.windowsillExtension = _MeasurementDBwindowsillExtensionValueEnumMap[
-          reader.readStringOrNull(offsets[74])] ??
+          reader.readStringOrNull(offsets[75])] ??
       WindowsillExtension.none;
-  object.windowsillExtensionInsulation = reader.readString(offsets[75]);
-  object.windowsillExtensionPrice = reader.readString(offsets[76]);
-  object.windowsillExtensionSheathing = reader.readString(offsets[77]);
-  object.windowsillExtensionWelding = reader.readString(offsets[78]);
+  object.windowsillExtensionInsulation = reader.readString(offsets[76]);
+  object.windowsillExtensionPrice = reader.readString(offsets[77]);
+  object.windowsillExtensionSheathing = reader.readString(offsets[78]);
+  object.windowsillExtensionWelding = reader.readString(offsets[79]);
   return object;
 }
 
@@ -882,9 +895,9 @@ P _measurementDBDeserializeProp<P>(
     case 61:
       return (reader.readString(offset)) as P;
     case 62:
-      return (reader.readBool(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 63:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 64:
       return (reader.readString(offset)) as P;
     case 65:
@@ -900,22 +913,24 @@ P _measurementDBDeserializeProp<P>(
     case 70:
       return (reader.readString(offset)) as P;
     case 71:
-      return (reader.readBool(offset)) as P;
-    case 72:
       return (reader.readString(offset)) as P;
-    case 73:
+    case 72:
       return (reader.readBool(offset)) as P;
+    case 73:
+      return (reader.readString(offset)) as P;
     case 74:
+      return (reader.readBool(offset)) as P;
+    case 75:
       return (_MeasurementDBwindowsillExtensionValueEnumMap[
               reader.readStringOrNull(offset)] ??
           WindowsillExtension.none) as P;
-    case 75:
-      return (reader.readString(offset)) as P;
     case 76:
       return (reader.readString(offset)) as P;
     case 77:
       return (reader.readString(offset)) as P;
     case 78:
+      return (reader.readString(offset)) as P;
+    case 79:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -7641,6 +7656,160 @@ extension MeasurementDBQueryFilter
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      signaturePathIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'signaturePath',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      signaturePathIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'signaturePath',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      signaturePathEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'signaturePath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      signaturePathGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'signaturePath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      signaturePathLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'signaturePath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      signaturePathBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'signaturePath',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      signaturePathStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'signaturePath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      signaturePathEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'signaturePath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      signaturePathContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'signaturePath',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      signaturePathMatches(String pattern, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'signaturePath',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      signaturePathIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'signaturePath',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
+      signaturePathIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'signaturePath',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterFilterCondition>
       slabExtensionEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -10423,6 +10592,20 @@ extension MeasurementDBQuerySortBy
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortBySignaturePath() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'signaturePath', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      sortBySignaturePathDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'signaturePath', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       sortBySlabExtension() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'slabExtension', Sort.asc);
@@ -11489,6 +11672,20 @@ extension MeasurementDBQuerySortThenBy
   }
 
   QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenBySignaturePath() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'signaturePath', Sort.asc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
+      thenBySignaturePathDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'signaturePath', Sort.desc);
+    });
+  }
+
+  QueryBuilder<MeasurementDB, MeasurementDB, QAfterSortBy>
       thenBySlabExtension() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'slabExtension', Sort.asc);
@@ -12168,6 +12365,14 @@ extension MeasurementDBQueryWhereDistinct
     });
   }
 
+  QueryBuilder<MeasurementDB, MeasurementDB, QDistinct> distinctBySignaturePath(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'signaturePath',
+          caseSensitive: caseSensitive);
+    });
+  }
+
   QueryBuilder<MeasurementDB, MeasurementDB, QDistinct>
       distinctBySlabExtension() {
     return QueryBuilder.apply(this, (query) {
@@ -12712,6 +12917,13 @@ extension MeasurementDBQueryProperty
   QueryBuilder<MeasurementDB, String, QQueryOperations> sealingPriceProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'sealingPrice');
+    });
+  }
+
+  QueryBuilder<MeasurementDB, String?, QQueryOperations>
+      signaturePathProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'signaturePath');
     });
   }
 

@@ -225,5 +225,6 @@
   "description": "Description",
   "connector": "Connector",
   "angle": "Angle",
-  "number": "Number"
+  "number": "Number",
+  "signature": "Signature"
 }

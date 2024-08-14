@@ -102,7 +102,21 @@ class PdfGenerator {
                       ],
                     ),
                     pw.Expanded(
-                      child: _footer(context.pageNumber),
+                      child: pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: pw.CrossAxisAlignment.end,
+                        children: [
+                          (measurement.signaturePath != null)
+                              ? pw.Image(
+                                  pw.MemoryImage(
+                                      File(measurement.signaturePath!).readAsBytesSync()),
+                                  width: 200,
+                                  height: 100,
+                                )
+                              : pw.SizedBox(),
+                          _footer(context.pageNumber),
+                        ],
+                      ),
                     ),
                   ],
                 ),

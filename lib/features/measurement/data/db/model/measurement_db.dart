@@ -30,6 +30,7 @@ class MeasurementDB {
   late String leadId;
   @Default('')
   late String clientName;
+  late String? signaturePath;
   @Default('')
   late String city;
   @Default('')
