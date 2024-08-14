@@ -449,7 +449,8 @@ const MeasurementDBSchema = CollectionSchema(
     r'OpeningTypeRecordDB': OpeningTypeRecordDBSchema,
     r'FillingTypeRecordDB': FillingTypeRecordDBSchema,
     r'ArchDB': ArchDBSchema,
-    r'ExpanderOptionDB': ExpanderOptionDBSchema
+    r'ExpanderDB': ExpanderDBSchema,
+    r'ConnectorDB': ConnectorDBSchema
   },
   getId: _measurementDBGetId,
   getLinks: _measurementDBGetLinks,

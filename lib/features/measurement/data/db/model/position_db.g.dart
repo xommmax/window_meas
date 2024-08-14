@@ -28,177 +28,177 @@ const PositionDBSchema = Schema(
       name: r'canopyType',
       type: IsarType.string,
     ),
-    r'doorOpeningType': PropertySchema(
+    r'connectors': PropertySchema(
       id: 3,
+      name: r'connectors',
+      type: IsarType.objectList,
+      target: r'ConnectorDB',
+    ),
+    r'doorOpeningType': PropertySchema(
+      id: 4,
       name: r'doorOpeningType',
       type: IsarType.string,
       enumMap: _PositionDBdoorOpeningTypeEnumValueMap,
     ),
     r'doorstep': PropertySchema(
-      id: 4,
+      id: 5,
       name: r'doorstep',
       type: IsarType.string,
       enumMap: _PositionDBdoorstepEnumValueMap,
     ),
     r'doorstepType': PropertySchema(
-      id: 5,
+      id: 6,
       name: r'doorstepType',
       type: IsarType.string,
       enumMap: _PositionDBdoorstepTypeEnumValueMap,
     ),
     r'drainageColor': PropertySchema(
-      id: 6,
+      id: 7,
       name: r'drainageColor',
       type: IsarType.string,
     ),
     r'drainageDepth': PropertySchema(
-      id: 7,
+      id: 8,
       name: r'drainageDepth',
       type: IsarType.string,
     ),
     r'drainageEndCap': PropertySchema(
-      id: 8,
+      id: 9,
       name: r'drainageEndCap',
       type: IsarType.bool,
     ),
     r'drainageWidth': PropertySchema(
-      id: 9,
+      id: 10,
       name: r'drainageWidth',
       type: IsarType.string,
     ),
-    r'expanderOption': PropertySchema(
-      id: 10,
-      name: r'expanderOption',
-      type: IsarType.object,
-      target: r'ExpanderOptionDB',
+    r'expanders': PropertySchema(
+      id: 11,
+      name: r'expanders',
+      type: IsarType.objectList,
+      target: r'ExpanderDB',
     ),
     r'flexibles': PropertySchema(
-      id: 11,
+      id: 12,
       name: r'flexibles',
       type: IsarType.objectList,
       target: r'SchemeDB',
     ),
     r'furniture': PropertySchema(
-      id: 12,
+      id: 13,
       name: r'furniture',
       type: IsarType.string,
     ),
     r'glassUnit': PropertySchema(
-      id: 13,
+      id: 14,
       name: r'glassUnit',
       type: IsarType.string,
     ),
     r'id': PropertySchema(
-      id: 14,
+      id: 15,
       name: r'id',
       type: IsarType.string,
     ),
     r'laminationExternal': PropertySchema(
-      id: 15,
+      id: 16,
       name: r'laminationExternal',
       type: IsarType.string,
     ),
     r'laminationInternal': PropertySchema(
-      id: 16,
+      id: 17,
       name: r'laminationInternal',
       type: IsarType.string,
     ),
     r'panelThickness': PropertySchema(
-      id: 17,
+      id: 18,
       name: r'panelThickness',
       type: IsarType.string,
       enumMap: _PositionDBpanelThicknessEnumValueMap,
     ),
     r'panelType': PropertySchema(
-      id: 18,
+      id: 19,
       name: r'panelType',
       type: IsarType.string,
       enumMap: _PositionDBpanelTypeEnumValueMap,
     ),
     r'photoPath': PropertySchema(
-      id: 19,
+      id: 20,
       name: r'photoPath',
       type: IsarType.string,
     ),
     r'positionComment': PropertySchema(
-      id: 20,
+      id: 21,
       name: r'positionComment',
       type: IsarType.string,
     ),
     r'profileSystem': PropertySchema(
-      id: 21,
+      id: 22,
       name: r'profileSystem',
       type: IsarType.string,
     ),
     r'quarterPosition': PropertySchema(
-      id: 22,
+      id: 23,
       name: r'quarterPosition',
       type: IsarType.string,
       enumMap: _PositionDBquarterPositionEnumValueMap,
     ),
     r'quarterSize': PropertySchema(
-      id: 23,
+      id: 24,
       name: r'quarterSize',
       type: IsarType.string,
     ),
     r'rubberColor': PropertySchema(
-      id: 24,
+      id: 25,
       name: r'rubberColor',
       type: IsarType.string,
       enumMap: _PositionDBrubberColorEnumValueMap,
     ),
     r'scheme': PropertySchema(
-      id: 25,
+      id: 26,
       name: r'scheme',
       type: IsarType.object,
       target: r'SchemeDB',
     ),
     r'schemeComment': PropertySchema(
-      id: 26,
+      id: 27,
       name: r'schemeComment',
       type: IsarType.string,
     ),
     r'slopeDepth': PropertySchema(
-      id: 27,
+      id: 28,
       name: r'slopeDepth',
       type: IsarType.string,
     ),
     r'slopeLength': PropertySchema(
-      id: 28,
+      id: 29,
       name: r'slopeLength',
       type: IsarType.string,
     ),
     r'slopeQuantity': PropertySchema(
-      id: 29,
+      id: 30,
       name: r'slopeQuantity',
       type: IsarType.string,
     ),
     r'standProfile': PropertySchema(
-      id: 30,
+      id: 31,
       name: r'standProfile',
       type: IsarType.string,
       enumMap: _PositionDBstandProfileEnumValueMap,
     ),
     r'staticCalculation': PropertySchema(
-      id: 31,
+      id: 32,
       name: r'staticCalculation',
       type: IsarType.bool,
     ),
     r'windowsillAssembly': PropertySchema(
-      id: 32,
+      id: 33,
       name: r'windowsillAssembly',
       type: IsarType.bool,
     ),
     r'windowsillColor': PropertySchema(
-      id: 33,
+      id: 34,
       name: r'windowsillColor',
       type: IsarType.string,
-    ),
-    r'windowsillConnector': PropertySchema(
-      id: 34,
-      name: r'windowsillConnector',
-      type: IsarType.string,
-      enumMap: _PositionDBwindowsillConnectorEnumValueMap,
     ),
     r'windowsillDepth': PropertySchema(
       id: 35,
@@ -233,15 +233,28 @@ int _positionDBEstimateSize(
   bytesCount += 3 + object.canopyColor.length * 3;
   bytesCount += 3 + object.canopySize.length * 3;
   bytesCount += 3 + object.canopyType.length * 3;
+  bytesCount += 3 + object.connectors.length * 3;
+  {
+    final offsets = allOffsets[ConnectorDB]!;
+    for (var i = 0; i < object.connectors.length; i++) {
+      final value = object.connectors[i];
+      bytesCount += ConnectorDBSchema.estimateSize(value, offsets, allOffsets);
+    }
+  }
   bytesCount += 3 + object.doorOpeningType.name.length * 3;
   bytesCount += 3 + object.doorstep.name.length * 3;
   bytesCount += 3 + object.doorstepType.name.length * 3;
   bytesCount += 3 + object.drainageColor.length * 3;
   bytesCount += 3 + object.drainageDepth.length * 3;
   bytesCount += 3 + object.drainageWidth.length * 3;
-  bytesCount += 3 +
-      ExpanderOptionDBSchema.estimateSize(
-          object.expanderOption, allOffsets[ExpanderOptionDB]!, allOffsets);
+  bytesCount += 3 + object.expanders.length * 3;
+  {
+    final offsets = allOffsets[ExpanderDB]!;
+    for (var i = 0; i < object.expanders.length; i++) {
+      final value = object.expanders[i];
+      bytesCount += ExpanderDBSchema.estimateSize(value, offsets, allOffsets);
+    }
+  }
   bytesCount += 3 + object.flexibles.length * 3;
   {
     final offsets = allOffsets[SchemeDB]!;
@@ -281,7 +294,6 @@ int _positionDBEstimateSize(
   bytesCount += 3 + object.slopeQuantity.length * 3;
   bytesCount += 3 + object.standProfile.name.length * 3;
   bytesCount += 3 + object.windowsillColor.length * 3;
-  bytesCount += 3 + object.windowsillConnector.name.length * 3;
   bytesCount += 3 + object.windowsillDepth.name.length * 3;
   bytesCount += 3 + object.windowsillSize.length * 3;
   bytesCount += 3 + object.windowsillType.name.length * 3;
@@ -297,53 +309,58 @@ void _positionDBSerialize(
   writer.writeString(offsets[0], object.canopyColor);
   writer.writeString(offsets[1], object.canopySize);
   writer.writeString(offsets[2], object.canopyType);
-  writer.writeString(offsets[3], object.doorOpeningType.name);
-  writer.writeString(offsets[4], object.doorstep.name);
-  writer.writeString(offsets[5], object.doorstepType.name);
-  writer.writeString(offsets[6], object.drainageColor);
-  writer.writeString(offsets[7], object.drainageDepth);
-  writer.writeBool(offsets[8], object.drainageEndCap);
-  writer.writeString(offsets[9], object.drainageWidth);
-  writer.writeObject<ExpanderOptionDB>(
-    offsets[10],
+  writer.writeObjectList<ConnectorDB>(
+    offsets[3],
     allOffsets,
-    ExpanderOptionDBSchema.serialize,
-    object.expanderOption,
+    ConnectorDBSchema.serialize,
+    object.connectors,
+  );
+  writer.writeString(offsets[4], object.doorOpeningType.name);
+  writer.writeString(offsets[5], object.doorstep.name);
+  writer.writeString(offsets[6], object.doorstepType.name);
+  writer.writeString(offsets[7], object.drainageColor);
+  writer.writeString(offsets[8], object.drainageDepth);
+  writer.writeBool(offsets[9], object.drainageEndCap);
+  writer.writeString(offsets[10], object.drainageWidth);
+  writer.writeObjectList<ExpanderDB>(
+    offsets[11],
+    allOffsets,
+    ExpanderDBSchema.serialize,
+    object.expanders,
   );
   writer.writeObjectList<SchemeDB>(
-    offsets[11],
+    offsets[12],
     allOffsets,
     SchemeDBSchema.serialize,
     object.flexibles,
   );
-  writer.writeString(offsets[12], object.furniture);
-  writer.writeString(offsets[13], object.glassUnit);
-  writer.writeString(offsets[14], object.id);
-  writer.writeString(offsets[15], object.laminationExternal);
-  writer.writeString(offsets[16], object.laminationInternal);
-  writer.writeString(offsets[17], object.panelThickness.name);
-  writer.writeString(offsets[18], object.panelType.name);
-  writer.writeString(offsets[19], object.photoPath);
-  writer.writeString(offsets[20], object.positionComment);
-  writer.writeString(offsets[21], object.profileSystem);
-  writer.writeString(offsets[22], object.quarterPosition.name);
-  writer.writeString(offsets[23], object.quarterSize);
-  writer.writeString(offsets[24], object.rubberColor.name);
+  writer.writeString(offsets[13], object.furniture);
+  writer.writeString(offsets[14], object.glassUnit);
+  writer.writeString(offsets[15], object.id);
+  writer.writeString(offsets[16], object.laminationExternal);
+  writer.writeString(offsets[17], object.laminationInternal);
+  writer.writeString(offsets[18], object.panelThickness.name);
+  writer.writeString(offsets[19], object.panelType.name);
+  writer.writeString(offsets[20], object.photoPath);
+  writer.writeString(offsets[21], object.positionComment);
+  writer.writeString(offsets[22], object.profileSystem);
+  writer.writeString(offsets[23], object.quarterPosition.name);
+  writer.writeString(offsets[24], object.quarterSize);
+  writer.writeString(offsets[25], object.rubberColor.name);
   writer.writeObject<SchemeDB>(
-    offsets[25],
+    offsets[26],
     allOffsets,
     SchemeDBSchema.serialize,
     object.scheme,
   );
-  writer.writeString(offsets[26], object.schemeComment);
-  writer.writeString(offsets[27], object.slopeDepth);
-  writer.writeString(offsets[28], object.slopeLength);
-  writer.writeString(offsets[29], object.slopeQuantity);
-  writer.writeString(offsets[30], object.standProfile.name);
-  writer.writeBool(offsets[31], object.staticCalculation);
-  writer.writeBool(offsets[32], object.windowsillAssembly);
-  writer.writeString(offsets[33], object.windowsillColor);
-  writer.writeString(offsets[34], object.windowsillConnector.name);
+  writer.writeString(offsets[27], object.schemeComment);
+  writer.writeString(offsets[28], object.slopeDepth);
+  writer.writeString(offsets[29], object.slopeLength);
+  writer.writeString(offsets[30], object.slopeQuantity);
+  writer.writeString(offsets[31], object.standProfile.name);
+  writer.writeBool(offsets[32], object.staticCalculation);
+  writer.writeBool(offsets[33], object.windowsillAssembly);
+  writer.writeString(offsets[34], object.windowsillColor);
   writer.writeString(offsets[35], object.windowsillDepth.name);
   writer.writeString(offsets[36], object.windowsillSize);
   writer.writeString(offsets[37], object.windowsillType.name);
@@ -359,71 +376,76 @@ PositionDB _positionDBDeserialize(
   object.canopyColor = reader.readString(offsets[0]);
   object.canopySize = reader.readString(offsets[1]);
   object.canopyType = reader.readString(offsets[2]);
+  object.connectors = reader.readObjectList<ConnectorDB>(
+        offsets[3],
+        ConnectorDBSchema.deserialize,
+        allOffsets,
+        ConnectorDB(),
+      ) ??
+      [];
   object.doorOpeningType = _PositionDBdoorOpeningTypeValueEnumMap[
-          reader.readStringOrNull(offsets[3])] ??
+          reader.readStringOrNull(offsets[4])] ??
       DoorOpeningType.none;
   object.doorstep =
-      _PositionDBdoorstepValueEnumMap[reader.readStringOrNull(offsets[4])] ??
+      _PositionDBdoorstepValueEnumMap[reader.readStringOrNull(offsets[5])] ??
           DoorstepOption.none;
   object.doorstepType = _PositionDBdoorstepTypeValueEnumMap[
-          reader.readStringOrNull(offsets[5])] ??
+          reader.readStringOrNull(offsets[6])] ??
       DoorstepType.none;
-  object.drainageColor = reader.readString(offsets[6]);
-  object.drainageDepth = reader.readString(offsets[7]);
-  object.drainageEndCap = reader.readBool(offsets[8]);
-  object.drainageWidth = reader.readString(offsets[9]);
-  object.expanderOption = reader.readObjectOrNull<ExpanderOptionDB>(
-        offsets[10],
-        ExpanderOptionDBSchema.deserialize,
-        allOffsets,
-      ) ??
-      ExpanderOptionDB();
-  object.flexibles = reader.readObjectList<SchemeDB>(
+  object.drainageColor = reader.readString(offsets[7]);
+  object.drainageDepth = reader.readString(offsets[8]);
+  object.drainageEndCap = reader.readBool(offsets[9]);
+  object.drainageWidth = reader.readString(offsets[10]);
+  object.expanders = reader.readObjectList<ExpanderDB>(
         offsets[11],
+        ExpanderDBSchema.deserialize,
+        allOffsets,
+        ExpanderDB(),
+      ) ??
+      [];
+  object.flexibles = reader.readObjectList<SchemeDB>(
+        offsets[12],
         SchemeDBSchema.deserialize,
         allOffsets,
         SchemeDB(),
       ) ??
       [];
-  object.furniture = reader.readString(offsets[12]);
-  object.glassUnit = reader.readString(offsets[13]);
-  object.id = reader.readString(offsets[14]);
-  object.laminationExternal = reader.readString(offsets[15]);
-  object.laminationInternal = reader.readString(offsets[16]);
+  object.furniture = reader.readString(offsets[13]);
+  object.glassUnit = reader.readString(offsets[14]);
+  object.id = reader.readString(offsets[15]);
+  object.laminationExternal = reader.readString(offsets[16]);
+  object.laminationInternal = reader.readString(offsets[17]);
   object.panelThickness = _PositionDBpanelThicknessValueEnumMap[
-          reader.readStringOrNull(offsets[17])] ??
+          reader.readStringOrNull(offsets[18])] ??
       PanelThickness.none;
   object.panelType =
-      _PositionDBpanelTypeValueEnumMap[reader.readStringOrNull(offsets[18])] ??
+      _PositionDBpanelTypeValueEnumMap[reader.readStringOrNull(offsets[19])] ??
           PanelType.none;
-  object.photoPath = reader.readStringOrNull(offsets[19]);
-  object.positionComment = reader.readString(offsets[20]);
-  object.profileSystem = reader.readString(offsets[21]);
+  object.photoPath = reader.readStringOrNull(offsets[20]);
+  object.positionComment = reader.readString(offsets[21]);
+  object.profileSystem = reader.readString(offsets[22]);
   object.quarterPosition = _PositionDBquarterPositionValueEnumMap[
-          reader.readStringOrNull(offsets[22])] ??
+          reader.readStringOrNull(offsets[23])] ??
       QuarterPosition.none;
-  object.quarterSize = reader.readString(offsets[23]);
+  object.quarterSize = reader.readString(offsets[24]);
   object.rubberColor = _PositionDBrubberColorValueEnumMap[
-          reader.readStringOrNull(offsets[24])] ??
+          reader.readStringOrNull(offsets[25])] ??
       RubberColor.none;
   object.scheme = reader.readObjectOrNull<SchemeDB>(
-    offsets[25],
+    offsets[26],
     SchemeDBSchema.deserialize,
     allOffsets,
   );
-  object.schemeComment = reader.readString(offsets[26]);
-  object.slopeDepth = reader.readString(offsets[27]);
-  object.slopeLength = reader.readString(offsets[28]);
-  object.slopeQuantity = reader.readString(offsets[29]);
+  object.schemeComment = reader.readString(offsets[27]);
+  object.slopeDepth = reader.readString(offsets[28]);
+  object.slopeLength = reader.readString(offsets[29]);
+  object.slopeQuantity = reader.readString(offsets[30]);
   object.standProfile = _PositionDBstandProfileValueEnumMap[
-          reader.readStringOrNull(offsets[30])] ??
+          reader.readStringOrNull(offsets[31])] ??
       StandProfile.none;
-  object.staticCalculation = reader.readBool(offsets[31]);
-  object.windowsillAssembly = reader.readBool(offsets[32]);
-  object.windowsillColor = reader.readString(offsets[33]);
-  object.windowsillConnector = _PositionDBwindowsillConnectorValueEnumMap[
-          reader.readStringOrNull(offsets[34])] ??
-      WindowsillConnector.none;
+  object.staticCalculation = reader.readBool(offsets[32]);
+  object.windowsillAssembly = reader.readBool(offsets[33]);
+  object.windowsillColor = reader.readString(offsets[34]);
   object.windowsillDepth = _PositionDBwindowsillDepthValueEnumMap[
           reader.readStringOrNull(offsets[35])] ??
       WindowsillDepth.none;
@@ -448,33 +470,42 @@ P _positionDBDeserializeProp<P>(
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
+      return (reader.readObjectList<ConnectorDB>(
+            offset,
+            ConnectorDBSchema.deserialize,
+            allOffsets,
+            ConnectorDB(),
+          ) ??
+          []) as P;
+    case 4:
       return (_PositionDBdoorOpeningTypeValueEnumMap[
               reader.readStringOrNull(offset)] ??
           DoorOpeningType.none) as P;
-    case 4:
+    case 5:
       return (_PositionDBdoorstepValueEnumMap[
               reader.readStringOrNull(offset)] ??
           DoorstepOption.none) as P;
-    case 5:
+    case 6:
       return (_PositionDBdoorstepTypeValueEnumMap[
               reader.readStringOrNull(offset)] ??
           DoorstepType.none) as P;
-    case 6:
-      return (reader.readString(offset)) as P;
     case 7:
       return (reader.readString(offset)) as P;
     case 8:
-      return (reader.readBool(offset)) as P;
-    case 9:
       return (reader.readString(offset)) as P;
+    case 9:
+      return (reader.readBool(offset)) as P;
     case 10:
-      return (reader.readObjectOrNull<ExpanderOptionDB>(
-            offset,
-            ExpanderOptionDBSchema.deserialize,
-            allOffsets,
-          ) ??
-          ExpanderOptionDB()) as P;
+      return (reader.readString(offset)) as P;
     case 11:
+      return (reader.readObjectList<ExpanderDB>(
+            offset,
+            ExpanderDBSchema.deserialize,
+            allOffsets,
+            ExpanderDB(),
+          ) ??
+          []) as P;
+    case 12:
       return (reader.readObjectList<SchemeDB>(
             offset,
             SchemeDBSchema.deserialize,
@@ -482,8 +513,6 @@ P _positionDBDeserializeProp<P>(
             SchemeDB(),
           ) ??
           []) as P;
-    case 12:
-      return (reader.readString(offset)) as P;
     case 13:
       return (reader.readString(offset)) as P;
     case 14:
@@ -493,37 +522,37 @@ P _positionDBDeserializeProp<P>(
     case 16:
       return (reader.readString(offset)) as P;
     case 17:
+      return (reader.readString(offset)) as P;
+    case 18:
       return (_PositionDBpanelThicknessValueEnumMap[
               reader.readStringOrNull(offset)] ??
           PanelThickness.none) as P;
-    case 18:
+    case 19:
       return (_PositionDBpanelTypeValueEnumMap[
               reader.readStringOrNull(offset)] ??
           PanelType.none) as P;
-    case 19:
-      return (reader.readStringOrNull(offset)) as P;
     case 20:
-      return (reader.readString(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 21:
       return (reader.readString(offset)) as P;
     case 22:
+      return (reader.readString(offset)) as P;
+    case 23:
       return (_PositionDBquarterPositionValueEnumMap[
               reader.readStringOrNull(offset)] ??
           QuarterPosition.none) as P;
-    case 23:
-      return (reader.readString(offset)) as P;
     case 24:
+      return (reader.readString(offset)) as P;
+    case 25:
       return (_PositionDBrubberColorValueEnumMap[
               reader.readStringOrNull(offset)] ??
           RubberColor.none) as P;
-    case 25:
+    case 26:
       return (reader.readObjectOrNull<SchemeDB>(
         offset,
         SchemeDBSchema.deserialize,
         allOffsets,
       )) as P;
-    case 26:
-      return (reader.readString(offset)) as P;
     case 27:
       return (reader.readString(offset)) as P;
     case 28:
@@ -531,19 +560,17 @@ P _positionDBDeserializeProp<P>(
     case 29:
       return (reader.readString(offset)) as P;
     case 30:
+      return (reader.readString(offset)) as P;
+    case 31:
       return (_PositionDBstandProfileValueEnumMap[
               reader.readStringOrNull(offset)] ??
           StandProfile.none) as P;
-    case 31:
-      return (reader.readBool(offset)) as P;
     case 32:
       return (reader.readBool(offset)) as P;
     case 33:
-      return (reader.readString(offset)) as P;
+      return (reader.readBool(offset)) as P;
     case 34:
-      return (_PositionDBwindowsillConnectorValueEnumMap[
-              reader.readStringOrNull(offset)] ??
-          WindowsillConnector.none) as P;
+      return (reader.readString(offset)) as P;
     case 35:
       return (_PositionDBwindowsillDepthValueEnumMap[
               reader.readStringOrNull(offset)] ??
@@ -654,16 +681,6 @@ const _PositionDBstandProfileValueEnumMap = {
   r'none': StandProfile.none,
   r'regular': StandProfile.regular,
   r'warm': StandProfile.warm,
-};
-const _PositionDBwindowsillConnectorEnumValueMap = {
-  r'none': r'none',
-  r'd45': r'd45',
-  r'd90': r'd90',
-};
-const _PositionDBwindowsillConnectorValueEnumMap = {
-  r'none': WindowsillConnector.none,
-  r'd45': WindowsillConnector.d45,
-  r'd90': WindowsillConnector.d90,
 };
 const _PositionDBwindowsillDepthEnumValueMap = {
   r'none': r'none',
@@ -1115,6 +1132,95 @@ extension PositionDBQueryFilter
         property: r'canopyType',
         value: '',
       ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      connectorsLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'connectors',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      connectorsIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'connectors',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      connectorsIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'connectors',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      connectorsLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'connectors',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      connectorsLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'connectors',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      connectorsLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'connectors',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -1939,6 +2045,95 @@ extension PositionDBQueryFilter
         property: r'drainageWidth',
         value: '',
       ));
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      expandersLengthEqualTo(int length) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'expanders',
+        length,
+        true,
+        length,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      expandersIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'expanders',
+        0,
+        true,
+        0,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      expandersIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'expanders',
+        0,
+        false,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      expandersLengthLessThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'expanders',
+        0,
+        true,
+        length,
+        include,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      expandersLengthGreaterThan(
+    int length, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'expanders',
+        length,
+        include,
+        999999,
+        true,
+      );
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
+      expandersLengthBetween(
+    int lower,
+    int upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.listLength(
+        r'expanders',
+        lower,
+        includeLower,
+        upper,
+        includeUpper,
+      );
     });
   }
 
@@ -4656,142 +4851,6 @@ extension PositionDBQueryFilter
   }
 
   QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
-      windowsillConnectorEqualTo(
-    WindowsillConnector value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'windowsillConnector',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
-      windowsillConnectorGreaterThan(
-    WindowsillConnector value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'windowsillConnector',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
-      windowsillConnectorLessThan(
-    WindowsillConnector value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'windowsillConnector',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
-      windowsillConnectorBetween(
-    WindowsillConnector lower,
-    WindowsillConnector upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'windowsillConnector',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
-      windowsillConnectorStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'windowsillConnector',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
-      windowsillConnectorEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'windowsillConnector',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
-      windowsillConnectorContains(String value, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'windowsillConnector',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
-      windowsillConnectorMatches(String pattern, {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'windowsillConnector',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
-      windowsillConnectorIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'windowsillConnector',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
-      windowsillConnectorIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'windowsillConnector',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition>
       windowsillDepthEqualTo(
     WindowsillDepth value, {
     bool caseSensitive = true,
@@ -5202,10 +5261,17 @@ extension PositionDBQueryFilter
 
 extension PositionDBQueryObject
     on QueryBuilder<PositionDB, PositionDB, QFilterCondition> {
-  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition> expanderOption(
-      FilterQuery<ExpanderOptionDB> q) {
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition> connectorsElement(
+      FilterQuery<ConnectorDB> q) {
     return QueryBuilder.apply(this, (query) {
-      return query.object(q, r'expanderOption');
+      return query.object(q, r'connectors');
+    });
+  }
+
+  QueryBuilder<PositionDB, PositionDB, QAfterFilterCondition> expandersElement(
+      FilterQuery<ExpanderDB> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.object(q, r'expanders');
     });
   }
 

@@ -5,13 +5,12 @@ import 'package:window_meas/features/measurement/data/db/model/position_db.dart'
 import 'package:window_meas/features/measurement/data/domain/model/params/door_opening_type_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/doorstep_option_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/doorstep_type_enum.dart';
-import 'package:window_meas/features/measurement/data/domain/model/expander_option.dart';
+import 'package:window_meas/features/measurement/data/domain/model/expander.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/panel_thickness_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/panel_type_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/quarter_position_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/rubber_color_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/stand_profile_enum.dart';
-import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_connector_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_depth_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_type_enum.dart';
 
@@ -44,7 +43,6 @@ class Position with _$Position {
     required WindowsillType windowsillType,
     required WindowsillDepth windowsillDepth,
     required String windowsillSize,
-    required WindowsillConnector windowsillConnector,
     required String windowsillColor,
     required bool windowsillAssembly,
     required String drainageDepth,
@@ -57,7 +55,8 @@ class Position with _$Position {
     required String slopeDepth,
     required String slopeLength,
     required String slopeQuantity,
-    required ExpanderOption expanderOption,
+    required List<Expander> expanders,
+    required List<Connector> connectors,
     required String positionComment,
     required String schemeComment,
   }) = _Position;
@@ -78,7 +77,8 @@ class Position with _$Position {
         laminationExternal: '',
         rubberColor: RubberColor.none,
         standProfile: StandProfile.none,
-        expanderOption: ExpanderOption.initial(),
+        expanders: [],
+        connectors: [],
         glassUnit: '',
         panelType: PanelType.none,
         panelThickness: PanelThickness.none,
@@ -86,7 +86,6 @@ class Position with _$Position {
         windowsillType: WindowsillType.none,
         windowsillDepth: WindowsillDepth.none,
         windowsillSize: '',
-        windowsillConnector: WindowsillConnector.none,
         windowsillColor: '',
         windowsillAssembly: false,
         drainageDepth: '',
@@ -119,7 +118,8 @@ class Position with _$Position {
     ..laminationExternal = laminationExternal
     ..rubberColor = rubberColor
     ..standProfile = standProfile
-    ..expanderOption = expanderOption.toDB()
+    ..expanders = expanders.map((e) => e.toDB()).toList()
+    ..connectors = connectors.map((e) => e.toDB()).toList()
     ..glassUnit = glassUnit
     ..panelType = panelType
     ..panelThickness = panelThickness
@@ -127,7 +127,6 @@ class Position with _$Position {
     ..windowsillType = windowsillType
     ..windowsillDepth = windowsillDepth
     ..windowsillSize = windowsillSize
-    ..windowsillConnector = windowsillConnector
     ..windowsillColor = windowsillColor
     ..windowsillAssembly = windowsillAssembly
     ..drainageDepth = drainageDepth
@@ -159,7 +158,8 @@ class Position with _$Position {
         laminationExternal: db.laminationExternal,
         rubberColor: db.rubberColor,
         standProfile: db.standProfile,
-        expanderOption: ExpanderOption.fromDB(db.expanderOption),
+        expanders: db.expanders.map(Expander.fromDB).toList(),
+        connectors: db.connectors.map(Connector.fromDB).toList(),
         glassUnit: db.glassUnit,
         panelType: db.panelType,
         panelThickness: db.panelThickness,
@@ -167,7 +167,6 @@ class Position with _$Position {
         windowsillType: db.windowsillType,
         windowsillDepth: db.windowsillDepth,
         windowsillSize: db.windowsillSize,
-        windowsillConnector: db.windowsillConnector,
         windowsillColor: db.windowsillColor,
         windowsillAssembly: db.windowsillAssembly,
         drainageDepth: db.drainageDepth,

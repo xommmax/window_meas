@@ -2,8 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:isar/isar.dart';
 import 'package:window_meas/features/editor/data/model/scheme_db.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/panel_thickness_enum.dart';
-import 'package:window_meas/features/measurement/data/domain/model/params/windowsill_connector_enum.dart';
-import 'package:window_meas/features/measurement/data/db/model/expander_option_db.dart';
+import 'package:window_meas/features/measurement/data/db/model/expander_db.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/door_opening_type_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/doorstep_option_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/doorstep_type_enum.dart';
@@ -52,7 +51,10 @@ class PositionDB {
   @Enumerated(EnumType.name)
   @Default(StandProfile.none)
   late StandProfile standProfile;
-  late ExpanderOptionDB expanderOption;
+  @Default([])
+  late List<ExpanderDB> expanders;
+  @Default([])
+  late List<ConnectorDB> connectors;
   @Default('')
   late String glassUnit;
   @Enumerated(EnumType.name)
@@ -72,8 +74,6 @@ class PositionDB {
   @Default('')
   late String windowsillSize;
   @Enumerated(EnumType.name)
-  @Default(WindowsillConnector.none)
-  late WindowsillConnector windowsillConnector;
   @Default('')
   late String windowsillColor;
   @Default(false)

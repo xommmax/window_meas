@@ -5,7 +5,7 @@ import 'package:window_meas/features/editor/data/model/polygon_db.dart';
 import 'package:window_meas/features/editor/data/model/segment_db.dart';
 import 'package:window_meas/features/editor/opening_type/data/opening_type_record_db.dart';
 import 'package:window_meas/features/editor/data/model/scheme_db.dart';
-import 'package:window_meas/features/measurement/data/db/model/expander_option_db.dart';
+import 'package:window_meas/features/measurement/data/db/model/expander_db.dart';
 import 'package:window_meas/features/measurement/data/db/model/position_db.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/assembly_type_enum.dart';
 import 'package:window_meas/features/measurement/data/domain/model/params/building_type_enum.dart';

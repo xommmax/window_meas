@@ -38,8 +38,6 @@ mixin _$Position {
   WindowsillType get windowsillType => throw _privateConstructorUsedError;
   WindowsillDepth get windowsillDepth => throw _privateConstructorUsedError;
   String get windowsillSize => throw _privateConstructorUsedError;
-  WindowsillConnector get windowsillConnector =>
-      throw _privateConstructorUsedError;
   String get windowsillColor => throw _privateConstructorUsedError;
   bool get windowsillAssembly => throw _privateConstructorUsedError;
   String get drainageDepth => throw _privateConstructorUsedError;
@@ -52,7 +50,8 @@ mixin _$Position {
   String get slopeDepth => throw _privateConstructorUsedError;
   String get slopeLength => throw _privateConstructorUsedError;
   String get slopeQuantity => throw _privateConstructorUsedError;
-  ExpanderOption get expanderOption => throw _privateConstructorUsedError;
+  List<Expander> get expanders => throw _privateConstructorUsedError;
+  List<Connector> get connectors => throw _privateConstructorUsedError;
   String get positionComment => throw _privateConstructorUsedError;
   String get schemeComment => throw _privateConstructorUsedError;
 
@@ -89,7 +88,6 @@ abstract class $PositionCopyWith<$Res> {
       WindowsillType windowsillType,
       WindowsillDepth windowsillDepth,
       String windowsillSize,
-      WindowsillConnector windowsillConnector,
       String windowsillColor,
       bool windowsillAssembly,
       String drainageDepth,
@@ -102,12 +100,12 @@ abstract class $PositionCopyWith<$Res> {
       String slopeDepth,
       String slopeLength,
       String slopeQuantity,
-      ExpanderOption expanderOption,
+      List<Expander> expanders,
+      List<Connector> connectors,
       String positionComment,
       String schemeComment});
 
   $SchemeCopyWith<$Res>? get scheme;
-  $ExpanderOptionCopyWith<$Res> get expanderOption;
 }
 
 /// @nodoc
@@ -145,7 +143,6 @@ class _$PositionCopyWithImpl<$Res, $Val extends Position>
     Object? windowsillType = null,
     Object? windowsillDepth = null,
     Object? windowsillSize = null,
-    Object? windowsillConnector = null,
     Object? windowsillColor = null,
     Object? windowsillAssembly = null,
     Object? drainageDepth = null,
@@ -158,7 +155,8 @@ class _$PositionCopyWithImpl<$Res, $Val extends Position>
     Object? slopeDepth = null,
     Object? slopeLength = null,
     Object? slopeQuantity = null,
-    Object? expanderOption = null,
+    Object? expanders = null,
+    Object? connectors = null,
     Object? positionComment = null,
     Object? schemeComment = null,
   }) {
@@ -251,10 +249,6 @@ class _$PositionCopyWithImpl<$Res, $Val extends Position>
           ? _value.windowsillSize
           : windowsillSize // ignore: cast_nullable_to_non_nullable
               as String,
-      windowsillConnector: null == windowsillConnector
-          ? _value.windowsillConnector
-          : windowsillConnector // ignore: cast_nullable_to_non_nullable
-              as WindowsillConnector,
       windowsillColor: null == windowsillColor
           ? _value.windowsillColor
           : windowsillColor // ignore: cast_nullable_to_non_nullable
@@ -303,10 +297,14 @@ class _$PositionCopyWithImpl<$Res, $Val extends Position>
           ? _value.slopeQuantity
           : slopeQuantity // ignore: cast_nullable_to_non_nullable
               as String,
-      expanderOption: null == expanderOption
-          ? _value.expanderOption
-          : expanderOption // ignore: cast_nullable_to_non_nullable
-              as ExpanderOption,
+      expanders: null == expanders
+          ? _value.expanders
+          : expanders // ignore: cast_nullable_to_non_nullable
+              as List<Expander>,
+      connectors: null == connectors
+          ? _value.connectors
+          : connectors // ignore: cast_nullable_to_non_nullable
+              as List<Connector>,
       positionComment: null == positionComment
           ? _value.positionComment
           : positionComment // ignore: cast_nullable_to_non_nullable
@@ -327,14 +325,6 @@ class _$PositionCopyWithImpl<$Res, $Val extends Position>
 
     return $SchemeCopyWith<$Res>(_value.scheme!, (value) {
       return _then(_value.copyWith(scheme: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ExpanderOptionCopyWith<$Res> get expanderOption {
-    return $ExpanderOptionCopyWith<$Res>(_value.expanderOption, (value) {
-      return _then(_value.copyWith(expanderOption: value) as $Val);
     });
   }
 }
@@ -370,7 +360,6 @@ abstract class _$$PositionImplCopyWith<$Res>
       WindowsillType windowsillType,
       WindowsillDepth windowsillDepth,
       String windowsillSize,
-      WindowsillConnector windowsillConnector,
       String windowsillColor,
       bool windowsillAssembly,
       String drainageDepth,
@@ -383,14 +372,13 @@ abstract class _$$PositionImplCopyWith<$Res>
       String slopeDepth,
       String slopeLength,
       String slopeQuantity,
-      ExpanderOption expanderOption,
+      List<Expander> expanders,
+      List<Connector> connectors,
       String positionComment,
       String schemeComment});
 
   @override
   $SchemeCopyWith<$Res>? get scheme;
-  @override
-  $ExpanderOptionCopyWith<$Res> get expanderOption;
 }
 
 /// @nodoc
@@ -426,7 +414,6 @@ class __$$PositionImplCopyWithImpl<$Res>
     Object? windowsillType = null,
     Object? windowsillDepth = null,
     Object? windowsillSize = null,
-    Object? windowsillConnector = null,
     Object? windowsillColor = null,
     Object? windowsillAssembly = null,
     Object? drainageDepth = null,
@@ -439,7 +426,8 @@ class __$$PositionImplCopyWithImpl<$Res>
     Object? slopeDepth = null,
     Object? slopeLength = null,
     Object? slopeQuantity = null,
-    Object? expanderOption = null,
+    Object? expanders = null,
+    Object? connectors = null,
     Object? positionComment = null,
     Object? schemeComment = null,
   }) {
@@ -532,10 +520,6 @@ class __$$PositionImplCopyWithImpl<$Res>
           ? _value.windowsillSize
           : windowsillSize // ignore: cast_nullable_to_non_nullable
               as String,
-      windowsillConnector: null == windowsillConnector
-          ? _value.windowsillConnector
-          : windowsillConnector // ignore: cast_nullable_to_non_nullable
-              as WindowsillConnector,
       windowsillColor: null == windowsillColor
           ? _value.windowsillColor
           : windowsillColor // ignore: cast_nullable_to_non_nullable
@@ -584,10 +568,14 @@ class __$$PositionImplCopyWithImpl<$Res>
           ? _value.slopeQuantity
           : slopeQuantity // ignore: cast_nullable_to_non_nullable
               as String,
-      expanderOption: null == expanderOption
-          ? _value.expanderOption
-          : expanderOption // ignore: cast_nullable_to_non_nullable
-              as ExpanderOption,
+      expanders: null == expanders
+          ? _value._expanders
+          : expanders // ignore: cast_nullable_to_non_nullable
+              as List<Expander>,
+      connectors: null == connectors
+          ? _value._connectors
+          : connectors // ignore: cast_nullable_to_non_nullable
+              as List<Connector>,
       positionComment: null == positionComment
           ? _value.positionComment
           : positionComment // ignore: cast_nullable_to_non_nullable
@@ -626,7 +614,6 @@ class _$PositionImpl extends _Position {
       required this.windowsillType,
       required this.windowsillDepth,
       required this.windowsillSize,
-      required this.windowsillConnector,
       required this.windowsillColor,
       required this.windowsillAssembly,
       required this.drainageDepth,
@@ -639,10 +626,13 @@ class _$PositionImpl extends _Position {
       required this.slopeDepth,
       required this.slopeLength,
       required this.slopeQuantity,
-      required this.expanderOption,
+      required final List<Expander> expanders,
+      required final List<Connector> connectors,
       required this.positionComment,
       required this.schemeComment})
       : _flexibles = flexibles,
+        _expanders = expanders,
+        _connectors = connectors,
         super._();
 
   @override
@@ -696,8 +686,6 @@ class _$PositionImpl extends _Position {
   @override
   final String windowsillSize;
   @override
-  final WindowsillConnector windowsillConnector;
-  @override
   final String windowsillColor;
   @override
   final bool windowsillAssembly;
@@ -721,8 +709,22 @@ class _$PositionImpl extends _Position {
   final String slopeLength;
   @override
   final String slopeQuantity;
+  final List<Expander> _expanders;
   @override
-  final ExpanderOption expanderOption;
+  List<Expander> get expanders {
+    if (_expanders is EqualUnmodifiableListView) return _expanders;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_expanders);
+  }
+
+  final List<Connector> _connectors;
+  @override
+  List<Connector> get connectors {
+    if (_connectors is EqualUnmodifiableListView) return _connectors;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_connectors);
+  }
+
   @override
   final String positionComment;
   @override
@@ -730,7 +732,7 @@ class _$PositionImpl extends _Position {
 
   @override
   String toString() {
-    return 'Position(id: $id, scheme: $scheme, flexibles: $flexibles, photoPath: $photoPath, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorOpeningType: $doorOpeningType, doorstep: $doorstep, doorstepType: $doorstepType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillConnector: $windowsillConnector, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, expanderOption: $expanderOption, positionComment: $positionComment, schemeComment: $schemeComment)';
+    return 'Position(id: $id, scheme: $scheme, flexibles: $flexibles, photoPath: $photoPath, quarterSize: $quarterSize, quarterPosition: $quarterPosition, staticCalculation: $staticCalculation, profileSystem: $profileSystem, doorOpeningType: $doorOpeningType, doorstep: $doorstep, doorstepType: $doorstepType, laminationInternal: $laminationInternal, laminationExternal: $laminationExternal, rubberColor: $rubberColor, standProfile: $standProfile, glassUnit: $glassUnit, panelType: $panelType, panelThickness: $panelThickness, furniture: $furniture, windowsillType: $windowsillType, windowsillDepth: $windowsillDepth, windowsillSize: $windowsillSize, windowsillColor: $windowsillColor, windowsillAssembly: $windowsillAssembly, drainageDepth: $drainageDepth, drainageWidth: $drainageWidth, drainageColor: $drainageColor, drainageEndCap: $drainageEndCap, canopyType: $canopyType, canopySize: $canopySize, canopyColor: $canopyColor, slopeDepth: $slopeDepth, slopeLength: $slopeLength, slopeQuantity: $slopeQuantity, expanders: $expanders, connectors: $connectors, positionComment: $positionComment, schemeComment: $schemeComment)';
   }
 
   @override
@@ -780,8 +782,6 @@ class _$PositionImpl extends _Position {
                 other.windowsillDepth == windowsillDepth) &&
             (identical(other.windowsillSize, windowsillSize) ||
                 other.windowsillSize == windowsillSize) &&
-            (identical(other.windowsillConnector, windowsillConnector) ||
-                other.windowsillConnector == windowsillConnector) &&
             (identical(other.windowsillColor, windowsillColor) ||
                 other.windowsillColor == windowsillColor) &&
             (identical(other.windowsillAssembly, windowsillAssembly) ||
@@ -806,8 +806,10 @@ class _$PositionImpl extends _Position {
                 other.slopeLength == slopeLength) &&
             (identical(other.slopeQuantity, slopeQuantity) ||
                 other.slopeQuantity == slopeQuantity) &&
-            (identical(other.expanderOption, expanderOption) ||
-                other.expanderOption == expanderOption) &&
+            const DeepCollectionEquality()
+                .equals(other._expanders, _expanders) &&
+            const DeepCollectionEquality()
+                .equals(other._connectors, _connectors) &&
             (identical(other.positionComment, positionComment) ||
                 other.positionComment == positionComment) &&
             (identical(other.schemeComment, schemeComment) ||
@@ -839,7 +841,6 @@ class _$PositionImpl extends _Position {
         windowsillType,
         windowsillDepth,
         windowsillSize,
-        windowsillConnector,
         windowsillColor,
         windowsillAssembly,
         drainageDepth,
@@ -852,7 +853,8 @@ class _$PositionImpl extends _Position {
         slopeDepth,
         slopeLength,
         slopeQuantity,
-        expanderOption,
+        const DeepCollectionEquality().hash(_expanders),
+        const DeepCollectionEquality().hash(_connectors),
         positionComment,
         schemeComment
       ]);
@@ -888,7 +890,6 @@ abstract class _Position extends Position {
       required final WindowsillType windowsillType,
       required final WindowsillDepth windowsillDepth,
       required final String windowsillSize,
-      required final WindowsillConnector windowsillConnector,
       required final String windowsillColor,
       required final bool windowsillAssembly,
       required final String drainageDepth,
@@ -901,7 +902,8 @@ abstract class _Position extends Position {
       required final String slopeDepth,
       required final String slopeLength,
       required final String slopeQuantity,
-      required final ExpanderOption expanderOption,
+      required final List<Expander> expanders,
+      required final List<Connector> connectors,
       required final String positionComment,
       required final String schemeComment}) = _$PositionImpl;
   const _Position._() : super._();
@@ -951,8 +953,6 @@ abstract class _Position extends Position {
   @override
   String get windowsillSize;
   @override
-  WindowsillConnector get windowsillConnector;
-  @override
   String get windowsillColor;
   @override
   bool get windowsillAssembly;
@@ -977,7 +977,9 @@ abstract class _Position extends Position {
   @override
   String get slopeQuantity;
   @override
-  ExpanderOption get expanderOption;
+  List<Expander> get expanders;
+  @override
+  List<Connector> get connectors;
   @override
   String get positionComment;
   @override
