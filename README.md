@@ -1,6 +1,6 @@
 # Everest
 
-Mobile application for windows company that allows them to take window measurements. 
+Mobile application for windows company that allows them to take window measurements.  
 
 Includes following features:
 * Measurements management
