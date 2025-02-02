@@ -29,7 +29,6 @@ class _SignatureItemState extends State<SignatureItem> {
       penStrokeWidth: 3,
       penColor: Colors.black,
       exportBackgroundColor: Colors.white,
-      onDrawEnd: () => _saveSignature(),
     );
 
     _signatureCanvas = Signature(
@@ -67,6 +66,10 @@ class _SignatureItemState extends State<SignatureItem> {
           Row(
             children: [
               Expanded(child: TextItem(title: context.l10n.signature)),
+              IconButton(
+                icon: const Icon(Icons.check_circle, color: Colors.grey),
+                onPressed: _saveSignature,
+              ),
               IconButton(
                 icon: const Icon(Icons.delete, color: Colors.grey),
                 onPressed: () {
