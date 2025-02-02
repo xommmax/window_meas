@@ -226,5 +226,6 @@
   "connector": "З'єднувач",
   "angle": "Кут",
   "number": "Номер",
-  "signature": "Підпис"
+  "signature": "Підпис",
+  "additionalFillings": "Доп профілі"
 }

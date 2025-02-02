@@ -226,5 +226,6 @@
   "connector": "Connector",
   "angle": "Angle",
   "number": "Number",
-  "signature": "Signature"
+  "signature": "Signature",
+  "additionalFillings": "Additional fillings"
 }

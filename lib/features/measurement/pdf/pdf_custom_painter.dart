@@ -177,6 +177,8 @@ class PdfCustomPainter {
         fillingType.fillingType,
       );
 
+      final shouldRotate = width < height;
+
       canvas.strokePath();
 
       String text = '';
@@ -197,21 +199,31 @@ class PdfCustomPainter {
       );
 
       if (fillingType.fillingType == FillingType.connector) {
-        final connectorText = '${Localization.l10n.connector} ${fillingType.text ?? ''}';
+        final connectorText = fillingType.text ?? '';
         final connectorTextWidget = pw.Text(
           connectorText,
           style: pw.TextStyle(fontSize: gridSize / 2 + 1, color: PdfColors.black),
         );
         connectorTextWidget.layout(context, const pw.BoxConstraints.tightForFinite());
         final connectorTextLayoutSize = connectorTextWidget.box?.size ?? const PdfPoint(0, 0);
-        final connectorTextOffset = PdfPoint(
-          center.dx + connectorTextLayoutSize.y / 2,
-          center.dy - connectorTextLayoutSize.x / 2,
-        );
 
-        canvas.setTransform(Matrix4.identity()
-          ..translate(connectorTextOffset.x, connectorTextOffset.y)
-          ..rotateZ(pi / 2));
+        final PdfPoint connectorTextOffset;
+        if (shouldRotate) {
+          connectorTextOffset = PdfPoint(
+            center.dx + connectorTextLayoutSize.y / 2,
+            center.dy - connectorTextLayoutSize.x / 2,
+          );
+        } else {
+          connectorTextOffset = PdfPoint(
+            center.dx - connectorTextLayoutSize.x / 2,
+            center.dy - connectorTextLayoutSize.y / 2,
+          );
+        }
+
+        final matrix = Matrix4.identity()..translate(connectorTextOffset.x, connectorTextOffset.y);
+
+        if (shouldRotate) matrix.rotateZ(pi / 2);
+        canvas.setTransform(matrix);
 
         pw.Widget.draw(
           connectorTextWidget,

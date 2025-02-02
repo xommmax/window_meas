@@ -143,6 +143,9 @@ class SchemePainter extends CustomPainter {
         fillingType.fillingType,
       );
 
+      final shouldRotate =
+          fillingType.polygon.globalWidth(size) < fillingType.polygon.globalHeight(size);
+
       String text = '';
       if (fillingType.sateen) text += 'C';
       if (fillingType.mosquito) text += ' M';
@@ -169,7 +172,7 @@ class SchemePainter extends CustomPainter {
 
       if (fillingType.fillingType == FillingType.connector) {
         final connectorText = TextSpan(
-          text: '${Localization.l10n.connector} ${fillingType.text ?? ''}',
+          text: fillingType.text ?? '',
           style: TextStyle(
             fontSize: gridSize(size) / 1.3,
             fontWeight: FontWeight.bold,
@@ -184,11 +187,19 @@ class SchemePainter extends CustomPainter {
 
         connectorTextPainter.layout();
 
-        final x = fillingType.polygon.globalWidth(size) / 2 - connectorTextPainter.height / 2;
-        final y = fillingType.polygon.globalHeight(size) / 2 + connectorTextPainter.width / 2;
-
+        final double x, y;
+        if (shouldRotate) {
+          x = fillingType.polygon.globalWidth(size) / 2 - connectorTextPainter.height / 2;
+          y = fillingType.polygon.globalHeight(size) / 2 + connectorTextPainter.width / 2;
+        } else {
+          x = fillingType.polygon.globalWidth(size) / 2 - connectorTextPainter.width / 2;
+          y = fillingType.polygon.globalHeight(size) / 2 - connectorTextPainter.height / 2;
+        }
         canvas.translate(x, y);
-        canvas.rotate(-pi / 2);
+
+        if (shouldRotate) {
+          canvas.rotate(-pi / 2);
+        }
         connectorTextPainter.paint(canvas, Offset.zero);
       }
 

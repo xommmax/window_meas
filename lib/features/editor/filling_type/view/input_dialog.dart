@@ -34,8 +34,8 @@ class _InputDialogState extends State<InputDialog> {
           children: [
             TextField(
               controller: textController,
-              decoration: InputDecoration(
-                labelText: context.l10n.number,
+              decoration: const InputDecoration(
+                labelText: 'Текст',
               ),
             ),
           ],
