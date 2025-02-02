@@ -30,6 +30,14 @@
           }
         },
         {
+          "client_id": "563921810957-k87ue816lsm73hvo59244gg0vv52dobo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.xodev.everest",
+            "certificate_hash": "fbe0b654b15d7813b734d2b12f6ba6496b235632"
+          }
+        },
+        {
           "client_id": "563921810957-t4qjt4rkiav086tc475sjn34ncuemecl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
